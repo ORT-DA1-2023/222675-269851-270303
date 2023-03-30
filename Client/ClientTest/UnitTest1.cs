@@ -15,7 +15,8 @@ namespace ClientTest
             {
                 name = "Joe",
                 password="1234",
-            };
+            }; 
+            Assert.IsNotNull(cl);
         Assert.AreEqual(cl.name,"Joe");
         Assert.AreEqual(cl.password, "1234");
         }
