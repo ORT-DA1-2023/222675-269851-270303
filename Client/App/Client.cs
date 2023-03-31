@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,6 +13,9 @@ namespace BackEnd {
     {
         private const int nameMinimumLength = 3;
         private const int nameMaximumLength = 20;
+        private const int passwordMinimumLength = 5;
+        private const int passwordMaximumLength = 25;
+        private DateTime registerDate;
         private String name;
         private String password;
         public Client()
@@ -33,11 +38,11 @@ namespace BackEnd {
            get => password;
            set
            {
-               if (isNotAValidPassword(value))
+               if (isAValidPassword(value))
                {
-                  
-               }
-               password = value;
+                   password = value;
+                }
+               
             }
               
        }
@@ -48,8 +53,7 @@ namespace BackEnd {
            {
                throw new BackEndException("Name must be alphanumeric");
            }
-          
-          if (value.Length < nameMinimumLength || value.Length > nameMaximumLength)
+          if (value.Length < nameMinimumLength || value.Length > nameMaximumLength) 
           {
               throw new BackEndException("Name length must be between 3 and 20");
           }
@@ -57,9 +61,31 @@ namespace BackEnd {
           return true;
        }
 
-       private bool isNotAValidPassword(String value)
+       private bool isAValidPassword(String value)
        {
-           return false;
+           if (!value.Any(char.IsDigit))
+           {
+               throw new BackEndException("Password must contain at least 1 number");
+            }
+           if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
+            {
+                throw new BackEndException("Password length must be between 5 and 25");
+            }
+
+           if (!value.Any(char.IsUpper))
+            {
+               throw new BackEndException("Password must contain at least one capital letter");
+
+            }
+
+           if (!value.Any(char.IsLower))
+           {
+               throw new BackEndException("Password must contain at least one lower case letter");
+
+           }
+
+
+            return true;
        }
 
     }
