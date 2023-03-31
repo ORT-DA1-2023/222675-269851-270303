@@ -20,7 +20,12 @@ namespace BackEnd {
         private String password;
         public Client()
         {
+            registerDate = DateTime.Now;
+        }
 
+        public DateTime RegisterDate
+        {
+            get => registerDate;
         }
         public String Name 
        {
