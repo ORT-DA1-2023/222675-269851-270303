@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "App\BackEnd.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{287E9DB3-4F2A-4059-8B1F-8AF1C4F9837B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SphereTest", "..\Figure\FigureTest\SphereTest.csproj", "{81F90436-5F0E-418C-B095-806AE2178C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{287E9DB3-4F2A-4059-8B1F-8AF1C4F9837B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{287E9DB3-4F2A-4059-8B1F-8AF1C4F9837B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{287E9DB3-4F2A-4059-8B1F-8AF1C4F9837B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F90436-5F0E-418C-B095-806AE2178C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F90436-5F0E-418C-B095-806AE2178C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F90436-5F0E-418C-B095-806AE2178C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F90436-5F0E-418C-B095-806AE2178C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

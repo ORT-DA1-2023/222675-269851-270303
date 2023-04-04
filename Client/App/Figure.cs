@@ -1,39 +1,36 @@
 ﻿using BackEnd;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FigureBackEnd
+namespace App
 {
-    public class Figure
+    public abstract class Figure 
     {
         private const int nameMinimumLength = 3;
         private const int nameMaximumLength = 20;
         private String name;
         private Client client;
 
-        public Client Client
+        public virtual Client Client
         {
             get => client;
             set => client = value;
         }
 
-        public String Name
+        public virtual String Name
         {
             get => name;
-            set => name = value;
-           /* {
+            set
+            {
                 if (isAValidName(value))
                 {
                     name = value;
                 }
             }
-           */
-        }
 
-        /*  private bool isAValidName(String value)
+        }
+        
+        private bool isAValidName(String value)
         {
             if (!value.All(char.IsLetterOrDigit))
             {
@@ -46,14 +43,5 @@ namespace FigureBackEnd
 
             return true;
         }
- */
-
-    }
-}
-
-namespace Figure
-{
-    public class Figure
-    {
     }
 }
