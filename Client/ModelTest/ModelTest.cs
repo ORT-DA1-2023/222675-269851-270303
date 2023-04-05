@@ -20,6 +20,8 @@ namespace ModelTest
             ((Sphere)(model.Figure)).Name = "nameSphere";
             ((Sphere)(model.Figure)).Radius = 10;
             model.Owner= client;
+            model.Material = new lambertianMaterial() { Client = client, Name = "nameMaterial", Color = new int[] { 1, 2, 3 } };
+
             
             Assert.IsNotNull(model);
             Assert.IsTrue(client.Name== "ownersN4me");
@@ -30,10 +32,12 @@ namespace ModelTest
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void nameIsEmpty()
+        public void nameIsNotEmpty()
         {
             var model = new Model();
             model.Name = "";
+
+            
         }
     }
 }
