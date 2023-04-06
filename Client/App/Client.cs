@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace App {
         private DateTime registerDate;
         private String name;
         private String password;
+        private ArrayList ownedFigures=new ArrayList();
+        private ArrayList ownedMaterials = new ArrayList();
+
+
         public Client()
         {
             registerDate = DateTime.Now;
@@ -50,8 +55,11 @@ namespace App {
             }
               
        }
+        public ArrayList OwnedFigures { get => ownedFigures; }
+        public ArrayList OwnedMaterials { get => ownedMaterials; }
 
-       private bool isAValidName(String value)
+
+        private bool isAValidName(String value)
        {
           if (!value.All(char.IsLetterOrDigit))
            {
