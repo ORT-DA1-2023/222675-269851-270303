@@ -29,8 +29,8 @@ namespace App
             return true;
         }
 
-        public Figure Figure { get; set; }
-        public Client Owner { get; set; }
-        public Material Material { get; set; }
+        public Figure Figure { get=>figure; set=>figure=value; }
+        public Client Owner { get=>owner; set=>owner=value; }
+        public Material Material { get=>material; set=>material=value; }
     }
 }
