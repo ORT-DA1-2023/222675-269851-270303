@@ -22,7 +22,7 @@ namespace ModelTest
             {
                 Name = "model1Name",
                 Figure = new Sphere() { Client=clientJoe, Name="figure1Name", Radius=20 },
-                Owner = clientJoe,
+                Client = clientJoe,
                 Material = new lambertianMaterial() { Client = clientJoe, Name = "material1Name", Color = new int[] { 1, 2, 3 } },
             };
         
@@ -32,7 +32,7 @@ namespace ModelTest
         public void modelCreationCorrectly()
         {
             Assert.IsNotNull(model1);
-            Assert.IsTrue(model1.Owner == clientJoe);
+            Assert.IsTrue(model1.Client == clientJoe);
             Assert.IsTrue(model1.Material.Name == "material1Name");
             Assert.IsTrue(model1.Name == "model1Name");
             Assert.IsTrue(model1.Figure.Name == "figure1Name");

@@ -6,7 +6,7 @@ namespace App
     {
         private string name;
         private Figure figure;
-        private Client owner;
+        private Client client;
         private Material material;
 
         public string Name { 
@@ -30,7 +30,7 @@ namespace App
         }
 
         public Figure Figure { get=>figure; set=>figure=value; }
-        public Client Owner { get=>owner; set=>owner=value; }
+        public Client Client { get=>client; set=>client =value; }
         public Material Material { get=>material; set=>material=value; }
     }
 }
