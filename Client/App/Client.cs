@@ -20,7 +20,7 @@ namespace App {
         private String password;
         private ArrayList ownedFigures=new ArrayList();
         private ArrayList ownedMaterials = new ArrayList();
-
+        private ArrayList ownedModels = new ArrayList();
 
         public Client()
         {
@@ -57,6 +57,7 @@ namespace App {
        }
         public ArrayList OwnedFigures { get => ownedFigures; }
         public ArrayList OwnedMaterials { get => ownedMaterials; }
+        public ArrayList OwnedModels { get => ownedModels; }
 
 
         private bool isAValidName(String value)
