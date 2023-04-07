@@ -6,9 +6,8 @@ using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using App;
 
-namespace BackEnd {
+namespace App {
     public class Client
     {
         private const int nameMinimumLength = 3;
@@ -92,6 +91,10 @@ namespace BackEnd {
 
             return true;
        }
+        public override bool Equals(object obj)
+        {
+            return this.name.Equals(((Client)obj).name);
+        }
 
     }
 
