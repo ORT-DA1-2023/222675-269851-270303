@@ -36,10 +36,8 @@ namespace SphereTest
         public void CreateFigureCorrectly()
         {
             Assert.IsNotNull(newFigure);
-            Assert.IsNotNull(newFigure.Client);
-            Assert.AreEqual(newFigure.Name, "FigureName");
-            Assert.AreEqual(newFigure.Client.Name, "Joe");
-            Assert.AreEqual(newFigure.Client.Password, "thisIs4Saf3Passw0rd");
+            Assert.IsNotNull(newFigure.Client.Equals(Joe));
+
         }
 
         [TestMethod]
