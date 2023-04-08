@@ -16,6 +16,8 @@ namespace ClientTest
         private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
         private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
         private const String passwordOnlyWithCapitalLetters = "THISPASSWORDISHARD2READ";
+
+
         [TestInitialize]
         public void initialize()
         {
@@ -86,7 +88,84 @@ namespace ClientTest
             clientJoe.Password = passwordOnlyWithCapitalLetters;
         }
 
+        [TestMethod]
+        public void clientEquals()
+        {
+            Client clientJoe2 = new Client()
+            {
+                Name = Joe,
+                Password = correctPasword,
+            };
+            Assert.IsTrue(clientJoe.Equals(clientJoe2));
+        }
 
+        [TestMethod]
+        public void addFigureToClient()
+        {
+            Figure fig = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
+            Assert.IsTrue(clientJoe.OwnedFigures.Count==0);
+            clientJoe.OwnedFigures.Add(fig);
+            Assert.IsNotNull(clientJoe.OwnedFigures);
+            Assert.IsTrue(clientJoe.OwnedFigures.Count == 1);
+            Assert.AreEqual(clientJoe.OwnedFigures[0], fig);
+        }
+
+        [TestMethod]
+        public void deleteFigureFromClient()
+        {
+           
+            Figure fig = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
+            clientJoe.OwnedFigures.Add(fig);
+            Assert.IsTrue(clientJoe.OwnedFigures.Count == 1);
+            clientJoe.OwnedFigures.Remove(fig);
+            Assert.IsTrue(clientJoe.OwnedFigures.Count == 0);
+
+        }
+
+        [TestMethod]
+        public void addMaterialToClient()
+        {
+            Material mat = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 0);
+            clientJoe.OwnedMaterials.Add(mat);
+            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 1);
+            Assert.AreEqual(clientJoe.OwnedMaterials[0], mat);
+        }
+        [TestMethod]
+        public void deleteMaterialFromClient()
+        {
+            Material mat = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            clientJoe.OwnedMaterials.Add(mat);
+            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 1);
+            clientJoe.OwnedMaterials.Remove(mat);
+            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 0);
+        }
+        
+        [TestMethod]
+        public void addModelToClient()
+        {
+            Figure figure = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
+            Material material = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Model model = new Model() { Client = clientJoe, Name = "TestModel", Figure= figure, Material=material };
+            Assert.IsTrue(clientJoe.OwnedModels.Count == 0);
+            clientJoe.OwnedModels.Add(model);
+            Assert.IsNotNull(clientJoe.OwnedModels);
+            Assert.IsTrue(clientJoe.OwnedModels.Count == 1);
+            Assert.AreEqual(clientJoe.OwnedModels[0], model);
+        }
+
+        [TestMethod]
+        public void deleteModelFromClient()
+        {
+            Figure figure = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
+            Material material = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Model model = new Model() { Client = clientJoe, Name = "TestModel", Figure = figure, Material = material };
+            clientJoe.OwnedModels.Add(model);
+            Assert.IsTrue(clientJoe.OwnedModels.Count == 1);
+            clientJoe.OwnedModels.Remove(model);
+            Assert.IsTrue(clientJoe.OwnedModels.Count == 0);
+        }
+        
 
     }
 }
