@@ -9,7 +9,7 @@ namespace ClientTest
     public class ClientTest
     {
         private Client clientSample;
-        private const String clientSampleName = "clientName";
+        private const String clientSampleName = "clientSampleName";
         private const String nonAlphanumericalName = "_*";
         private const String thisNameIsTooLong = "thisNameHasMoreThan20Chars";
         private const String thisNameIsTooShort = "ab";
@@ -17,7 +17,7 @@ namespace ClientTest
         private const String aValidPassword = "4V4lidPassw0rd";
         private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
         private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
-        private const String passwordOnlyWithCapitalLetters = "THISPASSWORDISHARD2READ";
+        //private const String passwordOnlyWithCapitalLetters = "THISPASSWORDISHARD2READ";
 
 
         [TestInitialize]
@@ -53,7 +53,7 @@ namespace ClientTest
             clientSample.Name = thisNameIsTooShort;
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name must be alphanumeric")]
+        [ExpectedException(typeof(BackEndException), "Name must be alphanumerical")]
         public void givenANonAlphanumericalNameItThrowsABackEndException()
         {
             clientSample.Name = nonAlphanumericalName;

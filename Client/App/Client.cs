@@ -22,11 +22,11 @@ namespace App {
         private ArrayList ownedMaterials = new ArrayList();
         private ArrayList ownedModels = new ArrayList();
 
-        private string nonAlphanumericPasswordTextException = "Name must be alphanumeric";
-        private string outOfRangeNameTextException = $"Name length must be between {nameMinimumLength} and {nameMaximumLength}";
-        private string outOfRangePasswordTextException = $"Name length must be between {passwordMinimumLength} and {passwordMaximumLength}";
-        private string nonNumbersAtPasswordTextException = "Password must contain at least 1 number";
-        private string nonCapitalsAtPasswordTextException = "Password must contain at least one capital letter";
+        private static string nonAlphanumericPasswordTextException = "Name must be alphanumerical";
+        private static string outOfRangeNameTextException = $"Name length must be between {nameMinimumLength} and {nameMaximumLength}";
+        private static string outOfRangePasswordTextException = $"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}";
+        private static string nonNumbersAtPasswordTextException = "Password must contain at least 1 number";
+        private static string nonCapitalsAtPasswordTextException = "Password must contain at least one capital letter";
         public Client()
         {
             registerDate = DateTime.Now;
