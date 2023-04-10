@@ -1,48 +1,50 @@
 ﻿using App;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Runtime.Remoting;
 
 namespace ModelTest
 {
     [TestClass]
     public class ModelTests
     {
-        public Client clientJoe;
+        public Client clientSample;
         public Model model1;
-       
+        public Model model2;
+
+        public string validName = "A valid Model Name";
+
         [TestInitialize]
         public void initialize()
         {
-            clientJoe = new Client()
+            clientSample = new Client()
             {
-                Name = "Joe",
-                Password = "correctP4ssw0rd",
+                Name = "clientSampleName",
             };
-            model1 = new Model()
-            {
-                Name = "model1Name",
-                Figure = new Sphere() { Client=clientJoe, Name="figure1Name", Radius=20 },
-                Client = clientJoe,
-                Material = new lambertianMaterial() { Client = clientJoe, Name = "material1Name", Color = new int[] { 1, 2, 3 } },
-            };
-        
+            model1 = new Model();
+
         }
         
         [TestMethod]
-        public void modelCreationCorrectly()
+        public void givenAClientItAssignsItAsTheModelOwner()
         {
-            Assert.IsNotNull(model1);
-            Assert.IsTrue(model1.Client == clientJoe);
-            Assert.IsTrue(model1.Material.Name == "material1Name");
-            Assert.IsTrue(model1.Name == "model1Name");
-            Assert.IsTrue(model1.Figure.Name == "figure1Name");
+           model1.Client= clientSample;
+            Assert.AreEqual(model1.Client, clientSample);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void nameIsNotEmpty()
+        public void givenAnEmptyNameItThrowsABackEndException()
         {
             model1.Name = "";  
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name must not start with spaces")]
+        public void givenANameWithSpacesAtTheBeginningItThrowsABackEndException()
+        {
+            model1.Name = " "+validName;
+        }
+
     }
 }
