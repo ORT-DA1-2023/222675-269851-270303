@@ -22,6 +22,11 @@ namespace App {
         private ArrayList ownedMaterials = new ArrayList();
         private ArrayList ownedModels = new ArrayList();
 
+        private string nonAlphanumericPasswordTextException = "Name must be alphanumeric";
+        private string outOfRangeNameTextException = $"Name length must be between {nameMinimumLength} and {nameMaximumLength}";
+        private string outOfRangePasswordTextException = $"Name length must be between {passwordMinimumLength} and {passwordMaximumLength}";
+        private string nonNumbersAtPasswordTextException = "Password must contain at least 1 number";
+        private string nonCapitalsAtPasswordTextException = "Password must contain at least one capital letter";
         public Client()
         {
             registerDate = DateTime.Now;
@@ -64,11 +69,11 @@ namespace App {
        {
           if (!value.All(char.IsLetterOrDigit))
            {
-               throw new BackEndException("Name must be alphanumeric");
+               throw new BackEndException(nonAlphanumericPasswordTextException);
            }
           if (value.Length < nameMinimumLength || value.Length > nameMaximumLength) 
           {
-              throw new BackEndException("Name length must be between 3 and 20");
+              throw new BackEndException(outOfRangeNameTextException);
           }
 
           return true;
@@ -78,25 +83,24 @@ namespace App {
        {
            if (!value.Any(char.IsDigit))
            {
-               throw new BackEndException("Password must contain at least 1 number");
+               throw new BackEndException(nonNumbersAtPasswordTextException);
             }
            if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
             {
-                throw new BackEndException("Password length must be between 5 and 25");
+                throw new BackEndException(outOfRangePasswordTextException);
             }
 
            if (!value.Any(char.IsUpper))
             {
-               throw new BackEndException("Password must contain at least one capital letter");
+               throw new BackEndException(nonCapitalsAtPasswordTextException);
 
             }
 
-           if (!value.Any(char.IsLower))
+           /*if (!value.Any(char.IsLower))
            {
                throw new BackEndException("Password must contain at least one lower case letter");
 
-           }
-
+           }*/
 
             return true;
        }

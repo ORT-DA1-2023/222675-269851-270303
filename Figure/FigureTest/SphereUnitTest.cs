@@ -36,7 +36,7 @@ namespace SphereTest
         public void CreateFigureCorrectly()
         {
             Assert.IsNotNull(newFigure);
-            Assert.IsNotNull(newFigure.Client.Equals(Joe));
+            Assert.IsNotNull(newFigure.Client.Equals(clientJoe));
 
         }
 
