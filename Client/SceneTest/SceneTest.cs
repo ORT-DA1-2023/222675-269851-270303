@@ -18,7 +18,7 @@ namespace SceneTest
         private int randomFoV = 30;
         private Scene defaultScene = new Scene();
         private decimal[] defaultPosition = new decimal[3] { 0, 2, 0 };
-        private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
+        private decimal[] defaultObjPosition = new decimal[3] { 0, 2, 5 };
 
 
         [TestInitialize]
@@ -77,20 +77,17 @@ namespace SceneTest
         public void defaultCameraPosition()
         {
             Assert.IsTrue(defaultScene.equalsCameraPosition(defaultPosition));
-
-            /*
-            [TestMethod]
-
-            public void defaultPosition()
-            {
-                Assert.AreEqual(defaultScene.objectPosition, defaultObjectPosition);
-            }
-            */
-
-
-
-
-
         }
+
+        [TestMethod]
+        
+        public void defaultObjectPosition()
+        {
+            Assert.IsTrue(defaultScene.equalsObjectPosition(defaultObjPosition));
+        }
+
+
+
+
     }
 }

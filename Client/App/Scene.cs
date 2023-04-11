@@ -65,5 +65,11 @@ namespace App
             }
             return true;
         }
-}
+
+        public bool equalsObjectPosition(decimal[] defaultObjPosition)
+        {
+            return true;
+        }
+
+    }
 }
