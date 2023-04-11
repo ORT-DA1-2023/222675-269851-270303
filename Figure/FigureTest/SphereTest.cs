@@ -10,7 +10,7 @@ namespace SphereTest
        
         private Client clientSample;
         private String validSphereName = "Name of the sphere";
-        private Sphere newSphericalFigure;
+        private Figure newSphericalFigure;
         private Decimal validRadius = 2;
 
 
@@ -41,21 +41,21 @@ namespace SphereTest
         [ExpectedException(typeof(BackEndException), "The radius must be greater than 0")]
         public void givenANegativeRadiusItThrowsABackEndException()
         {
-           newSphericalFigure.Radius = -1;
+           ((Sphere)(newSphericalFigure)).Radius = -1;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The radius must be greater than 0")]
         public void givenAZeroRadiusItThrowsABackEndException()
         {
-            newSphericalFigure.Radius = 0;
+            ((Sphere)(newSphericalFigure)).Radius = 0;
         }
 
         [TestMethod]
         public void givenAValidRadiusOfItAssignsItToTheSphere()
         {
-            newSphericalFigure.Radius = validRadius;
-            Assert.AreEqual(newSphericalFigure.Radius, validRadius);  
+            ((Sphere)(newSphericalFigure)).Radius = validRadius;
+            Assert.AreEqual(((Sphere)(newSphericalFigure)).Radius, validRadius);  
         }
 
         [TestMethod]
