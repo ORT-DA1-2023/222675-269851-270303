@@ -17,9 +17,9 @@ namespace SceneTest
         private decimal[] randomObjectPosition = new decimal[3] { 1, 1, 0 };
         private int randomFoV = 30;
         private Scene defaultScene = new Scene();
-        private decimal[] defaultPosition = new decimal[3]{0,2,0};
+        private decimal[] defaultPosition = new decimal[3] { 0, 2, 0 };
         private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
-        private decimal[] comparo = new decimal[3] { 0, 2, 0 };
+
 
         [TestInitialize]
 
@@ -41,7 +41,7 @@ namespace SceneTest
         {
             Assert.IsNotNull(sc);
             Assert.IsTrue(sc.Client.Equals(cl));
-            Assert.AreEqual(sc.Name,name);
+            Assert.AreEqual(sc.Name, name);
             Assert.AreEqual(sc.PositionedModels, positionedModels);
             Assert.AreEqual(sc.CameraPosition, randomCameraPosition);
             Assert.AreEqual(sc.ObjectPosition, randomObjectPosition);
@@ -55,7 +55,7 @@ namespace SceneTest
             sc.Name = "";
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException),"Name cant start or end with blank")]
+        [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
         public void throwNameStartsWithBlankException()
         {
             sc.Name = " " + name;
@@ -64,7 +64,7 @@ namespace SceneTest
         [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
         public void throwNameEndsWithBlankException()
         {
-            sc.Name =name + " ";
+            sc.Name = name + " ";
         }
 
         [TestMethod]
@@ -72,24 +72,25 @@ namespace SceneTest
         {
             Assert.AreEqual(defaultScene.FieldOfView, 30);
         }
-        
+
         [TestMethod]
         public void defaultCameraPosition()
         {
             Assert.IsTrue(defaultScene.equalsCameraPosition(defaultPosition));
+
+            /*
+            [TestMethod]
+
+            public void defaultPosition()
+            {
+                Assert.AreEqual(defaultScene.objectPosition, defaultObjectPosition);
+            }
+            */
+
+
+
+
+
         }
-
-       /*
-       [TestMethod]
-       public void defaultCameraPosition()
-       {
-           Assert.AreEqual(defaultScene.objectPosition, defaultObjectPosition);
-       }
-       */
-
-
-
-
-
     }
 }

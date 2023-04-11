@@ -56,6 +56,13 @@ namespace App
     }
         public bool equalsCameraPosition(decimal[] newCamera)
         {
+            for(int i = 0; i<newCamera.Length; i++)
+            {
+                if (this.cameraPosition[i] != newCamera[i])
+                {
+                    return false;
+                }
+            }
             return true;
         }
 }
