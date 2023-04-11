@@ -54,5 +54,9 @@ namespace App
         }
         return true;
     }
+        public bool equalsCameraPosition(decimal[] newCamera)
+        {
+            return true;
+        }
 }
 }

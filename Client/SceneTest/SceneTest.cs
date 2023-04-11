@@ -19,6 +19,7 @@ namespace SceneTest
         private Scene defaultScene = new Scene();
         private decimal[] defaultPosition = new decimal[3]{0,2,0};
         private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
+        private decimal[] comparo = new decimal[3] { 0, 2, 0 };
 
         [TestInitialize]
 
@@ -71,14 +72,14 @@ namespace SceneTest
         {
             Assert.AreEqual(defaultScene.FieldOfView, 30);
         }
-        /*
+        
         [TestMethod]
         public void defaultCameraPosition()
         {
-            Assert.AreEqual(defaultScene.CameraPosition, defaultPosition);
+            Assert.IsTrue(defaultScene.equalsCameraPosition(defaultPosition));
         }
-        */
-        /*
+
+       /*
        [TestMethod]
        public void defaultCameraPosition()
        {
