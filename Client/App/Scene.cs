@@ -26,6 +26,10 @@ namespace App
                 {
                     throw new BackEndException("Name cant be empty");
                 }
+                if (value != value.Trim())
+                {
+                    throw new BackEndException("Name cant start or end with blank");
+                }
                 name = value;
             }
         }

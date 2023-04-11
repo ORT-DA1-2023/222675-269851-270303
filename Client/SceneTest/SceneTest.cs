@@ -47,6 +47,13 @@ namespace SceneTest
         {
             sc.Name = "";
         }
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException),"Name cant start or end with blank")]
+        public void throwNameStartsWithBlankException()
+        {
+            sc.Name = " " + name;
+        }
+        
 
         
 
