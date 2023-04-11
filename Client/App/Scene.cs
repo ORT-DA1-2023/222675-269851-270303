@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Xml.Linq;
 
 namespace App
 {
@@ -18,23 +19,34 @@ namespace App
         }
 
         public Client Client { get => client; set => client = value; }
-        public string Name {
-            get => name; 
+        public string Name
+        {
+            get => name;
             set
             {
-                if(value == "")
+                if (isAValidName(value))
                 {
-                    throw new BackEndException("Name cant be empty");
+                    name = value;
                 }
-                if (value != value.Trim())
-                {
-                    throw new BackEndException("Name cant start or end with blank");
-                }
-                name = value;
             }
         }
+
+
         public ArrayList PositionedModels { get; set; }
         public decimal[] CameraPosition { get; set; }
         public int FieldOfView { get; set; }
+    
+    private bool isAValidName(string value)
+    {
+        if (value == "")
+        {
+            throw new BackEndException("Name cant be empty");
+        }
+        if (value != value.Trim())
+        {
+            throw new BackEndException("Name cant start or end with blank");
+        }
+        return true;
     }
+}
 }
