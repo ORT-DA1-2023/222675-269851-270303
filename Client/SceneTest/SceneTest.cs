@@ -13,8 +13,12 @@ namespace SceneTest
         private Client cl = new Client() { Name = "Joe", Password = "S4fePassword" };
         private String name = "SceneTest";
         private ArrayList positionedModels = new ArrayList();
-        private decimal[] defaultCameraPosition = new decimal[3] { 0, 2, 0 };
-        private int defaultFoV = 30;
+        private decimal[] randomCameraPosition = new decimal[3] { 1, 1, 0 };
+        private decimal[] randomObjectPosition = new decimal[3] { 1, 1, 0 };
+        private int randomFoV = 30;
+        private Scene defaultScene = new Scene();
+        private decimal[] defaultPosition = new decimal[3]{0,2,0};
+        private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
 
         [TestInitialize]
 
@@ -25,8 +29,9 @@ namespace SceneTest
                 Client = cl,
                 Name = name,
                 PositionedModels = positionedModels,
-                CameraPosition = defaultCameraPosition,
-                FieldOfView = defaultFoV,
+                CameraPosition = randomCameraPosition,
+                ObjectPosition = randomObjectPosition,
+                FieldOfView = randomFoV,
             };
         }
 
@@ -37,8 +42,9 @@ namespace SceneTest
             Assert.IsTrue(sc.Client.Equals(cl));
             Assert.AreEqual(sc.Name,name);
             Assert.AreEqual(sc.PositionedModels, positionedModels);
-            Assert.AreEqual(sc.CameraPosition, defaultCameraPosition);
-            Assert.AreEqual(sc.FieldOfView, defaultFoV);
+            Assert.AreEqual(sc.CameraPosition, randomCameraPosition);
+            Assert.AreEqual(sc.ObjectPosition, randomObjectPosition);
+            Assert.AreEqual(sc.FieldOfView, randomFoV);
         }
 
         [TestMethod]
@@ -60,6 +66,25 @@ namespace SceneTest
             sc.Name =name + " ";
         }
 
+        [TestMethod]
+        public void defaultFoV()
+        {
+            Assert.AreEqual(defaultScene.FieldOfView, 30);
+        }
+        /*
+        [TestMethod]
+        public void defaultCameraPosition()
+        {
+            Assert.AreEqual(defaultScene.CameraPosition, defaultPosition);
+        }
+        */
+        /*
+       [TestMethod]
+       public void defaultCameraPosition()
+       {
+           Assert.AreEqual(defaultScene.objectPosition, defaultObjectPosition);
+       }
+       */
 
 
 
