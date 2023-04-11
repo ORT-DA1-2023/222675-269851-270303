@@ -66,8 +66,15 @@ namespace App
             return true;
         }
 
-        public bool equalsObjectPosition(decimal[] defaultObjPosition)
+        public bool equalsObjectPosition(decimal[] newObject)
         {
+            for (int i = 0; i < newObject.Length; i++)
+            {
+                if (this.objectPosition[i] != newObject[i])
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
