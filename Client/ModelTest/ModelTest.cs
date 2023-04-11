@@ -40,11 +40,17 @@ namespace ModelTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name must not start with spaces")]
+        [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
         public void givenANameWithSpacesAtTheBeginningItThrowsABackEndException()
         {
             model1.Name = " "+validName;
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
+        public void givenANameWithSpacesAtTheEndItThrowsABackEndException()
+        {
+            model1.Name = validName+" ";
+        }
     }
 }
