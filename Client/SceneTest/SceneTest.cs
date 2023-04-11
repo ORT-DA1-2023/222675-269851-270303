@@ -7,13 +7,13 @@ using System.Runtime.Remoting.Channels;
 namespace SceneTest
 {
     [TestClass]
-    public class UnitTest1
+    public class SceneTest
     {
         private Scene sc;
         private Client cl = new Client() { Name = "Joe", Password = "S4fePassword" };
         private String name = "SceneTest";
         private ArrayList positionedModels = new ArrayList();
-        private int[] defaultCameraPosition = new int[3] { 0, 2, 0 };
+        private decimal[] defaultCameraPosition = new decimal[3] { 0, 2, 0 };
         private int defaultFoV = 30;
 
         [TestInitialize]
@@ -40,6 +40,15 @@ namespace SceneTest
             Assert.AreEqual(sc.CameraPosition, defaultCameraPosition);
             Assert.AreEqual(sc.FieldOfView, defaultFoV);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name cant be empty")]
+        public void throwNameIsNullException()
+        {
+            sc.Name = "";
+        }
+
+        
 
 
 
