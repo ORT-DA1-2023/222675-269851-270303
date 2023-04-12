@@ -64,11 +64,11 @@ namespace App {
        {
           if (!value.All(char.IsLetterOrDigit))
            {
-               throw new BackEndException("Name must be alphanumeric");
+               throw new BackEndException("Name must be alphanumerical");
            }
           if (value.Length < nameMinimumLength || value.Length > nameMaximumLength) 
           {
-              throw new BackEndException("Name length must be between 3 and 20");
+              throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
           }
 
           return true;
@@ -82,7 +82,7 @@ namespace App {
             }
            if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
             {
-                throw new BackEndException("Password length must be between 5 and 25");
+                throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
             }
 
            if (!value.Any(char.IsUpper))
@@ -90,14 +90,6 @@ namespace App {
                throw new BackEndException("Password must contain at least one capital letter");
 
             }
-
-           if (!value.Any(char.IsLower))
-           {
-               throw new BackEndException("Password must contain at least one lower case letter");
-
-           }
-
-
             return true;
        }
         public override bool Equals(object obj)

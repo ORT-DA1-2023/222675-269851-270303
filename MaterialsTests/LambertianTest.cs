@@ -1,75 +1,86 @@
 ﻿using App;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace MaterialsTests
 {
     [TestClass]
     public class LambertianTest
     {
-        private string joe = "Joe";
-        private string correctPassword = "Hello1234";
-        private Material newMaterial;
-        private string name = "Lambertian";
-        private int[] color = { 15, 15, 15 };
+        private LambertianMaterial materialSample;
+        private string validMaterialName = "LambertianMaterialName";
         private int[] colorLowerThan = { -1, -1, -1 };
         private int[] colorGreaterThan = { 266, 266, 266 };
-        private Client clientJoe;
+        private int[] validColor = { 15, 15, 15 };
+
+        private Client clientSample;
+        private string clientSampleName = "clientSampleName";
+
+
         [TestInitialize]
         public void initialize()
         {
-            clientJoe = new Client()
+            clientSample = new Client()
             {
-                Name = joe,
-                Password = correctPassword,
+                Name = clientSampleName
             };
-            newMaterial = new lambertianMaterial()
-            {
-                Name = name,
-                Client = clientJoe,
-                Color = color,
-
-            };
-
+            materialSample = new LambertianMaterial();
+            materialSample.Client = clientSample;
 
         }
         [TestMethod]
-        public void CreateMaterialCorrectly()
+        public void givenAValidNameItAssignsItToTheLambertarianMaterial()
         {
-            Assert.IsNotNull(newMaterial);
-            Assert.AreEqual(newMaterial.Name, "Lambertian");
-            Assert.IsTrue(newMaterial.Client.Equals(clientJoe));
-            Assert.AreEqual(((lambertianMaterial)newMaterial).Color,color);
+            Assert.IsNotNull(materialSample);
+            materialSample.Name = validMaterialName;
+            Assert.AreEqual(validMaterialName,materialSample.Name);
+            
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name cant be void")]
-        public void nameIsNull()
+        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
+        public void givenAnEmptyNameItThrowsABackEndException()
         {
-            newMaterial.Name = "";
+            materialSample.Name = "";
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
-        public void nameStartsWithSpace()
+        public void givenANameThatStartsWithSpaceItThrowsABackEndException()
         {
-            newMaterial.Name = " "+correctPassword;
+            materialSample.Name = " "+validMaterialName;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
-        public void nameEndsWithSpace()
+        public void givenANameThatEndsWithSpaceItThrowsABackEndException()
         {
-            newMaterial.Name =correctPassword+ " ";
+            materialSample.Name =validMaterialName + " ";
         }
         
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
-        public void colorIsLowerThan()
+        public void givenASmallerThanPossibleRGBItThrowsABackendException()
         { 
-            ((lambertianMaterial)newMaterial).Color=colorLowerThan;
+            ((LambertianMaterial)materialSample).Color=colorLowerThan;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
-        public void colorIsGreaterThan()
+        public void givenABiggerThanPossibleRGBItThrowsABackendException()
         {
-            ((lambertianMaterial)newMaterial).Color = colorGreaterThan;
+            ((LambertianMaterial)materialSample).Color = colorGreaterThan;
+        }
+        [TestMethod]
+        public void givenAValidRGBItAssignsItToTheMaterial()
+        {
+            materialSample.Color = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                materialSample.Color[i] = validColor[i];
+                Assert.IsTrue(materialSample.Color[i] == validColor[i]);
+            }
+        }
+        [TestMethod]
+        public void givenAMaterialItReturnsItsClient()
+        {
+            Assert.AreEqual(materialSample.Client, clientSample);
         }
 
     }

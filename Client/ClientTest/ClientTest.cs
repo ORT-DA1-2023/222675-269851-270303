@@ -8,164 +8,157 @@ namespace ClientTest
     [TestClass]
     public class ClientTest
     {
-        private Client clientJoe;
-        private const String Joe = "Joe";
-        private const String thisNameIsTooLong = "thisNameHasMoreThan20Words";
+        private Client clientSample;
+        private const String clientSampleName = "clientSampleName";
+        private const String nonAlphanumericalName = "_*";
+        private const String thisNameIsTooLong = "thisNameHasMoreThan20Chars";
+        private const String thisNameIsTooShort = "ab";
         private const String thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
-        private const String correctPasword = "thisIs4Saf3Passw0rd";
+        private const String aValidPassword = "4V4lidPassw0rd";
         private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
         private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
-        private const String passwordOnlyWithCapitalLetters = "THISPASSWORDISHARD2READ";
 
 
         [TestInitialize]
         public void initialize()
         {
-            clientJoe = new Client()
-            {
-                Name = Joe,
-                Password = correctPasword,
-            };
+            clientSample = new Client() { Name = clientSampleName };
         }
 
         [TestMethod]
-        public void clientSignUpCorrectly()
+        public void givenAValidNameItAssignsItToTheClient()
         {
-            Assert.IsNotNull(clientJoe);
-            Assert.AreEqual(clientJoe.Name, "Joe");
-            Assert.AreEqual(clientJoe.Password, "thisIs4Saf3Passw0rd");
+            clientSample.Name = clientSampleName;
+            Assert.AreEqual(clientSampleName, clientSample.Name);
+        }
+
+        [TestMethod]
+        public void givenAValidPasswordItAssignsItToTheClient()
+        {
+            clientSample.Password = aValidPassword;
+            Assert.AreEqual(clientSample.Password, aValidPassword);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")] 
-        public void nameIsTooLong()
+        public void givenATooLongNameItThrowsABackEndException()
         {
-            clientJoe.Name = thisNameIsTooLong;
+            clientSample.Name = thisNameIsTooLong;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
-        public void nameIsTooShort()
+        public void givenATooShortNameItThrowsABackEndException()
         {
-            clientJoe.Name = "";
+            clientSample.Name = thisNameIsTooShort;
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name must be alphanumeric")]
-        public void nameMustBeAlphanumeric()
+        [ExpectedException(typeof(BackEndException), "Name must be alphanumerical")]
+        public void givenANonAlphanumericalNameItThrowsABackEndException()
         {
-            clientJoe.Name = "";
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Password length must be between 5 and 25")]
-        public void passwordIsTooLong()
-        {
-            clientJoe.Password = thisPasswordIsTooLong;
+            clientSample.Name = nonAlphanumericalName;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password length must be between 5 and 25")]
-        public void passwordIsTooShort()
+        public void givenATooLongPasswordItThrowsABackEndException()
         {
-            clientJoe.Password = "";
+            clientSample.Password = thisPasswordIsTooLong;
         }
-
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password must contain at least 1 number")]
-        public void passwordDoesntContainNumbers()
+        public void givenAPasswordWithoutNumbersItThrowsABackEndException()
         {
-            
-            clientJoe.Password = passwordWithoutNumbers;
+            clientSample.Password = passwordWithoutNumbers;
+        }
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Password length must be between 5 and 25")]
+        public void givenATooShortPasswordItThrowsABackEndException()
+        {
+            clientSample.Password = "1";
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password must contain at least one capital letter")]
-        public void passwordDoesntContainCapitalLetters()
+        public void givenAPasswordWithourCapitalLettersItThrowsABackEndException()
         {
-            clientJoe.Password = passwordWithoutCapitalLetter;
+            clientSample.Password = passwordWithoutCapitalLetter;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Password must contain at least one lower case letter")]
-        public void passwordDoesntContainLowerCaselLetters()
+        public void givenTwoClientsWithTheSameNameItReturnsTheyAreEqual()
         {
-            clientJoe.Password = passwordOnlyWithCapitalLetters;
-        }
-
-        [TestMethod]
-        public void clientEquals()
-        {
-            Client clientJoe2 = new Client()
+            Client anotherClient = new Client()
             {
-                Name = Joe,
-                Password = correctPasword,
+                Name = clientSampleName,
             };
-            Assert.IsTrue(clientJoe.Equals(clientJoe2));
+            Assert.IsTrue(clientSample.Equals(anotherClient));
         }
 
         [TestMethod]
-        public void addFigureToClient()
+        public void givenAFigureItAddesItToTheClientOwnFigures()
         {
-            Figure fig = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
-            Assert.IsTrue(clientJoe.OwnedFigures.Count==0);
-            clientJoe.OwnedFigures.Add(fig);
-            Assert.IsNotNull(clientJoe.OwnedFigures);
-            Assert.IsTrue(clientJoe.OwnedFigures.Count == 1);
-            Assert.AreEqual(clientJoe.OwnedFigures[0], fig);
+            Figure fig = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            Assert.IsTrue(clientSample.OwnedFigures.Count==0);
+            clientSample.OwnedFigures.Add(fig);
+            Assert.IsNotNull(clientSample.OwnedFigures);
+            Assert.IsTrue(clientSample.OwnedFigures.Count == 1);
+            Assert.AreEqual(clientSample.OwnedFigures[0], fig);
         }
 
         [TestMethod]
-        public void deleteFigureFromClient()
+        public void givenAFigureItRemovesItFromClientOwnFigures()
         {
            
-            Figure fig = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
-            clientJoe.OwnedFigures.Add(fig);
-            Assert.IsTrue(clientJoe.OwnedFigures.Count == 1);
-            clientJoe.OwnedFigures.Remove(fig);
-            Assert.IsTrue(clientJoe.OwnedFigures.Count == 0);
+            Figure fig = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            clientSample.OwnedFigures.Add(fig);
+            Assert.IsTrue(clientSample.OwnedFigures.Count == 1);
+            clientSample.OwnedFigures.Remove(fig);
+            Assert.IsTrue(clientSample.OwnedFigures.Count == 0);
 
         }
 
         [TestMethod]
-        public void addMaterialToClient()
+        public void givenAMaterialItAddsItToClientOwnMaterials()
         {
-            Material mat = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 0);
-            clientJoe.OwnedMaterials.Add(mat);
-            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 1);
-            Assert.AreEqual(clientJoe.OwnedMaterials[0], mat);
+            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Assert.IsTrue(clientSample.OwnedMaterials.Count == 0);
+            clientSample.OwnedMaterials.Add(mat);
+            Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
+            Assert.AreEqual(clientSample.OwnedMaterials[0], mat);
         }
+
         [TestMethod]
-        public void deleteMaterialFromClient()
+        public void givenAMaterialItRemovesItFromClientOwnMaterials()
         {
-            Material mat = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            clientJoe.OwnedMaterials.Add(mat);
-            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 1);
-            clientJoe.OwnedMaterials.Remove(mat);
-            Assert.IsTrue(clientJoe.OwnedMaterials.Count == 0);
+            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            clientSample.OwnedMaterials.Add(mat);
+            Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
+            clientSample.OwnedMaterials.Remove(mat);
+            Assert.IsTrue(clientSample.OwnedMaterials.Count == 0);
         }
         
         [TestMethod]
-        public void addModelToClient()
+        public void givenAModelItAddsItToClientOwnModels()
         {
-            Figure figure = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
-            Material material = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Model model = new Model() { Client = clientJoe, Name = "TestModel", Figure= figure, Material=material };
-            Assert.IsTrue(clientJoe.OwnedModels.Count == 0);
-            clientJoe.OwnedModels.Add(model);
-            Assert.IsNotNull(clientJoe.OwnedModels);
-            Assert.IsTrue(clientJoe.OwnedModels.Count == 1);
-            Assert.AreEqual(clientJoe.OwnedModels[0], model);
+            Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Model model = new Model() { Client = clientSample, Name = "TestModel", Figure= figure, Material=material };
+            Assert.IsTrue(clientSample.OwnedModels.Count == 0);
+            clientSample.OwnedModels.Add(model);
+            Assert.IsNotNull(clientSample.OwnedModels);
+            Assert.IsTrue(clientSample.OwnedModels.Count == 1);
+            Assert.AreEqual(clientSample.OwnedModels[0], model);
         }
 
         [TestMethod]
-        public void deleteModelFromClient()
+        public void givenAModelItRemovesItFromClientOwnModels()
         {
-            Figure figure = new Sphere() { Client = clientJoe, Name = "Ring", Radius = 10 };
-            Material material = new lambertianMaterial() { Client = clientJoe, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Model model = new Model() { Client = clientJoe, Name = "TestModel", Figure = figure, Material = material };
-            clientJoe.OwnedModels.Add(model);
-            Assert.IsTrue(clientJoe.OwnedModels.Count == 1);
-            clientJoe.OwnedModels.Remove(model);
-            Assert.IsTrue(clientJoe.OwnedModels.Count == 0);
+            Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Model model = new Model() { Client = clientSample, Name = "TestModel", Figure = figure, Material = material };
+            clientSample.OwnedModels.Add(model);
+            Assert.IsTrue(clientSample.OwnedModels.Count == 1);
+            clientSample.OwnedModels.Remove(model);
+            Assert.IsTrue(clientSample.OwnedModels.Count == 0);
         }
-        
 
     }
 }

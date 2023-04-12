@@ -4,28 +4,28 @@ namespace App
 {
     public class Model
     {
-        private string name;
+        private String name;
         private Figure figure;
         private Client client;
         private Material material;
+
 
         public string Name { 
             get=>name;
             set
             {
-                if (isANonEmptyName(value))
+                if (isAValidName(value))
                 {
                     name = value;
                 }
             } 
         }
 
-        private bool isANonEmptyName(string name)
+        private bool isAValidName(string name)
         {
-            if (name=="")
-            {
-                throw new BackEndException("Name must not be empty");
-            }
+            if (name=="")throw new BackEndException("Name must not be empty");
+            if(!name.Trim().Equals(name)) throw new BackEndException("Name must not start or end with spaces");
+
             return true;
         }
 

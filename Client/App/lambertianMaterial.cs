@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace App
 {
     
-    public class lambertianMaterial :Material
+    public class LambertianMaterial :Material
     {
         private String name;
         private Client client;
@@ -46,7 +46,7 @@ namespace App
             {
                 if (value[i]<0 || value[i] > 255)
                 {
-                    throw new BackEndException("color cant be lower than 0 or greater than 255");
+                    throw new BackEndException("Color must be between 0 and 255");
                 }
             }
             
@@ -57,11 +57,11 @@ namespace App
         {
            if(value == "")
             {
-                throw new BackEndException("Name cant be void");
+                throw new BackEndException("Name must not be empty");
             }
             if (value !=value.Trim())
             {
-                throw new BackEndException("Name cant start or end with space");
+                throw new BackEndException("Name must not start or end with spaces");
             }
             return true;
         }
