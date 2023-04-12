@@ -9,7 +9,7 @@ namespace App
         private String name;
         private Client client;
 
-        private string invalidRadiusTextException = "The radius must be greater than 0";
+
         public override string Name
         {
             get => name;
@@ -43,7 +43,7 @@ namespace App
         {
             if (value <= 0)
             {
-                throw new BackEndException(invalidRadiusTextException);
+                throw new BackEndException("The radius must be greater than 0");
             }
             return true;
         }

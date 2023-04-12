@@ -7,8 +7,7 @@ namespace App
     {
         private String name;
         private Client client;
-        protected string emptyNameTextException = "The name must not be empty";
-        protected string nameStartsOrEndsWithSpaceTextException = "Name must not start or end with spaces";
+
 
         public virtual Client Client
         {
@@ -31,8 +30,8 @@ namespace App
 
         protected bool isAValidName(String value)
         {
-            if (value.Length == 0) throw new BackEndException(emptyNameTextException);
-            if (value.Trim().Length != value.Length) throw new BackEndException(nameStartsOrEndsWithSpaceTextException);
+            if (value.Length == 0) throw new BackEndException("The name must not be empty");
+            if (value.Trim().Length != value.Length) throw new BackEndException("Name must not start or end with spaces");
             return true;
         }
     }

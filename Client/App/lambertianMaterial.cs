@@ -13,10 +13,6 @@ namespace App
         private Client client;
         private int[] color;
 
-        private string emptyNameMessageTextException = "Name must not be empty";
-        private string nameStartsOrEndsWithSpacesTextException = "Name must not start or end with spaces";
-        private string outOfBoundariesColorTextException = "Color must be between 0 and 255";
-
         public override string Name 
         { 
             get =>name;
@@ -50,7 +46,7 @@ namespace App
             {
                 if (value[i]<0 || value[i] > 255)
                 {
-                    throw new BackEndException(outOfBoundariesColorTextException);
+                    throw new BackEndException("Color must be between 0 and 255");
                 }
             }
             
@@ -61,11 +57,11 @@ namespace App
         {
            if(value == "")
             {
-                throw new BackEndException(emptyNameMessageTextException);
+                throw new BackEndException("Name must not be empty");
             }
             if (value !=value.Trim())
             {
-                throw new BackEndException(nameStartsOrEndsWithSpacesTextException);
+                throw new BackEndException("Name must not start or end with spaces");
             }
             return true;
         }
