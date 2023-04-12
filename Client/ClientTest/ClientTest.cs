@@ -17,7 +17,6 @@ namespace ClientTest
         private const String aValidPassword = "4V4lidPassw0rd";
         private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
         private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
-        //private const String passwordOnlyWithCapitalLetters = "THISPASSWORDISHARD2READ";
 
 
         [TestInitialize]
@@ -83,13 +82,6 @@ namespace ClientTest
             clientSample.Password = passwordWithoutCapitalLetter;
         }
 
-      /*  [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Password must contain at least one lower case letter")]
-        public void passwordDoesntContainLowerCaselLetters()
-        {
-            clientSample.Password = passwordOnlyWithCapitalLetters;
-        }*/
-
         [TestMethod]
         public void givenTwoClientsWithTheSameNameItReturnsTheyAreEqual()
         {
@@ -132,6 +124,7 @@ namespace ClientTest
             Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
             Assert.AreEqual(clientSample.OwnedMaterials[0], mat);
         }
+
         [TestMethod]
         public void givenAMaterialItRemovesItFromClientOwnMaterials()
         {
