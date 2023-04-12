@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace App
 {
     
-    public class lambertianMaterial :Material
+    public class LambertianMaterial :Material
     {
         private String name;
         private Client client;

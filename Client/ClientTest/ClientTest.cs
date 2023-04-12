@@ -126,7 +126,7 @@ namespace ClientTest
         [TestMethod]
         public void givenAMaterialItAddsItToClientOwnMaterials()
         {
-            Material mat = new lambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
             Assert.IsTrue(clientSample.OwnedMaterials.Count == 0);
             clientSample.OwnedMaterials.Add(mat);
             Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
@@ -135,7 +135,7 @@ namespace ClientTest
         [TestMethod]
         public void givenAMaterialItRemovesItFromClientOwnMaterials()
         {
-            Material mat = new lambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
             clientSample.OwnedMaterials.Add(mat);
             Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
             clientSample.OwnedMaterials.Remove(mat);
@@ -146,7 +146,7 @@ namespace ClientTest
         public void givenAModelItAddsItToClientOwnModels()
         {
             Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            Material material = new lambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
             Model model = new Model() { Client = clientSample, Name = "TestModel", Figure= figure, Material=material };
             Assert.IsTrue(clientSample.OwnedModels.Count == 0);
             clientSample.OwnedModels.Add(model);
@@ -159,7 +159,7 @@ namespace ClientTest
         public void givenAModelItRemovesItFromClientOwnModels()
         {
             Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            Material material = new lambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
+            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
             Model model = new Model() { Client = clientSample, Name = "TestModel", Figure = figure, Material = material };
             clientSample.OwnedModels.Add(model);
             Assert.IsTrue(clientSample.OwnedModels.Count == 1);

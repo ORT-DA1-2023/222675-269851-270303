@@ -7,7 +7,7 @@ namespace MaterialsTests
     [TestClass]
     public class LambertianTest
     {
-        private lambertianMaterial materialSample;
+        private LambertianMaterial materialSample;
         private string validMaterialName = "LambertianMaterialName";
         private int[] colorLowerThan = { -1, -1, -1 };
         private int[] colorGreaterThan = { 266, 266, 266 };
@@ -24,7 +24,7 @@ namespace MaterialsTests
             {
                 Name = clientSampleName
             };
-            materialSample = new lambertianMaterial();
+            materialSample = new LambertianMaterial();
             materialSample.Client = clientSample;
 
         }
@@ -59,13 +59,13 @@ namespace MaterialsTests
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
         public void givenASmallerThanPossibleRGBItThrowsABackendException()
         { 
-            ((lambertianMaterial)materialSample).Color=colorLowerThan;
+            ((LambertianMaterial)materialSample).Color=colorLowerThan;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
         public void givenABiggerThanPossibleRGBItThrowsABackendException()
         {
-            ((lambertianMaterial)materialSample).Color = colorGreaterThan;
+            ((LambertianMaterial)materialSample).Color = colorGreaterThan;
         }
         [TestMethod]
         public void givenAValidRGBItAssignsItToTheMaterial()
