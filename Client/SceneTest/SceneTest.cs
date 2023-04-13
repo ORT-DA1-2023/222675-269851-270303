@@ -9,82 +9,122 @@ namespace SceneTest
     [TestClass]
     public class SceneTest
     {
-        private Scene sc;
-        private Client cl = new Client() { Name = "Joe", Password = "S4fePassword" };
-        private String name = "SceneTest";
+        private Scene sceneSample;
+        private Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
+        private String sceneSampleName = "SceneTest";
         private ArrayList positionedModels = new ArrayList();
         private decimal[] randomCameraPosition = new decimal[3] { 1, 1, 0 };
+        private decimal[] DifferentRandomCameraPosition = new decimal[3] { 2, 3, 0 };
         private decimal[] randomObjectPosition = new decimal[3] { 1, 1, 0 };
+        private decimal[] DifferentRandomObjectPosition = new decimal[3] { 5, 1, 3 };
         private int randomFoV = 30;
-        private Scene defaultScene = new Scene();
-        private decimal[] defaultPosition = new decimal[3] { 0, 2, 0 };
-        private decimal[] defaultObjPosition = new decimal[3] { 0, 2, 5 };
+        private Scene defaultSceneSample = new Scene();
+        private decimal[] defaultCamaraPosition = new decimal[3] { 0, 2, 0 };
+        private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
 
 
         [TestInitialize]
 
         public void initialize()
         {
-            sc = new Scene()
-            {
-                Client = cl,
-                Name = name,
-                PositionedModels = positionedModels,
-                CameraPosition = randomCameraPosition,
-                ObjectPosition = randomObjectPosition,
-                FieldOfView = randomFoV,
-            };
+            sceneSample = new Scene(){ Name = sceneSampleName };
         }
 
         [TestMethod]
-        public void isNotNull()
+        public void givenAValidFieldOfViewItAssignsItToTheScene()
         {
-            Assert.IsNotNull(sc);
-            Assert.IsTrue(sc.Client.Equals(cl));
-            Assert.AreEqual(sc.Name, name);
-            Assert.AreEqual(sc.PositionedModels, positionedModels);
-            Assert.AreEqual(sc.CameraPosition, randomCameraPosition);
-            Assert.AreEqual(sc.ObjectPosition, randomObjectPosition);
-            Assert.AreEqual(sc.FieldOfView, randomFoV);
+            sceneSample.FieldOfView = randomFoV;
+            Assert.AreEqual(sceneSample.FieldOfView, randomFoV);
         }
+
+        [TestMethod]
+        public void givenAValidClientItAssignsItToTheScene()
+        {
+            sceneSample.Client = clientSample;
+            Assert.IsTrue(sceneSample.Client.Equals(clientSample));
+        }
+
+
+        [TestMethod]
+        public void givenAValidNameItAssignsItToTheScene()
+        {
+            sceneSample.Name = sceneSampleName;
+            Assert.AreEqual(sceneSample.Name, sceneSampleName);
+        }
+
+        [TestMethod]
+        public void givenAValidPositionedModelsItAssignsItToTheScene()
+        {
+            sceneSample.PositionedModels = positionedModels;
+            Assert.AreEqual(sceneSample.PositionedModels, positionedModels);
+        }
+
+        [TestMethod]
+        public void givenAValidCameraPositionItAssignsItToTheScene()
+        {
+            sceneSample.CameraPosition = randomCameraPosition;
+            Assert.AreEqual(sceneSample.CameraPosition, randomCameraPosition);
+        }
+
+        [TestMethod]
+        public void givenAValidObjectPositionItAssignsItToTheScene()
+        {
+            sceneSample.ObjectPosition = randomObjectPosition;
+            Assert.AreEqual(sceneSample.ObjectPosition, randomObjectPosition);
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant be empty")]
-        public void throwNameIsNullException()
+        public void givenAnEmptyNameItThrowsABackEndException()
         {
-            sc.Name = "";
+            sceneSample.Name = "";
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
-        public void throwNameStartsWithBlankException()
+        public void givenANameThatStartsWithSpacesItThrowsABackEndException()
         {
-            sc.Name = " " + name;
+            sceneSample.Name = " " + sceneSampleName;
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
-        public void throwNameEndsWithBlankException()
+        public void givenANameThatEndsWithSpacesItThrowsABackEndException()
         {
-            sc.Name = name + " ";
+            sceneSample.Name = sceneSampleName + " ";
         }
 
         [TestMethod]
-        public void defaultFoV()
+        public void givenAdefaultSceneItComparesTheDefaultFoV()
         {
-            Assert.AreEqual(defaultScene.FieldOfView, 30);
+            Assert.AreEqual(defaultSceneSample.FieldOfView, 30);
         }
 
         [TestMethod]
-        public void defaultCameraPosition()
+        public void givenADefaultSceneItComparesTheDefaultCameraPosition()
         {
-            Assert.IsTrue(defaultScene.equalsCameraPosition(defaultPosition));
+            Assert.IsTrue(defaultSceneSample.equalsCameraPosition(defaultCamaraPosition));
         }
 
         [TestMethod]
-        
-        public void defaultObjectPosition()
+        public void givenADefaultSceneItComparesADifferentCameraPosition()
         {
-            Assert.IsTrue(defaultScene.equalsObjectPosition(defaultObjPosition));
+            Assert.IsFalse(defaultSceneSample.equalsCameraPosition(DifferentRandomCameraPosition));
         }
+
+        [TestMethod]
+        public void givenADefaultSceneItComparesTheDefaultObjectPosition()
+        {
+            Assert.IsTrue(defaultSceneSample.equalsObjectPosition(defaultObjectPosition));
+        }
+
+        [TestMethod]
+        public void givenADefaultSceneItComparesADifferentObjectPosition()
+        {
+            Assert.IsFalse(defaultSceneSample.equalsObjectPosition(DifferentRandomObjectPosition));
+        }
+
 
 
 
