@@ -16,9 +16,7 @@ namespace App {
         private const int passwordMinimumLength = 5;
         private const int passwordMaximumLength = 25;
         private DateTime registerDate;
-        private ArrayList ownedFigures=new ArrayList();
-        private ArrayList ownedMaterials = new ArrayList();
-        private ArrayList ownedModels = new ArrayList();
+      
 
         public Client()
         {
@@ -30,9 +28,7 @@ namespace App {
             get => registerDate;
         }
 
-        public ArrayList OwnedFigures { get => ownedFigures; }
-        public ArrayList OwnedMaterials { get => ownedMaterials; }
-        public ArrayList OwnedModels { get => ownedModels; }
+
 
 
         protected override bool IsAValidName(String value)
