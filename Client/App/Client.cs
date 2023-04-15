@@ -9,18 +9,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace App {
-    public class Client
+    public class Client : Person
     {
         private const int nameMinimumLength = 3;
         private const int nameMaximumLength = 20;
         private const int passwordMinimumLength = 5;
         private const int passwordMaximumLength = 25;
         private DateTime registerDate;
-        private String name;
-        private String password;
-        private ArrayList ownedFigures=new ArrayList();
-        private ArrayList ownedMaterials = new ArrayList();
-        private ArrayList ownedModels = new ArrayList();
+      
 
         public Client()
         {
@@ -31,36 +27,11 @@ namespace App {
         {
             get => registerDate;
         }
-        public String Name 
-       {
-           get => name;
-            set {
-               if (isAValidName(value))
-               {
-                  name=value;
-               }
-            }
-
-       }
-       public String Password
-       {
-           get => password;
-           set
-           {
-               if (isAValidPassword(value))
-               {
-                   password = value;
-                }
-               
-            }
-              
-       }
-        public ArrayList OwnedFigures { get => ownedFigures; }
-        public ArrayList OwnedMaterials { get => ownedMaterials; }
-        public ArrayList OwnedModels { get => ownedModels; }
 
 
-        private bool isAValidName(String value)
+
+
+        protected override bool IsAValidName(String value)
        {
           if (!value.All(char.IsLetterOrDigit))
            {
@@ -74,7 +45,7 @@ namespace App {
           return true;
        }
 
-       private bool isAValidPassword(String value)
+       protected override bool IsAValidPassword(String value)
        {
            if (!value.Any(char.IsDigit))
            {
@@ -92,11 +63,10 @@ namespace App {
             }
             return true;
        }
-        public override bool Equals(object obj)
+        public override bool Equals(Person p)
         {
-            return this.name.Equals(((Client)obj).name);
+            return this.Name.Equals(((Client)p).Name);
         }
-
     }
 
 }

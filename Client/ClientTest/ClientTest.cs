@@ -92,73 +92,7 @@ namespace ClientTest
             Assert.IsTrue(clientSample.Equals(anotherClient));
         }
 
-        [TestMethod]
-        public void givenAFigureItAddesItToTheClientOwnFigures()
-        {
-            Figure fig = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            Assert.IsTrue(clientSample.OwnedFigures.Count==0);
-            clientSample.OwnedFigures.Add(fig);
-            Assert.IsNotNull(clientSample.OwnedFigures);
-            Assert.IsTrue(clientSample.OwnedFigures.Count == 1);
-            Assert.AreEqual(clientSample.OwnedFigures[0], fig);
-        }
-
-        [TestMethod]
-        public void givenAFigureItRemovesItFromClientOwnFigures()
-        {
-           
-            Figure fig = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            clientSample.OwnedFigures.Add(fig);
-            Assert.IsTrue(clientSample.OwnedFigures.Count == 1);
-            clientSample.OwnedFigures.Remove(fig);
-            Assert.IsTrue(clientSample.OwnedFigures.Count == 0);
-
-        }
-
-        [TestMethod]
-        public void givenAMaterialItAddsItToClientOwnMaterials()
-        {
-            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Assert.IsTrue(clientSample.OwnedMaterials.Count == 0);
-            clientSample.OwnedMaterials.Add(mat);
-            Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
-            Assert.AreEqual(clientSample.OwnedMaterials[0], mat);
-        }
-
-        [TestMethod]
-        public void givenAMaterialItRemovesItFromClientOwnMaterials()
-        {
-            Material mat = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            clientSample.OwnedMaterials.Add(mat);
-            Assert.IsTrue(clientSample.OwnedMaterials.Count == 1);
-            clientSample.OwnedMaterials.Remove(mat);
-            Assert.IsTrue(clientSample.OwnedMaterials.Count == 0);
-        }
-        
-        [TestMethod]
-        public void givenAModelItAddsItToClientOwnModels()
-        {
-            Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Model model = new Model() { Client = clientSample, Name = "TestModel", Figure= figure, Material=material };
-            Assert.IsTrue(clientSample.OwnedModels.Count == 0);
-            clientSample.OwnedModels.Add(model);
-            Assert.IsNotNull(clientSample.OwnedModels);
-            Assert.IsTrue(clientSample.OwnedModels.Count == 1);
-            Assert.AreEqual(clientSample.OwnedModels[0], model);
-        }
-
-        [TestMethod]
-        public void givenAModelItRemovesItFromClientOwnModels()
-        {
-            Figure figure = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            Material material = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
-            Model model = new Model() { Client = clientSample, Name = "TestModel", Figure = figure, Material = material };
-            clientSample.OwnedModels.Add(model);
-            Assert.IsTrue(clientSample.OwnedModels.Count == 1);
-            clientSample.OwnedModels.Remove(model);
-            Assert.IsTrue(clientSample.OwnedModels.Count == 0);
-        }
+     
 
     }
 }
