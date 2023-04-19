@@ -55,35 +55,31 @@ namespace Render3D.BackEnd
             get => _registerDate;
         }
 
-
-
-
         protected bool IsAValidName(String value)
         {
-            if (!value.All(char.IsLetterOrDigit))
+            if(!HelperValidator.IsAlphanumerical(value))
             {
                 throw new BackEndException("Name must be alphanumerical");
             }
-            if (value.Length < nameMinimumLength || value.Length > nameMaximumLength)
+            if (!HelperValidator.IsLengthBetween(value, nameMinimumLength, nameMaximumLength))
             {
                 throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
             }
-
             return true;
         }
 
         private bool IsAValidPassword(String value)
         {
-            if (!value.Any(char.IsDigit))
+            if (!HelperValidator.IsAlphanumerical(value))
             {
                 throw new BackEndException("Password must contain at least 1 number");
             }
-            if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
+            if (!HelperValidator.IsLengthBetween(value, nameMinimumLength, nameMaximumLength))
             {
                 throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
             }
 
-            if (!value.Any(char.IsUpper))
+            if (!HelperValidator.ContainsACapital(value))
             {
                 throw new BackEndException("Password must contain at least one capital letter");
 

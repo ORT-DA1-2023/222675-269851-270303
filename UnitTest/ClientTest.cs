@@ -77,7 +77,7 @@ namespace Render3D.UnitTest
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password must contain at least one capital letter")]
-        public void givenAPasswordWithourCapitalLettersItThrowsABackEndException()
+        public void givenAPasswordWithoutCapitalLettersItThrowsABackEndException()
         {
             clientSample.Password = passwordWithoutCapitalLetter;
         }
