@@ -10,13 +10,13 @@ namespace Render3D.UnitTest
     {
         private Client clientSample;
         private const String clientSampleName = "clientSampleName";
-        private const String nonAlphanumericalName = "_*";
+        private const String nonAlphanumericalName = "_*/+-";
         private const String thisNameIsTooLong = "thisNameHasMoreThan20Chars";
         private const String thisNameIsTooShort = "ab";
         private const String thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
         private const String aValidPassword = "4V4lidPassw0rd";
         private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
-        private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
+        private const String passwordWithoutCapitalLetter = "thisp4ssword";
 
 
         [TestInitialize]
@@ -81,6 +81,14 @@ namespace Render3D.UnitTest
         {
             clientSample.Password = passwordWithoutCapitalLetter;
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Password must be alphanumerical")]
+        public void givenANonAlphanumericalPasswordItThrowsABackEndException()
+        {
+            clientSample.Password = nonAlphanumericalName;
+        }
+
 
         [TestMethod]
         public void givenTwoClientsWithTheSameNameItReturnsTheyAreEqual()
