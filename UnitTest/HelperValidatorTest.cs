@@ -105,13 +105,13 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAnEmptyStringItReturnsTrue()
         {
-            bool result = HelperValidator.IsEmpty("");
+            bool result = HelperValidator.IsAnEmptyString("");
             Assert.IsTrue(result);
         }
         [TestMethod]
         public void givenANonEmptyStringItReturnsFalse()
         {
-            bool result = HelperValidator.IsEmpty(tenCharName);
+            bool result = HelperValidator.IsAnEmptyString(tenCharName);
             Assert.IsFalse(result);
         }
     }
