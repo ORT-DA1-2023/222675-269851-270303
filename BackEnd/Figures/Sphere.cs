@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Render3D.BackEnd.Figures
@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Figures
             get => name;
             set
             {
-                if (isAValidName(value))
+                if (IsAValidName(value))
                 {
                     name = value;
                 }
@@ -33,13 +33,13 @@ namespace Render3D.BackEnd.Figures
             get => radius;
             set
             {
-                if (isAValidRadius(value))
+                if (IsAValidRadius(value))
                 {
                     radius = value;
                 }
             }
         }
-        private bool isAValidRadius(decimal value)
+        private bool IsAValidRadius(decimal value)
         {
             if (value <= 0)
             {

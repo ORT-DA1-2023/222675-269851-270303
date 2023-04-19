@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +13,15 @@ namespace Render3D.BackEnd
     {
         public DataWarehouse() { }
 
-        private ArrayList _figuresCreated = new ArrayList();
-        private ArrayList _materialsCreated = new ArrayList();
-        private ArrayList _modelsCreated = new ArrayList();
+        private List<Figure> _figuresCreated = new List<Figure>();
+        private List<Material> _materialsCreated = new List<Material>();
+        private List<Model> _modelsCreated = new List<Model>();
+        private List<Client> _clientsCreated = new List<Client>();
 
-        public ArrayList Figures { get => _figuresCreated; }
-        public ArrayList Materials { get => _materialsCreated; }
-        public ArrayList Models { get => _modelsCreated; }
+        public List<Figure> Figures { get => _figuresCreated; }
+        public List<Material> Materials { get => _materialsCreated; }
+        public List<Model> Models { get => _modelsCreated; }
+        public List<Client> Clients { get => _clientsCreated; }
    
     
     }
