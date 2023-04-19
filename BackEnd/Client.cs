@@ -8,64 +8,91 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Render3D.BackEnd {
-    public class Client : Person
+namespace Render3D.BackEnd
+{
+    public class Client
     {
         private const int nameMinimumLength = 3;
         private const int nameMaximumLength = 20;
         private const int passwordMinimumLength = 5;
         private const int passwordMaximumLength = 25;
-        private DateTime registerDate;
-      
+
+        protected string _name;
+        protected string _password;
+        private DateTime _registerDate;
+
 
         public Client()
         {
-            registerDate = DateTime.Now;
+            _registerDate = DateTime.Now;
+        }
+
+        public String Name
+        {
+            get { return _name; }
+            set
+            {
+                if (IsAValidName(value))
+                {
+                    _name = value;
+                }
+            }
+        }
+        public String Password
+        {
+            get { return _password; }
+            set
+            {
+                if (IsAValidPassword(value))
+                {
+                    _password = value;
+                }
+            }
         }
 
         public DateTime RegisterDate
         {
-            get => registerDate;
+            get => _registerDate;
         }
 
 
 
 
-        protected override bool IsAValidName(String value)
-       {
-          if (!value.All(char.IsLetterOrDigit))
-           {
-               throw new BackEndException("Name must be alphanumerical");
-           }
-          if (value.Length < nameMinimumLength || value.Length > nameMaximumLength) 
-          {
-              throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
-          }
-
-          return true;
-       }
-
-       protected override bool IsAValidPassword(String value)
-       {
-           if (!value.Any(char.IsDigit))
-           {
-               throw new BackEndException("Password must contain at least 1 number");
+        protected bool IsAValidName(String value)
+        {
+            if (!value.All(char.IsLetterOrDigit))
+            {
+                throw new BackEndException("Name must be alphanumerical");
             }
-           if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
+            if (value.Length < nameMinimumLength || value.Length > nameMaximumLength)
+            {
+                throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
+            }
+
+            return true;
+        }
+
+        private bool IsAValidPassword(String value)
+        {
+            if (!value.Any(char.IsDigit))
+            {
+                throw new BackEndException("Password must contain at least 1 number");
+            }
+            if (value.Length < passwordMinimumLength || value.Length > passwordMaximumLength)
             {
                 throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
             }
 
-           if (!value.Any(char.IsUpper))
+            if (!value.Any(char.IsUpper))
             {
-               throw new BackEndException("Password must contain at least one capital letter");
+                throw new BackEndException("Password must contain at least one capital letter");
 
             }
             return true;
-       }
-        public override bool Equals(Person p)
+        }
+        public bool Equals(Client p)
         {
-            return this.Name.Equals(((Client)p).Name);
+            return this.Name.Equals(p.Name);
         }
     }
 

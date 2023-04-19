@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="BackEndException.cs" />
     <Compile Include="DataWarehouse.cs" />
-    <Compile Include="Person.cs" />
     <Compile Include="Materials\LambertianMaterial.cs" />
     <Compile Include="Materials\Material.cs" />
     <Compile Include="Client.cs" />
