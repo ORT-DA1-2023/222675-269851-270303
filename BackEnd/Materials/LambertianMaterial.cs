@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.Materials
 {
-    
-    public class LambertianMaterial :Material
+
+    public class LambertianMaterial : Material
     {
         private String name;
         private Client client;
         private int[] color;
 
-        public override string Name 
-        { 
-            get =>name;
-            set { 
-                if(isAValidName(value))
+        public override string Name
+        {
+            get => name;
+            set
+            {
+                if (IsAValidName(value))
                 {
                     name = value;
                 }
@@ -33,38 +34,28 @@ namespace Render3D.BackEnd.Materials
             get => color;
             set
             {
-                if (isAValidColor(value))
+                if (IsAValidColor(value))
                 {
-                    color=value;
+                    color = value;
                 }
             }
         }
 
-        private bool isAValidColor(int[] value)
+        private bool IsAValidColor(int[] value)
         {
-           for(int i=0; i < value.Length; i++)
+            foreach (int code in value)
             {
-                if (value[i]<0 || value[i] > 255)
-                {
-                    throw new BackEndException("Color must be between 0 and 255");
-                }
+                if (code < 0 || code > 255) throw new BackEndException("Color must be between 0 and 255");
             }
-            
             return true;
         }
 
-        private bool isAValidName(string value)
+        private bool IsAValidName(string value)
         {
-           if(value == "")
-            {
-                throw new BackEndException("Name must not be empty");
-            }
-            if (value !=value.Trim())
-            {
-                throw new BackEndException("Name must not start or end with spaces");
-            }
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name must not be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
             return true;
         }
-        
+
     }
 }

@@ -30,7 +30,7 @@ namespace Render3D.BackEnd
         {
             return name.Any(char.IsUpper);
         }
-        public static bool IsEmpty(String name)
+        public static bool IsAnEmptyString(String name)
         {
             return name.Length == 0;
         }

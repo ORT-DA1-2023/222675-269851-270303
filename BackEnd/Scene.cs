@@ -1,64 +1,59 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private DateTime registerDate;
-        private DateTime lastModificationDate;
-        private Client client;
-        private String name;
-        private ArrayList positionedModels;
-        private decimal[] cameraPosition;
-        private decimal[] objectPosition;
-        private int fieldOfView;
+        private DateTime _registerDate;
+        private DateTime _lastModificationDate;
+        private Client _client;
+        private String _name;
+        private List<Model> _positionedModels;
+        private decimal[] _cameraPosition;
+        private decimal[] _objectPosition;
+        private int _fieldOfView;
         public Scene()
         {
-            registerDate = DateTime.Now;
-            cameraPosition = new decimal[3] {0,2,0};
-            objectPosition= new decimal[3] { 0, 2, 5 };
-            fieldOfView = 30;
+            _registerDate = DateTime.Now;
+            _cameraPosition = new decimal[3] { 0, 2, 0 };
+            _objectPosition = new decimal[3] { 0, 2, 5 };
+            _fieldOfView = 30;
         }
 
-        public Client Client { get => client; set => client = value; }
+        public Client Client { get => _client; set => _client = value; }
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                if (isAValidName(value))
+                if (IsAValidName(value))
                 {
-                    name = value;
+                    _name = value;
                 }
             }
         }
 
 
         public ArrayList PositionedModels { get; set; }
-        public decimal[] CameraPosition { get => cameraPosition; set => cameraPosition = value; }
-        public decimal[] ObjectPosition { get=>objectPosition; set=>objectPosition=value; }
-        public int FieldOfView { get => fieldOfView; set => fieldOfView = value; }
-       
+        public decimal[] CameraPosition { get => _cameraPosition; set => _cameraPosition = value; }
+        public decimal[] ObjectPosition { get => _objectPosition; set => _objectPosition = value; }
+        public int FieldOfView { get => _fieldOfView; set => _fieldOfView = value; }
 
-        private bool isAValidName(string value)
-    {
-        if (value == "")
+
+        private bool IsAValidName(string value)
         {
-            throw new BackEndException("Name cant be empty");
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
+            return true;
         }
-        if (value != value.Trim())
-        {
-            throw new BackEndException("Name cant start or end with blank");
-        }
-        return true;
-    }
         public bool equalsCameraPosition(decimal[] newCamera)
         {
-            for(int i = 0; i<newCamera.Length; i++)
+            for (int i = 0; i < newCamera.Length; i++)
             {
-                if (this.cameraPosition[i] != newCamera[i])
+                if (this.CameraPosition[i] != newCamera[i])
                 {
                     return false;
                 }
@@ -70,7 +65,7 @@ namespace Render3D.BackEnd
         {
             for (int i = 0; i < newObject.Length; i++)
             {
-                if (this.objectPosition[i] != newObject[i])
+                if (this.ObjectPosition[i] != newObject[i])
                 {
                     return false;
                 }

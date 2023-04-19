@@ -5,33 +5,33 @@ namespace Render3D.BackEnd.Figures
 {
     public abstract class Figure 
     {
-        private String name;
-        private Client client;
+        private String _name;
+        private Client _client;
 
 
         public virtual Client Client
         {
-            get => client;
-            set => client = value;
+            get => _client;
+            set => _client = value;
         }
 
         public virtual String Name
         {
-            get => name;
+            get => _name;
             set
             {
-                if (isAValidName(value))
+                if (IsAValidName(value))
                 {
-                    name = value;
+                    _name = value;
                 }
             }
 
         }
 
-        protected bool isAValidName(String value)
+        protected bool IsAValidName(String value)
         {
-            if (value.Length == 0) throw new BackEndException("The name must not be empty");
-            if (value.Trim().Length != value.Length) throw new BackEndException("Name must not start or end with spaces");
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The name must not be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name must not start or end with spaces");
             return true;
         }
     }

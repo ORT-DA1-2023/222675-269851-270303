@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Figures
             get => name;
             set
             {
-                if (isAValidName(value))
+                if (IsAValidName(value))
                 {
                     name = value;
                 }
