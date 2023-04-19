@@ -81,6 +81,25 @@ namespace Render3D.UnitTest
             Assert.IsTrue(data.Models.Count == 0);
         }
 
+
+        [TestMethod]
+        public void givenAClientItAddsItToExistingClients()
+        {
+           Assert.IsTrue(data.Clients.Count == 0);
+           data.Clients.Add(clientSample);
+           Assert.IsTrue (data.Clients.Count == 1);
+           Assert.IsTrue(data.Clients.Contains(clientSample));
+        }
+
+
+        [TestMethod]
+        public void givenAClientItRemovesItFromExistingClients()
+        {
+            data.Clients.Add(clientSample);
+            data.Clients.Remove(clientSample);
+            Assert.IsTrue(data.Clients.Count == 0);
+        }
+
     }
 }
 
