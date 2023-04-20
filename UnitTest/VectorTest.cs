@@ -14,6 +14,7 @@ namespace Render3D.UnitTest
         private const float one = 1;
         private const float twoFiveFive = 255;
         private Vector3D allOnes;
+        private Vector3D allTwos = new Vector3D(2, 2, 2);
         [TestInitialize]
         public void initialize()
         {
@@ -34,6 +35,11 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allOnes.Red, twoFiveFive);
             Assert.AreEqual(allOnes.Green, twoFiveFive);
             Assert.AreEqual(allOnes.Blue, twoFiveFive);
+        }
+        [TestMethod]
+        public void givenTwoVectorsReturnsTheSum()
+        {
+        Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);
         }
     }
 }

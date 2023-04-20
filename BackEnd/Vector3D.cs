@@ -31,5 +31,9 @@ namespace Render3D.BackEnd
         {
             get { return (int)Math.Abs(Math.Round(_z * 255)); }
         }
+        public Vector3D Add(Vector3D vector3d)
+        {
+            return vector3d;
+        }
     }
 }
