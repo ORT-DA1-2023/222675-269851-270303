@@ -33,7 +33,7 @@ namespace Render3D.BackEnd
         }
         public Vector3D Add(Vector3D vector3d)
         {
-            return new Vector3D(2,2,2);
+            return new Vector3D(_x + vector3d.X, _y + vector3d.Y, _z + vector3d.Z);
         }
     }
 }
