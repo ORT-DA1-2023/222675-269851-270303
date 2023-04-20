@@ -39,9 +39,9 @@ namespace Render3D.BackEnd
         {
             return new Vector3D(_x - vector3d.X, _y - vector3d.Y, _z - vector3d.Z);
         }
-        public Vector3D Multiply(float two)
+        public Vector3D Multiply(float iCount)
         {
-            throw new NotImplementedException();
+            return new Vector3D(_x * iCount, _y * iCount, _z * iCount);
         }
     }
 }
