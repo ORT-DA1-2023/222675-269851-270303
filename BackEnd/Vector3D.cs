@@ -88,9 +88,9 @@ namespace Render3D.BackEnd
             return Divide((int)Length());
         }
 
-        public float Dot(Vector3D allOnes)
+        public float Dot(Vector3D other)
         {
-            throw new NotImplementedException();
+            return (_x * other.X) + (_y * other.Y) + (_z * other.Z);
         }
     }
 }
