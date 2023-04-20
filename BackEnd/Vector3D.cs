@@ -93,9 +93,12 @@ namespace Render3D.BackEnd
             return (_x * other.X) + (_y * other.Y) + (_z * other.Z);
         }
 
-        public Vector3D Cross(Vector3D allOnes)
+        public Vector3D Cross(Vector3D other)
         {
-            throw new NotImplementedException();
+            float x = _y * other.Z - _z * other.Y;
+            float y = _z * other.X - _x * other.Z;
+            float z = _x * other.Y - _y * other.X;
+            return new Vector3D(x, y, z);
         }
     }
 }
