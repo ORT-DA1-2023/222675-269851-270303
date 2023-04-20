@@ -11,7 +11,8 @@ namespace Render3D.UnitTest
     [TestClass]
     public class VectorTest
     {
-        private const int one = 1;
+        private const float one = 1;
+        private const float twoFiveFive = 255;
         private Vector3D allOnes;
         [TestInitialize]
         public void initialize()
@@ -26,6 +27,13 @@ namespace Render3D.UnitTest
           Assert.AreEqual(allOnes.X, one);
           Assert.AreEqual(allOnes.Y, one);
           Assert.AreEqual(allOnes.Z, one);
+        }
+        [TestMethod]
+        public void givenAVectorGetTheAssignColors()
+        {
+            Assert.AreEqual(allOnes.Red, twoFiveFive);
+            Assert.AreEqual(allOnes.Green, twoFiveFive);
+            Assert.AreEqual(allOnes.Blue, twoFiveFive);
         }
     }
 }
