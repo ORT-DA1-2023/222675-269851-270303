@@ -83,5 +83,9 @@ namespace Render3D.BackEnd
         {
             return (float)Math.Sqrt(SquaredLength());
         }
+        public Vector3D GetUnit()
+        {
+            return Divide((int)Length());
+        }
     }
 }
