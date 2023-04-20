@@ -16,6 +16,7 @@ namespace Render3D.UnitTest
         private const float two = 2;
         private Vector3D allOnes;
         private Vector3D allTwos = new Vector3D(2, 2, 2);
+        private Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
         [TestInitialize]
         public void initialize()
         {
@@ -104,6 +105,11 @@ namespace Render3D.UnitTest
         public void givenAVectorReturnTheSquaredLength()
         {
             Assert.AreEqual(allOnes.SquaredLength(), 3);
+        }
+        [TestMethod]
+        public void givenAVectorReturnTheLength()
+        {
+            Assert.AreEqual(squareRootIsInt.Length(), 3);
         }
     }
 }

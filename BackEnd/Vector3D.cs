@@ -79,5 +79,9 @@ namespace Render3D.BackEnd
         {
             return (_x * _x) + (_y * _y) + (_z * _z);
         }
+        public float Length()
+        {
+            return (float)Math.Sqrt(SquaredLength());
+        }
     }
 }
