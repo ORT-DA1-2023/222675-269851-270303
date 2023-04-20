@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -13,14 +14,21 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             this._direction = direction;
         }
 
-        public Vector3D Origin 
-        { get => _origin;
-            set => _origin = value;
+        public Vector3D Origin
+        {
+            get { return _origin; }
+            set { _origin = value; }
         }
 
-        public Vector3D Direction 
-        { get => _direction; 
-          set=> _direction = value;
+        public Vector3D Direction
+        {
+            get { return _direction; }
+            set { _direction = value; }
+        }
+
+        public Vector3D PointAt(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

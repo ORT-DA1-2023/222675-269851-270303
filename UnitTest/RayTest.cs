@@ -10,6 +10,7 @@ namespace Render3D.UnitTest
     {
         private Vector3D Origin=new Vector3D(1,1,1);
         private Vector3D Direction = new Vector3D(2, 2, 2);
+        private Vector3D vectorPointedAt = new Vector3D(3, 3, 3);
         private Ray defaultRay;
 
         [TestInitialize]
@@ -22,6 +23,11 @@ namespace Render3D.UnitTest
         {
             Assert.IsTrue(defaultRay.Origin.Equals(Origin));
             Assert.IsTrue(defaultRay.Direction.Equals(Direction));
+        }
+        [TestMethod]
+        public void givenARayReturnTheVectorPointedAtAFloat()
+        {
+            Assert.AreEqual(defaultRay.PointAt(1), vectorPointedAt);
         }
     }
 }
