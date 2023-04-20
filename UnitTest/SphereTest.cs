@@ -18,7 +18,7 @@ namespace Render3D.UnitTest
         [TestInitialize]
         public void initialize()
         {
-            clientSample = new Client(){Name = "clientSampleName"};
+            clientSample = new Client(){Name = "client1Name"};
 
             newSphericalFigure = new Sphere();
         }

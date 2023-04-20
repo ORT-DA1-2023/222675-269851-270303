@@ -21,7 +21,7 @@ namespace Render3D.UnitTest
         public void initialize()
         {
           data= new DataWarehouse();
-          clientSample = new Client() { Name="clientSampleName"};
+          clientSample = new Client() { Name="client1Name"};
           clientSample2 = new Client() { Name = "clientSample2Name" };
           figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
           materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };

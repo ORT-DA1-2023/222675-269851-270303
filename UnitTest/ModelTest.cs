@@ -20,7 +20,7 @@ namespace Render3D.UnitTest
         {
             client1 = new Client()
             {
-                Name = "clientSampleName",
+                Name = "client1Name",
             };
             model1 = new Model();
 

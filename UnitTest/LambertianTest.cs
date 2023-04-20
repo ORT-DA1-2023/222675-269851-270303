@@ -15,7 +15,7 @@ namespace Render3D.UnitTest
         private int[] validColor = { 15, 15, 15 };
 
         private Client clientSample;
-        private string clientSampleName = "clientSampleName";
+        private string clientSampleName = "client1Name";
 
 
         [TestInitialize]
