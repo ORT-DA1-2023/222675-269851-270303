@@ -13,6 +13,7 @@ namespace Render3D.UnitTest
     {
         private const float one = 1;
         private const float twoFiveFive = 255;
+        private const float two = 2;
         private Vector3D allOnes;
         private Vector3D allTwos = new Vector3D(2, 2, 2);
         [TestInitialize]
@@ -49,6 +50,13 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allTwos.Substract(allOnes).X, allOnes.X);
             Assert.AreEqual(allTwos.Substract(allOnes).Y, allOnes.Y);
             Assert.AreEqual(allTwos.Substract(allOnes).Z, allOnes.Z);
+        }
+        [TestMethod]
+        public void givenAVectorAndAFloatMultiplyForEachCoord()
+        {
+            Assert.AreEqual(allOnes.Multiply(two).X, allTwos.X);
+            Assert.AreEqual(allOnes.Multiply(two).Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Multiply(two).Z, allTwos.Z);
         }
     }
 }
