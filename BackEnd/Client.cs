@@ -24,7 +24,8 @@ namespace Render3D.BackEnd
 
         public Client()
         {
-            _registerDate = DateTime.Now;
+            _registerDate = DateTimeProvider.Now;
+            
         }
 
         public String Name

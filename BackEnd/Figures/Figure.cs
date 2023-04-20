@@ -3,31 +3,14 @@ using System.Linq;
 
 namespace Render3D.BackEnd.Figures
 {
-    public abstract class Figure 
+    public abstract class Figure
     {
         private String _name;
         private Client _client;
 
 
-        public virtual Client Client
-        {
-            get => _client;
-            set => _client = value;
-        }
-
-        public virtual String Name
-        {
-            get => _name;
-            set
-            {
-                if (IsAValidName(value))
-                {
-                    _name = value;
-                }
-            }
-
-        }
-
+        public abstract Client Client { get; set; }
+        public abstract string Name { get; set; }
         protected bool IsAValidName(String value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The name must not be empty");

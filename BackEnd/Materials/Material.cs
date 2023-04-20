@@ -11,18 +11,7 @@ namespace Render3D.BackEnd.Materials
     {
         private String name;
         private Client client;
-        public virtual String Name
-        {
-            get => name;
-            set { name = value;}
-
-        }
-        public virtual Client Client
-        {
-            get => client;
-            set => client = value;
-        }
-
-        
+        public abstract String Name { get; set; }
+        public abstract Client Client { get; set;  }   
     }
 }
