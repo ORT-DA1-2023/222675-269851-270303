@@ -40,11 +40,15 @@ namespace Render3D.UnitTest
         public void givenTwoVectorsReturnsTheSum()
         {
             Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);
+            Assert.AreEqual(allOnes.Add(allOnes).Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Add(allOnes).Z, allTwos.Z);
         }
         [TestMethod]
         public void givenTwoVectorsReturnsTheSubstraction()
         {
-            Assert.AreEqual(allOnes.Substract(allTwos).X, allOnes.X);
+            Assert.AreEqual(allTwos.Substract(allOnes).X, allOnes.X);
+            Assert.AreEqual(allTwos.Substract(allOnes).Y, allOnes.Y);
+            Assert.AreEqual(allTwos.Substract(allOnes).Z, allOnes.Z);
         }
     }
 }
