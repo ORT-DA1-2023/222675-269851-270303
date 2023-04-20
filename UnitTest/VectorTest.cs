@@ -119,5 +119,10 @@ namespace Render3D.UnitTest
             Assert.AreEqual(squareRootIsInt.GetUnit().Y, squareRootIsInt.Divide(3).Y);
             Assert.AreEqual(squareRootIsInt.GetUnit().Z, squareRootIsInt.Divide(3).Z);
         }
+        [TestMethod]
+        public void givenTwoVectorsReturnFloat()
+        {
+            Assert.AreEqual(allOnes.Dot(allOnes), 3);
+        }
     }
 }
