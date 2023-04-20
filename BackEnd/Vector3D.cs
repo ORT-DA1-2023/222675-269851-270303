@@ -35,5 +35,10 @@ namespace Render3D.BackEnd
         {
             return new Vector3D(_x + vector3d.X, _y + vector3d.Y, _z + vector3d.Z);
         }
+
+        public Vector3D Substract(Vector3D allTwos)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

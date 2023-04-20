@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Render3D.UnitTest
 {
-    
+
     [TestClass]
     public class VectorTest
     {
@@ -20,14 +20,14 @@ namespace Render3D.UnitTest
         {
             allOnes = new Vector3D(1, 1, 1);
         }
-       
+
 
         [TestMethod]
         public void givenAVectorItAssignsTheCoordinates()
         {
-          Assert.AreEqual(allOnes.X, one);
-          Assert.AreEqual(allOnes.Y, one);
-          Assert.AreEqual(allOnes.Z, one);
+            Assert.AreEqual(allOnes.X, one);
+            Assert.AreEqual(allOnes.Y, one);
+            Assert.AreEqual(allOnes.Z, one);
         }
         [TestMethod]
         public void givenAVectorGetTheAssignColors()
@@ -39,7 +39,12 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenTwoVectorsReturnsTheSum()
         {
-        Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);
+            Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);
+        }
+        [TestMethod]
+        public void givenTwoVectorsReturnsTheSubstraction()
+        {
+            Assert.AreEqual(allOnes.Substract(allTwos).X, allOnes.X);
         }
     }
 }
