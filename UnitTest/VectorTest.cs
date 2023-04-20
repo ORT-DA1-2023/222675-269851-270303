@@ -100,5 +100,10 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allOnes.Y, allTwos.Y);
             Assert.AreEqual(allOnes.Z, allTwos.Z);
         }
+        [TestMethod]
+        public void givenAVectorReturnTheSquaredLength()
+        {
+            Assert.AreEqual(allOnes.SquaredLength(), 3);
+        }
     }
 }

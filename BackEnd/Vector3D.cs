@@ -75,5 +75,9 @@ namespace Render3D.BackEnd
             _y /= count;
             _z /= count;
         }
+        public float SquaredLength()
+        {
+            return (_x * _x) + (_y * _y) + (_z * _z);
+        }
     }
 }
