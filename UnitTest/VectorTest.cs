@@ -124,5 +124,13 @@ namespace Render3D.UnitTest
         {
             Assert.AreEqual(allOnes.Dot(allOnes), 3);
         }
+
+        [TestMethod]
+        public void givenTwoVectorsReturnANewOneInThe()
+        {
+            Assert.AreEqual(allOnes.Cross(allOnes).X, 0);
+            Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
+            Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
+        }
     }
 }
