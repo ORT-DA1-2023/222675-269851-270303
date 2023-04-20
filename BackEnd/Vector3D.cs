@@ -44,9 +44,9 @@ namespace Render3D.BackEnd
             return new Vector3D(_x * iCount, _y * iCount, _z * iCount);
         }
 
-        public Vector3D Divide(float two)
+        public Vector3D Divide(float iCount)
         {
-            throw new NotImplementedException();
+            return new Vector3D(_x / iCount, _y / iCount, _z / iCount);
         }
     }
 }
