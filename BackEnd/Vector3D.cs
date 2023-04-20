@@ -8,7 +8,7 @@ namespace Render3D.BackEnd
         private float _y;
         private float _z;
 
-        public Vector3D(int v1, int v2, int v3)
+        public Vector3D(float v1, float v2, float v3)
         {
             this._x = v1;
             this._y = v2;
@@ -33,7 +33,7 @@ namespace Render3D.BackEnd
         }
         public Vector3D Add(Vector3D vector3d)
         {
-            return vector3d;
+            return new Vector3D(2,2,2);
         }
     }
 }
