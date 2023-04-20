@@ -48,5 +48,10 @@ namespace Render3D.BackEnd
         {
             return new Vector3D(_x / iCount, _y / iCount, _z / iCount);
         }
+
+        public void AddTo(Vector3D allOnes)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

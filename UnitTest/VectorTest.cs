@@ -66,5 +66,13 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allTwos.Divide(two).Y, allOnes.Y);
             Assert.AreEqual(allTwos.Divide(two).Z, allOnes.Z);
         }
+        [TestMethod]
+        public void givenTwoVectorsAddToTheFirstOne()
+        {
+            allOnes.AddTo(allOnes);
+            Assert.AreEqual(allOnes.X,allTwos.X);
+            Assert.AreEqual(allOnes.Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Z, allTwos.Z);
+        }
     }
 }
