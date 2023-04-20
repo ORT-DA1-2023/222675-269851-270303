@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class Vector3D
     {
