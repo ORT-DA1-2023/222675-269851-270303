@@ -14,9 +14,23 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             this._y = v2;
             this._z = v3;
         }
-        public float X { get => _x; }
-        public float Y { get => _y; }
-        public float Z { get => _z; }
+        public float X
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+
+        public float Y
+        {
+            get { return _y; }
+            set { _y = value; }
+        }
+
+        public float Z
+        {
+            get { return _z; }
+            set { _z = value; }
+        }
         public int Red
         {
             get { return (int)Math.Abs(Math.Round(_x * 255)); }
@@ -99,6 +113,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             float y = _z * other.X - _x * other.Z;
             float z = _x * other.Y - _y * other.X;
             return new Vector3D(x, y, z);
+        }
+
+        public bool equals(Vector3D other)
+        {
+            return (_x==other.X && _y==other.Y && _z==other.Z);
         }
     }
 }

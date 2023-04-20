@@ -18,6 +18,7 @@ namespace Render3D.UnitTest
         private Vector3D allTwos = new Vector3D(2, 2, 2);
         private Vector3D allTree = new Vector3D(3, 3, 3);
         private Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
+
         [TestInitialize]
         public void initialize()
         {

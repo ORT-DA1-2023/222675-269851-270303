@@ -52,6 +52,7 @@
     <Compile Include="Figures\Figure.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GraphicMotorUtility\Ray.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Figures\Sphere.cs" />
   </ItemGroup>
