@@ -2,6 +2,7 @@
 using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Render3D.UnitTest
 {
@@ -10,7 +11,8 @@ namespace Render3D.UnitTest
     {
         private Vector3D Origin=new Vector3D(1,1,1);
         private Vector3D Direction = new Vector3D(2, 2, 2);
-        private Vector3D vectorPointedAt = new Vector3D(3, 3, 3);
+        private Vector3D calculatedVectorPointedAt;
+        private Vector3D expectedVectorPointedAt = new Vector3D(3, 3, 3);
         private Ray defaultRay;
 
         [TestInitialize]
@@ -21,13 +23,20 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenARayItAssignsTheCorrectVectors()
         {
-            Assert.IsTrue(defaultRay.Origin.Equals(Origin));
-            Assert.IsTrue(defaultRay.Direction.Equals(Direction));
+            Assert.AreEqual(defaultRay.Origin.X,Origin.X);
+            Assert.AreEqual(defaultRay.Origin.Y, Origin.Y);
+            Assert.AreEqual(defaultRay.Origin.Z, Origin.Z);
+            Assert.AreEqual(defaultRay.Direction.X, Direction.X);
+            Assert.AreEqual(defaultRay.Direction.Y, Direction.Y);
+            Assert.AreEqual(defaultRay.Direction.Z, Direction.Z);
         }
         [TestMethod]
         public void givenARayReturnTheVectorPointedAtAFloat()
         {
-            Assert.AreEqual(defaultRay.PointAt(1), vectorPointedAt);
+            calculatedVectorPointedAt = defaultRay.PointAt(1);
+            Assert.AreEqual(calculatedVectorPointedAt.X,expectedVectorPointedAt.X);
+            Assert.AreEqual(calculatedVectorPointedAt.Y, expectedVectorPointedAt.Y);
+            Assert.AreEqual(calculatedVectorPointedAt.Z, expectedVectorPointedAt.Z);
         }
     }
 }

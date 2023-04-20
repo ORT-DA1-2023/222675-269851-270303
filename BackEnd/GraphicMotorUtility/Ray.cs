@@ -26,9 +26,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             set { _direction = value; }
         }
 
-        public Vector3D PointAt(int v)
+        public Vector3D PointAt(int iPosX)
         {
-            throw new NotImplementedException();
+            return Origin.Add((Direction.Multiply(iPosX)));
         }
     }
 }
