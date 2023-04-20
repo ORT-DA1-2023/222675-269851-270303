@@ -62,5 +62,18 @@ namespace Render3D.BackEnd
             _y -= vector3d.Y;
             _z -= vector3d.Z;
         }
+        public void ScaleUpBy(int count)
+        {
+            _x *= count;
+            _y *= count;
+            _z *= count;
+        }
+
+        public void ScaleDownBy(int count)
+        {
+            _x /= count;
+            _y /= count;
+            _z /= count;
+        }
     }
 }

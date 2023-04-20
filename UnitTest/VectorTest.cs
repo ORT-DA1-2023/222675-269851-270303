@@ -84,5 +84,21 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allOnes.Y, allTwos.Y);
             Assert.AreEqual(allOnes.Z, allTwos.Z);
         }
+        [TestMethod]
+        public void givenAVectorAndANumberMultiplyEachCoord()
+        {
+            allOnes.ScaleUpBy(2);
+            Assert.AreEqual(allOnes.X, allTwos.X);
+            Assert.AreEqual(allOnes.Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Z, allTwos.Z);
+        }
+        [TestMethod]
+        public void givenAVectorAndANumberDivideEachCoord()
+        {
+            allTwos.ScaleDownBy(2);
+            Assert.AreEqual(allOnes.X, allTwos.X);
+            Assert.AreEqual(allOnes.Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Z, allTwos.Z);
+        }
     }
 }
