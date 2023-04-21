@@ -115,7 +115,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return new Vector3D(x, y, z);
         }
 
-        public bool equals(Vector3D other)
+        public bool Equals(Vector3D other)
         {
             return ((_x==other.X) && (_y==other.Y) && (_z==other.Z));
         }

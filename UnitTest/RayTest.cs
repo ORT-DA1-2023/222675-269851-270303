@@ -21,7 +21,7 @@ namespace Render3D.UnitTest
           defaultRay= new Ray(Origin,Direction);
         }
         [TestMethod]
-        public void givenARayItAssignsTheCorrectVectors()
+        public void givenARayItReturnsTheCorrectVectors()
         {
             Assert.AreEqual(defaultRay.Origin.X,Origin.X);
             Assert.AreEqual(defaultRay.Origin.Y, Origin.Y);
@@ -37,6 +37,20 @@ namespace Render3D.UnitTest
             Assert.AreEqual(calculatedVectorPointedAt.X,expectedVectorPointedAt.X);
             Assert.AreEqual(calculatedVectorPointedAt.Y, expectedVectorPointedAt.Y);
             Assert.AreEqual(calculatedVectorPointedAt.Z, expectedVectorPointedAt.Z);
+        }
+        [TestMethod]
+        public void givenARayItSetsItsDirection()
+        {
+            Vector3D allOnes = new Vector3D(1, 1, 1);
+            defaultRay.Direction = allOnes;
+            Assert.AreEqual(allOnes, defaultRay.Direction);
+        }
+        [TestMethod]
+        public void givenARayItSetsItsOrigin()
+        {
+            Vector3D allOnes = new Vector3D(1, 1, 1);
+            defaultRay.Origin = allOnes;
+            Assert.AreEqual(allOnes, defaultRay.Origin);
         }
     }
 }

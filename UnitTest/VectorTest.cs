@@ -27,12 +27,26 @@ namespace Render3D.UnitTest
 
 
         [TestMethod]
-        public void givenAVectorItAssignsTheCoordinates()
+        public void givenAVectorItReturnsItsCoordinates()
         {
             Assert.AreEqual(allOnes.X, one);
             Assert.AreEqual(allOnes.Y, one);
             Assert.AreEqual(allOnes.Z, one);
         }
+
+
+        [TestMethod]
+        public void givenAVectorItAssignsTheCoordinates()
+        {
+            Vector3D all2 = new Vector3D(1,1,1);
+            all2.X = 2;
+            all2.Y = 2;
+            all2.Z = 2;
+            Assert.IsTrue(all2.X == 2);
+            Assert.IsTrue(all2.Y == 2);
+            Assert.IsTrue(all2.Z == 2);
+        }
+
         [TestMethod]
         public void givenAVectorGetTheAssignColors()
         {
@@ -132,6 +146,37 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allOnes.Cross(allOnes).X, 0);
             Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
             Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
+        }
+
+        [TestMethod]
+        public void givenTwoVectorsWithTheSameComponentsItReturnsTrue()
+        {
+            Vector3D vector1 = new Vector3D(1, 2, 3);
+            Vector3D vector2 = new Vector3D(1, 2, 3);
+            Assert.IsTrue(vector1.Equals(vector2));
+        }
+
+        [TestMethod]
+        public void givenTwoVectorsWithTwoComponentsInCommonItReturnsFalse()
+        {
+            Vector3D vector1 = new Vector3D(1, 2, 3);
+            Vector3D vector2 = new Vector3D(1, 2, 1);
+            Assert.IsFalse(vector1.Equals(vector2));
+        }
+        [TestMethod]
+        public void givenTwoVectorsWithOneComponentInCommonItReturnsFalse()
+        {
+            Vector3D vector1 = new Vector3D(1, 2, 3);
+            Vector3D vector2 = new Vector3D(1, 1, 1);
+            Assert.IsFalse(vector1.Equals(vector2));
+        }
+
+        [TestMethod]
+        public void givenTwoVectorsWithONoComponentsInCommonItReturnsFalse()
+        {
+            Vector3D vector1 = new Vector3D(0, 0, 0);
+            Vector3D vector2 = new Vector3D(1, 1, 1);
+            Assert.IsFalse(vector1.Equals(vector2));
         }
     }
 }
