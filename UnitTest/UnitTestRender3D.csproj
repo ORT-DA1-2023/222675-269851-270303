@@ -59,6 +59,7 @@
     <Compile Include="HelperValidatorTest.cs" />
     <Compile Include="FigureTest.cs" />
     <Compile Include="RayTest.cs" />
+    <Compile Include="GaphicMotorTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
