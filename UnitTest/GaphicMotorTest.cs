@@ -13,6 +13,7 @@ namespace Render3D.UnitTest
         private GraphicMotor graphicMotorSample;
         private int resolutionSample = 300;
         private int NegativeResolutionSample = -1;
+        private int ZeroResolutionSample = 0;
 
         [TestInitialize]
         public void initialize()
@@ -32,6 +33,13 @@ namespace Render3D.UnitTest
         public void givenANegativeResolutionItThrowsABackEndException()
         {
             graphicMotorSample.Resolution = NegativeResolutionSample;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
+        public void givenAZeroResolutionItThrowsABackEndException()
+        {
+            graphicMotorSample.Resolution = ZeroResolutionSample;
         }
 
         [TestMethod]
