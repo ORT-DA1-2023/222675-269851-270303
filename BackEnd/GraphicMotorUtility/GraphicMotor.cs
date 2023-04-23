@@ -10,6 +10,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
     {
         private int _resolution;
         private int _pixelSampling;
+        private int _maximumDepth;
 
         public int Resolution
         {
@@ -17,9 +18,21 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _resolution; }
             set
             {
-                if (IsAValidResolutionOrPixelSampling(value, "resolution"))
+                if (IsAValidTheProperties(value, "resolution"))
                 {
                     _resolution = value;
+                }
+            }
+        }
+
+        public int MaximumDepth
+        { 
+            get { return _maximumDepth; }
+            set
+            {
+                if (IsAValidTheProperties(value, "maximum depth"))
+                {
+                    _maximumDepth = value;
                 }
             }
         }
@@ -29,14 +42,15 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _pixelSampling; }
             set
             {
-                if (IsAValidResolutionOrPixelSampling(value, "pixel sampling"))
+                if (IsAValidTheProperties(value, "pixel sampling"))
                 {
                     _pixelSampling = value;
                 }
             }
         }
 
-        private bool IsAValidResolutionOrPixelSampling(int value, String word)
+        
+        private bool IsAValidTheProperties(int value, String word)
         {
             if (value<=0)
             {

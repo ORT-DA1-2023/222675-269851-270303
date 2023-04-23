@@ -17,6 +17,9 @@ namespace Render3D.UnitTest
         private const int pixelSamplingSample = 50;
         private const int negativePixelSamplingSample = -1;
         private const int zeroPixelSamplingSample = 0;
+        private const int maximumDepthSample = 20;
+        private const int negativeMaximumDepth = -1;
+        private const int zeroMaximumDepth = 0;
 
 
 
@@ -39,6 +42,27 @@ namespace Render3D.UnitTest
             graphicMotorSample.PixelSampling = pixelSamplingSample;
             Assert.AreEqual(pixelSamplingSample, graphicMotorSample.PixelSampling);
         }
+
+        public void givenAValidMaximumDepthItAssignsItToTheGraphicMotor()
+        {
+            graphicMotorSample.MaximumDepth = maximumDepthSample;
+            Assert.AreEqual(maximumDepthSample, graphicMotorSample.MaximumDepth);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
+        public void givenANegativeMaximumDepthItThrowsABackEndException()
+        {
+            graphicMotorSample.MaximumDepth = negativeMaximumDepth;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
+        public void givenAZeroMaximumDepthItThrowsABackEndException()
+        {
+            graphicMotorSample.MaximumDepth = zeroMaximumDepth;
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
