@@ -11,14 +11,19 @@ namespace Render3D.UnitTest
     public class GraphicMotorTest
     {
         private GraphicMotor graphicMotorSample;
-        private int resolutionSample = 300;
-        private int NegativeResolutionSample = -1;
-        private int ZeroResolutionSample = 0;
+        private const int resolutionSample = 300;
+        private const int negativeResolutionSample = -1;
+        private const int zeroResolutionSample = 0;
+        private const int pixelSamplingSample = 50;
+        private const int negativePixelSamplingSample = -1;
+        private const int zeroPixelSamplingSample = 0;
+
+
 
         [TestInitialize]
         public void initialize()
         {
-            graphicMotorSample = new GraphicMotor() { Resolution = resolutionSample};
+            graphicMotorSample = new GraphicMotor() { Resolution = resolutionSample };
         }
 
         [TestMethod]
@@ -29,25 +34,39 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
+        public void givenAValidPixelSamplingItAssignsItToTheGraphicMotor()
+        {
+            graphicMotorSample.PixelSampling = pixelSamplingSample;
+            Assert.AreEqual(pixelSamplingSample, graphicMotorSample.PixelSampling);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
+        public void givenANegativePixelSamplingItThrowsABackEndException()
+        {
+            graphicMotorSample.PixelSampling = negativePixelSamplingSample;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
+        public void givenAZeroPixelSamplingItThrowsABackEndException()
+        {
+            graphicMotorSample.PixelSampling = zeroPixelSamplingSample;
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void givenANegativeResolutionItThrowsABackEndException()
         {
-            graphicMotorSample.Resolution = NegativeResolutionSample;
+            graphicMotorSample.Resolution = negativeResolutionSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void givenAZeroResolutionItThrowsABackEndException()
         {
-            graphicMotorSample.Resolution = ZeroResolutionSample;
+            graphicMotorSample.Resolution = zeroResolutionSample;
         }
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-            //
-            // TODO: Agregar aquí la lógica de las pruebas
-            //
-        }
     }
 }

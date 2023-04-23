@@ -9,6 +9,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
     public class GraphicMotor
     {
         private int _resolution;
+        private int _pixelSampling;
 
         public int Resolution
         {
@@ -16,21 +17,36 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _resolution; }
             set
             {
-                if (IsAValidResolution(value))
+                if (IsAValidResolutionOrPixelSampling(value, "resolution"))
                 {
                     _resolution = value;
                 }
             }
         }
 
-        private bool IsAValidResolution(int value)
+        public int PixelSampling
+        {
+            get { return _pixelSampling; }
+            set
+            {
+                if (IsAValidResolutionOrPixelSampling(value, "pixel sampling"))
+                {
+                    _pixelSampling = value;
+                }
+            }
+        }
+
+        private bool IsAValidResolutionOrPixelSampling(int value, String word)
         {
             if (value<=0)
             {
-                throw new BackEndException("The resolution must be greater than 0.");
+                throw new BackEndException($"The {word} must be greater than 0.");
             }
             return true;
         }
+       
+
+
 
     }
 }
