@@ -43,6 +43,7 @@ namespace Render3D.UnitTest
             Assert.AreEqual(pixelSamplingSample, graphicMotorSample.PixelSampling);
         }
 
+        [TestMethod]
         public void givenAValidMaximumDepthItAssignsItToTheGraphicMotor()
         {
             graphicMotorSample.MaximumDepth = maximumDepthSample;
