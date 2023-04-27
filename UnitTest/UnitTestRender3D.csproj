@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientTest.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="FigureTest.cs" />
     <Compile Include="RayTest.cs" />
     <Compile Include="GaphicMotorTest.cs" />
+    <Compile Include="PixelMatrixTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>

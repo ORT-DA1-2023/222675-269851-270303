@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,7 @@
     <Compile Include="BackEndException.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
+    <Compile Include="GraphicMotorUtility\PixelMatrix.cs" />
     <Compile Include="GraphicMotorUtility\Vector3D.cs" />
     <Compile Include="HelperValidator.cs" />
     <Compile Include="DataWarehouse.cs" />

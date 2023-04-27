@@ -20,6 +20,10 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _resolutionHeightDefault = 300;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
+        private Bitmap _bitmap;
+        private PixelMatrix _pixelMatrix;
+       
+  
 
         public GraphicMotor()
         {
@@ -66,14 +70,37 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        private int HeightResolution()
+        private int WidthResolution()
         {
             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
         public Bitmap Render(Scene sceneSample)
         {
-            throw new NotImplementedException();
+            
+            var width = WidthResolution();
+            var height = ResolutionHeight;
+            _pixelMatrix = new PixelMatrix();
+            int[,] _matrix = new int[width,height];
+            _pixelMatrix.Matrix = CreateMatrix(sceneSample, _matrix);
+            String imagePPM = CreateImage(_pixelMatrix.Matrix);
+            _bitmap = generateBitmap(new Bitmap(width,height));
+            return null;
+        }
+
+        private Bitmap generateBitmap(Bitmap bitmap)
+        {
+            return null;
+        }
+
+        private int[,] CreateMatrix(Scene sceneSample, int[,] matrix)
+        {
+            return null;
+        }
+
+        private string CreateImage(int[,] matrix)
+        {
+            return "P3\n1 1\n255\n255 255 255";
         }
 
         private bool IsAValidTheProperties(int value, String word)
