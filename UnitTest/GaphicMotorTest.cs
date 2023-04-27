@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Figures;
+using System.Drawing;
+using System.IO.Pipes;
+using System.IO;
 
 namespace Render3D.UnitTest
 {
@@ -25,6 +28,11 @@ namespace Render3D.UnitTest
         private const int maximumDepthSampleDefault = 20;
         private const int negativeMaximumDepth = -1;
         private const int zeroMaximumDepth = 0;
+        private Scene sceneSample = new Scene();
+        private String imageSamplePPM = "";
+        private byte[] ppmBytes;
+        private MemoryStream ppmStream;
+        private Bitmap bitmapSample;
 
 
 
@@ -33,6 +41,16 @@ namespace Render3D.UnitTest
         {
             graphicMotorSample = new GraphicMotor() { Resolution = resolutionSample };
         }
+
+        [TestMethod]
+        public void givenAValidSceneRenderMethodReturnsABitmapObject()
+        {
+            ppmBytes = Encoding.ASCII.GetBytes(imageSamplePPM);
+            ppmStream = new MemoryStream(ppmBytes);
+            bitmapSample = new Bitmap(ppmStream);
+            Assert.AreEqual(graphicMotorSample.Render(sceneSample), bitmapSample);
+        }
+
 
         [TestMethod]
         public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()

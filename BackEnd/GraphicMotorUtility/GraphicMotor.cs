@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.IO.Pipes;
+using System.IO;
+
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -56,7 +60,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        
+        public Bitmap Render(Scene sceneSample)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool IsAValidTheProperties(int value, String word)
         {
             if (value<=0)
