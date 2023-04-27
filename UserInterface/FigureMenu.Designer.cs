@@ -1,6 +1,6 @@
 ﻿namespace UserInterface
 {
-    partial class UserMenu
+    partial class FigureMenu
     {
         /// <summary>
         /// Required designer variable.

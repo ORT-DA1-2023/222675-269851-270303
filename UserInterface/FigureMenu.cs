@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UserInterface
 {
-    public partial class UserMenu : Form
+    public partial class FigureMenu : Form
     {
-        public UserMenu()
+        public FigureMenu()
         {
             InitializeComponent();
         }

@@ -45,7 +45,7 @@ namespace UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                UserMenu userMenu = new UserMenu();
+                FigureMenu userMenu = new FigureMenu();
                 this.Hide();
                 userMenu.Show();
             }
@@ -57,7 +57,21 @@ namespace UserInterface
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            String clientName = boxClientName.Text;
+            String clientPassword = boxClientPassword.Text;
+            if (true) //create user
+            {
+                boxClientName.Text = "";
+                boxClientPassword.Text = "";
+                FigureMenu userMenu = new FigureMenu();
+                this.Hide();
+                userMenu.Show();
+            }
+        }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }

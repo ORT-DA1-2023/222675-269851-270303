@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserMenu.cs">
+    <Compile Include="FigureMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserMenu.Designer.cs">
-      <DependentUpon>UserMenu.cs</DependentUpon>
+    <Compile Include="FigureMenu.Designer.cs">
+      <DependentUpon>FigureMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -72,8 +72,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserMenu.resx">
-      <DependentUpon>UserMenu.cs</DependentUpon>
+    <EmbeddedResource Include="FigureMenu.resx">
+      <DependentUpon>FigureMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
