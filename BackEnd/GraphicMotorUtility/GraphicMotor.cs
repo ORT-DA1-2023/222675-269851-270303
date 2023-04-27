@@ -6,35 +6,41 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.IO.Pipes;
 using System.IO;
-
+using System.ComponentModel.Design;
+using System.Runtime.Remoting.Messaging;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class GraphicMotor
     {
-        private int _resolution;
+        private int _resolutionHeight;
         private int _pixelSampling;
         private int _maximumDepth;
+        private const int _resultionWidthDefault = 200;
+        private const int _resolutionHeightDefault = 300;
+        private const int _pixelSamplingDefault = 50;
+        private const int _maximumDepthDefault = 20;
 
         public GraphicMotor()
         {
-            _resolution = 300;
-            _pixelSampling = 50;
-            _maximumDepth = 20;
+            _resolutionHeight = _resolutionHeightDefault;
+            _pixelSampling = _pixelSamplingDefault;
+            _maximumDepth = _maximumDepthDefault;
         }
 
-        public int Resolution
+        public int ResolutionHeight
         {
 
-            get { return _resolution; }
+            get { return _resolutionHeight; }
             set
             {
                 if (IsAValidTheProperties(value, "resolution"))
                 {
-                    _resolution = value;
+                    _resolutionHeight = value;
                 }
             }
         }
+
 
         public int MaximumDepth
         { 
@@ -58,6 +64,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     _pixelSampling = value;
                 }
             }
+        }
+
+        private int HeightResolution()
+        {
+            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
         public Bitmap Render(Scene sceneSample)
