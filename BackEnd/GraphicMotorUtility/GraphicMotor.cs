@@ -12,6 +12,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private int _pixelSampling;
         private int _maximumDepth;
 
+        public GraphicMotor()
+        {
+            _resolution = 300;
+            _pixelSampling = 50;
+            _maximumDepth = 20;
+        }
+
         public int Resolution
         {
 

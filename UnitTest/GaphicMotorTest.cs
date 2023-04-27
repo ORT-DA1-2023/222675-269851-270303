@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Figures;
 
 namespace Render3D.UnitTest
 {
@@ -11,13 +12,17 @@ namespace Render3D.UnitTest
     public class GraphicMotorTest
     {
         private GraphicMotor graphicMotorSample;
-        private const int resolutionSample = 300;
+        private GraphicMotor graphicMotorDefaultSample = new GraphicMotor();
+        private const int resolutionSample = 500;
+        private const int resolutionSampleDefault = 300;
         private const int negativeResolutionSample = -1;
         private const int zeroResolutionSample = 0;
-        private const int pixelSamplingSample = 50;
+        private const int pixelSamplingSample = 79;
+        private const int pixelSamplingSampleDefault = 50;
         private const int negativePixelSamplingSample = -1;
         private const int zeroPixelSamplingSample = 0;
-        private const int maximumDepthSample = 20;
+        private const int maximumDepthSample = 30;
+        private const int maximumDepthSampleDefault = 20;
         private const int negativeMaximumDepth = -1;
         private const int zeroMaximumDepth = 0;
 
@@ -27,6 +32,24 @@ namespace Render3D.UnitTest
         public void initialize()
         {
             graphicMotorSample = new GraphicMotor() { Resolution = resolutionSample };
+        }
+
+        [TestMethod]
+        public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        {
+            Assert.AreEqual(graphicMotorDefaultSample.PixelSampling, pixelSamplingSampleDefault);
+        }
+
+        [TestMethod]
+        public void givenAdefaultGraphicMotorItComparesTheDefaultMaximumDepth()
+        {
+            Assert.AreEqual(graphicMotorDefaultSample.MaximumDepth, maximumDepthSampleDefault);
+        }
+
+        [TestMethod]
+        public void givenAdefaultGraphicMotorItComparesTheDefaultResolution()
+        {
+            Assert.AreEqual(graphicMotorDefaultSample.Resolution, resolutionSampleDefault);
         }
 
         [TestMethod]
