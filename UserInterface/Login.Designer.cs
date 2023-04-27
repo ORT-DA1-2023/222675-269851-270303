@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblClientName = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
-            this.buttonSignUp = new System.Windows.Forms.Button();
+            this.btnSignUp = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.boxClientPassword = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             // pnlLogin
             // 
             this.pnlLogin.BackColor = System.Drawing.Color.White;
-            this.pnlLogin.Controls.Add(this.buttonSignUp);
+            this.pnlLogin.Controls.Add(this.btnSignUp);
             this.pnlLogin.Controls.Add(this.label1);
             this.pnlLogin.Controls.Add(this.buttonLogin);
             this.pnlLogin.Controls.Add(this.boxClientPassword);
@@ -74,15 +74,15 @@
             this.pnlLogin.Size = new System.Drawing.Size(716, 383);
             this.pnlLogin.TabIndex = 1;
             // 
-            // buttonSignUp
+            // btnSignUp
             // 
-            this.buttonSignUp.Location = new System.Drawing.Point(225, 330);
-            this.buttonSignUp.Name = "buttonSignUp";
-            this.buttonSignUp.Size = new System.Drawing.Size(79, 26);
-            this.buttonSignUp.TabIndex = 8;
-            this.buttonSignUp.Text = "Sign Up";
-            this.buttonSignUp.UseVisualStyleBackColor = true;
-            this.buttonSignUp.Click += new System.EventHandler(this.Button2_Click);
+            this.btnSignUp.Location = new System.Drawing.Point(225, 330);
+            this.btnSignUp.Name = "btnSignUp";
+            this.btnSignUp.Size = new System.Drawing.Size(79, 26);
+            this.btnSignUp.TabIndex = 8;
+            this.btnSignUp.Text = "Sign Up";
+            this.btnSignUp.UseVisualStyleBackColor = true;
+            this.btnSignUp.Click += new System.EventHandler(this.Button2_Click);
             // 
             // label1
             // 
@@ -182,7 +182,7 @@
         private System.Windows.Forms.Label lblClientPassword;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonSignUp;
+        private System.Windows.Forms.Button btnSignUp;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }

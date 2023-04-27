@@ -16,5 +16,30 @@ namespace UserInterface
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = Application.OpenForms.OfType<Login>().FirstOrDefault();
+            if (login != null)
+            {
+                login.Show();
+            }
+        }
+
+        private void UserMenu_Load(object sender, EventArgs e)
+        {
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           Application.Exit();
+        }
     }
 }

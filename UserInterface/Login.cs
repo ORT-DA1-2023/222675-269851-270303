@@ -46,14 +46,9 @@ namespace UserInterface
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
                 UserMenu userMenu = new UserMenu();
-                userMenu.FormClosed += new FormClosedEventHandler(userMenuFormClosed);
                 this.Hide();
-                userMenu.ShowDialog();
+                userMenu.Show();
             }
-        }
-        private void userMenuFormClosed(object sender, System.EventArgs e)
-        {
-            this.Show();
         }
         private void label1_Click_1(object sender, EventArgs e)
         {
