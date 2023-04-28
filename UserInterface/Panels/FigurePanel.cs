@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserInterface
+namespace Render3D.UserInterface.Panels
 {
     public partial class FigurePanel : Form
     {
@@ -18,6 +18,11 @@ namespace UserInterface
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreateFigure_Click(object sender, EventArgs e)
         {
 
         }

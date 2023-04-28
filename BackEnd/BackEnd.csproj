@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackEndException.cs" />
+    <Compile Include="DataTransferObject.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
     <Compile Include="GraphicMotorUtility\Vector3D.cs" />

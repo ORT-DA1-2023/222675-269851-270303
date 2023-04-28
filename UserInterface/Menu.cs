@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Render3D.UserInterface.Panels;
 
-namespace UserInterface
+namespace Render3D.UserInterface
 {
     public partial class Menu : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace Render3D.UserInterface
 {
     partial class Login
     {

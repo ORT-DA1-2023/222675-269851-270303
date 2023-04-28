@@ -60,6 +60,7 @@
     <Compile Include="FigureTest.cs" />
     <Compile Include="RayTest.cs" />
     <Compile Include="GaphicMotorTest.cs" />
+    <Compile Include="DataTransferObjectTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>

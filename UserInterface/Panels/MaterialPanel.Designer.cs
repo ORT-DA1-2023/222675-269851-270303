@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace Render3D.UserInterface.Panels
 {
     partial class MaterialPanel
     {
@@ -105,6 +105,7 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Create a new material!!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label4
             // 
