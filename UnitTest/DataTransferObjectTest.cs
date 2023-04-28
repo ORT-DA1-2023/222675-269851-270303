@@ -50,5 +50,11 @@ namespace Render3D.UnitTest
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample"));
         }
+        [TestMethod]
+        public void givenAClientReturnsFalseIfitAlreadyExists()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
+            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample"));
+        }
     }
 }
