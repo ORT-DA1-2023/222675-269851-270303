@@ -29,5 +29,13 @@ namespace Render3D.UnitTest
             Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
             Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
         }
+        [TestMethod]
+        public void givenANewClientReturnsTrueAfterAddingItToTheList()
+        {
+            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+            Assert.IsTrue(dto.ifPosibleSignIn("clientSample1", "PasswordExample"));
+            Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
+            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
+        }
     }
 }

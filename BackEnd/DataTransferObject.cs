@@ -13,6 +13,13 @@ namespace Render3D.BackEnd
 
         public DataWarehouse DataWareHouse { get => _dataWarehouse; }
 
+        public bool ifPosibleSignIn(string clientName, string clientPassword)
+        {
+            return true;
+        }
+
+
+
         public void transferClientForCreation(string clientName, string clientPassword)
         {
             Client client = new Client() { Name = clientName, Password = clientPassword };
