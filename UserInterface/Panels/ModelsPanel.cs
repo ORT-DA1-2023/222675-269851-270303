@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace Render3D.UserInterface.Panels
     public partial class ModelsPanel : Form
     {
         private String _client;
-        public ModelsPanel(String clientName)
+        private DataTransferObject _dataTransferObject;
+        public ModelsPanel(String clientName,DataTransferObject dto)
         {
             InitializeComponent();
             _client= clientName;
+            _dataTransferObject= dto;
         }
 
         private void label1_Click(object sender, EventArgs e)

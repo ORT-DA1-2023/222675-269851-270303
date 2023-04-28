@@ -7,24 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Render3D.BackEnd;
 using Render3D.UserInterface.Panels;
 
 namespace Render3D.UserInterface
 {
     public partial class Menu : Form
     {
-        String client;
-        public Menu(String ClientName)
+        private String _client;
+        DataTransferObject _dataTransferObject;
+        public Menu(String ClientName, DataTransferObject dto)
         {
             InitializeComponent();
-            client = ClientName;
-            lblShowClientName.Text = "Welcome back \n" + client + "!!";
-            showObjectCreationPanel(new FigurePanel(client));
+            _client = ClientName;
+            _dataTransferObject = dto;
+            lblShowClientName.Text = "Welcome back \n" + _client + "!!";
+            showObjectCreationPanel(new FigurePanel(_client,_dataTransferObject));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new MaterialPanel(client));
+            showObjectCreationPanel(new MaterialPanel(_client));
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace Render3D.UserInterface
 
         private void btnFigure_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new FigurePanel(client));
+            showObjectCreationPanel(new FigurePanel(_client, _dataTransferObject));
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -58,7 +61,7 @@ namespace Render3D.UserInterface
         }
         private void btnModel_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new ModelsPanel(client));
+            showObjectCreationPanel(new ModelsPanel(_client,_dataTransferObject));
         }
 
         private void showObjectCreationPanel(object formSon)

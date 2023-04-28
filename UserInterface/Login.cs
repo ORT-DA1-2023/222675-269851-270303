@@ -48,7 +48,7 @@ namespace Render3D.UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                Menu userMenu = new Menu(clientName);
+                Menu userMenu = new Menu(clientName,dataTransferObject);
                 this.Hide();
                 userMenu.Show();
             }
@@ -66,7 +66,7 @@ namespace Render3D.UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                Menu userMenu = new Menu(clientName) ;
+                Menu userMenu = new Menu(clientName,dataTransferObject) ;
                 this.Hide();
                 userMenu.Show();
             }

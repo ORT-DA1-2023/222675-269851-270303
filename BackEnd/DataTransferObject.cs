@@ -39,10 +39,18 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool TryToAddAfigure(Client client, string figureName, int figureRadius)
+        public bool TryToAddAfigure(String clientName, string figureName, int figureRadius)
         {
-            transferFigureForCreation(client, figureName, figureRadius);
-            return true;
+            Client client=getClientGivenAName(clientName);
+            try
+            {
+                transferFigureForCreation(client, figureName, figureRadius);
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
+           
         }
 
         private void transferClientForCreation(string clientName, string clientPassword)
@@ -56,7 +64,17 @@ namespace Render3D.BackEnd
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
         }
-
+        private Client getClientGivenAName(String clientName)
+        {
+            foreach (Client client in _dataWarehouse.Clients)
+            {
+                if (client.Name == clientName)
+                {
+                    return client;
+                }
+            }
+            return null;
+        }
        
     }
 }

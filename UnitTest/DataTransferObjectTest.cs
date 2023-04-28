@@ -50,12 +50,13 @@ namespace Render3D.UnitTest
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample"));
         }
+
         [TestMethod]
         public void givenANewFigureTrysToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-            Assert.IsTrue(dto.TryToAddAfigure(clientSample, "figureSample1", 5));
+            Assert.IsTrue(dto.TryToAddAfigure("clientSample1", "figureSample1", 5));
             Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
             Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWareHouse.Figures[0]).Radius);
             Assert.IsTrue((figureSample.Client).Equals(dto.DataWareHouse.Figures[0].Client));
@@ -63,13 +64,12 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenANewWrongFigureRadiusFailsTryingToAddItToTheList()
+        public void givenANewWrongFigureFailsTryingToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-            Assert.IsFalse(dto.TryToAddAfigure(clientSample, "figureSample1", -5));
+            Assert.IsFalse(dto.TryToAddAfigure("clientSample1", "figureSample1", -5));
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-           
         }
     }
 }

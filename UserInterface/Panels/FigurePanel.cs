@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace Render3D.UserInterface.Panels
     public partial class FigurePanel : Form
     {
         private String _client;
-        public FigurePanel(String clientName)
+        private DataTransferObject _dataTransferObject;
+        public FigurePanel(String clientName,DataTransferObject dto)
         {
             InitializeComponent();
             _client= clientName;
+            _dataTransferObject= dto;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -32,7 +35,7 @@ namespace Render3D.UserInterface.Panels
             if(figureRadiusString!="")
             {
                 figureRadius = Int32.Parse(figureRadiusString);
-
+                _dataTransferObject.TryToAddAfigure(_client, figureName, figureRadius);
             }
 
         }
