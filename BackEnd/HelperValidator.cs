@@ -34,5 +34,8 @@ namespace Render3D.BackEnd
         {
             return name.Length == 0;
         }
+        public static bool IsAnIntInTheRange(int num, int min, int max) {
+            return num>=min && num<=max;
+        }
     }
 }

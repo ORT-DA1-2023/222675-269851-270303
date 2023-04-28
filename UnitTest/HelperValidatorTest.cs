@@ -17,7 +17,8 @@ namespace Render3D.UnitTest
         private const string elevenCharName = "Abcdefghijk";
         private const string nonAlphanumericalName = "_*";
 
-
+        int minNumber = 1;
+        int maxNumber = 10;
 
         [TestMethod]
         public void givenANameShorterThanTheMinimumItReturnsFalse()
@@ -113,6 +114,39 @@ namespace Render3D.UnitTest
         {
             bool result = HelperValidator.IsAnEmptyString(tenCharName);
             Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void givenAnIntInTheRangeItReturnsTrue()
+        {
+            int num = 5;
+            int min = 1;
+            int max = 100;
+            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num, min, max));
+        }
+
+        [TestMethod]
+        public void givenAnIntEqualToTheMinimumItReturnsTrue()
+        {
+            int num = minNumber;
+            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num,minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntEqualToTheMaximumItReturnsTrue()
+        {
+            int num = maxNumber;
+            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntLargestThanTheMaximumItReturnsFalse()
+        {
+            int num = maxNumber+1;
+            Assert.IsFalse(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntSmallestThanTheMinimumItReturnsFalse()
+        {
+            int num = minNumber - 1;
+            Assert.IsFalse(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
         }
     }
 }

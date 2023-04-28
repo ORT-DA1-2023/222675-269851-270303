@@ -62,6 +62,7 @@
     <Compile Include="RayTest.cs" />
     <Compile Include="GaphicMotorTest.cs" />
     <Compile Include="PixelMatrixTest.cs" />
+    <Compile Include="CameraTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
