@@ -23,6 +23,7 @@ namespace Render3D.UserInterface
             _dataTransferObject = dto;
             lblShowClientName.Text = "Welcome back \n" + _client + "!!";
             showObjectCreationPanel(new FigurePanel(_client,_dataTransferObject));
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,17 +33,12 @@ namespace Render3D.UserInterface
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Dispose();
             Login login = Application.OpenForms.OfType<Login>().FirstOrDefault();
             if (login != null)
             {
                 login.Show();
             }
-        }
-
-        private void UserMenu_Load(object sender, EventArgs e)
-        {
-            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)

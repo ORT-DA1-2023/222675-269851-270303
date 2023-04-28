@@ -37,15 +37,8 @@ namespace Render3D.UserInterface.Panels
                 figureRadius = Int32.Parse(figureRadiusString);
                 _dataTransferObject.TryToAddAfigure(_client, figureName, figureRadius);
             }
-
-        }
-
-        private void txtFigureRadius_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            txtFigureName.Text = "";
+            txtFigureRadius.Text = "";
         }
     }
 }

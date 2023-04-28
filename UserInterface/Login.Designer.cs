@@ -33,11 +33,11 @@
             this.pnlLogin = new System.Windows.Forms.Panel();
             this.btnSignUp = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.boxClientPassword = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtClientPassword = new System.Windows.Forms.TextBox();
             this.lblClientPassword = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.boxClientName = new System.Windows.Forms.TextBox();
+            this.txtClientName = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.pnlLogin.SuspendLayout();
@@ -62,11 +62,11 @@
             this.pnlLogin.BackColor = System.Drawing.Color.White;
             this.pnlLogin.Controls.Add(this.btnSignUp);
             this.pnlLogin.Controls.Add(this.label1);
-            this.pnlLogin.Controls.Add(this.buttonLogin);
-            this.pnlLogin.Controls.Add(this.boxClientPassword);
+            this.pnlLogin.Controls.Add(this.btnLogin);
+            this.pnlLogin.Controls.Add(this.txtClientPassword);
             this.pnlLogin.Controls.Add(this.lblClientPassword);
             this.pnlLogin.Controls.Add(this.pictureBox1);
-            this.pnlLogin.Controls.Add(this.boxClientName);
+            this.pnlLogin.Controls.Add(this.txtClientName);
             this.pnlLogin.Controls.Add(this.lblClientName);
             this.pnlLogin.Location = new System.Drawing.Point(209, 139);
             this.pnlLogin.Margin = new System.Windows.Forms.Padding(200, 130, 150, 130);
@@ -95,29 +95,29 @@
             this.label1.Text = "Don\'t have an account?";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
-            // buttonLogin
+            // btnLogin
             // 
-            this.buttonLogin.BackColor = System.Drawing.Color.Yellow;
-            this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLogin.Location = new System.Drawing.Point(100, 194);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(10);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(205, 49);
-            this.buttonLogin.TabIndex = 6;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = false;
-            this.buttonLogin.Click += new System.EventHandler(this.Button1_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.Yellow;
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(100, 194);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(10);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(205, 49);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // boxClientPassword
+            // txtClientPassword
             // 
-            this.boxClientPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxClientPassword.Location = new System.Drawing.Point(100, 134);
-            this.boxClientPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
-            this.boxClientPassword.Multiline = true;
-            this.boxClientPassword.Name = "boxClientPassword";
-            this.boxClientPassword.PasswordChar = '*';
-            this.boxClientPassword.Size = new System.Drawing.Size(205, 40);
-            this.boxClientPassword.TabIndex = 5;
+            this.txtClientPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClientPassword.Location = new System.Drawing.Point(100, 134);
+            this.txtClientPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.txtClientPassword.Multiline = true;
+            this.txtClientPassword.Name = "txtClientPassword";
+            this.txtClientPassword.PasswordChar = '*';
+            this.txtClientPassword.Size = new System.Drawing.Size(205, 40);
+            this.txtClientPassword.TabIndex = 5;
             // 
             // lblClientPassword
             // 
@@ -144,16 +144,16 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // boxClientName
+            // txtClientName
             // 
-            this.boxClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxClientName.Location = new System.Drawing.Point(100, 52);
-            this.boxClientName.Margin = new System.Windows.Forms.Padding(100, 0, 10, 0);
-            this.boxClientName.Multiline = true;
-            this.boxClientName.Name = "boxClientName";
-            this.boxClientName.Size = new System.Drawing.Size(205, 40);
-            this.boxClientName.TabIndex = 2;
-            this.boxClientName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClientName.Location = new System.Drawing.Point(100, 52);
+            this.txtClientName.Margin = new System.Windows.Forms.Padding(100, 0, 10, 0);
+            this.txtClientName.Multiline = true;
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Size = new System.Drawing.Size(205, 40);
+            this.txtClientName.TabIndex = 2;
+            this.txtClientName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Login
             // 
@@ -177,15 +177,15 @@
 
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.Panel pnlLogin;
-        private System.Windows.Forms.TextBox boxClientName;
+        private System.Windows.Forms.TextBox txtClientName;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox boxClientPassword;
         private System.Windows.Forms.Label lblClientPassword;
-        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSignUp;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        public System.Windows.Forms.TextBox txtClientPassword;
     }
 }
 

@@ -75,6 +75,17 @@ namespace Render3D.BackEnd
             }
             return null;
         }
-       
+
+        public bool checkName(string clientName)
+        {
+            try
+            {
+                Client client = new Client() { Name = clientName, Password = "ThisPasswordIsS4fe" };
+                return true;
+            }catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

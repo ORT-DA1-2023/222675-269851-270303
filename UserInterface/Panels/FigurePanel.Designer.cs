@@ -99,7 +99,6 @@
             this.txtFigureRadius.Name = "txtFigureRadius";
             this.txtFigureRadius.Size = new System.Drawing.Size(111, 29);
             this.txtFigureRadius.TabIndex = 4;
-            this.txtFigureRadius.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFigureRadius_KeyPress);
             // 
             // btnCreateFigure
             // 

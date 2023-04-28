@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
+using UserInterface;
 
 namespace Render3D.UserInterface
 {
@@ -40,14 +41,14 @@ namespace Render3D.UserInterface
 
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            String clientName= boxClientName.Text;
-            String clientPassword= boxClientPassword.Text;
+            String clientName= txtClientName.Text;
+            String clientPassword= txtClientPassword.Text;
             if (dataTransferObject.AlreadyExistsThisClient(clientName,clientPassword)) 
             {
-                boxClientName.Text = "";
-                boxClientPassword.Text = "";
+                txtClientName.Text = "";
+                txtClientPassword.Text = "";
                 Menu userMenu = new Menu(clientName,dataTransferObject);
                 this.Hide();
                 userMenu.Show();
@@ -60,21 +61,11 @@ namespace Render3D.UserInterface
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            String clientName = boxClientName.Text;
-            String clientPassword = boxClientPassword.Text;
-            if (dataTransferObject.ifPosibleSignIn(clientName,clientPassword)) //create user
-            {
-                boxClientName.Text = "";
-                boxClientPassword.Text = "";
-                Menu userMenu = new Menu(clientName,dataTransferObject) ;
-                this.Hide();
-                userMenu.Show();
-            }
-            else
-            {
-                //mirar cambios de letra sobre esto
-            }
-
+            txtClientName.Text = "";
+            txtClientPassword.Text = "";
+            SignIn signIn = new SignIn(dataTransferObject);
+            this.Hide();
+            signIn.Show();  
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

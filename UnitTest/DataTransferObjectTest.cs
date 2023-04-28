@@ -71,5 +71,15 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.TryToAddAfigure("clientSample1", "figureSample1", -5));
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
         }
+        [TestMethod]
+        public void givenANameChecksIfIsValid()
+        {
+            Assert.IsTrue(dto.checkName("clientSample1"));
+        }
+        [TestMethod]
+        public void givenANameChecksIfIsNotValid()
+        {
+            Assert.IsFalse(dto.checkName(""));
+        }
     }
 }

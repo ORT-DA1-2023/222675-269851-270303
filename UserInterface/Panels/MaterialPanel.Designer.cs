@@ -66,6 +66,7 @@
             this.txtMaterialName.Name = "txtMaterialName";
             this.txtMaterialName.Size = new System.Drawing.Size(111, 29);
             this.txtMaterialName.TabIndex = 9;
+            this.txtMaterialName.TextChanged += new System.EventHandler(this.txtMaterialName_TextChanged);
             // 
             // label3
             // 

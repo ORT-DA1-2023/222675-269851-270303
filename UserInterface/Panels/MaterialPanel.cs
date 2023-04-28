@@ -33,5 +33,10 @@ namespace Render3D.UserInterface.Panels
         {
 
         }
+
+        private void txtMaterialName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
