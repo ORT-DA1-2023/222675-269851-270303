@@ -10,8 +10,8 @@ namespace Render3D.BackEnd
 {
     public class Camera
     {
-        private Vector3D _lookFrom;
-        private Vector3D _lookAt;
+        private Vector3D _lookFrom = new Vector3D(0, 2, 0);
+        private Vector3D _lookAt = new Vector3D(0, 2, 5);
         private int _fov = 30;
         private const int _minFov = 0;
         private const int _maxFov = 160;
@@ -39,5 +39,12 @@ namespace Render3D.BackEnd
             }
             return true;
         }
+
+        public bool Equals(Camera other)
+        {
+            return  this.Fov == other.Fov && this.LookFrom.Equals(other.LookFrom) && this.LookAt.Equals(other.LookAt);
+        }
+
+ 
     }
 }

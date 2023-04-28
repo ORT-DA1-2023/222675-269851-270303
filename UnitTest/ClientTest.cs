@@ -101,7 +101,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAClientItReturnsTrueIfTheDateTimeIsFixed()
+        public void givenAClientItReturnsTrueIfTheDateTimeIsCorrect()
         {
            
             DateTimeProvider.Now = DateTime.Now;

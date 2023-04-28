@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections;
 using System.Runtime.Remoting.Channels;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -30,12 +31,12 @@ namespace Render3D.UnitTest
             sceneSample = new Scene(){ Name = sceneSampleName };
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void givenAValidFieldOfViewItAssignsItToTheScene()
         {
             sceneSample.FieldOfView = randomFoV;
             Assert.AreEqual(sceneSample.FieldOfView, randomFoV);
-        }
+        }*/
 
         [TestMethod]
         public void givenAValidClientItAssignsItToTheScene()
@@ -59,19 +60,19 @@ namespace Render3D.UnitTest
             Assert.AreEqual(sceneSample.PositionedModels, positionedModels);
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void givenAValidCameraPositionItAssignsItToTheScene()
         {
             sceneSample.CameraPosition = randomCameraPosition;
             Assert.AreEqual(sceneSample.CameraPosition, randomCameraPosition);
-        }
+        }*/
 
-        [TestMethod]
+       /* [TestMethod]
         public void givenAValidObjectPositionItAssignsItToTheScene()
         {
             sceneSample.ObjectPosition = randomObjectPosition;
             Assert.AreEqual(sceneSample.ObjectPosition, randomObjectPosition);
-        }
+        }*/
 
 
         [TestMethod]
@@ -96,38 +97,44 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAdefaultSceneItComparesTheDefaultFoV()
+        public void givenTwoCamerasWithDifferentFovsItReturnsTheyAreNotEqual()
         {
-            Assert.AreEqual(defaultSceneSample.FieldOfView, 30);
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            Camera camera2 = new Camera();
+            camera2.Fov = 30;
+            Assert.IsFalse(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesTheDefaultCameraPosition()
+        public void givenTwoCamerasWithOnlyTheSameFovItReturnsTheyAreNotEqual()
         {
-            Assert.IsTrue(defaultSceneSample.equalsCameraPosition(defaultCamaraPosition));
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            camera1.LookAt = new Vector3D (1,1,1);
+            camera1.LookFrom = new Vector3D(0,0,0);
+
+            Camera camera2 = new Camera();
+            camera2.Fov = 20;
+            camera2.LookAt = new Vector3D(2, 2, 2);
+            camera2.LookFrom = new Vector3D(-2, -2, -2);
+            Assert.IsFalse(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesADifferentCameraPosition()
+        public void givenTwoEqualCamerasItReturnsTrue()
         {
-            Assert.IsFalse(defaultSceneSample.equalsCameraPosition(DifferentRandomCameraPosition));
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            camera1.LookAt = new Vector3D(1, 1, 1);
+            camera1.LookFrom = new Vector3D(2, 2, 2);
+
+            Camera camera2 = new Camera();
+            camera2.Fov = 20;
+            camera2.LookAt = new Vector3D(1, 1, 1);
+            camera2.LookFrom = new Vector3D(2, 2, 2);
+            bool b = camera1.Equals(camera2);
+            Assert.IsTrue(b);
         }
-
-        [TestMethod]
-        public void givenADefaultSceneItComparesTheDefaultObjectPosition()
-        {
-            Assert.IsTrue(defaultSceneSample.equalsObjectPosition(defaultObjectPosition));
-        }
-
-        [TestMethod]
-        public void givenADefaultSceneItComparesADifferentObjectPosition()
-        {
-            Assert.IsFalse(defaultSceneSample.equalsObjectPosition(DifferentRandomObjectPosition));
-        }
-
-
-
-
-
     }
 }
