@@ -44,7 +44,7 @@ namespace Render3D.UserInterface
         {
             String clientName= boxClientName.Text;
             String clientPassword= boxClientPassword.Text;
-            if (true) //IsAvalidClient(clientName, clientPassword)
+            if (dataTransferObject.AlreadyExistsThisClient(clientName,clientPassword)) 
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
