@@ -13,9 +13,12 @@ namespace Render3D.UserInterface
 {
     public partial class Menu : Form
     {
-        public Menu()
+        String Client;
+        public Menu(String ClientName)
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            Client = ClientName;
+            lblShowClientName.Text = "Welcome back \n" + Client + "!!";
         }
 
         private void button2_Click(object sender, EventArgs e)

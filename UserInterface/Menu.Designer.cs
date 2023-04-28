@@ -39,6 +39,7 @@
             this.btnMaterial = new System.Windows.Forms.Button();
             this.btnFigure = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.lblShowClientName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -92,6 +93,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblShowClientName);
             this.panel2.Controls.Add(this.btnScene);
             this.panel2.Controls.Add(this.btnModel);
             this.panel2.Controls.Add(this.btnMaterial);
@@ -106,7 +108,7 @@
             // 
             // btnScene
             // 
-            this.btnScene.Location = new System.Drawing.Point(14, 185);
+            this.btnScene.Location = new System.Drawing.Point(14, 264);
             this.btnScene.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnScene.Name = "btnScene";
             this.btnScene.Size = new System.Drawing.Size(157, 48);
@@ -116,7 +118,7 @@
             // 
             // btnModel
             // 
-            this.btnModel.Location = new System.Drawing.Point(14, 127);
+            this.btnModel.Location = new System.Drawing.Point(14, 206);
             this.btnModel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnModel.Name = "btnModel";
             this.btnModel.Size = new System.Drawing.Size(157, 48);
@@ -127,7 +129,7 @@
             // 
             // btnMaterial
             // 
-            this.btnMaterial.Location = new System.Drawing.Point(14, 69);
+            this.btnMaterial.Location = new System.Drawing.Point(14, 148);
             this.btnMaterial.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnMaterial.Name = "btnMaterial";
             this.btnMaterial.Size = new System.Drawing.Size(157, 48);
@@ -138,7 +140,7 @@
             // 
             // btnFigure
             // 
-            this.btnFigure.Location = new System.Drawing.Point(14, 11);
+            this.btnFigure.Location = new System.Drawing.Point(14, 90);
             this.btnFigure.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnFigure.Name = "btnFigure";
             this.btnFigure.Size = new System.Drawing.Size(157, 48);
@@ -157,6 +159,21 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // lblShowClientName
+            // 
+            this.lblShowClientName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblShowClientName.AutoSize = true;
+            this.lblShowClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowClientName.Location = new System.Drawing.Point(30, 8);
+            this.lblShowClientName.Name = "lblShowClientName";
+            this.lblShowClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblShowClientName.Size = new System.Drawing.Size(141, 48);
+            this.lblShowClientName.TabIndex = 0;
+            this.lblShowClientName.Text = "Welcome back \r\nUser!!";
+            this.lblShowClientName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,6 +187,7 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -186,5 +204,6 @@
         private System.Windows.Forms.Button btnScene;
         private System.Windows.Forms.Panel pnlObjectCreation;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label lblShowClientName;
     }
 }

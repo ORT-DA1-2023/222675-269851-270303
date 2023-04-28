@@ -15,8 +15,15 @@ namespace Render3D.BackEnd
 
         public bool ifPosibleSignIn(string clientName, string clientPassword)
         {
-            transferClientForCreation(clientName, clientPassword); 
-            return true;
+            try
+            {
+                transferClientForCreation(clientName, clientPassword);
+                return true;
+            }catch (Exception ex) {
+                return false;
+            }
+           
+            
         }
 
 

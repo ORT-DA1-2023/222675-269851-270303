@@ -37,5 +37,13 @@ namespace Render3D.UnitTest
             Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
             Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
         }
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
+        public void givenANewWrongClientReturnsFalseAfterTryingToAddItToTheList()
+        {
+            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+            Assert.IsTrue(dto.ifPosibleSignIn("", ""));
+            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+        }
     }
 }

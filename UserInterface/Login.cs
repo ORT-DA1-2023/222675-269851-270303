@@ -48,7 +48,7 @@ namespace Render3D.UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                Menu userMenu = new Menu();
+                Menu userMenu = new Menu(clientName);
                 this.Hide();
                 userMenu.Show();
             }
@@ -62,14 +62,19 @@ namespace Render3D.UserInterface
         {
             String clientName = boxClientName.Text;
             String clientPassword = boxClientPassword.Text;
-            if (/*dataTransferObject.ifPosibleSignIn(clientName,clientPassword)*/ true) //create user
+            if (dataTransferObject.ifPosibleSignIn(clientName,clientPassword)) //create user
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                Menu userMenu = new Menu();
+                Menu userMenu = new Menu(clientName) ;
                 this.Hide();
                 userMenu.Show();
             }
+            else
+            {
+                //mirar cambios de letra sobre esto
+            }
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
