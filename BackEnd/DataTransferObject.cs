@@ -15,7 +15,8 @@ namespace Render3D.BackEnd
 
         public void transferClientForCreation(string clientName, string clientPassword)
         {
-           
+            Client client = new Client() { Name = clientName, Password = clientPassword };
+            _dataWarehouse.Clients.Add(client);
         }
     }
 }
