@@ -13,6 +13,18 @@ namespace Render3D.BackEnd
 
         public DataWarehouse DataWareHouse { get => _dataWarehouse; }
 
+        public bool AlreadyExistsThisClient(string clientName, string clientPassword)
+        {
+            foreach (Client client in _dataWarehouse.Clients)
+            {
+                if (client.Name == clientName && client.Password == clientPassword)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public bool ifPosibleSignIn(string clientName, string clientPassword)
         {
             try
