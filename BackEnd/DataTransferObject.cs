@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Render3D.BackEnd.Figures;
 
 namespace Render3D.BackEnd
 {
@@ -48,7 +48,8 @@ namespace Render3D.BackEnd
 
         public void transferFigureForCreation(Client client, string figureName, int figureRadius)
         {
-            
+            Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
+            _dataWarehouse.Figures.Add(figure);
         }
     }
 }
