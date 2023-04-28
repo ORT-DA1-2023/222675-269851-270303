@@ -14,14 +14,13 @@ namespace Render3D.UnitTest
         private Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
         private String sceneSampleName = "SceneTest";
         private ArrayList positionedModels = new ArrayList();
-        private decimal[] randomCameraPosition = new decimal[3] { 1, 1, 0 };
-        private decimal[] DifferentRandomCameraPosition = new decimal[3] { 2, 3, 0 };
-        private decimal[] randomObjectPosition = new decimal[3] { 1, 1, 0 };
-        private decimal[] DifferentRandomObjectPosition = new decimal[3] { 5, 1, 3 };
+        private Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
+        private Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
+        private Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
+        private Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
         private int randomFoV = 30;
         private Scene defaultSceneSample = new Scene();
-        private decimal[] defaultCamaraPosition = new decimal[3] { 0, 2, 0 };
-        private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
+  
 
 
         [TestInitialize]
@@ -60,21 +59,15 @@ namespace Render3D.UnitTest
             Assert.AreEqual(sceneSample.PositionedModels, positionedModels);
         }
 
-       /* [TestMethod]
-        public void givenAValidCameraPositionItAssignsItToTheScene()
+       [TestMethod]
+        public void givenACameraItAssignsItToTheScene()
         {
-            sceneSample.CameraPosition = randomCameraPosition;
-            Assert.AreEqual(sceneSample.CameraPosition, randomCameraPosition);
-        }*/
+            Camera camera = new Camera() { Fov = 20, LookAt= randomObjectivePosition,LookFrom=randomCameraPosition };
+            sceneSample.Camera = camera;
+            Assert.AreEqual(sceneSample.Camera, camera);
+        }
 
-       /* [TestMethod]
-        public void givenAValidObjectPositionItAssignsItToTheScene()
-        {
-            sceneSample.ObjectPosition = randomObjectPosition;
-            Assert.AreEqual(sceneSample.ObjectPosition, randomObjectPosition);
-        }*/
-
-
+      
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant be empty")]
         public void givenAnEmptyNameItThrowsABackEndException()
@@ -135,6 +128,16 @@ namespace Render3D.UnitTest
             camera2.LookFrom = new Vector3D(2, 2, 2);
             bool b = camera1.Equals(camera2);
             Assert.IsTrue(b);
+        }
+
+        [TestMethod]
+        public void givenAnExistingSceneItUpdatesTheLastModifiedDate()
+        {
+            Scene scene = new Scene();
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
+            DateTimeProvider.Now = JanuaryFirst2020;
+            scene.UpdateLastModificationDate();
+            Assert.AreEqual(JanuaryFirst2020, scene.LastModificationDate);
         }
     }
 }

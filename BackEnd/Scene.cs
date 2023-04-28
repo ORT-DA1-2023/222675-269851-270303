@@ -39,11 +39,16 @@ namespace Render3D.BackEnd
 
         public ArrayList PositionedModels { get; set; }
 
-        private void UpdateModificationDate()
+        public DateTime LastModificationDate
         {
-            _lastModificationDate = DateTimeProvider.Now;
+            get => _lastModificationDate;
+            private set => _lastModificationDate = value;
         }
- 
+  
+        public void UpdateLastModificationDate()
+        {
+            LastModificationDate = DateTimeProvider.Now;
+        }
         private bool IsAValidName(string value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");

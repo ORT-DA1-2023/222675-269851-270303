@@ -103,10 +103,9 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAClientItReturnsTrueIfTheDateTimeIsCorrect()
         {
-           
             DateTimeProvider.Now = DateTime.Now;
             Client client2 = new Client();
-            Assert.AreEqual(DateTime.Now, client2.RegisterDate);
+            Assert.AreEqual(DateTimeProvider.Now, client2.RegisterDate);
         }
 
         [TestMethod]
