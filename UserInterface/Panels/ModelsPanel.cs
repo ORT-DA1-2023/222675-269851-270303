@@ -12,9 +12,11 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class ModelsPanel : Form
     {
-        public ModelsPanel()
+        private String _client;
+        public ModelsPanel(String clientName)
         {
             InitializeComponent();
+            _client= clientName;
         }
 
         private void label1_Click(object sender, EventArgs e)

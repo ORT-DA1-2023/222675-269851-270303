@@ -45,5 +45,10 @@ namespace Render3D.BackEnd
             Client client = new Client() { Name = clientName, Password = clientPassword };
             _dataWarehouse.Clients.Add(client);
         }
+
+        public void transferFigureForCreation(Client client, string figureName, int figureRadius)
+        {
+            
+        }
     }
 }

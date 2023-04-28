@@ -14,12 +14,14 @@ namespace Render3D.UnitTest
     {
         public DataTransferObject dto;
         Client clientSample;
+        Figure figureSample;
 
         [TestInitialize]
         public void initialize()
         {
             dto = new DataTransferObject();
             clientSample = new Client() {Name= "clientSample1", Password="PasswordSample1" };
+            figureSample = new Sphere() { Client= clientSample,Name = "figureSample1", Radius = 5 };
         }
         [TestMethod]
         public void givenANewClientitAddsItToTheExistingClients()
@@ -55,6 +57,18 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample"));
+        }
+        [TestMethod]
+        public void givenAFigureTrysToAddItToTheList()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
+            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+            dto.transferFigureForCreation(clientSample, "figureSample1", 5);
+            Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
+            Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWareHouse.Figures[0]).Radius);
+            Assert.IsTrue((figureSample.Client).Equals(dto.DataWareHouse.Figures[0].Client));
+            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 1);
+
         }
     }
 }

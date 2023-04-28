@@ -12,9 +12,11 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class MaterialPanel : Form
     {
-        public MaterialPanel()
+        private String _client;
+        public MaterialPanel(String clientName)
         {
             InitializeComponent();
+            _client= clientName;
         }
 
         private void label5_Click(object sender, EventArgs e)

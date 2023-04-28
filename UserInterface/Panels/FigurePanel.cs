@@ -12,9 +12,11 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class FigurePanel : Form
     {
-        public FigurePanel()
+        private String _client;
+        public FigurePanel(String clientName)
         {
             InitializeComponent();
+            _client= clientName;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -24,7 +26,23 @@ namespace Render3D.UserInterface.Panels
 
         private void btnCreateFigure_Click(object sender, EventArgs e)
         {
+            String figureName= txtFigureName.Text;
+            String figureRadiusString = txtFigureRadius.Text;
+            int figureRadius;
+            if(figureRadiusString!="")
+            {
+                figureRadius = Int32.Parse(figureRadiusString);
 
+            }
+
+        }
+
+        private void txtFigureRadius_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

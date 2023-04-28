@@ -13,17 +13,18 @@ namespace Render3D.UserInterface
 {
     public partial class Menu : Form
     {
-        String Client;
+        String client;
         public Menu(String ClientName)
         {
-            InitializeComponent(); 
-            Client = ClientName;
-            lblShowClientName.Text = "Welcome back \n" + Client + "!!";
+            InitializeComponent();
+            client = ClientName;
+            lblShowClientName.Text = "Welcome back \n" + client + "!!";
+            showObjectCreationPanel(new FigurePanel(client));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new MaterialPanel());
+            showObjectCreationPanel(new MaterialPanel(client));
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace Render3D.UserInterface
 
         private void btnFigure_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new FigurePanel());
+            showObjectCreationPanel(new FigurePanel(client));
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -57,7 +58,7 @@ namespace Render3D.UserInterface
         }
         private void btnModel_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new ModelsPanel());
+            showObjectCreationPanel(new ModelsPanel(client));
         }
 
         private void showObjectCreationPanel(object formSon)
