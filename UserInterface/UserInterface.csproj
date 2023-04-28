@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FigureMenu.cs">
+    <Compile Include="Panels\MaterialPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FigureMenu.Designer.cs">
-      <DependentUpon>FigureMenu.cs</DependentUpon>
+    <Compile Include="Panels\MaterialPanel.Designer.cs">
+      <DependentUpon>MaterialPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ModelsPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ModelsPanel.Designer.cs">
+      <DependentUpon>ModelsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\FigurePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\FigurePanel.Designer.cs">
+      <DependentUpon>FigurePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -63,6 +81,15 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Panels\FigurePanel.resx">
+      <DependentUpon>FigurePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\MaterialPanel.resx">
+      <DependentUpon>MaterialPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ModelsPanel.resx">
+      <DependentUpon>ModelsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -72,8 +99,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FigureMenu.resx">
-      <DependentUpon>FigureMenu.cs</DependentUpon>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -45,7 +45,7 @@ namespace UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                FigureMenu userMenu = new FigureMenu();
+                Menu userMenu = new Menu();
                 this.Hide();
                 userMenu.Show();
             }
@@ -63,7 +63,7 @@ namespace UserInterface
             {
                 boxClientName.Text = "";
                 boxClientPassword.Text = "";
-                FigureMenu userMenu = new FigureMenu();
+                Menu userMenu = new Menu();
                 this.Hide();
                 userMenu.Show();
             }
