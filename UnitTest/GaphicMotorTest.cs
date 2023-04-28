@@ -36,7 +36,7 @@ namespace Render3D.UnitTest
         [TestInitialize]
         public void initialize()
         {
-            graphicMotorSample = new GraphicMotor() { ResolutionHeight = resolutionHeightSample };
+            graphicMotorSample = new GraphicMotor();
         }
 
         [TestMethod]

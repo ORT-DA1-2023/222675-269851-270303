@@ -22,8 +22,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _maximumDepthDefault = 20;
         private Bitmap _bitmap;
         private PixelMatrix _pixelMatrix;
-       
-  
+
+
 
         public GraphicMotor()
         {
@@ -78,29 +78,57 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public Bitmap Render(Scene sceneSample)
         {
             
+            int width = WidthResolution();
+            int height = ResolutionHeight;
+            _pixelMatrix = new PixelMatrix(width, height);
+            _pixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
+            String imagePPM = CreateImage(_pixelMatrix.Matrix);
+            _bitmap = GenerateBitmap(new Bitmap(width,height));
+            return null;
+        }
+
+        private Bitmap GenerateBitmap(Bitmap bitmap)
+        {
+            return null;
+        }
+
+        private Color[,] CreateMatrix(Scene sceneSample, Color[,] matrix) //TODO: Change the information
+        {
+    
             var width = WidthResolution();
             var height = ResolutionHeight;
-            _pixelMatrix = new PixelMatrix();
-            int[,] _matrix = new int[width,height];
-            _pixelMatrix.Matrix = CreateMatrix(sceneSample, _matrix);
-            String imagePPM = CreateImage(_pixelMatrix.Matrix);
-            _bitmap = generateBitmap(new Bitmap(width,height));
-            return null;
+            for (int x = 0; x < height; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    int r = 255;
+                    int g = 255;
+                    int b = 0;
+                    matrix[x, y] = Color.FromArgb(r, g, b);
+                }
+            }
+            return matrix;
+
         }
 
-        private Bitmap generateBitmap(Bitmap bitmap)
+        private string CreateImage(Color[,] matrix)  
         {
-            return null;
-        }
 
-        private int[,] CreateMatrix(Scene sceneSample, int[,] matrix)
-        {
-            return null;
-        }
-
-        private string CreateImage(int[,] matrix)
-        {
-            return "P3\n1 1\n255\n255 255 255";
+            var width = WidthResolution();
+            var height = ResolutionHeight;
+            StringBuilder ppmString = new StringBuilder();
+            ppmString.AppendLine("P3");
+            ppmString.AppendLine($"{width} {height}");
+            ppmString.AppendLine("255");
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Color pixel = matrix[y, x];
+                    ppmString.AppendLine($"{pixel.R} {pixel.G} {pixel.B}");
+                }
+            }
+            return ppmString.ToString();
         }
 
         private bool IsAValidTheProperties(int value, String word)
