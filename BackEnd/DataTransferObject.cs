@@ -29,27 +29,34 @@ namespace Render3D.BackEnd
         {
             try
             {
+                if (AlreadyExistsThisClient(clientName, clientPassword))
+                {
+                    return false;
+                }
                 transferClientForCreation(clientName, clientPassword);
                 return true;
             }catch (Exception ex) {
                 return false;
-            }
-           
-            
+            } 
+        }
+        public bool TryToAddAfigure(Client client, string figureName, int figureRadius)
+        {
+            transferFigureForCreation(client, figureName, figureRadius);
+            return true;
         }
 
-
-
-        public void transferClientForCreation(string clientName, string clientPassword)
+        private void transferClientForCreation(string clientName, string clientPassword)
         {
             Client client = new Client() { Name = clientName, Password = clientPassword };
             _dataWarehouse.Clients.Add(client);
         }
 
-        public void transferFigureForCreation(Client client, string figureName, int figureRadius)
+        private void transferFigureForCreation(Client client, string figureName, int figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
         }
+
+       
     }
 }

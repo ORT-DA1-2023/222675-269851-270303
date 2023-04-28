@@ -24,14 +24,6 @@ namespace Render3D.UnitTest
             figureSample = new Sphere() { Client= clientSample,Name = "figureSample1", Radius = 5 };
         }
         [TestMethod]
-        public void givenANewClientitAddsItToTheExistingClients()
-        {
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
-            dto.transferClientForCreation("clientSample1", "PasswordExample");
-            Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
-        }
-        [TestMethod]
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
         {
             Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
@@ -59,16 +51,25 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample"));
         }
         [TestMethod]
-        public void givenAFigureTrysToAddItToTheList()
+        public void givenANewFigureTrysToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-            dto.transferFigureForCreation(clientSample, "figureSample1", 5);
+            Assert.IsTrue(dto.TryToAddAfigure(clientSample, "figureSample1", 5));
             Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
             Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWareHouse.Figures[0]).Radius);
             Assert.IsTrue((figureSample.Client).Equals(dto.DataWareHouse.Figures[0].Client));
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 1);
+        }
 
+        [TestMethod]
+        public void givenANewWrongFigureRadiusFailsTryingToAddItToTheList()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
+            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+            Assert.IsFalse(dto.TryToAddAfigure(clientSample, "figureSample1", -5));
+            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+           
         }
     }
 }
