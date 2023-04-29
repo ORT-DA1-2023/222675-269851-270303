@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace Render3D.UserInterface
 {
     partial class SignIn
     {
@@ -62,17 +62,17 @@
             this.panel1.Controls.Add(this.txtClientName);
             this.panel1.Controls.Add(this.lblClientName);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(209, 109);
-            this.panel1.Margin = new System.Windows.Forms.Padding(200, 100, 200, 100);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(666, 443);
+            this.panel1.Size = new System.Drawing.Size(1000, 580);
             this.panel1.TabIndex = 0;
             // 
             // btnGoBack
             // 
             this.btnGoBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGoBack.Location = new System.Drawing.Point(10, 394);
-            this.btnGoBack.Margin = new System.Windows.Forms.Padding(10);
+            this.btnGoBack.Location = new System.Drawing.Point(32, 472);
+            this.btnGoBack.Margin = new System.Windows.Forms.Padding(60);
             this.btnGoBack.Name = "btnGoBack";
             this.btnGoBack.Size = new System.Drawing.Size(102, 39);
             this.btnGoBack.TabIndex = 16;
@@ -83,7 +83,7 @@
             // btnSignIn
             // 
             this.btnSignIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSignIn.Location = new System.Drawing.Point(285, 361);
+            this.btnSignIn.Location = new System.Drawing.Point(428, 393);
             this.btnSignIn.Margin = new System.Windows.Forms.Padding(0);
             this.btnSignIn.Name = "btnSignIn";
             this.btnSignIn.Size = new System.Drawing.Size(102, 39);
@@ -97,7 +97,7 @@
             this.lblPasswordsDontMatch.AutoSize = true;
             this.lblPasswordsDontMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPasswordsDontMatch.ForeColor = System.Drawing.Color.Red;
-            this.lblPasswordsDontMatch.Location = new System.Drawing.Point(231, 320);
+            this.lblPasswordsDontMatch.Location = new System.Drawing.Point(374, 352);
             this.lblPasswordsDontMatch.Name = "lblPasswordsDontMatch";
             this.lblPasswordsDontMatch.Size = new System.Drawing.Size(35, 16);
             this.lblPasswordsDontMatch.TabIndex = 14;
@@ -108,7 +108,7 @@
             this.lblWrongPasswordMessage.AutoSize = true;
             this.lblWrongPasswordMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWrongPasswordMessage.ForeColor = System.Drawing.Color.Red;
-            this.lblWrongPasswordMessage.Location = new System.Drawing.Point(231, 221);
+            this.lblWrongPasswordMessage.Location = new System.Drawing.Point(374, 253);
             this.lblWrongPasswordMessage.Name = "lblWrongPasswordMessage";
             this.lblWrongPasswordMessage.Size = new System.Drawing.Size(35, 16);
             this.lblWrongPasswordMessage.TabIndex = 13;
@@ -120,7 +120,7 @@
             this.lblWrongUsernameMessage.AutoSize = true;
             this.lblWrongUsernameMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWrongUsernameMessage.ForeColor = System.Drawing.Color.Red;
-            this.lblWrongUsernameMessage.Location = new System.Drawing.Point(231, 120);
+            this.lblWrongUsernameMessage.Location = new System.Drawing.Point(374, 152);
             this.lblWrongUsernameMessage.Name = "lblWrongUsernameMessage";
             this.lblWrongUsernameMessage.Size = new System.Drawing.Size(35, 16);
             this.lblWrongUsernameMessage.TabIndex = 12;
@@ -129,20 +129,21 @@
             // txtClientRepeatedPassword
             // 
             this.txtClientRepeatedPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientRepeatedPassword.Location = new System.Drawing.Point(234, 278);
+            this.txtClientRepeatedPassword.Location = new System.Drawing.Point(377, 310);
             this.txtClientRepeatedPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.txtClientRepeatedPassword.Multiline = true;
             this.txtClientRepeatedPassword.Name = "txtClientRepeatedPassword";
             this.txtClientRepeatedPassword.PasswordChar = '*';
             this.txtClientRepeatedPassword.Size = new System.Drawing.Size(205, 32);
             this.txtClientRepeatedPassword.TabIndex = 11;
+            this.txtClientRepeatedPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.repeatedPasswordKeyUpCheck);
             // 
             // lblClientRepeatedPassword
             // 
             this.lblClientRepeatedPassword.AutoSize = true;
             this.lblClientRepeatedPassword.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientRepeatedPassword.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientRepeatedPassword.Location = new System.Drawing.Point(230, 254);
+            this.lblClientRepeatedPassword.Location = new System.Drawing.Point(373, 286);
             this.lblClientRepeatedPassword.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.lblClientRepeatedPassword.Name = "lblClientRepeatedPassword";
             this.lblClientRepeatedPassword.Size = new System.Drawing.Size(170, 22);
@@ -152,20 +153,21 @@
             // txtClientPassword
             // 
             this.txtClientPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientPassword.Location = new System.Drawing.Point(234, 179);
+            this.txtClientPassword.Location = new System.Drawing.Point(377, 211);
             this.txtClientPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.txtClientPassword.Multiline = true;
             this.txtClientPassword.Name = "txtClientPassword";
             this.txtClientPassword.PasswordChar = '*';
             this.txtClientPassword.Size = new System.Drawing.Size(205, 32);
             this.txtClientPassword.TabIndex = 9;
+            this.txtClientPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ClientPasswordKeyUpCheck);
             // 
             // lblClientPassword
             // 
             this.lblClientPassword.AutoSize = true;
             this.lblClientPassword.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientPassword.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientPassword.Location = new System.Drawing.Point(230, 155);
+            this.lblClientPassword.Location = new System.Drawing.Point(373, 187);
             this.lblClientPassword.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.lblClientPassword.Name = "lblClientPassword";
             this.lblClientPassword.Size = new System.Drawing.Size(100, 22);
@@ -175,21 +177,20 @@
             // txtClientName
             // 
             this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientName.Location = new System.Drawing.Point(234, 77);
+            this.txtClientName.Location = new System.Drawing.Point(377, 109);
             this.txtClientName.Margin = new System.Windows.Forms.Padding(100, 0, 10, 0);
             this.txtClientName.Multiline = true;
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(205, 32);
             this.txtClientName.TabIndex = 7;
-            this.txtClientName.TextChanged += new System.EventHandler(this.txtClientName_TextChanged);
-            this.txtClientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.usernameKeyPressCheck);
+            this.txtClientName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.usernameKeyUpCheck);
             // 
             // lblClientName
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientName.Location = new System.Drawing.Point(230, 53);
+            this.lblClientName.Location = new System.Drawing.Point(373, 85);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(103, 22);
@@ -202,7 +203,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(228, 12);
+            this.label1.Location = new System.Drawing.Point(371, 44);
             this.label1.Margin = new System.Windows.Forms.Padding(400);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(238, 31);
@@ -215,12 +216,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Yellow;
-            this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.ClientSize = new System.Drawing.Size(1000, 580);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SignIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Go back";
-            this.Load += new System.EventHandler(this.SignIn_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

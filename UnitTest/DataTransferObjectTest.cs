@@ -81,5 +81,16 @@ namespace Render3D.UnitTest
         {
             Assert.IsFalse(dto.checkName(""));
         }
+
+        [TestMethod]
+        public void givenAPasswordChecksIfIsValid()
+        {
+            Assert.IsTrue(dto.checkPassword("clientSample1"));
+        }
+        [TestMethod]
+        public void givenAPasswordChecksIfIsNotValid()
+        {
+            Assert.IsFalse(dto.checkPassword(""));
+        }
     }
 }

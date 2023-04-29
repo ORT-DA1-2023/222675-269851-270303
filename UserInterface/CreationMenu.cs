@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.UserInterface.Panels;
+using UserInterface;
 
 namespace Render3D.UserInterface
 {
-    public partial class Menu : Form
+    public partial class CreationMenu : Form
     {
         private String _client;
         DataTransferObject _dataTransferObject;
-        public Menu(String ClientName, DataTransferObject dto)
+        public CreationMenu()
         {
             InitializeComponent();
-            _client = ClientName;
-            _dataTransferObject = dto;
-            lblShowClientName.Text = "Welcome back \n" + _client + "!!";
             showObjectCreationPanel(new FigurePanel(_client,_dataTransferObject));
-            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -33,17 +30,7 @@ namespace Render3D.UserInterface
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            Login login = Application.OpenForms.OfType<Login>().FirstOrDefault();
-            if (login != null)
-            {
-                login.Show();
-            }
-        }
-
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
-        {
-           Application.Exit();
+            ((Render3DIU)this.Parent.Parent).userWantsToLogIn();
         }
 
         private void btnFigure_Click(object sender, EventArgs e)
@@ -51,10 +38,6 @@ namespace Render3D.UserInterface
             showObjectCreationPanel(new FigurePanel(_client, _dataTransferObject));
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         private void btnModel_Click(object sender, EventArgs e)
         {
             showObjectCreationPanel(new ModelsPanel(_client,_dataTransferObject));
@@ -74,6 +57,9 @@ namespace Render3D.UserInterface
             form.Show();
         }
 
-       
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+            lblShowClientName.Text = "Welcome back \n" + ((Render3DIU)this.Parent.Parent).clientName + "!!";
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace Render3D.UserInterface
 {
     public partial class Login : Form
     {
-        DataTransferObject dataTransferObject = new DataTransferObject();
         public Login()
         {
             InitializeComponent();
@@ -45,13 +44,12 @@ namespace Render3D.UserInterface
         {
             String clientName= txtClientName.Text;
             String clientPassword= txtClientPassword.Text;
-            if (dataTransferObject.AlreadyExistsThisClient(clientName,clientPassword)) 
+            if (((Render3DIU)this.Parent.Parent).dataTransferObject.AlreadyExistsThisClient(clientName,clientPassword)) 
             {
                 txtClientName.Text = "";
                 txtClientPassword.Text = "";
-                Menu userMenu = new Menu(clientName,dataTransferObject);
-                this.Hide();
-                userMenu.Show();
+                ((Render3DIU)this.Parent.Parent).clientName = clientName;
+                ((Render3DIU)this.Parent.Parent).enterMenu();
             }
         }
         private void label1_Click_1(object sender, EventArgs e)
@@ -59,13 +57,11 @@ namespace Render3D.UserInterface
 
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void btnSignIn_Click(object sender, EventArgs e)
         {
             txtClientName.Text = "";
             txtClientPassword.Text = "";
-            SignIn signIn = new SignIn(dataTransferObject);
-            this.Hide();
-            signIn.Show();  
+            ((Render3DIU)this.Parent.Parent).userWantsToSignIn();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

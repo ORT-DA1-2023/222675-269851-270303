@@ -49,9 +49,9 @@
             // 
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateFigure.Location = new System.Drawing.Point(0, 372);
+            this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
             this.btnCreateFigure.Name = "btnCreateFigure";
-            this.btnCreateFigure.Size = new System.Drawing.Size(300, 78);
+            this.btnCreateFigure.Size = new System.Drawing.Size(379, 78);
             this.btnCreateFigure.TabIndex = 11;
             this.btnCreateFigure.Text = "Create!!!";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
@@ -64,7 +64,7 @@
             this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaterialName.Location = new System.Drawing.Point(138, 101);
             this.txtMaterialName.Name = "txtMaterialName";
-            this.txtMaterialName.Size = new System.Drawing.Size(111, 29);
+            this.txtMaterialName.Size = new System.Drawing.Size(190, 29);
             this.txtMaterialName.TabIndex = 9;
             this.txtMaterialName.TextChanged += new System.EventHandler(this.txtMaterialName_TextChanged);
             // 
@@ -144,7 +144,7 @@
             this.nrRedColor.Location = new System.Drawing.Point(138, 154);
             this.nrRedColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
             this.nrRedColor.Name = "nrRedColor";
-            this.nrRedColor.Size = new System.Drawing.Size(120, 29);
+            this.nrRedColor.Size = new System.Drawing.Size(199, 29);
             this.nrRedColor.TabIndex = 14;
             this.nrRedColor.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
@@ -157,7 +157,7 @@
             this.nrGreenColor.Location = new System.Drawing.Point(138, 203);
             this.nrGreenColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
             this.nrGreenColor.Name = "nrGreenColor";
-            this.nrGreenColor.Size = new System.Drawing.Size(120, 29);
+            this.nrGreenColor.Size = new System.Drawing.Size(199, 29);
             this.nrGreenColor.TabIndex = 15;
             // 
             // nrBlueColor
@@ -169,7 +169,7 @@
             this.nrBlueColor.Location = new System.Drawing.Point(138, 255);
             this.nrBlueColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
             this.nrBlueColor.Name = "nrBlueColor";
-            this.nrBlueColor.Size = new System.Drawing.Size(120, 29);
+            this.nrBlueColor.Size = new System.Drawing.Size(199, 29);
             this.nrBlueColor.TabIndex = 16;
             // 
             // panel1
@@ -184,18 +184,17 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.txtMaterialName);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 450);
+            this.panel1.Size = new System.Drawing.Size(379, 551);
             this.panel1.TabIndex = 17;
             // 
             // MaterialPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 450);
+            this.ClientSize = new System.Drawing.Size(380, 580);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MaterialPanel";

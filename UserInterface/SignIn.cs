@@ -9,22 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
-using Render3D.UserInterface;
-using Menu = Render3D.UserInterface.Menu;
 
-namespace UserInterface
+namespace Render3D.UserInterface
 {
     public partial class SignIn : Form
     {
-        private DataTransferObject _dataTransferObject;
-        public SignIn(DataTransferObject dto)
+        public SignIn()
         {
             InitializeComponent();
-            _dataTransferObject = dto;
             lblPasswordsDontMatch.Text = "";
             lblWrongPasswordMessage.Text = "";
             lblWrongUsernameMessage.Text = "";
-            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -37,24 +32,13 @@ namespace UserInterface
 
         }
 
-        private void SignIn_Load(object sender, EventArgs e)
-        {
 
-        }
 
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            Login login = Application.OpenForms.OfType<Login>().FirstOrDefault();
-            if (login != null)
-            {
-                login.Show();
-            }
-        }
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
+            ((Render3DIU)this.Parent.Parent).userWantsToLogIn();
+
         }
 
         private void btnSignIn_Click(object sender, EventArgs e)
@@ -63,14 +47,10 @@ namespace UserInterface
             String clientPassword = txtClientPassword.Text;
             String clientPasswordRepeated = txtClientRepeatedPassword.Text;
 
-            if (clientPassword== clientPasswordRepeated && _dataTransferObject.ifPosibleSignIn(clientName,clientPassword))
+            if (clientPassword== clientPasswordRepeated && ((Render3DIU)this.Parent.Parent).dataTransferObject.ifPosibleSignIn(clientName,clientPassword))
             {
-                txtClientName.Text = "";
-                txtClientPassword.Text = "";
-                txtClientRepeatedPassword.Text = "";
-                Menu userMenu = new Menu(clientName,_dataTransferObject) ;
-                this.Hide();
-                userMenu.Show();
+                ((Render3DIU)this.Parent.Parent).clientName = clientName;
+                ((Render3DIU)this.Parent.Parent).enterMenu();
             }
             else
             {
@@ -78,15 +58,38 @@ namespace UserInterface
             }
         }
 
-        private void txtClientName_TextChanged(object sender, EventArgs e)
-        {
 
+        private void repeatedPasswordKeyUpCheck(object sender, KeyEventArgs e)
+        {
+            String clientPassword = txtClientPassword.Text;
+            String repeatedPassword = txtClientRepeatedPassword.Text;
+            if (!clientPassword.Equals(repeatedPassword))
+            {
+                lblPasswordsDontMatch.Text = "the password don't match";
+            }
+            else
+            {
+                lblPasswordsDontMatch.Text = "";
+            }
         }
 
-        private void usernameKeyPressCheck(object sender, KeyPressEventArgs e)
+        private void ClientPasswordKeyUpCheck(object sender, KeyEventArgs e)
+        {
+            String clientPassword = txtClientPassword.Text;
+            if (!((Render3DIU)this.Parent.Parent).dataTransferObject.checkPassword(clientPassword))
+            {
+                lblWrongPasswordMessage.Text = "this password is not valid";
+            }
+            else
+            {
+                lblWrongPasswordMessage.Text = "";
+            }
+        }
+
+        private void usernameKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientName = txtClientName.Text;
-            if(!_dataTransferObject.checkName(clientName))
+            if (!((Render3DIU)this.Parent.Parent).dataTransferObject.checkName(clientName))
             {
                 lblWrongUsernameMessage.Text = "this username is not valid";
             }

@@ -49,7 +49,7 @@
             this.lblClientName.AutoSize = true;
             this.lblClientName.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientName.Location = new System.Drawing.Point(96, 28);
+            this.lblClientName.Location = new System.Drawing.Point(273, 109);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(103, 22);
@@ -68,27 +68,27 @@
             this.pnlLogin.Controls.Add(this.pictureBox1);
             this.pnlLogin.Controls.Add(this.txtClientName);
             this.pnlLogin.Controls.Add(this.lblClientName);
-            this.pnlLogin.Location = new System.Drawing.Point(209, 139);
+            this.pnlLogin.Location = new System.Drawing.Point(0, 0);
             this.pnlLogin.Margin = new System.Windows.Forms.Padding(200, 130, 150, 130);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(716, 383);
+            this.pnlLogin.Size = new System.Drawing.Size(1000, 580);
             this.pnlLogin.TabIndex = 1;
             // 
             // btnSignUp
             // 
-            this.btnSignUp.Location = new System.Drawing.Point(225, 330);
+            this.btnSignUp.Location = new System.Drawing.Point(402, 411);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(79, 26);
             this.btnSignUp.TabIndex = 8;
             this.btnSignUp.Text = "Sign Up";
             this.btnSignUp.UseVisualStyleBackColor = true;
-            this.btnSignUp.Click += new System.EventHandler(this.Button2_Click);
+            this.btnSignUp.Click += new System.EventHandler(this.btnSignIn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(128, 272);
+            this.label1.Location = new System.Drawing.Point(305, 353);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 20);
             this.label1.TabIndex = 7;
@@ -99,7 +99,7 @@
             // 
             this.btnLogin.BackColor = System.Drawing.Color.Yellow;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(100, 194);
+            this.btnLogin.Location = new System.Drawing.Point(277, 275);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(10);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(205, 49);
@@ -111,7 +111,7 @@
             // txtClientPassword
             // 
             this.txtClientPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientPassword.Location = new System.Drawing.Point(100, 134);
+            this.txtClientPassword.Location = new System.Drawing.Point(277, 215);
             this.txtClientPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.txtClientPassword.Multiline = true;
             this.txtClientPassword.Name = "txtClientPassword";
@@ -124,7 +124,7 @@
             this.lblClientPassword.AutoSize = true;
             this.lblClientPassword.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientPassword.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientPassword.Location = new System.Drawing.Point(96, 110);
+            this.lblClientPassword.Location = new System.Drawing.Point(273, 191);
             this.lblClientPassword.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.lblClientPassword.Name = "lblClientPassword";
             this.lblClientPassword.Size = new System.Drawing.Size(100, 22);
@@ -136,7 +136,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(401, 52);
+            this.pictureBox1.Location = new System.Drawing.Point(578, 133);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(261, 240);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -147,7 +147,7 @@
             // txtClientName
             // 
             this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientName.Location = new System.Drawing.Point(100, 52);
+            this.txtClientName.Location = new System.Drawing.Point(277, 133);
             this.txtClientName.Margin = new System.Windows.Forms.Padding(100, 0, 10, 0);
             this.txtClientName.Multiline = true;
             this.txtClientName.Name = "txtClientName";
@@ -160,8 +160,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Yellow;
-            this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.ClientSize = new System.Drawing.Size(1000, 580);
             this.Controls.Add(this.pnlLogin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

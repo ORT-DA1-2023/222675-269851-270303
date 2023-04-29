@@ -87,5 +87,17 @@ namespace Render3D.BackEnd
                 return false;
             }
         }
+
+        public bool checkPassword(string clientPassword)
+        {
+            try
+            {
+                Client client = new Client() { Name = "validName", Password = clientPassword };
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

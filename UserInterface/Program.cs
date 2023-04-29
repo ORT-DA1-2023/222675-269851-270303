@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserInterface;
 
 namespace Render3D.UserInterface
 {
@@ -16,7 +17,7 @@ namespace Render3D.UserInterface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Render3DIU());
         }
     }
 }

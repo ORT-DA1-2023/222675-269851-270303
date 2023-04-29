@@ -86,7 +86,7 @@
             this.txtFigureName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFigureName.Location = new System.Drawing.Point(151, 130);
             this.txtFigureName.Name = "txtFigureName";
-            this.txtFigureName.Size = new System.Drawing.Size(111, 29);
+            this.txtFigureName.Size = new System.Drawing.Size(191, 29);
             this.txtFigureName.TabIndex = 3;
             // 
             // txtFigureRadius
@@ -97,16 +97,16 @@
             this.txtFigureRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFigureRadius.Location = new System.Drawing.Point(151, 197);
             this.txtFigureRadius.Name = "txtFigureRadius";
-            this.txtFigureRadius.Size = new System.Drawing.Size(111, 29);
+            this.txtFigureRadius.Size = new System.Drawing.Size(191, 29);
             this.txtFigureRadius.TabIndex = 4;
             // 
             // btnCreateFigure
             // 
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateFigure.Location = new System.Drawing.Point(0, 372);
+            this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
             this.btnCreateFigure.Name = "btnCreateFigure";
-            this.btnCreateFigure.Size = new System.Drawing.Size(300, 78);
+            this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 5;
             this.btnCreateFigure.Text = "Create!!!";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
@@ -120,18 +120,17 @@
             this.panel1.Controls.Add(this.txtFigureRadius);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtFigureName);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 450);
+            this.panel1.Size = new System.Drawing.Size(380, 551);
             this.panel1.TabIndex = 6;
             // 
             // FigurePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 450);
+            this.ClientSize = new System.Drawing.Size(380, 580);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FigurePanel";
