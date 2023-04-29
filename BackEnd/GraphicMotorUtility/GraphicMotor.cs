@@ -75,6 +75,21 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
+        public Bitmap RenderModelPreview(Model model)
+        {
+            Scene previewScene = new Scene();
+            previewScene.PositionedModels.Add(model);
+
+            Camera camera = new Camera();
+            camera.LookAt = model.Figure.Position;
+            camera.LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10));
+            camera.Fov = 60;
+
+            previewScene.Camera = camera;
+
+            return Render(previewScene);
+        }
+
         public Bitmap Render(Scene sceneSample)
         {
             
@@ -82,7 +97,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             int height = ResolutionHeight;
             _pixelMatrix = new PixelMatrix(width, height);
             _pixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
-            String imagePPM = CreateImage(_pixelMatrix.Matrix);
+            String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
             _bitmap = GenerateBitmap(new Bitmap(width,height));
             return null;
         }
@@ -111,7 +126,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         }
 
-        private string CreateImage(Color[,] matrix)  
+        private string CreateImagePPM(Color[,] matrix)  
         {
 
             var width = WidthResolution();

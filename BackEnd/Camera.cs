@@ -10,14 +10,28 @@ namespace Render3D.BackEnd
 {
     public class Camera
     {
-        private Vector3D _lookFrom = new Vector3D(0, 2, 0);
-        private Vector3D _lookAt = new Vector3D(0, 2, 5);
+        private Vector3D _lookFrom;
+        private Vector3D _lookAt;
         private int _fov = 30;
         private const int _minFov = 0;
         private const int _maxFov = 160;
 
-        public Vector3D LookFrom { get; set; }
-        public Vector3D LookAt { get; set; }
+        public Vector3D LookFrom
+        {
+            get => _lookFrom;
+            set => _lookFrom = value;
+        }
+        public Vector3D LookAt
+        {
+            get => _lookAt;
+            set => _lookAt = value;
+        }
+
+        public Camera()
+        {
+            _lookFrom = new Vector3D(0, 2, 0);
+            _lookAt = new Vector3D(0, 2, 5);
+        }
         public int Fov
         {
             get => _fov;

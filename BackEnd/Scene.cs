@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Xml.Linq;
 using Render3D.BackEnd;
-
 
 namespace Render3D.BackEnd
 {
@@ -15,12 +15,15 @@ namespace Render3D.BackEnd
         private String _name;
         private List<Model> _positionedModels;
         private Camera _camera;
+        private Bitmap _preview;
 
         public Scene()
         {
             _camera = new Camera();
             _registerDate = DateTimeProvider.Now;
+            _preview = new Bitmap(0,0);
         }
+
 
         public Client Client { get => _client; set => _client = value; }
         public Camera Camera { get; set; }
@@ -36,6 +39,7 @@ namespace Render3D.BackEnd
             }
         }
 
+      
         public ArrayList PositionedModels { get; set; }
 
         public DateTime LastModificationDate
