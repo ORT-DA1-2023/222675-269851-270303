@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 using System.Linq;
 
 namespace Render3D.BackEnd.Figures
@@ -7,10 +8,16 @@ namespace Render3D.BackEnd.Figures
     {
         private String _name;
         private Client _client;
+        private Vector3D _position;
 
 
         public abstract Client Client { get; set; }
         public abstract string Name { get; set; }
+        public abstract Vector3D Position { get; set; }
+
+        public abstract bool IsFigureHit(Vector3D pointIntersectionSample, Vector3D normalSample, decimal moduleSample);
+        
+
         protected bool IsAValidName(String value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The name must not be empty");

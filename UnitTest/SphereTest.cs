@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -13,6 +14,7 @@ namespace Render3D.UnitTest
         private String validSphereName = "Name of the sphere";
         private Sphere newSphericalFigure;
         private Decimal validRadius = 2;
+        private Vector3D positionSample = new Vector3D(0, 0, 0);
 
 
         [TestInitialize]
@@ -22,6 +24,15 @@ namespace Render3D.UnitTest
 
             newSphericalFigure = new Sphere();
         }
+
+        [TestMethod]
+        public void givenAValidVectorItAssignsItToTheFigure()
+        {
+            newSphericalFigure.Position = positionSample;
+            Assert.AreEqual(positionSample, newSphericalFigure.Position);
+
+        }
+
 
         [TestMethod]
         public void givenAValidNameItAssignsItToTheSphere()

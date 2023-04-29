@@ -14,7 +14,6 @@ namespace Render3D.BackEnd
         private Client _client;
         private String _name;
         private List<Model> _positionedModels;
-      
         private Camera _camera;
 
         public Scene()
