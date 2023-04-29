@@ -45,6 +45,7 @@
     <Compile Include="BackEndException.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="DateTimeProvider.cs" />
+    <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
     <Compile Include="GraphicMotorUtility\PixelMatrix.cs" />
     <Compile Include="GraphicMotorUtility\Vector3D.cs" />
