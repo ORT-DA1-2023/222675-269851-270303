@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Render3D.BackEnd.Materials;
-
+using Render3D.BackEnd.GraphicMotorUtility;
 namespace Render3D.UnitTest
 {
     [TestClass]
@@ -10,9 +10,9 @@ namespace Render3D.UnitTest
     {
         private LambertianMaterial materialSample;
         private string validMaterialName = "LambertianMaterialName";
-        private int[] colorLowerThan = { -1, -1, -1 };
-        private int[] colorGreaterThan = { 266, 266, 266 };
-        private int[] validColor = { 15, 15, 15 };
+        private Vector3D colorLowerThan = new Vector3D( -1, -1, -1 );
+        private Vector3D colorGreaterThan = new Vector3D(266, 266, 266);
+        private Vector3D validColor = new Vector3D(15, 15, 15);
 
         private Client clientSample;
         private string clientSampleName = "client1Name";
@@ -71,12 +71,11 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidRGBItAssignsItToTheMaterial()
         {
-            materialSample.Color = new int[3];
-            for (int i = 0; i < 3; i++)
-            {
-                materialSample.Color[i] = validColor[i];
-                Assert.IsTrue(materialSample.Color[i] == validColor[i]);
-            }
+            materialSample.Color = new Vector3D (1,2,3);
+            Assert.IsTrue(materialSample.Color.X == 1);
+            Assert.IsTrue(materialSample.Color.Y == 2);
+            Assert.IsTrue(materialSample.Color.Z == 3);
+
         }
         [TestMethod]
         public void givenAMaterialItReturnsItsClient()

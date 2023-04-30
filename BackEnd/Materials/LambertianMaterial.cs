@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace Render3D.BackEnd.Materials
     {
         private String name;
         private Client client;
+        private Vector3D color;
 
         public override string Name
         {
@@ -29,17 +31,21 @@ namespace Render3D.BackEnd.Materials
             get => client;
             set => client = value;
         }
-       
+        public override Vector3D Color { 
+            get => color;
+            set { 
+                if(IsAValidColor(value))
+                {
+                    color = value;
+                }
+            } 
+        }
 
-        public override Vector3D Color { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        private bool IsAValidColor(int[] value)
+        private bool IsAValidColor(Vector3D value)
         {
-            foreach (int code in value)
-            {
-                if (code < 0 || code > 255) throw new BackEndException("Color must be between 0 and 255");
-            }
-            return true;
+
+            if (value.X < 0 || value.X > 255 || value.Y < 0 || value.Y > 255 || value.Z < 0 || value.Z >255) throw new BackEndException("Color must be between 0 and 255");
+          return true;
         }
 
         private bool IsAValidName(string value)
