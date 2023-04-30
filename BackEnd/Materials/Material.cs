@@ -10,9 +10,9 @@ namespace Render3D.BackEnd.Materials
 
     public abstract class Material
     {
-        private String name;
-        private Client client;
-        private Vector3D color;
+        private String _name;
+        private Client _client;
+        private Vector3D _color;
         public abstract String Name { get; set; }
         public abstract Client Client { get; set;  } 
         

@@ -43,8 +43,12 @@ namespace Render3D.BackEnd.Materials
 
         private bool IsAValidColor(Vector3D value)
         {
+            if(!HelperValidator.IsANumberInRange(value.X,0,255) || !HelperValidator.IsANumberInRange(value.Y, 0, 255) || 
+                !HelperValidator.IsANumberInRange(value.Z, 0, 255))
+            {
+                throw new BackEndException("Color must be between 0 and 255");
+            }
 
-            if (value.X < 0 || value.X > 255 || value.Y < 0 || value.Y > 255 || value.Z < 0 || value.Z >255) throw new BackEndException("Color must be between 0 and 255");
           return true;
         }
 

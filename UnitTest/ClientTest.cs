@@ -15,7 +15,7 @@ namespace Render3D.UnitTest
         private const String thisNameIsTooShort = "ab";
         private const String thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
         private const String aValidPassword = "4V4lidPassw0rd";
-        private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
+        private const String passwordWithoutNumbers = "ThisPasswordIsNotPerfect";
         private const String passwordWithoutCapitalLetter = "thisp4ssword";
 
 

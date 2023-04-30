@@ -48,7 +48,7 @@ namespace Render3D.BackEnd
 
         private bool IsAValidName(int value)
         {
-            if (!HelperValidator.IsAnIntInTheRange(value, _minFov, _maxFov))
+            if (!HelperValidator.IsANumberInRange(value, _minFov, _maxFov))
             {
                 throw new BackEndException($"FoV must be between {_minFov} and {_maxFov}");
             }

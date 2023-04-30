@@ -121,32 +121,32 @@ namespace Render3D.UnitTest
             int num = 5;
             int min = 1;
             int max = 100;
-            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num, min, max));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, min, max));
         }
 
         [TestMethod]
         public void givenAnIntEqualToTheMinimumItReturnsTrue()
         {
             int num = minNumber;
-            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num,minNumber, maxNumber));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num,minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntEqualToTheMaximumItReturnsTrue()
         {
             int num = maxNumber;
-            Assert.IsTrue(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntLargestThanTheMaximumItReturnsFalse()
         {
             int num = maxNumber+1;
-            Assert.IsFalse(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntSmallestThanTheMinimumItReturnsFalse()
         {
             int num = minNumber - 1;
-            Assert.IsFalse(HelperValidator.IsAnIntInTheRange(num, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
     }
 }
