@@ -113,7 +113,14 @@ namespace Render3D.BackEnd
 
         public bool alreadyExistsThisFigure(string figureName)
         {
-            throw new NotImplementedException();
+            foreach (Figure figure in _dataWarehouse.Figures)
+            {
+                if (figure.Name == figureName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

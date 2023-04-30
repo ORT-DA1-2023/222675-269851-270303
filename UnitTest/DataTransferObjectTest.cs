@@ -93,11 +93,18 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.checkPassword(""));
         }
         [TestMethod]
-        public void alreadyExistsThisFigure()
+        public void givenANameReturnsTrueIfalreadyExistsThisFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
             Assert.IsTrue(dto.alreadyExistsThisFigure("figureSample1"));
+        }
+        [TestMethod]
+        public void givenANameReturnsFalseIfDoesntalreadyExistsThisFigure()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
+            Assert.IsFalse(dto.alreadyExistsThisFigure("figureSample2"));
         }
         [TestMethod]
         public void givenANewNameItChanges()
