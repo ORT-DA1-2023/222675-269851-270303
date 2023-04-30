@@ -99,5 +99,10 @@ namespace Render3D.BackEnd
                 return false;
             }
         }
+
+        public void ifPosibleChangeName(string oldName, string newName)
+        {
+            
+        }
     }
 }

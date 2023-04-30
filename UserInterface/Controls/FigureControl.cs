@@ -9,12 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd.Figures;
+using Render3D.UserInterface;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UserInterface.Controls
 {
+    
     public partial class FigureControl : UserControl
     {
+        private String oldName;
         private Figure figure;
 
         public FigureControl(Figure figure)
@@ -27,6 +30,7 @@ namespace UserInterface.Controls
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            oldName= txtFigureName.Text;
             txtFigureName.ReadOnly = false;
         }
 
@@ -37,12 +41,16 @@ namespace UserInterface.Controls
                 txtFigureName.ReadOnly = true; 
                 e.Handled = true; 
             }
+            if (!oldName.Equals(txtFigureName.Text))
+            {
+                ((CreationMenu)this.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
+            }
         }
 
         private void clientLeaves(object sender, EventArgs e)
         {
             txtFigureName.ReadOnly = true;
-
+            ((CreationMenu)this.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
         }
     }
 }
