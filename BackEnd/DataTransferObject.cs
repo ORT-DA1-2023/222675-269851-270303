@@ -133,5 +133,9 @@ namespace Render3D.BackEnd
             return false;
         }
 
+        public bool ifPosibleDeleteFigure(string clientName, string figureName)
+        {
+            return true;
+        }
     }
 }

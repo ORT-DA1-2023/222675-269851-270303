@@ -71,5 +71,13 @@ namespace UserInterface.Controls
                 txtFigureName.BackColor = Color.White;
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenDeleted(oldName)){
+                ((CreationMenu)this.Parent.Parent.Parent).refreshLists();
+            }
+
+        }
     }
 }

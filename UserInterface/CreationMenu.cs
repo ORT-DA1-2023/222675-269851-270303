@@ -88,5 +88,10 @@ namespace Render3D.UserInterface
         {
             return (render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName));
         }
+
+        public bool figureNameHasBeenDeleted(string figureName)
+        {
+            return render.dataTransferObject.ifPosibleDeleteFigure(render.clientName,figureName);
+        }
     }
 }

@@ -111,7 +111,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            dto.ifPosibleChangeFigureName("clientSample1","figureSample1", "figureSample2");
+            Assert.IsTrue(dto.ifPosibleChangeFigureName("clientSample1","figureSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
@@ -121,10 +121,25 @@ namespace Render3D.UnitTest
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
             dto.TryToAddAfigure("clientSample1", "figureSample2", 1);
-            dto.ifPosibleChangeFigureName("clientSample1", "clientSample1", "figureSample2");
+            Assert.IsFalse(dto.ifPosibleChangeFigureName("clientSample1", "clientSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
-
+        }
+        [TestMethod]
+        public void givenANameDeletesTheFigure()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);          
+            Assert.IsTrue(dto.ifPosibleDeleteFigure("clientSample1", "figureSample1"));
+            Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
+        }
+        [TestMethod]
+        public void givenANameDoesNotDeleteTheFigure()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
+            Assert.IsFalse(dto.ifPosibleDeleteFigure("clientSample1", "figureSample3"));
+            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
     }
 }
