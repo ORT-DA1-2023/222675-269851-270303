@@ -5,6 +5,7 @@ using System.Collections;
 using System.Runtime.Remoting.Channels;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Figures;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest
 {
@@ -14,7 +15,7 @@ namespace Render3D.UnitTest
         private Scene sceneSample;
         private Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
         private String sceneSampleName = "SceneTest";
-        private ArrayList positionedModels = new ArrayList();
+        private List<Model> positionedModels = new List<Model>();
         private Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
         private Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
         private Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);

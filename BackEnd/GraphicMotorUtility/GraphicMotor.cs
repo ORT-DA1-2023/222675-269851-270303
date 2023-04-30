@@ -131,7 +131,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                 for (var column = 0; column < WidthResolution(); column++)
                 {
                     var u = column / WidthResolution();
-                    var v = row / WidthResolution();
+                    var v = row / ResolutionHeight;
                     Vector3D horizontalPosition = vectorHorizontal.Multiply(u);
                     Vector3D verticalPosition = vectorVertical.Multiply(v);
                     Vector3D pointPosition = vectorLowerLeftCorner.Add(horizontalPosition.Add(verticalPosition));
@@ -152,7 +152,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 if (posX == 0)
                 {
-                    matrix[posY, posX] = pixelRGB;
+                    matrix[posY, posX] = new Vector3D(255,255,255);
                 }
                 else
                 {
@@ -182,6 +182,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     ppmString.AppendLine($"{pixel.X} {pixel.Y} {pixel.Z}");
                 }
             }
+            Console.WriteLine( ppmString.ToString() );
             return ppmString.ToString();
         }
 

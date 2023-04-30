@@ -23,11 +23,12 @@ namespace Render3D.BackEnd
         {
             _camera = new Camera();
             _registerDate = DateTimeProvider.Now;
+            _positionedModels = new List<Model>();
         }
 
 
         public Client Client { get => _client; set => _client = value; }
-        public Camera Camera { get; set; }
+        public Camera Camera { get => _camera; set => _camera = value; }
         public string Name
         {
             get => _name;
@@ -41,7 +42,7 @@ namespace Render3D.BackEnd
         }
 
       
-        public ArrayList PositionedModels { get; set; }
+        public List<Model> PositionedModels { get => _positionedModels; set => _positionedModels = value; }
 
         public DateTime LastModificationDate
         {

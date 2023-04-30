@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,6 @@ namespace Render3D.BackEnd.Materials
     {
         private String name;
         private Client client;
-        private int[] color;
 
         public override string Name
         {
@@ -29,17 +29,9 @@ namespace Render3D.BackEnd.Materials
             get => client;
             set => client = value;
         }
-        public int[] Color
-        {
-            get => color;
-            set
-            {
-                if (IsAValidColor(value))
-                {
-                    color = value;
-                }
-            }
-        }
+       
+
+        public override Vector3D Color { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private bool IsAValidColor(int[] value)
         {
