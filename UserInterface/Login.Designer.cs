@@ -55,7 +55,6 @@
             this.lblClientName.Size = new System.Drawing.Size(103, 22);
             this.lblClientName.TabIndex = 0;
             this.lblClientName.Text = "Username\r\n";
-            this.lblClientName.Click += new System.EventHandler(this.Label1_Click);
             // 
             // pnlLogin
             // 
@@ -93,7 +92,6 @@
             this.label1.Size = new System.Drawing.Size(177, 20);
             this.label1.TabIndex = 7;
             this.label1.Text = "Don\'t have an account?";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnLogin
             // 
@@ -130,7 +128,6 @@
             this.lblClientPassword.Size = new System.Drawing.Size(100, 22);
             this.lblClientPassword.TabIndex = 4;
             this.lblClientPassword.Text = "Password";
-            this.lblClientPassword.Click += new System.EventHandler(this.lblClientPassword_Click_1);
             // 
             // pictureBox1
             // 
@@ -142,7 +139,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // txtClientName
             // 
@@ -153,7 +149,6 @@
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(205, 40);
             this.txtClientName.TabIndex = 2;
-            this.txtClientName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Login
             // 
@@ -167,6 +162,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Shown += new System.EventHandler(this.variablesInitialize);
             this.pnlLogin.ResumeLayout(false);
             this.pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -14,30 +14,19 @@ namespace Render3D.UserInterface
 {
     public partial class SignIn : Form
     {
+        private Render3DIU render;
         public SignIn()
         {
             InitializeComponent();
             lblPasswordsDontMatch.Text = "";
             lblWrongPasswordMessage.Text = "";
             lblWrongUsernameMessage.Text = "";
+            
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            ((Render3DIU)this.Parent.Parent).userWantsToLogIn();
+           render.userWantsToLogIn();
 
         }
 
@@ -47,10 +36,10 @@ namespace Render3D.UserInterface
             String clientPassword = txtClientPassword.Text;
             String clientPasswordRepeated = txtClientRepeatedPassword.Text;
 
-            if (clientPassword== clientPasswordRepeated && ((Render3DIU)this.Parent.Parent).dataTransferObject.ifPosibleSignIn(clientName,clientPassword))
+            if (clientPassword== clientPasswordRepeated && render.dataTransferObject.ifPosibleSignIn(clientName,clientPassword))
             {
-                ((Render3DIU)this.Parent.Parent).clientName = clientName;
-                ((Render3DIU)this.Parent.Parent).enterMenu();
+                render.clientName = clientName;
+                render.enterMenu();
             }
             else
             {
@@ -63,7 +52,7 @@ namespace Render3D.UserInterface
         {
             String clientPassword = txtClientPassword.Text;
             String repeatedPassword = txtClientRepeatedPassword.Text;
-            if (!clientPassword.Equals(repeatedPassword))
+            if (!clientPassword.Equals(repeatedPassword) && (repeatedPassword != ""))
             {
                 lblPasswordsDontMatch.Text = "the password don't match";
             }
@@ -76,7 +65,7 @@ namespace Render3D.UserInterface
         private void ClientPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientPassword = txtClientPassword.Text;
-            if (!((Render3DIU)this.Parent.Parent).dataTransferObject.checkPassword(clientPassword))
+            if (!render.dataTransferObject.checkPassword(clientPassword) && (clientPassword!=""))
             {
                 lblWrongPasswordMessage.Text = "this password is not valid";
             }
@@ -89,7 +78,7 @@ namespace Render3D.UserInterface
         private void usernameKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientName = txtClientName.Text;
-            if (!((Render3DIU)this.Parent.Parent).dataTransferObject.checkName(clientName))
+            if (!render.dataTransferObject.checkName(clientName) && (clientName != ""))
             {
                 lblWrongUsernameMessage.Text = "this username is not valid";
             }
@@ -97,6 +86,11 @@ namespace Render3D.UserInterface
             {
                 lblWrongUsernameMessage.Text = "";
             }
+        }
+
+        private void variableInitialize(object sender, EventArgs e)
+        {
+            render = (Render3DIU)this.Parent.Parent;
         }
     }
 }

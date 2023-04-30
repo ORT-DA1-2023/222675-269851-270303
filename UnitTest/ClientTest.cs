@@ -64,7 +64,7 @@ namespace Render3D.UnitTest
             client1.Password = thisPasswordIsTooLong;
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Password must contain at least 1 number")]
+        [ExpectedException(typeof(BackEndException), "Password must contain at least one number")]
         public void givenAPasswordWithoutNumbersItThrowsABackEndException()
         {
             client1.Password = passwordWithoutNumbers;

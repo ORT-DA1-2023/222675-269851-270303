@@ -27,7 +27,7 @@ namespace Render3D.UnitTest
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
         {
             Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
-            Assert.IsTrue(dto.ifPosibleSignIn("clientSample1", "PasswordExample"));
+            Assert.IsTrue(dto.ifPosibleSignIn("clientSample1", "PasswordExample1"));
             Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
             Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
         }
@@ -41,20 +41,20 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAClientReturnsTrueIfitAlreadyExists()
         {
-            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
-            Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample"));
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample1"));
         }
         [TestMethod]
         public void givenAClientReturnsFalseIfitAlreadyExists()
         {
-            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
-            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample"));
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample1"));
         }
 
         [TestMethod]
         public void givenANewFigureTrysToAddItToTheList()
         {
-            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
             Assert.IsTrue(dto.TryToAddAfigure("clientSample1", "figureSample1", 5));
             Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
@@ -66,7 +66,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenANewWrongFigureFailsTryingToAddItToTheList()
         {
-            dto.ifPosibleSignIn("clientSample1", "PasswordExample");
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
             Assert.IsFalse(dto.TryToAddAfigure("clientSample1", "figureSample1", -5));
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);

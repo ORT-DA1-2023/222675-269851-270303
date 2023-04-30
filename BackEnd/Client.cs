@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -73,11 +74,15 @@ namespace Render3D.BackEnd
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
-                throw new BackEndException("Password must contain at least 1 number");
+                throw new BackEndException("Password must be alphanumerical");
             }
             if (!HelperValidator.IsLengthBetween(value, nameMinimumLength, nameMaximumLength))
             {
                 throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
+            }
+            if (!HelperValidator.ContainsANumber(value))
+            {
+                throw new BackEndException("Password must contain at least one number");
             }
 
             if (!HelperValidator.ContainsACapital(value))

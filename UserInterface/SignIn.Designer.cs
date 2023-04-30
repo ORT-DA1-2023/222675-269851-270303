@@ -113,7 +113,6 @@
             this.lblWrongPasswordMessage.Size = new System.Drawing.Size(35, 16);
             this.lblWrongPasswordMessage.TabIndex = 13;
             this.lblWrongPasswordMessage.Text = "error";
-            this.lblWrongPasswordMessage.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblWrongUsernameMessage
             // 
@@ -209,7 +208,6 @@
             this.label1.Size = new System.Drawing.Size(238, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "It\'s time to sign in!!";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // SignIn
             // 
@@ -222,6 +220,7 @@
             this.Name = "SignIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Go back";
+            this.Shown += new System.EventHandler(this.variableInitialize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

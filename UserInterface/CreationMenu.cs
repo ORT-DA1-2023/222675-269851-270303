@@ -3,24 +3,40 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.UserInterface.Panels;
 using UserInterface;
+using UserInterface.Controls;
 
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
     {
+        private String show = "figure";
         private String _client;
-        DataTransferObject _dataTransferObject;
+        private DataTransferObject _dataTransferObject;
+        private Render3DIU render;
         public CreationMenu()
         {
             InitializeComponent();
-            showObjectCreationPanel(new FigurePanel(_client,_dataTransferObject));
+        }
+
+        public void showFigureList()
+        {
+            flObjectList.Controls.Clear();
+            DataWarehouse listConteiners = render.dataTransferObject.DataWareHouse;
+            List<Figure> figureList = listConteiners.Figures;
+            foreach (Sphere figure in figureList)
+            {
+                FigureControl figureControl = new FigureControl(figure);
+                flObjectList.Controls.Add(figureControl);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -30,12 +46,12 @@ namespace Render3D.UserInterface
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            ((Render3DIU)this.Parent.Parent).userWantsToLogIn();
+            render.userWantsToLogIn();
         }
 
         private void btnFigure_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new FigurePanel(_client, _dataTransferObject));
+            showObjectCreationPanel(new FigurePanel());
         }
 
         private void btnModel_Click(object sender, EventArgs e)
@@ -57,9 +73,16 @@ namespace Render3D.UserInterface
             form.Show();
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
+        private void variablesInitialize(object sender, EventArgs e)
         {
-            lblShowClientName.Text = "Welcome back \n" + ((Render3DIU)this.Parent.Parent).clientName + "!!";
+            render = (Render3DIU)this.Parent.Parent;
+            lblShowClientName.Text = "Welcome back \n" + render.clientName + "!!";
+            showObjectCreationPanel(new FigurePanel());
+            showFigureList();
+        }
+        public void refreshLists()
+        {
+
         }
     }
 }

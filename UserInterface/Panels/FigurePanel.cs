@@ -11,21 +11,16 @@ using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
 {
+    
     public partial class FigurePanel : Form
     {
-        private String _client;
-        private DataTransferObject _dataTransferObject;
-        public FigurePanel(String clientName,DataTransferObject dto)
+        private CreationMenu creation;
+        private Render3DIU render;
+        public FigurePanel()
         {
             InitializeComponent();
-            _client= clientName;
-            _dataTransferObject= dto;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnCreateFigure_Click(object sender, EventArgs e)
         {
@@ -35,10 +30,17 @@ namespace Render3D.UserInterface.Panels
             if(figureRadiusString!="")
             {
                 figureRadius = Int32.Parse(figureRadiusString);
-                _dataTransferObject.TryToAddAfigure(_client, figureName, figureRadius);
+                render.dataTransferObject.TryToAddAfigure(render.clientName, figureName, figureRadius);
+                creation.showFigureList();
             }
             txtFigureName.Text = "";
             txtFigureRadius.Text = "";
+        }
+
+        private void variablesInitialize(object sender, EventArgs e)
+        {
+            creation = ((CreationMenu)this.Parent.Parent);
+            render = ((Render3DIU)creation.Parent.Parent);
         }
     }
 }
