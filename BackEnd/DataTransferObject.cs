@@ -102,7 +102,13 @@ namespace Render3D.BackEnd
 
         public void ifPosibleChangeName(string oldName, string newName)
         {
-            
+            foreach (Client client in _dataWarehouse.Clients)
+            {
+                if (client.Name == oldName)
+                {
+                   client.Name = newName;
+                }
+            }
         }
     }
 }
