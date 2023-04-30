@@ -100,15 +100,20 @@ namespace Render3D.BackEnd
             }
         }
 
-        public void ifPosibleChangeName(string oldName, string newName)
+        public void ifPosibleChangeFigureName(string oldName, string newName)
         {
-            foreach (Client client in _dataWarehouse.Clients)
+            foreach (Figure figure in _dataWarehouse.Figures)
             {
-                if (client.Name == oldName)
+                if (figure.Name == oldName)
                 {
-                   client.Name = newName;
+                   figure.Name = newName;
                 }
             }
+        }
+
+        public bool alreadyExistsThisFigure(string figureName)
+        {
+            throw new NotImplementedException();
         }
     }
 }
