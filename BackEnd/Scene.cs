@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.ExceptionServices;
 using System.Xml.Linq;
 using Render3D.BackEnd;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.BackEnd
 {
@@ -46,7 +48,35 @@ namespace Render3D.BackEnd
             get => _lastModificationDate;
             private set => _lastModificationDate = value;
         }
-  
+
+        public Vector3D ShootRay(Ray ray)
+        {
+            HitRecord3D hitRecord = new HitRecord3D();
+            double moduleMax = 3.4 * Math.Pow(10, 38);
+            foreach (Model element in PositionedModels)
+            {
+                HitRecord3D hit = element.Figure.IsFigureHit(ray, 0, moduleMax);
+                if (hit != null)
+                { 
+                    hitRecord = hit;
+                    moduleMax = hit.Module; 
+                }
+            }
+            if (hitRecord!=null)
+            { 
+                var vectorColor = new Vector3D(hitRecord.Normal.X + 1, hitRecord.Normal.Y + 1, hitRecord.Normal.Z + 1);
+                return vectorColor.Multiply((float)0.5);
+            }
+            else
+            {
+                var vectorDirectionUnit = ray.Direction.GetUnit();
+                var posY = 0.5 * (vectorDirectionUnit.Y + 1);
+                var colorStart = new Vector3D(1, 1, 1);
+                var colorEnd = new Vector3D((float)0.5, (float)0.7, (float)1.0);
+                return colorStart.Multiply((float)(1 - posY)).Add(colorEnd.Multiply((float)posY));
+            }
+        }
+
         public void UpdateLastModificationDate()
         {
             LastModificationDate = DateTimeProvider.Now;

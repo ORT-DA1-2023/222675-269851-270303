@@ -8,6 +8,7 @@ using System.IO.Pipes;
 using System.IO;
 using System.ComponentModel.Design;
 using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -16,8 +17,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private int _resolutionHeight;
         private int _pixelSampling;
         private int _maximumDepth;
-        private const int _resultionWidthDefault = 200;
-        private const int _resolutionHeightDefault = 300;
+        private const int _resultionWidthDefault = 2;
+        private const int _resolutionHeightDefault = 3;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
         private Bitmap _bitmap;
@@ -43,6 +44,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     _resolutionHeight = value;
                 }
             }
+        }
+
+        public PixelMatrix PixelMatrix
+        {
+            get { return _pixelMatrix; }
+            set { _pixelMatrix = value; }
         }
 
 
@@ -95,8 +102,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             
             int width = WidthResolution();
             int height = ResolutionHeight;
-            _pixelMatrix = new PixelMatrix(width, height);
-            _pixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
+            PixelMatrix = new PixelMatrix(width, height);
+            PixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
             String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
             _bitmap = GenerateBitmap(new Bitmap(width,height));
             return null;
@@ -107,26 +114,58 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return null;
         }
 
-        private Color[,] CreateMatrix(Scene sceneSample, Color[,] matrix) //TODO: Change the information
+        private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
         {
-    
-            var width = WidthResolution();
-            var height = ResolutionHeight;
-            for (int x = 0; x < height; x++)
+            float distanceToPlane = (float)((ResolutionHeight / 2) / Math.Tan(sceneSample.Camera.Fov / 2));
+            float aspectRatio = WidthResolution() / ResolutionHeight;
+            float viewportHeight = (float)(2 * distanceToPlane * Math.Tan(sceneSample.Camera.Fov / 2));
+            float viewportWidth = aspectRatio * viewportHeight;
+
+            Vector3D vectorLowerLeftCorner = new Vector3D(-viewportWidth / 2, -viewportHeight / 2, -distanceToPlane);
+            Vector3D vectorHorizontal = new Vector3D(viewportWidth, 0, 0);
+            Vector3D vectorVertical = new Vector3D(0, viewportHeight, 0);
+            Vector3D origin = sceneSample.Camera.LookFrom;
+
+            for (var row = ResolutionHeight - 1; row >= 0; row--)
             {
-                for (int y = 0; y < width; y++)
+                for (var column = 0; column < WidthResolution(); column++)
                 {
-                    int r = 255;
-                    int g = 255;
-                    int b = 0;
-                    matrix[x, y] = Color.FromArgb(r, g, b);
+                    var u = column / WidthResolution();
+                    var v = row / WidthResolution();
+                    Vector3D horizontalPosition = vectorHorizontal.Multiply(u);
+                    Vector3D verticalPosition = vectorVertical.Multiply(v);
+                    Vector3D pointPosition = vectorLowerLeftCorner.Add(horizontalPosition.Add(verticalPosition));
+                    Ray ray = new Ray(origin, pointPosition);
+                    Vector3D pixelColor = sceneSample.ShootRay(ray);
+                    SavePixel(row, column, pixelColor, matrix);
                 }
             }
             return matrix;
-
         }
 
-        private string CreateImagePPM(Color[,] matrix)  
+        public void SavePixel(int row, int column, Vector3D pixelRGB, Vector3D[,] matrix)
+        {
+            int posX = column;
+            int posY = matrix.GetLength(0) - row - 1;
+
+            if (posY < matrix.GetLength(0))
+            {
+                if (posX == 0)
+                {
+                    matrix[posY, posX] = pixelRGB;
+                }
+                else
+                {
+                    matrix[posY, posX] = pixelRGB;
+                }
+            }
+            else
+            {
+                throw new BackEndException("Pixel Overflow Error");
+            }
+        }
+
+        private string CreateImagePPM(Vector3D[,] matrix)  
         {
 
             var width = WidthResolution();
@@ -139,8 +178,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Color pixel = matrix[y, x];
-                    ppmString.AppendLine($"{pixel.R} {pixel.G} {pixel.B}");
+                    Vector3D pixel = matrix[y, x];
+                    ppmString.AppendLine($"{pixel.X} {pixel.Y} {pixel.Z}");
                 }
             }
             return ppmString.ToString();

@@ -17,7 +17,7 @@ namespace Render3D.UnitTest
         private GraphicMotor graphicMotorSample;
         private GraphicMotor graphicMotorDefaultSample = new GraphicMotor();
         private const int resolutionHeightSample = 500;
-        private const int resolutionHeightSampleDefault = 300;
+        private const int resolutionHeightSampleDefault = 3;
         private const int negativeResolutionHeightSample = -1;
         private const int zeroResolutionHeightSample = 0;
         private const int pixelSamplingSample = 79;
@@ -28,7 +28,7 @@ namespace Render3D.UnitTest
         private const int maximumDepthSampleDefault = 20;
         private const int negativeMaximumDepth = -1;
         private const int zeroMaximumDepth = 0;
-        private Scene sceneSample = new Scene();
+        private Scene sceneSample;
         private Bitmap bitmapSample;
 
 
@@ -43,6 +43,7 @@ namespace Render3D.UnitTest
         public void givenAValidSceneRenderMethodReturnsABitmap()
         {
             //bitmapSample = new Bitmap(ppmStreamSample);
+            sceneSample = new Scene();
             Assert.AreEqual(graphicMotorSample.Render(sceneSample), null);
         }
 

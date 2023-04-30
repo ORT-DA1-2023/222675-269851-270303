@@ -4,7 +4,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class PixelMatrix
     {
-        private Color[,] _matrix;
+        private Vector3D[,] _matrix;
         private int _width;
         private int _height;
 
@@ -17,10 +17,10 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         {
             _width = width;
             _height = height;
-            _matrix = new Color[height, width];
+            _matrix = new Vector3D[height, width];
         }
 
-        public Color[,] Matrix
+        public Vector3D[,] Matrix
         {
             get { return _matrix; }
             set { _matrix = value; }

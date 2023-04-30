@@ -10,7 +10,7 @@ namespace Render3D.UnitTest
     {
         private const int width = 3;
         private const int height = 2;
-        private Color[,] matrixPPM;
+        private Vector3D[,] matrixPPM;
         private PixelMatrix pixelMatrixSample;
 
         [TestInitialize]
@@ -23,7 +23,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidMatrixItAssingsToThePixelMatrix()
         {
-            matrixPPM = new Color[width,height];
+            matrixPPM = new Vector3D[width,height];
             pixelMatrixSample.Matrix = matrixPPM;
             Assert.AreEqual(matrixPPM,pixelMatrixSample.Matrix);
 
