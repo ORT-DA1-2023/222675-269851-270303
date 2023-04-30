@@ -13,8 +13,13 @@ namespace Render3D.UnitTest
         private Client clientSample;
         private String validSphereName = "Name of the sphere";
         private Sphere newSphericalFigure;
-        private Decimal validRadius = 2;
+        private float validRadius = 2;
         private Vector3D positionSample = new Vector3D(0, 0, 0);
+
+        private double moduleMaxSample;
+        private double moduleMinSample;
+        private Ray rayIntersection;
+        private HitRecord3D hitRecord;
 
 
         [TestInitialize]
@@ -33,6 +38,18 @@ namespace Render3D.UnitTest
 
         }
 
+
+        [TestMethod]
+        public void givenAValidModuleAnd2VectorItReturnsAHitRecord()
+        {
+            rayIntersection = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
+            moduleMaxSample = 0;
+            moduleMinSample = 0;
+            hitRecord = new HitRecord3D();
+            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample)));
+           
+
+        }
 
         [TestMethod]
         public void givenAValidNameItAssignsItToTheSphere()

@@ -33,7 +33,6 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAVectorItAssignsItAsLookFrom()
         {
-            Assert.AreEqual(null, cameraSample.LookFrom);
             cameraSample.LookFrom = allOnes;
             Assert.AreEqual(allOnes, cameraSample.LookFrom);
         }
@@ -41,7 +40,6 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAVectorItAssignsItAsLookAt()
         {
-            Assert.AreEqual(null, cameraSample.LookAt);
             cameraSample.LookAt = allOnes;
             Assert.AreEqual(allOnes, cameraSample.LookAt);
         }

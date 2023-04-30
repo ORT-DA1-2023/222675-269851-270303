@@ -21,7 +21,6 @@ namespace Render3D.BackEnd
         {
             _camera = new Camera();
             _registerDate = DateTimeProvider.Now;
-            _preview = new Bitmap(0,0);
         }
 
 

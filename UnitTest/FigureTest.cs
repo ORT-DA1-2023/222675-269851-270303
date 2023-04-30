@@ -13,9 +13,6 @@ namespace Render3D.UnitTest
         private Figure figure1;
         private string figure1Name = "A valid name";
         private Vector3D positionSample = new Vector3D(0, 0, 0);
-        private Vector3D pointIntersectionSample; 
-        private Vector3D normalSample;
-        private decimal moduleSample;
 
 
         [TestInitialize]
@@ -33,15 +30,6 @@ namespace Render3D.UnitTest
 
         }
 
-        [TestMethod]
-        public void givenAValidModuleAnd2VectorItReturnsTrue()
-        {
-            pointIntersectionSample = new Vector3D(0, 0, 0);
-            normalSample = new Vector3D(0, 0, 3);
-            moduleSample = new decimal(3);
-            Assert.IsTrue(figure1.IsFigureHit(pointIntersectionSample, normalSample, moduleSample));
-
-        }
 
 
         [TestMethod]

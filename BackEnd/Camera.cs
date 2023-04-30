@@ -29,6 +29,7 @@ namespace Render3D.BackEnd
 
         public Camera()
         {
+            Fov = _fov;
             _lookFrom = new Vector3D(0, 2, 0);
             _lookAt = new Vector3D(0, 2, 5);
         }

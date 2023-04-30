@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Runtime.Remoting.Channels;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Figures;
 
 namespace Render3D.UnitTest
 {
@@ -20,6 +21,7 @@ namespace Render3D.UnitTest
         private Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
         private int randomFoV = 30;
         private Scene defaultSceneSample = new Scene();
+
   
 
 
@@ -62,12 +64,13 @@ namespace Render3D.UnitTest
        [TestMethod]
         public void givenACameraItAssignsItToTheScene()
         {
-            Camera camera = new Camera() { Fov = 20, LookAt= randomObjectivePosition,LookFrom=randomCameraPosition };
+            Camera camera = new Camera();
             sceneSample.Camera = camera;
             Assert.AreEqual(sceneSample.Camera, camera);
         }
 
-      
+       
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant be empty")]
         public void givenAnEmptyNameItThrowsABackEndException()

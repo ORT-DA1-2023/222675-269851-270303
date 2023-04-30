@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Figures
         public abstract string Name { get; set; }
         public abstract Vector3D Position { get; set; }
 
-        public abstract bool IsFigureHit(Vector3D pointIntersectionSample, Vector3D normalSample, decimal moduleSample);
+        public abstract HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax);
         
 
         protected bool IsAValidName(String value)
