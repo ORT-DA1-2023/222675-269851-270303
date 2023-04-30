@@ -111,8 +111,9 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample2","PasswordExample1"));
-            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample1"));
+            dto.ifPosibleChangeFigureName("figureSample1", "figureSample2");
+            Assert.IsTrue(dto.alreadyExistsThisFigure("figureSample2"));
+            Assert.IsFalse(dto.alreadyExistsThisFigure("figureSample1"));
         }
         public void givenANewNameItDoesNotChangeIt()
         {
