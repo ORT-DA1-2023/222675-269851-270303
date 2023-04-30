@@ -42,6 +42,10 @@ namespace Render3D.BackEnd
         public bool TryToAddAfigure(String clientName, string figureName, int figureRadius)
         {
             Client client=getClientGivenAName(clientName);
+            if (alreadyExistsThisFigure(clientName, figureName)) 
+            {
+                return false;
+            }
             try
             {
                 transferFigureForCreation(client, figureName, figureRadius);
@@ -59,7 +63,7 @@ namespace Render3D.BackEnd
             _dataWarehouse.Clients.Add(client);
         }
 
-        private void transferFigureForCreation(Client client, string figureName, int figureRadius)
+        private void transferFigureForCreation(Client client, String figureName, int figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
@@ -76,7 +80,7 @@ namespace Render3D.BackEnd
             return null;
         }
 
-        public bool checkName(string clientName)
+        public bool checkName(String clientName)
         {
             try
             {
@@ -88,7 +92,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        public bool checkPassword(string clientPassword)
+        public bool checkPassword(String clientPassword)
         {
             try
             {
@@ -100,27 +104,33 @@ namespace Render3D.BackEnd
             }
         }
 
-        public void ifPosibleChangeFigureName(string oldName, string newName)
+        public bool alreadyExistsThisFigure(String clientName,String figureName)
         {
+            Client client = getClientGivenAName(clientName);
             foreach (Figure figure in _dataWarehouse.Figures)
             {
-                if (figure.Name == oldName)
-                {
-                   figure.Name = newName;
-                }
-            }
-        }
-
-        public bool alreadyExistsThisFigure(string figureName)
-        {
-            foreach (Figure figure in _dataWarehouse.Figures)
-            {
-                if (figure.Name == figureName)
+                if (figure.Name == figureName && figure.Client.Equals(client))
                 {
                     return true;
                 }
             }
             return false;
         }
+        public void ifPosibleChangeFigureName(String clientName,String oldName, String newName)
+        {
+            Client client = getClientGivenAName(clientName);
+            if (!alreadyExistsThisFigure(clientName,newName)) 
+            {
+                foreach (Figure figure in _dataWarehouse.Figures)
+                {
+                    if (figure.Name == oldName && figure.Client.Equals(client))
+                    {
+                        figure.Name = newName;
+                    }
+                }
+            }
+          
+        }
+
     }
 }

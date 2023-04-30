@@ -97,31 +97,33 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(dto.alreadyExistsThisFigure("figureSample1"));
+            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
         [TestMethod]
         public void givenANameReturnsFalseIfDoesntalreadyExistsThisFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            Assert.IsFalse(dto.alreadyExistsThisFigure("figureSample2"));
+            Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
         }
         [TestMethod]
         public void givenANewNameItChanges()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            dto.ifPosibleChangeFigureName("figureSample1", "figureSample2");
-            Assert.IsTrue(dto.alreadyExistsThisFigure("figureSample2"));
-            Assert.IsFalse(dto.alreadyExistsThisFigure("figureSample1"));
+            dto.ifPosibleChangeFigureName("clientSample1","figureSample1", "figureSample2");
+            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
+            Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
+        [TestMethod]
         public void givenANewNameItDoesNotChangeIt()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            dto.ifPosibleChangeFigureName("clientSample1", "clientSample2");
-            Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample1"));
-            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample1"));
+            dto.TryToAddAfigure("clientSample1", "figureSample2", 1);
+            dto.ifPosibleChangeFigureName("clientSample1", "clientSample1", "figureSample2");
+            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
 
         }
     }

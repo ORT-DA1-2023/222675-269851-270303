@@ -86,7 +86,7 @@ namespace Render3D.UserInterface
         }
         public void figureNameHasBeenChanged(String oldName,string newName)
         {
-            //render.dataTransferObject.ifPosibleChangeName(oldName, newName);
+            render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName);
         }
     }
 }

@@ -43,14 +43,14 @@ namespace UserInterface.Controls
             }
             if (!oldName.Equals(txtFigureName.Text))
             {
-                ((CreationMenu)this.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
             }
         }
 
         private void clientLeaves(object sender, EventArgs e)
         {
             txtFigureName.ReadOnly = true;
-            ((CreationMenu)this.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
         }
     }
 }
