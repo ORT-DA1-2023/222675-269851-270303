@@ -116,7 +116,7 @@ namespace Render3D.BackEnd
             }
             return false;
         }
-        public void ifPosibleChangeFigureName(String clientName,String oldName, String newName)
+        public bool ifPosibleChangeFigureName(String clientName,String oldName, String newName)
         {
             Client client = getClientGivenAName(clientName);
             if (!alreadyExistsThisFigure(clientName,newName)) 
@@ -126,10 +126,11 @@ namespace Render3D.BackEnd
                     if (figure.Name == oldName && figure.Client.Equals(client))
                     {
                         figure.Name = newName;
+                        return true;
                     }
                 }
             }
-          
+            return false;
         }
 
     }

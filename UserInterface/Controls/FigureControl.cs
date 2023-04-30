@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -32,25 +33,43 @@ namespace UserInterface.Controls
         {
             oldName= txtFigureName.Text;
             txtFigureName.ReadOnly = false;
+            txtFigureName.BackColor = Color.Green;
         }
 
         private void clientPressEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtFigureName.ReadOnly = true; 
-                e.Handled = true; 
+                e.Handled = true;
+                checksForCorrectEdit();
             }
-            if (!oldName.Equals(txtFigureName.Text))
-            {
-                ((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
-            }
+            
+            
         }
 
         private void clientLeaves(object sender, EventArgs e)
         {
+            checksForCorrectEdit();
+
+        }
+        private void checksForCorrectEdit()
+        {
             txtFigureName.ReadOnly = true;
-            ((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text);
+            if (!oldName.Equals(txtFigureName.Text))
+            {
+                if (((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text))
+                {
+                    txtFigureName.BackColor = Color.White;
+                }
+                else
+                {
+                    txtFigureName.BackColor = Color.Red;
+                }
+            }
+            else
+            {
+                txtFigureName.BackColor = Color.White;
+            }
         }
     }
 }

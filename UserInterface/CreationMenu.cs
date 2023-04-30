@@ -84,9 +84,9 @@ namespace Render3D.UserInterface
         {
 
         }
-        public void figureNameHasBeenChanged(String oldName,string newName)
+        public bool figureNameHasBeenChanged(String oldName,string newName)
         {
-            render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName);
+            return (render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName));
         }
     }
 }
