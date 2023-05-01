@@ -79,8 +79,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            //return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
-            return ResolutionHeight;
+            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
 

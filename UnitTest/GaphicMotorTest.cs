@@ -48,7 +48,6 @@ namespace Render3D.UnitTest
             Assert.AreEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
-      
 
         [TestMethod]
         public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
