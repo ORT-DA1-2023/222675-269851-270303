@@ -79,7 +79,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            //return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            return ResolutionHeight;
         }
 
 
@@ -122,7 +123,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
         {
-           
+            Random random = new Random();
             for (var row = ResolutionHeight - 1; row >= 0; row--)
             {
                 for (var column = 0; column < WidthResolution(); column++)
@@ -130,11 +131,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     Vector3D pixelColor = new Vector3D(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
-                        Random random = new Random();
+                        
                         double randomNumber = random.NextDouble();
-
-                        Random random2 = new Random();
-                        double randomNumber2 = random2.NextDouble();
+                        double randomNumber2 = random.NextDouble();
 
                         double u = (column + randomNumber) / WidthResolution();
                         double v = (row + randomNumber2) / ResolutionHeight;
@@ -151,11 +150,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public void SavePixel(int row, int column, Vector3D pixelRGB, Vector3D[,] matrix)
         {
             int posX = column;
-            int posY = matrix.GetLength(0) - row - 1;
+            int posY = ResolutionHeight - row - 1;
 
             if (posY < ResolutionHeight)
             {
-                matrix[posY, posX] = new Vector3D(pixelRGB.X, pixelRGB.Y, pixelRGB.Z);
+               
+                matrix[posY, posX] = pixelRGB;
 
             }
             else
@@ -178,7 +178,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                 for (int x = 0; x < width; x++)
                 {
                     Vector3D pixel = matrix[y, x];
-                    ppmString.AppendLine($"{pixel.X} {pixel.Y} {pixel.Z}");
+                    ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
             Console.WriteLine( ppmString.ToString() );

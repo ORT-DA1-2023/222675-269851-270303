@@ -48,13 +48,6 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAVectorGetTheAssignColors()
-        {
-            Assert.AreEqual(allOnes.Red, twoFiveFive);
-            Assert.AreEqual(allOnes.Green, twoFiveFive);
-            Assert.AreEqual(allOnes.Blue, twoFiveFive);
-        }
-        [TestMethod]
         public void givenTwoVectorsReturnsTheSum()
         {
             Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);

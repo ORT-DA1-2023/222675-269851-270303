@@ -10,9 +10,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Vector3D(float v1, float v2, float v3)
         {
-            this._x = v1;
-            this._y = v2;
-            this._z = v3;
+            X = v1;
+            Y = v2;
+            Z = v3;
         }
         public float X
         {
@@ -31,67 +31,67 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _z; }
             set { _z = value; }
         }
-        public int Red
+        public int Red()
         {
-            get { return (int)Math.Abs(Math.Round(_x * 255)); }
+            return (int)Math.Abs(Math.Round(X * 255)); 
         }
 
-        public int Green
+        public int Green()
         {
-            get { return (int)Math.Abs(Math.Round(_y * 255)); }
+             return (int)Math.Abs(Math.Round(Y * 255)); 
         }
 
-        public int Blue
+        public int Blue()
         {
-            get { return (int)Math.Abs(Math.Round(_z * 255)); }
+            return (int)Math.Abs(Math.Round(Z * 255));  
         }
         public Vector3D Add(Vector3D vector3d)
         {
-            return new Vector3D(_x + vector3d.X, _y + vector3d.Y, _z + vector3d.Z);
+            return new Vector3D(X + vector3d.X, Y + vector3d.Y, Z + vector3d.Z);
         }
         public Vector3D Substract(Vector3D vector3d)
         {
-            return new Vector3D(_x - vector3d.X, _y - vector3d.Y, _z - vector3d.Z);
+            return new Vector3D(X - vector3d.X, Y - vector3d.Y, Z - vector3d.Z);
         }
         public Vector3D Multiply(float iCount)
         {
-            return new Vector3D(_x * iCount, _y * iCount, _z * iCount);
+            return new Vector3D(X * iCount, Y * iCount, Z * iCount);
         }
 
         public Vector3D Divide(float iCount)
         {
-            return new Vector3D(_x / iCount, _y / iCount, _z / iCount);
+            return new Vector3D(X / iCount, Y / iCount, Z / iCount);
         }
 
         public void AddTo(Vector3D vector3d)
         {
-            _x += vector3d.X;
-            _y += vector3d.Y;
-            _z += vector3d.Z;
+            X += vector3d.X;
+            Y += vector3d.Y;
+            Z += vector3d.Z;
         }
 
         public void SubstractFrom(Vector3D vector3d)
         {
-            _x -= vector3d.X;
-            _y -= vector3d.Y;
-            _z -= vector3d.Z;
+            X -= vector3d.X;
+            Y -= vector3d.Y;
+            Z -= vector3d.Z;
         }
         public void ScaleUpBy(int count)
         {
-            _x *= count;
-            _y *= count;
-            _z *= count;
+            X *= count;
+            Y *= count;
+            Z *= count;
         }
 
         public void ScaleDownBy(int count)
         {
-            _x /= count;
-            _y /= count;
-            _z /= count;
+            X /= count;
+            Y /= count;
+            Z /= count;
         }
         public float SquaredLength()
         {
-            return (_x * _x) + (_y * _y) + (_z * _z);
+            return (X * X) + (Y * Y) + (Z * Z);
         }
         public float Length()
         {
@@ -104,20 +104,20 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public float Dot(Vector3D other)
         {
-            return (_x * other.X) + (_y * other.Y) + (_z * other.Z);
+            return (X * other.X) + (Y * other.Y) + (Z  * other.Z);
         }
 
         public Vector3D Cross(Vector3D other)
         {
-            float x = _y * other.Z - _z * other.Y;
-            float y = _z * other.X - _x * other.Z;
-            float z = _x * other.Y - _y * other.X;
+            float x = Y * other.Z - Z * other.Y;
+            float y = Z * other.X - X * other.Z;
+            float z = X * other.Y - Y * other.X;
             return new Vector3D(x, y, z);
         }
 
         public bool Equals(Vector3D other)
         {
-            return ((_x==other.X) && (_y==other.Y) && (_z==other.Z));
+            return ((X==other.X) && (Y ==other.Y) && (Z ==other.Z));
         }
     }
 }

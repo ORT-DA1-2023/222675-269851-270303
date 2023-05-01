@@ -52,8 +52,8 @@ namespace Render3D.BackEnd
 
         public Vector3D ShootRay(Ray ray, int depth)
         {
-            HitRecord3D hitRecord = new HitRecord3D();
-            double moduleMax = 3.4 * Math.Pow(10, 38);
+            HitRecord3D hitRecord = null;
+            double moduleMax = Math.Pow(10, 38);
             foreach (Model element in PositionedModels)
             {
                 HitRecord3D hit = element.Figure.IsFigureHit(ray, 0.001, moduleMax, element.Material.Color);
@@ -65,8 +65,9 @@ namespace Render3D.BackEnd
             }
             if (hitRecord!=null)
             {
-                if (depth > 10)
+                if (depth > 0)
                 {
+
                     Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
                     Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);
@@ -95,10 +96,7 @@ namespace Render3D.BackEnd
             do
             {
                 Random random = new Random();
-                double randomNumber1 = random.NextDouble();
-                double randomNumber2 = random.NextDouble();
-                double randomNumber3 = random.NextDouble();
-                Vector3D vectorTemp = new Vector3D((float)randomNumber1, (float)randomNumber2, (float)randomNumber3);
+                Vector3D vectorTemp = new Vector3D((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
             } while (vector.SquaredLength() >=1 );
             return vector;

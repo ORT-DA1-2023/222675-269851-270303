@@ -69,7 +69,7 @@ namespace Render3D.BackEnd.Figures
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
             var a = ray.Direction.Dot(ray.Direction);
             var b = vectorOriginCenter.Dot(ray.Direction) * 2;
-            var c = vectorOriginCenter.Dot(vectorOriginCenter) - (radius * radius);
+            var c = vectorOriginCenter.Dot(vectorOriginCenter) - (Radius * Radius);
             var discriminant = (b * b) - (4 * a * c);
             if (discriminant < 0)
             {
@@ -79,7 +79,7 @@ namespace Render3D.BackEnd.Figures
             {
                 float t = ((float)((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
                 Vector3D intersectionPoint = ray.PointAt(t);
-                Vector3D normal = intersectionPoint.Substract(Position).Divide(radius);
+                Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
                 if (t < tMax && t > tMin)
                 {
                     return new HitRecord3D(t, intersectionPoint, normal, color);

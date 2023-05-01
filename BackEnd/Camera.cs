@@ -131,7 +131,10 @@ namespace Render3D.BackEnd
 
         public Camera(Vector3D vectorLookFrom,  Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio)
         {
+            LookAt = vectorLookAt;
+            VectorUp = vectorUp;
             Fov = fieldOfView;
+            AspectRatio = aspectRatio;
             Theta = fieldOfView * Math.PI / 180;
             HeightHalf = Math.Tan(Theta / 2);
             WidthHalf = AspectRatio * HeightHalf;
