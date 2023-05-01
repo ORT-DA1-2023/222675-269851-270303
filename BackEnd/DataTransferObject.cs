@@ -174,7 +174,15 @@ namespace Render3D.BackEnd
 
         public bool alreadyExistsThisMaterial(String clientName, string materialName)
         {
-            throw new NotImplementedException();
+            Client client = getClientGivenAName(clientName);
+            foreach (Material material in _dataWarehouse.Materials)
+            {
+                if (material.Name == materialName && material.Client.Equals(client))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void transferMaterialForCreation(Client client, string materialName, int[] materialColors)
