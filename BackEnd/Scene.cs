@@ -50,13 +50,13 @@ namespace Render3D.BackEnd
             private set => _lastModificationDate = value;
         }
 
-        public Vector3D ShootRay(Ray ray)
+        public Vector3D ShootRay(Ray ray, int depth)
         {
             HitRecord3D hitRecord = new HitRecord3D();
             double moduleMax = 3.4 * Math.Pow(10, 38);
             foreach (Model element in PositionedModels)
             {
-                HitRecord3D hit = element.Figure.IsFigureHit(ray, 0, moduleMax);
+                HitRecord3D hit = element.Figure.IsFigureHit(ray, 0.001, moduleMax, element.Material.Color);
                 if (hit != null)
                 { 
                     hitRecord = hit;
@@ -64,9 +64,20 @@ namespace Render3D.BackEnd
                 }
             }
             if (hitRecord!=null)
-            { 
-                var vectorColor = new Vector3D(hitRecord.Normal.X + 1, hitRecord.Normal.Y + 1, hitRecord.Normal.Z + 1);
-                return vectorColor.Multiply((float)0.5);
+            {
+                if (depth > 10)
+                {
+                    Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
+                    Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
+                    Ray newRay = new Ray(hitRecord.Intersection, newVector);
+                    Vector3D color = ShootRay(newRay, depth - 1);
+                    Vector3D attenuation = hitRecord.Attenuation;
+                    return new Vector3D(color.X * attenuation.X, color.Y * attenuation.Y, color.Z * attenuation.Z);
+                }
+                else
+                {
+                    return new Vector3D(0, 0, 0);
+                }
             }
             else
             {
@@ -76,6 +87,21 @@ namespace Render3D.BackEnd
                 var colorEnd = new Vector3D((float)0.5, (float)0.7, (float)1.0);
                 return colorStart.Multiply((float)(1 - posY)).Add(colorEnd.Multiply((float)posY));
             }
+        }
+
+        private Vector3D GetRandomInUnitSphere()
+        {
+            Vector3D vector;
+            do
+            {
+                Random random = new Random();
+                double randomNumber1 = random.NextDouble();
+                double randomNumber2 = random.NextDouble();
+                double randomNumber3 = random.NextDouble();
+                Vector3D vectorTemp = new Vector3D((float)randomNumber1, (float)randomNumber2, (float)randomNumber3);
+                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
+            } while (vector.SquaredLength() >=1 );
+            return vector;
         }
 
         public void UpdateLastModificationDate()

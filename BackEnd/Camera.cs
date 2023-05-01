@@ -114,6 +114,7 @@ namespace Render3D.BackEnd
         public Camera()
         {
             _lookAt = new Vector3D(0, 2, 5);
+            _vectorUp = new Vector3D(0, 1, 0);
             Fov = 30;
             _theta = Fov*Math.PI/180;
             _heightHalf  = Math.Tan(Theta/2);

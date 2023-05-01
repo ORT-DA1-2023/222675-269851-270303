@@ -58,7 +58,7 @@ namespace Render3D.BackEnd.Figures
         }
 
 
-        public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax)
+        public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
             var a = ray.Direction.Dot(ray.Direction);
@@ -76,7 +76,7 @@ namespace Render3D.BackEnd.Figures
                 Vector3D normal = intersectionPoint.Substract(Position).Divide(radius);
                 if (t < tMax && t > tMin)
                 {
-                    return new HitRecord3D(t, intersectionPoint, normal);
+                    return new HitRecord3D(t, intersectionPoint, normal, color);
                 }
                 else
                 {

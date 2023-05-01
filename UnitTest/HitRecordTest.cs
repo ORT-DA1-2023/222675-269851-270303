@@ -12,6 +12,7 @@ namespace Render3D.UnitTest
         private double moduleSample;
         private Vector3D intersectionSample;
         private Vector3D normalSample;
+        private Vector3D attenuationSample;
 
         [TestInitialize]
         public void initialize()
@@ -25,11 +26,21 @@ namespace Render3D.UnitTest
             moduleSample = 1;
             intersectionSample = new Vector3D(0, 0, 0);
             normalSample = new Vector3D(0, 0, 0);
-            hitRecordSample = new HitRecord3D(moduleSample, intersectionSample, normalSample);
+            hitRecordSample = new HitRecord3D(moduleSample, intersectionSample, normalSample, attenuationSample);
             Assert.AreEqual(moduleSample, hitRecordSample.Module);
             Assert.AreEqual(intersectionSample, hitRecordSample.Intersection);
             Assert.AreEqual(normalSample, hitRecordSample.Normal);
+            Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
+
+        [TestMethod]
+        public void givenAValidAttenuationItAssingsToTheHitRecord()
+        {
+            attenuationSample = new Vector3D(7, 234, 34);
+            hitRecordSample.Attenuation = attenuationSample;
+            Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
+        }
+
 
         [TestMethod]
         public void givenAValidModuleItAssingsToTheHitRecord()

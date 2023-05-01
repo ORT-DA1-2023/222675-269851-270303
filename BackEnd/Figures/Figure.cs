@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Figures
         public abstract string Name { get; set; }
         public abstract Vector3D Position { get; set; }
 
-        public abstract HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax);
+        public abstract HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color);
         
 
         protected bool IsAValidName(String value)

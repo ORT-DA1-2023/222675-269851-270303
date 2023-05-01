@@ -82,6 +82,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
+        private int AspectRatio()
+        {
+            return WidthResolution() / ResolutionHeight;
+        }
+
         public Bitmap RenderModelPreview(Model model)
         {
             Scene previewScene = new Scene();
@@ -116,28 +121,23 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
         {
-            float distanceToPlane = (float)((ResolutionHeight / 2) / Math.Tan(sceneSample.Camera.Fov / 2));
-            float aspectRatio = WidthResolution() / ResolutionHeight;
-            float viewportHeight = (float)(2 * distanceToPlane * Math.Tan(sceneSample.Camera.Fov / 2));
-            float viewportWidth = aspectRatio * viewportHeight;
-
-            Vector3D vectorLowerLeftCorner = new Vector3D(-viewportWidth / 2, -viewportHeight / 2, -distanceToPlane);
-            Vector3D vectorHorizontal = new Vector3D(viewportWidth, 0, 0);
-            Vector3D vectorVertical = new Vector3D(0, viewportHeight, 0);
-            Vector3D origin = sceneSample.Camera.LookFrom;
-
+           
             for (var row = ResolutionHeight - 1; row >= 0; row--)
             {
                 for (var column = 0; column < WidthResolution(); column++)
                 {
-                    var u = column / WidthResolution();
-                    var v = row / ResolutionHeight;
-                    Vector3D horizontalPosition = vectorHorizontal.Multiply(u);
-                    Vector3D verticalPosition = vectorVertical.Multiply(v);
-                    Vector3D pointPosition = vectorLowerLeftCorner.Add(horizontalPosition.Add(verticalPosition));
-                    Ray ray = new Ray(origin, pointPosition);
-                    Vector3D pixelColor = sceneSample.ShootRay(ray);
-                    SavePixel(row, column, pixelColor, matrix);
+                    Vector3D pixelColor = new Vector3D(0, 0, 0);
+                    for (int sample = 0; sample < PixelSampling; sample++)
+                    {
+                        Random random = new Random();
+                        double randomNumber = random.NextDouble();
+                        double u = (column + randomNumber) / WidthResolution();
+                        double v = (row + randomNumber) / ResolutionHeight;
+                        Ray ray = sceneSample.Camera.GetRay((float)u, (float)v);
+                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
+                    }
+                    pixelColor = pixelColor.Divide(PixelSampling);
+                   SavePixel(row, column, pixelColor, matrix);
                 }
             }
             return matrix;

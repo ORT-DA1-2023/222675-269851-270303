@@ -32,7 +32,7 @@ namespace Render3D.BackEnd
             return true;
         }
 
-        
+      
 
 
         public Figure Figure { get=>_figure; set=>_figure =value; }

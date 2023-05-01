@@ -15,6 +15,7 @@ namespace Render3D.UnitTest
         private Sphere newSphericalFigure;
         private float validRadius = 2;
         private Vector3D positionSample = new Vector3D(0, 0, 0);
+        private Vector3D colorSample = new Vector3D(255, 1, 66);
 
         private double moduleMaxSample;
         private double moduleMinSample;
@@ -46,7 +47,7 @@ namespace Render3D.UnitTest
             moduleMaxSample = 0;
             moduleMinSample = 0;
             hitRecord = new HitRecord3D();
-            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample)));
+            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
            
 
         }
