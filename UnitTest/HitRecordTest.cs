@@ -33,6 +33,8 @@ namespace Render3D.UnitTest
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
 
+        
+
         [TestMethod]
         public void givenAValidAttenuationItAssingsToTheHitRecord()
         {

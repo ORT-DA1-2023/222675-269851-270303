@@ -57,6 +57,12 @@ namespace Render3D.BackEnd.Figures
             position = new Vector3D(0, 0, 0);
         }
 
+        public Sphere(Vector3D position, float radius)
+        {
+            Radius = radius;
+            Position = position;
+        }
+
 
         public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color)
         {

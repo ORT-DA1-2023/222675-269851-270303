@@ -8,6 +8,7 @@ using Render3D.BackEnd.Figures;
 using System.Drawing;
 using System.IO.Pipes;
 using System.IO;
+using Render3D.BackEnd.Materials;
 
 namespace Render3D.UnitTest
 {
@@ -47,6 +48,7 @@ namespace Render3D.UnitTest
             Assert.AreEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
+      
 
         [TestMethod]
         public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
