@@ -26,15 +26,38 @@ namespace Render3D.UserInterface.Panels
         {
             String figureName= txtFigureName.Text;
             String figureRadiusString = txtFigureRadius.Text;
-            int figureRadius;
-            if(figureRadiusString!="")
+            decimal figureRadius;
+            if (tryToParse(figureRadiusString)!=-1)
             {
-                figureRadius = Int32.Parse(figureRadiusString);
+                figureRadius = tryToParse(figureRadiusString);
                 render.dataTransferObject.TryToAddAfigure(render.clientName, figureName, figureRadius);
                 creation.showFigureList();
+                lblRadiusNotValid.Text = "";
+                lblNameNotValid.Text = "";
+            }
+            else
+            {
+                alertFigureRadiusIsNotANumber();
             }
             txtFigureName.Text = "";
             txtFigureRadius.Text = "";
+        }
+
+        private void alertFigureRadiusIsNotANumber()
+        {
+            lblRadiusNotValid.Text = "the radius must be a number";
+        }
+
+        private decimal tryToParse(string figureRadiusString)
+        {
+            try
+            {
+               decimal radius= Decimal.Parse(figureRadiusString);
+                return radius; 
+            }catch 
+            { 
+                return -1; 
+            }
         }
 
         private void variablesInitialize(object sender, EventArgs e)

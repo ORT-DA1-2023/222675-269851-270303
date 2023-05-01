@@ -39,7 +39,7 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool TryToAddAfigure(String clientName, string figureName, int figureRadius)
+        public bool TryToAddAfigure(String clientName, string figureName, decimal figureRadius)
         {
             Client client=getClientGivenAName(clientName);
             if (alreadyExistsThisFigure(clientName, figureName)) 
@@ -63,7 +63,7 @@ namespace Render3D.BackEnd
             _dataWarehouse.Clients.Add(client);
         }
 
-        private void transferFigureForCreation(Client client, String figureName, int figureRadius)
+        private void transferFigureForCreation(Client client, String figureName, decimal figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);

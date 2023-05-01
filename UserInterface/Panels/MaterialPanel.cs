@@ -19,22 +19,7 @@ namespace Render3D.UserInterface.Panels
             _client= clientName;
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMaterialName_TextChanged(object sender, EventArgs e)
+        private void btnCreateFigure_Click(object sender, EventArgs e)
         {
 
         }
