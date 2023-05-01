@@ -12,11 +12,14 @@ namespace Render3D.UnitTest
         private Vector3D allOnes;
         private Vector3D allTwos;
         private Vector3D oneTwoThree;
-        
         private int validFov = 30;
        
         private const int smallestValidFov = 0;
         private const int largestValidFov = 160;
+        private const double validAspectRatio = 1;
+        private const double validWidthHalf = 1;
+        private const double validHeightHalf = 1;
+
 
         private int tooSmallFov = -1;
         private int tooLargeFov = 161;
@@ -29,6 +32,38 @@ namespace Render3D.UnitTest
             allTwos = new Vector3D(2, 2, 2);
             oneTwoThree = new Vector3D(1, 2, 3);
         }
+
+        [TestMethod]
+        public void givenAValidWidthHalfItAssingsToTheCamara()
+        {
+            cameraSample.WidthHalf = validWidthHalf;
+            Assert.AreEqual(validWidthHalf, cameraSample.WidthHalf);
+        }
+
+        [TestMethod]
+        public void grivenAValidFovItCalculatesThetaToAssingsTheCamera()
+        {
+            double theta = validFov * Math.PI / 180;
+            cameraSample.Theta = theta;
+            Assert.AreEqual(theta, cameraSample.Theta);
+        }
+
+        [TestMethod]
+        public void givenAValidHeightHalfItAssingsToTheCamara()
+        {
+            cameraSample.HeightHalf = validHeightHalf;
+            Assert.AreEqual(validHeightHalf, cameraSample.HeightHalf);
+        }
+
+
+
+        [TestMethod]
+        public void givenAValidAspectRatioItAssingsToTheCamera()
+        {
+            cameraSample.AspectRatio = validAspectRatio;
+            Assert.AreEqual(validAspectRatio, cameraSample.AspectRatio);
+        }
+
 
         [TestMethod]
         public void givenAVectorItAssignsItAsLookFrom()
