@@ -135,7 +135,19 @@ namespace Render3D.BackEnd
 
         public bool ifPosibleDeleteFigure(string clientName, string figureName)
         {
-            return true;
+            Client client= getClientGivenAName(clientName);
+            int iterator = 0;
+            foreach (Figure figure in _dataWarehouse.Figures)
+            {
+                if (figure.Name == figureName && figure.Client.Equals(client))
+                {
+                    _dataWarehouse.Figures.RemoveAt(iterator);
+                    return true;
+                }
+                iterator++;
+            }
+            
+            return false;
         }
     }
 }

@@ -82,7 +82,8 @@ namespace Render3D.UserInterface
         }
         public void refreshLists()
         {
-
+            showObjectCreationPanel(new FigurePanel());
+            showFigureList();
         }
         public bool figureNameHasBeenChanged(String oldName,string newName)
         {
