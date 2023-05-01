@@ -13,13 +13,9 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class ModelsPanel : Form
     {
-        private String _client;
-        private DataTransferObject _dataTransferObject;
-        public ModelsPanel(String clientName,DataTransferObject dto)
+        public ModelsPanel()
         {
             InitializeComponent();
-            _client= clientName;
-            _dataTransferObject= dto;
         }
 
         private void label1_Click(object sender, EventArgs e)

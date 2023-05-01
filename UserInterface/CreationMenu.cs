@@ -19,7 +19,6 @@ namespace Render3D.UserInterface
     public partial class CreationMenu : Form
     {
         private String show = "figure";
-        private String _client;
         private DataTransferObject _dataTransferObject;
         private Render3DIU render;
         public CreationMenu()
@@ -41,7 +40,7 @@ namespace Render3D.UserInterface
 
         private void button2_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new MaterialPanel(_client));
+            showObjectCreationPanel(new MaterialPanel());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -56,7 +55,7 @@ namespace Render3D.UserInterface
 
         private void btnModel_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new ModelsPanel(_client,_dataTransferObject));
+            showObjectCreationPanel(new ModelsPanel());
         }
 
         private void showObjectCreationPanel(object formSon)

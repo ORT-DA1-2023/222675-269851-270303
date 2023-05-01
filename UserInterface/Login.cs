@@ -25,7 +25,7 @@ namespace Render3D.UserInterface
         {
             String clientName= txtClientName.Text;
             String clientPassword= txtClientPassword.Text;
-            if (render.dataTransferObject.AlreadyExistsThisClient(clientName,clientPassword)) 
+            if (render.dataTransferObject.alreadyExistsThisClient(clientName,clientPassword)) 
             {
                 txtClientName.Text = "";
                 txtClientPassword.Text = "";

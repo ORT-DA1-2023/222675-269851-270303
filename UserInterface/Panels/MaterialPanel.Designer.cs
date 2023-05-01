@@ -50,7 +50,7 @@
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 582);
-            this.btnCreateFigure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCreateFigure.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(505, 96);
             this.btnCreateFigure.TabIndex = 11;
@@ -65,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaterialName.Location = new System.Drawing.Point(184, 124);
-            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaterialName.Name = "txtMaterialName";
             this.txtMaterialName.Size = new System.Drawing.Size(265, 34);
             this.txtMaterialName.TabIndex = 9;
@@ -201,9 +201,10 @@
             this.ClientSize = new System.Drawing.Size(507, 714);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MaterialPanel";
             this.Text = "Material";
+            this.Shown += new System.EventHandler(this.variablesInitialize);
             ((System.ComponentModel.ISupportInitialize)(this.nrRedColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrGreenColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrBlueColor)).EndInit();

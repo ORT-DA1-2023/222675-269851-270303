@@ -8,20 +8,21 @@ using Render3D.BackEnd.Materials;
 
 namespace Render3D.UnitTest
 {
-    
+
     [TestClass]
     public class DataTransferObjectTest
     {
         public DataTransferObject dto;
         Client clientSample;
         Figure figureSample;
+        int[] colors = {0,0,0};
 
         [TestInitialize]
         public void initialize()
         {
             dto = new DataTransferObject();
-            clientSample = new Client() {Name= "clientSample1", Password="PasswordSample1" };
-            figureSample = new Sphere() { Client= clientSample,Name = "figureSample1", Radius = 5 };
+            clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
+            figureSample = new Sphere() { Client = clientSample, Name = "figureSample1", Radius = 5 };
         }
         [TestMethod]
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
@@ -42,13 +43,13 @@ namespace Render3D.UnitTest
         public void givenAClientReturnsTrueIfitAlreadyExists()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(dto.AlreadyExistsThisClient("clientSample1", "PasswordExample1"));
+            Assert.IsTrue(dto.alreadyExistsThisClient("clientSample1", "PasswordExample1"));
         }
         [TestMethod]
         public void givenAClientReturnsFalseIfitAlreadyExists()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsFalse(dto.AlreadyExistsThisClient("clientSample2", "PasswordExample1"));
+            Assert.IsFalse(dto.alreadyExistsThisClient("clientSample2", "PasswordExample1"));
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-            Assert.IsTrue(dto.TryToAddAfigure("clientSample1", "figureSample1", 5));
+            Assert.IsTrue(dto.tryToAddAfigure("clientSample1", "figureSample1", 5));
             Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
             Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWareHouse.Figures[0]).Radius);
             Assert.IsTrue((figureSample.Client).Equals(dto.DataWareHouse.Figures[0].Client));
@@ -68,7 +69,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
-            Assert.IsFalse(dto.TryToAddAfigure("clientSample1", "figureSample1", -5));
+            Assert.IsFalse(dto.tryToAddAfigure("clientSample1", "figureSample1", -5));
             Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
         }
         [TestMethod]
@@ -96,22 +97,22 @@ namespace Render3D.UnitTest
         public void givenANameReturnsTrueIfalreadyExistsThisFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
         [TestMethod]
-        public void givenANameReturnsFalseIfDoesntalreadyExistsThisFigure()
+        public void givenANameReturnsFalseIfDoesntExistsThisFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
         }
         [TestMethod]
         public void givenANewNameItChanges()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(dto.ifPosibleChangeFigureName("clientSample1","figureSample1", "figureSample2"));
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
+            Assert.IsTrue(dto.ifPosibleChangeFigureName("clientSample1", "figureSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
@@ -119,8 +120,8 @@ namespace Render3D.UnitTest
         public void givenANewNameItDoesNotChangeIt()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
-            dto.TryToAddAfigure("clientSample1", "figureSample2", 1);
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
+            dto.tryToAddAfigure("clientSample1", "figureSample2", 1);
             Assert.IsFalse(dto.ifPosibleChangeFigureName("clientSample1", "clientSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
@@ -129,7 +130,7 @@ namespace Render3D.UnitTest
         public void givenANameDeletesTheFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);          
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
             Assert.IsTrue(dto.ifPosibleDeleteFigure("clientSample1", "figureSample1"));
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
@@ -137,9 +138,24 @@ namespace Render3D.UnitTest
         public void givenANameDoesNotDeleteTheFigure()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            dto.TryToAddAfigure("clientSample1", "figureSample1", 1);
+            dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
             Assert.IsFalse(dto.ifPosibleDeleteFigure("clientSample1", "figureSample3"));
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
+        }
+
+        [TestMethod]
+        public void givenANameReturnsTrueIfalreadyExistsThisMaterial()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
+            Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
+        }
+        [TestMethod]
+        public void givenANameReturnsFalseIfDoesntExistsThisMatrial()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            Assert.IsTrue(dto.tryToAddAMaterial("clientSample1", "materialSample1", colors));
+            Assert.IsFalse(dto.alreadyExistsThisMaterial("clientSample1", "materialSample2"));
         }
     }
 }

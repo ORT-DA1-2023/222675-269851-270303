@@ -12,16 +12,29 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class MaterialPanel : Form
     {
-        private String _client;
-        public MaterialPanel(String clientName)
+        private int rgbLength =3;
+        private CreationMenu creation;
+        private Render3DIU render;
+        public MaterialPanel()
         {
             InitializeComponent();
-            _client= clientName;
+            
         }
 
         private void btnCreateFigure_Click(object sender, EventArgs e)
         {
+            String materialName= txtMaterialName.Text;
+            int[] materialColors= new int[rgbLength];
+            materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
+            materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
+            materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
+            render.dataTransferObject.tryToAddAMaterial(render.clientName,materialName, materialColors);
+        }
 
+        private void variablesInitialize(object sender, EventArgs e)
+        {
+            creation = ((CreationMenu)this.Parent.Parent);
+            render = ((Render3DIU)creation.Parent.Parent);
         }
     }
 }

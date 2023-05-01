@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd
 {
@@ -13,7 +14,7 @@ namespace Render3D.BackEnd
 
         public DataWarehouse DataWareHouse { get => _dataWarehouse; }
 
-        public bool AlreadyExistsThisClient(string clientName, string clientPassword)
+        public bool alreadyExistsThisClient(string clientName, string clientPassword)
         {
             foreach (Client client in _dataWarehouse.Clients)
             {
@@ -29,7 +30,7 @@ namespace Render3D.BackEnd
         {
             try
             {
-                if (AlreadyExistsThisClient(clientName, clientPassword))
+                if (alreadyExistsThisClient(clientName, clientPassword))
                 {
                     return false;
                 }
@@ -39,7 +40,7 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool TryToAddAfigure(String clientName, string figureName, decimal figureRadius)
+        public bool tryToAddAfigure(String clientName, string figureName, decimal figureRadius)
         {
             Client client=getClientGivenAName(clientName);
             if (alreadyExistsThisFigure(clientName, figureName)) 
@@ -148,6 +149,38 @@ namespace Render3D.BackEnd
             }
             
             return false;
+        }
+
+        public bool tryToAddAMaterial(String clientName,string materialName, int[] materialColors)
+        {
+            Client client =getClientGivenAName(clientName);
+            if (alreadyExistsThisMaterial(clientName, materialName))
+            {
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    transferMaterialForCreation(client, materialName, materialColors);
+                    return true;
+                }catch (Exception e)
+                {
+                    return false;
+                }
+               
+            }
+        }
+
+        public bool alreadyExistsThisMaterial(String clientName, string materialName)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void transferMaterialForCreation(Client client, string materialName, int[] materialColors)
+        {
+           Material material= new LambertianMaterial() { Client =client, Name = materialName, Color=materialColors};
+           _dataWarehouse.Materials.Add(material);
         }
     }
 }
