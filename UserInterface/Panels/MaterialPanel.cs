@@ -29,6 +29,11 @@ namespace Render3D.UserInterface.Panels
             materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
             render.dataTransferObject.tryToAddAMaterial(render.clientName,materialName, materialColors);
+            creation.showMaterialList();
+            txtMaterialName.Text="";
+            nrRedColor.Value = 0;
+            nrGreenColor.Value = 0;
+            nrBlueColor.Value = 0;
         }
 
         private void variablesInitialize(object sender, EventArgs e)

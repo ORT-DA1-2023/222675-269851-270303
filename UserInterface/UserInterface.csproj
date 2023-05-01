@@ -52,6 +52,12 @@
     <Compile Include="Controls\FigureControl.Designer.cs">
       <DependentUpon>FigureControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MaterialControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MaterialControl.Designer.cs">
+      <DependentUpon>MaterialControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Render3DIU.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\FigureControl.resx">
       <DependentUpon>FigureControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MaterialControl.resx">
+      <DependentUpon>MaterialControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Render3DIU.resx">
       <DependentUpon>Render3DIU.cs</DependentUpon>

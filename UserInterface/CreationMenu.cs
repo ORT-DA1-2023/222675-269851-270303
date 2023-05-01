@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 using Render3D.UserInterface.Panels;
 using UserInterface;
 using UserInterface.Controls;
@@ -18,7 +19,6 @@ namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
     {
-        private String show = "figure";
         private DataTransferObject _dataTransferObject;
         private Render3DIU render;
         public CreationMenu()
@@ -35,6 +35,18 @@ namespace Render3D.UserInterface
             {
                 FigureControl figureControl = new FigureControl(figure);
                 flObjectList.Controls.Add(figureControl);
+            }
+        }
+
+        public void showMaterialList()
+        {
+            flObjectList.Controls.Clear();
+            DataWarehouse listConteiners = render.dataTransferObject.DataWareHouse;
+            List<Material> materialList = listConteiners.Materials;
+            foreach (Material material in materialList)
+            {
+                MaterialControl materialControl = new MaterialControl(material);
+                flObjectList.Controls.Add(materialControl);
             }
         }
 
