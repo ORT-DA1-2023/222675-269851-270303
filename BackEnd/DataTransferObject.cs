@@ -40,7 +40,7 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool tryToAddAfigure(String clientName, string figureName, decimal figureRadius)
+        public bool tryToAddAFigure(String clientName, string figureName, decimal figureRadius)
         {
             Client client=getClientGivenAName(clientName);
             if (alreadyExistsThisFigure(clientName, figureName)) 
@@ -206,6 +206,11 @@ namespace Render3D.BackEnd
                 }
             }
             return false;
+        }
+
+        public bool ifPosibleDeleteMaterial(string clientName, string materialName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

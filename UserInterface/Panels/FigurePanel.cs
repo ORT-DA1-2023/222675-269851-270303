@@ -30,7 +30,7 @@ namespace Render3D.UserInterface.Panels
             if (tryToParse(figureRadiusString)!=-1)
             {
                 figureRadius = tryToParse(figureRadiusString);
-                render.dataTransferObject.tryToAddAfigure(render.clientName, figureName, figureRadius);
+                render.dataTransferObject.tryToAddAFigure(render.clientName, figureName, figureRadius);
                 creation.showFigureList();
                 lblRadiusNotValid.Text = "";
                 lblNameNotValid.Text = "";

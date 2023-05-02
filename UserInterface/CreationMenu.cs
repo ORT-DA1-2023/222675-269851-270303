@@ -110,5 +110,10 @@ namespace Render3D.UserInterface
         {
             return (render.dataTransferObject.ifPosibleChangeMaterialName(render.clientName, oldName, newName));
         }
+
+        internal bool materialNameHasBeenDeleted(string materialName)
+        {
+            return render.dataTransferObject.ifPosibleDeleteMaterial(render.clientName, materialName);
+        }
     }
 }
