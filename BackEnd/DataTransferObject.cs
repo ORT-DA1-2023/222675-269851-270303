@@ -193,7 +193,19 @@ namespace Render3D.BackEnd
 
         public bool ifPosibleChangeMaterialName(string clientName, string oldName, string newName)
         {
-            throw new NotImplementedException();
+            Client client = getClientGivenAName(clientName);
+            if (!alreadyExistsThisMaterial(clientName, newName))
+            {
+                foreach (Material material in _dataWarehouse.Materials)
+                {
+                    if (material.Name == oldName && material.Client.Equals(client))
+                    {
+                        material.Name = newName;
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
