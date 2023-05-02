@@ -190,5 +190,10 @@ namespace Render3D.BackEnd
            Material material= new LambertianMaterial() { Client =client, Name = materialName, Color=materialColors};
            _dataWarehouse.Materials.Add(material);
         }
+
+        public bool ifPosibleChangeMaterialName(string clientName, string oldName, string newName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

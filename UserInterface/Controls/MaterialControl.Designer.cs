@@ -78,8 +78,11 @@
             this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaterialName.Location = new System.Drawing.Point(107, 19);
             this.txtMaterialName.Name = "txtMaterialName";
+            this.txtMaterialName.ReadOnly = true;
             this.txtMaterialName.Size = new System.Drawing.Size(136, 30);
             this.txtMaterialName.TabIndex = 3;
+            this.txtMaterialName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clientPressEnter);
+            this.txtMaterialName.Leave += new System.EventHandler(this.ClientLeaves);
             // 
             // btnEditMaterialName
             // 

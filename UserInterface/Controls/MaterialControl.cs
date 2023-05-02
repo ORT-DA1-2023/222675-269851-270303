@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd.Materials;
+using Render3D.UserInterface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace UserInterface.Controls
     public partial class MaterialControl : UserControl
     {
         Material material;
+        String oldName;
         public MaterialControl(Material material)
         {
             this.material = material;
@@ -26,7 +28,44 @@ namespace UserInterface.Controls
 
         private void btnEditMaterialName_Click(object sender, EventArgs e)
         {
+            oldName = txtMaterialName.Text;
+            txtMaterialName.ReadOnly = false;
+            txtMaterialName.BackColor = Color.Green;
+        }
 
+
+        
+        private void ClientLeaves(object sender, EventArgs e)
+        {
+            checksForCorrectEdit();
+        }
+
+        private void clientPressEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                checksForCorrectEdit();
+            }
+        }
+        private void checksForCorrectEdit()
+        {
+            txtMaterialName.ReadOnly = true;
+            if (!oldName.Equals(txtMaterialName.Text))
+            {
+                if (((CreationMenu)this.Parent.Parent.Parent).materialNameHasBeenChanged(oldName, txtMaterialName.Text))
+                {
+                    txtMaterialName.BackColor = Color.White;
+                }
+                else
+                {
+                    txtMaterialName.BackColor = Color.Red;
+                }
+            }
+            else
+            {
+                txtMaterialName.BackColor = Color.White;
+            }
         }
     }
 }
