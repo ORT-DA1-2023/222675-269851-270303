@@ -210,7 +210,19 @@ namespace Render3D.BackEnd
 
         public bool ifPosibleDeleteMaterial(string clientName, string materialName)
         {
-            throw new NotImplementedException();
+            Client client = getClientGivenAName(clientName);
+            int iterator = 0;
+            foreach (Material material in _dataWarehouse.Materials)
+            {
+                if (material.Name == materialName && material.Client.Equals(client))
+                {
+                    _dataWarehouse.Materials.RemoveAt(iterator);
+                    return true;
+                }
+                iterator++;
+            }
+
+            return false;
         }
     }
 }

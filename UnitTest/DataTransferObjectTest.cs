@@ -215,8 +215,8 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
-            Assert.IsFalse(dto.ifPosibleDeleteFigure("clientSample1", "materialSample3"));
-            Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
+            Assert.IsFalse(dto.ifPosibleDeleteMaterial("clientSample1", "materialSample3"));
+            Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
         }
     }
 }
