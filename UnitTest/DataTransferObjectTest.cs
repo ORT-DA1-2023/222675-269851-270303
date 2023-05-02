@@ -112,7 +112,7 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample2"));
         }
         [TestMethod]
-        public void givenANewNameItChanges()
+        public void givenANewFigureNameItChanges()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
@@ -121,7 +121,7 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
         [TestMethod]
-        public void givenANewNameItDoesNotChangeIt()
+        public void givenANewFigureNameItDoesNotChange()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAfigure("clientSample1", "figureSample1", 1);
@@ -181,6 +181,25 @@ namespace Render3D.UnitTest
             Assert.IsTrue((dto.DataWareHouse).Materials.Count == 0);
             Assert.IsFalse(dto.tryToAddAMaterial("clientSample1", "materialSample1", invalidColors));
             Assert.IsTrue((dto.DataWareHouse).Materials.Count == 0);
+        }
+        [TestMethod]
+        public void givenANewMaterialNameItChanges()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
+            Assert.IsTrue(dto.ifPosibleChangeMaterialName("clientSample1", "materialSample1", "materialSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample2"));
+            Assert.IsFalse(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
+        }
+        [TestMethod]
+        public void givenANewMaterialNameItDoesNotChange()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
+            dto.tryToAddAMaterial("clientSample1", "materialSample2", colors);
+            Assert.IsFalse(dto.ifPosibleChangeMaterialName("clientSample1", "materialSample1", "materialSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
         }
     }
 }
