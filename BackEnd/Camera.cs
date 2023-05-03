@@ -124,9 +124,9 @@ namespace Render3D.BackEnd
             _vectorW = LookFrom.Substract(LookAt).GetUnit();
             _vectorU = VectorUp.Cross(VectorW).GetUnit();
             _vectorV = VectorW.Cross(VectorU);
-            _corner_lowerleft = LookFrom.Substract(VectorU.Multiply((float)WidthHalf)).Substract(VectorV.Multiply((float)HeightHalf)).Substract(VectorW);
-            _horizontal = VectorU.Multiply((float)WidthHalf * 2);
-            _vertical = VectorV.Multiply((float)HeightHalf * 2);
+            _corner_lowerleft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
+            _horizontal = VectorU.Multiply(WidthHalf * 2);
+            _vertical = VectorV.Multiply(HeightHalf * 2);
         }
 
         public Camera(Vector3D vectorLookFrom,  Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio)
@@ -142,9 +142,9 @@ namespace Render3D.BackEnd
             VectorW = vectorLookFrom.Substract(vectorLookAt).GetUnit();
             VectorU = vectorUp.Cross(VectorW).GetUnit();
             VectorV = VectorW.Cross(VectorU);
-            Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply((float)WidthHalf)).Substract(VectorV.Multiply((float)HeightHalf)).Substract(VectorW);
-            Horizontal = VectorU.Multiply((float)(2 * WidthHalf));
-            Vertical = VectorV.Multiply((float)(2 * HeightHalf));
+            Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
+            Horizontal = VectorU.Multiply((2 * WidthHalf));
+            Vertical = VectorV.Multiply((2 * HeightHalf));
         }
         public int Fov
         {
@@ -174,7 +174,7 @@ namespace Render3D.BackEnd
             return  this.Fov == other.Fov && this.LookFrom.Equals(other.LookFrom) && this.LookAt.Equals(other.LookAt);
         }
 
-        public Ray GetRay(float u, float v)
+        public Ray GetRay(double u, double v)
         {
             Vector3D horizontalPosition = Horizontal.Multiply(u);
             Vector3D verticalPosition = Vertical.Multiply(v);

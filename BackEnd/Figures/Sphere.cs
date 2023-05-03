@@ -8,7 +8,7 @@ namespace Render3D.BackEnd.Figures
 {
     public class Sphere : Figure
     {
-        private float radius;
+        private double radius;
         private String name;
         private Client client;
         private Vector3D position;
@@ -38,7 +38,7 @@ namespace Render3D.BackEnd.Figures
             set => client = value;
         }
 
-        public float Radius
+        public double Radius
         {
             get => radius;
             set
@@ -57,7 +57,7 @@ namespace Render3D.BackEnd.Figures
             position = new Vector3D(0, 0, 0);
         }
 
-        public Sphere(Vector3D position, float radius)
+        public Sphere(Vector3D position, double radius)
         {
             Radius = radius;
             Position = position;
@@ -77,7 +77,7 @@ namespace Render3D.BackEnd.Figures
             }
             else
             {
-                float t = ((float)((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
+                double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
                 Vector3D intersectionPoint = ray.PointAt(t);
                 Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
                 if (t < tMax && t > tMin)
@@ -91,7 +91,7 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
-        private bool IsAValidRadius(float value)
+        private bool IsAValidRadius(double value)
         {
             if (value <= 0)
             {

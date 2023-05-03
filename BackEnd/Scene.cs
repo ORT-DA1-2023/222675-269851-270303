@@ -73,7 +73,14 @@ namespace Render3D.BackEnd
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);
                     Vector3D color = ShootRay(newRay, depth - 1);
                     Vector3D attenuation = hitRecord.Attenuation;
-                    return new Vector3D(color.X * attenuation.X, color.Y * attenuation.Y, color.Z * attenuation.Z);
+                    var  r = attenuation.X * color.X;
+                    var g = attenuation.Y * color.Y;
+                    var b = attenuation.Z * color.Z;
+                    if(b<0)
+                    {
+                        b = 0;
+                    }
+                    return new Vector3D(r, g, b);
                 }
                 else
                 {
@@ -85,8 +92,8 @@ namespace Render3D.BackEnd
                 var vectorDirectionUnit = ray.Direction.GetUnit();
                 var posY = 0.5 * (vectorDirectionUnit.Y + 1);
                 var colorStart = new Vector3D(1, 1, 1);
-                var colorEnd = new Vector3D((float)0.5, (float)0.7, (float)1.0);
-                return colorStart.Multiply((float)(1 - posY)).Add(colorEnd.Multiply((float)posY));
+                var colorEnd = new Vector3D(0.5, 0.7, 1.0);
+                return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
             }
         }
 
@@ -96,7 +103,7 @@ namespace Render3D.BackEnd
             do
             {
                 Random random = new Random();
-                Vector3D vectorTemp = new Vector3D((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+                Vector3D vectorTemp = new Vector3D(0.5, 0.5, 0.5);
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
             } while (vector.SquaredLength() >=1 );
             return vector;

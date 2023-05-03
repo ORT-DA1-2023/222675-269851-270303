@@ -53,9 +53,9 @@ namespace Render3D.UnitTest
         {
 
             graphicMotorSample.ResolutionHeight = 600;
-            graphicMotorSample.PixelSampling = 100;
-            graphicMotorSample.MaximumDepth = 50;
-            Vector3D LookAt = new Vector3D(0, (float)0.5, -2);
+            graphicMotorSample.PixelSampling = 1;
+            graphicMotorSample.MaximumDepth = 1;
+            Vector3D LookAt = new Vector3D(0, 0.5, -2);
             Vector3D VectorUp = new Vector3D(0, 1, 0);
             Vector3D LookFrom = new Vector3D(4, 2, 8);
 
@@ -63,14 +63,14 @@ namespace Render3D.UnitTest
 
 
             LambertianMaterial lm = new LambertianMaterial();
-            lm.Color = new Vector3D((float)0.1, (float)0.2, (float)0.5);
-            Sphere sph = new Sphere(new Vector3D(0, (float)0.5, -2), (float)0.5);
+            lm.Color = new Vector3D(0.1, 0.2, 0.5);
+            Sphere sph = new Sphere(new Vector3D(0, 0.5, -2), 0.5);
             Model md1 = new Model();
             md1.Material = lm;
             md1.Figure = sph;
 
             LambertianMaterial lm2 = new LambertianMaterial();
-            lm2.Color = new Vector3D((float)0.7, (float)0.7, (float)0.1);
+            lm2.Color = new Vector3D(0.7, 0.7, 0.1);
             Sphere tierra = new Sphere(new Vector3D(0, -2000, -1), 2000);
             Model laTIerra = new Model();
             laTIerra.Material = lm2;

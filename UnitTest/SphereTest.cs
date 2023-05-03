@@ -13,7 +13,7 @@ namespace Render3D.UnitTest
         private Client clientSample;
         private String validSphereName = "Name of the sphere";
         private Sphere newSphericalFigure;
-        private float validRadius = 2;
+        private double validRadius = 2;
         private Vector3D positionSample = new Vector3D(0, 0, 0);
         private Vector3D colorSample = new Vector3D(255, 1, 66);
 

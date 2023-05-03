@@ -37,7 +37,7 @@ namespace Render3D.BackEnd
         public static bool IsANumberInRange(int num, int min, int max) {
             return num>=min && num<=max;
         }
-        public static bool IsANumberInRange(float num, float min, float max)
+        public static bool IsANumberInRange(double num, double min, double max)
         {
             return num >= min && num <= max;
         }
