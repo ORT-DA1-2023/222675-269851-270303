@@ -53,8 +53,8 @@ namespace Render3D.UnitTest
         {
 
             graphicMotorSample.ResolutionHeight = 600;
-            graphicMotorSample.PixelSampling = 1;
-            graphicMotorSample.MaximumDepth = 1;
+            graphicMotorSample.PixelSampling = 100;
+            graphicMotorSample.MaximumDepth = 50;
             Vector3D LookAt = new Vector3D(0, 0.5, -2);
             Vector3D VectorUp = new Vector3D(0, 1, 0);
             Vector3D LookFrom = new Vector3D(4, 2, 8);

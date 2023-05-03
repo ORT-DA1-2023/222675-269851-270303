@@ -76,10 +76,7 @@ namespace Render3D.BackEnd
                     var  r = attenuation.X * color.X;
                     var g = attenuation.Y * color.Y;
                     var b = attenuation.Z * color.Z;
-                    if(b<0)
-                    {
-                        b = 0;
-                    }
+                   
                     return new Vector3D(r, g, b);
                 }
                 else
@@ -103,7 +100,7 @@ namespace Render3D.BackEnd
             do
             {
                 Random random = new Random();
-                Vector3D vectorTemp = new Vector3D(0.5, 0.5, 0.5);
+                Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
             } while (vector.SquaredLength() >=1 );
             return vector;

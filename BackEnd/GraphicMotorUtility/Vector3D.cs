@@ -10,10 +10,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Vector3D(double v1, double v2, double v3)
         {
-            if(v1 is double.NaN)
-            {
-                Console.WriteLine("AA");
-            }
+           
             X = v1;
             Y = v2;
             Z = v3;
@@ -44,10 +41,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public int Green()
         {
             var green = Math.Abs(Math.Round(Y * 255));
-            if((int)green < 0)
-            {
-                green = 255;
-            }
+            
 
              return green > 255 ? 255 : (int) green; 
         }

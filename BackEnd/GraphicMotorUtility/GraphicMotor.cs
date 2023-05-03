@@ -135,8 +135,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double randomNumber = random.NextDouble();
                         double randomNumber2 = random.NextDouble();
 
-                        double u = (column + 0.5) / WidthResolution();
-                        double v = (row + 0.5) / ResolutionHeight;
+                        double u = (column + randomNumber) / WidthResolution();
+                        double v = (row + randomNumber2) / ResolutionHeight;
                         Ray ray = sceneSample.Camera.GetRay(u, v);
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
                     }
