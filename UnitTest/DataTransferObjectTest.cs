@@ -30,17 +30,17 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
         {
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Clients.Count == 0);
             Assert.IsTrue(dto.ifPosibleSignIn("clientSample1", "PasswordExample1"));
-            Assert.IsTrue(clientSample.Equals((dto.DataWareHouse).Clients[0]));
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 1);
+            Assert.IsTrue(clientSample.Equals((dto.DataWarehouse).Clients[0]));
+            Assert.IsTrue((dto.DataWarehouse).Clients.Count == 1);
         }
         [TestMethod]
         public void givenANewWrongClientReturnsFalseAfterTryingToAddItToTheList()
         {
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Clients.Count == 0);
             Assert.IsFalse(dto.ifPosibleSignIn("", ""));
-            Assert.IsTrue((dto.DataWareHouse).Clients.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Clients.Count == 0);
         }
 
         [TestMethod]
@@ -60,21 +60,21 @@ namespace Render3D.UnitTest
         public void givenANewFigureTrysToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Figures.Count == 0);
             Assert.IsTrue(dto.tryToAddAFigure("clientSample1", "figureSample1", 5));
-            Assert.AreEqual(figureSample.Name, dto.DataWareHouse.Figures[0].Name);
-            Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWareHouse.Figures[0]).Radius);
-            Assert.IsTrue((figureSample.Client).Equals(dto.DataWareHouse.Figures[0].Client));
-            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 1);
+            Assert.AreEqual(figureSample.Name, dto.DataWarehouse.Figures[0].Name);
+            Assert.AreEqual(((Sphere)figureSample).Radius, ((Sphere)dto.DataWarehouse.Figures[0]).Radius);
+            Assert.IsTrue((figureSample.Client).Equals(dto.DataWarehouse.Figures[0].Client));
+            Assert.IsTrue((dto.DataWarehouse).Figures.Count == 1);
         }
 
         [TestMethod]
         public void givenANewWrongFigureFailsTryingToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Figures.Count == 0);
             Assert.IsFalse(dto.tryToAddAFigure("clientSample1", "figureSample1", -5));
-            Assert.IsTrue((dto.DataWareHouse).Figures.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Figures.Count == 0);
         }
         [TestMethod]
         public void givenANameChecksIfIsValid()
@@ -166,21 +166,21 @@ namespace Render3D.UnitTest
         public void givenANewMaterialTrysToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((dto.DataWareHouse).Materials.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Materials.Count == 0);
             Assert.IsTrue(dto.tryToAddAMaterial("clientSample1", "materialSample1", colors));
-            Assert.AreEqual(materialSample.Name, dto.DataWareHouse.Materials[0].Name);
-            Assert.AreEqual(((LambertianMaterial)materialSample).Color, ((LambertianMaterial)dto.DataWareHouse.Materials[0]).Color);
-            Assert.IsTrue((materialSample.Client).Equals(dto.DataWareHouse.Materials[0].Client));
-            Assert.IsTrue((dto.DataWareHouse).Materials.Count == 1);
+            Assert.AreEqual(materialSample.Name, dto.DataWarehouse.Materials[0].Name);
+            Assert.AreEqual(((LambertianMaterial)materialSample).Color, ((LambertianMaterial)dto.DataWarehouse.Materials[0]).Color);
+            Assert.IsTrue((materialSample.Client).Equals(dto.DataWarehouse.Materials[0].Client));
+            Assert.IsTrue((dto.DataWarehouse).Materials.Count == 1);
         }
 
         [TestMethod]
         public void givenANewWrongMaterialFailsTryingToAddItToTheList()
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((dto.DataWareHouse).Materials.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Materials.Count == 0);
             Assert.IsFalse(dto.tryToAddAMaterial("clientSample1", "materialSample1", invalidColors));
-            Assert.IsTrue((dto.DataWareHouse).Materials.Count == 0);
+            Assert.IsTrue((dto.DataWarehouse).Materials.Count == 0);
         }
         [TestMethod]
         public void givenANewMaterialNameItChanges()

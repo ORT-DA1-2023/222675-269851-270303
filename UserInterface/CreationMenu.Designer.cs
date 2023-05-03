@@ -123,7 +123,7 @@
             this.btnMaterial.TabIndex = 2;
             this.btnMaterial.Text = "Materials!";
             this.btnMaterial.UseVisualStyleBackColor = true;
-            this.btnMaterial.Click += new System.EventHandler(this.button2_Click);
+            this.btnMaterial.Click += new System.EventHandler(this.btnMaterial_Click);
             // 
             // btnFigure
             // 

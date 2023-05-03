@@ -72,7 +72,7 @@ namespace UserInterface.Controls
         {
             if (((CreationMenu)this.Parent.Parent.Parent).materialNameHasBeenDeleted(txtMaterialName.Text))
             {
-                ((CreationMenu)this.Parent.Parent.Parent).refreshLists();
+                ((CreationMenu)this.Parent.Parent.Parent).refresh("Material");
             }
         }
     }

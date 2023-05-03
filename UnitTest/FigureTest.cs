@@ -62,6 +62,12 @@ namespace Render3D.UnitTest
            figure1.Name="";
         }
 
+        [TestMethod]
+        public void givenAFigureReturnsAString()
+        {
+            Assert.AreEqual(figure1.ToString(), figure1Name);
+        }
+
         /*   [TestMethod]
            public void givenAFigureAndAClientItAssignsTheFigureToTheClient()
            {

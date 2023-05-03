@@ -12,7 +12,7 @@ namespace Render3D.BackEnd
     {
         private DataWarehouse _dataWarehouse = new DataWarehouse();
 
-        public DataWarehouse DataWareHouse { get => _dataWarehouse; }
+        public DataWarehouse DataWarehouse { get => _dataWarehouse; }
 
         public bool alreadyExistsThisClient(string clientName, string clientPassword)
         {

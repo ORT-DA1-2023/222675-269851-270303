@@ -29,7 +29,7 @@ namespace Render3D.UserInterface
         public void showFigureList()
         {
             flObjectList.Controls.Clear();
-            DataWarehouse listConteiners = render.dataTransferObject.DataWareHouse;
+            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
             List<Figure> figureList = listConteiners.Figures;
             foreach (Sphere figure in figureList)
             {
@@ -41,7 +41,7 @@ namespace Render3D.UserInterface
         public void showMaterialList()
         {
             flObjectList.Controls.Clear();
-            DataWarehouse listConteiners = render.dataTransferObject.DataWareHouse;
+            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
             List<Material> materialList = listConteiners.Materials;
             foreach (Material material in materialList)
             {
@@ -50,24 +50,29 @@ namespace Render3D.UserInterface
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            showObjectCreationPanel(new MaterialPanel());
-        }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             render.userWantsToLogIn();
         }
+        private void btnMaterial_Click(object sender, EventArgs e)
+        {
+            refresh("Material");
+        }
 
         private void btnFigure_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new FigurePanel());
+            refresh("Figure");
         }
 
         private void btnModel_Click(object sender, EventArgs e)
         {
-            showObjectCreationPanel(new ModelsPanel());
+            refresh("Model");
+        }
+
+        private void showModelList()
+        {
+           
         }
 
         private void showObjectCreationPanel(object formSon)
@@ -91,10 +96,24 @@ namespace Render3D.UserInterface
             showObjectCreationPanel(new FigurePanel());
             showFigureList();
         }
-        public void refreshLists()
+        public void refresh(String toShow)
         {
-            showObjectCreationPanel(new FigurePanel());
-            showFigureList();
+            if(toShow=="Material")
+            {
+                showObjectCreationPanel(new MaterialPanel());
+                showMaterialList();
+            }
+            if (toShow == "Figure")
+            {
+                showObjectCreationPanel(new FigurePanel());
+                showFigureList();
+            }
+            if(toShow == "Model")
+            {
+                showObjectCreationPanel(new ModelPanel());
+                showModelList();
+            }
+            
         }
         public bool figureNameHasBeenChanged(String oldName,string newName)
         {

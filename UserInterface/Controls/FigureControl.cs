@@ -75,7 +75,7 @@ namespace UserInterface.Controls
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if(((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenDeleted(txtFigureName.Text)){
-                ((CreationMenu)this.Parent.Parent.Parent).refreshLists();
+                ((CreationMenu)this.Parent.Parent.Parent).refresh("Figure");
             }
 
         }

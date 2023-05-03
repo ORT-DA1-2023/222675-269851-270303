@@ -47,5 +47,11 @@ namespace Render3D.BackEnd.Figures
             }
             return true;
         }
+
+          override
+        public String ToString()
+        {
+            return "";
+        }
     }
 }
