@@ -24,5 +24,10 @@ namespace Render3D.BackEnd.Figures
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name must not start or end with spaces");
             return true;
         }
+        override
+            public String ToString()
+        {
+            return Name;
+        }
     }
 }

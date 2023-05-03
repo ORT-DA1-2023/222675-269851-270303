@@ -101,5 +101,12 @@ namespace Render3D.UnitTest
         {
             newSphericalFigure.Name = validSphereName+" ";
         }
+        [TestMethod]
+        public void givenAFigureReturnsAString()
+        {
+            newSphericalFigure.Name = validSphereName;
+            newSphericalFigure.Radius= validRadius;
+            Assert.AreEqual(newSphericalFigure.ToString(),validSphereName +" "+ validRadius);
+        }
     }
 }

@@ -26,10 +26,10 @@ namespace Render3D.UserInterface.Panels
         {
             String figureName= txtFigureName.Text;
             String figureRadiusString = txtFigureRadius.Text;
-            decimal figureRadius;
+            Double figureRadius;
             if (tryToParse(figureRadiusString)!=-1)
             {
-                figureRadius = tryToParse(figureRadiusString);
+                figureRadius = Convert.ToDouble(figureRadiusString);
                 render.dataTransferObject.tryToAddAFigure(render.clientName, figureName, figureRadius);
                 creation.showFigureList();
                 lblRadiusNotValid.Text = "";

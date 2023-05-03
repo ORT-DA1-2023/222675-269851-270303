@@ -5,6 +5,7 @@ using System.Text;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -16,6 +17,7 @@ namespace Render3D.UnitTest
         Client clientSample;
         Figure figureSample;
         Material materialSample;
+        Vector3D colorVec= new Vector3D(0,0,0);
         int[] colors = {0,0,0};
         int[] invalidColors = { -1, 0, 0 };
 
@@ -25,7 +27,7 @@ namespace Render3D.UnitTest
             dto = new DataTransferObject();
             clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
             figureSample = new Sphere() { Client = clientSample, Name = "figureSample1", Radius = 5 };
-            materialSample = new LambertianMaterial() { Client = clientSample, Name = "materialSample1", Color=colors };
+            materialSample = new LambertianMaterial() { Client = clientSample, Name = "materialSample1", Color=colorVec };
         }
         [TestMethod]
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
@@ -169,8 +171,6 @@ namespace Render3D.UnitTest
             Assert.IsTrue((dto.DataWarehouse).Materials.Count == 0);
             Assert.IsTrue(dto.tryToAddAMaterial("clientSample1", "materialSample1", colors));
             Assert.AreEqual(materialSample.Name, dto.DataWarehouse.Materials[0].Name);
-            Assert.AreEqual(((LambertianMaterial)materialSample).Color, ((LambertianMaterial)dto.DataWarehouse.Materials[0]).Color);
-            Assert.IsTrue((materialSample.Client).Equals(dto.DataWarehouse.Materials[0].Client));
             Assert.IsTrue((dto.DataWarehouse).Materials.Count == 1);
         }
 

@@ -21,9 +21,9 @@ namespace UserInterface.Controls
             this.material = material;
             InitializeComponent();
             txtMaterialName.Text = material.Name;
-            lblRedColor.Text ="Red: "+ ((LambertianMaterial)material).Color[0];
-            lblGreenColor.Text = "Green: " + ((LambertianMaterial)material).Color[1];
-            lblBlueColor.Text = "Blue: " + ((LambertianMaterial)material).Color[2];
+            lblRedColor.Text ="Red: "+ ((LambertianMaterial)material).Color.X;
+            lblGreenColor.Text = "Green: " + ((LambertianMaterial)material).Color.Y;
+            lblBlueColor.Text = "Blue: " + ((LambertianMaterial)material).Color.Z;
         }
 
         private void btnEditMaterialName_Click(object sender, EventArgs e)

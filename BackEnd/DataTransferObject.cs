@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd
@@ -40,7 +41,7 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool tryToAddAFigure(String clientName, string figureName, decimal figureRadius)
+        public bool tryToAddAFigure(String clientName, string figureName, double figureRadius)
         {
             Client client=getClientGivenAName(clientName);
             if (alreadyExistsThisFigure(clientName, figureName)) 
@@ -64,7 +65,7 @@ namespace Render3D.BackEnd
             _dataWarehouse.Clients.Add(client);
         }
 
-        private void transferFigureForCreation(Client client, String figureName, decimal figureRadius)
+        private void transferFigureForCreation(Client client, String figureName, double figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
@@ -187,7 +188,8 @@ namespace Render3D.BackEnd
 
         private void transferMaterialForCreation(Client client, string materialName, int[] materialColors)
         {
-           Material material= new LambertianMaterial() { Client =client, Name = materialName, Color=materialColors};
+            Vector3D color= new Vector3D(materialColors[0], materialColors[1], materialColors[2]);
+           Material material= new LambertianMaterial() { Client =client, Name = materialName, Color=color};
            _dataWarehouse.Materials.Add(material);
         }
 

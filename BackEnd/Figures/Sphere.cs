@@ -103,7 +103,7 @@ namespace Render3D.BackEnd.Figures
           override
         public String ToString()
         {
-            return "";
+            return base.ToString() +" "+ radius;
         }
     }
 }
