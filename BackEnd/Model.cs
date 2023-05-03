@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using System;
 
@@ -30,6 +31,9 @@ namespace Render3D.BackEnd
 
             return true;
         }
+
+      
+
 
         public Figure Figure { get=>_figure; set=>_figure =value; }
         public Client Client { get=>_client; set=>_client =value; }

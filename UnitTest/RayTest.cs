@@ -31,7 +31,7 @@ namespace Render3D.UnitTest
             Assert.AreEqual(defaultRay.Direction.Z, Direction.Z);
         }
         [TestMethod]
-        public void givenARayReturnTheVectorPointedAtAFloat()
+        public void givenARayReturnTheVectorPointedAtAdouble()
         {
             calculatedVectorPointedAt = defaultRay.PointAt(1);
             Assert.AreEqual(calculatedVectorPointedAt.X,expectedVectorPointedAt.X);

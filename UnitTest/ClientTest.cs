@@ -15,7 +15,7 @@ namespace Render3D.UnitTest
         private const String thisNameIsTooShort = "ab";
         private const String thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
         private const String aValidPassword = "4V4lidPassw0rd";
-        private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
+        private const String passwordWithoutNumbers = "ThisPasswordIsNotPerfect";
         private const String passwordWithoutCapitalLetter = "thisp4ssword";
 
 
@@ -101,28 +101,27 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAClientItReturnsTrueIfTheDateTimeIsFixed()
+        public void givenAClientItReturnsTrueIfTheDateTimeIsCorrect()
         {
-           
             DateTimeProvider.Now = DateTime.Now;
             Client client2 = new Client();
-            Assert.AreEqual(DateTime.Now, client2.RegisterDate);
+            Assert.AreEqual(DateTimeProvider.Now, client2.RegisterDate);
         }
 
         [TestMethod]
         public void givenTwoClientsItReturnsTrueIfTheSecondIsCreatedAfterTheFirstOne()
         {
-
-            DateTimeProvider.Now = DateTime.Now;
+            DateTime JanuaryFirst2020 = new DateTime(2020,1,1);
+            DateTime FebruaryFirst2020 = new DateTime(2020, 2, 1);
+            DateTimeProvider.Now = JanuaryFirst2020;
             client1 = new Client();
-            Assert.AreEqual(DateTime.Now, client1.RegisterDate);
-            DateTimeProvider.Reset();
+            Assert.AreEqual(JanuaryFirst2020, client1.RegisterDate);
 
-            DateTimeProvider.Now= DateTime.Now.AddDays(1);
+            DateTimeProvider.Now = FebruaryFirst2020;
             Client client2 = new Client();
 
-            Assert.AreEqual(DateTimeProvider.Now, client2.RegisterDate);
-            Assert.IsTrue(client2.RegisterDate > client1.RegisterDate);
+            Assert.AreEqual(FebruaryFirst2020, client2.RegisterDate);
+ 
          
         }
 
