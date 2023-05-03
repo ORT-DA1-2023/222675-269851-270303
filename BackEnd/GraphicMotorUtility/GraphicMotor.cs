@@ -79,8 +79,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            //return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
-            return ResolutionHeight;
+            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
 
@@ -131,14 +130,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     Vector3D pixelColor = new Vector3D(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
-                        
-                        double randomNumber = random.NextDouble();
-                        double randomNumber2 = random.NextDouble();
-
-                        double u = (column + randomNumber) / WidthResolution();
-                        double v = (row + randomNumber2) / ResolutionHeight;
+                       
+                        double u = (column + random.NextDouble()) / WidthResolution();
+                        double v = (row + random.NextDouble()) / ResolutionHeight;
                         Ray ray = sceneSample.Camera.GetRay(u, v);
-                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
+                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
                    SavePixel(row, column, pixelColor, matrix);

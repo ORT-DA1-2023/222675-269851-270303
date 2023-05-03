@@ -49,12 +49,12 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void pribando()
+        public void TestTemporaneoRender()
         {
 
             graphicMotorSample.ResolutionHeight = 600;
-            graphicMotorSample.PixelSampling = 100;
-            graphicMotorSample.MaximumDepth = 50;
+            graphicMotorSample.PixelSampling = 50;
+            graphicMotorSample.MaximumDepth = 20;
             Vector3D LookAt = new Vector3D(0, 0.5, -2);
             Vector3D VectorUp = new Vector3D(0, 1, 0);
             Vector3D LookFrom = new Vector3D(4, 2, 8);
@@ -69,6 +69,8 @@ namespace Render3D.UnitTest
             md1.Material = lm;
             md1.Figure = sph;
 
+
+
             LambertianMaterial lm2 = new LambertianMaterial();
             lm2.Color = new Vector3D(0.7, 0.7, 0.1);
             Sphere tierra = new Sphere(new Vector3D(0, -2000, -1), 2000);
@@ -76,10 +78,29 @@ namespace Render3D.UnitTest
             laTIerra.Material = lm2;
             laTIerra.Figure = tierra;
 
+            LambertianMaterial lm3 = new LambertianMaterial();
+            lm3.Color = new Vector3D(0.8, 0.2, 0.5);
+            Sphere sph2 = new Sphere(new Vector3D(-1, 0.5, -2), 0.5);
+            Model md2 = new Model();
+            md2.Material = lm3;
+            md2.Figure = sph2;
+
+            LambertianMaterial lm4 = new LambertianMaterial();
+            lm4.Color = new Vector3D(0.8, 0.25, 0.5);
+            Sphere sph3 = new Sphere(new Vector3D(-1, 2, -10), 2);
+            Model md3 = new Model();
+            md3.Material = lm4;
+            md3.Figure = sph3;
+
+
             Scene scene = new Scene();
             scene.Camera = cam;
             scene.PositionedModels.Add(md1);
             scene.PositionedModels.Add(laTIerra);
+            scene.PositionedModels.Add(md2);
+            scene.PositionedModels.Add(md3);
+
+
 
             Assert.AreEqual(graphicMotorSample.Render(scene), null);
 

@@ -34,22 +34,18 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         }
         public int Red()
         {
-            var red = Math.Abs(Math.Round(X * 255));
-            return red > 255 ? 255 : (int)red; 
+           return (int)Math.Abs(Math.Round(X * 255));
         }
 
         public int Green()
         {
-            var green = Math.Abs(Math.Round(Y * 255));
-            
-
-             return green > 255 ? 255 : (int) green; 
+           return (int)Math.Abs(Math.Round(Y * 255));
+          
         }
 
         public int Blue()
         {
-            var blue = Math.Abs(Math.Round(Z * 255));
-            return blue>255 ? 255 :(int) blue;  
+            return (int)Math.Abs(Math.Round(Z * 255));
         }
         public Vector3D Add(Vector3D vector3d)
         {

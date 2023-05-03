@@ -50,7 +50,7 @@ namespace Render3D.BackEnd
             private set => _lastModificationDate = value;
         }
 
-        public Vector3D ShootRay(Ray ray, int depth)
+        public Vector3D ShootRay(Ray ray, int depth, Random random)
         {
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
@@ -68,10 +68,10 @@ namespace Render3D.BackEnd
                 if (depth > 0)
                 {
 
-                    Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
+                    Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere(random));
                     Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);
-                    Vector3D color = ShootRay(newRay, depth - 1);
+                    Vector3D color = ShootRay(newRay, depth - 1, random);
                     Vector3D attenuation = hitRecord.Attenuation;
                     var  r = attenuation.X * color.X;
                     var g = attenuation.Y * color.Y;
@@ -94,12 +94,12 @@ namespace Render3D.BackEnd
             }
         }
 
-        private Vector3D GetRandomInUnitSphere()
+        private Vector3D GetRandomInUnitSphere(Random random)
         {
             Vector3D vector;
             do
             {
-                Random random = new Random();
+               //Random random = new Random();
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
             } while (vector.SquaredLength() >=1 );
