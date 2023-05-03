@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -12,7 +13,14 @@ namespace Render3D.UnitTest
         private Client clientSample;
         private String validSphereName = "Name of the sphere";
         private Sphere newSphericalFigure;
-        private Decimal validRadius = 2;
+        private double validRadius = 2;
+        private Vector3D positionSample = new Vector3D(0, 0, 0);
+        private Vector3D colorSample = new Vector3D(255, 1, 66);
+
+        private double moduleMaxSample;
+        private double moduleMinSample;
+        private Ray rayIntersection;
+        private HitRecord3D hitRecord;
 
 
         [TestInitialize]
@@ -21,6 +29,27 @@ namespace Render3D.UnitTest
             clientSample = new Client(){Name = "client1Name"};
 
             newSphericalFigure = new Sphere();
+        }
+
+        [TestMethod]
+        public void givenAValidVectorItAssignsItToTheFigure()
+        {
+            newSphericalFigure.Position = positionSample;
+            Assert.AreEqual(positionSample, newSphericalFigure.Position);
+
+        }
+
+
+        [TestMethod]
+        public void givenAValidModuleAnd2VectorItReturnsAHitRecord()
+        {
+            rayIntersection = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
+            moduleMaxSample = 0;
+            moduleMinSample = 0;
+            hitRecord = new HitRecord3D();
+            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
+           
+
         }
 
         [TestMethod]
