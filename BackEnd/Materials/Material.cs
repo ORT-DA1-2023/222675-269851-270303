@@ -14,8 +14,14 @@ namespace Render3D.BackEnd.Materials
         private Client _client;
         private Vector3D _color;
         public abstract String Name { get; set; }
-        public abstract Client Client { get; set;  } 
-        
+        public abstract Client Client { get; set; }
+
         public abstract Vector3D Color { get; set; }
+
+        override
+            public String ToString()
+        {
+            return Name;
+        }
     }
 }

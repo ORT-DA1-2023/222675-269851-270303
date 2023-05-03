@@ -83,5 +83,13 @@ namespace Render3D.UnitTest
             Assert.AreEqual(materialSample.Client, clientSample);
         }
 
+        [TestMethod]
+        public void givenAMaterialReturnsAString()
+        {
+            materialSample.Name = validMaterialName;
+            materialSample.Color = validColor;
+            Assert.AreEqual (materialSample.ToString(), validMaterialName+ " ("+ validColor.X+ ","+validColor.Y+","+validColor.Z+")");
+        }
+
     }
 }

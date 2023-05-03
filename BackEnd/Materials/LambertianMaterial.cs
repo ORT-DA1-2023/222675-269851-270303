@@ -58,6 +58,10 @@ namespace Render3D.BackEnd.Materials
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
             return true;
         }
-
+        override
+            public String ToString()
+        {
+            return base.ToString()+ " ("+ color.X +","+color.Y +","+color.Z+")";    
+        }
     }
 }

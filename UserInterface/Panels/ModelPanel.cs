@@ -35,6 +35,10 @@ namespace Render3D.UserInterface.Panels
             {
                 lstFigure.Items.Add(figure);
             }
+            foreach (Material material in materialList) 
+            { 
+                lstMaterial.Items.Add(material);
+            }
 
         }
 
