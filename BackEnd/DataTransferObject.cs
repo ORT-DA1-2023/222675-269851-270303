@@ -249,7 +249,15 @@ namespace Render3D.BackEnd
 
         public bool alreadyExistsThisModel(string clientName, string modelName)
         {
-            throw new NotImplementedException();
+            Client client = getClientGivenAName(clientName);
+            foreach (Model model in _dataWarehouse.Models)
+            {
+                if (model.Name == modelName && model.Client.Equals(client))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void tryToAddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
