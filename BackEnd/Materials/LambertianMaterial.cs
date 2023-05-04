@@ -49,12 +49,5 @@ namespace Render3D.BackEnd.Materials
           return true;
         }
 
-        private bool IsAValidName(string value)
-        {
-            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name must not be empty");
-            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
-            return true;
-        }
-
     }
 }

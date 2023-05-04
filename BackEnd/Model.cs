@@ -12,8 +12,9 @@ namespace Render3D.BackEnd
         private Figure _figure;
         private Client _client;
         private Material _material;
-        private Bitmap preview;
+        private Bitmap _preview;
 
+        public Client Client { get => _client; set => _client = value; }
 
         public string Name { 
             get=>_name;
@@ -26,31 +27,26 @@ namespace Render3D.BackEnd
             } 
         }
 
+        public Figure Figure { get => _figure; set => _figure = value; }
+
         public Bitmap Preview
         {
-            get=>preview;
+            get=>_preview;
             set
             {
                 if (value != null)
                 {
-                    preview = value;
+                    _preview = value;
                 }
             }
         }
+        public Material Material { get => _material; set => _material = value; }
 
         private bool IsAValidName(string Name)
         {
             if(HelperValidator.IsAnEmptyString(Name))throw new BackEndException("Name must not be empty");
             if(HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
-
             return true;
-        }
-
-      
-
-
-        public Figure Figure { get=>_figure; set=>_figure =value; }
-        public Client Client { get=>_client; set=>_client =value; }
-        public Material Material { get=>_material; set=>_material =value; }
+        }   
     }
 }

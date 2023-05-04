@@ -50,10 +50,10 @@ namespace Render3D.UnitTest
             Assert.AreNotEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
-     /*   [TestMethod]
+        [TestMethod]
         public void TestTemporaneoRender()
         {
-
+           /*
             graphicMotorSample.ResolutionHeight = 600;
             graphicMotorSample.PixelSampling = 50;
             graphicMotorSample.MaximumDepth = 20;
@@ -105,10 +105,10 @@ namespace Render3D.UnitTest
 
 
             Assert.AreNotEqual(graphicMotorSample.Render(scene), null);
+           */
 
 
-
-        }*/
+        }
 
 
 

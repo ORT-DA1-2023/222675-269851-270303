@@ -12,10 +12,13 @@ namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private DateTime _registerDate;
-        private DateTime _lastModificationDate;
         private Client _client;
         private String _name;
+
+        private DateTime _registerDate;
+        private DateTime _lastModificationDate;
+        private DateTime? _lastRenderizationDate = null;
+
         private List<Model> _positionedModels;
         private Camera _camera;
         private Bitmap _preview;
@@ -24,6 +27,7 @@ namespace Render3D.BackEnd
         {
             _camera = new Camera();
             _registerDate = DateTimeProvider.Now;
+            _lastModificationDate = DateTimeProvider.Now;
             _positionedModels = new List<Model>();
         }
 
@@ -42,14 +46,25 @@ namespace Render3D.BackEnd
             }
         }
 
-      
-        public List<Model> PositionedModels { get => _positionedModels; set => _positionedModels = value; }
-
+        public DateTime RegisterDate
+        {
+            get => _registerDate;
+        }
         public DateTime LastModificationDate
         {
             get => _lastModificationDate;
             private set => _lastModificationDate = value;
         }
+        public DateTime? LastRenderizationDate
+        {
+            get => _lastRenderizationDate;
+            private set => _lastRenderizationDate = value;
+        }
+
+        public List<Model> PositionedModels { get => _positionedModels; set => _positionedModels = value; }
+
+        public Bitmap Preview { get => _preview; set => _preview = value; }
+
 
         public Vector3D ShootRay(Ray ray, int depth, Random random)
         {
@@ -59,12 +74,12 @@ namespace Render3D.BackEnd
             {
                 HitRecord3D hit = element.Figure.IsFigureHit(ray, 0.001, moduleMax, ((LambertianMaterial)element.Material).Color);
                 if (hit != null)
-                { 
+                {
                     hitRecord = hit;
-                    moduleMax = hit.Module; 
+                    moduleMax = hit.Module;
                 }
             }
-            if (hitRecord!=null)
+            if (hitRecord != null)
             {
                 if (depth > 0)
                 {
@@ -73,7 +88,7 @@ namespace Render3D.BackEnd
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);
                     Vector3D color = ShootRay(newRay, depth - 1, random);
                     Vector3D attenuation = hitRecord.Attenuation;
-                    return new Vector3D(attenuation.X * color.X, attenuation.Y * color.Y, attenuation.Z* color.Z);
+                    return new Vector3D(attenuation.X * color.X, attenuation.Y * color.Y, attenuation.Z * color.Z);
                 }
                 else
                 {
@@ -82,11 +97,11 @@ namespace Render3D.BackEnd
             }
             else
             {
-               return getBlueSky(ray);
+                return GetBlueSky(ray);
             }
         }
 
-        private Vector3D getBlueSky(Ray ray)
+        private Vector3D GetBlueSky(Ray ray)
         {
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
@@ -101,8 +116,8 @@ namespace Render3D.BackEnd
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
-            } while (vector.SquaredLength() >=1 );
+                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
             return vector;
         }
 
@@ -110,12 +125,16 @@ namespace Render3D.BackEnd
         {
             LastModificationDate = DateTimeProvider.Now;
         }
+        public void UpdateLastRenderizationDate()
+        {
+            LastRenderizationDate = DateTimeProvider.Now;
+        }
         private bool IsAValidName(string value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
             return true;
         }
-        
+
     }
 }

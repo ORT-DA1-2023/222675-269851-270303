@@ -6,9 +6,15 @@ namespace Render3D.BackEnd.Figures
 {
     public abstract class Figure
     {
-        protected String _name;
         protected Client _client;
+        protected String _name;
         protected Vector3D _position;
+
+        public Client Client
+        {
+            get => _client;
+            set => _client = value;
+        }
 
         public string Name
         {
@@ -20,12 +26,6 @@ namespace Render3D.BackEnd.Figures
                     _name = value;
                 }
             }
-        }
-
-        public  Client Client
-        {
-            get => _client;
-            set => _client = value;
         }
 
         public  Vector3D Position
