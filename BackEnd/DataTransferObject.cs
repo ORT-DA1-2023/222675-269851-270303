@@ -283,8 +283,20 @@ namespace Render3D.BackEnd
             }
         }
 
-        public bool ifPosibleChangeModelName(string ClientName,string oldName, string newName)
+        public bool ifPosibleChangeModelName(string clientName,string oldName, string newName)
         {
+            Client client = getClientGivenAName(clientName);
+            if (!alreadyExistsThisModel(clientName, newName))
+            {
+                foreach (Model model in _dataWarehouse.Models)
+                {
+                    if (model.Name == oldName && model.Client.Equals(client))
+                    {
+                        model.Name = newName;
+                        return true;
+                    }
+                }
+            }
             return false;
         }
     }
