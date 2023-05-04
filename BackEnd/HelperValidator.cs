@@ -41,9 +41,6 @@ namespace Render3D.BackEnd
         {
             return num >= min && num <= max;
         }
-        public static bool IsANumberInRange(Decimal num, Decimal min, Decimal max)
-        {
-            return num >= min && num <= max;
-        }
+
     }
 }

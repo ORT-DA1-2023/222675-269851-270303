@@ -11,32 +11,29 @@ namespace Render3D.BackEnd.Materials
 
     public class LambertianMaterial : Material
     {
-        private String name;
-        private Client client;
-        private Vector3D color;
-
+        private Vector3D _color;
         public override string Name
         {
-            get => name;
+            get => _name;
             set
             {
                 if (IsAValidName(value))
                 {
-                    name = value;
+                    _name = value;
                 }
             }
         }
         public override Client Client
         {
-            get => client;
-            set => client = value;
+            get => _client;
+            set => _client = value;
         }
-        public override Vector3D Color { 
-            get => color;
+        public  Vector3D Color { 
+            get => _color;
             set { 
                 if(IsAValidColor(value))
                 {
-                    color = value;
+                    _color = value;
                 }
             } 
         }

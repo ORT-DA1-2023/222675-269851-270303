@@ -9,25 +9,25 @@ namespace Render3D.BackEnd
 {
     public class DateTimeProvider
     {
-        private static DateTime? now;
+        private static DateTime? _now;
         public static DateTime Now
         {
             get
             {
-                if (now == null)
+                if (_now == null)
                 {
                     return DateTime.Now;
                 }
                 else
                 {
-                    return (DateTime)now;
+                    return (DateTime)_now;
                 }
             }
             set
             {
-                now = value;
+                _now = value;
             }
         }
-        public static void Reset() => now = null;
+        public static void Reset() => _now = null;
     }
 }

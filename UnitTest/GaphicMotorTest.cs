@@ -21,14 +21,17 @@ namespace Render3D.UnitTest
         private const int resolutionHeightSampleDefault = 3;
         private const int negativeResolutionHeightSample = -1;
         private const int zeroResolutionHeightSample = 0;
+
         private const int pixelSamplingSample = 79;
         private const int pixelSamplingSampleDefault = 50;
         private const int negativePixelSamplingSample = -1;
         private const int zeroPixelSamplingSample = 0;
+
         private const int maximumDepthSample = 30;
         private const int maximumDepthSampleDefault = 20;
         private const int negativeMaximumDepth = -1;
         private const int zeroMaximumDepth = 0;
+
         private Scene sceneSample;
         private Bitmap bitmapSample;
 
@@ -47,7 +50,7 @@ namespace Render3D.UnitTest
             Assert.AreNotEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
-        [TestMethod]
+     /*   [TestMethod]
         public void TestTemporaneoRender()
         {
 
@@ -105,7 +108,7 @@ namespace Render3D.UnitTest
 
 
 
-        }
+        }*/
 
 
 

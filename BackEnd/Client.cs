@@ -56,9 +56,9 @@ namespace Render3D.BackEnd
             get => _registerDate;
         }
 
-        protected bool IsAValidName(String value)
+        private bool IsAValidName(String value)
         {
-            if(!HelperValidator.IsAlphanumerical(value))
+            if (!HelperValidator.IsAlphanumerical(value))
             {
                 throw new BackEndException("Name must be alphanumerical");
             }

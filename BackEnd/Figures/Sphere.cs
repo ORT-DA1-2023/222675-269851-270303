@@ -8,53 +8,34 @@ namespace Render3D.BackEnd.Figures
 {
     public class Sphere : Figure
     {
-        private double radius;
-        private String name;
-        private Client client;
-        private Vector3D position;
+        private double _radius;
+        /*private String _name;
+        private Client _client;
+        private Vector3D _position;*/
 
-        public override Vector3D Position
-        {
-            get { return position; }    
-            set { position = value;}
-        }
+     
         
-
-        public override string Name
-        {
-            get => name;
-            set
-            {
-                if (IsAValidName(value))
-                {
-                    name = value;
-                }
-            }
-        }
+       
         
-        public override Client Client
-        {
-            get => client;
-            set => client = value;
-        }
+       
 
         public double Radius
         {
-            get => radius;
+            get => _radius;
             set
             {
                 if (IsAValidRadius(value))
                 {
-                    radius = value;
+                    _radius = value;
                 }
             }
         }
 
         public Sphere()
         {
-            radius = 1;
-            name = "SphereSample";
-            position = new Vector3D(0, 0, 0);
+            _radius = 1;
+            _name = "SphereSample";
+            _position = new Vector3D(0, 0, 0);
         }
 
         public Sphere(Vector3D position, double radius)
@@ -95,7 +76,7 @@ namespace Render3D.BackEnd.Figures
         {
             if (value <= 0)
             {
-                throw new BackEndException("The radius must be greater than 0");
+                throw new BackEndException("The _radius must be greater than 0");
             }
             return true;
         }
