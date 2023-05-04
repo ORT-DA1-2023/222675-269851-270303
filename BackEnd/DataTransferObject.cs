@@ -247,7 +247,7 @@ namespace Render3D.BackEnd
             _dataWarehouse.Models.Add(model);
         }
 
-        private bool alreadyExistsThisModel(string clientName, string modelName)
+        public bool alreadyExistsThisModel(string clientName, string modelName)
         {
             throw new NotImplementedException();
         }

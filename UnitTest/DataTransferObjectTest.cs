@@ -238,5 +238,20 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.tryToAddAModelWithoutPreview("clientSample1", "", figureSample, materialSample));
             Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
         }
+        [TestMethod]
+        public void givenANameReturnsTrueIfalreadyExistsThisModel()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample);
+            Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
+        }
+        [TestMethod]
+        public void givenANameReturnsFalseIfDoesntExistsThisModel()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample);
+            Assert.IsFalse(dto.alreadyExistsThisModel("clientSample1", "modelSample2"));
+        }
+
     }
 }
