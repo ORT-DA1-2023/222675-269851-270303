@@ -49,6 +49,17 @@ namespace Render3D.UserInterface
                 flObjectList.Controls.Add(materialControl);
             }
         }
+        public void showModelList()
+        {
+            flObjectList.Controls.Clear();
+            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
+            List<Model> models = listConteiners.Models;
+            foreach (Model model in models)
+            {
+                //ModelControl modelControl = new MaterialControl(model);
+                //flObjectList.Controls.Add(modelControl);
+            }
+        }
 
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -70,10 +81,7 @@ namespace Render3D.UserInterface
             refresh("Model");
         }
 
-        private void showModelList()
-        {
-           
-        }
+        
 
         private void showObjectCreationPanel(object formSon)
         {

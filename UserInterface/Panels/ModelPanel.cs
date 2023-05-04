@@ -44,7 +44,12 @@ namespace Render3D.UserInterface.Panels
 
         private void btnCreateFigure_Click(object sender, EventArgs e)
         {
-
+            String modelName= txtModelName.Text; 
+            Figure figure= lstFigure.SelectedItem as Figure;
+            Material material= lstMaterial.SelectedItem as Material;
+            render.dataTransferObject.tryToAddAModel(render.clientName,modelName,figure,material);
+            creation.showModelList();
+            txtModelName.Text = "";
         }
     }
 }

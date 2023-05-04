@@ -226,5 +226,10 @@ namespace Render3D.BackEnd
 
             return false;
         }
+
+        public void tryToAddAModel(string clientName, string modelName, Figure figure, Material material)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

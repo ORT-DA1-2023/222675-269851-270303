@@ -38,11 +38,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lstFigure = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtModelName = new System.Windows.Forms.TextBox();
+            this.lblModelName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblModelName);
+            this.panel1.Controls.Add(this.txtModelName);
             this.panel1.Controls.Add(this.checkGeneratePreview);
             this.panel1.Controls.Add(this.btnCreateFigure);
             this.panel1.Controls.Add(this.label5);
@@ -64,7 +68,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkGeneratePreview.AutoSize = true;
             this.checkGeneratePreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkGeneratePreview.Location = new System.Drawing.Point(109, 409);
+            this.checkGeneratePreview.Location = new System.Drawing.Point(108, 515);
             this.checkGeneratePreview.Margin = new System.Windows.Forms.Padding(4);
             this.checkGeneratePreview.Name = "checkGeneratePreview";
             this.checkGeneratePreview.Size = new System.Drawing.Size(226, 33);
@@ -92,7 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(104, 314);
+            this.label5.Location = new System.Drawing.Point(103, 420);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(289, 50);
@@ -105,7 +109,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(104, 153);
+            this.label4.Location = new System.Drawing.Point(103, 259);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(289, 50);
@@ -116,12 +120,13 @@
             // 
             this.lstMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMaterial.FormattingEnabled = true;
-            this.lstMaterial.ItemHeight = 16;
-            this.lstMaterial.Location = new System.Drawing.Point(109, 262);
+            this.lstMaterial.ItemHeight = 29;
+            this.lstMaterial.Location = new System.Drawing.Point(108, 368);
             this.lstMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.lstMaterial.Name = "lstMaterial";
-            this.lstMaterial.Size = new System.Drawing.Size(281, 36);
+            this.lstMaterial.Size = new System.Drawing.Size(281, 33);
             this.lstMaterial.TabIndex = 4;
             // 
             // label3
@@ -130,7 +135,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(104, 228);
+            this.label3.Location = new System.Drawing.Point(103, 334);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(194, 29);
@@ -143,7 +148,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(104, 79);
+            this.label2.Location = new System.Drawing.Point(103, 185);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(169, 29);
@@ -154,12 +159,13 @@
             // 
             this.lstFigure.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFigure.FormattingEnabled = true;
-            this.lstFigure.ItemHeight = 16;
-            this.lstFigure.Location = new System.Drawing.Point(109, 113);
+            this.lstFigure.ItemHeight = 29;
+            this.lstFigure.Location = new System.Drawing.Point(108, 219);
             this.lstFigure.Margin = new System.Windows.Forms.Padding(4);
             this.lstFigure.Name = "lstFigure";
-            this.lstFigure.Size = new System.Drawing.Size(281, 36);
+            this.lstFigure.Size = new System.Drawing.Size(281, 33);
             this.lstFigure.TabIndex = 1;
             // 
             // label1
@@ -174,6 +180,27 @@
             this.label1.Size = new System.Drawing.Size(279, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "Create a new model!!!";
+            // 
+            // txtModelName
+            // 
+            this.txtModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtModelName.Location = new System.Drawing.Point(108, 134);
+            this.txtModelName.Name = "txtModelName";
+            this.txtModelName.Size = new System.Drawing.Size(281, 34);
+            this.txtModelName.TabIndex = 9;
+            // 
+            // lblModelName
+            // 
+            this.lblModelName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblModelName.AutoSize = true;
+            this.lblModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModelName.Location = new System.Drawing.Point(103, 102);
+            this.lblModelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblModelName.Name = "lblModelName";
+            this.lblModelName.Size = new System.Drawing.Size(84, 29);
+            this.lblModelName.TabIndex = 10;
+            this.lblModelName.Text = "Name:";
             // 
             // ModelPanel
             // 
@@ -204,5 +231,7 @@
         private System.Windows.Forms.ListBox lstMaterial;
         private System.Windows.Forms.CheckBox checkGeneratePreview;
         private System.Windows.Forms.Button btnCreateFigure;
+        private System.Windows.Forms.Label lblModelName;
+        private System.Windows.Forms.TextBox txtModelName;
     }
 }
