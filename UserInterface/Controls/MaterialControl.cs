@@ -75,5 +75,6 @@ namespace UserInterface.Controls
                 ((CreationMenu)this.Parent.Parent.Parent).refresh("Material");
             }
         }
+
     }
 }

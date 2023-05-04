@@ -12,6 +12,7 @@ namespace Render3D.BackEnd
     public class DataTransferObject
     {
         private DataWarehouse _dataWarehouse = new DataWarehouse();
+        private GraphicMotor graphicMotor= new GraphicMotor();
 
         public DataWarehouse DataWarehouse { get => _dataWarehouse; }
 
@@ -138,15 +139,13 @@ namespace Render3D.BackEnd
         public bool ifPosibleDeleteFigure(string clientName, string figureName)
         {
             Client client= getClientGivenAName(clientName);
-            int iterator = 0;
             foreach (Figure figure in _dataWarehouse.Figures)
             {
                 if (figure.Name == figureName && figure.Client.Equals(client))
                 {
-                    _dataWarehouse.Figures.RemoveAt(iterator);
+                    _dataWarehouse.Figures.Remove(figure);
                     return true;
                 }
-                iterator++;
             }
             
             return false;
@@ -213,35 +212,33 @@ namespace Render3D.BackEnd
         public bool ifPosibleDeleteMaterial(string clientName, string materialName)
         {
             Client client = getClientGivenAName(clientName);
-            int iterator = 0;
             foreach (Material material in _dataWarehouse.Materials)
             {
                 if (material.Name == materialName && material.Client.Equals(client))
                 {
-                    _dataWarehouse.Materials.RemoveAt(iterator);
+                    _dataWarehouse.Materials.Remove(material);
                     return true;
                 }
-                iterator++;
             }
 
             return false;
         }
 
-        public bool tryToAddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
+        public void tryToAddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
             Client client = getClientGivenAName(clientName);
             if (alreadyExistsThisModel(clientName, modelName))
             {
-                return false;
+               // return new Exception ("model already exists");
             }
                 try
                 {
                     transferModelForCreation(client, modelName, figure, material);
-                    return true;
+                  //  return null;
                 }
                 catch (Exception e)
                 {
-                    return false;
+                   // return e;
                 }
         }
 
@@ -266,7 +263,24 @@ namespace Render3D.BackEnd
 
         public void tryToAddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {
-            throw new NotImplementedException();
+         tryToAddAModelWithoutPreview(clientName, modelName, figure, material);
+         addPreviewToTheModel(clientName, modelName);
+        }
+
+
+        private void addPreviewToTheModel(string clientName, string modelName)
+        {
+            Client client = getClientGivenAName(clientName);
+            if(alreadyExistsThisModel(clientName, modelName))
+            {              
+             foreach (Model model in _dataWarehouse.Models)
+                {
+                    if (model.Name == modelName && model.Client.Equals(client))
+                    {
+                        model.Preview=graphicMotor.RenderModelPreview(model);
+                    }
+                }
+            }
         }
     }
 }

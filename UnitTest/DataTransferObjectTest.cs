@@ -226,7 +226,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
-            Assert.IsTrue(dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample));
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample);
             Assert.AreEqual(modelSample.Name, dto.DataWarehouse.Models[0].Name);
             Assert.IsTrue((dto.DataWarehouse).Models.Count == 1);
         }
@@ -235,7 +235,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
-            Assert.IsFalse(dto.tryToAddAModelWithoutPreview("clientSample1", "", figureSample, materialSample));
+            dto.tryToAddAModelWithoutPreview("clientSample1", "", figureSample, materialSample);
             Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
         }
         [TestMethod]

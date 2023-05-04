@@ -56,8 +56,8 @@ namespace Render3D.UserInterface
             List<Model> models = listConteiners.Models;
             foreach (Model model in models)
             {
-                //ModelControl modelControl = new MaterialControl(model);
-                //flObjectList.Controls.Add(modelControl);
+                ModelControl modelControl = new ModelControl(model);
+                flObjectList.Controls.Add(modelControl);
             }
         }
 
