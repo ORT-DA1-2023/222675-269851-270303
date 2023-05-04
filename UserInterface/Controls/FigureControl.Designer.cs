@@ -81,7 +81,7 @@
             // txtFigureName
             // 
             this.txtFigureName.AcceptsReturn = true;
-            this.txtFigureName.BackColor = System.Drawing.Color.White;
+            this.txtFigureName.BackColor = System.Drawing.SystemColors.Control;
             this.txtFigureName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtFigureName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFigureName.Location = new System.Drawing.Point(95, 26);

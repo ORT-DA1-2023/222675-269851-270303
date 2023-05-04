@@ -42,7 +42,7 @@ namespace Render3D.BackEnd
                 return false;
             } 
         }
-        public bool tryToAddAFigure(String clientName, string figureName, double figureRadius)
+        public bool tryToAddAFigure(string clientName, string figureName, double figureRadius)
         {
             Client client=getClientGivenAName(clientName);
             if (alreadyExistsThisFigure(clientName, figureName)) 
@@ -66,12 +66,12 @@ namespace Render3D.BackEnd
             _dataWarehouse.Clients.Add(client);
         }
 
-        private void transferFigureForCreation(Client client, String figureName, double figureRadius)
+        private void transferFigureForCreation(Client client, string figureName, double figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
         }
-        private Client getClientGivenAName(String clientName)
+        private Client getClientGivenAName(string clientName)
         {
             foreach (Client client in _dataWarehouse.Clients)
             {
@@ -83,7 +83,7 @@ namespace Render3D.BackEnd
             return null;
         }
 
-        public bool checkName(String clientName)
+        public bool checkName(string clientName)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        public bool checkPassword(String clientPassword)
+        public bool checkPassword(string clientPassword)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        public bool alreadyExistsThisFigure(String clientName,String figureName)
+        public bool alreadyExistsThisFigure(string clientName,string figureName)
         {
             Client client = getClientGivenAName(clientName);
             foreach (Figure figure in _dataWarehouse.Figures)
@@ -119,7 +119,7 @@ namespace Render3D.BackEnd
             }
             return false;
         }
-        public bool ifPosibleChangeFigureName(String clientName,String oldName, String newName)
+        public bool ifPosibleChangeFigureName(string clientName,string oldName, string newName)
         {
             Client client = getClientGivenAName(clientName);
             if (!alreadyExistsThisFigure(clientName,newName)) 
@@ -151,7 +151,7 @@ namespace Render3D.BackEnd
             return false;
         }
 
-        public bool tryToAddAMaterial(String clientName,string materialName, int[] materialColors)
+        public bool tryToAddAMaterial(string clientName,string materialName, int[] materialColors)
         {
             Client client =getClientGivenAName(clientName);
             if (alreadyExistsThisMaterial(clientName, materialName))
@@ -172,7 +172,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        public bool alreadyExistsThisMaterial(String clientName, string materialName)
+        public bool alreadyExistsThisMaterial(string clientName, string materialName)
         {
             Client client = getClientGivenAName(clientName);
             foreach (Material material in _dataWarehouse.Materials)
@@ -281,6 +281,11 @@ namespace Render3D.BackEnd
                     }
                 }
             }
+        }
+
+        public bool ifPosibleChangeModelName(string ClientName,string oldName, string newName)
+        {
+            return false;
         }
     }
 }

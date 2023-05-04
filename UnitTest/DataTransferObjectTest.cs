@@ -253,5 +253,24 @@ namespace Render3D.UnitTest
             Assert.IsFalse(dto.alreadyExistsThisModel("clientSample1", "modelSample2"));
         }
 
+        [TestMethod]
+        public void givenANewModelNameItChanges()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample);
+            Assert.IsTrue(dto.ifPosibleChangeModelName("clientSample1", "modelSample1", "modelSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample2"));
+            Assert.IsFalse(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
+        }
+        [TestMethod]
+        public void givenANewModelNameItDoesNotChanges()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample, materialSample);
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample2", figureSample, materialSample);
+            Assert.IsTrue(dto.ifPosibleChangeModelName("clientSample1", "modelSample1", "modelSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
+        }
     }
 }

@@ -142,5 +142,10 @@ namespace Render3D.UserInterface
         {
             return render.dataTransferObject.ifPosibleDeleteMaterial(render.clientName, materialName);
         }
+
+        internal bool modelNameHasBeenChanged(string oldName, string newName)
+        {
+            return (render.dataTransferObject.ifPosibleChangeModelName(render.clientName,oldName,newName));
+        }
     }
 }
