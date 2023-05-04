@@ -23,6 +23,10 @@ namespace UserInterface.Controls
             txtModelName.Text = model.Name;
             lblModelFigure.Text= model.Figure.Name;
             lblModelMaterial.Text= model.Material.Name;
+            if (model.Preview != null)
+            {
+                pBoxPreview.Image = model.Preview;
+            }
         }
 
         private void btnEditModelName_Click(object sender, EventArgs e)
@@ -64,6 +68,12 @@ namespace UserInterface.Controls
             {
                 txtModelName.BackColor = Color.White;
             }
+        }
+
+        private void btnDeleteModel_Click(object sender, EventArgs e)
+        {
+            ((CreationMenu)this.Parent.Parent.Parent).deleteModel(txtModelName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).refresh("Model");
         }
     }
 }

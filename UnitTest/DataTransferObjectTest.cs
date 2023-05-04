@@ -139,7 +139,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAFigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(dto.ifPosibleDeleteFigure("clientSample1", "figureSample1"));
+            dto.deleteFigureInList("clientSample1", "figureSample1");
             Assert.IsFalse(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAFigure("clientSample1", "figureSample1", 1);
-            Assert.IsFalse(dto.ifPosibleDeleteFigure("clientSample1", "figureSample3"));
+            dto.deleteFigureInList("clientSample1", "figureSample3");
             Assert.IsTrue(dto.alreadyExistsThisFigure("clientSample1", "figureSample1"));
         }
 
@@ -209,7 +209,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
-            Assert.IsTrue(dto.ifPosibleDeleteMaterial("clientSample1", "materialSample1"));
+            dto.deleteMaterialInList("clientSample1", "materialSample1");
             Assert.IsFalse(dto.alreadyExistsThisMaterial("clientSample1", "figureSample1"));
         }
         [TestMethod]
@@ -217,7 +217,7 @@ namespace Render3D.UnitTest
         {
             dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
             dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
-            Assert.IsFalse(dto.ifPosibleDeleteMaterial("clientSample1", "materialSample3"));
+            dto.deleteMaterialInList("clientSample1", "materialSample3");
             Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
         }
 
@@ -270,6 +270,23 @@ namespace Render3D.UnitTest
             dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample2", figureSample, materialSample);
             Assert.IsFalse(dto.ifPosibleChangeModelName("clientSample1", "modelSample1", "modelSample2"));
             Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample2"));
+            Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
+        }
+
+        [TestMethod]
+        public void givenANameDeletesTheModel()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample, materialSample);
+            dto.deleteModelInList("clientSample1", "modelSample1");
+            Assert.IsFalse(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
+        }
+        [TestMethod]
+        public void givenANameDoesNotDeleteTheModel()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample);
+            dto.deleteModelInList("clientSample1", "modelSample3");
             Assert.IsTrue(dto.alreadyExistsThisModel("clientSample1", "modelSample1"));
         }
     }

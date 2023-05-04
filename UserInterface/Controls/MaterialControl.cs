@@ -70,10 +70,9 @@ namespace UserInterface.Controls
 
         private void btnDeleteMaterial_Click(object sender, EventArgs e)
         {
-            if (((CreationMenu)this.Parent.Parent.Parent).materialNameHasBeenDeleted(txtMaterialName.Text))
-            {
-                ((CreationMenu)this.Parent.Parent.Parent).refresh("Material");
-            }
+         ((CreationMenu)this.Parent.Parent.Parent).deleteMaterial(txtMaterialName.Text);
+         ((CreationMenu)this.Parent.Parent.Parent).refresh("Material");
+
         }
 
     }

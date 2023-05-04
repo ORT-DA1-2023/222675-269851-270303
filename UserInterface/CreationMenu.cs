@@ -128,9 +128,9 @@ namespace Render3D.UserInterface
             return (render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName));
         }
 
-        public bool figureNameHasBeenDeleted(string figureName)
+        public void deleteFigure(string figureName)
         {
-            return render.dataTransferObject.ifPosibleDeleteFigure(render.clientName,figureName);
+          render.dataTransferObject.deleteFigureInList(render.clientName,figureName);
         }
 
         internal bool materialNameHasBeenChanged(string oldName, string newName)
@@ -138,14 +138,19 @@ namespace Render3D.UserInterface
             return (render.dataTransferObject.ifPosibleChangeMaterialName(render.clientName, oldName, newName));
         }
 
-        internal bool materialNameHasBeenDeleted(string materialName)
+        internal void deleteMaterial(string materialName)
         {
-            return render.dataTransferObject.ifPosibleDeleteMaterial(render.clientName, materialName);
+          render.dataTransferObject.deleteMaterialInList(render.clientName, materialName);
         }
 
         internal bool modelNameHasBeenChanged(string oldName, string newName)
         {
             return (render.dataTransferObject.ifPosibleChangeModelName(render.clientName,oldName,newName));
+        }
+
+        internal void deleteModel(string modelName)
+        {
+         render.dataTransferObject.deleteModelInList(render.clientName, modelName);
         }
     }
 }

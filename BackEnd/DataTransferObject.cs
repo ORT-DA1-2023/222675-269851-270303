@@ -106,49 +106,51 @@ namespace Render3D.BackEnd
                 return false;
             }
         }
-
-        public bool alreadyExistsThisFigure(string clientName,string figureName)
+        private Figure searchFigureInList(string clientName, string figureName)
         {
             Client client = getClientGivenAName(clientName);
             foreach (Figure figure in _dataWarehouse.Figures)
             {
                 if (figure.Name == figureName && figure.Client.Equals(client))
                 {
-                    return true;
+                    return figure;
                 }
+            }
+            return null;
+        }
+
+        public bool alreadyExistsThisFigure(string clientName,string figureName)
+        {
+            if (searchFigureInList(clientName, figureName) != null)
+            {
+                return true;
             }
             return false;
         }
         public bool ifPosibleChangeFigureName(string clientName,string oldName, string newName)
         {
-            Client client = getClientGivenAName(clientName);
-            if (!alreadyExistsThisFigure(clientName,newName)) 
+            Figure figure=searchFigureInList(clientName, oldName);
+            if(figure == null)
             {
-                foreach (Figure figure in _dataWarehouse.Figures)
-                {
-                    if (figure.Name == oldName && figure.Client.Equals(client))
-                    {
-                        figure.Name = newName;
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
+            if (searchFigureInList(clientName, newName) != null)
+            {
+                return false;
+            }
+            figure.Name= newName;
+            return true;
         }
+        
 
-        public bool ifPosibleDeleteFigure(string clientName, string figureName)
+        public void deleteFigureInList(string clientName, string figureName)
         {
-            Client client= getClientGivenAName(clientName);
-            foreach (Figure figure in _dataWarehouse.Figures)
-            {
-                if (figure.Name == figureName && figure.Client.Equals(client))
-                {
-                    _dataWarehouse.Figures.Remove(figure);
-                    return true;
-                }
-            }
             
-            return false;
+            Figure figure= searchFigureInList(clientName,figureName);
+            if (figure != null)
+            {
+                _dataWarehouse.Figures.Remove(figure);
+            }
         }
 
         public bool tryToAddAMaterial(string clientName,string materialName, int[] materialColors)
@@ -174,14 +176,10 @@ namespace Render3D.BackEnd
 
         public bool alreadyExistsThisMaterial(string clientName, string materialName)
         {
-            Client client = getClientGivenAName(clientName);
-            foreach (Material material in _dataWarehouse.Materials)
-            {
-                if (material.Name == materialName && material.Client.Equals(client))
+                if (searchMaterialInList(clientName,materialName)!=null)
                 {
                     return true;
                 }
-            }
             return false;
         }
 
@@ -191,37 +189,39 @@ namespace Render3D.BackEnd
            Material material= new LambertianMaterial() { Client =client, Name = materialName, Color=color};
            _dataWarehouse.Materials.Add(material);
         }
-
-        public bool ifPosibleChangeMaterialName(string clientName, string oldName, string newName)
-        {
-            Client client = getClientGivenAName(clientName);
-            if (!alreadyExistsThisMaterial(clientName, newName))
-            {
-                foreach (Material material in _dataWarehouse.Materials)
-                {
-                    if (material.Name == oldName && material.Client.Equals(client))
-                    {
-                        material.Name = newName;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool ifPosibleDeleteMaterial(string clientName, string materialName)
+        private Material searchMaterialInList(string clientName, string materialName)
         {
             Client client = getClientGivenAName(clientName);
             foreach (Material material in _dataWarehouse.Materials)
             {
-                if (material.Name == materialName && material.Client.Equals(client))
+                if (material.Name ==materialName && material.Client.Equals(client))
                 {
-                    _dataWarehouse.Materials.Remove(material);
-                    return true;
+                    return material;
                 }
             }
+            return null;
+        }
 
-            return false;
+        public bool ifPosibleChangeMaterialName(string clientName, string oldName, string newName)
+        {
+           Material material= searchMaterialInList(clientName, oldName);
+           if(material== null)
+            {
+                return false;
+            }
+            if (searchMaterialInList(clientName, newName) != null)
+            {
+                return false;
+            }
+            material.Name= newName;
+            return  true;
+        }
+
+
+        public void deleteMaterialInList(string clientName, string materialName)
+        {
+            Material material = searchMaterialInList(clientName, materialName);
+            _dataWarehouse.Materials.Remove(material);
         }
 
         public void tryToAddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
@@ -241,63 +241,70 @@ namespace Render3D.BackEnd
                    // return e;
                 }
         }
-
-        private void transferModelForCreation(Client client, string modelName, Figure figure, Material material)
-        {
-            Model model= new Model() { Client = client, Name=modelName,Figure=figure,Material=material};
-            _dataWarehouse.Models.Add(model);
-        }
-
-        public bool alreadyExistsThisModel(string clientName, string modelName)
-        {
-            Client client = getClientGivenAName(clientName);
-            foreach (Model model in _dataWarehouse.Models)
-            {
-                if (model.Name == modelName && model.Client.Equals(client))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void tryToAddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {
          tryToAddAModelWithoutPreview(clientName, modelName, figure, material);
          addPreviewToTheModel(clientName, modelName);
         }
 
+        private void transferModelForCreation(Client client, string modelName, Figure figure, Material material)
+        {
+            Model model= new Model() { Client = client, Name=modelName,Figure=figure,Material=material};
+            _dataWarehouse.Models.Add(model);
+        }
+        private Model searchModelInList(string clientName,string modelName)
+        {
+            Client client = getClientGivenAName(clientName);
+            foreach (Model model in _dataWarehouse.Models)
+            {
+                if (model.Name == modelName && model.Client.Equals(client))
+                {
+                    return model;
+                }
+            }
+            return null;
+        }
+
+        public bool alreadyExistsThisModel(string clientName, string modelName)
+        {
+           if(searchModelInList(clientName, modelName)!=null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        
+
 
         private void addPreviewToTheModel(string clientName, string modelName)
         {
-            Client client = getClientGivenAName(clientName);
-            if(alreadyExistsThisModel(clientName, modelName))
-            {              
-             foreach (Model model in _dataWarehouse.Models)
-                {
-                    if (model.Name == modelName && model.Client.Equals(client))
-                    {
-                        model.Preview=graphicMotor.RenderModelPreview(model);
-                    }
-                }
-            }
+            Model model = searchModelInList(clientName, modelName);      
+            model.Preview=graphicMotor.RenderModelPreview(model);
         }
 
         public bool ifPosibleChangeModelName(string clientName,string oldName, string newName)
         {
-            Client client = getClientGivenAName(clientName);
-            if (!alreadyExistsThisModel(clientName, newName))
+            Model model= searchModelInList(clientName, oldName);
+            if (model == null)
             {
-                foreach (Model model in _dataWarehouse.Models)
-                {
-                    if (model.Name == oldName && model.Client.Equals(client))
-                    {
-                        model.Name = newName;
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
+            if (searchModelInList(clientName, newName) != null)
+            {
+                return false;
+            }
+            model.Name=newName;
+            return true;
+        }
+
+        public void deleteModelInList(string clientName, string modelName)
+        {
+            Model model = searchModelInList(clientName, modelName);
+            if (model != null)
+            {
+                _dataWarehouse.Models.Remove(model);
+            }
         }
     }
 }
