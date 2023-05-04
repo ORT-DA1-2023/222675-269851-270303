@@ -230,6 +230,10 @@ namespace Render3D.BackEnd
         public bool tryToAddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
             Client client = getClientGivenAName(clientName);
+            if (alreadyExistsThisModel(clientName, modelName))
+            {
+                return false;
+            }
                 try
                 {
                     transferModelForCreation(client, modelName, figure, material);
