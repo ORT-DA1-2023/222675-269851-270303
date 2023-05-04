@@ -79,7 +79,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            // return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            return ResolutionHeight;
         }
 
 
@@ -124,16 +125,16 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
         {
             string[] linesImagePPM = imagePPM.Split('\n');
-            for (int i = 3; i < linesImagePPM.Length; i++ )
+            for (int i = 3; i < linesImagePPM.Length-1; i++ )
             {
-                var rgbValues = linesImagePPM[i].Split(' ').Select(value => int.Parse(value)).ToArray();
+                var rgbValues = linesImagePPM[i].Split(' ').Select(value => (value)).ToArray();
                 var r = rgbValues[0];
                 var g = rgbValues[1];
                 var b = rgbValues[2];
                 var lineNumber = i - 3;
                 var pixelColumn = lineNumber % WidthResolution();
                 var pixelRow = lineNumber / WidthResolution();
-                bitmap.SetPixel(pixelColumn, pixelRow, Color.FromArgb(r, g, b));
+                bitmap.SetPixel(pixelColumn, pixelRow, Color.FromArgb(int.Parse(r), int.Parse(g), int.Parse(b)));
             }
 
             return bitmap;
