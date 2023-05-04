@@ -2,6 +2,7 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using System;
+using System.Drawing;
 
 namespace Render3D.BackEnd
 {
@@ -11,6 +12,7 @@ namespace Render3D.BackEnd
         private Figure _figure;
         private Client _client;
         private Material _material;
+        private Bitmap preview;
 
 
         public string Name { 
@@ -22,6 +24,18 @@ namespace Render3D.BackEnd
                     _name = value;
                 }
             } 
+        }
+
+        public Bitmap Preview
+        {
+            get=>preview;
+            set
+            {
+                if (value != null)
+                {
+                    preview = value;
+                }
+            }
         }
 
         private bool IsAValidName(string Name)

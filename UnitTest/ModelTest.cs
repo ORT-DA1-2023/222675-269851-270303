@@ -4,6 +4,7 @@ using System;
 using System.Runtime.Remoting;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
+using System.Drawing;
 
 namespace Render3D.UnitTest
 {
@@ -31,6 +32,14 @@ namespace Render3D.UnitTest
         {
             model1.Name = validName;
             Assert.AreEqual(model1.Name, validName);
+        }
+
+        [TestMethod]
+        public void givenABitmapNullItDoesNotAssignsTheModel()
+        {
+            Bitmap preview = null;
+            model1.Preview = preview;
+            Assert.AreEqual(model1.Preview, null);
         }
 
         [TestMethod]

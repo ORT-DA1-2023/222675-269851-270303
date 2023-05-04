@@ -67,17 +67,12 @@ namespace Render3D.BackEnd
             {
                 if (depth > 0)
                 {
-
                     Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere(random));
                     Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);
                     Vector3D color = ShootRay(newRay, depth - 1, random);
                     Vector3D attenuation = hitRecord.Attenuation;
-                    var  r = attenuation.X * color.X;
-                    var g = attenuation.Y * color.Y;
-                    var b = attenuation.Z * color.Z;
-                   
-                    return new Vector3D(r, g, b);
+                    return new Vector3D(attenuation.X * color.X, attenuation.Y * color.Y, attenuation.Z* color.Z);
                 }
                 else
                 {
@@ -86,12 +81,17 @@ namespace Render3D.BackEnd
             }
             else
             {
-                var vectorDirectionUnit = ray.Direction.GetUnit();
-                var posY = 0.5 * (vectorDirectionUnit.Y + 1);
-                var colorStart = new Vector3D(1, 1, 1);
-                var colorEnd = new Vector3D(0.5, 0.7, 1.0);
-                return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
+               return getBlueSky(ray);
             }
+        }
+
+        private Vector3D getBlueSky(Ray ray)
+        {
+            var vectorDirectionUnit = ray.Direction.GetUnit();
+            var posY = 0.5 * (vectorDirectionUnit.Y + 1);
+            var colorStart = new Vector3D(1, 1, 1);
+            var colorEnd = new Vector3D(0.5, 0.7, 1.0);
+            return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
         }
 
         private Vector3D GetRandomInUnitSphere(Random random)
@@ -99,7 +99,6 @@ namespace Render3D.BackEnd
             Vector3D vector;
             do
             {
-               //Random random = new Random();
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
             } while (vector.SquaredLength() >=1 );

@@ -43,9 +43,8 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidSceneRenderMethodReturnsABitmap()
         {
-            //bitmapSample = new Bitmap(ppmStreamSample);
             sceneSample = new Scene();
-            Assert.AreEqual(graphicMotorSample.Render(sceneSample), null);
+            Assert.AreNotEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
         [TestMethod]
@@ -102,7 +101,7 @@ namespace Render3D.UnitTest
 
 
 
-            Assert.AreEqual(graphicMotorSample.Render(scene), null);
+            Assert.AreNotEqual(graphicMotorSample.Render(scene), null);
 
 
 

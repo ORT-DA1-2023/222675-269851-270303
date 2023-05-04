@@ -79,13 +79,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
         }
 
 
         public int AspectRatio()
         {
-            return WidthResolution() / ResolutionHeight;
+            return  ResolutionHeight / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)
@@ -103,6 +103,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return Render(previewScene);
         }
 
+        public Bitmap Bitmap
+        {
+            get { return _bitmap; }
+            set { _bitmap = value; }
+        }
+
         public Bitmap Render(Scene sceneSample)
         {
             
@@ -111,13 +117,26 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             PixelMatrix = new PixelMatrix(width, height);
             PixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
             String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
-            _bitmap = GenerateBitmap(new Bitmap(width,height));
-            return null;
+            Bitmap = GenerateBitmap(new Bitmap(width,height), imagePPM);
+            return Bitmap;
         }
 
-        private Bitmap GenerateBitmap(Bitmap bitmap)
+        private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
         {
-            return null;
+            string[] linesImagePPM = imagePPM.Split('\n');
+            for (int i = 3; i < linesImagePPM.Length-1; i++ )
+            {
+                var rgbValues = linesImagePPM[i].Split(' ').Select(value => (value)).ToArray();
+                var r = rgbValues[0];
+                var g = rgbValues[1];
+                var b = rgbValues[2];
+                var lineNumber = i - 3;
+                var pixelColumn = lineNumber % WidthResolution();
+                var pixelRow = lineNumber / WidthResolution();
+                bitmap.SetPixel(pixelColumn, pixelRow, Color.FromArgb(int.Parse(r), int.Parse(g), int.Parse(b)));
+            }
+
+            return bitmap;
         }
 
         private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
