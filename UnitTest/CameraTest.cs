@@ -9,9 +9,9 @@ namespace Render3D.UnitTest
     public class CameraTest
     {
         private Camera cameraSample;
-        private Vector3D allOnes;
-        private Vector3D allTwos;
-        private Vector3D oneTwoThree;
+        private Vector3D allOnes  = new Vector3D(1, 1, 1);
+        private Vector3D allTwos = new Vector3D(2, 2, 2);
+        private Vector3D oneTwoThree = new Vector3D(1, 2, 3);
         private int validFov = 30;
        
         private const int smallestValidFov = 0;
@@ -28,9 +28,6 @@ namespace Render3D.UnitTest
         public void Initialize()
         {
             cameraSample = new Camera();
-            allOnes = new Vector3D(1, 1, 1);
-            allTwos = new Vector3D(2, 2, 2);
-            oneTwoThree = new Vector3D(1, 2, 3);
         }
 
         [TestMethod]
@@ -112,6 +109,8 @@ namespace Render3D.UnitTest
         {
             cameraSample.Fov = tooLargeFov;
         }
+
+
     }
 }
 

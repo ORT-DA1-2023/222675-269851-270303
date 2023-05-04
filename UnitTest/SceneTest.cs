@@ -38,7 +38,6 @@ namespace Render3D.UnitTest
             Assert.IsTrue(sceneSample.Client.Equals(clientSample));
         }
 
-
         [TestMethod]
         public void givenAValidNameItAssignsItToTheScene()
         {

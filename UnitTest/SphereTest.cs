@@ -36,9 +36,17 @@ namespace Render3D.UnitTest
         {
             newSphericalFigure.Position = positionSample;
             Assert.AreEqual(positionSample, newSphericalFigure.Position);
-
         }
 
+        [TestMethod]
+        public void givenASphereCreatedWithTheConstructorWithAttributesItAssignsCorrectlyTheAttributes()
+        {
+            Vector3D allOnes = new Vector3D(1, 1, 1);
+            double radius = 2.3;
+          Sphere sphere = new Sphere(allOnes,radius);
+            Assert.AreEqual (radius, sphere.Radius);
+            Assert.AreEqual(sphere.Position, sphere.Position);
+        }
 
         [TestMethod]
         public void givenAValidModuleAnd2VectorItReturnsAHitRecord()
@@ -48,9 +56,8 @@ namespace Render3D.UnitTest
             moduleMinSample = 0;
             hitRecord = new HitRecord3D();
             Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
-           
-
         }
+
 
         [TestMethod]
         public void givenAValidNameItAssignsItToTheSphere()

@@ -129,7 +129,7 @@ namespace Render3D.BackEnd
             _vertical = VectorV.Multiply(HeightHalf * 2);
         }
 
-        public Camera(Vector3D vectorLookFrom,  Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio)
+        public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio)
         {
             LookAt = vectorLookAt;
             VectorUp = vectorUp;
