@@ -47,9 +47,22 @@ namespace Render3D.UserInterface.Panels
             String modelName= txtModelName.Text; 
             Figure figure= lstFigure.SelectedItem as Figure;
             Material material= lstMaterial.SelectedItem as Material;
-            render.dataTransferObject.tryToAddAModel(render.clientName,modelName,figure,material);
+            if (figure == null || material==null) {
+                return;
+            }
+            
+            if(checkGeneratePreview.Checked)
+            {
+                render.dataTransferObject.tryToAddAModelWithPreview(render.clientName, modelName, figure, material);
+            }
+            else
+            {
+                render.dataTransferObject.tryToAddAModelWithoutPreview(render.clientName, modelName, figure, material);
+            }
+            
             creation.showModelList();
             txtModelName.Text = "";
+
         }
     }
 }

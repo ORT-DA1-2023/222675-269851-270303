@@ -227,7 +227,32 @@ namespace Render3D.BackEnd
             return false;
         }
 
-        public void tryToAddAModel(string clientName, string modelName, Figure figure, Material material)
+        public bool tryToAddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
+        {
+            Client client = getClientGivenAName(clientName);
+                try
+                {
+                    transferModelForCreation(client, modelName, figure, material);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+        }
+
+        private void transferModelForCreation(Client client, string modelName, Figure figure, Material material)
+        {
+            Model model= new Model() { Client = client, Name=modelName,Figure=figure,Material=material};
+            _dataWarehouse.Models.Add(model);
+        }
+
+        private bool alreadyExistsThisModel(string clientName, string modelName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void tryToAddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {
             throw new NotImplementedException();
         }

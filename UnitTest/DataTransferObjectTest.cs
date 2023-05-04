@@ -17,6 +17,7 @@ namespace Render3D.UnitTest
         Client clientSample;
         Figure figureSample;
         Material materialSample;
+        Model modelSample;
         Vector3D colorVec= new Vector3D(0,0,0);
         int[] colors = {0,0,0};
         int[] invalidColors = { -1, 0, 0 };
@@ -28,6 +29,7 @@ namespace Render3D.UnitTest
             clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
             figureSample = new Sphere() { Client = clientSample, Name = "figureSample1", Radius = 5 };
             materialSample = new LambertianMaterial() { Client = clientSample, Name = "materialSample1", Color=colorVec };
+            modelSample = new Model() { Client=clientSample, Name ="modelSample1", Figure=figureSample, Material=materialSample }; 
         }
         [TestMethod]
         public void givenANewClientReturnsTrueAfterAddingItToTheList()
@@ -217,6 +219,24 @@ namespace Render3D.UnitTest
             dto.tryToAddAMaterial("clientSample1", "materialSample1", colors);
             Assert.IsFalse(dto.ifPosibleDeleteMaterial("clientSample1", "materialSample3"));
             Assert.IsTrue(dto.alreadyExistsThisMaterial("clientSample1", "materialSample1"));
+        }
+
+        [TestMethod]
+        public void givenANewModelTrysToAddItToTheList()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
+            Assert.IsTrue(dto.tryToAddAModelWithoutPreview("clientSample1", "modelSample1", figureSample,materialSample));
+            Assert.AreEqual(modelSample.Name, dto.DataWarehouse.Models[0].Name);
+            Assert.IsTrue((dto.DataWarehouse).Models.Count == 1);
+        }
+        [TestMethod]
+        public void givenANewWrongModelDoesNotAddItToTheList()
+        {
+            dto.ifPosibleSignIn("clientSample1", "PasswordExample1");
+            Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
+            Assert.IsFalse(dto.tryToAddAModelWithoutPreview("clientSample1", "", figureSample, materialSample));
+            Assert.IsTrue((dto.DataWarehouse).Models.Count == 0);
         }
     }
 }
