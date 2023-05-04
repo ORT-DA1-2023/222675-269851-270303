@@ -79,14 +79,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-            // return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
-            return ResolutionHeight;
+             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+           // return ResolutionHeight;
         }
 
 
         public int AspectRatio()
         {
-            return WidthResolution() / ResolutionHeight;
+            return  ResolutionHeight / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)
