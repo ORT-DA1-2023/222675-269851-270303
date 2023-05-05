@@ -33,6 +33,7 @@ namespace Render3D.UnitTest.ControlllersTests
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
         public void GivenANewWrongClientReturnsFalseAfterTryingToAddItToTheList()
         {
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
@@ -54,23 +55,26 @@ namespace Render3D.UnitTest.ControlllersTests
         [TestMethod]
         public void givenANameChecksIfIsValid()
         {
-            Assert.IsTrue(_clientController.CheckName("clientSample1"));
+            _clientController.CheckName("clientSample1");
         }
         [TestMethod]
+
+        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
         public void givenANameChecksIfIsNotValid()
         {
-            Assert.IsFalse(_clientController.CheckName(""));
+            _clientController.CheckName("");
         }
 
         [TestMethod]
         public void givenAPasswordChecksIfIsValid()
         {
-            Assert.IsTrue(_clientController.CheckPassword("ValidPassword1"));
+            _clientController.CheckPassword("ValidPassword1");
         }
         [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name length must be between 5 and 25")]
         public void givenAPasswordChecksIfIsNotValid()
         {
-            Assert.IsFalse(_clientController.CheckPassword(""));
+            _clientController.CheckPassword("");
         }
     }
 }

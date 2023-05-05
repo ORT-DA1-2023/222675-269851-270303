@@ -62,27 +62,38 @@ namespace Render3D.UserInterface
         private void ClientPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientPassword = txtClientPassword.Text;
-            if (!render.clientController.CheckPassword(clientPassword) && (clientPassword != ""))
+            if ((clientPassword != ""))
             {
-                lblWrongPasswordMessage.Text = "this password is not valid";
+                try
+                {
+                    render.clientController.CheckPassword(clientPassword);
+                }catch (Exception ex)
+                {
+                    lblWrongPasswordMessage.Text = ex.Message;
+                    return;
+                }
+                
             }
-            else
-            {
-                lblWrongPasswordMessage.Text = "";
-            }
+            lblWrongPasswordMessage.Text = "";
         }
 
         private void UsernameKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientName = txtClientName.Text;
-            if (!render.clientController.CheckName(clientName) && (clientName != ""))
+            if ((clientName != ""))
             {
-                lblWrongUsernameMessage.Text = "this username is not valid";
+                try
+                {
+                    render.clientController.CheckName(clientName);
+                }catch(Exception ex)
+                {
+                    lblWrongUsernameMessage.Text = ex.Message;
+                    return;
+                }
+   
             }
-            else
-            {
                 lblWrongUsernameMessage.Text = "";
-            }
+            
         }
 
         private void VariableInitialize(object sender, EventArgs e)

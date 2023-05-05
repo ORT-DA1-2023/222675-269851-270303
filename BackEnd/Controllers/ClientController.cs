@@ -39,30 +39,14 @@ namespace Render3D.BackEnd.Controllers
             }
             return new Client();
         }
-        public bool CheckName(string clientName)
+        public void CheckName(string clientName)
         {
-            try
-            {
                 Client client = new Client() { Name = clientName, Password = "ThisPasswordIsS4fe" };
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
         }
 
-        public bool CheckPassword(string clientPassword)
+        public void CheckPassword(string clientPassword)
         {
-            try
-            {
                 Client client = new Client() { Name = "validName", Password = clientPassword };
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
         }
 
     }

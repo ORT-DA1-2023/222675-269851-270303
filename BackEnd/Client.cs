@@ -13,10 +13,10 @@ namespace Render3D.BackEnd
 {
     public class Client
     {
-        private const int nameMinimumLength = 3;
-        private const int nameMaximumLength = 20;
-        private const int passwordMinimumLength = 5;
-        private const int passwordMaximumLength = 25;
+        private const int _nameMinimumLength = 3;
+        private const int _nameMaximumLength = 20;
+        private const int _passwordMinimumLength = 5;
+        private const int _passwordMaximumLength = 25;
 
         protected string _name;
         protected string _password;
@@ -63,9 +63,9 @@ namespace Render3D.BackEnd
             {
                 throw new BackEndException("Name must be alphanumerical");
             }
-            if (!HelperValidator.IsLengthBetween(value, nameMinimumLength, nameMaximumLength))
+            if (!HelperValidator.IsLengthBetween(value, _nameMinimumLength, _nameMaximumLength))
             {
-                throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
+                throw new BackEndException($"Name length must be between {_nameMinimumLength} and {_nameMaximumLength}");
             }
             return true;
         }
@@ -76,9 +76,9 @@ namespace Render3D.BackEnd
             {
                 throw new BackEndException("Password must be alphanumerical");
             }
-            if (!HelperValidator.IsLengthBetween(value, nameMinimumLength, nameMaximumLength))
+            if (!HelperValidator.IsLengthBetween(value, _passwordMinimumLength, _passwordMaximumLength))
             {
-                throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
+                throw new BackEndException($"Password length must be between {_passwordMinimumLength} and {_passwordMaximumLength}");
             }
             if (!HelperValidator.ContainsANumber(value))
             {
