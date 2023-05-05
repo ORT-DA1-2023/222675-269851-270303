@@ -38,43 +38,45 @@ namespace Render3D.UnitTest.ControllersTests
             _modelSample = new Model() { Client = _clientSample, Name = "modelSample1", Figure = _figure, Material = _materialSample };
         }
         [TestMethod]
-        public void GivenANewMaterialAddsItToTheList()
+        public void GivenANewModelAddsItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure,_materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
         [TestMethod]
-        public void GivenANewWrongMaterialFailsAddingItToTheList()
+        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
+        public void GivenANewWrongModelFailsAddingItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
             _modelController.AddAModelWithoutPreview("clientSample1", "", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
         }
         [TestMethod]
-        public void GivenARepeatedMaterialFailsAddingItToTheList()
+        [ExpectedException(typeof(BackEndException), "model already exists")]
+        public void GivenARepeatedModelFailsAddingItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
         [TestMethod]
-        public void givenANewMaterialNameItChanges()
+        public void givenANewModelNameItChanges()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             _modelController.ChangeModelName("clientSample1", "modelSample1", "modelSample2");
             Assert.IsTrue(_modelController.DataWarehouse.Models[0].Name == "modelSample2");
 
         }
         [TestMethod]
-        public void givenANewMaterialNameItDoesNotChange()
+        public void givenANewModelNameItDoesNotChange()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample2", _figure, _materialSample);
             _modelController.ChangeModelName("clientSample1", "modelSample1", "modelSample2");
@@ -82,21 +84,21 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models[1].Name == "modelSample2");
         }
         [TestMethod]
-        public void GivenANameDeletesTheMaterial()
+        public void GivenANameDeletesTheModel()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-            _modelController.deleteModelInList("clientSample1", "modelSample1");
+            _modelController.DeleteModelInList("clientSample1", "modelSample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
         }
         [TestMethod]
-        public void GivenANameDoesNotDeleteTheMaterial()
+        public void GivenANameDoesNotDeleteTheModel()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-            _modelController.deleteModelInList("clientSample1", "modelSample2");
+            _modelController.DeleteModelInList("clientSample1", "modelSample2");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
     }

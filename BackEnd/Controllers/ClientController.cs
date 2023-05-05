@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,18 +12,15 @@ namespace Render3D.BackEnd.Controllers
         private DataWarehouse _dataWarehouse;
         public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse=value;} }
 
-        public void TryToSignIn(string clientName, string clientPassword)
+        public void SignIn(string clientName, string clientPassword)
         {
-            try
+            if (GetClientByName(clientName).Name != "")
             {
-                if (GetClientByName(clientName).Name!="")
-                {
-                    CreateAndAddAClient(clientName, clientPassword);
-                }
+                CreateAndAddAClient(clientName, clientPassword);
             }
-            catch (Exception ex)
+            else
             {
-
+                throw new Exception( "client already exists");
             }
         }
         private void CreateAndAddAClient(string clientName, string clientPassword)

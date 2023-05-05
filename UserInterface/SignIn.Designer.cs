@@ -41,6 +41,7 @@
             this.txtClientName = new System.Windows.Forms.TextBox();
             this.lblClientName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblExceptionError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblExceptionError);
             this.panel1.Controls.Add(this.btnGoBack);
             this.panel1.Controls.Add(this.btnSignIn);
             this.panel1.Controls.Add(this.lblPasswordsDontMatch);
@@ -78,7 +80,7 @@
             this.btnGoBack.TabIndex = 16;
             this.btnGoBack.Text = "Go back";
             this.btnGoBack.UseVisualStyleBackColor = true;
-            this.btnGoBack.Click += new System.EventHandler(this.btnLogOut_Click);
+            this.btnGoBack.Click += new System.EventHandler(this.BtnGoBack_Click);
             // 
             // btnSignIn
             // 
@@ -90,7 +92,7 @@
             this.btnSignIn.TabIndex = 15;
             this.btnSignIn.Text = "Sign In";
             this.btnSignIn.UseVisualStyleBackColor = true;
-            this.btnSignIn.Click += new System.EventHandler(this.btnSignIn_Click);
+            this.btnSignIn.Click += new System.EventHandler(this.BtnSignIn_Click);
             // 
             // lblPasswordsDontMatch
             // 
@@ -135,7 +137,7 @@
             this.txtClientRepeatedPassword.PasswordChar = '*';
             this.txtClientRepeatedPassword.Size = new System.Drawing.Size(205, 32);
             this.txtClientRepeatedPassword.TabIndex = 11;
-            this.txtClientRepeatedPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.repeatedPasswordKeyUpCheck);
+            this.txtClientRepeatedPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RepeatedPasswordKeyUpCheck);
             // 
             // lblClientRepeatedPassword
             // 
@@ -182,7 +184,7 @@
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(205, 32);
             this.txtClientName.TabIndex = 7;
-            this.txtClientName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.usernameKeyUpCheck);
+            this.txtClientName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UsernameKeyUpCheck);
             // 
             // lblClientName
             // 
@@ -209,6 +211,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "It\'s time to sign in!!";
             // 
+            // lblExceptionError
+            // 
+            this.lblExceptionError.AutoSize = true;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Location = new System.Drawing.Point(374, 452);
+            this.lblExceptionError.Name = "lblExceptionError";
+            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.TabIndex = 17;
+            this.lblExceptionError.Text = "error";
+            // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,7 +233,7 @@
             this.Name = "SignIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Go back";
-            this.Shown += new System.EventHandler(this.variableInitialize);
+            this.Shown += new System.EventHandler(this.VariableInitialize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -242,5 +255,6 @@
         private System.Windows.Forms.Label lblPasswordsDontMatch;
         private System.Windows.Forms.Label lblWrongPasswordMessage;
         private System.Windows.Forms.Button btnGoBack;
+        private System.Windows.Forms.Label lblExceptionError;
     }
 }

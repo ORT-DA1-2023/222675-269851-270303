@@ -47,7 +47,7 @@
             this.btnDeleteModel.TabIndex = 8;
             this.btnDeleteModel.Text = "Delete";
             this.btnDeleteModel.UseVisualStyleBackColor = true;
-            this.btnDeleteModel.Click += new System.EventHandler(this.btnDeleteModel_Click);
+            this.btnDeleteModel.Click += new System.EventHandler(this.BtnDeleteModel_Click);
             // 
             // btnEditModelName
             // 
@@ -59,7 +59,7 @@
             this.btnEditModelName.TabIndex = 7;
             this.btnEditModelName.Text = "Edit";
             this.btnEditModelName.UseVisualStyleBackColor = true;
-            this.btnEditModelName.Click += new System.EventHandler(this.btnEditModelName_Click);
+            this.btnEditModelName.Click += new System.EventHandler(this.BtnEditModelName_Click);
             // 
             // txtModelName
             // 

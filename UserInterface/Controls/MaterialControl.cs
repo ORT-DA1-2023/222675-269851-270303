@@ -53,7 +53,7 @@ namespace UserInterface.Controls
             txtMaterialName.ReadOnly = true;
             if (!oldName.Equals(txtMaterialName.Text))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).materialNameHasBeenChanged(oldName, txtMaterialName.Text))
+                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(oldName, txtMaterialName.Text))
                 {
                     txtMaterialName.BackColor = Color.White;
                 }
@@ -68,10 +68,10 @@ namespace UserInterface.Controls
             }
         }
 
-        private void btnDeleteMaterial_Click(object sender, EventArgs e)
+        private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-         ((CreationMenu)this.Parent.Parent.Parent).deleteMaterial(txtMaterialName.Text);
-         ((CreationMenu)this.Parent.Parent.Parent).refresh("Material");
+         ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(txtMaterialName.Text);
+         ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
 
         }
 

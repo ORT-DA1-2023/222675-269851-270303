@@ -22,33 +22,32 @@ namespace Render3D.UserInterface.Panels
         }
 
 
-        private void btnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
             String figureName= txtFigureName.Text;
             String figureRadiusString = txtFigureRadius.Text;
             Double figureRadius;
-            if (tryToParse(figureRadiusString)!=-1)
+            if (TryToParse(figureRadiusString)!=-1)
             {
                 figureRadius = Convert.ToDouble(figureRadiusString);
-                render.dataTransferObject.tryToAddAFigure(render.clientName, figureName, figureRadius);
-                creation.showFigureList();
-                lblRadiusNotValid.Text = "";
-                lblNameNotValid.Text = "";
+                try
+                {
+                    render.figureController.AddFigure(render.clientName, figureName, figureRadius);
+                }catch(Exception ex)
+                {
+                    lblExceptionError.Text= ex.Message;
+                }
+                creation.ShowFigureList();
             }
             else
             {
-                alertFigureRadiusIsNotANumber();
+                lblExceptionError.Text = "the radius must be a number";
             }
             txtFigureName.Text = "";
             txtFigureRadius.Text = "";
         }
 
-        private void alertFigureRadiusIsNotANumber()
-        {
-            lblRadiusNotValid.Text = "the radius must be a number";
-        }
-
-        private decimal tryToParse(string figureRadiusString)
+        private decimal TryToParse(string figureRadiusString)
         {
             try
             {
@@ -60,10 +59,11 @@ namespace Render3D.UserInterface.Panels
             }
         }
 
-        private void variablesInitialize(object sender, EventArgs e)
+        private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = ((CreationMenu)this.Parent.Parent);
             render = ((Render3DIU)creation.Parent.Parent);
+            lblExceptionError.Text = "";
         }
     }
 }

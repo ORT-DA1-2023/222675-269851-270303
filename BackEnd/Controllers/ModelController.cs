@@ -22,15 +22,13 @@ namespace Render3D.BackEnd.Controllers
             
             if (GetModelByNameAndClient(clientName, modelName)==null)
             {
-                try
-                {
                     TransferModelForCreation(ClientController.GetClientByName(clientName), modelName, figure, material);
 
-                }
-                catch (Exception e)
-                {
-                }
-            }  
+            }
+            else
+            {
+                throw new BackEndException("model already exists");
+            }
         }
         public void AddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {
@@ -42,7 +40,7 @@ namespace Render3D.BackEnd.Controllers
             Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
             _dataWarehouse.Models.Add(model);
         }
-        private Model GetModelByNameAndClient(string clientName, string modelName)
+        public Model GetModelByNameAndClient(string clientName, string modelName)
         {
             Client client = ClientController.GetClientByName(clientName);
             foreach (Model model in _dataWarehouse.Models)
@@ -74,7 +72,7 @@ namespace Render3D.BackEnd.Controllers
             return;
         }
 
-        public void deleteModelInList(string clientName, string modelName)
+        public void DeleteModelInList(string clientName, string modelName)
         {
             Model model = GetModelByNameAndClient(clientName, modelName);
             if (model != null)

@@ -28,7 +28,7 @@ namespace Render3D.UnitTest.ControlllersTests
         public void GivenANewClientReturnsTrueAfterAddingItToTheList()
         {
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_clientSample.Equals((_clientController.DataWarehouse).Clients[0]));
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 1);
         }
@@ -36,19 +36,19 @@ namespace Render3D.UnitTest.ControlllersTests
         public void GivenANewWrongClientReturnsFalseAfterTryingToAddItToTheList()
         {
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
-            _clientController.TryToSignIn("", "");
+            _clientController.SignIn("", "");
             Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
         }
         [TestMethod]
         public void GivenAClientReturnsTrueIfIsInTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_clientController.GetClientByName("clientSample1").Equals(_clientSample));
         }
         [TestMethod]
         public void GivenAClientReturnsFalseIfIsInNotTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_clientController.GetClientByName("clientSample2").Name==null);
         }
         [TestMethod]

@@ -20,14 +20,11 @@ namespace Render3D.BackEnd.Controllers
         {
             if (GetMaterialByNameAndClient(clientName,materialName).Name==null)
             {
-                try
-                {
                     CreateAndAddMaterial(ClientController.GetClientByName(clientName), materialName, materialColors);
-                }
-                catch (Exception e)
-                {
-
-                }
+            }
+            else
+            {
+                throw new BackEndException("material already exists");
             }
         }
         private void CreateAndAddMaterial(Client client, string materialName, int[] materialColors)
@@ -37,7 +34,7 @@ namespace Render3D.BackEnd.Controllers
             _dataWarehouse.Materials.Add(material);
         }
 
-        private Material GetMaterialByNameAndClient(string clientName, string materialName)
+        public Material GetMaterialByNameAndClient(string clientName, string materialName)
         {
             Client client = ClientController.GetClientByName(clientName);
             foreach (Material material in _dataWarehouse.Materials)

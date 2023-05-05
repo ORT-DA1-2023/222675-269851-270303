@@ -34,23 +34,25 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenANewMaterialAddsItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenANewWrongMaterialFailsAddingItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
             _materialController.AddMaterial("clientSample1", "", _colorArray);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
         }
         [TestMethod]
+        [ExpectedException(typeof(BackEndException), "material already exists")]
         public void GivenARepeatedMaterialFailsAddingItToTheList()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
@@ -59,7 +61,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void givenANewMaterialNameItChanges()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             _materialController.ChangeMaterialName("clientSample1", "materialSample1", "materialSample2");
             Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == "materialSample2");
@@ -68,7 +70,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void givenANewMaterialNameItDoesNotChange()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             _materialController.AddMaterial("clientSample1", "materialSample2", _colorArray);
             _materialController.ChangeMaterialName("clientSample1", "materialSample1", "materialSample2");
@@ -78,7 +80,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenANameDeletesTheMaterial()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
             _materialController.DeleteMaterialInList("clientSample1", "materialSample1");
@@ -87,7 +89,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenANameDoesNotDeleteTheMaterial()
         {
-            _clientController.TryToSignIn("clientSample1", "PasswordExample1");
+            _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
             _materialController.DeleteMaterialInList("clientSample1", "materialSample2");

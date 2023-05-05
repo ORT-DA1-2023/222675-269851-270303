@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Render3D.BackEnd;
 
 namespace Render3D.UserInterface
 {
@@ -21,34 +12,40 @@ namespace Render3D.UserInterface
             lblPasswordsDontMatch.Text = "";
             lblWrongPasswordMessage.Text = "";
             lblWrongUsernameMessage.Text = "";
-            
+            lblExceptionError.Text = "";
+
         }
 
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void BtnGoBack_Click(object sender, EventArgs e)
         {
-           render.userWantsToLogIn();
+            render.userWantsToLogIn();
 
         }
 
-        private void btnSignIn_Click(object sender, EventArgs e)
+        private void BtnSignIn_Click(object sender, EventArgs e)
         {
             String clientName = txtClientName.Text;
             String clientPassword = txtClientPassword.Text;
             String clientPasswordRepeated = txtClientRepeatedPassword.Text;
 
-            if (clientPassword== clientPasswordRepeated && render.dataTransferObject.ifPosibleSignIn(clientName,clientPassword))
+            if (clientPassword == clientPasswordRepeated)
             {
+                try
+                {
+                    render.clientController.SignIn(clientName, clientPassword);
+                }
+                catch (Exception ex)
+                {
+                    lblExceptionError.Text = ex.Message;
+                    return;
+                }
                 render.clientName = clientName;
                 render.enterMenu();
-            }
-            else
-            {
-                //mirar cambios de letra sobre esto
             }
         }
 
 
-        private void repeatedPasswordKeyUpCheck(object sender, KeyEventArgs e)
+        private void RepeatedPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientPassword = txtClientPassword.Text;
             String repeatedPassword = txtClientRepeatedPassword.Text;
@@ -65,7 +62,7 @@ namespace Render3D.UserInterface
         private void ClientPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientPassword = txtClientPassword.Text;
-            if (!render.dataTransferObject.checkPassword(clientPassword) && (clientPassword!=""))
+            if (!render.clientController.CheckPassword(clientPassword) && (clientPassword != ""))
             {
                 lblWrongPasswordMessage.Text = "this password is not valid";
             }
@@ -75,10 +72,10 @@ namespace Render3D.UserInterface
             }
         }
 
-        private void usernameKeyUpCheck(object sender, KeyEventArgs e)
+        private void UsernameKeyUpCheck(object sender, KeyEventArgs e)
         {
             String clientName = txtClientName.Text;
-            if (!render.dataTransferObject.checkName(clientName) && (clientName != ""))
+            if (!render.clientController.CheckName(clientName) && (clientName != ""))
             {
                 lblWrongUsernameMessage.Text = "this username is not valid";
             }
@@ -88,9 +85,10 @@ namespace Render3D.UserInterface
             }
         }
 
-        private void variableInitialize(object sender, EventArgs e)
+        private void VariableInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
+            lblExceptionError.Text = "";
         }
     }
 }

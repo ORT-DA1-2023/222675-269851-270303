@@ -19,14 +19,11 @@ namespace Render3D.BackEnd.Controllers
         {
             if (GetFigureByNameAndClient(clientName, figureName).Name == null)
             {
-                try
-                {
                     CreateAndAddFigure(ClientController.GetClientByName(clientName), figureName, figureRadius);
-                }
-                catch (Exception ex)
-                {
-
-                }
+            }
+            else
+            {
+                throw new BackEndException("figure already exists");
             }
 
         }
@@ -35,7 +32,7 @@ namespace Render3D.BackEnd.Controllers
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
         }
-        private Figure GetFigureByNameAndClient(string clientName, string figureName)
+        public Figure GetFigureByNameAndClient(string clientName, string figureName)
         {
             Client client = ClientController.GetClientByName(clientName);
             foreach (Figure figure in _dataWarehouse.Figures)

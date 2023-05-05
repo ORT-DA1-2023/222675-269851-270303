@@ -18,46 +18,44 @@ namespace UserInterface.Controls
     
     public partial class FigureControl : UserControl
     {
-        private String oldName;
-        private Figure figure;
-
+        private string _oldName;
         public FigureControl(Figure figure)
         {
-            this.figure = figure;
             InitializeComponent();
             this.txtFigureName.Text = figure.Name;
             this.lblFigureRadius.Text = ""+((Sphere)figure).Radius;
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            oldName= txtFigureName.Text;
+            _oldName= txtFigureName.Text;
             txtFigureName.ReadOnly = false;
             txtFigureName.BackColor = Color.Green;
         }
 
-        private void clientPressEnter(object sender, KeyEventArgs e)
+        private void ClientPressEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                checksForCorrectEdit();
+                ChecksForCorrectEdit();
             }
             
             
         }
 
-        private void clientLeaves(object sender, EventArgs e)
+        private void ClientLeaves(object sender, EventArgs e)
         {
-            checksForCorrectEdit();
+            ChecksForCorrectEdit();
 
         }
-        private void checksForCorrectEdit()
+        private void ChecksForCorrectEdit()
         {
             txtFigureName.ReadOnly = true;
-            if (!oldName.Equals(txtFigureName.Text))
+            if (!_oldName.Equals(txtFigureName.Text))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).figureNameHasBeenChanged(oldName, txtFigureName.Text))
+
+                if (((CreationMenu)this.Parent.Parent.Parent).FigureNameHasBeenChanged(_oldName, txtFigureName.Text))
                 {
                     txtFigureName.BackColor = Color.White;
                 }
@@ -72,10 +70,10 @@ namespace UserInterface.Controls
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
-        ((CreationMenu)this.Parent.Parent.Parent).deleteFigure(txtFigureName.Text);
-        ((CreationMenu)this.Parent.Parent.Parent).refresh("Figure");
+        ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(txtFigureName.Text);
+        ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
         }
     }
 }

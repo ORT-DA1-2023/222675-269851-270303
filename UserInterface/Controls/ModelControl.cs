@@ -29,7 +29,7 @@ namespace UserInterface.Controls
             }
         }
 
-        private void btnEditModelName_Click(object sender, EventArgs e)
+        private void BtnEditModelName_Click(object sender, EventArgs e)
         {
             oldName = txtModelName.Text;
             txtModelName.ReadOnly = false;
@@ -41,21 +41,21 @@ namespace UserInterface.Controls
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                checksForCorrectEdit();
+                ChecksForCorrectEdit();
             }
         }
 
         private void ClientLeaves(object sender, EventArgs e)
         {
-            checksForCorrectEdit();
+            ChecksForCorrectEdit();
         }
 
-        private void checksForCorrectEdit()
+        private void ChecksForCorrectEdit()
         {
             txtModelName.ReadOnly = true;
             if (!oldName.Equals(txtModelName.Text))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).modelNameHasBeenChanged(oldName, txtModelName.Text))
+                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(oldName, txtModelName.Text))
                 {
                     txtModelName.BackColor = Color.White;
                 }
@@ -70,10 +70,10 @@ namespace UserInterface.Controls
             }
         }
 
-        private void btnDeleteModel_Click(object sender, EventArgs e)
+        private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).deleteModel(txtModelName.Text);
-            ((CreationMenu)this.Parent.Parent.Parent).refresh("Model");
+            ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(txtModelName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
         }
     }
 }
