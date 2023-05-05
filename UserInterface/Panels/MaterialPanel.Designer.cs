@@ -142,6 +142,11 @@
             this.nrRedColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nrRedColor.Location = new System.Drawing.Point(138, 154);
             this.nrRedColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.nrRedColor.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.nrRedColor.Name = "nrRedColor";
             this.nrRedColor.Size = new System.Drawing.Size(199, 29);
             this.nrRedColor.TabIndex = 14;
@@ -154,6 +159,11 @@
             this.nrGreenColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nrGreenColor.Location = new System.Drawing.Point(138, 203);
             this.nrGreenColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.nrGreenColor.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.nrGreenColor.Name = "nrGreenColor";
             this.nrGreenColor.Size = new System.Drawing.Size(199, 29);
             this.nrGreenColor.TabIndex = 15;
@@ -166,6 +176,11 @@
             this.nrBlueColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nrBlueColor.Location = new System.Drawing.Point(138, 255);
             this.nrBlueColor.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.nrBlueColor.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.nrBlueColor.Name = "nrBlueColor";
             this.nrBlueColor.Size = new System.Drawing.Size(199, 29);
             this.nrBlueColor.TabIndex = 16;

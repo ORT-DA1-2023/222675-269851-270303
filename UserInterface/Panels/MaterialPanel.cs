@@ -30,12 +30,12 @@ namespace Render3D.UserInterface.Panels
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
             try
             {
-                render.materialController.AddMaterial(render.clientName, materialName, materialColors);
+               render.materialController.AddMaterial(render.clientName, materialName, materialColors);
             }catch (Exception ex)
             {
                 lblExceptionError.Text = ex.Message;
+                return;
             }
-            
             creation.ShowMaterialList();
             txtMaterialName.Text="";
             nrRedColor.Value = 0;

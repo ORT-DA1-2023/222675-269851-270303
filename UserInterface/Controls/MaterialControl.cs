@@ -14,21 +14,22 @@ namespace UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {
-        Material material;
-        String oldName;
+        private Material _material;
+        private string _oldName;
         public MaterialControl(Material material)
         {
-            this.material = material;
+            _material = material;
             InitializeComponent();
             txtMaterialName.Text = material.Name;
-            lblRedColor.Text ="Red: "+ ((LambertianMaterial)material).Color.X;
-            lblGreenColor.Text = "Green: " + ((LambertianMaterial)material).Color.Y;
-            lblBlueColor.Text = "Blue: " + ((LambertianMaterial)material).Color.Z;
+            lblRedColor.Text ="Red: "+ _material.Color.X;
+            lblGreenColor.Text = "Green: " + _material.Color.Y;
+            lblBlueColor.Text = "Blue: " + _material.Color.Z;
+            pBoxMaterial.BackColor = Color.FromArgb((int)_material.Color.X,(int)_material.Color.Y,(int)_material.Color.Z);
         }
 
         private void btnEditMaterialName_Click(object sender, EventArgs e)
         {
-            oldName = txtMaterialName.Text;
+            _oldName = txtMaterialName.Text;
             txtMaterialName.ReadOnly = false;
             txtMaterialName.BackColor = Color.Green;
         }
@@ -51,9 +52,9 @@ namespace UserInterface.Controls
         private void checksForCorrectEdit()
         {
             txtMaterialName.ReadOnly = true;
-            if (!oldName.Equals(txtMaterialName.Text))
+            if (!_oldName.Equals(txtMaterialName.Text))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(oldName, txtMaterialName.Text))
+                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(_oldName, txtMaterialName.Text))
                 {
                     txtMaterialName.BackColor = Color.White;
                 }
