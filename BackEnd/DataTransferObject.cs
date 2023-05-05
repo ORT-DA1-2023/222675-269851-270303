@@ -14,7 +14,7 @@ namespace Render3D.BackEnd
         private DataWarehouse _dataWarehouse = new DataWarehouse();
         private GraphicMotor graphicMotor= new GraphicMotor();
 
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; }
+        public DataWarehouse DataWarehouse { get; }
 
         public bool alreadyExistsThisClient(string clientName, string clientPassword)
         {
@@ -36,7 +36,7 @@ namespace Render3D.BackEnd
                 {
                     return false;
                 }
-                transferClientForCreation(clientName, clientPassword);
+                CreateAndAddAClient(clientName, clientPassword);
                 return true;
             }catch (Exception ex) {
                 return false;
@@ -59,12 +59,13 @@ namespace Render3D.BackEnd
             }
            
         }
-
-        private void transferClientForCreation(string clientName, string clientPassword)
+        private void CreateAndAddAClient(string clientName, string clientPassword)
         {
             Client client = new Client() { Name = clientName, Password = clientPassword };
             _dataWarehouse.Clients.Add(client);
         }
+
+
 
         private void transferFigureForCreation(Client client, string figureName, double figureRadius)
         {
