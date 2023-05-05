@@ -14,7 +14,7 @@ namespace Render3D.BackEnd
         private DataWarehouse _dataWarehouse = new DataWarehouse();
         private GraphicMotor graphicMotor= new GraphicMotor();
 
-        public DataWarehouse DataWarehouse { get; }
+        public DataWarehouse DataWarehouse { get =>_dataWarehouse; }
 
         public bool alreadyExistsThisClient(string clientName, string clientPassword)
         {

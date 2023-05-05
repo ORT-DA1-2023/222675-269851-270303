@@ -19,7 +19,6 @@ namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
     {
-        private DataTransferObject _dataTransferObject;
         private Render3DIU render;
         public CreationMenu()
         {

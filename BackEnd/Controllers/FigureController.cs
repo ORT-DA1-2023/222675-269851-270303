@@ -17,8 +17,7 @@ namespace Render3D.BackEnd.Controllers
         public ClientController ClientController { get => _clientController; set => _clientController = value; }
         public void TryToAddFigure(string clientName, string figureName, double figureRadius)
         {
-            Figure auxiliarFigure=GetFigureByNameAndClient(clientName, figureName);
-            if (auxiliarFigure.Name == "")
+            if (GetFigureByNameAndClient(clientName, figureName).Name == null)
             {
                 try
                 {
