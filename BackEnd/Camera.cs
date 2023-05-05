@@ -117,8 +117,8 @@ namespace Render3D.BackEnd
             _widthHalf = AspectRatio * HeightHalf;
             _lookFrom = new Vector3D(0, 2, 0);
             _vectorW = LookFrom.Substract(LookAt).GetUnit();
-            _vectorU = VectorUp.Cross(VectorW).GetUnit();
-            _vectorV = VectorW.Cross(VectorU);
+            _vectorU = VectorUp.CrossProduct(VectorW).GetUnit();
+            _vectorV = VectorW.CrossProduct(VectorU);
             _corner_lowerleft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
             _horizontal = VectorU.Multiply(WidthHalf * 2);
             _vertical = VectorV.Multiply(HeightHalf * 2);
@@ -135,8 +135,8 @@ namespace Render3D.BackEnd
             WidthHalf = AspectRatio * HeightHalf;
             LookFrom = vectorLookFrom;
             VectorW = vectorLookFrom.Substract(vectorLookAt).GetUnit();
-            VectorU = vectorUp.Cross(VectorW).GetUnit();
-            VectorV = VectorW.Cross(VectorU);
+            VectorU = vectorUp.CrossProduct(VectorW).GetUnit();
+            VectorV = VectorW.CrossProduct(VectorU);
             Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
             Horizontal = VectorU.Multiply((2 * WidthHalf));
             Vertical = VectorV.Multiply((2 * HeightHalf));

@@ -8,7 +8,6 @@ namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private Client _client;
         private String _name;
 
         private readonly DateTime _registerDate;
@@ -16,50 +15,36 @@ namespace Render3D.BackEnd
         private DateTime? _lastRenderizationDate = null;
 
         private List<Model> _positionedModels;
-        private Camera _camera;
-        private Bitmap _preview;
 
         public Scene()
         {
-            _camera = new Camera();
-            _registerDate = DateTimeProvider.Now;
-            _lastModificationDate = DateTimeProvider.Now;
-            _positionedModels = new List<Model>();
+            Camera = new Camera();
+            RegisterDate = DateTimeProvider.Now;
+            LastModificationDate = DateTimeProvider.Now;
+            PositionedModels = new List<Model>();
         }
 
 
-        public Client Client { get => _client; set => _client = value; }
-        public Camera Camera { get => _camera; set => _camera = value; }
+        public Client Client { get; set; }
+        public Camera Camera { get; set; }
         public string Name
         {
             get => _name;
             set
             {
-                if (IsAValidName(value))
-                {
-                    _name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
         }
 
-        public DateTime RegisterDate
-        {
-            get => _registerDate;
-        }
-        public DateTime LastModificationDate
-        {
-            get => _lastModificationDate;
-            private set => _lastModificationDate = value;
-        }
-        public DateTime? LastRenderizationDate
-        {
-            get => _lastRenderizationDate;
-            private set => _lastRenderizationDate = value;
-        }
+        public DateTime RegisterDate { get; }
 
-        public List<Model> PositionedModels { get => _positionedModels; set => _positionedModels = value; }
+        public DateTime LastModificationDate { get; private set; }
+        public DateTime? LastRenderizationDate { get; set; }
 
-        public Bitmap Preview { get => _preview; set => _preview = value; }
+        public List<Model> PositionedModels { get; set; }
+
+        public Bitmap Preview { get; set; }
 
 
         public Vector3D ShootRay(Ray ray, int depth, Random random)
@@ -126,12 +111,10 @@ namespace Render3D.BackEnd
         {
             LastRenderizationDate = DateTimeProvider.Now;
         }
-        private bool IsAValidName(string value)
+        private void ValidateName(string value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
-            return true;
         }
-
     }
 }

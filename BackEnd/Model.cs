@@ -7,7 +7,7 @@ namespace Render3D.BackEnd
 {
     public class Model
     {
-        private String _name;
+        private string _name;
         private Figure _figure;
         private Client _client;
         private Material _material;
@@ -20,10 +20,8 @@ namespace Render3D.BackEnd
             get => _name;
             set
             {
-                if (IsAValidName(value))
-                {
-                    _name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
         }
 
@@ -42,11 +40,10 @@ namespace Render3D.BackEnd
         }
         public Material Material { get => _material; set => _material = value; }
 
-        private bool IsAValidName(string Name)
+        private void ValidateName(string Name)
         {
             if (HelperValidator.IsAnEmptyString(Name)) throw new BackEndException("Name must not be empty");
             if (HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
-            return true;
         }
     }
 }

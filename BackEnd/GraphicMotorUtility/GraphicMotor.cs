@@ -15,15 +15,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
         private Bitmap _bitmap;
-        private PixelMatrix _pixelMatrix;
-
-
 
         public GraphicMotor()
         {
-            _resolutionHeight = _resolutionHeightDefault;
-            _pixelSampling = _pixelSamplingDefault;
-            _maximumDepth = _maximumDepthDefault;
+            ResolutionHeight = _resolutionHeightDefault;
+            PixelSampling = _pixelSamplingDefault;
+            MaximumDepth = _maximumDepthDefault;
         }
 
         public int ResolutionHeight
@@ -32,18 +29,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _resolutionHeight; }
             set
             {
-                if (IsAValidTheProperties(value, "resolution"))
-                {
-                    _resolutionHeight = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "resolution");
+                _resolutionHeight = value;
+
             }
         }
 
-        public PixelMatrix PixelMatrix
-        {
-            get { return _pixelMatrix; }
-            set { _pixelMatrix = value; }
-        }
+        public PixelMatrix PixelMatrix { get; set; }
 
 
         public int MaximumDepth
@@ -51,10 +43,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _maximumDepth; }
             set
             {
-                if (IsAValidTheProperties(value, "maximum depth"))
-                {
-                    _maximumDepth = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "maximum depth");
+                _maximumDepth = value;
             }
         }
 
@@ -63,10 +53,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _pixelSampling; }
             set
             {
-                if (IsAValidTheProperties(value, "pixel sampling"))
-                {
-                    _pixelSampling = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "pixel sampling");
+                _pixelSampling = value;
             }
         }
 
@@ -108,8 +96,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             int width = WidthResolution();
             int height = ResolutionHeight;
             PixelMatrix = new PixelMatrix(width, height);
-            PixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
-            String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
+            PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix);
+            String imagePPM = CreateImagePPM(PixelMatrix.Matrix);
             Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
         }
@@ -162,9 +150,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
             if (posY < ResolutionHeight)
             {
-
                 matrix[posY, posX] = pixelRGB;
-
             }
             else
             {
@@ -174,7 +160,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private string CreateImagePPM(Vector3D[,] matrix)
         {
-
             var width = WidthResolution();
             var height = ResolutionHeight;
             StringBuilder ppmString = new StringBuilder();
@@ -193,17 +178,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return ppmString.ToString();
         }
 
-        private bool IsAValidTheProperties(int value, String word)
+        private void ValidateNumberIsGreaterThanZero(int number, String word)
         {
-            if (value <= 0)
-            {
-                throw new BackEndException($"The {word} must be greater than 0.");
-            }
-            return true;
+            if (number <= 0) throw new BackEndException($"The {word} must be greater than 0.");
         }
-
-
-
-
     }
 }

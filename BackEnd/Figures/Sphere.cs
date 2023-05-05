@@ -35,9 +35,9 @@ namespace Render3D.BackEnd.Figures
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
             //(ray.Position);
-            var a = ray.Direction.Dot(ray.Direction);
-            var b = vectorOriginCenter.Dot(ray.Direction) * 2;
-            var c = vectorOriginCenter.Dot(vectorOriginCenter) - (Radius * Radius);
+            var a = ray.Direction.DotProduct(ray.Direction);
+            var b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            var c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
             var discriminant = (b * b) - (4 * a * c);
             if (discriminant < 0)
             {
