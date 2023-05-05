@@ -14,7 +14,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _resolutionHeightDefault = 3;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
-        private Bitmap _bitmap;
 
         public GraphicMotor()
         {
@@ -74,25 +73,22 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Scene previewScene = new Scene();
             previewScene.PositionedModels.Add(model);
 
-            Camera camera = new Camera();
-            camera.LookAt = model.Figure.Position;
-            camera.LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10));
-            camera.Fov = 60;
+            Camera camera = new Camera
+            {
+                LookAt = model.Figure.Position,
+                LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10)),
+                Fov = 60
+            };
 
             previewScene.Camera = camera;
 
             return Render(previewScene);
         }
 
-        public Bitmap Bitmap
-        {
-            get { return _bitmap; }
-            set { _bitmap = value; }
-        }
+        public Bitmap Bitmap { get; set; }
 
         public Bitmap Render(Scene sceneSample)
         {
-
             int width = WidthResolution();
             int height = ResolutionHeight;
             PixelMatrix = new PixelMatrix(width, height);

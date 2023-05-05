@@ -10,11 +10,6 @@ namespace Render3D.BackEnd
     {
         private String _name;
 
-        private readonly DateTime _registerDate;
-        private DateTime _lastModificationDate;
-        private DateTime? _lastRenderizationDate = null;
-        private List<Model> _positionedModels;
-
         public Scene()
         {
             Camera = new Camera();
@@ -43,7 +38,6 @@ namespace Render3D.BackEnd
         public List<Model> PositionedModels { get; set; }
 
         public Bitmap Preview { get; set; }
-
 
         public Vector3D ShootRay(Ray ray, int depth, Random random)
         {
