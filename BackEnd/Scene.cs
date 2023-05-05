@@ -13,7 +13,6 @@ namespace Render3D.BackEnd
         private readonly DateTime _registerDate;
         private DateTime _lastModificationDate;
         private DateTime? _lastRenderizationDate = null;
-
         private List<Model> _positionedModels;
 
         public Scene()
@@ -38,7 +37,6 @@ namespace Render3D.BackEnd
         }
 
         public DateTime RegisterDate { get; }
-
         public DateTime LastModificationDate { get; private set; }
         public DateTime? LastRenderizationDate { get; set; }
 

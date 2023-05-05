@@ -5,69 +5,26 @@ namespace Render3D.BackEnd
 {
     public class Camera
     {
-        private Vector3D _lookFrom;
-        private Vector3D _lookAt;
-        private Vector3D _vectorUp;
-        private Vector3D _vectorW;
-        private Vector3D _vectorU;
-        private Vector3D _vectorV;
-        private Vector3D _horizontal;
-        private Vector3D _vertical;
-        private Vector3D _corner_lowerleft;
         private double _theta;
-        private double _heightHalf;
-        private double _widthHalf;
-        private double _aspectRatio;
         private int _fov;
         private const int _minFov = 0;
         private const int _maxFov = 160;
 
-        public Vector3D LookFrom
-        {
-            get => _lookFrom;
-            set => _lookFrom = value;
-        }
-        public Vector3D LookAt
-        {
-            get => _lookAt;
-            set => _lookAt = value;
-        }
+        private const double degreesToRadians = Math.PI / 180;
+        public Vector3D LookFrom { get; set; }
+        public Vector3D LookAt { get; set; }
 
-        public Vector3D VectorW
-        {
-            get => _vectorW;
-            set => _vectorW = value;
-        }
+        public Vector3D VectorW { get; set; }
 
-        public Vector3D VectorU
-        {
-            get => _vectorU;
-            set => _vectorU = value;
-        }
+        public Vector3D VectorU { get; set; }
 
-        public Vector3D VectorV
-        {
-            get => _vectorV;
-            set => _vectorV = value;
-        }
+        public Vector3D VectorV { get; set; }
 
-        public double HeightHalf
-        {
-            get => _heightHalf;
-            set => _heightHalf = value;
-        }
+        public double HeightHalf { get; set; }
 
-        public double AspectRatio
-        {
-            get => _aspectRatio;
-            set => _aspectRatio = value;
-        }
+        public double AspectRatio { get; set; }
 
-        public double WidthHalf
-        {
-            get => _widthHalf;
-            set { _widthHalf = value; }
-        }
+        public double WidthHalf { get; set; }
 
 
 
@@ -78,50 +35,34 @@ namespace Render3D.BackEnd
             set
             {
                 _theta = value;
-                _heightHalf = Math.Tan(Theta / 2);
+                HeightHalf = Math.Tan(Theta / 2);
             }
 
         }
 
-        public Vector3D VectorUp
-        {
-            get => _vectorUp;
-            set => _vectorUp = value;
-        }
+        public Vector3D VectorUp { get; set; }
 
-        public Vector3D Corner_lowerLeft
-        {
-            get => _corner_lowerleft;
-            set => _corner_lowerleft = value;
-        }
+        public Vector3D Corner_lowerLeft { get; set; }
 
-        public Vector3D Horizontal
-        {
-            get => _horizontal;
-            set => _horizontal = value;
-        }
-        public Vector3D Vertical
-        {
-            get => _vertical;
-            set => _vertical = value;
-        }
+        public Vector3D Horizontal { get; set; }
+        public Vector3D Vertical { get; set; }
 
         public Camera()
         {
-            _lookAt = new Vector3D(0, 2, 5);
-            _vectorUp = new Vector3D(0, 1, 0);
+            LookAt = new Vector3D(0, 2, 5);
+            VectorUp = new Vector3D(0, 1, 0);
             Fov = 30;
             _theta = Fov * Math.PI / 180;
-            _heightHalf = Math.Tan(Theta / 2);
-            _aspectRatio = 16.0 / 9.0;
-            _widthHalf = AspectRatio * HeightHalf;
-            _lookFrom = new Vector3D(0, 2, 0);
-            _vectorW = LookFrom.Substract(LookAt).GetUnit();
-            _vectorU = VectorUp.CrossProduct(VectorW).GetUnit();
-            _vectorV = VectorW.CrossProduct(VectorU);
-            _corner_lowerleft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
-            _horizontal = VectorU.Multiply(WidthHalf * 2);
-            _vertical = VectorV.Multiply(HeightHalf * 2);
+            HeightHalf = Math.Tan(Theta / 2);
+            AspectRatio = 16.0 / 9.0;
+            WidthHalf = AspectRatio * HeightHalf;
+            LookFrom = new Vector3D(0, 2, 0);
+            VectorW = LookFrom.Substract(LookAt).GetUnit();
+            VectorU = VectorUp.CrossProduct(VectorW).GetUnit();
+            VectorV = VectorW.CrossProduct(VectorU);
+            Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply(WidthHalf)).Substract(VectorV.Multiply(HeightHalf)).Substract(VectorW);
+            Horizontal = VectorU.Multiply(WidthHalf * 2);
+            Vertical = VectorV.Multiply(HeightHalf * 2);
         }
 
         public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio)
@@ -147,21 +88,18 @@ namespace Render3D.BackEnd
 
             set
             {
-                if (IsAValidName(value))
-                {
-                    _fov = value;
-                    _theta = Fov * Math.PI / 180;
-                }
+                ValidateName(value);
+                _fov = value;
+                _theta = Fov * degreesToRadians;
             }
         }
 
-        private bool IsAValidName(int value)
+        private void ValidateName(int value)
         {
             if (!HelperValidator.IsANumberInRange(value, _minFov, _maxFov))
             {
                 throw new BackEndException($"FoV must be between {_minFov} and {_maxFov}");
             }
-            return true;
         }
 
         public bool Equals(Camera other)
