@@ -111,7 +111,7 @@
             this.btnModel.TabIndex = 3;
             this.btnModel.Text = "Models!";
             this.btnModel.UseVisualStyleBackColor = true;
-            this.btnModel.Click += new System.EventHandler(this.btnModel_Click);
+            this.btnModel.Click += new System.EventHandler(this.BtnModel_Click);
             // 
             // btnMaterial
             // 
@@ -123,7 +123,7 @@
             this.btnMaterial.TabIndex = 2;
             this.btnMaterial.Text = "Materials!";
             this.btnMaterial.UseVisualStyleBackColor = true;
-            this.btnMaterial.Click += new System.EventHandler(this.btnMaterial_Click);
+            this.btnMaterial.Click += new System.EventHandler(this.BtnMaterial_Click);
             // 
             // btnFigure
             // 
@@ -135,7 +135,7 @@
             this.btnFigure.TabIndex = 1;
             this.btnFigure.Text = "Figures!";
             this.btnFigure.UseVisualStyleBackColor = true;
-            this.btnFigure.Click += new System.EventHandler(this.btnFigure_Click);
+            this.btnFigure.Click += new System.EventHandler(this.BtnFigure_Click);
             // 
             // btnLogOut
             // 
@@ -147,7 +147,7 @@
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            this.btnLogOut.Click += new System.EventHandler(this.BtnLogOut_Click);
             // 
             // pnlMenuControler
             // 
@@ -180,7 +180,7 @@
             this.Name = "CreationMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "au";
-            this.Shown += new System.EventHandler(this.variablesInitialize);
+            this.Shown += new System.EventHandler(this.VariablesInitialize);
             this.panel3.ResumeLayout(false);
             this.pnlMenuControler.ResumeLayout(false);
             this.pnlMenuControler.PerformLayout();

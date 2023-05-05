@@ -21,25 +21,34 @@ namespace Render3D.UserInterface.Panels
             
         }
 
-        private void btnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
             String materialName= txtMaterialName.Text;
             int[] materialColors= new int[rgbLength];
             materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
             materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
-            render.dataTransferObject.tryToAddAMaterial(render.clientName,materialName, materialColors);
-            creation.showMaterialList();
+            try
+            {
+                render.materialController.AddMaterial(render.clientName, materialName, materialColors);
+            }catch (Exception ex)
+            {
+                lblExceptionError.Text = ex.Message;
+            }
+            
+            creation.ShowMaterialList();
             txtMaterialName.Text="";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;
             nrBlueColor.Value = 0;
+            lblExceptionError.Text = "";
         }
 
-        private void variablesInitialize(object sender, EventArgs e)
+        private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = ((CreationMenu)this.Parent.Parent);
             render = ((Render3DIU)creation.Parent.Parent);
+            lblExceptionError.Text = "";
         }
     }
 }

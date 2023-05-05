@@ -96,7 +96,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Camera camera = new Camera();
             camera.LookAt = model.Figure.Position;
             camera.LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10));
-            camera.Fov = 60;
+            camera.Fov = 160;
 
             previewScene.Camera = camera;
 

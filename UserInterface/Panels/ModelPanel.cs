@@ -23,14 +23,14 @@ namespace Render3D.UserInterface.Panels
             InitializeComponent();
         }
 
-        private void variableInitialize(object sender, EventArgs e)
+        private void VariableInitialize(object sender, EventArgs e)
         {
             creation = ((CreationMenu)this.Parent.Parent);
             render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
-            List<Figure> figureList= render.dataTransferObject.DataWarehouse.Figures;
-            List <Material> materialList=render.dataTransferObject.DataWarehouse.Materials;
+            List<Figure> figureList= render.dataWarehouse.Figures;
+            List <Material> materialList=render.dataWarehouse.Materials;
             foreach (Figure figure in figureList)
             {
                 lstFigure.Items.Add(figure);
@@ -39,28 +39,42 @@ namespace Render3D.UserInterface.Panels
             { 
                 lstMaterial.Items.Add(material);
             }
-
+            lblExceptionError.Text = "";
         }
 
-        private void btnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            String modelName= txtModelName.Text; 
+            string modelName= txtModelName.Text; 
             Figure figure= lstFigure.SelectedItem as Figure;
             Material material= lstMaterial.SelectedItem as Material;
             if (figure == null || material==null) {
                 return;
             }
-            
-            if(checkGeneratePreview.Checked)
+
+            if (checkGeneratePreview.Checked)
             {
-                render.dataTransferObject.tryToAddAModelWithPreview(render.clientName, modelName, figure, material);
+                try {
+                    render.modelController.AddAModelWithPreview(render.clientName, modelName, figure, material);
+                }
+                catch (Exception ex)
+                {
+                    lblExceptionError.Text = ex.Message;
+                }
             }
             else
             {
-                render.dataTransferObject.tryToAddAModelWithoutPreview(render.clientName, modelName, figure, material);
+                try
+                {
+                    render.modelController.AddAModelWithoutPreview(render.clientName, modelName, figure, material);
+                }
+                catch (Exception ex)
+                {
+                    lblExceptionError.Text = ex.Message;
+                }
+
             }
             
-            creation.showModelList();
+            creation.ShowModelList();
             txtModelName.Text = "";
 
         }

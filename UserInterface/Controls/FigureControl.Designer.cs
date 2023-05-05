@@ -55,7 +55,7 @@
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -66,7 +66,7 @@
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // pboxImage
             // 
@@ -89,8 +89,8 @@
             this.txtFigureName.ReadOnly = true;
             this.txtFigureName.Size = new System.Drawing.Size(108, 22);
             this.txtFigureName.TabIndex = 5;
-            this.txtFigureName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clientPressEnter);
-            this.txtFigureName.Leave += new System.EventHandler(this.clientLeaves);
+            this.txtFigureName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClientPressEnter);
+            this.txtFigureName.Leave += new System.EventHandler(this.ClientLeaves);
             // 
             // FigureControl
             // 

@@ -47,7 +47,7 @@
             this.btnDeleteModel.TabIndex = 8;
             this.btnDeleteModel.Text = "Delete";
             this.btnDeleteModel.UseVisualStyleBackColor = true;
-            this.btnDeleteModel.Click += new System.EventHandler(this.btnDeleteModel_Click);
+            this.btnDeleteModel.Click += new System.EventHandler(this.BtnDeleteModel_Click);
             // 
             // btnEditModelName
             // 
@@ -59,7 +59,7 @@
             this.btnEditModelName.TabIndex = 7;
             this.btnEditModelName.Text = "Edit";
             this.btnEditModelName.UseVisualStyleBackColor = true;
-            this.btnEditModelName.Click += new System.EventHandler(this.btnEditModelName_Click);
+            this.btnEditModelName.Click += new System.EventHandler(this.BtnEditModelName_Click);
             // 
             // txtModelName
             // 
@@ -100,9 +100,10 @@
             // pBoxPreview
             // 
             this.pBoxPreview.Image = global::UserInterface.Properties.Resources.LoginIcon;
-            this.pBoxPreview.Location = new System.Drawing.Point(3, 22);
+            this.pBoxPreview.Location = new System.Drawing.Point(0, 33);
             this.pBoxPreview.Name = "pBoxPreview";
-            this.pBoxPreview.Size = new System.Drawing.Size(97, 73);
+            this.pBoxPreview.Size = new System.Drawing.Size(100, 67);
+            this.pBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBoxPreview.TabIndex = 11;
             this.pBoxPreview.TabStop = false;
             // 

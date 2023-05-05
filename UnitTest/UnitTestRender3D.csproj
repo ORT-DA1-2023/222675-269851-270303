@@ -50,7 +50,11 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllersTests\ClientControllerTest.cs" />
     <Compile Include="ClientTest.cs" />
+    <Compile Include="ControllersTests\FigureControllerTest.cs" />
+    <Compile Include="ControllersTests\MaterialControllerTest.cs" />
+    <Compile Include="ControllersTests\ModelControllerTest.cs" />
     <Compile Include="DataWarehouseTest.cs" />
     <Compile Include="LambertianTest.cs" />
     <Compile Include="ModelTest.cs" />
@@ -61,7 +65,6 @@
     <Compile Include="FigureTest.cs" />
     <Compile Include="RayTest.cs" />
     <Compile Include="GaphicMotorTest.cs" />
-    <Compile Include="DataTransferObjectTest.cs" />
     <Compile Include="PixelMatrixTest.cs" />
     <Compile Include="CameraTest.cs" />
     <Compile Include="DateTimeProviderTest.cs" />

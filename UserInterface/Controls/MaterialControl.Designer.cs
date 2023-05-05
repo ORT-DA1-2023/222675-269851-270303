@@ -108,7 +108,7 @@
             this.btnDeleteMaterial.TabIndex = 5;
             this.btnDeleteMaterial.Text = "Delete";
             this.btnDeleteMaterial.UseVisualStyleBackColor = true;
-            this.btnDeleteMaterial.Click += new System.EventHandler(this.btnDeleteMaterial_Click);
+            this.btnDeleteMaterial.Click += new System.EventHandler(this.BtnDeleteMaterial_Click);
             // 
             // MaterialControl
             // 

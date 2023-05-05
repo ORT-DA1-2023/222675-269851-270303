@@ -21,19 +21,30 @@ namespace Render3D.UserInterface
         }
 
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
-            String clientName= txtClientName.Text;
-            String clientPassword= txtClientPassword.Text;
-            if (render.dataTransferObject.alreadyExistsThisClient(clientName,clientPassword)) 
+            string clientName= txtClientName.Text;
+            string clientPassword= txtClientPassword.Text;
+            Client client= render.clientController.GetClientByName(clientName);
+            if (client.Name!=null && client.Password.Equals(clientPassword))
             {
                 txtClientName.Text = "";
                 txtClientPassword.Text = "";
                 render.clientName = clientName;
                 render.enterMenu();
             }
+            else
+            {
+                if (client.Name == null)
+                {
+                    lblExceptionError.Text = "There are no clients with that name";
+                }
+                else {
+                    lblExceptionError.Text = "Password is incorrect";
+                }
+            }
         }
-        private void btnSignIn_Click(object sender, EventArgs e)
+        private void BtnSignIn_Click(object sender, EventArgs e)
         {
             txtClientName.Text = "";
             txtClientPassword.Text = "";
@@ -41,9 +52,10 @@ namespace Render3D.UserInterface
         }
 
 
-        private void variablesInitialize(object sender, EventArgs e)
+        private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
+            lblExceptionError.Text = "";
         }
     }
 }

@@ -40,6 +40,7 @@
             this.txtClientName = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.lblExceptionError = new System.Windows.Forms.Label();
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // pnlLogin
             // 
             this.pnlLogin.BackColor = System.Drawing.Color.White;
+            this.pnlLogin.Controls.Add(this.lblExceptionError);
             this.pnlLogin.Controls.Add(this.btnSignUp);
             this.pnlLogin.Controls.Add(this.label1);
             this.pnlLogin.Controls.Add(this.btnLogin);
@@ -75,13 +77,13 @@
             // 
             // btnSignUp
             // 
-            this.btnSignUp.Location = new System.Drawing.Point(402, 411);
+            this.btnSignUp.Location = new System.Drawing.Point(403, 458);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(79, 26);
             this.btnSignUp.TabIndex = 8;
             this.btnSignUp.Text = "Sign Up";
             this.btnSignUp.UseVisualStyleBackColor = true;
-            this.btnSignUp.Click += new System.EventHandler(this.btnSignIn_Click);
+            this.btnSignUp.Click += new System.EventHandler(this.BtnSignIn_Click);
             // 
             // label1
             // 
@@ -104,7 +106,7 @@
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // txtClientPassword
             // 
@@ -150,6 +152,17 @@
             this.txtClientName.Size = new System.Drawing.Size(205, 40);
             this.txtClientName.TabIndex = 2;
             // 
+            // lblExceptionError
+            // 
+            this.lblExceptionError.AutoSize = true;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Location = new System.Drawing.Point(274, 406);
+            this.lblExceptionError.Name = "lblExceptionError";
+            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.TabIndex = 18;
+            this.lblExceptionError.Text = "error";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,7 +175,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Shown += new System.EventHandler(this.variablesInitialize);
+            this.Shown += new System.EventHandler(this.VariablesInitialize);
             this.pnlLogin.ResumeLayout(false);
             this.pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -183,6 +196,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         public System.Windows.Forms.TextBox txtClientPassword;
+        private System.Windows.Forms.Label lblExceptionError;
     }
 }
 

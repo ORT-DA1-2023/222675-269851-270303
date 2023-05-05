@@ -19,18 +19,16 @@ namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
     {
-        private DataTransferObject _dataTransferObject;
         private Render3DIU render;
         public CreationMenu()
         {
             InitializeComponent();
         }
 
-        public void showFigureList()
+        public void ShowFigureList()
         {
             flObjectList.Controls.Clear();
-            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
-            List<Figure> figureList = listConteiners.Figures;
+            List<Figure> figureList = render.dataWarehouse.Figures;
             foreach (Sphere figure in figureList)
             {
                 FigureControl figureControl = new FigureControl(figure);
@@ -38,22 +36,20 @@ namespace Render3D.UserInterface
             }
         }
 
-        public void showMaterialList()
+        public void ShowMaterialList()
         {
             flObjectList.Controls.Clear();
-            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
-            List<Material> materialList = listConteiners.Materials;
+            List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Material material in materialList)
             {
                 MaterialControl materialControl = new MaterialControl(material);
                 flObjectList.Controls.Add(materialControl);
             }
         }
-        public void showModelList()
+        public void ShowModelList()
         {
             flObjectList.Controls.Clear();
-            DataWarehouse listConteiners = render.dataTransferObject.DataWarehouse;
-            List<Model> models = listConteiners.Models;
+            List<Model> models = render.dataWarehouse.Models;
             foreach (Model model in models)
             {
                 ModelControl modelControl = new ModelControl(model);
@@ -62,23 +58,23 @@ namespace Render3D.UserInterface
         }
 
 
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void BtnLogOut_Click(object sender, EventArgs e)
         {
             render.userWantsToLogIn();
         }
-        private void btnMaterial_Click(object sender, EventArgs e)
+        private void BtnMaterial_Click(object sender, EventArgs e)
         {
-            refresh("Material");
+            Refresh("Material");
         }
 
-        private void btnFigure_Click(object sender, EventArgs e)
+        private void BtnFigure_Click(object sender, EventArgs e)
         {
-            refresh("Figure");
+            Refresh("Figure");
         }
 
-        private void btnModel_Click(object sender, EventArgs e)
+        private void BtnModel_Click(object sender, EventArgs e)
         {
-            refresh("Model");
+            Refresh("Model");
         }
 
         
@@ -97,60 +93,75 @@ namespace Render3D.UserInterface
             form.Show();
         }
 
-        private void variablesInitialize(object sender, EventArgs e)
+        private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
             lblShowClientName.Text = "Welcome back \n" + render.clientName + "!!";
             showObjectCreationPanel(new FigurePanel());
-            showFigureList();
+            ShowFigureList();
         }
-        public void refresh(String toShow)
+        public void Refresh(String toShow)
         {
             if(toShow=="Material")
             {
                 showObjectCreationPanel(new MaterialPanel());
-                showMaterialList();
+                ShowMaterialList();
             }
             if (toShow == "Figure")
             {
                 showObjectCreationPanel(new FigurePanel());
-                showFigureList();
+                ShowFigureList();
             }
             if(toShow == "Model")
             {
                 showObjectCreationPanel(new ModelPanel());
-                showModelList();
+                ShowModelList();
             }
             
         }
-        public bool figureNameHasBeenChanged(String oldName,string newName)
+        public bool FigureNameHasBeenChanged(String oldName,string newName)
         {
-            return (render.dataTransferObject.ifPosibleChangeFigureName(render.clientName,oldName, newName));
+           render.figureController.ChangeFigureName(render.clientName,oldName, newName);
+            if (render.figureController.GetFigureByNameAndClient(render.clientName, newName).Name != null)
+            {
+                return true;
+            }
+            return false;   
         }
 
-        public void deleteFigure(string figureName)
+        public void DeleteFigure(string figureName)
         {
-          render.dataTransferObject.deleteFigureInList(render.clientName,figureName);
+          render.figureController.DeleteFigureInList(render.clientName,figureName);
         }
 
-        internal bool materialNameHasBeenChanged(string oldName, string newName)
+        internal bool MaterialNameHasBeenChanged(string oldName, string newName)
         {
-            return (render.dataTransferObject.ifPosibleChangeMaterialName(render.clientName, oldName, newName));
+             render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
+            if (render.materialController.GetMaterialByNameAndClient(render.clientName, newName) != null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        internal void deleteMaterial(string materialName)
+        internal void DeleteMaterial(string materialName)
         {
-          render.dataTransferObject.deleteMaterialInList(render.clientName, materialName);
+          render.materialController.DeleteMaterialInList(render.clientName, materialName);
         }
 
-        internal bool modelNameHasBeenChanged(string oldName, string newName)
+        internal bool ModelNameHasBeenChanged(string oldName, string newName)
         {
-            return (render.dataTransferObject.ifPosibleChangeModelName(render.clientName,oldName,newName));
+             render.modelController.ChangeModelName(render.clientName,oldName,newName);
+            if (render.modelController.GetModelByNameAndClient(render.clientName, newName) != null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        internal void deleteModel(string modelName)
+        internal void DeleteModel(string modelName)
         {
-         render.dataTransferObject.deleteModelInList(render.clientName, modelName);
+         render.modelController.DeleteModelInList(render.clientName, modelName);
         }
     }
 }
