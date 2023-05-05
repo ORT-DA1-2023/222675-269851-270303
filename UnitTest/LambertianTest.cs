@@ -59,21 +59,21 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
         public void givenASmallerThanPossibleRGBItThrowsABackendException()
         {
-            materialSample.Color = colorLowerThan;
+            materialSample.Attenuation = colorLowerThan;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
         public void givenABiggerThanPossibleRGBItThrowsABackendException()
         {
-            materialSample.Color = colorGreaterThan;
+            materialSample.Attenuation = colorGreaterThan;
         }
         [TestMethod]
         public void givenAValidRGBItAssignsItToTheMaterial()
         {
-            materialSample.Color = new Vector3D(1, 2, 3);
-            Assert.IsTrue(materialSample.Color.X == 1);
-            Assert.IsTrue(materialSample.Color.Y == 2);
-            Assert.IsTrue(materialSample.Color.Z == 3);
+            materialSample.Attenuation = new Vector3D(1, 2, 3);
+            Assert.IsTrue(materialSample.Attenuation.X == 1);
+            Assert.IsTrue(materialSample.Attenuation.Y == 2);
+            Assert.IsTrue(materialSample.Attenuation.Z == 3);
 
         }
         [TestMethod]
