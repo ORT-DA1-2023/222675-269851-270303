@@ -13,15 +13,10 @@ namespace Render3D.BackEnd.Controllers
     {
         private DataWarehouse _dataWarehouse;
         private ClientController _clientController;
-        private FigureController _figureController;
-        private MaterialController _materialController;
         private GraphicMotor _graphicMotor= new GraphicMotor();
 
         public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
         public ClientController ClientController { get => _clientController; set => _clientController = value; }
-        public FigureController FigureController { get => _figureController; set => _figureController = value; }
-        public MaterialController MaterialController { get => _materialController; set => _materialController = value; }
-
         public void AddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
             
@@ -35,8 +30,7 @@ namespace Render3D.BackEnd.Controllers
                 catch (Exception e)
                 {
                 }
-            }
-            
+            }  
         }
         public void AddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {

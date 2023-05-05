@@ -76,7 +76,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials[1].Name == "materialSample2");
         }
         [TestMethod]
-        public void GivenANameDeletesTheFigure()
+        public void GivenANameDeletesTheMaterial()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
@@ -85,7 +85,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
         }
         [TestMethod]
-        public void GivenANameDoesNotDeleteTheFigure()
+        public void GivenANameDoesNotDeleteTheMaterial()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
             _materialController.AddMaterial("clientSample1", "materialSample1", _colorArray);
