@@ -16,7 +16,7 @@ namespace Render3D.BackEnd
 
         public Client()
         {
-            _registerDate = DateTimeProvider.Now;
+            RegisterDate = DateTimeProvider.Now;
 
         }
 
@@ -25,10 +25,8 @@ namespace Render3D.BackEnd
             get { return _name; }
             set
             {
-                if (IsAValidName(value))
-                {
-                    _name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
         }
         public String Password
@@ -36,19 +34,14 @@ namespace Render3D.BackEnd
             get { return _password; }
             set
             {
-                if (IsAValidPassword(value))
-                {
-                    _password = value;
-                }
+                ValidatePassword(value);
+                _password = value;
             }
         }
 
-        public DateTime RegisterDate
-        {
-            get => _registerDate;
-        }
+        public DateTime RegisterDate { get; }
 
-        private bool IsAValidName(String value)
+        private void ValidateName(String value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -58,10 +51,9 @@ namespace Render3D.BackEnd
             {
                 throw new BackEndException($"Name length must be between {nameMinimumLength} and {nameMaximumLength}");
             }
-            return true;
         }
 
-        private bool IsAValidPassword(String value)
+        private void ValidatePassword(String value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -71,13 +63,11 @@ namespace Render3D.BackEnd
             {
                 throw new BackEndException($"Password length must be between {passwordMinimumLength} and {passwordMaximumLength}");
             }
-
             if (!HelperValidator.ContainsACapital(value))
             {
                 throw new BackEndException("Password must contain at least one capital letter");
 
             }
-            return true;
         }
         public bool Equals(Client p)
         {

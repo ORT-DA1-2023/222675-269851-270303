@@ -18,7 +18,6 @@
             Attenuation = color;
         }
         public double Module { get; set; }
-
         public Vector3D Intersection { get; set; }
         public Vector3D Normal { get; set; }
         public Vector3D Attenuation { get; set; }
