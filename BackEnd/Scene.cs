@@ -1,6 +1,7 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -43,35 +44,43 @@ namespace Render3D.BackEnd
         {
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
+            Model modelSample = new Model();
             foreach (Model element in PositionedModels)
             {
-                HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, (element.Material).Attenuation);
+                HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
                 if (hit != null)
                 {
+                    modelSample = element;
                     hitRecord = hit;
                     moduleMax = hit.Module;
                 }
             }
+            return AttenuationOfBlueSkyOrFigure(depth, hitRecord, random, modelSample, ray);
+        }
+
+        private Vector3D AttenuationOfBlueSkyOrFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray)
+        {
             if (hitRecord != null)
             {
-                if (depth > 0)
-                {
-                    //todo menos shoot ray puede ir en material
-                    Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere(random));
-                    Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
-                    Ray newRay = new Ray(hitRecord.Intersection, newVector);
-                    Vector3D color = ShootRay(newRay, depth - 1, random);
-                    Vector3D attenuation = hitRecord.Attenuation;
-                    return new Vector3D(attenuation.X * color.X, attenuation.Y * color.Y, attenuation.Z * color.Z);
-                }
-                else
-                {
-                    return new Vector3D(0, 0, 0);
-                }
+                return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, random, modelSample);
             }
             else
             {
                 return GetBlueSky(ray);
+            }
+        }
+
+        private Vector3D GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
+        {
+            if (MaxiumDepth > 0)
+            {
+                Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
+                Vector3D color = ShootRay(newRay, MaxiumDepth - 1, random);
+                return new Vector3D(hitRecord.Attenuation.X * color.X, hitRecord.Attenuation.Y * color.Y, hitRecord.Attenuation.Z * color.Z);
+            }
+            else
+            {
+                return new Vector3D(0, 0, 0);
             }
         }
 
@@ -84,16 +93,7 @@ namespace Render3D.BackEnd
             return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
         }
 
-        private Vector3D GetRandomInUnitSphere(Random random)
-        {
-            Vector3D vector;
-            do
-            {
-                Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
-            } while (vector.SquaredLength() >= 1);
-            return vector;
-        }
+       
 
         public void UpdateLastModificationDate()
         {

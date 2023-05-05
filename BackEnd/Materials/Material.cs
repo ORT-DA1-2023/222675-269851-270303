@@ -38,7 +38,7 @@ namespace Render3D.BackEnd.Materials
             }
         }
 
-        //para donde se va el rayo
+        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
 
         protected void ValidateName(string value)
         {

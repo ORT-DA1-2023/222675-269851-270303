@@ -72,6 +72,8 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
+
+
         private void ValidateRadius(double value)
         {
             if (value <= 0)
