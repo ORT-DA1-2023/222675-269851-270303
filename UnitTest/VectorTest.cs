@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Render3D.UnitTest
@@ -15,9 +12,9 @@ namespace Render3D.UnitTest
         private const double twoFiveFive = 255;
         private const double two = 2;
         private Vector3D allOnes;
-        private Vector3D allTwos = new Vector3D(2, 2, 2);
-        private Vector3D allTree = new Vector3D(3, 3, 3);
-        private Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
+        private readonly Vector3D allTwos = new Vector3D(2, 2, 2);
+        private readonly Vector3D allTree = new Vector3D(3, 3, 3);
+        private readonly Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
 
         [TestInitialize]
         public void initialize()
@@ -38,7 +35,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAVectorItAssignsTheCoordinates()
         {
-            Vector3D all2 = new Vector3D(1,1,1);
+            Vector3D all2 = new Vector3D(1, 1, 1);
             all2.X = 2;
             all2.Y = 2;
             all2.Z = 2;

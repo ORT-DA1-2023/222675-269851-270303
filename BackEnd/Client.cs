@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
@@ -19,13 +11,13 @@ namespace Render3D.BackEnd
 
         protected string _name;
         protected string _password;
-        private DateTime _registerDate;
+        private readonly DateTime _registerDate;
 
 
         public Client()
         {
             _registerDate = DateTimeProvider.Now;
-            
+
         }
 
         public String Name

@@ -1,5 +1,4 @@
 ﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using System;
 using System.Drawing;
@@ -16,22 +15,23 @@ namespace Render3D.BackEnd
 
         public Client Client { get => _client; set => _client = value; }
 
-        public string Name { 
-            get=>_name;
+        public string Name
+        {
+            get => _name;
             set
             {
                 if (IsAValidName(value))
                 {
                     _name = value;
                 }
-            } 
+            }
         }
 
         public Figure Figure { get => _figure; set => _figure = value; }
 
         public Bitmap Preview
         {
-            get=>_preview;
+            get => _preview;
             set
             {
                 if (value != null)
@@ -44,9 +44,9 @@ namespace Render3D.BackEnd
 
         private bool IsAValidName(string Name)
         {
-            if(HelperValidator.IsAnEmptyString(Name))throw new BackEndException("Name must not be empty");
-            if(HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
+            if (HelperValidator.IsAnEmptyString(Name)) throw new BackEndException("Name must not be empty");
+            if (HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
             return true;
-        }   
+        }
     }
 }

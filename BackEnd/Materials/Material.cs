@@ -1,9 +1,4 @@
-﻿using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Render3D.BackEnd.Materials
 {
@@ -12,9 +7,11 @@ namespace Render3D.BackEnd.Materials
     {
         protected String _name;
         protected Client _client;
-        
+
         public abstract String Name { get; set; }
-        public abstract Client Client { get; set;  }
+        public abstract Client Client { get; set; }
+
+        //para donde se va el rayo
 
         protected bool IsAValidName(string value)
         {

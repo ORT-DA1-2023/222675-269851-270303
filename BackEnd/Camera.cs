@@ -1,10 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
@@ -74,7 +69,7 @@ namespace Render3D.BackEnd
             set { _widthHalf = value; }
         }
 
-        
+
 
 
         public double Theta
@@ -85,7 +80,7 @@ namespace Render3D.BackEnd
                 _theta = value;
                 _heightHalf = Math.Tan(Theta / 2);
             }
-            
+
         }
 
         public Vector3D VectorUp
@@ -116,8 +111,8 @@ namespace Render3D.BackEnd
             _lookAt = new Vector3D(0, 2, 5);
             _vectorUp = new Vector3D(0, 1, 0);
             Fov = 30;
-            _theta = Fov*Math.PI/180;
-            _heightHalf  = Math.Tan(Theta/2);
+            _theta = Fov * Math.PI / 180;
+            _heightHalf = Math.Tan(Theta / 2);
             _aspectRatio = 16.0 / 9.0;
             _widthHalf = AspectRatio * HeightHalf;
             _lookFrom = new Vector3D(0, 2, 0);
@@ -171,7 +166,7 @@ namespace Render3D.BackEnd
 
         public bool Equals(Camera other)
         {
-            return  this.Fov == other.Fov && this.LookFrom.Equals(other.LookFrom) && this.LookAt.Equals(other.LookAt);
+            return this.Fov == other.Fov && this.LookFrom.Equals(other.LookFrom) && this.LookAt.Equals(other.LookAt);
         }
 
         public Ray GetRay(double u, double v)
@@ -180,6 +175,6 @@ namespace Render3D.BackEnd
             Vector3D verticalPosition = Vertical.Multiply(v);
             return new Ray(LookFrom, Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom));
         }
- 
+
     }
 }

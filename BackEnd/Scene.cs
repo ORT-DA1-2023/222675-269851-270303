@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.ExceptionServices;
-using System.Xml.Linq;
-using Render3D.BackEnd;
-using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd
 {
@@ -15,7 +11,7 @@ namespace Render3D.BackEnd
         private Client _client;
         private String _name;
 
-        private DateTime _registerDate;
+        private readonly DateTime _registerDate;
         private DateTime _lastModificationDate;
         private DateTime? _lastRenderizationDate = null;
 
@@ -83,6 +79,7 @@ namespace Render3D.BackEnd
             {
                 if (depth > 0)
                 {
+                    //todo menos shoot ray puede ir en material
                     Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere(random));
                     Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
                     Ray newRay = new Ray(hitRecord.Intersection, newVector);

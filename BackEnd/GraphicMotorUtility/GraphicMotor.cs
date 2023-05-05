@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.IO.Pipes;
-using System.IO;
-using System.ComponentModel.Design;
-using System.Runtime.Remoting.Messaging;
-using System.Text.RegularExpressions;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -54,7 +47,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
 
         public int MaximumDepth
-        { 
+        {
             get { return _maximumDepth; }
             set
             {
@@ -79,13 +72,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private int WidthResolution()
         {
-             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            return (ResolutionHeight * _resultionWidthDefault) / _resolutionHeightDefault;
         }
 
 
         public int AspectRatio()
         {
-            return  ResolutionHeight / WidthResolution();
+            return ResolutionHeight / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)
@@ -111,20 +104,20 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap Render(Scene sceneSample)
         {
-            
+
             int width = WidthResolution();
             int height = ResolutionHeight;
             PixelMatrix = new PixelMatrix(width, height);
             PixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
             String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
-            Bitmap = GenerateBitmap(new Bitmap(width,height), imagePPM);
+            Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
         }
 
         private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
         {
             string[] linesImagePPM = imagePPM.Split('\n');
-            for (int i = 3; i < linesImagePPM.Length-1; i++ )
+            for (int i = 3; i < linesImagePPM.Length - 1; i++)
             {
                 var rgbValues = linesImagePPM[i].Split(' ').Select(value => (value)).ToArray();
                 var r = rgbValues[0];
@@ -139,7 +132,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
+        private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix)
         {
             Random random = new Random();
             for (var row = ResolutionHeight - 1; row >= 0; row--)
@@ -149,14 +142,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     Vector3D pixelColor = new Vector3D(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
-                       
+
                         double u = (column + random.NextDouble()) / WidthResolution();
                         double v = (row + random.NextDouble()) / ResolutionHeight;
                         Ray ray = sceneSample.Camera.GetRay(u, v);
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
-                   SavePixel(row, column, pixelColor, matrix);
+                    SavePixel(row, column, pixelColor, matrix);
                 }
             }
             return matrix;
@@ -169,7 +162,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
             if (posY < ResolutionHeight)
             {
-               
+
                 matrix[posY, posX] = pixelRGB;
 
             }
@@ -179,7 +172,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        private string CreateImagePPM(Vector3D[,] matrix)  
+        private string CreateImagePPM(Vector3D[,] matrix)
         {
 
             var width = WidthResolution();
@@ -196,19 +189,19 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
-            Console.WriteLine( ppmString.ToString() );
+            Console.WriteLine(ppmString.ToString());
             return ppmString.ToString();
         }
 
         private bool IsAValidTheProperties(int value, String word)
         {
-            if (value<=0)
+            if (value <= 0)
             {
                 throw new BackEndException($"The {word} must be greater than 0.");
             }
             return true;
         }
-       
+
 
 
 

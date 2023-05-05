@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Render3D.UnitTest
 {
@@ -16,14 +13,13 @@ namespace Render3D.UnitTest
         private const string tenCharName = "Abcdefghij";
         private const string elevenCharName = "Abcdefghijk";
         private const string nonAlphanumericalName = "_*";
-
-        int minNumber = 1;
-        int maxNumber = 10;
+        private readonly int minNumber = 1;
+        private readonly int maxNumber = 10;
 
         [TestMethod]
         public void givenANameShorterThanTheMinimumItReturnsFalse()
         {
-            bool result = HelperValidator.IsLengthBetween(twoCharName,minLength,maxLength);
+            bool result = HelperValidator.IsLengthBetween(twoCharName, minLength, maxLength);
             Assert.IsFalse(result);
         }
 
@@ -44,14 +40,14 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenANameStartingWithSpacesReturnTrue()
         {
-            bool result= HelperValidator.IsTrimmable(" "+tenCharName);
+            bool result = HelperValidator.IsTrimmable(" " + tenCharName);
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void givenANameEndingWithSpacesReturnTrue()
         {
-            bool result = HelperValidator.IsTrimmable(tenCharName+" ");
+            bool result = HelperValidator.IsTrimmable(tenCharName + " ");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -89,7 +85,7 @@ namespace Render3D.UnitTest
             Assert.IsTrue(result);
         }
 
-        [TestMethod]    
+        [TestMethod]
         public void givenANameWithoutCapitalsItReturnsFalse()
         {
             bool result = HelperValidator.ContainsACapital("nocapitals");
@@ -128,7 +124,7 @@ namespace Render3D.UnitTest
         public void givenAnIntEqualToTheMinimumItReturnsTrue()
         {
             int num = minNumber;
-            Assert.IsTrue(HelperValidator.IsANumberInRange(num,minNumber, maxNumber));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntEqualToTheMaximumItReturnsTrue()
@@ -139,7 +135,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAnIntLargestThanTheMaximumItReturnsFalse()
         {
-            int num = maxNumber+1;
+            int num = maxNumber + 1;
             Assert.IsFalse(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
         [TestMethod]

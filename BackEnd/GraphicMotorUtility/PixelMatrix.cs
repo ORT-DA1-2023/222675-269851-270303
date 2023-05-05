@@ -1,16 +1,14 @@
-﻿using System.Drawing;
-
-namespace Render3D.BackEnd.GraphicMotorUtility
+﻿namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class PixelMatrix
     {
         private Vector3D[,] _matrix;
-        private int _width;
-        private int _height;
+        private readonly int _width;
+        private readonly int _height;
 
         public PixelMatrix()
         {
-            
+
         }
 
         public PixelMatrix(int width, int height)
@@ -25,6 +23,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _matrix; }
             set { _matrix = value; }
         }
-       
+
     }
 }

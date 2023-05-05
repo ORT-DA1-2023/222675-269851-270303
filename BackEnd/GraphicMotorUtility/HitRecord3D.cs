@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Render3D.BackEnd.GraphicMotorUtility
+﻿namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class HitRecord3D
     {
@@ -22,18 +16,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         }
 
         public HitRecord3D(double module, Vector3D intersection, Vector3D normal, Vector3D color)
-        { 
+        {
             _module = module;
             _intersection = intersection;
             _normal = normal;
             _attenuation = color;
         }
 
-        public double Module
-        {
-            get => _module;
-            set => _module = value;
-        }
+        public double Module { get => _module; set => _module = value; }
 
         public Vector3D Intersection
         {

@@ -10,7 +10,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Vector3D(double v1, double v2, double v3)
         {
-           
+
             X = v1;
             Y = v2;
             Z = v3;
@@ -34,13 +34,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         }
         public int Red()
         {
-           return (int)Math.Abs(Math.Round(X * 255));
+            return (int)Math.Abs(Math.Round(X * 255));
         }
 
         public int Green()
         {
-           return (int)Math.Abs(Math.Round(Y * 255));
-          
+            return (int)Math.Abs(Math.Round(Y * 255));
+
         }
 
         public int Blue()
@@ -106,7 +106,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public double Dot(Vector3D other)
         {
-            return (X * other.X) + (Y * other.Y) + (Z  * other.Z);
+            return (X * other.X) + (Y * other.Y) + (Z * other.Z);
         }
 
         public Vector3D Cross(Vector3D other)
@@ -119,7 +119,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public bool Equals(Vector3D other)
         {
-            return ((X==other.X) && (Y ==other.Y) && (Z ==other.Z));
+            return ((X == other.X) && (Y == other.Y) && (Z == other.Z));
         }
     }
 }

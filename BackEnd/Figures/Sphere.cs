@@ -1,33 +1,19 @@
-﻿using Microsoft.SqlServer.Server;
-using Render3D.BackEnd.GraphicMotorUtility;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.CodeDom;
-using System.Linq;
 
 namespace Render3D.BackEnd.Figures
 {
     public class Sphere : Figure
     {
         private double _radius;
-        /*private String _name;
-        private Client _client;
-        private Vector3D _position;*/
-
-     
-        
-       
-        
-       
 
         public double Radius
         {
             get => _radius;
             set
             {
-                if (IsAValidRadius(value))
-                {
-                    _radius = value;
-                }
+                ValidateRadius(value);
+                _radius = value;
             }
         }
 
@@ -48,6 +34,7 @@ namespace Render3D.BackEnd.Figures
         public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
+            //(ray.Position);
             var a = ray.Direction.Dot(ray.Direction);
             var b = vectorOriginCenter.Dot(ray.Direction) * 2;
             var c = vectorOriginCenter.Dot(vectorOriginCenter) - (Radius * Radius);
@@ -72,13 +59,12 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
-        private bool IsAValidRadius(double value)
+        private void ValidateRadius(double value)
         {
             if (value <= 0)
             {
                 throw new BackEndException("The _radius must be greater than 0");
             }
-            return true;
         }
     }
 }

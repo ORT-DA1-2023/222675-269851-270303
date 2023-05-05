@@ -1,10 +1,7 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections;
-using System.Runtime.Remoting.Channels;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Figures;
+using System;
 using System.Collections.Generic;
 
 namespace Render3D.UnitTest
@@ -13,15 +10,15 @@ namespace Render3D.UnitTest
     public class SceneTest
     {
         private Scene sceneSample;
-        private Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
-        private String sceneSampleName = "SceneTest";
-        private List<Model> positionedModels = new List<Model>();
-        private Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
-        private Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
-        private Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
-        private Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
-        private int randomFoV = 30;
-        private Scene defaultSceneSample = new Scene();
+        private readonly Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
+        private readonly String sceneSampleName = "SceneTest";
+        private readonly List<Model> positionedModels = new List<Model>();
+        private readonly Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
+        private readonly Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
+        private readonly Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
+        private readonly Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
+        private readonly int randomFoV = 30;
+        private readonly Scene defaultSceneSample = new Scene();
 
 
         [TestInitialize]

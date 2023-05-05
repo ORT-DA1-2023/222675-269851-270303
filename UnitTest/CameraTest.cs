@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 
 namespace Render3D.UnitTest
 {
@@ -9,11 +9,11 @@ namespace Render3D.UnitTest
     public class CameraTest
     {
         private Camera cameraSample;
-        private Vector3D allOnes  = new Vector3D(1, 1, 1);
-        private Vector3D allTwos = new Vector3D(2, 2, 2);
-        private Vector3D oneTwoThree = new Vector3D(1, 2, 3);
-        private int validFov = 30;
-       
+        private readonly Vector3D allOnes = new Vector3D(1, 1, 1);
+        private readonly Vector3D allTwos = new Vector3D(2, 2, 2);
+        private readonly Vector3D oneTwoThree = new Vector3D(1, 2, 3);
+        private readonly int validFov = 30;
+
         private const int smallestValidFov = 0;
         private const int largestValidFov = 160;
         private const double validAspectRatio = 1;
@@ -21,8 +21,8 @@ namespace Render3D.UnitTest
         private const double validHeightHalf = 1;
 
 
-        private int tooSmallFov = -1;
-        private int tooLargeFov = 161;
+        private readonly int tooSmallFov = -1;
+        private readonly int tooLargeFov = 161;
 
         [TestInitialize]
         public void Initialize()
