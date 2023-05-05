@@ -52,9 +52,7 @@ namespace Render3D.BackEnd.Figures
 
         public Sphere()
         {
-            radius = 1;
-            name = "SphereSample";
-            position = new Vector3D(0, 0, 0);
+
         }
 
         public Sphere(Vector3D position, double radius)

@@ -8,25 +8,14 @@ namespace Render3D.BackEnd.Controllers
 {
     public class ClientController
     {
-        private DataWarehouse _dataWarehouse = new DataWarehouse();
-        public DataWarehouse DataWarehouse { get; }
+        private DataWarehouse _dataWarehouse;
+        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse=value;} }
 
-        public bool ExistsThisClient(string clientName, string clientPassword)
-        {
-            foreach (Client client in _dataWarehouse.Clients)
-            {
-                if (client.Name == clientName && client.Password == clientPassword)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
         public void TryToSignIn(string clientName, string clientPassword)
         {
             try
             {
-                if (!ExistsThisClient(clientName, clientPassword))
+                if (GetClientByName(clientName).Name!="")
                 {
                     CreateAndAddAClient(clientName, clientPassword);
                 }
@@ -41,7 +30,7 @@ namespace Render3D.BackEnd.Controllers
             Client client = new Client() { Name = clientName, Password = clientPassword };
             _dataWarehouse.Clients.Add(client);
         }
-        private Client GetClientGivenAName(string clientName)
+        public Client GetClientByName(string clientName)
         {
             foreach (Client client in _dataWarehouse.Clients)
             {
