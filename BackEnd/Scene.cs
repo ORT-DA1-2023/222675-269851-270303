@@ -45,7 +45,7 @@ namespace Render3D.BackEnd
             double moduleMax = Math.Pow(10, 38);
             foreach (Model element in PositionedModels)
             {
-                HitRecord3D hit = element.Figure.IsFigureHit(ray, 0.001, moduleMax, ((LambertianMaterial)element.Material).Color);
+                HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, ((LambertianMaterial)element.Material).Color);
                 if (hit != null)
                 {
                     hitRecord = hit;

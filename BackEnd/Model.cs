@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
-using System;
 using System.Drawing;
 
 namespace Render3D.BackEnd

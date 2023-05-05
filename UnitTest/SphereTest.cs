@@ -55,7 +55,7 @@ namespace Render3D.UnitTest
             moduleMaxSample = 0;
             moduleMinSample = 0;
             hitRecord = new HitRecord3D();
-            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.IsFigureHit(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
+            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.FigureHitRecord(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
         }
 
 
@@ -108,5 +108,43 @@ namespace Render3D.UnitTest
         {
             newSphericalFigure.Name = validSphereName + " ";
         }
+        [TestMethod]
+        public void givenARayWhichHitsASphereItReturnsTrue()
+        {
+            Sphere sphere = new Sphere() { Position = new Vector3D(1, 1, 1), Radius = 1 };
+            Vector3D direction = new Vector3D(1, 1, 1);
+            Vector3D origin = new Vector3D(0, 0, 0);
+            Ray ray = new Ray(origin, direction);
+            double minDistance = 0;
+            double maxDistance = 2;
+
+            Assert.IsTrue(sphere.WasHit(ray, minDistance, maxDistance));
+        }
+        [TestMethod]
+        public void givenARayWhichHitsASphereButNotInRangeItReturnsFalse()
+        {
+            Sphere sphere = new Sphere() { Position = new Vector3D(10, 10, 10), Radius = 1 };
+            Vector3D direction = new Vector3D(1, 1, 1);
+            Vector3D origin = new Vector3D(0, 0, 0);
+            Ray ray = new Ray(origin, direction);
+            double minDistance = 0;
+            double maxDistance = 2;
+
+            Assert.IsFalse(sphere.WasHit(ray, minDistance, maxDistance));
+        }
+
+           [TestMethod]
+            public void givenARayWhichDoesNotHitASphereItReturnsFalse()
+            {
+                Sphere sphere = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 1 };
+                Vector3D direction = new Vector3D(1, 1, 1);
+                Vector3D origin = new Vector3D(2, 0, 0);
+                Ray ray = new Ray(origin, direction);
+                double minDistance = 1;
+                double maxDistance = 2;
+
+                Assert.IsFalse(sphere.WasHit(ray, minDistance, maxDistance));
+            }
+
     }
 }

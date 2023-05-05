@@ -30,15 +30,28 @@ namespace Render3D.BackEnd.Figures
             Position = position;
         }
 
-
-        public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color)
+        public override bool WasHit(Ray ray, double minDistance, double maxDistance)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
-            //(ray.Position);
-            var a = ray.Direction.DotProduct(ray.Direction);
-            var b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
-            var c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
-            var discriminant = (b * b) - (4 * a * c);
+            double a = ray.Direction.DotProduct(ray.Direction);
+            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (b * b) - (4 * a * c);
+            if (discriminant < 0) { 
+                return false;
+            }
+            double t = ((-b - Math.Sqrt(discriminant)) / (2 * a));
+            return HelperValidator.IsANumberInRange(t, minDistance, maxDistance);
+
+        }
+
+        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Vector3D color)
+        {
+            Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
+            double a = ray.Direction.DotProduct(ray.Direction);
+            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (b * b) - (4 * a * c);
             if (discriminant < 0)
             {
                 return null;

@@ -24,7 +24,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public int ResolutionHeight
         {
-
             get { return _resolutionHeight; }
             set
             {
