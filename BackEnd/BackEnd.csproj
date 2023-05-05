@@ -45,6 +45,8 @@
     <Compile Include="BackEndException.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FigureController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="DataTransferObject.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="DateTimeProvider.cs" />

@@ -28,11 +28,11 @@ namespace Render3D.UnitTest.ControllersTests
         }
 
         [TestMethod]
-        public void GivenANewFigureTrysToAddItToTheList()
+        public void GivenANewFigureAddsItToTheList()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 5);
+            _figureController.AddFigure("clientSample1", "figureSample1", 5);
             Assert.AreEqual(_figureSample.Name, _figureController.DataWarehouse.Figures[0].Name);
             Assert.IsTrue((_figureSample.Client).Equals(_figureController.DataWarehouse.Figures[0].Client));
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 1);
@@ -43,7 +43,7 @@ namespace Render3D.UnitTest.ControllersTests
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", -5);
+            _figureController.AddFigure("clientSample1", "figureSample1", -5);
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
         }
         [TestMethod]
@@ -51,15 +51,15 @@ namespace Render3D.UnitTest.ControllersTests
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 5);
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 5);
+            _figureController.AddFigure("clientSample1", "figureSample1", 5);
+            _figureController.AddFigure("clientSample1", "figureSample1", 5);
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 1);
         }
         [TestMethod]
         public void GivenANewFigureNameItChanges()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 5);
+            _figureController.AddFigure("clientSample1", "figureSample1", 5);
             _figureController.ChangeFigureName("clientSample1", "figureSample1", "figureSample2");
             Assert.AreEqual("figureSample2",_figureController.DataWarehouse.Figures[0].Name);
         }
@@ -67,8 +67,8 @@ namespace Render3D.UnitTest.ControllersTests
         public void GivenANewFigureNameItDoesNotChange()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 1);
-            _figureController.TryToAddFigure("clientSample1", "figureSample2", 5);
+            _figureController.AddFigure("clientSample1", "figureSample1", 1);
+            _figureController.AddFigure("clientSample1", "figureSample2", 5);
             _figureController.ChangeFigureName("clientSample1", "clientSample1", "figureSample2");
             Assert.AreEqual("figureSample1", _figureController.DataWarehouse.Figures[0].Name);
             Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[1].Name);
@@ -77,18 +77,18 @@ namespace Render3D.UnitTest.ControllersTests
         public void GivenANameDeletesTheFigure()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 1);
+            _figureController.AddFigure("clientSample1", "figureSample1", 1);
             Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
-            _figureController.deleteFigureInList("clientSample1", "figureSample1");
+            _figureController.DeleteFigureInList("clientSample1", "figureSample1");
             Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 0);
         }
         [TestMethod]
         public void GivenANameDoesNotDeleteTheFigure()
         {
             _clientController.TryToSignIn("clientSample1", "PasswordExample1");
-            _figureController.TryToAddFigure("clientSample1", "figureSample1", 1);
+            _figureController.AddFigure("clientSample1", "figureSample1", 1);
             Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
-            _figureController.deleteFigureInList("clientSample1", "figureSample2");
+            _figureController.DeleteFigureInList("clientSample1", "figureSample2");
             Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
         }
 

@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Controllers
 
         public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
         public ClientController ClientController { get => _clientController; set => _clientController = value; }
-        public void TryToAddFigure(string clientName, string figureName, double figureRadius)
+        public void AddFigure(string clientName, string figureName, double figureRadius)
         {
             if (GetFigureByNameAndClient(clientName, figureName).Name == null)
             {
@@ -47,11 +47,11 @@ namespace Render3D.BackEnd.Controllers
             }
             return new Sphere();
         }
-        public void deleteFigureInList(string clientName, string figureName)
+        public void DeleteFigureInList(string clientName, string figureName)
         {
 
             Figure figure = GetFigureByNameAndClient(clientName, figureName);
-            if (figure.Name != "")
+            if (figure.Name != null)
             {
                 _dataWarehouse.Figures.Remove(figure);
             }

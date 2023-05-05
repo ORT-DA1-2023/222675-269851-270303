@@ -12,7 +12,7 @@ namespace Render3D.BackEnd
     public class DataTransferObject
     {
         private DataWarehouse _dataWarehouse = new DataWarehouse();
-        private GraphicMotor graphicMotor= new GraphicMotor();
+        private GraphicMotor graphicMotor= new GraphicMotor() {ResolutionHeight=100};
 
         public DataWarehouse DataWarehouse { get =>_dataWarehouse; }
 
@@ -230,16 +230,14 @@ namespace Render3D.BackEnd
             Client client = getClientGivenAName(clientName);
             if (alreadyExistsThisModel(clientName, modelName))
             {
-               // return new Exception ("model already exists");
             }
                 try
                 {
                     transferModelForCreation(client, modelName, figure, material);
-                  //  return null;
+
                 }
                 catch (Exception e)
                 {
-                   // return e;
                 }
         }
         public void tryToAddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
