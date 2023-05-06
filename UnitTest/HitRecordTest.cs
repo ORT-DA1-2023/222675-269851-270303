@@ -37,7 +37,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidAttenuationItAssingsToTheHitRecord()
         {
-            attenuationSample = new Colour(7/255, 234/255, 34/255);
+            attenuationSample = new Colour(7 / 255, 234 / 255, 34 / 255);
             hitRecordSample.Attenuation = attenuationSample;
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }

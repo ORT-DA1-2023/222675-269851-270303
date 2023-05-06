@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using System.Drawing;
 
 namespace Render3D.UnitTest
 {
@@ -138,10 +137,10 @@ namespace Render3D.UnitTest
         public void givenTwoColorsItSubstractsThem()
         {
             Colour colour1 = new Colour(1, 0, 0);
-            Colour colour2 = new Colour(0,1,0);
+            Colour colour2 = new Colour(0, 1, 0);
 
-            Colour diff= colour1.Substract(colour2);
-            Colour expected = new Colour(1,0,0); 
+            Colour diff = colour1.Substract(colour2);
+            Colour expected = new Colour(1, 0, 0);
             Assert.IsTrue(expected.Equals(diff));
         }
         [TestMethod]
@@ -168,7 +167,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAColorAndANumberItDividesThem()
         {
-            Colour colour1 = new Colour(1,0.5,0.25);
+            Colour colour1 = new Colour(1, 0.5, 0.25);
             int ratio = 2;
             Colour quotient = colour1.Divide(ratio);
             Colour expected = new Colour(0.5, 0.25, 0.125);

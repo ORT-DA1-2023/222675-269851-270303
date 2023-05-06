@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using System;
 
 namespace Render3D.UnitTest
 {
@@ -11,8 +9,6 @@ namespace Render3D.UnitTest
     {
         private LambertianMaterial materialSample;
         private readonly string validMaterialName = "LambertianMaterialName";
-        private readonly Colour colorLowerThan = new Colour(0, 0, 0);
-        private readonly Colour colorGreaterThan = new Colour(1, 1, 1);
 
         private Client clientSample;
         private readonly string clientSampleName = "client1Name";

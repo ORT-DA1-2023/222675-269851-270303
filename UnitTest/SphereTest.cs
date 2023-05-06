@@ -15,7 +15,7 @@ namespace Render3D.UnitTest
         private Sphere newSphericalFigure;
         private readonly double validRadius = 2;
         private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
-        private readonly Colour colorSample = new Colour(1, 0.5,0.1);
+        private readonly Colour colorSample = new Colour(1, 0.5, 0.1);
 
         private double moduleMaxSample;
         private double moduleMinSample;
