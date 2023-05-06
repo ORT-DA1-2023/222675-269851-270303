@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,6 +67,64 @@ namespace Render3D.BackEnd
             if (!HelperValidator.IsANumberInRange(num, 0, 1)) throw new BackEndException("Colour percentage must be between 0 and 1");
         }
 
+        public void AddTo(Colour anotherColour)
+        {
+            PercentageRed += anotherColour.PercentageRed;
+            PercentageGreen += anotherColour.PercentageGreen;
+            PercentageBlue += anotherColour.PercentageBlue;
+        }
+
+        public Colour Add(Colour anotherColour)
+        {
+            double red = this.PercentageRed + anotherColour.PercentageRed;
+            double green = this.PercentageGreen + anotherColour.PercentageGreen;
+            double blue = this.PercentageBlue + anotherColour.PercentageBlue;
+            Colour sum = new Colour(red, green, blue);
+            return sum;
+        }
+
+        public Colour Substract(Colour anotherColour)
+        {
+            double red = this.PercentageRed - anotherColour.PercentageRed;
+            double green = this.PercentageGreen - anotherColour.PercentageGreen;
+            double blue = this.PercentageBlue - anotherColour.PercentageBlue;
+            Colour diff = new Colour(red, green, blue);
+            return diff;
+        }
+        public Colour Multiply(Colour anotherColour)
+        {
+            double red = this.PercentageRed * anotherColour.PercentageRed;
+            double green = this.PercentageGreen * anotherColour.PercentageGreen;
+            double blue = this.PercentageBlue * anotherColour.PercentageBlue;
+            Colour product = new Colour(red, green, blue);
+            return product;
+        }
+        public Colour Divide(Colour anotherColour)
+        {
+            double red = this.PercentageRed / anotherColour.PercentageRed;
+            double green = this.PercentageGreen / anotherColour.PercentageGreen;
+            double blue = this.PercentageBlue / anotherColour.PercentageBlue;
+            Colour quotient = new Colour(red, green, blue);
+            return quotient;
+        }
+
+        public Colour Divide(int number)
+        {
+            double red = this.PercentageRed / number;
+            double green = this.PercentageGreen / number;
+            double blue = this.PercentageBlue / number;
+            Colour quotient = new Colour(red,green,blue);
+            return quotient;
+        }
+
+        public Colour Multiply(double number)
+        {
+            double red = this.PercentageRed * number;
+            double green = this.PercentageGreen * number;
+            double blue = this.PercentageBlue * number;
+            Colour product = new Colour(red, green, blue);
+            return product;
+        }
     }
 
 }

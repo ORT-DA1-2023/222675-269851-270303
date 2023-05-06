@@ -11,10 +11,10 @@
         {
             _width = width;
             _height = height;
-            Matrix = new Vector3D[height, width];
+            Matrix = new Colour[height, width];
         }
 
-        public Vector3D[,] Matrix { get; set; }
+        public Colour[,] Matrix { get; set; }
 
     }
 }

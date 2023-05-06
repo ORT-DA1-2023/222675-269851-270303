@@ -115,14 +115,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix)
+        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix)
         {
             Random random = new Random();
             for (var row = ResolutionHeight - 1; row >= 0; row--)
             {
                 for (var column = 0; column < WidthResolution(); column++)
                 {
-                    Vector3D pixelColor = new Vector3D(0, 0, 0);
+                    Colour pixelColor = new Colour(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
 
@@ -138,7 +138,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return matrix;
         }
 
-        public void SavePixel(int row, int column, Vector3D pixelRGB, Vector3D[,] matrix)
+        public void SavePixel(int row, int column, Colour pixelRGB, Colour[,] matrix)
         {
             int posX = column;
             int posY = ResolutionHeight - row - 1;
@@ -153,7 +153,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        private string CreateImagePPM(Vector3D[,] matrix)
+        private string CreateImagePPM(Colour[,] matrix)
         {
             var width = WidthResolution();
             var height = ResolutionHeight;
@@ -165,7 +165,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Vector3D pixel = matrix[y, x];
+                    Colour pixel = matrix[y, x];
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }

@@ -40,7 +40,7 @@ namespace Render3D.BackEnd
 
         public Bitmap Preview { get; set; }
 
-        public Vector3D ShootRay(Ray ray, int depth, Random random)
+        public Colour ShootRay(Ray ray, int depth, Random random)
         {
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
@@ -60,7 +60,7 @@ namespace Render3D.BackEnd
             return ElementAttenuation(depth, hitRecord, random, modelSample, ray, itWasAHit);
         }
 
-        private Vector3D ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
+        private Colour ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
         {
             if (itWasAHit)
             {
@@ -72,27 +72,27 @@ namespace Render3D.BackEnd
             }
         }
 
-        private Vector3D GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
+        private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
         {
             if (MaxiumDepth > 0)
             {
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
-                Vector3D color = ShootRay(newRay, MaxiumDepth - 1, random);
-                return new Vector3D(hitRecord.Attenuation.X * color.X, hitRecord.Attenuation.Y * color.Y, hitRecord.Attenuation.Z * color.Z);
+                Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
+                return new Colour(hitRecord.Attenuation.X * color.PercentageRed, hitRecord.Attenuation.Y * color.PercentageGreen, hitRecord.Attenuation.Z * color.PercentageBlue);
             }
             else
             {
-                return new Vector3D(0, 0, 0);
+                return new Colour(0, 0, 0);
             }
         }
 
-        private Vector3D GetBlueSky(Ray ray)
+        private Colour GetBlueSky(Ray ray)
         {
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
-            var colorStart = new Vector3D(1, 1, 1);
-            var colorEnd = new Vector3D(0.5, 0.7, 1.0);
-            return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
+            var colorStart = new Colour(1, 1, 1); //revisar
+            var colorEnd = new Colour(0.5, 0.7, 1.0); //revisar
+            return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
 
        
