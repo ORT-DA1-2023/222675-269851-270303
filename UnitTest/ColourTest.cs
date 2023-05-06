@@ -7,14 +7,14 @@ namespace Render3D.UnitTest
     [TestClass]
     public class ColourTest
     {
- 
+
         [TestMethod]
         public void givenAColourItSetsCorrectlyTheRedPercentage()
         {
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Colour colour = new Colour(percentageRed,percentageGreen,percentageBlue );
 
             int redValue = colour.Red();
 
@@ -53,83 +53,81 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithANegativeRedPercentageItThrowsABackEndException()
+        public void givenAColourWithANegativeRedPercentageItAssignsZero()
         {
             double percentageRed = -0.2;
             double percentageGreen = 0.5;
             double percentageBlue = 0.8;
             Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
-            _ = colour.Red();
+            Assert.AreEqual(0, colour.Red());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithRedPercentageHigherThanOneItThrowsABackEndException()
+        public void givenAColourWithRedPercentageHigherThanOneItAssigns255()
         {
             double percentageRed = 1.3;
             double percentageGreen = 0.5;
             double percentageBlue = 0.7;
 
-            _ = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colour.Red());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithANegativeGreenPercentageItThrowsABackEndException()
+        public void givenAColourWithANegativeGreenPercentageItAssigns0()
         {
             double percentageRed = 0.2;
             double percentageGreen = -0.5;
             double percentageBlue = 0.8;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
-            _ = colour.Red();
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(0, colour.Green());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithGreenPercentageHigherThanOneItThrowsABackEndException()
+        public void givenAColourWithGreenPercentageHigherThanOneItAssigns255()
         {
             double percentageRed = 0.3;
             double percentageGreen = 1.5;
             double percentageBlue = 0.7;
 
-            _ = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colour.Green());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithANegativeBluePercentageItThrowsABackEndException()
+        public void givenAColourWithANegativeBluePercentageItAssigns0()
         {
             double percentageRed = 0.2;
             double percentageGreen = 0.5;
             double percentageBlue = -0.8;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
-            _ = colour.Red();
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(0, colour.Blue());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Colour percentage must be between 0 and 1")]
-        public void givenAColourWithBluePercentageHigherThanOneItThrowsABackEndException()
+        public void givenAColourWithBluePercentageHigherThanOneItAssigns255()
         {
             double percentageRed = 0.3;
             double percentageGreen = 0.5;
             double percentageBlue = 2.7;
 
-            _ = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colour.Blue());
         }
 
         [TestMethod]
-        public void givenTwoDifferentColoursItReturnsFalse() {
+        public void givenTwoDifferentColoursItReturnsTheyAreNotEqual()
+        {
             Colour red = new Colour(1, 0, 0);
             Colour white = new Colour(1, 1, 1);
             Assert.IsFalse(red.Equals(white));
         }
 
         [TestMethod]
-        public void givenTheSameColoursItReturnsTrue()
+        public void givenTheSameColoursItReturnsTheyAreEqual()
         {
             Colour red1 = new Colour(1, 0, 0);
             Colour red2 = new Colour(1, 0, 0);

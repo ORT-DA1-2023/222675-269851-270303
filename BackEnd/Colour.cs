@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Render3D.BackEnd
 {
@@ -12,28 +13,29 @@ namespace Render3D.BackEnd
         private double _percentageRed;
         private double _percentageGreen;
         private double _percentageBlue;
-        public Colour(double v1, double v2, double v3)
+
+        public Colour(double percentageRed, double percentageGreen, double percentageBlue)
         {
-            PercentageRed = v1;
-            PercentageGreen = v2;
-            PercentageBlue = v3;
+            PercentageRed = ValidateColour(percentageRed);
+            PercentageGreen = ValidateColour(percentageGreen);
+            PercentageBlue = ValidateColour(percentageBlue);
         }
+
         public double PercentageRed { 
             get => _percentageRed;
-            set {
-               ValidateColour(value);
-               _percentageRed = value;
-                
-            } 
+            set
+            {
+                _percentageRed = value;
+                ValidateColour(PercentageRed);
+            }
         }
         public double PercentageGreen
         {
             get => _percentageGreen;
             set
             {
-                ValidateColour(value);
                 _percentageGreen = value;
-
+                ValidateColour(PercentageGreen);
             }
         }
         public double PercentageBlue
@@ -41,9 +43,8 @@ namespace Render3D.BackEnd
             get => _percentageBlue;
             set
             {
-                ValidateColour(value);
                 _percentageBlue = value;
-
+                ValidateColour(PercentageBlue);
             }
         }
         public int Red()
@@ -62,9 +63,11 @@ namespace Render3D.BackEnd
         {
             return PercentageRed==other.PercentageRed && PercentageGreen==other.PercentageGreen && PercentageBlue==other.PercentageBlue; 
         }
-        private void ValidateColour(double num)
+        private double ValidateColour(double num)
         {
-            if (!HelperValidator.IsANumberInRange(num, 0, 1)) throw new BackEndException("Colour percentage must be between 0 and 1");
+            if (num > 1) return 1;
+            if(num<0) return 0;
+            return num;
         }
 
         public void AddTo(Colour anotherColour)
@@ -124,6 +127,15 @@ namespace Render3D.BackEnd
             double blue = this.PercentageBlue * number;
             Colour product = new Colour(red, green, blue);
             return product;
+        }
+
+        private bool IsNumberBiggerThanOne(double number)
+        {
+            return number > 1d;
+        }
+        private bool IsNumberNegative(double number)
+        {
+            return number < 0d;
         }
     }
 

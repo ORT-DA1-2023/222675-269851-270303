@@ -122,7 +122,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 for (var column = 0; column < WidthResolution(); column++)
                 {
-                    Colour pixelColor = new Colour(0, 0, 0);
+                    Colour pixelColor = new Colour (0,0,0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
 
