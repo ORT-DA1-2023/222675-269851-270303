@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
@@ -34,16 +30,14 @@ namespace Render3D.BackEnd
         {
             return name.Length == 0;
         }
-        public static bool IsANumberInRange(int num, int min, int max) {
-            return num>=min && num<=max;
+        public static bool IsANumberInRange(int num, int min, int max)
+        {
+            return num >= min && num <= max;
         }
         public static bool IsANumberInRange(double num, double min, double max)
         {
             return num >= min && num <= max;
         }
-        public static bool IsANumberInRange(Decimal num, Decimal min, Decimal max)
-        {
-            return num >= min && num <= max;
-        }
+
     }
 }

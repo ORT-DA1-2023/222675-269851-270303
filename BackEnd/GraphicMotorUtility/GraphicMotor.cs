@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.IO.Pipes;
-using System.IO;
-using System.ComponentModel.Design;
-using System.Runtime.Remoting.Messaging;
-using System.Text.RegularExpressions;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -21,47 +14,35 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _resolutionHeightDefault = 3;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
-        private Bitmap _bitmap;
-        private PixelMatrix _pixelMatrix;
-
-
 
         public GraphicMotor()
         {
-            _resolutionHeight = _resolutionHeightDefault;
-            _pixelSampling = _pixelSamplingDefault;
-            _maximumDepth = _maximumDepthDefault;
+            ResolutionHeight = _resolutionHeightDefault;
+            PixelSampling = _pixelSamplingDefault;
+            MaximumDepth = _maximumDepthDefault;
         }
 
         public int ResolutionHeight
         {
-
             get { return _resolutionHeight; }
             set
             {
-                if (IsAValidTheProperties(value, "resolution"))
-                {
-                    _resolutionHeight = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "resolution");
+                _resolutionHeight = value;
+
             }
         }
 
-        public PixelMatrix PixelMatrix
-        {
-            get { return _pixelMatrix; }
-            set { _pixelMatrix = value; }
-        }
+        public PixelMatrix PixelMatrix { get; set; }
 
 
         public int MaximumDepth
-        { 
+        {
             get { return _maximumDepth; }
             set
             {
-                if (IsAValidTheProperties(value, "maximum depth"))
-                {
-                    _maximumDepth = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "maximum depth");
+                _maximumDepth = value;
             }
         }
 
@@ -70,22 +51,19 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             get { return _pixelSampling; }
             set
             {
-                if (IsAValidTheProperties(value, "pixel sampling"))
-                {
-                    _pixelSampling = value;
-                }
+                ValidateNumberIsGreaterThanZero(value, "pixel sampling");
+                _pixelSampling = value;
             }
         }
 
         private int WidthResolution()
         {
-             return (ResolutionHeight * _resultionWidthDefault)/_resolutionHeightDefault;
+            return (ResolutionHeight * _resultionWidthDefault) / _resolutionHeightDefault;
         }
-
 
         public int AspectRatio()
         {
-            return  ResolutionHeight / WidthResolution();
+            return ResolutionHeight / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)
@@ -93,38 +71,35 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Scene previewScene = new Scene();
             previewScene.PositionedModels.Add(model);
 
-            Camera camera = new Camera();
-            camera.LookAt = model.Figure.Position;
-            camera.LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10));
-            camera.Fov = 160;
+            Camera camera = new Camera
+            {
+                LookAt = model.Figure.Position,
+                LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10)),
+                Fov = 160
+            };
 
             previewScene.Camera = camera;
 
             return Render(previewScene);
         }
 
-        public Bitmap Bitmap
-        {
-            get { return _bitmap; }
-            set { _bitmap = value; }
-        }
+        public Bitmap Bitmap { get; set; }
 
         public Bitmap Render(Scene sceneSample)
         {
-            
             int width = WidthResolution();
             int height = ResolutionHeight;
             PixelMatrix = new PixelMatrix(width, height);
-            PixelMatrix.Matrix = CreateMatrix(sceneSample, _pixelMatrix.Matrix);
-            String imagePPM = CreateImagePPM(_pixelMatrix.Matrix);
-            Bitmap = GenerateBitmap(new Bitmap(width,height), imagePPM);
+            PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix);
+            String imagePPM = CreateImagePPM(PixelMatrix.Matrix);
+            Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
         }
 
         private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
         {
             string[] linesImagePPM = imagePPM.Split('\n');
-            for (int i = 3; i < linesImagePPM.Length-1; i++ )
+            for (int i = 3; i < linesImagePPM.Length - 1; i++)
             {
                 var rgbValues = linesImagePPM[i].Split(' ').Select(value => (value)).ToArray();
                 var r = rgbValues[0];
@@ -139,39 +114,37 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Vector3D[,] CreateMatrix(Scene sceneSample, Vector3D[,] matrix) 
+        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix)
         {
             Random random = new Random();
             for (var row = ResolutionHeight - 1; row >= 0; row--)
             {
                 for (var column = 0; column < WidthResolution(); column++)
                 {
-                    Vector3D pixelColor = new Vector3D(0, 0, 0);
+                    Colour pixelColor = new Colour(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
-                       
+
                         double u = (column + random.NextDouble()) / WidthResolution();
                         double v = (row + random.NextDouble()) / ResolutionHeight;
                         Ray ray = sceneSample.Camera.GetRay(u, v);
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
-                   SavePixel(row, column, pixelColor, matrix);
+                    SavePixel(row, column, pixelColor, matrix);
                 }
             }
             return matrix;
         }
 
-        public void SavePixel(int row, int column, Vector3D pixelRGB, Vector3D[,] matrix)
+        public void SavePixel(int row, int column, Colour pixelRGB, Colour[,] matrix)
         {
             int posX = column;
             int posY = ResolutionHeight - row - 1;
 
             if (posY < ResolutionHeight)
             {
-               
                 matrix[posY, posX] = pixelRGB;
-
             }
             else
             {
@@ -179,9 +152,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        private string CreateImagePPM(Vector3D[,] matrix)  
+        private string CreateImagePPM(Colour[,] matrix)
         {
-
             var width = WidthResolution();
             var height = ResolutionHeight;
             StringBuilder ppmString = new StringBuilder();
@@ -192,25 +164,17 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Vector3D pixel = matrix[y, x];
+                    Colour pixel = matrix[y, x];
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
-            Console.WriteLine( ppmString.ToString() );
+            Console.WriteLine(ppmString.ToString());
             return ppmString.ToString();
         }
 
-        private bool IsAValidTheProperties(int value, String word)
+        private void ValidateNumberIsGreaterThanZero(int number, String word)
         {
-            if (value<=0)
-            {
-                throw new BackEndException($"The {word} must be greater than 0.");
-            }
-            return true;
+            if (number <= 0) throw new BackEndException($"The {word} must be greater than 0.");
         }
-       
-
-
-
     }
 }

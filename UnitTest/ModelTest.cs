@@ -1,7 +1,5 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Runtime.Remoting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using System.Drawing;

@@ -1,27 +1,55 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.Materials
 {
 
     public abstract class Material
     {
-        private String _name;
-        private Client _client;
-        private Vector3D _color;
-        public abstract String Name { get; set; }
-        public abstract Client Client { get; set; }
+        protected string _name;
+        protected Client _client;
+        protected Ray _ray;
+        protected Colour _attenuation;
 
-        public abstract Vector3D Color { get; set; }
 
-        override
-            public String ToString()
+        public String Name
+        {
+            get => _name;
+            set
+            {
+                ValidateName(value);
+                _name = value;
+            }
+        }
+        public Client Client { get; set; }
+        public Ray Ray
+        {
+            get => _ray;
+            set => _ray = value;
+        }
+
+        public Colour Attenuation
+        {
+            get => _attenuation;
+            set
+            {
+                _attenuation = value;
+            }
+        }
+
+        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
+
+        protected void ValidateName(string value)
+        {
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name must not be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
+
+        }
+
+      public override String ToString()
         {
             return Name;
         }
+
     }
 }

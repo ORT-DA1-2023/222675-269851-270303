@@ -1,7 +1,6 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using System;
-using System.Security.Cryptography;
 
 namespace Render3D.UnitTest
 {
@@ -40,7 +39,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")] 
+        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
         public void givenATooLongNameItThrowsABackEndException()
         {
             client1.Name = thisNameIsTooLong;
@@ -111,7 +110,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenTwoClientsItReturnsTrueIfTheSecondIsCreatedAfterTheFirstOne()
         {
-            DateTime JanuaryFirst2020 = new DateTime(2020,1,1);
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
             DateTime FebruaryFirst2020 = new DateTime(2020, 2, 1);
             DateTimeProvider.Now = JanuaryFirst2020;
             client1 = new Client();
@@ -121,8 +120,8 @@ namespace Render3D.UnitTest
             Client client2 = new Client();
 
             Assert.AreEqual(FebruaryFirst2020, client2.RegisterDate);
- 
-         
+
+
         }
 
     }

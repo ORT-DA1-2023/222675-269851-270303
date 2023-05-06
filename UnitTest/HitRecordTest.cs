@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
-using System;
 
 namespace Render3D.UnitTest
 {
@@ -12,16 +11,16 @@ namespace Render3D.UnitTest
         private double moduleSample;
         private Vector3D intersectionSample;
         private Vector3D normalSample;
-        private Vector3D attenuationSample;
+        private Colour attenuationSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             hitRecordSample = new HitRecord3D();
         }
 
         [TestMethod]
-        public void givenValidAtributesItAssingsToTheHitRecord()
+        public void GivenValidAtributesItAssingsToTheHitRecord()
         {
             moduleSample = 1;
             intersectionSample = new Vector3D(0, 0, 0);
@@ -33,12 +32,12 @@ namespace Render3D.UnitTest
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
 
-        
+
 
         [TestMethod]
         public void givenAValidAttenuationItAssingsToTheHitRecord()
         {
-            attenuationSample = new Vector3D(7, 234, 34);
+            attenuationSample = new Colour(7 / 255, 234 / 255, 34 / 255);
             hitRecordSample.Attenuation = attenuationSample;
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }

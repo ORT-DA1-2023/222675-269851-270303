@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Drawing;
 
 namespace Render3D.UnitTest
 {
@@ -10,7 +9,7 @@ namespace Render3D.UnitTest
     {
         private const int width = 3;
         private const int height = 2;
-        private Vector3D[,] matrixPPM;
+        private Colour[,] matrixPPM;
         private PixelMatrix pixelMatrixSample;
 
         [TestInitialize]
@@ -23,9 +22,9 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidMatrixItAssingsToThePixelMatrix()
         {
-            matrixPPM = new Vector3D[width,height];
+            matrixPPM = new Colour[width, height];
             pixelMatrixSample.Matrix = matrixPPM;
-            Assert.AreEqual(matrixPPM,pixelMatrixSample.Matrix);
+            Assert.AreEqual(matrixPPM, pixelMatrixSample.Matrix);
 
         }
     }

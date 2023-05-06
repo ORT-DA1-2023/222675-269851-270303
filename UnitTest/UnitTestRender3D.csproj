@@ -69,6 +69,7 @@
     <Compile Include="CameraTest.cs" />
     <Compile Include="DateTimeProviderTest.cs" />
     <Compile Include="HitRecordTest.cs" />
+    <Compile Include="ColourTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>

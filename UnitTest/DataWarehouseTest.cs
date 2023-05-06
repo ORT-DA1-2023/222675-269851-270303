@@ -1,10 +1,7 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Reflection;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -15,18 +12,18 @@ namespace Render3D.UnitTest
         private Client clientSample;
         private Client clientSample2;
         private Figure figureSample;
-       private Material materialSample;
+        private Material materialSample;
         private Model modelSample;
 
         [TestInitialize]
         public void initialize()
         {
-          data= new DataWarehouse();
-          clientSample = new Client() { Name="client1Name"};
-          clientSample2 = new Client() { Name = "clientSample2Name" };
-          figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-          materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new Vector3D(255, 0, 0 ) };
-          modelSample = new Model() { Client = clientSample, Name = "TestModel", Figure = figureSample, Material = materialSample };
+            data = new DataWarehouse();
+            clientSample = new Client() { Name = "client1Name" };
+            clientSample2 = new Client() { Name = "clientSample2Name" };
+            figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Attenuation = new Colour(1, 0, 0) };
+            modelSample = new Model() { Client = clientSample, Name = "TestModel", Figure = figureSample, Material = materialSample };
         }
 
         [TestMethod]
@@ -49,7 +46,7 @@ namespace Render3D.UnitTest
 
         [TestMethod]
         public void givenAMaterialItAddsItToExistingMaterials()
-        { 
+        {
             Assert.IsTrue(data.Materials.Count == 0);
             data.Materials.Add(materialSample);
             Assert.IsTrue(data.Materials.Count == 1);
@@ -60,7 +57,7 @@ namespace Render3D.UnitTest
         public void givenAMaterialItRemovesItFromExistingMaterials()
         {
             data.Materials.Add(materialSample);
-            data.Materials.Remove(materialSample); 
+            data.Materials.Remove(materialSample);
             Assert.IsTrue(!data.Materials.Contains(materialSample));
         }
 
@@ -86,10 +83,10 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAClientItAddsItToExistingClients()
         {
-           Assert.IsTrue(data.Clients.Count == 0);
-           data.Clients.Add(clientSample);
-           Assert.IsTrue (data.Clients.Count == 1);
-           Assert.IsTrue(data.Clients.Contains(clientSample));
+            Assert.IsTrue(data.Clients.Count == 0);
+            data.Clients.Add(clientSample);
+            Assert.IsTrue(data.Clients.Count == 1);
+            Assert.IsTrue(data.Clients.Contains(clientSample));
         }
 
 

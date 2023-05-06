@@ -1,58 +1,27 @@
-﻿using Microsoft.SqlServer.Server;
-using Render3D.BackEnd.GraphicMotorUtility;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.CodeDom;
-using System.Linq;
 
 namespace Render3D.BackEnd.Figures
 {
     public class Sphere : Figure
     {
-        private double radius;
-        private String name;
-        private Client client;
-        private Vector3D position;
-
-        public override Vector3D Position
-        {
-            get { return position; }    
-            set { position = value;}
-        }
-        
-
-        public override string Name
-        {
-            get => name;
-            set
-            {
-                if (IsAValidName(value))
-                {
-                    name = value;
-                }
-            }
-        }
-        
-        public override Client Client
-        {
-            get => client;
-            set => client = value;
-        }
+        private double _radius;
 
         public double Radius
         {
-            get => radius;
+            get => _radius;
             set
             {
-                if (IsAValidRadius(value))
-                {
-                    radius = value;
-                }
+                ValidateRadius(value);
+                _radius = value;
             }
         }
 
         public Sphere()
         {
-            Position = new Vector3D(0, 0, 0);
+            _radius = 1;
+            _name = "SphereSample";
+            _position = new Vector3D(0, 0, 0);
         }
 
         public Sphere(Vector3D position, double radius)
@@ -61,41 +30,41 @@ namespace Render3D.BackEnd.Figures
             Position = position;
         }
 
-
-        public override HitRecord3D IsFigureHit(Ray ray, double tMin, double tMax, Vector3D color)
+        public override bool WasHit(Ray ray, double minDistance, double maxDistance)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
-            var a = ray.Direction.Dot(ray.Direction);
-            var b = vectorOriginCenter.Dot(ray.Direction) * 2;
-            var c = vectorOriginCenter.Dot(vectorOriginCenter) - (Radius * Radius);
-            var discriminant = (b * b) - (4 * a * c);
+            double a = ray.Direction.DotProduct(ray.Direction);
+            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (b * b) - (4 * a * c);
             if (discriminant < 0)
             {
-                return null;
+                return false;
             }
-            else
-            {
-                double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
-                Vector3D intersectionPoint = ray.PointAt(t);
-                Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
-                if (t < tMax && t > tMin)
-                {
-                    return new HitRecord3D(t, intersectionPoint, normal, color);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            double t = ((-b - Math.Sqrt(discriminant)) / (2 * a));
+            return HelperValidator.IsANumberInRange(t, minDistance, maxDistance);
+
         }
 
-        private bool IsAValidRadius(double value)
+        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Colour color)
+        {
+            Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
+            double a = ray.Direction.DotProduct(ray.Direction);
+            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (b * b) - (4 * a * c);
+            double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
+            Vector3D intersectionPoint = ray.PointAt(t);
+            Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
+            return new HitRecord3D(t, intersectionPoint, normal, color);
+        }
+
+        private void ValidateRadius(double value)
         {
             if (value <= 0)
             {
                 throw new BackEndException("The radius must be greater than 0");
             }
-            return true;
         }
 
           override

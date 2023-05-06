@@ -1,120 +1,117 @@
-﻿using System;
-using System.Collections;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.ExceptionServices;
-using System.Xml.Linq;
-using Render3D.BackEnd;
-using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private DateTime _registerDate;
-        private DateTime _lastModificationDate;
-        private Client _client;
         private String _name;
-        private List<Model> _positionedModels;
-        private Camera _camera;
-        private Bitmap _preview;
 
         public Scene()
         {
-            _camera = new Camera();
-            _registerDate = DateTimeProvider.Now;
-            _positionedModels = new List<Model>();
+            Camera = new Camera();
+            RegisterDate = DateTimeProvider.Now;
+            LastModificationDate = DateTimeProvider.Now;
+            PositionedModels = new List<Model>();
         }
 
 
-        public Client Client { get => _client; set => _client = value; }
-        public Camera Camera { get => _camera; set => _camera = value; }
+        public Client Client { get; set; }
+        public Camera Camera { get; set; }
         public string Name
         {
             get => _name;
             set
             {
-                if (IsAValidName(value))
-                {
-                    _name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
         }
 
-      
-        public List<Model> PositionedModels { get => _positionedModels; set => _positionedModels = value; }
+        public DateTime RegisterDate { get; }
+        public DateTime LastModificationDate { get; private set; }
+        public DateTime? LastRenderizationDate { get; set; }
 
-        public DateTime LastModificationDate
-        {
-            get => _lastModificationDate;
-            private set => _lastModificationDate = value;
-        }
+        public List<Model> PositionedModels { get; set; }
 
-        public Vector3D ShootRay(Ray ray, int depth, Random random)
+        public Bitmap Preview { get; set; }
+
+        public Colour ShootRay(Ray ray, int depth, Random random)
         {
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
+            Model modelSample = new Model();
+            bool itWasAHit = false;
             foreach (Model element in PositionedModels)
             {
-                HitRecord3D hit = element.Figure.IsFigureHit(ray, 0.001, moduleMax, element.Material.Color);
-                if (hit != null)
-                { 
+                if (element.Figure.WasHit(ray, 0.001, moduleMax))
+                {
+                    itWasAHit = true;
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
+                    modelSample = element;
                     hitRecord = hit;
-                    moduleMax = hit.Module; 
+                    moduleMax = hit.Module;
                 }
             }
-            if (hitRecord!=null)
+            return ElementAttenuation(depth, hitRecord, random, modelSample, ray, itWasAHit);
+        }
+
+        private Colour ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
+        {
+            if (itWasAHit)
             {
-                if (depth > 0)
-                {
-                    Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere(random));
-                    Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
-                    Ray newRay = new Ray(hitRecord.Intersection, newVector);
-                    Vector3D color = ShootRay(newRay, depth - 1, random);
-                    Vector3D attenuation = hitRecord.Attenuation;
-                    return new Vector3D(attenuation.X * color.X, attenuation.Y * color.Y, attenuation.Z* color.Z);
-                }
-                else
-                {
-                    return new Vector3D(0, 0, 0);
-                }
+                return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, random, modelSample);
             }
             else
             {
-               return getBlueSky(ray);
+                return GetBlueSky(ray);
             }
         }
 
-        private Vector3D getBlueSky(Ray ray)
+        private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
+        {
+            if (MaxiumDepth > 0)
+            {
+                Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
+                Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
+                return new Colour(
+                   hitRecord.Attenuation.Red() * color.PercentageRed,
+                    hitRecord.Attenuation.Green() * color.PercentageGreen,
+                    hitRecord.Attenuation.Blue() * color.PercentageBlue
+                    );
+            }
+
+            else
+            {
+                return new Colour(0, 0, 0);
+            }
+        }
+
+        private Colour GetBlueSky(Ray ray)
         {
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
-            var colorStart = new Vector3D(1, 1, 1);
-            var colorEnd = new Vector3D(0.5, 0.7, 1.0);
-            return colorStart.Multiply((1 - posY)).Add(colorEnd.Multiply(posY));
+            var colorStart = new Colour(1, 1, 1);//revisar
+            var colorEnd = new Colour(0.5, 0.7, 1.0); //revisar
+            return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
 
-        private Vector3D GetRandomInUnitSphere(Random random)
-        {
-            Vector3D vector;
-            do
-            {
-                Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1,1,1));
-            } while (vector.SquaredLength() >=1 );
-            return vector;
-        }
+
 
         public void UpdateLastModificationDate()
         {
             LastModificationDate = DateTimeProvider.Now;
         }
-        private bool IsAValidName(string value)
+        public void UpdateLastRenderizationDate()
+        {
+            LastRenderizationDate = DateTimeProvider.Now;
+        }
+        private void ValidateName(string value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
-            return true;
         }
-        
     }
 }

@@ -7,7 +7,7 @@ namespace Render3D.UnitTest
     [TestClass]
     public class DateTimeProviderTest
     {
-        DateTime januaryFirst2020;
+        private DateTime januaryFirst2020;
 
         [TestInitialize]
         public void Initialize()

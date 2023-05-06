@@ -48,6 +48,7 @@
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Colour.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
@@ -65,6 +66,5 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Figures\Sphere.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
