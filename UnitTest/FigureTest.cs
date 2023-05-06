@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd.Figures;
 using Render3D.BackEnd;
-using System;
+using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.UnitTest
 {
@@ -10,7 +10,8 @@ namespace Render3D.UnitTest
     {
         private Client client1;
         private Figure figure1;
-        private string figure1Name = "A valid name";
+        private readonly string figure1Name = "A valid name";
+        private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
 
 
         [TestInitialize]
@@ -19,6 +20,16 @@ namespace Render3D.UnitTest
             client1 = new Client() { Name = "client1Name" };
             figure1 = new Sphere() { Client = client1, Name = figure1Name };
         }
+
+        [TestMethod]
+        public void givenAValidVectorItAssignsItToTheFigure()
+        {
+            figure1.Position = positionSample;
+            Assert.AreEqual(positionSample, figure1.Position);
+
+        }
+
+
 
         [TestMethod]
         public void givenAValidNameItAssignsItToTheFigure()
@@ -51,15 +62,16 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAFigureItReturnsItsOwner() { 
-        Assert.AreEqual(figure1.Client, client1);
+        public void givenAFigureItReturnsItsOwner()
+        {
+            Assert.AreEqual(figure1.Client, client1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The name must not be empty")]
         public void givenAnEmptyFigureNameItShouldThrowABackEndException()
         {
-           figure1.Name="";
+            figure1.Name = "";
         }
 
         /*   [TestMethod]

@@ -1,8 +1,8 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
+using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.Collections;
-using System.Runtime.Remoting.Channels;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest
 {
@@ -10,31 +10,22 @@ namespace Render3D.UnitTest
     public class SceneTest
     {
         private Scene sceneSample;
-        private Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
-        private String sceneSampleName = "SceneTest";
-        private ArrayList positionedModels = new ArrayList();
-        private decimal[] randomCameraPosition = new decimal[3] { 1, 1, 0 };
-        private decimal[] DifferentRandomCameraPosition = new decimal[3] { 2, 3, 0 };
-        private decimal[] randomObjectPosition = new decimal[3] { 1, 1, 0 };
-        private decimal[] DifferentRandomObjectPosition = new decimal[3] { 5, 1, 3 };
-        private int randomFoV = 30;
-        private Scene defaultSceneSample = new Scene();
-        private decimal[] defaultCamaraPosition = new decimal[3] { 0, 2, 0 };
-        private decimal[] defaultObjectPosition = new decimal[3] { 0, 2, 5 };
+        private readonly Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
+        private readonly String sceneSampleName = "SceneTest";
+        private readonly List<Model> positionedModels = new List<Model>();
+        private readonly Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
+        private readonly Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
+        private readonly Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
+        private readonly Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
+        private readonly int randomFoV = 30;
+        private readonly Scene defaultSceneSample = new Scene();
 
 
         [TestInitialize]
 
         public void initialize()
         {
-            sceneSample = new Scene(){ Name = sceneSampleName };
-        }
-
-        [TestMethod]
-        public void givenAValidFieldOfViewItAssignsItToTheScene()
-        {
-            sceneSample.FieldOfView = randomFoV;
-            Assert.AreEqual(sceneSample.FieldOfView, randomFoV);
+            sceneSample = new Scene() { Name = sceneSampleName };
         }
 
         [TestMethod]
@@ -43,7 +34,6 @@ namespace Render3D.UnitTest
             sceneSample.Client = clientSample;
             Assert.IsTrue(sceneSample.Client.Equals(clientSample));
         }
-
 
         [TestMethod]
         public void givenAValidNameItAssignsItToTheScene()
@@ -60,18 +50,13 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidCameraPositionItAssignsItToTheScene()
+        public void givenACameraItAssignsItToTheScene()
         {
-            sceneSample.CameraPosition = randomCameraPosition;
-            Assert.AreEqual(sceneSample.CameraPosition, randomCameraPosition);
+            Camera camera = new Camera();
+            sceneSample.Camera = camera;
+            Assert.AreEqual(sceneSample.Camera, camera);
         }
 
-        [TestMethod]
-        public void givenAValidObjectPositionItAssignsItToTheScene()
-        {
-            sceneSample.ObjectPosition = randomObjectPosition;
-            Assert.AreEqual(sceneSample.ObjectPosition, randomObjectPosition);
-        }
 
 
         [TestMethod]
@@ -96,38 +81,93 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAdefaultSceneItComparesTheDefaultFoV()
+        public void givenASceneItReturnsItsRegisteredDate()
         {
-            Assert.AreEqual(defaultSceneSample.FieldOfView, 30);
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
+            DateTimeProvider.Now = JanuaryFirst2020;
+
+            Scene scene = new Scene();
+            DateTimeProvider.Reset();
+
+            Assert.AreEqual(JanuaryFirst2020, scene.RegisterDate);
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesTheDefaultCameraPosition()
+        public void givenASceneItReturnsNullInRenderizationDateIfItWasNeverRendered()
         {
-            Assert.IsTrue(defaultSceneSample.equalsCameraPosition(defaultCamaraPosition));
+            Scene scene = new Scene();
+            Assert.IsNull(scene.LastRenderizationDate);
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesADifferentCameraPosition()
+        public void givenASceneItReturnsItsLastRenderizationDate()
         {
-            Assert.IsFalse(defaultSceneSample.equalsCameraPosition(DifferentRandomCameraPosition));
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
+            DateTime FebruaryFirst2020 = new DateTime(2020, 2, 1);
+
+            DateTimeProvider.Now = JanuaryFirst2020;
+            Scene scene = new Scene();
+
+            DateTimeProvider.Now = FebruaryFirst2020;
+            scene.UpdateLastRenderizationDate();
+            Assert.AreEqual(FebruaryFirst2020, scene.LastRenderizationDate);
+        }
+
+
+
+        [TestMethod]
+        public void givenTwoCamerasWithDifferentFovsItReturnsTheyAreNotEqual()
+        {
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            Camera camera2 = new Camera();
+            camera2.Fov = 30;
+
+            Assert.IsFalse(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesTheDefaultObjectPosition()
+        public void givenTwoCamerasWithOnlyTheSameFovItReturnsTheyAreNotEqual()
         {
-            Assert.IsTrue(defaultSceneSample.equalsObjectPosition(defaultObjectPosition));
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            camera1.LookAt = new Vector3D(1, 1, 1);
+            camera1.LookFrom = new Vector3D(0, 0, 0);
+
+            Camera camera2 = new Camera();
+            camera2.Fov = 20;
+            camera2.LookAt = new Vector3D(2, 2, 2);
+            camera2.LookFrom = new Vector3D(-2, -2, -2);
+
+            Assert.IsFalse(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenADefaultSceneItComparesADifferentObjectPosition()
+        public void givenTwoEqualCamerasItReturnsTrue()
         {
-            Assert.IsFalse(defaultSceneSample.equalsObjectPosition(DifferentRandomObjectPosition));
+            Camera camera1 = new Camera();
+            camera1.Fov = 20;
+            camera1.LookAt = new Vector3D(1, 1, 1);
+            camera1.LookFrom = new Vector3D(2, 2, 2);
+
+            Camera camera2 = new Camera();
+            camera2.Fov = 20;
+            camera2.LookAt = new Vector3D(1, 1, 1);
+            camera2.LookFrom = new Vector3D(2, 2, 2);
+            bool b = camera1.Equals(camera2);
+
+            Assert.IsTrue(b);
         }
 
+        [TestMethod]
+        public void givenAnExistingSceneItUpdatesTheLastModifiedDate()
+        {
+            Scene scene = new Scene();
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
+            DateTimeProvider.Now = JanuaryFirst2020;
+            scene.UpdateLastModificationDate();
 
-
-
-
+            Assert.AreEqual(JanuaryFirst2020, scene.LastModificationDate);
+        }
     }
 }

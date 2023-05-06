@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Render3D.UnitTest
@@ -11,13 +8,13 @@ namespace Render3D.UnitTest
     [TestClass]
     public class VectorTest
     {
-        private const float one = 1;
-        private const float twoFiveFive = 255;
-        private const float two = 2;
+        private const double one = 1;
+        private const double twoFiveFive = 255;
+        private const double two = 2;
         private Vector3D allOnes;
-        private Vector3D allTwos = new Vector3D(2, 2, 2);
-        private Vector3D allTree = new Vector3D(3, 3, 3);
-        private Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
+        private readonly Vector3D allTwos = new Vector3D(2, 2, 2);
+        private readonly Vector3D allTree = new Vector3D(3, 3, 3);
+        private readonly Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
 
         [TestInitialize]
         public void initialize()
@@ -38,7 +35,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAVectorItAssignsTheCoordinates()
         {
-            Vector3D all2 = new Vector3D(1,1,1);
+            Vector3D all2 = new Vector3D(1, 1, 1);
             all2.X = 2;
             all2.Y = 2;
             all2.Z = 2;
@@ -47,13 +44,6 @@ namespace Render3D.UnitTest
             Assert.IsTrue(all2.Z == 2);
         }
 
-        [TestMethod]
-        public void givenAVectorGetTheAssignColors()
-        {
-            Assert.AreEqual(allOnes.Red, twoFiveFive);
-            Assert.AreEqual(allOnes.Green, twoFiveFive);
-            Assert.AreEqual(allOnes.Blue, twoFiveFive);
-        }
         [TestMethod]
         public void givenTwoVectorsReturnsTheSum()
         {
@@ -69,7 +59,7 @@ namespace Render3D.UnitTest
             Assert.AreEqual(allTwos.Substract(allOnes).Z, allOnes.Z);
         }
         [TestMethod]
-        public void givenAVectorAndAFloatMultiplyForEachCoord()
+        public void givenAVectorAndAdoubleMultiplyForEachCoord()
         {
             Assert.AreEqual(allOnes.Multiply(two).X, allTwos.X);
             Assert.AreEqual(allOnes.Multiply(two).Y, allTwos.Y);
@@ -77,7 +67,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAVectorAndAFloatDivideForEachCoord()
+        public void givenAVectorAndAdoubleDivideForEachCoord()
         {
             Assert.AreEqual(allTwos.Divide(two).X, allOnes.X);
             Assert.AreEqual(allTwos.Divide(two).Y, allOnes.Y);
@@ -135,17 +125,17 @@ namespace Render3D.UnitTest
             Assert.AreEqual(squareRootIsInt.GetUnit().Z, squareRootIsInt.Divide(3).Z);
         }
         [TestMethod]
-        public void givenTwoVectorsReturnFloat()
+        public void givenTwoVectorsReturndouble()
         {
-            Assert.AreEqual(allOnes.Dot(allOnes), 3);
+            Assert.AreEqual(allOnes.DotProduct(allOnes), 3);
         }
 
         [TestMethod]
         public void givenTwoVectorsReturnANewOneInThe()
         {
-            Assert.AreEqual(allOnes.Cross(allOnes).X, 0);
-            Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
-            Assert.AreEqual(allOnes.Cross(allOnes).Y, 0);
+            Assert.AreEqual(allOnes.CrossProduct(allOnes).X, 0);
+            Assert.AreEqual(allOnes.CrossProduct(allOnes).Y, 0);
+            Assert.AreEqual(allOnes.CrossProduct(allOnes).Y, 0);
         }
 
         [TestMethod]
