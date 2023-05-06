@@ -45,22 +45,24 @@ namespace Render3D.BackEnd
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
             Model modelSample = new Model();
+            bool itWasAHit = false;
             foreach (Model element in PositionedModels)
             {
-                HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
-                if (hit != null)
+                if (element.Figure.WasHit(ray, 0.001, moduleMax))
                 {
+                    itWasAHit = true;
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
                     modelSample = element;
                     hitRecord = hit;
                     moduleMax = hit.Module;
                 }
             }
-            return AttenuationOfBlueSkyOrFigure(depth, hitRecord, random, modelSample, ray);
+            return ElementAttenuation(depth, hitRecord, random, modelSample, ray, itWasAHit);
         }
 
-        private Vector3D AttenuationOfBlueSkyOrFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray)
+        private Vector3D ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
         {
-            if (hitRecord != null)
+            if (itWasAHit)
             {
                 return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, random, modelSample);
             }

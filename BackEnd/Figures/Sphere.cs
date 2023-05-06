@@ -37,7 +37,8 @@ namespace Render3D.BackEnd.Figures
             double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
             double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
             double discriminant = (b * b) - (4 * a * c);
-            if (discriminant < 0) { 
+            if (discriminant < 0)
+            {
                 return false;
             }
             double t = ((-b - Math.Sqrt(discriminant)) / (2 * a));
@@ -52,33 +53,17 @@ namespace Render3D.BackEnd.Figures
             double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
             double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
             double discriminant = (b * b) - (4 * a * c);
-            if (discriminant < 0)
-            {
-                return null;
-            }
-            else
-            {
-                double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
-                Vector3D intersectionPoint = ray.PointAt(t);
-                Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
-                if (t < tMax && t > tMin)
-                {
-                    return new HitRecord3D(t, intersectionPoint, normal, color);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
+            Vector3D intersectionPoint = ray.PointAt(t);
+            Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
+            return new HitRecord3D(t, intersectionPoint, normal, color);
         }
-
-
 
         private void ValidateRadius(double value)
         {
             if (value <= 0)
             {
-                throw new BackEndException("The _radius must be greater than 0");
+                throw new BackEndException("The radius must be greater than 0");
             }
         }
     }
