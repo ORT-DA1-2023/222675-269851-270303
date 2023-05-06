@@ -9,7 +9,7 @@ namespace Render3D.BackEnd.Materials
         protected string _name;
         protected Client _client;
         protected Ray _ray;
-        protected Vector3D _attenuation;
+        protected Colour _attenuation;
 
 
         public String Name
@@ -28,12 +28,11 @@ namespace Render3D.BackEnd.Materials
             set => _ray = value;
         }
 
-        public Vector3D Attenuation
+        public Colour Attenuation
         {
             get => _attenuation;
             set
             {
-                ValidateColor(value);
                 _attenuation = value;
             }
         }
@@ -47,14 +46,6 @@ namespace Render3D.BackEnd.Materials
 
         }
 
-        private void ValidateColor(Vector3D value)
-        {
-            if (!HelperValidator.IsANumberInRange(value.X, 0, 255) || !HelperValidator.IsANumberInRange(value.Y, 0, 255) ||
-                !HelperValidator.IsANumberInRange(value.Z, 0, 255))
-            {
-                throw new BackEndException("Color must be between 0 and 255");
-            }
-        }
 
     }
 }

@@ -7,10 +7,10 @@
             Module = 0;
             Intersection = new Vector3D(0, 0, 0);
             Normal = new Vector3D(0, 0, 0);
-            Attenuation = new Vector3D(0, 0, 0);
+            Attenuation = new Colour(0, 0, 0);
         }
 
-        public HitRecord3D(double module, Vector3D intersection, Vector3D normal, Vector3D color)
+        public HitRecord3D(double module, Vector3D intersection, Vector3D normal, Colour color)
         {
             Module = module;
             Intersection = intersection;
@@ -20,6 +20,6 @@
         public double Module { get; set; }
         public Vector3D Intersection { get; set; }
         public Vector3D Normal { get; set; }
-        public Vector3D Attenuation { get; set; }
+        public Colour Attenuation { get; set; }
     }
 }

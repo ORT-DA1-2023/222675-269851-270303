@@ -77,9 +77,9 @@ namespace Render3D.BackEnd
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
                 Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
                 return new Colour(
-                   hitRecord.Attenuation.X * color.PercentageRed,
-                    hitRecord.Attenuation.Y * color.PercentageGreen,
-                    hitRecord.Attenuation.Z * color.PercentageBlue
+                   hitRecord.Attenuation.Red() * color.PercentageRed,
+                    hitRecord.Attenuation.Green() * color.PercentageGreen,
+                    hitRecord.Attenuation.Blue() * color.PercentageBlue
                     );
             }
 

@@ -46,7 +46,7 @@ namespace Render3D.BackEnd.Figures
 
         }
 
-        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Vector3D color)
+        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Colour color)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
             double a = ray.Direction.DotProduct(ray.Direction);
