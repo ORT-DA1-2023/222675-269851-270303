@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
+using System.Drawing;
 
 namespace Render3D.UnitTest
 {
@@ -131,6 +132,47 @@ namespace Render3D.UnitTest
             Colour red1 = new Colour(1, 0, 0);
             Colour red2 = new Colour(1, 0, 0);
             Assert.IsTrue(red1.Equals(red2));
+        }
+
+        [TestMethod]
+        public void givenTwoColorsItSubstractsThem()
+        {
+            Colour colour1 = new Colour(1, 0, 0);
+            Colour colour2 = new Colour(0,1,0);
+
+            Colour diff= colour1.Substract(colour2);
+            Colour expected = new Colour(1,0,0); 
+            Assert.IsTrue(expected.Equals(diff));
+        }
+        [TestMethod]
+        public void givenTwoColorsItMultiplyThem()
+        {
+            Colour colour1 = new Colour(1, 0, 0);
+            Colour colour2 = new Colour(1, 1, 0);
+
+            Colour product = colour1.Multiply(colour2);
+            Colour expected = new Colour(1, 0, 0);
+            Assert.IsTrue(expected.Equals(product));
+        }
+        [TestMethod]
+        public void givenTwoColorsItDivideThem()
+        {
+            Colour colour1 = new Colour(0.5, 0.25, 1);
+            Colour colour2 = new Colour(1, 1, 1);
+
+            Colour quotient = colour1.Divide(colour2);
+            Colour expected = new Colour(0.5, 0.25, 1);
+            Assert.IsTrue(expected.Equals(quotient));
+        }
+
+        [TestMethod]
+        public void givenAColorAndANumberItDividesThem()
+        {
+            Colour colour1 = new Colour(1,0.5,0.25);
+            int ratio = 2;
+            Colour quotient = colour1.Divide(ratio);
+            Colour expected = new Colour(0.5, 0.25, 0.125);
+            Assert.IsTrue(expected.Equals(quotient));
         }
     }
 

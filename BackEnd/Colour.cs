@@ -124,14 +124,6 @@ namespace Render3D.BackEnd
             return product;
         }
 
-        private bool IsNumberBiggerThanOne(double number)
-        {
-            return number > 1d;
-        }
-        private bool IsNumberNegative(double number)
-        {
-            return number < 0d;
-        }
     }
 
 }
