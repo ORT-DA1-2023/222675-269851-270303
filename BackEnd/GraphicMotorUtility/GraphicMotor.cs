@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd.Figures;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -69,17 +70,21 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap RenderModelPreview(Model model)
         {
+            ResolutionHeight = 200;
+            PixelSampling = 45;
+            MaximumDepth = 15;
+
             Scene previewScene = new Scene();
+            model.Figure.Position = new Vector3D(0, 0, 0);
             previewScene.PositionedModels.Add(model);
 
-            Camera camera = new Camera
-            {
-                LookAt = model.Figure.Position,
-                LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10)),
-                Fov = 60
-            };
+            Sphere sphereSample = (Sphere)model.Figure;
+            double radius = sphereSample.Radius;
 
+
+            Camera camera = new Camera(model.Figure.Position.Add(new Vector3D(2 * radius, 2 * radius, 2 * radius)), model.Figure.Position, new Vector3D(0, 2 * radius, 0), 60, 1);
             previewScene.Camera = camera;
+
 
             return Render(previewScene);
         }
