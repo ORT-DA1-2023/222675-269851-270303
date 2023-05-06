@@ -32,8 +32,8 @@ namespace Render3D.BackEnd.Controllers
         }
         private void CreateAndAddMaterial(Client client, string materialName, int[] materialColors)
         {
-            Vector3D color = new Vector3D(materialColors[0], materialColors[1], materialColors[2]);
-            Material material = new LambertianMaterial() { Client = client, Name = materialName, Color = color };
+            Colour color = new Colour(materialColors[0], materialColors[1], materialColors[2]);
+            Material material = new LambertianMaterial() { Client = client, Name = materialName, Colour = color };
             _dataWarehouse.Materials.Add(material);
         }
 

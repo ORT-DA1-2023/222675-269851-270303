@@ -18,8 +18,8 @@ namespace Render3D.BackEnd.Figures
                 _name = value;
             }
         }
-        override
-            public String ToString()
+
+        public override string ToString()
         {
             return Name;
         }

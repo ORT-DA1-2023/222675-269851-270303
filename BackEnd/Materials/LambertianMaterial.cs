@@ -6,12 +6,16 @@ namespace Render3D.BackEnd.Materials
 
     public class LambertianMaterial : Material
     {
+        public LambertianMaterial() { }
+
         public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
             Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure(random));
             Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
             return new Ray(hitRecord.Intersection, newVector);
         }
+
+
 
         private Vector3D GetRandomInUnitFigure(Random random)
         {
@@ -23,31 +27,8 @@ namespace Render3D.BackEnd.Materials
             } while (vector.SquaredLength() >= 1);
             return vector;
         }
-        public override Client Client
-        {
-            get => client;
-            set => client = value;
-        }
-        public override Vector3D Color { 
-            get => color;
-            set { 
-                if(IsAValidColor(value))
-                {
-                    color = value;
-                }
-            } 
-        }
 
-        private bool IsAValidColor(Vector3D value)
-        {
-            if(!HelperValidator.IsANumberInRange(value.X,0,255) || !HelperValidator.IsANumberInRange(value.Y, 0, 255) || 
-                !HelperValidator.IsANumberInRange(value.Z, 0, 255))
-            {
-                throw new BackEndException("Color must be between 0 and 255");
-            }
-
-          return true;
-        }
+        public Colour Colour { get; set; }
 
         private bool IsAValidName(string value)
         {
@@ -55,10 +36,11 @@ namespace Render3D.BackEnd.Materials
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
             return true;
         }
-        override
-            public String ToString()
+        
+   
+           public override String ToString()
         {
-            return base.ToString()+ " ("+ color.X +","+color.Y +","+color.Z+")";    
+            return base.ToString()+ " ("+ Colour.Red() +","+Colour.Green() +","+Colour.Blue()+")";    
         }
     }
 }

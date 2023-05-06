@@ -21,10 +21,11 @@ namespace UserInterface.Controls
             _material = material;
             InitializeComponent();
             txtMaterialName.Text = material.Name;
-            lblRedColor.Text ="Red: "+ _material.Color.X;
-            lblGreenColor.Text = "Green: " + _material.Color.Y;
-            lblBlueColor.Text = "Blue: " + _material.Color.Z;
-            pBoxMaterial.BackColor = Color.FromArgb((int)_material.Color.X,(int)_material.Color.Y,(int)_material.Color.Z);
+            lblRedColor.Text = "Red: " + _material.Attenuation.Red();
+            lblGreenColor.Text = "Green: " + _material.Attenuation.Green(); ;
+            lblBlueColor.Text = "Blue: " + _material.Attenuation.Blue();
+            pBoxMaterial.BackColor = Color.FromArgb(_material.Attenuation.Red(), _material.Attenuation.Red(), _material.Attenuation.Red());
+              
         }
 
         private void btnEditMaterialName_Click(object sender, EventArgs e)

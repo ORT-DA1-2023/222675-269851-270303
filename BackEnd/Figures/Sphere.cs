@@ -67,10 +67,9 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
-          override
-        public String ToString()
+          public override String ToString()
         {
-            return base.ToString() +" "+ radius;
+            return base.ToString() +" "+ _radius;
         }
     }
 }

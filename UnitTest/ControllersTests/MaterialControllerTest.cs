@@ -19,7 +19,7 @@ namespace Render3D.UnitTest.ControllersTests
         private ClientController _clientController;
         private Client _clientSample;
         private Material _materialSample;
-        private Vector3D _color= new Vector3D(0,0,0);
+        private Colour _color= new Colour(0,0,0);
         private int[] _colorArray = new int[] { 0, 0, 0 };
 
         [TestInitialize]
@@ -29,7 +29,7 @@ namespace Render3D.UnitTest.ControllersTests
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
             _materialController = new MaterialController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
             _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1",Color=_color};
+            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1",Colour=_color};
         }
         [TestMethod]
         public void GivenANewMaterialAddsItToTheList()
