@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Render3D.BackEnd.Controllers;
 
-namespace Render3D.UnitTest.ControlllersTests
+namespace Render3D.UnitTest.ControllersTests
 {
     [TestClass]
     public class ClientControllerTest
@@ -47,6 +47,7 @@ namespace Render3D.UnitTest.ControlllersTests
             Assert.IsTrue(_clientController.GetClientByName("clientSample1").Equals(_clientSample));
         }
         [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The client doesnt exist")]
         public void GivenAClientReturnsFalseIfIsInNotTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");

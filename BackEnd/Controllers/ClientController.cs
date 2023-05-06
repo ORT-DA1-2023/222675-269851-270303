@@ -14,13 +14,12 @@ namespace Render3D.BackEnd.Controllers
 
         public void SignIn(string clientName, string clientPassword)
         {
-            Client client;
             try
             {
-               client= GetClientByName(clientName);
+                GetClientByName(clientName);
                 throw new Exception("client already exists");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 CreateAndAddAClient(clientName, clientPassword);
             }        

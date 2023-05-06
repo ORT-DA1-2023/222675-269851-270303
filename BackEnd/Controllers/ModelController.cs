@@ -19,23 +19,25 @@ namespace Render3D.BackEnd.Controllers
         public ClientController ClientController { get => _clientController; set => _clientController = value; }
         public void AddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
-            
-            if (GetModelByNameAndClient(clientName, modelName)==null)
+
+            try
             {
-                    TransferModelForCreation(ClientController.GetClientByName(clientName), modelName, figure, material);
+                GetModelByNameAndClient(clientName, modelName);
 
             }
-            else
+            catch (Exception)
             {
-                throw new BackEndException("model already exists");
+                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure,material);
+                return;
             }
+            throw new BackEndException("model already exists");
         }
         public void AddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
         {
             AddAModelWithoutPreview(clientName, modelName, figure, material);
             AddPreviewToTheModel(clientName, modelName);
         }
-        private void TransferModelForCreation(Client client, string modelName, Figure figure, Material material)
+        private void CreateAndAddModel(Client client, string modelName, Figure figure, Material material)
         {
             Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
             _dataWarehouse.Models.Add(model);
@@ -59,26 +61,36 @@ namespace Render3D.BackEnd.Controllers
         }
         public void ChangeModelName(string clientName, string oldName, string newName)
         {
-            Model model = GetModelByNameAndClient(clientName, oldName);
-            if (model == null)
+            Model model;
+            try
+            {
+                model = GetModelByNameAndClient(clientName, oldName);
+            }
+            catch (Exception)
             {
                 return;
             }
-            if (GetModelByNameAndClient(clientName, newName) != null)
+            try
             {
-                return;
+                GetModelByNameAndClient(clientName, newName);
             }
-            model.Name = newName;
-            return;
+            catch (Exception)
+            {
+                model.Name = newName;
+            }
         }
 
         public void DeleteModelInList(string clientName, string modelName)
         {
-            Model model = GetModelByNameAndClient(clientName, modelName);
-            if (model != null)
+            try
             {
+                Model model = GetModelByNameAndClient(clientName, modelName);
                 _dataWarehouse.Models.Remove(model);
             }
+            catch (Exception)
+            {
+            }
+
         }
     }
 

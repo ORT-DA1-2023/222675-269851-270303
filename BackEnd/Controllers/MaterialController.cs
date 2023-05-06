@@ -3,6 +3,7 @@ using Render3D.BackEnd.Materials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,14 +19,16 @@ namespace Render3D.BackEnd.Controllers
 
         public void AddMaterial(string clientName, string materialName, int[] materialColors)
         {
-            if (GetMaterialByNameAndClient(clientName,materialName).Name==null)
+           try
             {
-                    CreateAndAddMaterial(ClientController.GetClientByName(clientName), materialName, materialColors);
-            }
-            else
+                GetMaterialByNameAndClient(clientName, materialName);
+               
+            }catch(Exception)
             {
-                throw new BackEndException("material already exists");
-            }
+                CreateAndAddMaterial(ClientController.GetClientByName(clientName), materialName, materialColors);
+                return;
+            } 
+            throw new BackEndException("material already exists");
         }
         private void CreateAndAddMaterial(Client client, string materialName, int[] materialColors)
         {
@@ -47,24 +50,32 @@ namespace Render3D.BackEnd.Controllers
             throw new BackEndException("material doesnt exist");
         }
         public void ChangeMaterialName(string clientName, string oldName, string newName)
-        {
-            Material material = GetMaterialByNameAndClient(clientName, oldName);
-            if (material.Name == null)
+        { 
+            Material material;
+            try
+            {
+                material = GetMaterialByNameAndClient(clientName, oldName);
+            }
+            catch (Exception)
             {
                 return;
             }
-            if (GetMaterialByNameAndClient(clientName, newName).Name != null)
+            try{
+                GetMaterialByNameAndClient(clientName, newName);
+            }catch (Exception)
             {
-                return;
-            }
-            material.Name = newName;
+              material.Name = newName;
+            }        
         }
         public void DeleteMaterialInList(string clientName, string materialName)
         {
-            Material material = GetMaterialByNameAndClient(clientName, materialName);
-            if (material.Name != null)
+            try
             {
+                Material material=GetMaterialByNameAndClient(clientName, materialName);
                 _dataWarehouse.Materials.Remove(material);
+            }
+            catch(Exception) 
+            {
             }
             
         }
