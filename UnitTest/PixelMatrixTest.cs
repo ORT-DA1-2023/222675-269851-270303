@@ -22,7 +22,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAValidMatrixItAssingsToThePixelMatrix()
         {
-            matrixPPM = new Colour [width, height];
+            matrixPPM = new Colour[width, height];
             pixelMatrixSample.Matrix = matrixPPM;
             Assert.AreEqual(matrixPPM, pixelMatrixSample.Matrix);
 

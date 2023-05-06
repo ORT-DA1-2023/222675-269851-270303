@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using System;
 
 namespace Render3D.UnitTest
 {
@@ -14,7 +13,7 @@ namespace Render3D.UnitTest
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-            Colour colour = new Colour(percentageRed,percentageGreen,percentageBlue );
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
             int redValue = colour.Red();
 

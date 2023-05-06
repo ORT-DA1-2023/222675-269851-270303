@@ -1,10 +1,4 @@
-﻿using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+﻿using System;
 
 namespace Render3D.BackEnd
 {
@@ -21,7 +15,8 @@ namespace Render3D.BackEnd
             PercentageBlue = ValidateColour(percentageBlue);
         }
 
-        public double PercentageRed { 
+        public double PercentageRed
+        {
             get => _percentageRed;
             set
             {
@@ -61,12 +56,12 @@ namespace Render3D.BackEnd
         }
         public bool Equals(Colour other)
         {
-            return PercentageRed==other.PercentageRed && PercentageGreen==other.PercentageGreen && PercentageBlue==other.PercentageBlue; 
+            return PercentageRed == other.PercentageRed && PercentageGreen == other.PercentageGreen && PercentageBlue == other.PercentageBlue;
         }
         private double ValidateColour(double num)
         {
             if (num > 1) return 1;
-            if(num<0) return 0;
+            if (num < 0) return 0;
             return num;
         }
 
@@ -116,7 +111,7 @@ namespace Render3D.BackEnd
             double red = this.PercentageRed / number;
             double green = this.PercentageGreen / number;
             double blue = this.PercentageBlue / number;
-            Colour quotient = new Colour(red,green,blue);
+            Colour quotient = new Colour(red, green, blue);
             return quotient;
         }
 

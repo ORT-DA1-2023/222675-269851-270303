@@ -13,7 +13,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-       
+
         public Vector3D Add(Vector3D vector3d)
         {
             return new Vector3D(X + vector3d.X, Y + vector3d.Y, Z + vector3d.Z);

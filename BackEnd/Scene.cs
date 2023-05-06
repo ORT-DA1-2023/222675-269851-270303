@@ -1,7 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Materials;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -83,37 +81,37 @@ namespace Render3D.BackEnd
                     hitRecord.Attenuation.Y * color.PercentageGreen,
                     hitRecord.Attenuation.Z * color.PercentageBlue
                     );
-                }
-        
+            }
+
             else
             {
-                return new Colour(0,0,0);
-}
+                return new Colour(0, 0, 0);
+            }
         }
 
         private Colour GetBlueSky(Ray ray)
-{
-    var vectorDirectionUnit = ray.Direction.GetUnit();
-    var posY = 0.5 * (vectorDirectionUnit.Y + 1);
+        {
+            var vectorDirectionUnit = ray.Direction.GetUnit();
+            var posY = 0.5 * (vectorDirectionUnit.Y + 1);
             var colorStart = new Colour(1, 1, 1);//revisar
-    var colorEnd = new Colour (0.5,0.7,1.0); //revisar
-    return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
-}
+            var colorEnd = new Colour(0.5, 0.7, 1.0); //revisar
+            return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
+        }
 
 
 
-public void UpdateLastModificationDate()
-{
-    LastModificationDate = DateTimeProvider.Now;
-}
-public void UpdateLastRenderizationDate()
-{
-    LastRenderizationDate = DateTimeProvider.Now;
-}
-private void ValidateName(string value)
-{
-    if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
-    if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
-}
+        public void UpdateLastModificationDate()
+        {
+            LastModificationDate = DateTimeProvider.Now;
+        }
+        public void UpdateLastRenderizationDate()
+        {
+            LastRenderizationDate = DateTimeProvider.Now;
+        }
+        private void ValidateName(string value)
+        {
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Render3D.BackEnd.Materials
         protected Client _client;
         protected Ray _ray;
         protected Vector3D _attenuation;
-       
+
 
         public String Name
         {
@@ -22,7 +22,7 @@ namespace Render3D.BackEnd.Materials
             }
         }
         public Client Client { get; set; }
-        public Ray Ray 
+        public Ray Ray
         {
             get => _ray;
             set => _ray = value;
