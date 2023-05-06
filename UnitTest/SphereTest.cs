@@ -15,7 +15,7 @@ namespace Render3D.UnitTest
         private Sphere newSphericalFigure;
         private readonly double validRadius = 2;
         private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
-        private readonly Vector3D colorSample = new Vector3D(255, 1, 66);
+        private readonly Colour colorSample = new Colour(1, 0.5, 0.1);
 
         private double moduleMaxSample;
         private double moduleMinSample;
@@ -133,18 +133,18 @@ namespace Render3D.UnitTest
             Assert.IsFalse(sphere.WasHit(ray, minDistance, maxDistance));
         }
 
-           [TestMethod]
-            public void givenARayWhichDoesNotHitASphereItReturnsFalse()
-            {
-                Sphere sphere = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 1 };
-                Vector3D direction = new Vector3D(1, 1, 1);
-                Vector3D origin = new Vector3D(2, 0, 0);
-                Ray ray = new Ray(origin, direction);
-                double minDistance = 1;
-                double maxDistance = 2;
+        [TestMethod]
+        public void givenARayWhichDoesNotHitASphereItReturnsFalse()
+        {
+            Sphere sphere = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 1 };
+            Vector3D direction = new Vector3D(1, 1, 1);
+            Vector3D origin = new Vector3D(2, 0, 0);
+            Ray ray = new Ray(origin, direction);
+            double minDistance = 1;
+            double maxDistance = 2;
 
-                Assert.IsFalse(sphere.WasHit(ray, minDistance, maxDistance));
-            }
+            Assert.IsFalse(sphere.WasHit(ray, minDistance, maxDistance));
+        }
 
     }
 }

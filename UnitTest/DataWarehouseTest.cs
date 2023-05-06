@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 
 namespace Render3D.UnitTest
@@ -23,7 +22,7 @@ namespace Render3D.UnitTest
             clientSample = new Client() { Name = "client1Name" };
             clientSample2 = new Client() { Name = "clientSample2Name" };
             figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-            materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Attenuation = new Vector3D(255, 0, 0) };
+            materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Attenuation = new Colour(1, 0, 0) };
             modelSample = new Model() { Client = clientSample, Name = "TestModel", Figure = figureSample, Material = materialSample };
         }
 

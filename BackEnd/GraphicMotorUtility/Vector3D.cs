@@ -13,18 +13,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        public int Red()
-        {
-            return (int)Math.Abs(Math.Round(X * 255));
-        }
-        public int Green()
-        {
-            return (int)Math.Abs(Math.Round(Y * 255));
-        }
-        public int Blue()
-        {
-            return (int)Math.Abs(Math.Round(Z * 255));
-        }
 
         public Vector3D Add(Vector3D vector3d)
         {
