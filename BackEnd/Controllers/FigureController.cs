@@ -42,7 +42,7 @@ namespace Render3D.BackEnd.Controllers
                     return figure;
                 }
             }
-            return new Sphere();
+            throw new BackEndException("figure doesnt exist");
         }
         public void DeleteFigureInList(string clientName, string figureName)
         {

@@ -18,15 +18,14 @@ namespace Render3D.UserInterface
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            render.userWantsToLogIn();
-
+            render.UserWantsToLogIn();
         }
 
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
-            String clientName = txtClientName.Text;
-            String clientPassword = txtClientPassword.Text;
-            String clientPasswordRepeated = txtClientRepeatedPassword.Text;
+            string clientName = txtClientName.Text;
+            string clientPassword = txtClientPassword.Text;
+            string clientPasswordRepeated = txtClientRepeatedPassword.Text;
 
             if (clientPassword == clientPasswordRepeated)
             {
@@ -40,7 +39,7 @@ namespace Render3D.UserInterface
                     return;
                 }
                 render.clientName = clientName;
-                render.enterMenu();
+                render.EnterMenu();
             }
         }
 

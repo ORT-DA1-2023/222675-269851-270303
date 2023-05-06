@@ -44,7 +44,7 @@ namespace Render3D.BackEnd.Controllers
                     return material;
                 }
             }
-            return new LambertianMaterial();
+            throw new BackEndException("material doesnt exist");
         }
         public void ChangeMaterialName(string clientName, string oldName, string newName)
         {

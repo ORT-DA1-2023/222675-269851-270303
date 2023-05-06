@@ -25,30 +25,32 @@ namespace Render3D.UserInterface
         {
             string clientName= txtClientName.Text;
             string clientPassword= txtClientPassword.Text;
-            Client client= render.clientController.GetClientByName(clientName);
-            if (client.Name!=null && client.Password.Equals(clientPassword))
+            Client client;
+            try
             {
-                txtClientName.Text = "";
-                txtClientPassword.Text = "";
-                render.clientName = clientName;
-                render.enterMenu();
+                client = render.clientController.GetClientByName(clientName);
             }
-            else
+            catch(Exception ex)
             {
-                if (client.Name == null)
-                {
-                    lblExceptionError.Text = "There are no clients with that name";
-                }
-                else {
-                    lblExceptionError.Text = "Password is incorrect";
-                }
+                lblExceptionError.Text = ex.Message;
+                return;
             }
+            
+            if (!client.Password.Equals(clientPassword))
+            {
+                lblExceptionError.Text = "Password is incorrect";
+                return;
+            }
+            txtClientName.Text = "";
+            txtClientPassword.Text = "";
+            render.clientName = clientName;
+            render.EnterMenu();
         }
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
             txtClientName.Text = "";
             txtClientPassword.Text = "";
-            render.userWantsToSignIn();
+            render.UserWantsToSignIn();
         }
 
 

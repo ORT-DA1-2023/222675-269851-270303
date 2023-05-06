@@ -15,7 +15,7 @@ namespace Render3D.UserInterface
 {
     public partial class Render3DIU : Form
     {
-        public String clientName= "";
+        public string clientName= "";
         public DataWarehouse dataWarehouse = new DataWarehouse();
         public ClientController clientController = new ClientController();
         public FigureController figureController = new FigureController();
@@ -31,24 +31,24 @@ namespace Render3D.UserInterface
             modelController.DataWarehouse = dataWarehouse;
             modelController.ClientController = clientController;
             InitializeComponent();
-            userWantsToLogIn();
+            UserWantsToLogIn();
         }
-        public void userWantsToLogIn()
+        public void UserWantsToLogIn()
         {
-            showObjectCreationPanel(new Login());
+            ShowObjectCreationPanel(new Login());
         }
 
-        public void enterMenu()
+        public void EnterMenu()
         {
-            showObjectCreationPanel(new CreationMenu());
+            ShowObjectCreationPanel(new CreationMenu());
         }
 
-        public void userWantsToSignIn()
+        public void UserWantsToSignIn()
         {
-            showObjectCreationPanel(new SignIn());
+            ShowObjectCreationPanel(new SignIn());
         }
 
-        private void showObjectCreationPanel(object formSon)
+        private void ShowObjectCreationPanel(object formSon)
         {
             if (this.pnLayout.Controls.Count > 0)
             {

@@ -50,7 +50,7 @@ namespace Render3D.BackEnd.Controllers
                     return model;
                 }
             }
-            return null;
+            throw new BackEndException("model doesnt exist");
         }
         private void AddPreviewToTheModel(string clientName, string modelName)
         {

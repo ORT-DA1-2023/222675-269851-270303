@@ -60,7 +60,7 @@ namespace Render3D.UserInterface
 
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
-            render.userWantsToLogIn();
+            render.UserWantsToLogIn();
         }
         private void BtnMaterial_Click(object sender, EventArgs e)
         {
@@ -79,7 +79,7 @@ namespace Render3D.UserInterface
 
         
 
-        private void showObjectCreationPanel(object formSon)
+        private void ShowObjectCreationPanel(object formSon)
         {
             if(this.pnlObjectCreation.Controls.Count >0)
             {
@@ -97,24 +97,24 @@ namespace Render3D.UserInterface
         {
             render = (Render3DIU)this.Parent.Parent;
             lblShowClientName.Text = "Welcome back \n" + render.clientName + "!!";
-            showObjectCreationPanel(new FigurePanel());
+            ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
         public void Refresh(String toShow)
         {
             if(toShow=="Material")
             {
-                showObjectCreationPanel(new MaterialPanel());
+                ShowObjectCreationPanel(new MaterialPanel());
                 ShowMaterialList();
             }
             if (toShow == "Figure")
             {
-                showObjectCreationPanel(new FigurePanel());
+                ShowObjectCreationPanel(new FigurePanel());
                 ShowFigureList();
             }
             if(toShow == "Model")
             {
-                showObjectCreationPanel(new ModelPanel());
+                ShowObjectCreationPanel(new ModelPanel());
                 ShowModelList();
             }
             

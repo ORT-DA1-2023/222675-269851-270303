@@ -14,14 +14,16 @@ namespace Render3D.BackEnd.Controllers
 
         public void SignIn(string clientName, string clientPassword)
         {
-            if (GetClientByName(clientName).Name != "")
+            Client client;
+            try
+            {
+               client= GetClientByName(clientName);
+                throw new Exception("client already exists");
+            }
+            catch (Exception ex)
             {
                 CreateAndAddAClient(clientName, clientPassword);
-            }
-            else
-            {
-                throw new Exception( "client already exists");
-            }
+            }        
         }
         private void CreateAndAddAClient(string clientName, string clientPassword)
         {
@@ -37,7 +39,7 @@ namespace Render3D.BackEnd.Controllers
                     return client;
                 }
             }
-            return new Client();
+            throw new BackEndException("The client doesnt exist");
         }
         public void CheckName(string clientName)
         {
