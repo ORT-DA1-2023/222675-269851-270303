@@ -26,11 +26,11 @@ namespace Render3D.BackEnd.Materials
             return vector;
         }
 
-        public Colour Colour { get; set; }
+        
 
         public override String ToString()
         {
-            return base.ToString() + " (" + Colour.Red() + "," + Colour.Green() + "," + Colour.Blue() + ")";
+            return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
     }
 }

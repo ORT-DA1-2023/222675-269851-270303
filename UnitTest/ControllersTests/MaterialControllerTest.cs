@@ -29,7 +29,7 @@ namespace Render3D.UnitTest.ControllersTests
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
             _materialController = new MaterialController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
             _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1",Colour=_color};
+            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1",Attenuation =_color};
         }
         [TestMethod]
         public void GivenANewMaterialAddsItToTheList()

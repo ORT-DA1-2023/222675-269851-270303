@@ -32,7 +32,7 @@ namespace Render3D.UnitTest.ControllersTests
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
             _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Colour = _colour };
+            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Attenuation = _colour };
             _figure = new Sphere() { Client = _clientSample, Name = "figureSample1", Radius = 5 };
             _modelController = new ModelController() { ClientController = _clientController, DataWarehouse = _dataWarehouse };
             _modelSample = new Model() { Client = _clientSample, Name = "modelSample1", Figure = _figure, Material = _materialSample };
