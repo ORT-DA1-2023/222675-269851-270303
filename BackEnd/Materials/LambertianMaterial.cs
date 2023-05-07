@@ -15,8 +15,6 @@ namespace Render3D.BackEnd.Materials
             return new Ray(hitRecord.Intersection, newVector);
         }
 
-
-
         private Vector3D GetRandomInUnitFigure(Random random)
         {
             Vector3D vector;
@@ -30,17 +28,9 @@ namespace Render3D.BackEnd.Materials
 
         public Colour Colour { get; set; }
 
-        private bool IsAValidName(string value)
+        public override String ToString()
         {
-            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name must not be empty");
-            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
-            return true;
-        }
-        
-   
-           public override String ToString()
-        {
-            return base.ToString()+ " ("+ Colour.Red() +","+Colour.Green() +","+Colour.Blue()+")";    
+            return base.ToString() + " (" + Colour.Red() + "," + Colour.Green() + "," + Colour.Blue() + ")";
         }
     }
 }

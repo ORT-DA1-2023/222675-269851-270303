@@ -42,8 +42,10 @@ namespace Render3D.UserInterface
             List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Material material in materialList)
             {
-                MaterialControl materialControl = new MaterialControl(material);
-                flObjectList.Controls.Add(materialControl);
+
+                    MaterialControl materialControl = new MaterialControl(material); //se cae aca
+                    flObjectList.Controls.Add(materialControl);
+ 
             }
         }
         public void ShowModelList()
