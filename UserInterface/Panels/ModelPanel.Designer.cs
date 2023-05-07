@@ -29,23 +29,25 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblExceptionError = new System.Windows.Forms.Label();
             this.lblModelName = new System.Windows.Forms.Label();
             this.txtModelName = new System.Windows.Forms.TextBox();
             this.checkGeneratePreview = new System.Windows.Forms.CheckBox();
             this.btnCreateFigure = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lstMaterial = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lstFigure = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblExceptionError = new System.Windows.Forms.Label();
+            this.lstFigure = new System.Windows.Forms.ComboBox();
+            this.lstMaterial = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lstMaterial);
+            this.panel1.Controls.Add(this.lstFigure);
             this.panel1.Controls.Add(this.lblExceptionError);
             this.panel1.Controls.Add(this.lblModelName);
             this.panel1.Controls.Add(this.txtModelName);
@@ -53,15 +55,24 @@
             this.panel1.Controls.Add(this.btnCreateFigure);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lstMaterial);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.lstFigure);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 551);
             this.panel1.TabIndex = 0;
+            // 
+            // lblExceptionError
+            // 
+            this.lblExceptionError.AutoSize = true;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Location = new System.Drawing.Point(78, 399);
+            this.lblExceptionError.Name = "lblExceptionError";
+            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.TabIndex = 18;
+            this.lblExceptionError.Text = "error";
             // 
             // lblModelName
             // 
@@ -79,7 +90,7 @@
             // 
             this.txtModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtModelName.Location = new System.Drawing.Point(81, 109);
-            this.txtModelName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtModelName.Margin = new System.Windows.Forms.Padding(2);
             this.txtModelName.Name = "txtModelName";
             this.txtModelName.Size = new System.Drawing.Size(212, 28);
             this.txtModelName.TabIndex = 9;
@@ -135,18 +146,6 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "tip: if the list is empty you should\r\n start by creating a figure";
             // 
-            // lstMaterial
-            // 
-            this.lstMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstMaterial.FormattingEnabled = true;
-            this.lstMaterial.ItemHeight = 22;
-            this.lstMaterial.Location = new System.Drawing.Point(81, 299);
-            this.lstMaterial.Name = "lstMaterial";
-            this.lstMaterial.Size = new System.Drawing.Size(212, 26);
-            this.lstMaterial.TabIndex = 4;
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -171,18 +170,6 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Chose a figure";
             // 
-            // lstFigure
-            // 
-            this.lstFigure.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFigure.FormattingEnabled = true;
-            this.lstFigure.ItemHeight = 22;
-            this.lstFigure.Location = new System.Drawing.Point(81, 178);
-            this.lstFigure.Name = "lstFigure";
-            this.lstFigure.Size = new System.Drawing.Size(212, 26);
-            this.lstFigure.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -195,16 +182,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Create a new model!!!";
             // 
-            // lblExceptionError
+            // lstFigure
             // 
-            this.lblExceptionError.AutoSize = true;
-            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
-            this.lblExceptionError.Location = new System.Drawing.Point(78, 399);
-            this.lblExceptionError.Name = "lblExceptionError";
-            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
-            this.lblExceptionError.TabIndex = 18;
-            this.lblExceptionError.Text = "error";
+            this.lstFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFigure.FormattingEnabled = true;
+            this.lstFigure.Location = new System.Drawing.Point(81, 177);
+            this.lstFigure.Name = "lstFigure";
+            this.lstFigure.Size = new System.Drawing.Size(212, 32);
+            this.lstFigure.TabIndex = 19;
+            // 
+            // lstMaterial
+            // 
+            this.lstMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMaterial.FormattingEnabled = true;
+            this.lstMaterial.Location = new System.Drawing.Point(81, 298);
+            this.lstMaterial.Name = "lstMaterial";
+            this.lstMaterial.Size = new System.Drawing.Size(212, 32);
+            this.lstMaterial.TabIndex = 20;
             // 
             // ModelPanel
             // 
@@ -226,16 +220,16 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lstFigure;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox lstMaterial;
         private System.Windows.Forms.CheckBox checkGeneratePreview;
         private System.Windows.Forms.Button btnCreateFigure;
         private System.Windows.Forms.Label lblModelName;
         private System.Windows.Forms.TextBox txtModelName;
         private System.Windows.Forms.Label lblExceptionError;
+        private System.Windows.Forms.ComboBox lstFigure;
+        private System.Windows.Forms.ComboBox lstMaterial;
     }
 }
