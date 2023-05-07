@@ -1,4 +1,4 @@
-﻿namespace UserInterface.Controls
+﻿namespace Render3D.UserInterface.Controls
 {
     partial class MaterialControl
     {

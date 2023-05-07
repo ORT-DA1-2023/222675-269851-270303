@@ -13,7 +13,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.UserInterface;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace UserInterface.Controls
+namespace Render3D.UserInterface.Controls
 {
     
     public partial class FigureControl : UserControl

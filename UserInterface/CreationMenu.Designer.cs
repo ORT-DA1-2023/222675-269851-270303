@@ -53,16 +53,16 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(814, 714);
+            this.panel3.Size = new System.Drawing.Size(610, 580);
             this.panel3.TabIndex = 1;
             // 
             // flObjectList
             // 
             this.flObjectList.AutoScroll = true;
-            this.flObjectList.Location = new System.Drawing.Point(424, -1);
+            this.flObjectList.Location = new System.Drawing.Point(318, -1);
             this.flObjectList.Margin = new System.Windows.Forms.Padding(0);
             this.flObjectList.Name = "flObjectList";
-            this.flObjectList.Size = new System.Drawing.Size(387, 713);
+            this.flObjectList.Size = new System.Drawing.Size(290, 579);
             this.flObjectList.TabIndex = 0;
             // 
             // pnlObjectCreation
@@ -70,10 +70,10 @@
             this.pnlObjectCreation.BackColor = System.Drawing.Color.White;
             this.pnlObjectCreation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlObjectCreation.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlObjectCreation.Location = new System.Drawing.Point(814, 0);
+            this.pnlObjectCreation.Location = new System.Drawing.Point(610, 0);
             this.pnlObjectCreation.Margin = new System.Windows.Forms.Padding(0);
             this.pnlObjectCreation.Name = "pnlObjectCreation";
-            this.pnlObjectCreation.Size = new System.Drawing.Size(519, 714);
+            this.pnlObjectCreation.Size = new System.Drawing.Size(390, 580);
             this.pnlObjectCreation.TabIndex = 0;
             // 
             // lblShowClientName
@@ -81,11 +81,10 @@
             this.lblShowClientName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblShowClientName.AutoSize = true;
             this.lblShowClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowClientName.Location = new System.Drawing.Point(91, 10);
-            this.lblShowClientName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShowClientName.Location = new System.Drawing.Point(68, 8);
             this.lblShowClientName.Name = "lblShowClientName";
             this.lblShowClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblShowClientName.Size = new System.Drawing.Size(178, 58);
+            this.lblShowClientName.Size = new System.Drawing.Size(141, 48);
             this.lblShowClientName.TabIndex = 0;
             this.lblShowClientName.Text = "Welcome back \r\nUser!!";
             this.lblShowClientName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,21 +92,22 @@
             // btnScene
             // 
             this.btnScene.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnScene.Location = new System.Drawing.Point(69, 314);
-            this.btnScene.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnScene.Location = new System.Drawing.Point(52, 255);
+            this.btnScene.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnScene.Name = "btnScene";
-            this.btnScene.Size = new System.Drawing.Size(209, 59);
+            this.btnScene.Size = new System.Drawing.Size(157, 48);
             this.btnScene.TabIndex = 4;
             this.btnScene.Text = "Scenes!";
             this.btnScene.UseVisualStyleBackColor = true;
+            this.btnScene.Click += new System.EventHandler(this.BtnScene_Click);
             // 
             // btnModel
             // 
             this.btnModel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnModel.Location = new System.Drawing.Point(69, 242);
-            this.btnModel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnModel.Location = new System.Drawing.Point(52, 197);
+            this.btnModel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnModel.Name = "btnModel";
-            this.btnModel.Size = new System.Drawing.Size(209, 59);
+            this.btnModel.Size = new System.Drawing.Size(157, 48);
             this.btnModel.TabIndex = 3;
             this.btnModel.Text = "Models!";
             this.btnModel.UseVisualStyleBackColor = true;
@@ -116,10 +116,10 @@
             // btnMaterial
             // 
             this.btnMaterial.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnMaterial.Location = new System.Drawing.Point(69, 171);
-            this.btnMaterial.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMaterial.Location = new System.Drawing.Point(52, 139);
+            this.btnMaterial.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnMaterial.Name = "btnMaterial";
-            this.btnMaterial.Size = new System.Drawing.Size(209, 59);
+            this.btnMaterial.Size = new System.Drawing.Size(157, 48);
             this.btnMaterial.TabIndex = 2;
             this.btnMaterial.Text = "Materials!";
             this.btnMaterial.UseVisualStyleBackColor = true;
@@ -128,10 +128,10 @@
             // btnFigure
             // 
             this.btnFigure.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnFigure.Location = new System.Drawing.Point(69, 100);
-            this.btnFigure.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFigure.Location = new System.Drawing.Point(52, 81);
+            this.btnFigure.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnFigure.Name = "btnFigure";
-            this.btnFigure.Size = new System.Drawing.Size(209, 59);
+            this.btnFigure.Size = new System.Drawing.Size(157, 48);
             this.btnFigure.TabIndex = 1;
             this.btnFigure.Text = "Figures!";
             this.btnFigure.UseVisualStyleBackColor = true;
@@ -140,10 +140,9 @@
             // btnLogOut
             // 
             this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLogOut.Location = new System.Drawing.Point(69, 473);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogOut.Location = new System.Drawing.Point(52, 384);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(209, 59);
+            this.btnLogOut.Size = new System.Drawing.Size(157, 48);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
@@ -163,20 +162,19 @@
             this.pnlMenuControler.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuControler.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMenuControler.Name = "pnlMenuControler";
-            this.pnlMenuControler.Size = new System.Drawing.Size(425, 714);
+            this.pnlMenuControler.Size = new System.Drawing.Size(319, 580);
             this.pnlMenuControler.TabIndex = 2;
             // 
             // CreationMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 714);
+            this.ClientSize = new System.Drawing.Size(1000, 580);
             this.Controls.Add(this.pnlMenuControler);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlObjectCreation);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CreationMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "au";

@@ -10,15 +10,13 @@ using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.UserInterface;
 
-namespace UserInterface.Controls
+namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        Model model;
-        String oldName;
+        string oldName;
         public ModelControl(Model model)
         {
-            model = model;
             InitializeComponent();
             txtModelName.Text = model.Name;
             lblModelFigure.Text= model.Figure.Name;

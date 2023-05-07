@@ -24,9 +24,9 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            String figureName= txtFigureName.Text;
-            String figureRadiusString = txtFigureRadius.Text;
-            Double figureRadius;
+            string figureName= txtFigureName.Text;
+            string figureRadiusString = txtFigureRadius.Text;
+            double figureRadius;
             if (TryToParse(figureRadiusString)!=-1)
             {
                 figureRadius = Convert.ToDouble(figureRadiusString);
@@ -61,8 +61,8 @@ namespace Render3D.UserInterface.Panels
 
         private void VariablesInitialize(object sender, EventArgs e)
         {
-            creation = ((CreationMenu)this.Parent.Parent);
-            render = ((Render3DIU)creation.Parent.Parent);
+            creation = (CreationMenu)this.Parent.Parent;
+            render = (Render3DIU)creation.Parent.Parent;
             lblExceptionError.Text = "";
         }
     }

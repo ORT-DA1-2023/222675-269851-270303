@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserInterface.Controls
+namespace Render3D.UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {

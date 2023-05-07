@@ -25,7 +25,7 @@ namespace Render3D.UserInterface.Panels
 
         private void VariableInitialize(object sender, EventArgs e)
         {
-            creation = ((CreationMenu)this.Parent.Parent);
+            creation = (CreationMenu)this.Parent.Parent;
             render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();

@@ -11,9 +11,8 @@ using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
+using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
-using UserInterface;
-using UserInterface.Controls;
 
 namespace Render3D.UserInterface
 {
@@ -119,7 +118,11 @@ namespace Render3D.UserInterface
                 ShowObjectCreationPanel(new ModelPanel());
                 ShowModelList();
             }
-            
+            if (toShow == "Scene")
+            {
+                ShowObjectCreationPanel(new ScenePanel());
+            }
+
         }
         public bool FigureNameHasBeenChanged(String oldName,string newName)
         {
@@ -164,6 +167,11 @@ namespace Render3D.UserInterface
         internal void DeleteModel(string modelName)
         {
          render.modelController.DeleteModelInList(render.clientName, modelName);
+        }
+
+        private void BtnScene_Click(object sender, EventArgs e)
+        {
+            Refresh("Scene");
         }
     }
 }
