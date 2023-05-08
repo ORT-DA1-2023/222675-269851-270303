@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,8 +31,11 @@ namespace Render3D.UserInterface
             List<Figure> figureList = render.dataWarehouse.Figures;
             foreach (Sphere figure in figureList)
             {
-                FigureControl figureControl = new FigureControl(figure);
-                flObjectList.Controls.Add(figureControl);
+                if(figure.Client.Name.Equals(render.clientName))
+                {
+                    FigureControl figureControl = new FigureControl(figure);
+                    flObjectList.Controls.Add(figureControl);
+                }
             }
         }
 
@@ -41,9 +45,12 @@ namespace Render3D.UserInterface
             List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Material material in materialList)
             {
-
-                    MaterialControl materialControl = new MaterialControl(material); //se cae aca
+                if(material.Client.Name.Equals(render.clientName))
+                {
+                    MaterialControl materialControl = new MaterialControl(material);
                     flObjectList.Controls.Add(materialControl);
+                }
+
  
             }
         }
@@ -53,8 +60,24 @@ namespace Render3D.UserInterface
             List<Model> models = render.dataWarehouse.Models;
             foreach (Model model in models)
             {
-                ModelControl modelControl = new ModelControl(model);
-                flObjectList.Controls.Add(modelControl);
+                if (model.Client.Name.Equals(render.clientName))
+                {
+                    ModelControl modelControl = new ModelControl(model);
+                    flObjectList.Controls.Add(modelControl);
+                }
+            }
+        }
+
+        public void ShowSceneList()
+        {
+            flObjectList.Controls.Clear();
+            List<Scene> scenes =render.dataWarehouse.Scenes;
+            foreach(Scene scene in scenes)
+            {
+                if (scene.Client.Name.Equals(render.clientName))
+                {
+                   //control
+                }
             }
         }
 
@@ -121,6 +144,7 @@ namespace Render3D.UserInterface
             if (toShow == "Scene")
             {
                 ShowObjectCreationPanel(new ScenePanel());
+                ShowSceneList();
             }
 
         }

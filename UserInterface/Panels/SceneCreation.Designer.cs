@@ -32,13 +32,12 @@
             this.btnChangeName = new System.Windows.Forms.Button();
             this.lblCameraError = new System.Windows.Forms.Label();
             this.btnChangeCamera = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnGoBack = new System.Windows.Forms.Button();
             this.nrFov = new System.Windows.Forms.NumericUpDown();
             this.lblRenderOutDated = new System.Windows.Forms.Label();
             this.lblLastModificationDate = new System.Windows.Forms.Label();
             this.lblLastRenderDate = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnRender = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pBoxRender = new System.Windows.Forms.PictureBox();
             this.txtSceneName = new System.Windows.Forms.TextBox();
@@ -48,15 +47,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnAddModel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPosition = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -69,13 +68,12 @@
             this.panel1.Controls.Add(this.btnChangeName);
             this.panel1.Controls.Add(this.lblCameraError);
             this.panel1.Controls.Add(this.btnChangeCamera);
-            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnGoBack);
             this.panel1.Controls.Add(this.nrFov);
             this.panel1.Controls.Add(this.lblRenderOutDated);
             this.panel1.Controls.Add(this.lblLastModificationDate);
             this.panel1.Controls.Add(this.lblLastRenderDate);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.btnRender);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.pBoxRender);
             this.panel1.Controls.Add(this.txtSceneName);
@@ -120,17 +118,6 @@
             this.btnChangeCamera.Text = "Change";
             this.btnChangeCamera.UseVisualStyleBackColor = true;
             this.btnChangeCamera.Click += new System.EventHandler(this.BtnChangeCamera_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(317, 455);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(88, 36);
-            this.btnSave.TabIndex = 22;
-            this.btnSave.Text = "Save and quit";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnGoBack
             // 
@@ -191,14 +178,15 @@
             this.lblLastRenderDate.TabIndex = 11;
             this.lblLastRenderDate.Text = "LastRenderDate";
             // 
-            // button2
+            // btnRender
             // 
-            this.button2.Location = new System.Drawing.Point(605, 117);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 33);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Render";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnRender.Location = new System.Drawing.Point(605, 117);
+            this.btnRender.Name = "btnRender";
+            this.btnRender.Size = new System.Drawing.Size(112, 33);
+            this.btnRender.TabIndex = 10;
+            this.btnRender.Text = "Render";
+            this.btnRender.UseVisualStyleBackColor = true;
+            this.btnRender.Click += new System.EventHandler(this.BtnRender_Click);
             // 
             // button1
             // 
@@ -280,26 +268,27 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnAddModel);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.txtPosition);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.cBoxAvailableModels);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(190, 534);
             this.panel2.TabIndex = 0;
             // 
-            // button3
+            // btnAddModel
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(-1, 489);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(190, 44);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Add model";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnAddModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddModel.Location = new System.Drawing.Point(-1, 489);
+            this.btnAddModel.Name = "btnAddModel";
+            this.btnAddModel.Size = new System.Drawing.Size(190, 44);
+            this.btnAddModel.TabIndex = 7;
+            this.btnAddModel.Text = "Add model";
+            this.btnAddModel.UseVisualStyleBackColor = true;
+            this.btnAddModel.Click += new System.EventHandler(this.BtnAddModel_Click);
             // 
             // label7
             // 
@@ -331,36 +320,37 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "available models";
             // 
-            // comboBox1
+            // cBoxAvailableModels
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(-1, 194);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(190, 32);
-            this.comboBox1.TabIndex = 0;
+            this.cBoxAvailableModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxAvailableModels.FormattingEnabled = true;
+            this.cBoxAvailableModels.Location = new System.Drawing.Point(-1, 194);
+            this.cBoxAvailableModels.Name = "cBoxAvailableModels";
+            this.cBoxAvailableModels.Size = new System.Drawing.Size(190, 32);
+            this.cBoxAvailableModels.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.btnRemoveModel);
             this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.comboBox2);
+            this.panel3.Controls.Add(this.cBoxPositionedModels);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(821, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 534);
             this.panel3.TabIndex = 1;
             // 
-            // button4
+            // btnRemoveModel
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(-1, 492);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(190, 44);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "remove model";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveModel.Location = new System.Drawing.Point(-1, 489);
+            this.btnRemoveModel.Name = "btnRemoveModel";
+            this.btnRemoveModel.Size = new System.Drawing.Size(190, 44);
+            this.btnRemoveModel.TabIndex = 8;
+            this.btnRemoveModel.Text = "remove model";
+            this.btnRemoveModel.UseVisualStyleBackColor = true;
+            this.btnRemoveModel.Click += new System.EventHandler(this.BtnRemoveModel_Click);
             // 
             // label8
             // 
@@ -372,14 +362,14 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "positioned models";
             // 
-            // comboBox2
+            // cBoxPositionedModels
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(-1, 194);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(190, 32);
-            this.comboBox2.TabIndex = 1;
+            this.cBoxPositionedModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxPositionedModels.FormattingEnabled = true;
+            this.cBoxPositionedModels.Location = new System.Drawing.Point(-1, 194);
+            this.cBoxPositionedModels.Name = "cBoxPositionedModels";
+            this.cBoxPositionedModels.Size = new System.Drawing.Size(190, 32);
+            this.cBoxPositionedModels.TabIndex = 1;
             // 
             // SceneCreation
             // 
@@ -418,20 +408,19 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblLastModificationDate;
         private System.Windows.Forms.Label lblLastRenderDate;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRender;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblRenderOutDated;
         private System.Windows.Forms.NumericUpDown nrFov;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnGoBack;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtPosition;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox cBoxAvailableModels;
+        private System.Windows.Forms.Button btnAddModel;
+        private System.Windows.Forms.Button btnRemoveModel;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cBoxPositionedModels;
         private System.Windows.Forms.Button btnChangeCamera;
         private System.Windows.Forms.Label lblCameraError;
         private System.Windows.Forms.Button btnChangeName;

@@ -33,11 +33,18 @@ namespace Render3D.UserInterface.Panels
             List <Material> materialList=render.dataWarehouse.Materials;
             foreach (Figure figure in figureList)
             {
-                lstFigure.Items.Add(figure);
+                if (figure.Client.Name.Equals(render.clientName))
+                {
+                    lstFigure.Items.Add(figure);
+                }
+                
             }
             foreach (Material material in materialList) 
-            { 
-                lstMaterial.Items.Add(material);
+            {
+                if (material.Client.Name.Equals(render.clientName))
+                {
+                    lstMaterial.Items.Add(material);
+                }
             }
             lblExceptionError.Text = "";
         }

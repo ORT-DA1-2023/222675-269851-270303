@@ -24,6 +24,7 @@ namespace Render3D.BackEnd.Controllers
                 if(!scene.Camera.Equals(camera))
                 {
                     scene.Camera=camera;
+                    scene.UpdateLastModificationDate();
                 }
             }
             catch(Exception)
@@ -57,14 +58,20 @@ namespace Render3D.BackEnd.Controllers
             }
             throw new BackEndException("scene doesnt exist");
         }
-
-        private void CreateAndAddScene(Client client,string sceneName, Camera camera)
+        public void AddScene(string clientName, string sceneName)
         {
-            Scene scene = new Scene() {Client= client,Name=sceneName,Camera=camera};
-            DataWarehouse.Scenes.Add(scene);
+            try
+            {
+                GetSceneByNameAndClient(clientName, sceneName);
+            }catch(Exception)
+            {
+                CreateAndAddBlankScene(clientName, sceneName);
+                return;
+            }
+            throw new BackEndException("scene already exists"); 
         }
 
-        public void CreateAndAddBlankScene(string clientName,string sceneName)
+        private void CreateAndAddBlankScene(string clientName, string sceneName)
         {
             Client client=ClientController.GetClientByName(clientName);
             Camera camera = new Camera();
@@ -99,6 +106,17 @@ namespace Render3D.BackEnd.Controllers
             return posibleName+i;
            
         }
+        public void DeleteSceneInList(string clientName, string sceneName)
+        {
+            try
+            {
+                Scene scene = GetSceneByNameAndClient(clientName, sceneName);
+                DataWarehouse.Scenes.Remove(scene);
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public void ChangeSceneName(string clientName, string oldName, string newName)
         {
@@ -117,9 +135,30 @@ namespace Render3D.BackEnd.Controllers
             }catch(Exception)
             {
                 scene.Name = newName;
+                scene.UpdateLastModificationDate();
             }
 
            
         }
+
+        public void AddModel(Scene scene, Model model, string position)
+        {
+            Vector3D positionVector= GetVectorFromString(position);
+            Model newModel= new Model() { Client= model.Client, Name=model.Name, Figure=model.Figure,Material=model.Material};
+            newModel.Figure.Position = positionVector;
+            scene.PositionedModels.Add(newModel);
+        }
+
+        public void RemoveModel(Scene scene,Model model)
+        {
+            scene.PositionedModels.Remove(model);
+        }
+
+        public void RenderScene(Scene scene)
+        {
+            scene.Preview = GraphicMotor.Render(scene);
+            scene.UpdateLastRenderizationDate();
+        }
+
     }
 }

@@ -17,7 +17,6 @@ namespace Render3D.UnitTest.ControllersTests
     public class ModelControllerTest
     {
         private DataWarehouse _dataWarehouse;
-
         private ClientController _clientController;
         private Client _clientSample;
         private Material _materialSample;
@@ -27,7 +26,7 @@ namespace Render3D.UnitTest.ControllersTests
         private Colour _colour = new Colour(0, 0, 0);
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };

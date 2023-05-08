@@ -37,7 +37,7 @@ namespace UserInterface.Panels
         private void GenerateDefaultScene()
         {
             string name = sceneController.GetNextValidName();
-            sceneController.CreateAndAddBlankScene(client, name);
+            sceneController.AddScene(client, name);
             scene = sceneController.GetSceneByNameAndClient(client, name);
         }
 
@@ -48,6 +48,40 @@ namespace UserInterface.Panels
             txtLookAt.Text = "(" + cam.LookAt.X + "," + cam.LookAt.Y + "," + cam.LookAt.Z + "," + ")";
             txtLookFrom.Text = "(" + cam.LookFrom.X + "," + cam.LookFrom.Y + "," + cam.LookFrom.Z + "," + ")";
             nrFov.Value = cam.Fov;
+            cBoxAvailableModels.Items.Clear();
+            cBoxPositionedModels.Items.Clear();
+            foreach (Model model in sceneController.DataWarehouse.Models)
+            {
+                cBoxAvailableModels.Items.Add(model);
+            }
+            foreach(Model model in scene.PositionedModels)
+            {
+                cBoxPositionedModels.Items.Add(model);
+            }
+            pBoxRender.Image = scene.Preview;
+            lblCameraError.Text = "";
+            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month+ "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
+            if(scene.LastRenderizationDate != null)
+            {
+                lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+            }
+            else
+            {
+                lblLastRenderDate.Text = "this scene has not been rendered yet";
+            }
+            CheckRenderOutDated();
+        }
+
+        private void CheckRenderOutDated()
+        {
+            if (scene.LastRenderizationDate==null  || scene.LastRenderizationDate < (scene.LastModificationDate))
+            {
+                lblRenderOutDated.Text = "WARNING this render is outdated";
+            }
+            else
+            {
+                lblRenderOutDated.Text = "";
+            }
         }
 
         public bool IsValidFormat(string input)
@@ -79,6 +113,35 @@ namespace UserInterface.Panels
         private void BtnChangeName_Click(object sender, EventArgs e)
         {
             sceneController.ChangeSceneName(scene.Client.Name,scene.Name, txtSceneName.Text);
+        }
+
+        private void BtnAddModel_Click(object sender, EventArgs e)
+        {
+            string position = txtPosition.Text;
+            if (!(cBoxAvailableModels.SelectedItem is Model model))
+            {
+                return;
+            }
+            sceneController.AddModel(scene,model,position);
+            LoadScene();
+            cBoxAvailableModels.SelectedItem = null;
+        }
+
+        private void BtnRemoveModel_Click(object sender, EventArgs e)
+        {
+            if (!(cBoxPositionedModels.SelectedItem is Model model))
+            {
+                return;
+            }
+            sceneController.RemoveModel(scene,model);
+            LoadScene();
+            cBoxPositionedModels.SelectedItem = null;
+        }
+
+        private void BtnRender_Click(object sender, EventArgs e)
+        {
+            sceneController.RenderScene(scene);
+            LoadScene();
         }
     }
 }

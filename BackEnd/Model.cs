@@ -1,5 +1,6 @@
 ﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
+using System;
 using System.Drawing;
 
 namespace Render3D.BackEnd
@@ -43,6 +44,11 @@ namespace Render3D.BackEnd
         {
             if (HelperValidator.IsAnEmptyString(Name)) throw new BackEndException("Name must not be empty");
             if (HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
+        }
+        override
+        public string ToString()
+        {
+            return _name + "(" + Figure.Position.X + "," + Figure.Position.Y +"," + Figure.Position.Z + ")";
         }
     }
 }
