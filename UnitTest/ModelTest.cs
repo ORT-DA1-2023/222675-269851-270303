@@ -41,6 +41,14 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
+        public void givenABitmapNotNullItAssignsItToTheModel()
+        {
+            Bitmap preview = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            model1.Preview = preview;
+            Assert.AreEqual(model1.Preview, preview);
+        }
+
+        [TestMethod]
         public void givenAClientItAssignsItAsTheModelOwner()
         {
             model1.Client = client1;
