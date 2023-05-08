@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.Materials
 {
     public class Colour
     {

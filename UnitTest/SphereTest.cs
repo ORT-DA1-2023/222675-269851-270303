@@ -4,6 +4,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 
+using Render3D.BackEnd.Materials;
 namespace Render3D.UnitTest
 {
     [TestClass]

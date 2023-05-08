@@ -1,4 +1,6 @@
-﻿namespace Render3D.BackEnd.GraphicMotorUtility
+﻿using Render3D.BackEnd.Materials;
+
+namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class HitRecord3D
     {

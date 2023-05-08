@@ -1,4 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Utilities;
+using Render3D.BackEnd.Materials;
 using System;
 
 namespace Render3D.BackEnd.Figures

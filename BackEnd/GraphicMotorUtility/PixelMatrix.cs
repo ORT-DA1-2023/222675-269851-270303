@@ -1,5 +1,6 @@
 ﻿namespace Render3D.BackEnd.GraphicMotorUtility
 {
+    using Render3D.BackEnd.Materials;
     public class PixelMatrix
     {
         private readonly int _width;
