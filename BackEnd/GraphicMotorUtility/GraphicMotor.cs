@@ -61,9 +61,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return (ResolutionHeight * _resultionWidthDefault) / _resolutionHeightDefault;
         }
 
-        public int AspectRatio()
+        public double AspectRatio()
         {
-            return ResolutionHeight / WidthResolution();
+            return((double)ResolutionHeight) / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)

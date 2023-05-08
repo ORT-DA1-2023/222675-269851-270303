@@ -93,8 +93,8 @@ namespace Render3D.BackEnd
         {
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
-            var colorStart = new Colour(1, 1, 1);//revisar
-            var colorEnd = new Colour(0.5, 0.7, 1.0); //revisar
+            var colorStart = new Colour(1, 1, 1);
+            var colorEnd = new Colour(0.5, 0.7, 1.0); 
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
 

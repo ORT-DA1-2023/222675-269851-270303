@@ -145,5 +145,12 @@ namespace Render3D.UnitTest
             graphicMotorSample.ResolutionHeight = zeroResolutionHeightSample;
         }
 
+        [TestMethod]
+        public void givenAGraphicMotorItCalculatesTheAspectRatio()
+        {
+            GraphicMotor motor = new GraphicMotor() { ResolutionHeight=300};
+            double ratio=  motor.AspectRatio();
+            Assert.AreEqual(1.5,ratio);
+        }
     }
 }
