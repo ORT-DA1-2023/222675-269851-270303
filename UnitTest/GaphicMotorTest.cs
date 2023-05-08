@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
 using System.Drawing;
 
 namespace Render3D.UnitTest
@@ -11,7 +13,7 @@ namespace Render3D.UnitTest
         private GraphicMotor graphicMotorSample;
         private readonly GraphicMotor graphicMotorDefaultSample = new GraphicMotor();
         private const int resolutionHeightSample = 500;
-        private const int resolutionHeightSampleDefault = 3;
+        private const int resolutionWidthSampleDefault = 300;
         private const int negativeResolutionHeightSample = -1;
         private const int zeroResolutionHeightSample = 0;
 
@@ -46,8 +48,8 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void TestTemporaneoRender()
         {
-            /*
-              graphicMotorSample.ResolutionHeight = 300;
+           /*
+              graphicMotorSample.ResolutionWidth = 300;
               graphicMotorSample.PixelSampling = 50;
               graphicMotorSample.MaximumDepth = 20;
               Vector3D LookAt = new Vector3D(0, 0.5, -2);
@@ -58,7 +60,7 @@ namespace Render3D.UnitTest
 
 
              LambertianMaterial lm = new LambertianMaterial();
-              lm.Attenuation = new Vector3D(0.1, 0.2, 0.5);
+              lm.Attenuation = new Colour(0, 0.3, 0.4);
               Sphere sph = new Sphere(new Vector3D(0, 0.5, -2), 0.5);
               Model md1 = new Model();
               md1.Material = lm;
@@ -67,21 +69,21 @@ namespace Render3D.UnitTest
 
 
               LambertianMaterial lm2 = new LambertianMaterial();
-              lm2.Attenuation = new Vector3D(0.7, 0.7, 0.1);
+              lm2.Attenuation = new Colour(0, 1,0);
               Sphere tierra = new Sphere(new Vector3D(0, -2000, -1), 2000);
               Model laTIerra = new Model();
               laTIerra.Material = lm2;
               laTIerra.Figure = tierra;
 
               LambertianMaterial lm3 = new LambertianMaterial();
-              lm3.Attenuation = new Vector3D(0.8, 0.2, 0.5);
+              lm3.Attenuation = new Colour(0.4, 0.2, 0.3);
               Sphere sph2 = new Sphere(new Vector3D(-1, 0.5, -2), 0.5);
               Model md2 = new Model();
               md2.Material = lm3;
               md2.Figure = sph2;
 
               LambertianMaterial lm4 = new LambertianMaterial();
-              lm4.Attenuation = new Vector3D(0.8, 0.25, 0.5);
+              lm4.Attenuation = new Colour(0.3, 0.3, 0.7);
               Sphere sph3 = new Sphere(new Vector3D(-1, 2, -10), 2);
               Model md3 = new Model();
               md3.Material = lm4;
@@ -99,7 +101,7 @@ namespace Render3D.UnitTest
 
               Assert.AreNotEqual(graphicMotorSample.Render(scene), null);
 
-             */
+            */
 
         }
 
@@ -121,14 +123,14 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAdefaultGraphicMotorItComparesTheDefaultResolution()
         {
-            Assert.AreEqual(graphicMotorDefaultSample.ResolutionHeight, resolutionHeightSampleDefault);
+            Assert.AreEqual(graphicMotorDefaultSample.ResolutionWidth, resolutionWidthSampleDefault);
         }
 
         [TestMethod]
         public void givenAValidResolutionItAssignsItToTheGraphicMotor()
         {
-            graphicMotorSample.ResolutionHeight = resolutionHeightSample;
-            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionHeight);
+            graphicMotorSample.ResolutionWidth = resolutionHeightSample;
+            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionWidth);
         }
 
         [TestMethod]
@@ -178,14 +180,14 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void givenANegativeResolutionItThrowsABackEndException()
         {
-            graphicMotorSample.ResolutionHeight = negativeResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = negativeResolutionHeightSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void givenAZeroResolutionItThrowsABackEndException()
         {
-            graphicMotorSample.ResolutionHeight = zeroResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = zeroResolutionHeightSample;
         }
 
     }
