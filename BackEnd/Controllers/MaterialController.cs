@@ -55,6 +55,7 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 material = GetMaterialByNameAndClient(clientName, oldName);
+                Material checkMaterialName = new LambertianMaterial() { Name= newName};
             }
             catch (Exception)
             {

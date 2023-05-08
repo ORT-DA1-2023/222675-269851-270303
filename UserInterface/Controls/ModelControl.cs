@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.UserInterface;
+using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        string oldName;
+        private string _oldName;
         public ModelControl(Model model)
         {
             InitializeComponent();
-            txtModelName.Text = model.Name;
+            lblModelName.Text = model.Name;
+            _oldName = model.Name;
             lblModelFigure.Text= model.Figure.Name;
             lblModelMaterial.Text= model.Material.Name;
             if (model.Preview != null)
@@ -29,48 +31,33 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEditModelName_Click(object sender, EventArgs e)
         {
-            oldName = txtModelName.Text;
-            txtModelName.ReadOnly = false;
-            txtModelName.BackColor = Color.Green;
-        }
-
-        private void ClientPressEnter(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            using (var nameChanger = new NameChanger(_oldName))
             {
-                e.Handled = true;
-                ChecksForCorrectEdit();
-            }
-        }
-
-        private void ClientLeaves(object sender, EventArgs e)
-        {
-            ChecksForCorrectEdit();
-        }
-
-        private void ChecksForCorrectEdit()
-        {
-            txtModelName.ReadOnly = true;
-            if (!oldName.Equals(txtModelName.Text))
-            {
-                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(oldName, txtModelName.Text))
+                var result = nameChanger.ShowDialog(this);
+                if (result == DialogResult.OK)
                 {
-                    txtModelName.BackColor = Color.White;
-                }
-                else
-                {
-                    txtModelName.BackColor = Color.Red;
+                    string name = nameChanger.newName;
+                    ChecksForCorrectEdit(name);
                 }
             }
-            else
+        }
+
+
+        private void ChecksForCorrectEdit(string newName)
+        {
+            if (!_oldName.Equals(newName))
             {
-                txtModelName.BackColor = Color.White;
+                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_oldName, newName))
+                {
+                    lblModelName.Text = newName;
+                    _oldName=newName;
+                }
             }
         }
 
         private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(txtModelName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
             ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
         }
     }

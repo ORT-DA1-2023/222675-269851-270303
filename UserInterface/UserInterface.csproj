@@ -64,6 +64,12 @@
     <Compile Include="Controls\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\NameChanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\NameChanger.Designer.cs">
+      <DependentUpon>NameChanger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\SceneCreation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\NameChanger.resx">
+      <DependentUpon>NameChanger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\SceneCreation.resx">
       <DependentUpon>SceneCreation.cs</DependentUpon>

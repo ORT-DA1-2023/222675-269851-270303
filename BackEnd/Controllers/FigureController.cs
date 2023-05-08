@@ -64,7 +64,9 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 figure=GetFigureByNameAndClient(clientName, oldName);
-            }catch(Exception)
+                Figure correctNameCheck = new Sphere() { Name = newName};
+            }
+            catch(Exception)
             {
                 return;
             }
@@ -72,7 +74,9 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 GetFigureByNameAndClient(clientName, newName);
-            }catch (Exception)
+
+            }
+            catch (Exception)
             {
                 figure.Name = newName;
             }

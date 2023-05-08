@@ -124,14 +124,26 @@ namespace Render3D.UserInterface
             }
 
         }
-        public bool FigureNameHasBeenChanged(String oldName,string newName)
+        public bool FigureNameHasBeenChanged(string oldName,string newName)
         {
-           render.figureController.ChangeFigureName(render.clientName,oldName, newName);
-            if (render.figureController.GetFigureByNameAndClient(render.clientName, newName).Name != null)
+            try
             {
+                render.figureController.GetFigureByNameAndClient(render.clientName, newName);
+                return false;
+            }
+            catch (Exception)
+            {
+            }
+            render.figureController.ChangeFigureName(render.clientName,oldName, newName);
+            try
+            {
+                render.figureController.GetFigureByNameAndClient(render.clientName, newName);
                 return true;
             }
-            return false;   
+            catch (Exception) 
+            { 
+                return false;
+            }
         }
 
         public void DeleteFigure(string figureName)
@@ -141,12 +153,25 @@ namespace Render3D.UserInterface
 
         internal bool MaterialNameHasBeenChanged(string oldName, string newName)
         {
-             render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
-            if (render.materialController.GetMaterialByNameAndClient(render.clientName, newName) != null)
+            try
             {
+                render.materialController.GetMaterialByNameAndClient(render.clientName, newName);
+                return false;
+            }
+            catch (Exception)
+            {
+            }
+            render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
+            try
+            {
+                render.materialController.GetMaterialByNameAndClient(render.clientName, newName);
                 return true;
             }
-            return false;
+            catch(Exception)
+            {
+                return false;
+            }
+
         }
 
         internal void DeleteMaterial(string materialName)
