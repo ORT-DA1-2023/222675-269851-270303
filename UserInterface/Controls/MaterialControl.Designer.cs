@@ -67,7 +67,7 @@
             this.lblBlueColor.AutoSize = true;
             this.lblBlueColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBlueColor.ForeColor = System.Drawing.Color.Blue;
-            this.lblBlueColor.Location = new System.Drawing.Point(188, 70);
+            this.lblBlueColor.Location = new System.Drawing.Point(200, 70);
             this.lblBlueColor.Margin = new System.Windows.Forms.Padding(30, 0, 2, 0);
             this.lblBlueColor.Name = "lblBlueColor";
             this.lblBlueColor.Size = new System.Drawing.Size(45, 20);
@@ -80,7 +80,7 @@
             this.txtMaterialName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaterialName.Location = new System.Drawing.Point(97, 16);
-            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(2);
             this.txtMaterialName.Name = "txtMaterialName";
             this.txtMaterialName.ReadOnly = true;
             this.txtMaterialName.Size = new System.Drawing.Size(103, 19);
@@ -92,7 +92,7 @@
             // 
             this.btnEditMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditMaterialName.Location = new System.Drawing.Point(204, 11);
-            this.btnEditMaterialName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEditMaterialName.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditMaterialName.Name = "btnEditMaterialName";
             this.btnEditMaterialName.Size = new System.Drawing.Size(75, 24);
             this.btnEditMaterialName.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             this.btnDeleteMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteMaterial.Location = new System.Drawing.Point(204, 41);
-            this.btnDeleteMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteMaterial.Name = "btnDeleteMaterial";
             this.btnDeleteMaterial.Size = new System.Drawing.Size(75, 24);
             this.btnDeleteMaterial.TabIndex = 5;
@@ -131,7 +131,7 @@
             this.Controls.Add(this.lblBlueColor);
             this.Controls.Add(this.lblGreenColor);
             this.Controls.Add(this.lblRedColor);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MaterialControl";
             this.Size = new System.Drawing.Size(291, 105);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).EndInit();

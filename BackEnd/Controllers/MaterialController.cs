@@ -25,15 +25,15 @@ namespace Render3D.BackEnd.Controllers
                
             }catch(Exception)
             {
-                CreateAndAddMaterial(ClientController.GetClientByName(clientName), materialName, materialColors);
+                Colour colour= new Colour(materialColors[0]/255f, materialColors[1] / 255f, materialColors[2] / 255f);
+                CreateAndAddMaterial(ClientController.GetClientByName(clientName), materialName, colour);
                 return;
             } 
             throw new BackEndException("material already exists");
         }
-        private void CreateAndAddMaterial(Client client, string materialName, int[] materialColors)
+        private void CreateAndAddMaterial(Client client, string materialName, Colour colour)
         {
-            Colour color = new Colour(materialColors[0], materialColors[1], materialColors[2]);
-            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = color };
+            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = colour };
             _dataWarehouse.Materials.Add(material);
         }
 

@@ -24,7 +24,7 @@ namespace Render3D.UserInterface.Controls
             lblRedColor.Text = "Red: " + _material.Attenuation.Red();
             lblGreenColor.Text = "Green: " + _material.Attenuation.Green(); ;
             lblBlueColor.Text = "Blue: " + _material.Attenuation.Blue();
-            pBoxMaterial.BackColor = Color.FromArgb(_material.Attenuation.Red(), _material.Attenuation.Red(), _material.Attenuation.Red());
+            pBoxMaterial.BackColor = Color.FromArgb(_material.Attenuation.Red(), _material.Attenuation.Green(), _material.Attenuation.Blue());
               
         }
 

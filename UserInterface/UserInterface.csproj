@@ -64,6 +64,12 @@
     <Compile Include="Controls\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\SceneCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\SceneCreation.Designer.cs">
+      <DependentUpon>SceneCreation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\ScenePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SceneCreation.resx">
+      <DependentUpon>SceneCreation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\ScenePanel.resx">
       <DependentUpon>ScenePanel.cs</DependentUpon>
