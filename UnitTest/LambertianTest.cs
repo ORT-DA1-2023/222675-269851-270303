@@ -13,11 +13,11 @@ namespace Render3D.UnitTest
         private readonly string validMaterialName = "LambertianMaterialName";
 
         private Client clientSample;
-        private readonly string clientSampleName = "client1Name";
-        HitRecord3D hit;
+        private readonly string clientSampleName = "clientSampleName";
+        HitRecord3D hitSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             clientSample = new Client()
             {
@@ -26,7 +26,7 @@ namespace Render3D.UnitTest
             materialSample = new LambertianMaterial();
             materialSample.Client = clientSample;
 
-            hit = new HitRecord3D()
+            hitSample = new HitRecord3D()
             {
                 Intersection = new Vector3D(1, 1, 1),
                 Normal = new Vector3D(0, 0, 2),
@@ -35,7 +35,7 @@ namespace Render3D.UnitTest
             };
         }
         [TestMethod]
-        public void givenAValidNameItAssignsItToTheLambertarianMaterial()
+        public void GivenValidNameAssignsToLambertarianMaterial()
         {
             Assert.IsNotNull(materialSample);
             materialSample.Name = validMaterialName;
@@ -44,31 +44,31 @@ namespace Render3D.UnitTest
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void givenAnEmptyNameItThrowsABackEndException()
+        public void GivenEmptyNameThrowsBackEndException()
         {
             materialSample.Name = "";
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
-        public void givenANameThatStartsWithSpaceItThrowsABackEndException()
+        public void GivenNameStartingWithSpaceThrowsBackEndException()
         {
             materialSample.Name = " " + validMaterialName;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
-        public void givenANameThatEndsWithSpaceItThrowsABackEndException()
+        public void GivenNameEndingWithSpaceThrowsBackEndException()
         {
             materialSample.Name = validMaterialName + " ";
         }
 
         [TestMethod]
-        public void givenAMaterialItReturnsItsClient()
+        public void GivenMaterialReturnsItsClient()
         {
             Assert.AreEqual(materialSample.Client, clientSample);
         }
 
         [TestMethod]
-        public void givenAMaterialReturnsAString()
+        public void GivenMaterialReturnsItsToString()
         {
             materialSample.Name = validMaterialName;
               materialSample.Attenuation = new Colour(1,1,0);
@@ -76,7 +76,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenARayItCorrectlySetsItToTheMaterial()
+        public void GivenARaySetsItToMaterial()
         {
             Vector3D origin = new Vector3D(0, 0, 1);
             Vector3D direction = new Vector3D(0, 0, 1);
@@ -86,11 +86,10 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenARayReflectedItVerifiesItsOriginComesFromTheIntersection()
+        public void GivenRayReflectedVerifiesItsOriginComesFromIntersection()
         {
-            Ray reflected=materialSample.ReflectsTheLight(hit, new Random());
-            Assert.AreEqual(reflected.Origin, hit.Intersection);
+            Ray reflected=materialSample.ReflectsTheLight(hitSample, new Random());
+            Assert.AreEqual(reflected.Origin, hitSample.Intersection);
         }
-
     }
 }

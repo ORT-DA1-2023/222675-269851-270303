@@ -3,6 +3,7 @@ using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
+using System;
 using System.Drawing;
 
 namespace Render3D.UnitTest
@@ -11,7 +12,8 @@ namespace Render3D.UnitTest
     public class GraphicMotorTest
     {
         private GraphicMotor graphicMotorSample;
-        private readonly GraphicMotor graphicMotorDefaultSample = new GraphicMotor();
+        private Scene sceneSample;
+
         private const int resolutionHeightSample = 500;
         private const int resolutionHeightSampleDefault = 3;
         private const int negativeResolutionHeightSample = -1;
@@ -27,26 +29,21 @@ namespace Render3D.UnitTest
         private const int negativeMaximumDepth = -1;
         private const int zeroMaximumDepth = 0;
 
-        private Scene sceneSample;
-        private  Bitmap bitmapSample;
-
-
-
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             graphicMotorSample = new GraphicMotor();
         }
 
         [TestMethod]
-        public void givenAValidSceneRenderMethodReturnsABitmap()
+        public void GivenValidSceneRenderMethodReturnsBitmap()
         {
             sceneSample = new Scene();
             Assert.AreNotEqual(graphicMotorSample.Render(sceneSample), null);
         }
 
         [TestMethod]
-        public void givenANonEmptySceneItCreatesANonNullPreview()
+        public void GivenNonEmptySceneCreatesNonNullPreview()
         {
             Model model = new Model()
             {
@@ -57,46 +54,42 @@ namespace Render3D.UnitTest
             GraphicMotor graphicMotor = new GraphicMotor();
             Bitmap bitmap = graphicMotor.RenderModelPreview(model);
             Assert.IsNotNull(bitmap);
-
         }
 
-
-
-
         [TestMethod]
-        public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        public void GivenDefaultGraphicMotorItHasDefaultPixelSampling()
         {
-            Assert.AreEqual(graphicMotorDefaultSample.PixelSampling, pixelSamplingSampleDefault);
+            Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
         }
 
         [TestMethod]
-        public void givenAdefaultGraphicMotorItComparesTheDefaultMaximumDepth()
+        public void givenDefaultGraphicMotorItHasDefaultMaximumDepth()
         {
-            Assert.AreEqual(graphicMotorDefaultSample.MaximumDepth, maximumDepthSampleDefault);
+            Assert.AreEqual(graphicMotorSample.MaximumDepth, maximumDepthSampleDefault);
         }
 
         [TestMethod]
-        public void givenAdefaultGraphicMotorItComparesTheDefaultResolution()
+        public void GivenDefaultGraphicMotorItHasTheDefaultResolution()
         {
-            Assert.AreEqual(graphicMotorDefaultSample.ResolutionHeight, resolutionHeightSampleDefault);
+            Assert.AreEqual(graphicMotorSample.ResolutionHeight, resolutionHeightSampleDefault);
         }
 
         [TestMethod]
-        public void givenAValidResolutionItAssignsItToTheGraphicMotor()
+        public void GivenValidResolutionAssignsToGraphicMotor()
         {
             graphicMotorSample.ResolutionHeight = resolutionHeightSample;
             Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionHeight);
         }
 
         [TestMethod]
-        public void givenAValidPixelSamplingItAssignsItToTheGraphicMotor()
+        public void GivenValidPixelSamplingAssignsToGraphicMotor()
         {
             graphicMotorSample.PixelSampling = pixelSamplingSample;
             Assert.AreEqual(pixelSamplingSample, graphicMotorSample.PixelSampling);
         }
 
         [TestMethod]
-        public void givenAValidMaximumDepthItAssignsItToTheGraphicMotor()
+        public void GivenValidMaximumDepthAssignsToGraphicMotor()
         {
             graphicMotorSample.MaximumDepth = maximumDepthSample;
             Assert.AreEqual(maximumDepthSample, graphicMotorSample.MaximumDepth);
@@ -104,14 +97,14 @@ namespace Render3D.UnitTest
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
-        public void givenANegativeMaximumDepthItThrowsABackEndException()
+        public void GivenNegativeMaximumDepthThrowsBackEndException()
         {
             graphicMotorSample.MaximumDepth = negativeMaximumDepth;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
-        public void givenAZeroMaximumDepthItThrowsABackEndException()
+        public void GivenZeroMaximumDepthThrowsBackEndException()
         {
             graphicMotorSample.MaximumDepth = zeroMaximumDepth;
         }
@@ -119,34 +112,34 @@ namespace Render3D.UnitTest
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
-        public void givenANegativePixelSamplingItThrowsABackEndException()
+        public void GivenNegativePixelSamplingThrowsBackEndException()
         {
             graphicMotorSample.PixelSampling = negativePixelSamplingSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
-        public void givenAZeroPixelSamplingItThrowsABackEndException()
+        public void GivenZeroPixelSamplingThrowsBackEndException()
         {
             graphicMotorSample.PixelSampling = zeroPixelSamplingSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
-        public void givenANegativeResolutionItThrowsABackEndException()
+        public void GivenNegativeResolutionThrowsABackEndException()
         {
             graphicMotorSample.ResolutionHeight = negativeResolutionHeightSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
-        public void givenAZeroResolutionItThrowsABackEndException()
+        public void GivenZeroResolutionThrowsBackEndException()
         {
             graphicMotorSample.ResolutionHeight = zeroResolutionHeightSample;
         }
 
         [TestMethod]
-        public void givenAGraphicMotorItCalculatesTheAspectRatio()
+        public void GivenGraphicMotorReturnsAspectRatio()
         {
             GraphicMotor motor = new GraphicMotor() { ResolutionHeight=300};
             double ratio=  motor.AspectRatio();

@@ -6,29 +6,29 @@ namespace Render3D.UnitTest
     [TestClass]
     public class RayTest
     {
-        private readonly Vector3D Origin = new Vector3D(1, 1, 1);
-        private readonly Vector3D Direction = new Vector3D(2, 2, 2);
+        private readonly Vector3D origin = new Vector3D(1, 1, 1);
+        private readonly Vector3D direction = new Vector3D(2, 2, 2);
         private Vector3D calculatedVectorPointedAt;
         private readonly Vector3D expectedVectorPointedAt = new Vector3D(3, 3, 3);
         private Ray defaultRay;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
-            defaultRay = new Ray(Origin, Direction);
+            defaultRay = new Ray(origin, direction);
         }
         [TestMethod]
-        public void givenARayItReturnsTheCorrectVectors()
+        public void GivenRayReturnsCorrectVectors()
         {
-            Assert.AreEqual(defaultRay.Origin.X, Origin.X);
-            Assert.AreEqual(defaultRay.Origin.Y, Origin.Y);
-            Assert.AreEqual(defaultRay.Origin.Z, Origin.Z);
-            Assert.AreEqual(defaultRay.Direction.X, Direction.X);
-            Assert.AreEqual(defaultRay.Direction.Y, Direction.Y);
-            Assert.AreEqual(defaultRay.Direction.Z, Direction.Z);
+            Assert.AreEqual(defaultRay.Origin.X, origin.X);
+            Assert.AreEqual(defaultRay.Origin.Y, origin.Y);
+            Assert.AreEqual(defaultRay.Origin.Z, origin.Z);
+            Assert.AreEqual(defaultRay.Direction.X, direction.X);
+            Assert.AreEqual(defaultRay.Direction.Y, direction.Y);
+            Assert.AreEqual(defaultRay.Direction.Z, direction.Z);
         }
         [TestMethod]
-        public void givenARayReturnTheVectorPointedAtAdouble()
+        public void GivenRayReturnVectorPointedAtADouble()
         {
             calculatedVectorPointedAt = defaultRay.PointAt(1);
             Assert.AreEqual(calculatedVectorPointedAt.X, expectedVectorPointedAt.X);
@@ -36,14 +36,14 @@ namespace Render3D.UnitTest
             Assert.AreEqual(calculatedVectorPointedAt.Z, expectedVectorPointedAt.Z);
         }
         [TestMethod]
-        public void givenARayItSetsItsDirection()
+        public void GivenRayAssignsItsDirection()
         {
             Vector3D allOnes = new Vector3D(1, 1, 1);
             defaultRay.Direction = allOnes;
             Assert.AreEqual(allOnes, defaultRay.Direction);
         }
         [TestMethod]
-        public void givenARayItSetsItsOrigin()
+        public void GivenRayAssignsItsOrigin()
         {
             Vector3D allOnes = new Vector3D(1, 1, 1);
             defaultRay.Origin = allOnes;

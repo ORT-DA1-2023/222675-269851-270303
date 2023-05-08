@@ -9,95 +9,96 @@ namespace Render3D.UnitTest
     [TestClass]
     public class ModelTests
     {
-        public Client client1;
-        public Model model1;
-        public Model model2;
-        public string validName = "A valid Model Name";
+        public Client clientSample1;
+        public Model modelSample1;
+        public Model modelSample2;
+        public readonly string validName = "A valid Model Name";
 
         [TestInitialize]
         public void Initialize()
         {
-            client1 = new Client()
+            clientSample1 = new Client()
             {
-                Name = "client1Name",
+                Name = "clientSampleName",
             };
-            model1 = new Model();
+            modelSample1 = new Model();
 
         }
 
         [TestMethod]
-        public void givenAModelItReturnsItsName()
+        public void GivenModelReturnsItsName()
         {
-            model1.Name = validName;
-            Assert.AreEqual(model1.Name, validName);
+            modelSample1.Name = validName;
+            Assert.AreEqual(modelSample1.Name, validName);
         }
 
         [TestMethod]
-        public void givenABitmapNullItDoesNotAssignsTheModel()
+        public void GivenNullBitmapDoesNotAssignToModel()
         {
-            Bitmap preview = null;
-            model1.Preview = preview;
-            Assert.AreEqual(model1.Preview, null);
+            Bitmap oldPreview= new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            modelSample1.Preview = oldPreview;
+            Bitmap newPreview = null;
+            modelSample1.Preview = newPreview;
+            Assert.AreEqual(modelSample1.Preview, oldPreview);
         }
 
         [TestMethod]
-        public void givenABitmapNotNullItAssignsItToTheModel()
+        public void GivenBitmapNotNullAssignsToModel()
         {
             Bitmap preview = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-            model1.Preview = preview;
-            Assert.AreEqual(model1.Preview, preview);
+            modelSample1.Preview = preview;
+            Assert.AreEqual(modelSample1.Preview, preview);
         }
 
         [TestMethod]
-        public void givenAClientItAssignsItAsTheModelOwner()
+        public void GivenClientAssignsItAsModelOwner()
         {
-            model1.Client = client1;
-            Assert.AreEqual(model1.Client, client1);
+            modelSample1.Client = clientSample1;
+            Assert.AreEqual(modelSample1.Client, clientSample1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void givenAnEmptyNameItThrowsABackEndException()
+        public void GivenEmptyNameThrowsBackEndException()
         {
-            model1.Name = "";
+            modelSample1.Name = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
-        public void givenANameWithSpacesAtTheBeginningItThrowsABackEndException()
+        public void GivenNameStartingWithSpaceThrowsBackEndException()
         {
-            model1.Name = " " + validName;
+            modelSample1.Name = " " + validName;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
-        public void givenANameWithSpacesAtTheEndItThrowsABackEndException()
+        public void GivenNameEndingWithSpacesThrowsBackEndException()
         {
-            model1.Name = validName + " ";
+            modelSample1.Name = validName + " ";
         }
         [TestMethod]
-        public void givenAModelItReturnsItsFigure()
+        public void GivenModelReturnsItsFigure()
         {
-            Figure figure1 = new Sphere() { Name = "figureName" };
-            Model model1 = new Model()
+            Figure figureSample = new Sphere() { Name = "figureName" };
+            Model modelSample = new Model()
             {
-                Client = client1,
-                Figure = figure1,
+                Client = clientSample1,
+                Figure = figureSample,
             };
-            Assert.AreEqual(model1.Figure, figure1);
+            Assert.AreEqual(modelSample.Figure, figureSample);
         }
 
         [TestMethod]
-        public void givenAModelItReturnsItsMaterial()
+        public void GivenModelReturnsItsMaterial()
         {
-            Material material1 = new LambertianMaterial { Client = client1, Name = "materialName" };
-
-            Model model1 = new Model()
+            Material materialSample  = new LambertianMaterial { Client = clientSample1, Name = "materialName" };
+            Model modelSample = new Model()
             {
-                Client = client1,
-                Material = material1
+                Client = clientSample1,
+                Material = materialSample
             };
-            Assert.AreEqual(model1.Material, material1);
+            Assert.AreEqual(modelSample.Material, materialSample);
         }
 
     }

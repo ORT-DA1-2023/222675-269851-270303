@@ -55,7 +55,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "model already exists")]
+        [ExpectedException(typeof(BackEndException), "modelSample already exists")]
         public void GivenARepeatedModelFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");

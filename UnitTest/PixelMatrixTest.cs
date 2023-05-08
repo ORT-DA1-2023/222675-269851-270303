@@ -9,22 +9,21 @@ namespace Render3D.UnitTest
     {
         private const int width = 3;
         private const int height = 2;
-        private Colour[,] matrixPPM;
+        private Colour[,] matrixPPMSample;
         private PixelMatrix pixelMatrixSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             pixelMatrixSample = new PixelMatrix();
         }
 
-
         [TestMethod]
-        public void givenAValidMatrixItAssingsToThePixelMatrix()
+        public void GivenValidMatrixAssingsToPixelMatrix()
         {
-            matrixPPM = new Colour[width, height];
-            pixelMatrixSample.Matrix = matrixPPM;
-            Assert.AreEqual(matrixPPM, pixelMatrixSample.Matrix);
+            matrixPPMSample = new Colour[width, height];
+            pixelMatrixSample.Matrix = matrixPPMSample;
+            Assert.AreEqual(matrixPPMSample, pixelMatrixSample.Matrix);
 
         }
     }

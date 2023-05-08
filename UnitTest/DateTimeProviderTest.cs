@@ -16,21 +16,20 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenADateTimeItReturnsTrueIfTheDateTimeIsFixed()
+        public void GivenDateTimeReturnsTrueIfDateTimeIsFixed()
         {
             DateTimeProvider.Now = DateTime.Now;
             Client client1 = new Client();
             Assert.AreEqual(DateTimeProvider.Now, client1.RegisterDate);
         }
-        [TestMethod]
-        public void givenAFixedDateItUpdatesToTheCurrentDate()
-        {
 
+        [TestMethod]
+        public void GivenFixedDateUpdatesItToCurrentDate()
+        {
             DateTimeProvider.Now = januaryFirst2020;
             Assert.AreEqual(januaryFirst2020, DateTimeProvider.Now);
             DateTimeProvider.Reset();
             Assert.AreNotEqual(januaryFirst2020, DateTimeProvider.Now);
-
         }
     }
 }
