@@ -7,6 +7,7 @@ using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Controllers;
 using System.Drawing;
+using System.Reflection;
 
 namespace Render3D.UnitTest
 {
@@ -23,8 +24,8 @@ namespace Render3D.UnitTest
         private readonly Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
         private readonly int randomFoV = 30;
         private Ray ray;
-
-
+        private Model model;
+        private Material material;
         [TestInitialize]
 
         public void initialize()
@@ -34,7 +35,7 @@ namespace Render3D.UnitTest
             Vector3D origin = new Vector3D(0, 0, 0);
             Vector3D direction = new Vector3D(1, 1, 1);
             ray = new Ray(origin, direction);
-            Material material = new LambertianMaterial()
+             material = new LambertianMaterial()
             {
                 Attenuation = new Colour(1, 0, 0),
                 Ray = ray,
@@ -44,16 +45,10 @@ namespace Render3D.UnitTest
                 Position = new Vector3D(5, 5, 5),
                 Radius = 2,
             };
-            Model model = new Model()
+             model = new Model()
             {
                 Figure = figure,
                 Material = material,
-            };
-            List<Model> newModels = new List<Model>();
-            newModels.Add(model);
-            Scene scene = new Scene()
-            {
-                PositionedModels = newModels,
             };
 
         }
@@ -228,6 +223,17 @@ namespace Render3D.UnitTest
             Assert.AreEqual(bitmap, scene.Preview);
            
         }
+
+        [TestMethod]
+        public void ShootRayWithoutHitDoesNotReturnTheMaterialColour()
+        {
+            Colour result = sceneSample.ShootRay(ray, 10, new Random());
+            sceneSample.PositionedModels.Add(model);
+
+            Colour materialColour = sceneSample.PositionedModels[0].Material.Attenuation;
+            Assert.AreNotEqual(materialColour, result);
+        }
+
 
     }
 }

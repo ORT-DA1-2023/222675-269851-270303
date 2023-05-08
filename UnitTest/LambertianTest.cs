@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
+using System;
 
 namespace Render3D.UnitTest
 {
@@ -12,7 +14,7 @@ namespace Render3D.UnitTest
 
         private Client clientSample;
         private readonly string clientSampleName = "client1Name";
-        
+        HitRecord3D hit;
 
         [TestInitialize]
         public void initialize()
@@ -24,6 +26,13 @@ namespace Render3D.UnitTest
             materialSample = new LambertianMaterial();
             materialSample.Client = clientSample;
 
+            hit = new HitRecord3D()
+            {
+                Intersection = new Vector3D(1, 1, 1),
+                Normal = new Vector3D(0, 0, 2),
+                Attenuation = new Colour(0, 0, 0),
+                Module = 2.3,
+            };
         }
         [TestMethod]
         public void givenAValidNameItAssignsItToTheLambertarianMaterial()
@@ -61,10 +70,27 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAMaterialReturnsAString()
         {
-          /*  materialSample.Name = validMaterialName;
-            materialSample.Color = validColor;
-            Assert.AreEqual (materialSample.ToString(), validMaterialName+ " ("+ validColor.X+ ","+validColor.Y+","+validColor.Z+")");*/
+            materialSample.Name = validMaterialName;
+              materialSample.Attenuation = new Colour(1,1,0);
+              Assert.AreEqual (materialSample.ToString(), $"{validMaterialName} (255,255,0)");
         }
-        
+
+        [TestMethod]
+        public void givenARayItCorrectlySetsItToTheMaterial()
+        {
+            Vector3D origin = new Vector3D(0, 0, 1);
+            Vector3D direction = new Vector3D(0, 0, 1);
+            Ray ray = new Ray(origin, direction);
+            materialSample.Ray = ray;
+            Assert.AreEqual(ray, materialSample.Ray);
+        }
+
+        [TestMethod]
+        public void givenARayReflectedItVerifiesItsOriginComesFromTheIntersection()
+        {
+            Ray reflected=materialSample.ReflectsTheLight(hit, new Random());
+            Assert.AreEqual(reflected.Origin, hit.Intersection);
+        }
+
     }
 }
