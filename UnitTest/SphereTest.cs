@@ -109,6 +109,13 @@ namespace Render3D.UnitTest
             newSphericalFigure.Name = validSphereName + " ";
         }
         [TestMethod]
+        public void givenAFigureReturnsAString()
+        {
+            newSphericalFigure.Name = validSphereName;
+            newSphericalFigure.Radius= validRadius;
+            Assert.AreEqual(newSphericalFigure.ToString(),validSphereName +" "+ validRadius);
+        }
+        [TestMethod]
         public void givenARayWhichHitsASphereItReturnsTrue()
         {
             Sphere sphere = new Sphere() { Position = new Vector3D(1, 1, 1), Radius = 1 };

@@ -7,10 +7,6 @@ namespace Render3D.BackEnd.Materials
     public abstract class Material
     {
         protected string _name;
-        protected Client _client;
-        protected Ray _ray;
-        protected Colour _attenuation;
-
 
         public String Name
         {
@@ -22,20 +18,9 @@ namespace Render3D.BackEnd.Materials
             }
         }
         public Client Client { get; set; }
-        public Ray Ray
-        {
-            get => _ray;
-            set => _ray = value;
-        }
+        public Ray Ray { get; set; }
 
-        public Colour Attenuation
-        {
-            get => _attenuation;
-            set
-            {
-                _attenuation = value;
-            }
-        }
+        public Colour Attenuation { get; set; }
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
 
@@ -46,6 +31,10 @@ namespace Render3D.BackEnd.Materials
 
         }
 
+        public override String ToString()
+        {
+            return Name;
+        }
 
     }
 }

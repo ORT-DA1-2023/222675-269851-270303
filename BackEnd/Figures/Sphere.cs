@@ -66,5 +66,10 @@ namespace Render3D.BackEnd.Figures
                 throw new BackEndException("The radius must be greater than 0");
             }
         }
+
+          public override String ToString()
+        {
+            return base.ToString() +" "+ _radius;
+        }
     }
 }

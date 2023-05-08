@@ -3,6 +3,11 @@ using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.Collections.Generic;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Controllers;
+using System.Drawing;
+using System.Reflection;
 
 namespace Render3D.UnitTest
 {
@@ -10,22 +15,42 @@ namespace Render3D.UnitTest
     public class SceneTest
     {
         private Scene sceneSample;
+        private readonly string sceneSampleName = "sceneSampleName";
         private readonly Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
-        private readonly String sceneSampleName = "SceneTest";
         private readonly List<Model> positionedModels = new List<Model>();
         private readonly Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
         private readonly Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
         private readonly Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
         private readonly Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
         private readonly int randomFoV = 30;
-        private readonly Scene defaultSceneSample = new Scene();
-
-
+        private Ray ray;
+        private Model model;
+        private Material material;
         [TestInitialize]
 
         public void initialize()
         {
             sceneSample = new Scene() { Name = sceneSampleName };
+
+            Vector3D origin = new Vector3D(0, 0, 0);
+            Vector3D direction = new Vector3D(1, 1, 1);
+            ray = new Ray(origin, direction);
+             material = new LambertianMaterial()
+            {
+                Attenuation = new Colour(1, 0, 0),
+                Ray = ray,
+            };
+            Figure figure = new Sphere()
+            {
+                Position = new Vector3D(5, 5, 5),
+                Radius = 2,
+            };
+             model = new Model()
+            {
+                Figure = figure,
+                Material = material,
+            };
+
         }
 
         [TestMethod]
@@ -169,5 +194,46 @@ namespace Render3D.UnitTest
 
             Assert.AreEqual(JanuaryFirst2020, scene.LastModificationDate);
         }
+
+        [TestMethod]
+        public void givenARayItWithHitAssignsTheHitValues()
+        {
+            Colour ret = sceneSample.ShootRay(ray, 10, new Random());
+            Assert.AreEqual(154, ret.Red());
+            Assert.AreEqual(194, ret.Green());
+            Assert.AreEqual(255, ret.Blue());
+
+        }
+
+        [TestMethod]
+       public void givenASceneItSetsThePreview()
+        {
+            Scene scene = new Scene();
+            Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            scene.Preview=bitmap;
+            Assert.AreEqual(bitmap, scene.Preview);
+        }
+        [TestMethod]
+        public void givenASceneItReturnsThePreview()
+        {
+            Scene scene = new Scene();
+            Assert.IsNull(scene.Preview);
+            Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            scene.Preview = bitmap;
+            Assert.AreEqual(bitmap, scene.Preview);
+           
+        }
+
+        [TestMethod]
+        public void ShootRayWithoutHitDoesNotReturnTheMaterialColour()
+        {
+            Colour result = sceneSample.ShootRay(ray, 10, new Random());
+            sceneSample.PositionedModels.Add(model);
+
+            Colour materialColour = sceneSample.PositionedModels[0].Material.Attenuation;
+            Assert.AreNotEqual(materialColour, result);
+        }
+
+
     }
 }

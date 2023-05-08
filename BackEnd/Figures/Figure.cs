@@ -18,6 +18,11 @@ namespace Render3D.BackEnd.Figures
                 _name = value;
             }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
         public Vector3D Position { get => _position; set => _position = value; }
         public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
         public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);

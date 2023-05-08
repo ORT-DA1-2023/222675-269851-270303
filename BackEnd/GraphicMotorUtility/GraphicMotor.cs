@@ -61,10 +61,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return (ResolutionHeight * _resultionWidthDefault) / _resolutionHeightDefault;
         }
 
-
-        public int AspectRatio()
+        public double AspectRatio()
         {
-            return ResolutionHeight / WidthResolution();
+            return((double)ResolutionHeight) / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)
@@ -76,7 +75,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 LookAt = model.Figure.Position,
                 LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10)),
-                Fov = 60
+                Fov = 160
             };
 
             previewScene.Camera = camera;

@@ -15,6 +15,8 @@ namespace Render3D.UnitTest
         private const string nonAlphanumericalName = "_*";
         private readonly int minNumber = 1;
         private readonly int maxNumber = 10;
+        private readonly double minDouble = 1;
+        private readonly double maxDouble = 10;
 
         [TestMethod]
         public void givenANameShorterThanTheMinimumItReturnsFalse()
@@ -115,34 +117,57 @@ namespace Render3D.UnitTest
         public void givenAnIntInTheRangeItReturnsTrue()
         {
             int num = 5;
-            int min = 1;
-            int max = 100;
-            Assert.IsTrue(HelperValidator.IsANumberInRange(num, min, max));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
         }
 
         [TestMethod]
         public void givenAnIntEqualToTheMinimumItReturnsTrue()
         {
-            int num = minNumber;
-            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(minNumber, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntEqualToTheMaximumItReturnsTrue()
         {
-            int num = maxNumber;
-            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
+            Assert.IsTrue(HelperValidator.IsANumberInRange(maxNumber, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntLargestThanTheMaximumItReturnsFalse()
         {
-            int num = maxNumber + 1;
-            Assert.IsFalse(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxNumber+1, minNumber, maxNumber));
         }
         [TestMethod]
         public void givenAnIntSmallestThanTheMinimumItReturnsFalse()
         {
-            int num = minNumber - 1;
-            Assert.IsFalse(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minNumber-1, minNumber, maxNumber));
         }
+
+        [TestMethod]
+        public void givenADoubleInTheRangeItReturnsTrue()
+        {
+            double num = 5;
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minDouble, maxDouble));
+        }
+
+        [TestMethod]
+        public void givenADoubleEqualToTheMinimumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(minDouble, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleEqualToTheMaximumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(maxDouble, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleLargestThanTheMaximumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxDouble+1, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleSmallestThanTheMinimumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minDouble-1, minDouble, maxDouble));
+        }
+
     }
 }

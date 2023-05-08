@@ -110,6 +110,16 @@ namespace Render3D.UnitTest
             cameraSample.Fov = tooLargeFov;
         }
 
+        [TestMethod]
+        public void givenACameraCreatedWithTheConstructorWithParametersItassignsTheProperties()
+        {
+            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, 1);
+            Assert.IsTrue(allOnes.Equals(camera.LookFrom));
+            Assert.IsTrue(allTwos.Equals(camera.LookAt));
+            Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
+            Assert.IsTrue(camera.Fov == validFov);
+            Assert.IsTrue(camera.AspectRatio == 1);
+        }
 
     }
 }

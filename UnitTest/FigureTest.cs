@@ -74,6 +74,7 @@ namespace Render3D.UnitTest
             figure1.Name = "";
         }
 
+
         /*   [TestMethod]
            public void givenAFigureAndAClientItAssignsTheFigureToTheClient()
            {
