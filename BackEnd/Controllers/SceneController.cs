@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd.GraphicMotorUtility;
+﻿using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,116 @@ namespace Render3D.BackEnd.Controllers
 {
     public class SceneController
     {
-        private DataWarehouse _dataWarehouse;
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set => _dataWarehouse = value; }
+        public DataWarehouse DataWarehouse { get; set; }
+        public ClientController ClientController { get; set; }
+        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
 
-        private void CreateAndAddScene(string sceneName, double[] lookFrom, double[] lookAt, int fov)
+        public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov)
         {
-            Vector3D lookFromVector = new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]);
-            Vector3D lookAtVector = new Vector3D(lookAt[0], lookAt[1], lookAt[2]);
-            Camera camera= new Camera() { LookAt=lookAtVector, Fov=fov, LookFrom=lookFromVector};
-            Scene scene = new Scene() {Name=sceneName,Camera=camera};
+            try
+            {
+                Vector3D lookAtVector = GetVectorFromString(stringLookAt);
+                Vector3D lookFromVector = GetVectorFromString(stringLookFrom);
+                Camera camera = new Camera() {LookAt=lookAtVector,LookFrom=lookFromVector,Fov=fov};
+                if(!scene.Camera.Equals(camera))
+                {
+                    scene.Camera=camera;
+                }
+            }
+            catch(Exception)
+            {
+        
+            }
+        }
+
+        private Vector3D GetVectorFromString(string stringLookAt)
+        {
+            Vector3D vector = null;
+            string[] values= stringLookAt.Substring(1,stringLookAt.Length-2).Split(',');
+            double[] valuesInDouble= new double[values.Length];
+            for (int i = 0; i < values.Length; i++)
+            {
+                valuesInDouble[i]= Double.Parse(values[i]);
+            }
+            vector= new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
+            return vector;
+        }
+
+        public Scene GetSceneByNameAndClient(string clientName, string sceneName)
+        {
+            Client client = ClientController.GetClientByName(clientName);
+            foreach (Scene scene in DataWarehouse.Scenes)
+            {
+                if (scene.Name == sceneName && scene.Client.Equals(client))
+                {
+                    return scene;
+                }
+            }
+            throw new BackEndException("scene doesnt exist");
+        }
+
+        private void CreateAndAddScene(Client client,string sceneName, Camera camera)
+        {
+            Scene scene = new Scene() {Client= client,Name=sceneName,Camera=camera};
             DataWarehouse.Scenes.Add(scene);
+        }
+
+        public void CreateAndAddBlankScene(string clientName,string sceneName)
+        {
+            Client client=ClientController.GetClientByName(clientName);
+            Camera camera = new Camera();
+            Scene scene= new Scene() { Client = client, Name = sceneName,Camera=camera};
+            DataWarehouse.Scenes.Add(scene);
+        }
+
+        public string GetNextValidName()
+        {
+            string posibleName= "Blank_name_";
+            int i = 1;
+            bool found= false;
+            while (!found)
+            {
+                bool validName = true;
+                foreach (Scene scene in DataWarehouse.Scenes)
+                {
+                    if (scene.Name == posibleName + i)
+                    {
+                        validName= false;
+                    }
+            }
+                if (validName)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return posibleName+i;
+           
+        }
+
+        public void ChangeSceneName(string clientName, string oldName, string newName)
+        {
+            Scene scene;
+            try
+            {
+                scene = GetSceneByNameAndClient(clientName, oldName);
+                Scene tryName = new Scene() { Name=newName };
+            }catch(Exception)
+            {
+                return;
+            }
+            try
+            {
+                GetSceneByNameAndClient(clientName, newName);
+            }catch(Exception)
+            {
+                scene.Name = newName;
+            }
+
+           
         }
     }
 }

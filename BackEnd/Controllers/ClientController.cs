@@ -9,8 +9,7 @@ namespace Render3D.BackEnd.Controllers
 {
     public class ClientController
     {
-        private DataWarehouse _dataWarehouse;
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse=value;} }
+        public DataWarehouse DataWarehouse { get; set; }
 
         public void SignIn(string clientName, string clientPassword)
         {
@@ -27,11 +26,11 @@ namespace Render3D.BackEnd.Controllers
         private void CreateAndAddAClient(string clientName, string clientPassword)
         {
             Client client = new Client() { Name = clientName, Password = clientPassword };
-            _dataWarehouse.Clients.Add(client);
+            DataWarehouse.Clients.Add(client);
         }
         public Client GetClientByName(string clientName)
         {
-            foreach (Client client in _dataWarehouse.Clients)
+            foreach (Client client in DataWarehouse.Clients)
             {
                 if (client.Name == clientName)
                 {

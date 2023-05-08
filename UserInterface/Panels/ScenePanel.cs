@@ -13,6 +13,8 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class ScenePanel : Form
     {
+        private CreationMenu creation;
+        private Render3DIU render;
         public ScenePanel()
         {
             InitializeComponent();
@@ -22,13 +24,19 @@ namespace Render3D.UserInterface.Panels
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent;
             Render3DIU render = (Render3DIU)creation.Parent.Parent;
-            using (var scene = new SceneCreation())
+            using (var scene = new SceneCreation(render.sceneController, render.clientName,null))
             {
                 var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                 }
             }
+        }
+
+        private void VariableInitialize(object sender, EventArgs e)
+        {
+            creation= (CreationMenu)this.Parent.Parent;
+            render = (Render3DIU)creation.Parent.Parent;
         }
     }
 }

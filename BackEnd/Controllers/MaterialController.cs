@@ -11,11 +11,8 @@ namespace Render3D.BackEnd.Controllers
 {
     public class MaterialController
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
-        public ClientController ClientController { get => _clientController; set => _clientController = value; }
+        public DataWarehouse DataWarehouse { get; set; }
+        public ClientController ClientController { get; set; }
 
         public void AddMaterial(string clientName, string materialName, int[] materialColors)
         {
@@ -34,13 +31,13 @@ namespace Render3D.BackEnd.Controllers
         private void CreateAndAddMaterial(Client client, string materialName, Colour colour)
         {
             Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = colour };
-            _dataWarehouse.Materials.Add(material);
+            DataWarehouse.Materials.Add(material);
         }
 
         public Material GetMaterialByNameAndClient(string clientName, string materialName)
         {
             Client client = ClientController.GetClientByName(clientName);
-            foreach (Material material in _dataWarehouse.Materials)
+            foreach (Material material in DataWarehouse.Materials)
             {
                 if (material.Name == materialName && material.Client.Equals(client))
                 {
@@ -73,7 +70,7 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 Material material=GetMaterialByNameAndClient(clientName, materialName);
-                _dataWarehouse.Materials.Remove(material);
+                DataWarehouse.Materials.Remove(material);
             }
             catch(Exception) 
             {

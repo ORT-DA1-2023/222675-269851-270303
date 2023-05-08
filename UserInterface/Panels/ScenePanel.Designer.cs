@@ -76,6 +76,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScenePanel";
             this.Text = "ScenePanel";
+            this.Shown += new System.EventHandler(this.VariableInitialize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -8,8 +8,6 @@ namespace Render3D.BackEnd
     public class Scene
     {
         protected string _name;
-        protected Client _client;
-        protected Camera _camera;
 
         public Scene()
         {
@@ -20,8 +18,8 @@ namespace Render3D.BackEnd
         }
 
 
-        public Client Client { get=>_client; set=> _client=value; }
-        public Camera Camera { get=>_camera; set=>_camera=value; }
+        public Client Client { get; set; }
+        public Camera Camera { get; set; }
         public string Name
         {
             get => _name;
@@ -95,8 +93,8 @@ namespace Render3D.BackEnd
         {
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
-            var colorStart = new Colour(1, 1, 1);//revisar
-            var colorEnd = new Colour(0.5, 0.7, 1.0); //revisar
+            var colorStart = new Colour(1, 1, 1);
+            var colorEnd = new Colour(0.5, 0.7, 1.0); 
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
 

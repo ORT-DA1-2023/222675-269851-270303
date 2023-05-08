@@ -49,6 +49,7 @@
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Colour.cs" />
+    <Compile Include="Controllers\SceneController.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
