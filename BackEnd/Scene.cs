@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 
 namespace Render3D.BackEnd
 {
@@ -33,9 +35,7 @@ namespace Render3D.BackEnd
         public DateTime RegisterDate { get; }
         public DateTime LastModificationDate { get; private set; }
         public DateTime? LastRenderizationDate { get; set; }
-
         public List<Model> PositionedModels { get; set; }
-
         public Bitmap Preview { get; set; }
 
         public Colour ShootRay(Ray ray, int depth, Random random)

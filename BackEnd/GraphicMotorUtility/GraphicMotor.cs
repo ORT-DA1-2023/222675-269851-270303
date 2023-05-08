@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {

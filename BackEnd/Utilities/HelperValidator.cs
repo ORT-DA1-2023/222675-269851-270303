@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.Utilities
 {
     public class HelperValidator
     {

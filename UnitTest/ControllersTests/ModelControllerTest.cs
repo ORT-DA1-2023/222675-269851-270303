@@ -7,12 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Utilities;
+
 
 namespace Render3D.UnitTest.ControllersTests
 {
-    /// <summary>
-    /// Summary description for ModelControllerTest
-    /// </summary>
+
     [TestClass]
     public class ModelControllerTest
     {
@@ -27,7 +27,7 @@ namespace Render3D.UnitTest.ControllersTests
         private Colour _colour = new Colour(0, 0, 0);
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };

@@ -2,7 +2,7 @@
 using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.Utilities
 {
     public class DataWarehouse
     {

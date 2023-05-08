@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd.Materials;
 using Render3D.BackEnd;
 
 namespace Render3D.UnitTest
