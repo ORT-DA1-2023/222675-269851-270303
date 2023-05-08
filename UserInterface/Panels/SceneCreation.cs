@@ -14,11 +14,28 @@ namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        public SceneCreation(DataWarehouse data)
+        public Scene scene;
+        public SceneCreation()
         {
             InitializeComponent();
-            GraphicMotor g = new GraphicMotor();
-            pBoxRender.Image = data.Models[0].Preview;
+            scene = new Scene();
+        }
+
+        private void BtnGoBack_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void NrFov_ValueChanged(object sender, EventArgs e)
+        {
+            scene.Camera.Fov=(int)nrFov.Value;
         }
     }
 }

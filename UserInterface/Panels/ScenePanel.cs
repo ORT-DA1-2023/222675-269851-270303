@@ -22,8 +22,13 @@ namespace Render3D.UserInterface.Panels
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent;
             Render3DIU render = (Render3DIU)creation.Parent.Parent;
-            SceneCreation scene =new SceneCreation(render.dataWarehouse);
-            scene.Show();
+            using (var scene = new SceneCreation())
+            {
+                var result = scene.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                }
+            }
         }
     }
 }

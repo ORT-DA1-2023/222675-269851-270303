@@ -12,11 +12,13 @@ namespace Render3D.BackEnd
         private readonly List<Figure> _figuresCreated = new List<Figure>();
         private readonly List<Material> _materialsCreated = new List<Material>();
         private readonly List<Model> _modelsCreated = new List<Model>();
+        private readonly List<Scene> _scenesCreated = new List<Scene>();   
 
         public List<Client> Clients { get => _clientsCreated; }
         public List<Figure> Figures { get => _figuresCreated; }
         public List<Material> Materials { get => _materialsCreated; }
         public List<Model> Models { get => _modelsCreated; }
+        public List<Scene> Scenes { get => _scenesCreated; }
 
 
 

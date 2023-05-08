@@ -7,7 +7,9 @@ namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private String _name;
+        protected string _name;
+        protected Client _client;
+        protected Camera _camera;
 
         public Scene()
         {
@@ -18,8 +20,8 @@ namespace Render3D.BackEnd
         }
 
 
-        public Client Client { get; set; }
-        public Camera Camera { get; set; }
+        public Client Client { get=>_client; set=> _client=value; }
+        public Camera Camera { get=>_camera; set=>_camera=value; }
         public string Name
         {
             get => _name;
