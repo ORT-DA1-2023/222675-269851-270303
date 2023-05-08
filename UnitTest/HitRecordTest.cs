@@ -20,7 +20,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenValidAtributesItAssingsToTheHitRecord()
+        public void GivenValidAtributesAssingsToHitRecord()
         {
             moduleSample = 1;
             intersectionSample = new Vector3D(0, 0, 0);
@@ -32,19 +32,16 @@ namespace Render3D.UnitTest
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
 
-
-
         [TestMethod]
-        public void givenAValidAttenuationItAssingsToTheHitRecord()
+        public void givenValidAttenuationAssingsToHitRecord()
         {
             attenuationSample = new Colour(7 / 255, 234 / 255, 34 / 255);
             hitRecordSample.Attenuation = attenuationSample;
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
 
-
         [TestMethod]
-        public void givenAValidModuleItAssingsToTheHitRecord()
+        public void GivenValidModuleAssingsToHitRecord()
         {
             moduleSample = 1;
             hitRecordSample.Module = moduleSample;
@@ -52,7 +49,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidIntersectionItAssingsToTheHitRecord()
+        public void GivenValidIntersectionAssingsToTheHitRecord()
         {
             intersectionSample = new Vector3D(0, 0, 0);
             hitRecordSample.Intersection = intersectionSample;

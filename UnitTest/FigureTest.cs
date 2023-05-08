@@ -8,79 +8,65 @@ namespace Render3D.UnitTest
     [TestClass]
     public class FigureTest
     {
-        private Client client1;
-        private Figure figure1;
-        private readonly string figure1Name = "A valid name";
+        private Client clientSample1;
+        private Figure figureSample1;
+        private readonly string figureSample1Name = "A valid name";
         private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
-
 
         [TestInitialize]
         public void Initialize()
         {
-            client1 = new Client() { Name = "client1Name" };
-            figure1 = new Sphere() { Client = client1, Name = figure1Name };
+            clientSample1 = new Client() { Name = "clientSampleName" };
+            figureSample1 = new Sphere() { Client = clientSample1, Name = figureSample1Name };
         }
 
         [TestMethod]
-        public void givenAValidVectorItAssignsItToTheFigure()
+        public void GivenValidVectorAssignsToFigure()
         {
-            figure1.Position = positionSample;
-            Assert.AreEqual(positionSample, figure1.Position);
-
-        }
-
-
-
-        [TestMethod]
-        public void givenAValidNameItAssignsItToTheFigure()
-        {
-            figure1.Name = figure1Name;
-            Assert.AreEqual(figure1Name, figure1.Name);
+            figureSample1.Position = positionSample;
+            Assert.AreEqual(positionSample, figureSample1.Position);
 
         }
 
         [TestMethod]
-        public void givenAFigureItAssignsAClientAsItsOwner()
+        public void GivenValidNameAssignsToFigure()
         {
-            figure1.Client = client1;
-            Assert.AreEqual(figure1.Client, client1);
+            figureSample1.Name = figureSample1Name;
+            Assert.AreEqual(figureSample1Name, figureSample1.Name);
         }
 
-
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
-        public void givenANameThatStartsWithSpacesItThrowsABackEndException()
+        public void GivenFigureAssignsClientAsOwner()
         {
-            figure1.Name = " " + figure1Name;
+            figureSample1.Client = clientSample1;
+            Assert.AreEqual(figureSample1.Client, clientSample1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
-        public void givenANameThatEndsWithSpacesItThrowsABackEndException()
+        public void GivenNameStartingWithSpacesThrowsBackEndException()
         {
-            figure1.Name = figure1Name + " ";
+            figureSample1.Name = " " + figureSample1Name;
         }
 
         [TestMethod]
-        public void givenAFigureItReturnsItsOwner()
+        [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
+        public void GivenNameEndingWithSpacesThrowsBackEndException()
         {
-            Assert.AreEqual(figure1.Client, client1);
+            figureSample1.Name = figureSample1Name + " ";
+        }
+
+        [TestMethod]
+        public void GivenFigureReturnsItsOwner()
+        {
+            Assert.AreEqual(figureSample1.Client, clientSample1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The name must not be empty")]
-        public void givenAnEmptyFigureNameItShouldThrowABackEndException()
+        public void GivenEmptyFigureNameThrowsBackEndException()
         {
-            figure1.Name = "";
+            figureSample1.Name = "";
         }
-
-
-        /*   [TestMethod]
-           public void givenAFigureAndAClientItAssignsTheFigureToTheClient()
-           {
-               Client client2 = new Client() { Name="client2Name"};
-               figure1.Client = client2;
-               Assert.AreEqual(figure1.Client, client2);
-           }*/
     }
 }

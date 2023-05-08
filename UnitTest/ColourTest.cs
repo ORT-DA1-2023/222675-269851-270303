@@ -6,15 +6,14 @@ namespace Render3D.UnitTest
     [TestClass]
     public class ColourTest
     {
-
         [TestMethod]
-        public void givenAColourItSetsCorrectlyTheRedPercentage()
+        public void GivenColourSetsRedPercentage()
         {
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
+            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
             int redValue = colour.Red();
 
             int expectedRedValue = (int)(percentageRed * 255);
@@ -22,103 +21,101 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAColourItSetsCorrectlyTheGreenPercentage()
+        public void GivenColourSetsGreenPercentage()
         {
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
-            int greenValue = colour.Green();
-
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            int greenValue = colourSample.Green();
 
             int expectedGreenValue = (int)(percentageGreen * 255);
             Assert.AreEqual(expectedGreenValue, greenValue);
         }
 
         [TestMethod]
-        public void givenAColourItSetsCorrectlyTheBluePercentage()
+        public void GivenColourSetsBluePercentage()
         {
-
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-
-            int blueValue = colour.Blue();
+           
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            int blueValue = colourSample.Blue();
 
             int expectedBlueValue = (int)(percentageBlue * 255);
             Assert.AreEqual(expectedBlueValue, blueValue);
         }
 
         [TestMethod]
-        public void givenAColourWithANegativeRedPercentageItAssignsZero()
+        public void GivenColourWithNegativeRedPercentageAssignsZero()
         {
             double percentageRed = -0.2;
             double percentageGreen = 0.5;
             double percentageBlue = 0.8;
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
 
-            Assert.AreEqual(0, colour.Red());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(0, colourSample.Red());
         }
 
         [TestMethod]
-        public void givenAColourWithRedPercentageHigherThanOneItAssigns255()
+        public void GivenColourWithRedPercentageHigherThanOneAssigns255()
         {
             double percentageRed = 1.3;
             double percentageGreen = 0.5;
             double percentageBlue = 0.7;
 
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-            Assert.AreEqual(255, colour.Red());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colourSample.Red());
         }
 
         [TestMethod]
-        public void givenAColourWithANegativeGreenPercentageItAssigns0()
+        public void GivenColourWithNegativeGreenPercentageAssignsZero()
         {
             double percentageRed = 0.2;
             double percentageGreen = -0.5;
             double percentageBlue = 0.8;
 
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-            Assert.AreEqual(0, colour.Green());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(0, colourSample.Green());
         }
 
         [TestMethod]
-        public void givenAColourWithGreenPercentageHigherThanOneItAssigns255()
+        public void GivenColourWithGreenPercentageHigherThanOneAssigns255()
         {
             double percentageRed = 0.3;
             double percentageGreen = 1.5;
             double percentageBlue = 0.7;
 
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-            Assert.AreEqual(255, colour.Green());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colourSample.Green());
         }
 
         [TestMethod]
-        public void givenAColourWithANegativeBluePercentageItAssigns0()
+        public void GivenColourWithNegativeBluePercentageAssignsZero()
         {
             double percentageRed = 0.2;
             double percentageGreen = 0.5;
             double percentageBlue = -0.8;
 
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-            Assert.AreEqual(0, colour.Blue());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(0, colourSample.Blue());
         }
 
         [TestMethod]
-        public void givenAColourWithBluePercentageHigherThanOneItAssigns255()
+        public void GivenColourWithBluePercentageHigherThanOneAssigns255()
         {
             double percentageRed = 0.3;
             double percentageGreen = 0.5;
             double percentageBlue = 2.7;
 
-            Colour colour = new Colour(percentageRed, percentageGreen, percentageBlue);
-            Assert.AreEqual(255, colour.Blue());
+            Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
+            Assert.AreEqual(255, colourSample.Blue());
         }
 
         [TestMethod]
-        public void givenTwoDifferentColoursItReturnsTheyAreNotEqual()
+        public void GivenTwoDifferentColoursReturnsTheyAreNotEqual()
         {
             Colour red = new Colour(1, 0, 0);
             Colour white = new Colour(1, 1, 1);
@@ -126,7 +123,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenTheSameColoursItReturnsTheyAreEqual()
+        public void GivenTheSameColoursReturnsTheyAreEqual()
         {
             Colour red1 = new Colour(1, 0, 0);
             Colour red2 = new Colour(1, 0, 0);
@@ -134,47 +131,46 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenTwoColorsItSubstractsThem()
+        public void GivenTwoColoursSubstractRGBPercentages()
         {
-            Colour colour1 = new Colour(1, 0, 0);
-            Colour colour2 = new Colour(0, 1, 0);
+            Colour colourSample1 = new Colour(1, 0, 0);
+            Colour colourSample2 = new Colour(0, 1, 0);
 
-            Colour diff = colour1.Substract(colour2);
+            Colour diff = colourSample1.Substract(colourSample2);
             Colour expected = new Colour(1, 0, 0);
             Assert.IsTrue(expected.Equals(diff));
         }
-        [TestMethod]
-        public void givenTwoColorsItMultiplyThem()
-        {
-            Colour colour1 = new Colour(1, 0, 0);
-            Colour colour2 = new Colour(1, 1, 0);
 
-            Colour product = colour1.Multiply(colour2);
+        [TestMethod]
+        public void GivenTwoColorsMultipliesRGBPercentages()
+        {
+            Colour colourSample1 = new Colour(1, 0, 0);
+            Colour colourSample2 = new Colour(1, 1, 0);
+
+            Colour product = colourSample1.Multiply(colourSample2);
             Colour expected = new Colour(1, 0, 0);
             Assert.IsTrue(expected.Equals(product));
         }
-        [TestMethod]
-        public void givenTwoColorsItDivideThem()
-        {
-            Colour colour1 = new Colour(0.5, 0.25, 1);
-            Colour colour2 = new Colour(1, 1, 1);
 
-            Colour quotient = colour1.Divide(colour2);
+        [TestMethod]
+        public void GivenTwoColorsDividesRGBPercentages()
+        {
+            Colour colour1Sample = new Colour(0.5, 0.25, 1);
+            Colour colour2Sample = new Colour(1, 1, 1);
+
+            Colour quotient = colour1Sample.Divide(colour2Sample);
             Colour expected = new Colour(0.5, 0.25, 1);
             Assert.IsTrue(expected.Equals(quotient));
         }
 
         [TestMethod]
-        public void givenAColorAndANumberItDividesThem()
+        public void GivenColorAndNumberDividesRGBPercentagesByNumber()
         {
-            Colour colour1 = new Colour(1, 0.5, 0.25);
+            Colour colour1Sample = new Colour(1, 0.5, 0.25);
             int ratio = 2;
-            Colour quotient = colour1.Divide(ratio);
+            Colour quotient = colour1Sample.Divide(ratio);
             Colour expected = new Colour(0.5, 0.25, 0.125);
             Assert.IsTrue(expected.Equals(quotient));
         }
     }
-
-
 }
-

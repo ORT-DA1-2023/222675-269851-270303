@@ -49,7 +49,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "material already exists")]
+        [ExpectedException(typeof(BackEndException), "materialSample already exists")]
         public void GivenARepeatedMaterialFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
