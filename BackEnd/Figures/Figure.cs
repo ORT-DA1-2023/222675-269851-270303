@@ -1,38 +1,37 @@
-﻿using System;
-using System.Linq;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
 
 namespace Render3D.BackEnd.Figures
 {
-    public abstract class Figure 
+    public abstract class Figure
     {
-        private String name;
-        private Client client;
+        protected Client _client;
+        protected string _name;
+        protected Vector3D _position;
 
-
-        public virtual Client Client
+        public Client Client { get; set; }
+        public string Name
         {
-            get => client;
-            set => client = value;
-        }
-
-        public virtual String Name
-        {
-            get => name;
+            get => _name;
             set
             {
-                if (isAValidName(value))
-                {
-                    name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
-
         }
 
-        protected bool isAValidName(String value)
+        public override string ToString()
         {
-            if (value.Length == 0) throw new BackEndException("The name must not be empty");
-            if (value.Trim().Length != value.Length) throw new BackEndException("Name must not start or end with spaces");
-            return true;
+            return Name;
         }
+        public Vector3D Position { get => _position; set => _position = value; }
+        public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
+        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);
+
+        protected void ValidateName(string value)
+        {
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The _name must not be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name must not start or end with spaces");
+        }
+
     }
 }

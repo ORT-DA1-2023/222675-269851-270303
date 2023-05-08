@@ -1,7 +1,6 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using System;
-using System.Security.Cryptography;
 
 namespace Render3D.UnitTest
 {
@@ -9,90 +8,124 @@ namespace Render3D.UnitTest
     public class ClientTest
     {
         private Client clientSample;
-        private const String clientSampleName = "clientSampleName";
-        private const String nonAlphanumericalName = "_*";
-        private const String thisNameIsTooLong = "thisNameHasMoreThan20Chars";
-        private const String thisNameIsTooShort = "ab";
-        private const String thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
-        private const String aValidPassword = "4V4lidPassw0rd";
-        private const String passwordWithoutNumbers = "ThisPasswordIsAlmostPerfect";
-        private const String passwordWithoutCapitalLetter = "thispasswordishard2read";
+        private const string clientSampleName = "clientSampleName";
+        private const string nonAlphanumericalName = "_*/+-";
+        private const string thisNameIsTooLong = "thisNameHasMoreThan20Chars";
+        private const string thisNameIsTooShort = "ab";
+        private const string thisPasswordIsTooLong = "thisPasswordIsIncorrectEvenThoughItCointainsAtLeast1NumberAnd1CapitalLetterA";
+        private const string aValidPassword = "4V4lidPassw0rd";
+        private const string passwordWithoutNumbers = "ThisPasswordIsNotPerfect";
+        private const string passwordWithoutCapitalLetter = "thisp4ssword";
 
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             clientSample = new Client() { Name = clientSampleName };
         }
 
         [TestMethod]
-        public void givenAValidNameItAssignsItToTheClient()
+        public void GivenValidNameAssignsToClient()
         {
             clientSample.Name = clientSampleName;
             Assert.AreEqual(clientSampleName, clientSample.Name);
         }
 
         [TestMethod]
-        public void givenAValidPasswordItAssignsItToTheClient()
+        public void GivenValidPasswordAssignsToClient()
         {
             clientSample.Password = aValidPassword;
             Assert.AreEqual(clientSample.Password, aValidPassword);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")] 
-        public void givenATooLongNameItThrowsABackEndException()
+        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
+        public void GivenTooLongNameThrowsBackEndException()
         {
             clientSample.Name = thisNameIsTooLong;
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
-        public void givenATooShortNameItThrowsABackEndException()
+        public void GivenTooShortNameThrowsBackEndException()
         {
             clientSample.Name = thisNameIsTooShort;
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must be alphanumerical")]
-        public void givenANonAlphanumericalNameItThrowsABackEndException()
+        public void GivenNonAlphanumericalNameThrowsBackEndException()
         {
             clientSample.Name = nonAlphanumericalName;
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password length must be between 5 and 25")]
-        public void givenATooLongPasswordItThrowsABackEndException()
+        public void GivenTooLongPasswordThrowsBackEndException()
         {
             clientSample.Password = thisPasswordIsTooLong;
         }
+
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Password must contain at least 1 number")]
-        public void givenAPasswordWithoutNumbersItThrowsABackEndException()
+        [ExpectedException(typeof(BackEndException), "Password must contain at least one number")]
+        public void GivenPasswordWithoutNumbersThrowsBackEndException()
         {
             clientSample.Password = passwordWithoutNumbers;
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password length must be between 5 and 25")]
-        public void givenATooShortPasswordItThrowsABackEndException()
+        public void GivenTooShortPasswordThrowsBackEndException()
         {
             clientSample.Password = "1";
         }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Password must contain at least one capital letter")]
-        public void givenAPasswordWithourCapitalLettersItThrowsABackEndException()
+        public void GivenPasswordWithoutCapitalLettersThrowsBackEndException()
         {
             clientSample.Password = passwordWithoutCapitalLetter;
         }
 
         [TestMethod]
-        public void givenTwoClientsWithTheSameNameItReturnsTheyAreEqual()
+        [ExpectedException(typeof(BackEndException), "Password must be alphanumerical")]
+        public void GivenNonAlphanumericalPasswordThrowsBackEndException()
         {
-            Client anotherClient = new Client()
+            clientSample.Password = nonAlphanumericalName;
+        }
+
+        [TestMethod]
+        public void GivenTwoClientsWithSameNameReturnTheyAreEqual()
+        {
+            Client client2 = new Client()
             {
                 Name = clientSampleName,
             };
-            Assert.IsTrue(clientSample.Equals(anotherClient));
+            Assert.IsTrue(clientSample.Equals(client2));
         }
 
-     
+        [TestMethod]
+        public void GivenClientReturnsRegisterDate()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            Client client2 = new Client();
+            Assert.AreEqual(DateTimeProvider.Now, client2.RegisterDate);
+        }
+
+        [TestMethod]
+        public void GivenTwoClientsAssignsDifferentDatesToEachOne()
+        {
+            DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
+            DateTime FebruaryFirst2020 = new DateTime(2020, 2, 1);
+
+            DateTimeProvider.Now = JanuaryFirst2020;
+            clientSample = new Client();
+            Assert.AreEqual(JanuaryFirst2020, clientSample.RegisterDate);
+
+            DateTimeProvider.Now = FebruaryFirst2020;
+            Client client2 = new Client();
+            Assert.AreEqual(FebruaryFirst2020, client2.RegisterDate);
+        }
 
     }
 }

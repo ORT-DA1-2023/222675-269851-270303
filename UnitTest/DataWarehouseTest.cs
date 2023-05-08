@@ -1,7 +1,5 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Reflection;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 
@@ -10,75 +8,92 @@ namespace Render3D.UnitTest
     [TestClass]
     public class DataWarehouseTest
     {
-        private DataWarehouse data;
+        private DataWarehouse dataSample;
         private Client clientSample;
-        private Client clientSample2;
         private Figure figureSample;
-       private Material materialSample;
+        private Material materialSample;
         private Model modelSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
-          data= new DataWarehouse();
-          clientSample = new Client() { Name="clientSampleName"};
-          clientSample2 = new Client() { Name = "clientSample2Name" };
-          figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
-          materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Color = new int[] { 255, 0, 0 } };
-          modelSample = new Model() { Client = clientSample, Name = "TestModel", Figure = figureSample, Material = materialSample };
+            dataSample = new DataWarehouse();
+            clientSample = new Client() { Name = "clientSampleName" };
+            figureSample = new Sphere() { Client = clientSample, Name = "Ring", Radius = 10 };
+            materialSample = new LambertianMaterial() { Client = clientSample, Name = "Red", Attenuation = new Colour(1, 0, 0) };
+            modelSample = new Model() { Client = clientSample, Name = "TestModel", Figure = figureSample, Material = materialSample };
         }
 
         [TestMethod]
-        public void givenAFigureItAddsItToTheExistingFigures()
+        public void GivenFigureAddsItToExistingFigures()
         {
-            Assert.IsTrue(data.Figures.Count == 0);
-            data.Figures.Add(figureSample);
-            Assert.AreEqual(data.Figures[0], figureSample);
-            Assert.IsTrue(data.Figures.Count == 1);
+            Assert.IsTrue(dataSample.Figures.Count == 0);
+            dataSample.Figures.Add(figureSample);
+            Assert.AreEqual(dataSample.Figures[0], figureSample);
+            Assert.IsTrue(dataSample.Figures.Count == 1);
         }
 
         [TestMethod]
-        public void givenAFigureItRemovesItFromExistingFigures()
+        public void GivenFigureRemovesItFromExistingFigures()
         {
-            data.Figures.Add(figureSample);
-            Assert.IsTrue(data.Figures.Count == 1);
-            data.Figures.Remove(figureSample);
-            Assert.IsTrue(data.Figures.Count == 0);
+            dataSample.Figures.Add(figureSample);
+            Assert.IsTrue(dataSample.Figures.Count == 1);
+            dataSample.Figures.Remove(figureSample);
+            Assert.IsTrue(dataSample.Figures.Count == 0);
         }
 
         [TestMethod]
-        public void givenAMaterialItAddsItToExistingMaterials()
-        { 
-            Assert.IsTrue(data.Materials.Count == 0);
-            data.Materials.Add(materialSample);
-            Assert.IsTrue(data.Materials.Count == 1);
-            Assert.IsTrue(data.Materials.Contains(materialSample));
+        public void GivenMaterialAddsItToExistingMaterials()
+        {
+            Assert.IsTrue(dataSample.Materials.Count == 0);
+            dataSample.Materials.Add(materialSample);
+            Assert.IsTrue(dataSample.Materials.Count == 1);
+            Assert.IsTrue(dataSample.Materials.Contains(materialSample));
         }
 
         [TestMethod]
-        public void givenAMaterialItRemovesItFromExistingMaterials()
+        public void GivenMaterialRemovesItFromExistingMaterials()
         {
-            data.Materials.Add(materialSample);
-            data.Materials.Remove(materialSample); 
-            Assert.IsTrue(!data.Materials.Contains(materialSample));
+            dataSample.Materials.Add(materialSample);
+            dataSample.Materials.Remove(materialSample);
+            Assert.IsTrue(!dataSample.Materials.Contains(materialSample));
         }
 
         [TestMethod]
-        public void givenAModelItAddsItToExistingModels()
+        public void GivenModelAddsItToExistingModels()
         {
-            Assert.IsTrue(data.Models.Count == 0);
-            data.Models.Add(modelSample);
-            Assert.IsTrue(data.Models.Count == 1);
-            Assert.IsTrue(data.Models.Contains(modelSample));
+            Assert.IsTrue(dataSample.Models.Count == 0);
+            dataSample.Models.Add(modelSample);
+            Assert.IsTrue(dataSample.Models.Count == 1);
+            Assert.IsTrue(dataSample.Models.Contains(modelSample));
         }
 
         [TestMethod]
-        public void givenAModelItRemovesItFromExistingModels()
+        public void GivenModelRemovesItFromExistingModels()
         {
-            data.Models.Add(modelSample);
-            Assert.IsTrue(data.Models.Count == 1);
-            data.Models.Remove(modelSample);
-            Assert.IsTrue(data.Models.Count == 0);
+            dataSample.Models.Add(modelSample);
+            Assert.IsTrue(dataSample.Models.Count == 1);
+            dataSample.Models.Remove(modelSample);
+            Assert.IsTrue(dataSample.Models.Count == 0);
+        }
+
+
+        [TestMethod]
+        public void GivenClientAddsItToExistingClients()
+        {
+            Assert.IsTrue(dataSample.Clients.Count == 0);
+            dataSample.Clients.Add(clientSample);
+            Assert.IsTrue(dataSample.Clients.Count == 1);
+            Assert.IsTrue(dataSample.Clients.Contains(clientSample));
+        }
+
+
+        [TestMethod]
+        public void GivenClientRemovesItFromExistingClients()
+        {
+            dataSample.Clients.Add(clientSample);
+            dataSample.Clients.Remove(clientSample);
+            Assert.IsTrue(dataSample.Clients.Count == 0);
         }
 
     }

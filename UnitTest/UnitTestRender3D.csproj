@@ -47,16 +47,30 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllersTests\ClientControllerTest.cs" />
     <Compile Include="ClientTest.cs" />
+    <Compile Include="ControllersTests\FigureControllerTest.cs" />
+    <Compile Include="ControllersTests\MaterialControllerTest.cs" />
+    <Compile Include="ControllersTests\ModelControllerTest.cs" />
     <Compile Include="DataWarehouseTest.cs" />
     <Compile Include="LambertianTest.cs" />
     <Compile Include="ModelTest.cs" />
-    <Compile Include="PersonTest.cs" />
     <Compile Include="SceneTest.cs" />
     <Compile Include="SphereTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HelperValidatorTest.cs" />
+    <Compile Include="FigureTest.cs" />
+    <Compile Include="RayTest.cs" />
+    <Compile Include="GaphicMotorTest.cs" />
+    <Compile Include="PixelMatrixTest.cs" />
+    <Compile Include="CameraTest.cs" />
+    <Compile Include="DateTimeProviderTest.cs" />
+    <Compile Include="HitRecordTest.cs" />
+    <Compile Include="ColourTest.cs" />
+    <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

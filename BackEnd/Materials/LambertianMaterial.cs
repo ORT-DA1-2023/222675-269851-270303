@@ -1,70 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
 
 namespace Render3D.BackEnd.Materials
 {
-    
-    public class LambertianMaterial :Material
+
+    public class LambertianMaterial : Material
     {
-        private String name;
-        private Client client;
-        private int[] color;
+        public LambertianMaterial() { }
 
-        public override string Name 
-        { 
-            get =>name;
-            set { 
-                if(isAValidName(value))
-                {
-                    name = value;
-                }
-            }
-        }
-        public override Client Client
+        public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
-            get => client;
-            set => client = value;
-        }
-        public int[] Color
-        {
-            get => color;
-            set
-            {
-                if (isAValidColor(value))
-                {
-                    color=value;
-                }
-            }
+            Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure(random));
+            Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
+            return new Ray(hitRecord.Intersection, newVector);
         }
 
-        private bool isAValidColor(int[] value)
+        private Vector3D GetRandomInUnitFigure(Random random)
         {
-           for(int i=0; i < value.Length; i++)
+            Vector3D vector;
+            do
             {
-                if (value[i]<0 || value[i] > 255)
-                {
-                    throw new BackEndException("Color must be between 0 and 255");
-                }
-            }
-            
-            return true;
+                Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
+            return vector;
         }
 
-        private bool isAValidName(string value)
-        {
-           if(value == "")
-            {
-                throw new BackEndException("Name must not be empty");
-            }
-            if (value !=value.Trim())
-            {
-                throw new BackEndException("Name must not start or end with spaces");
-            }
-            return true;
-        }
         
+
+        public override String ToString()
+        {
+            return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
+        }
     }
 }

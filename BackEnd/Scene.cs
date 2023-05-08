@@ -1,82 +1,117 @@
-﻿using System;
-using System.Collections;
-using System.Xml.Linq;
+﻿using Render3D.BackEnd.GraphicMotorUtility;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private DateTime registerDate;
-        private DateTime lastModificationDate;
-        private Client client;
-        private String name;
-        private ArrayList positionedModels;
-        private decimal[] cameraPosition;
-        private decimal[] objectPosition;
-        private int fieldOfView;
+        private String _name;
+
         public Scene()
         {
-            registerDate = DateTime.Now;
-            cameraPosition = new decimal[3] {0,2,0};
-            objectPosition= new decimal[3] { 0, 2, 5 };
-            fieldOfView = 30;
+            Camera = new Camera();
+            RegisterDate = DateTimeProvider.Now;
+            LastModificationDate = DateTimeProvider.Now;
+            PositionedModels = new List<Model>();
         }
 
-        public Client Client { get => client; set => client = value; }
+
+        public Client Client { get; set; }
+        public Camera Camera { get; set; }
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                if (isAValidName(value))
-                {
-                    name = value;
-                }
+                ValidateName(value);
+                _name = value;
             }
         }
 
+        public DateTime RegisterDate { get; }
+        public DateTime LastModificationDate { get; private set; }
+        public DateTime? LastRenderizationDate { get; set; }
 
-        public ArrayList PositionedModels { get; set; }
-        public decimal[] CameraPosition { get => cameraPosition; set => cameraPosition = value; }
-        public decimal[] ObjectPosition { get=>objectPosition; set=>objectPosition=value; }
-        public int FieldOfView { get => fieldOfView; set => fieldOfView = value; }
-       
+        public List<Model> PositionedModels { get; set; }
 
-        private bool isAValidName(string value)
-    {
-        if (value == "")
+        public Bitmap Preview { get; set; }
+
+        public Colour ShootRay(Ray ray, int depth, Random random)
         {
-            throw new BackEndException("Name cant be empty");
-        }
-        if (value != value.Trim())
-        {
-            throw new BackEndException("Name cant start or end with blank");
-        }
-        return true;
-    }
-        public bool equalsCameraPosition(decimal[] newCamera)
-        {
-            for(int i = 0; i<newCamera.Length; i++)
+            HitRecord3D hitRecord = null;
+            double moduleMax = Math.Pow(10, 38);
+            Model modelSample = new Model();
+            bool itWasAHit = false;
+            foreach (Model element in PositionedModels)
             {
-                if (this.cameraPosition[i] != newCamera[i])
+                if (element.Figure.WasHit(ray, 0.001, moduleMax))
                 {
-                    return false;
+                    itWasAHit = true;
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
+                    modelSample = element;
+                    hitRecord = hit;
+                    moduleMax = hit.Module;
                 }
             }
-            return true;
+            return ElementAttenuation(depth, hitRecord, random, modelSample, ray, itWasAHit);
         }
 
-        public bool equalsObjectPosition(decimal[] newObject)
+        private Colour ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
         {
-            for (int i = 0; i < newObject.Length; i++)
+            if (itWasAHit)
             {
-                if (this.objectPosition[i] != newObject[i])
-                {
-                    return false;
-                }
+                return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, random, modelSample);
             }
-            return true;
+            else
+            {
+                return GetBlueSky(ray);
+            }
         }
 
+        private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
+        {
+            if (MaxiumDepth > 0)
+            {
+                Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
+                Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
+                return new Colour(
+                   hitRecord.Attenuation.Red() * color.PercentageRed,
+                    hitRecord.Attenuation.Green() * color.PercentageGreen,
+                    hitRecord.Attenuation.Blue() * color.PercentageBlue
+                    );
+            }
+
+            else
+            {
+                return new Colour(0, 0, 0);
+            }
+        }
+
+        private Colour GetBlueSky(Ray ray)
+        {
+            var vectorDirectionUnit = ray.Direction.GetUnit();
+            var posY = 0.5 * (vectorDirectionUnit.Y + 1);
+            var colorStart = new Colour(1, 1, 1);
+            var colorEnd = new Colour(0.5, 0.7, 1.0); 
+            return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
+        }
+
+
+
+        public void UpdateLastModificationDate()
+        {
+            LastModificationDate = DateTimeProvider.Now;
+        }
+        public void UpdateLastRenderizationDate()
+        {
+            LastRenderizationDate = DateTimeProvider.Now;
+        }
+        private void ValidateName(string value)
+        {
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name cant be empty");
+            if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name cant start or end with blank");
+        }
     }
 }
