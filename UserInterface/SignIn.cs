@@ -73,6 +73,7 @@ namespace Render3D.UserInterface
                 }
                 
             }
+            RepeatedPasswordKeyUpCheck (sender, e);
             lblWrongPasswordMessage.Text = "";
         }
 
