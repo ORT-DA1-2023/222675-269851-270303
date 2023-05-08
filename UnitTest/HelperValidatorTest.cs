@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Render3D.UnitTest
 {
@@ -16,13 +13,15 @@ namespace Render3D.UnitTest
         private const string tenCharName = "Abcdefghij";
         private const string elevenCharName = "Abcdefghijk";
         private const string nonAlphanumericalName = "_*";
-
-
+        private readonly int minNumber = 1;
+        private readonly int maxNumber = 10;
+        private readonly double minDouble = 1;
+        private readonly double maxDouble = 10;
 
         [TestMethod]
         public void givenANameShorterThanTheMinimumItReturnsFalse()
         {
-            bool result = HelperValidator.IsLengthBetween(twoCharName,minLength,maxLength);
+            bool result = HelperValidator.IsLengthBetween(twoCharName, minLength, maxLength);
             Assert.IsFalse(result);
         }
 
@@ -43,14 +42,14 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenANameStartingWithSpacesReturnTrue()
         {
-            bool result= HelperValidator.IsTrimmable(" "+tenCharName);
+            bool result = HelperValidator.IsTrimmable(" " + tenCharName);
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void givenANameEndingWithSpacesReturnTrue()
         {
-            bool result = HelperValidator.IsTrimmable(tenCharName+" ");
+            bool result = HelperValidator.IsTrimmable(tenCharName + " ");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -88,7 +87,7 @@ namespace Render3D.UnitTest
             Assert.IsTrue(result);
         }
 
-        [TestMethod]    
+        [TestMethod]
         public void givenANameWithoutCapitalsItReturnsFalse()
         {
             bool result = HelperValidator.ContainsACapital("nocapitals");
@@ -114,5 +113,61 @@ namespace Render3D.UnitTest
             bool result = HelperValidator.IsAnEmptyString(tenCharName);
             Assert.IsFalse(result);
         }
+        [TestMethod]
+        public void givenAnIntInTheRangeItReturnsTrue()
+        {
+            int num = 5;
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minNumber, maxNumber));
+        }
+
+        [TestMethod]
+        public void givenAnIntEqualToTheMinimumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(minNumber, minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntEqualToTheMaximumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(maxNumber, minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntLargestThanTheMaximumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxNumber+1, minNumber, maxNumber));
+        }
+        [TestMethod]
+        public void givenAnIntSmallestThanTheMinimumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minNumber-1, minNumber, maxNumber));
+        }
+
+        [TestMethod]
+        public void givenADoubleInTheRangeItReturnsTrue()
+        {
+            double num = 5;
+            Assert.IsTrue(HelperValidator.IsANumberInRange(num, minDouble, maxDouble));
+        }
+
+        [TestMethod]
+        public void givenADoubleEqualToTheMinimumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(minDouble, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleEqualToTheMaximumItReturnsTrue()
+        {
+            Assert.IsTrue(HelperValidator.IsANumberInRange(maxDouble, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleLargestThanTheMaximumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxDouble+1, minDouble, maxDouble));
+        }
+        [TestMethod]
+        public void givenADoubleSmallestThanTheMinimumItReturnsFalse()
+        {
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minDouble-1, minDouble, maxDouble));
+        }
+
     }
 }

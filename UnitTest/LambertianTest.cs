@@ -1,7 +1,8 @@
-﻿using Render3D.BackEnd;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
+using System;
 
 namespace Render3D.UnitTest
 {
@@ -9,14 +10,11 @@ namespace Render3D.UnitTest
     public class LambertianTest
     {
         private LambertianMaterial materialSample;
-        private string validMaterialName = "LambertianMaterialName";
-        private int[] colorLowerThan = { -1, -1, -1 };
-        private int[] colorGreaterThan = { 266, 266, 266 };
-        private int[] validColor = { 15, 15, 15 };
+        private readonly string validMaterialName = "LambertianMaterialName";
 
         private Client clientSample;
-        private string clientSampleName = "client1Name";
-
+        private readonly string clientSampleName = "client1Name";
+        HitRecord3D hit;
 
         [TestInitialize]
         public void initialize()
@@ -28,14 +26,21 @@ namespace Render3D.UnitTest
             materialSample = new LambertianMaterial();
             materialSample.Client = clientSample;
 
+            hit = new HitRecord3D()
+            {
+                Intersection = new Vector3D(1, 1, 1),
+                Normal = new Vector3D(0, 0, 2),
+                Attenuation = new Colour(0, 0, 0),
+                Module = 2.3,
+            };
         }
         [TestMethod]
         public void givenAValidNameItAssignsItToTheLambertarianMaterial()
         {
             Assert.IsNotNull(materialSample);
             materialSample.Name = validMaterialName;
-            Assert.AreEqual(validMaterialName,materialSample.Name);
-            
+            Assert.AreEqual(validMaterialName, materialSample.Name);
+
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
@@ -47,41 +52,44 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
         public void givenANameThatStartsWithSpaceItThrowsABackEndException()
         {
-            materialSample.Name = " "+validMaterialName;
+            materialSample.Name = " " + validMaterialName;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]
         public void givenANameThatEndsWithSpaceItThrowsABackEndException()
         {
-            materialSample.Name =validMaterialName + " ";
+            materialSample.Name = validMaterialName + " ";
         }
-        
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
-        public void givenASmallerThanPossibleRGBItThrowsABackendException()
-        { 
-            ((LambertianMaterial)materialSample).Color=colorLowerThan;
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "color cant be lower than 0 or greater than 255")]
-        public void givenABiggerThanPossibleRGBItThrowsABackendException()
-        {
-            ((LambertianMaterial)materialSample).Color = colorGreaterThan;
-        }
-        [TestMethod]
-        public void givenAValidRGBItAssignsItToTheMaterial()
-        {
-            materialSample.Color = new int[3];
-            for (int i = 0; i < 3; i++)
-            {
-                materialSample.Color[i] = validColor[i];
-                Assert.IsTrue(materialSample.Color[i] == validColor[i]);
-            }
-        }
+
         [TestMethod]
         public void givenAMaterialItReturnsItsClient()
         {
             Assert.AreEqual(materialSample.Client, clientSample);
+        }
+
+        [TestMethod]
+        public void givenAMaterialReturnsAString()
+        {
+            materialSample.Name = validMaterialName;
+              materialSample.Attenuation = new Colour(1,1,0);
+              Assert.AreEqual (materialSample.ToString(), $"{validMaterialName} (255,255,0)");
+        }
+
+        [TestMethod]
+        public void givenARayItCorrectlySetsItToTheMaterial()
+        {
+            Vector3D origin = new Vector3D(0, 0, 1);
+            Vector3D direction = new Vector3D(0, 0, 1);
+            Ray ray = new Ray(origin, direction);
+            materialSample.Ray = ray;
+            Assert.AreEqual(ray, materialSample.Ray);
+        }
+
+        [TestMethod]
+        public void givenARayReflectedItVerifiesItsOriginComesFromTheIntersection()
+        {
+            Ray reflected=materialSample.ReflectsTheLight(hit, new Random());
+            Assert.AreEqual(reflected.Origin, hit.Intersection);
         }
 
     }
