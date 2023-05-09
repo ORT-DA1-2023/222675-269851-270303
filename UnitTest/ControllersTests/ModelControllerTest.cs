@@ -13,7 +13,6 @@ namespace Render3D.UnitTest.ControllersTests
     public class ModelControllerTest
     {
         private DataWarehouse _dataWarehouse;
-
         private ClientController _clientController;
         private Client _clientSample;
         private Material _materialSample;

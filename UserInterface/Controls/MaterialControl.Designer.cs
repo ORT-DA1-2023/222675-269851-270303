@@ -31,10 +31,10 @@
             this.lblRedColor = new System.Windows.Forms.Label();
             this.lblGreenColor = new System.Windows.Forms.Label();
             this.lblBlueColor = new System.Windows.Forms.Label();
-            this.txtMaterialName = new System.Windows.Forms.TextBox();
-            this.btnEditMaterialName = new System.Windows.Forms.Button();
             this.btnDeleteMaterial = new System.Windows.Forms.Button();
             this.pBoxMaterial = new System.Windows.Forms.PictureBox();
+            this.lblMaterialName = new System.Windows.Forms.Label();
+            this.btnEditName = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,44 +67,18 @@
             this.lblBlueColor.AutoSize = true;
             this.lblBlueColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBlueColor.ForeColor = System.Drawing.Color.Blue;
-            this.lblBlueColor.Location = new System.Drawing.Point(188, 70);
+            this.lblBlueColor.Location = new System.Drawing.Point(200, 70);
             this.lblBlueColor.Margin = new System.Windows.Forms.Padding(30, 0, 2, 0);
             this.lblBlueColor.Name = "lblBlueColor";
             this.lblBlueColor.Size = new System.Drawing.Size(45, 20);
             this.lblBlueColor.TabIndex = 2;
             this.lblBlueColor.Text = "Blue:";
             // 
-            // txtMaterialName
-            // 
-            this.txtMaterialName.BackColor = System.Drawing.SystemColors.Control;
-            this.txtMaterialName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaterialName.Location = new System.Drawing.Point(97, 16);
-            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtMaterialName.Name = "txtMaterialName";
-            this.txtMaterialName.ReadOnly = true;
-            this.txtMaterialName.Size = new System.Drawing.Size(103, 19);
-            this.txtMaterialName.TabIndex = 3;
-            this.txtMaterialName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clientPressEnter);
-            this.txtMaterialName.Leave += new System.EventHandler(this.ClientLeaves);
-            // 
-            // btnEditMaterialName
-            // 
-            this.btnEditMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditMaterialName.Location = new System.Drawing.Point(204, 11);
-            this.btnEditMaterialName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnEditMaterialName.Name = "btnEditMaterialName";
-            this.btnEditMaterialName.Size = new System.Drawing.Size(75, 24);
-            this.btnEditMaterialName.TabIndex = 4;
-            this.btnEditMaterialName.Text = "Edit";
-            this.btnEditMaterialName.UseVisualStyleBackColor = true;
-            this.btnEditMaterialName.Click += new System.EventHandler(this.btnEditMaterialName_Click);
-            // 
             // btnDeleteMaterial
             // 
             this.btnDeleteMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteMaterial.Location = new System.Drawing.Point(204, 41);
-            this.btnDeleteMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteMaterial.Location = new System.Drawing.Point(204, 44);
+            this.btnDeleteMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteMaterial.Name = "btnDeleteMaterial";
             this.btnDeleteMaterial.Size = new System.Drawing.Size(75, 24);
             this.btnDeleteMaterial.TabIndex = 5;
@@ -120,18 +94,40 @@
             this.pBoxMaterial.TabIndex = 6;
             this.pBoxMaterial.TabStop = false;
             // 
+            // lblMaterialName
+            // 
+            this.lblMaterialName.AutoSize = true;
+            this.lblMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaterialName.Location = new System.Drawing.Point(108, 28);
+            this.lblMaterialName.Name = "lblMaterialName";
+            this.lblMaterialName.Size = new System.Drawing.Size(60, 24);
+            this.lblMaterialName.TabIndex = 7;
+            this.lblMaterialName.Text = "label1";
+            // 
+            // btnEditName
+            // 
+            this.btnEditName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditName.Location = new System.Drawing.Point(204, 16);
+            this.btnEditName.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEditName.Name = "btnEditName";
+            this.btnEditName.Size = new System.Drawing.Size(75, 24);
+            this.btnEditName.TabIndex = 8;
+            this.btnEditName.Text = "Edit";
+            this.btnEditName.UseVisualStyleBackColor = true;
+            this.btnEditName.Click += new System.EventHandler(this.BtnEditName_Click);
+            // 
             // MaterialControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnEditName);
+            this.Controls.Add(this.lblMaterialName);
             this.Controls.Add(this.pBoxMaterial);
             this.Controls.Add(this.btnDeleteMaterial);
-            this.Controls.Add(this.btnEditMaterialName);
-            this.Controls.Add(this.txtMaterialName);
             this.Controls.Add(this.lblBlueColor);
             this.Controls.Add(this.lblGreenColor);
             this.Controls.Add(this.lblRedColor);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MaterialControl";
             this.Size = new System.Drawing.Size(291, 105);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).EndInit();
@@ -145,9 +141,9 @@
         private System.Windows.Forms.Label lblRedColor;
         private System.Windows.Forms.Label lblGreenColor;
         private System.Windows.Forms.Label lblBlueColor;
-        private System.Windows.Forms.TextBox txtMaterialName;
-        private System.Windows.Forms.Button btnEditMaterialName;
         private System.Windows.Forms.Button btnDeleteMaterial;
         private System.Windows.Forms.PictureBox pBoxMaterial;
+        private System.Windows.Forms.Label lblMaterialName;
+        private System.Windows.Forms.Button btnEditName;
     }
 }

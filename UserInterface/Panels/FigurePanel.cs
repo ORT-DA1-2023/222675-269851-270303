@@ -40,16 +40,15 @@ namespace Render3D.UserInterface.Panels
             txtFigureRadius.Text = "";
         }
 
-        private decimal TryToParse(string figureRadiusString)
+        private double TryToParse(string figureRadiusString)
         {
             try
             {
-                decimal radius = Decimal.Parse(figureRadiusString);
-                return radius;
-            }
-            catch
-            {
-                return -1;
+               double radius= double.Parse(figureRadiusString);
+                return radius; 
+            }catch 
+            { 
+                return -1; 
             }
         }
 

@@ -9,12 +9,9 @@ namespace Render3D.BackEnd.Controllers
 {
     public class ModelController
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-        private readonly GraphicMotor _graphicMotor = new GraphicMotor();
-
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
-        public ClientController ClientController { get => _clientController; set => _clientController = value; }
+        public DataWarehouse DataWarehouse { get; set; }
+        public ClientController ClientController { get; set; }
+        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
         public void AddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
 
@@ -38,12 +35,12 @@ namespace Render3D.BackEnd.Controllers
         private void CreateAndAddModel(Client client, string modelName, Figure figure, Material material)
         {
             Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
-            _dataWarehouse.Models.Add(model);
+            DataWarehouse.Models.Add(model);
         }
         public Model GetModelByNameAndClient(string clientName, string modelName)
         {
             Client client = ClientController.GetClientByName(clientName);
-            foreach (Model model in _dataWarehouse.Models)
+            foreach (Model model in DataWarehouse.Models)
             {
                 if (model.Name == modelName && model.Client.Equals(client))
                 {
@@ -55,7 +52,7 @@ namespace Render3D.BackEnd.Controllers
         private void AddPreviewToTheModel(string clientName, string modelName)
         {
             Model model = GetModelByNameAndClient(clientName, modelName);
-            model.Preview = _graphicMotor.RenderModelPreview(model);
+            model.Preview = GraphicMotor.RenderModelPreview(model);
         }
         public void ChangeModelName(string clientName, string oldName, string newName)
         {
@@ -83,7 +80,7 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 Model model = GetModelByNameAndClient(clientName, modelName);
-                _dataWarehouse.Models.Remove(model);
+                DataWarehouse.Models.Remove(model);
             }
             catch (Exception)
             {

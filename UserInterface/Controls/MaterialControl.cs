@@ -2,73 +2,56 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {
-        private readonly Material _material;
         private string _oldName;
         public MaterialControl(Material material)
         {
-            _material = material;
             InitializeComponent();
-            txtMaterialName.Text = material.Name;
-            lblRedColor.Text = "Red: " + _material.Attenuation.Red();
-            lblGreenColor.Text = "Green: " + _material.Attenuation.Green(); ;
-            lblBlueColor.Text = "Blue: " + _material.Attenuation.Blue();
-            pBoxMaterial.BackColor = Color.FromArgb(_material.Attenuation.Red(), _material.Attenuation.Red(), _material.Attenuation.Red());
-
+            lblMaterialName.Text = material.Name;
+            _oldName = material.Name;
+            lblRedColor.Text = "Red: " + material.Attenuation.Red();
+            lblGreenColor.Text = "Green: " + material.Attenuation.Green(); ;
+            lblBlueColor.Text = "Blue: " + material.Attenuation.Blue();
+            pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());        
         }
 
-        private void btnEditMaterialName_Click(object sender, EventArgs e)
+ 
+        private void ChecksForCorrectEdit(string newName)
         {
-            _oldName = txtMaterialName.Text;
-            txtMaterialName.ReadOnly = false;
-            txtMaterialName.BackColor = Color.Green;
-        }
-
-
-
-        private void ClientLeaves(object sender, EventArgs e)
-        {
-            checksForCorrectEdit();
-        }
-
-        private void clientPressEnter(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            if (!_oldName.Equals(newName))
             {
-                e.Handled = true;
-                checksForCorrectEdit();
-            }
-        }
-        private void checksForCorrectEdit()
-        {
-            txtMaterialName.ReadOnly = true;
-            if (!_oldName.Equals(txtMaterialName.Text))
-            {
-                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(_oldName, txtMaterialName.Text))
+                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(_oldName, newName))
                 {
-                    txtMaterialName.BackColor = Color.White;
+                    lblMaterialName.Text = newName;
+                    _oldName=newName;
                 }
-                else
-                {
-                    txtMaterialName.BackColor = Color.Red;
-                }
-            }
-            else
-            {
-                txtMaterialName.BackColor = Color.White;
             }
         }
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(txtMaterialName.Text);
-            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+         ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
+         ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
 
         }
 
+        private void BtnEditName_Click(object sender, EventArgs e)
+        {
+            using (var nameChanger = new NameChanger(_oldName))
+            {
+                var result = nameChanger.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    string name=nameChanger.newName;
+                    ChecksForCorrectEdit(name);
+                }
+            }
+            
+        }
     }
 }

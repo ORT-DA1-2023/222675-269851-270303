@@ -12,6 +12,7 @@ namespace Render3D.UserInterface
         public FigureController figureController = new FigureController();
         public MaterialController materialController = new MaterialController();
         public ModelController modelController = new ModelController();
+        public SceneController sceneController= new SceneController();
         public Render3DIU()
         {
             clientController.DataWarehouse = dataWarehouse;
@@ -21,6 +22,8 @@ namespace Render3D.UserInterface
             materialController.ClientController = clientController;
             modelController.DataWarehouse = dataWarehouse;
             modelController.ClientController = clientController;
+            sceneController.DataWarehouse = dataWarehouse;
+            sceneController.ClientController = clientController;
             InitializeComponent();
             UserWantsToLogIn();
         }

@@ -63,6 +63,7 @@
             this.btnCreateScene.TabIndex = 3;
             this.btnCreateScene.Text = "Create new Scene";
             this.btnCreateScene.UseVisualStyleBackColor = true;
+            this.btnCreateScene.Click += new System.EventHandler(this.BtnCreateScene_Click);
             // 
             // ScenePanel
             // 
@@ -75,6 +76,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScenePanel";
             this.Text = "ScenePanel";
+            this.Shown += new System.EventHandler(this.VariableInitialize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -64,6 +64,24 @@
     <Compile Include="Controls\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SceneControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SceneControl.Designer.cs">
+      <DependentUpon>SceneControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\NameChanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\NameChanger.Designer.cs">
+      <DependentUpon>NameChanger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\SceneCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\SceneCreation.Designer.cs">
+      <DependentUpon>SceneCreation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\ScenePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +141,15 @@
     <EmbeddedResource Include="Controls\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SceneControl.resx">
+      <DependentUpon>SceneControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\NameChanger.resx">
+      <DependentUpon>NameChanger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SceneCreation.resx">
+      <DependentUpon>SceneCreation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Panels\ScenePanel.resx">
       <DependentUpon>ScenePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sphere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\SceneWithoutPreview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

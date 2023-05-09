@@ -18,8 +18,9 @@ namespace Render3D.BackEnd.Controllers
 
             }
             catch (Exception)
-            {
-                CreateLambertianMaterial(ClientController.GetClientByName(clientName), materialName, materialColors);
+            {        
+                Colour colour= new Colour(materialColors[0]/255f, materialColors[1] / 255f, materialColors[2] / 255f);
+                CreateLambertianMaterial(ClientController.GetClientByName(clientName), materialName, colour);
                 return;
             }
             throw new BackEndException("material already exists");
@@ -49,6 +50,7 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 material = GetMaterialByNameAndClient(clientName, oldName);
+                Material checkMaterialName = new LambertianMaterial() { Name= newName};
             }
             catch (Exception)
             {

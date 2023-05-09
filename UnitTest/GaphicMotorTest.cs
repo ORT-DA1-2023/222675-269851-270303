@@ -14,7 +14,7 @@ namespace Render3D.UnitTest
         private Scene sceneSample;
 
         private const int resolutionHeightSample = 500;
-        private const int resolutionHeightSampleDefault = 3;
+        private const int resolutionWidthSampleDefault = 300;
         private const int negativeResolutionHeightSample = -1;
         private const int zeroResolutionHeightSample = 0;
 
@@ -55,6 +55,15 @@ namespace Render3D.UnitTest
             Assert.IsNotNull(bitmap);
         }
 
+
+
+
+        [TestMethod]
+        public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        {
+            Assert.AreEqual(graphicMotorDefaultSample.PixelSampling, pixelSamplingSampleDefault);
+        }
+
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasDefaultPixelSampling()
         {
@@ -76,8 +85,8 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenValidResolutionAssignsToGraphicMotor()
         {
-            graphicMotorSample.ResolutionHeight = resolutionHeightSample;
-            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionHeight);
+            graphicMotorSample.ResolutionWidth = resolutionHeightSample;
+            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionWidth);
         }
 
         [TestMethod]
@@ -127,14 +136,14 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenNegativeResolutionThrowsABackEndException()
         {
-            graphicMotorSample.ResolutionHeight = negativeResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = negativeResolutionHeightSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenZeroResolutionThrowsBackEndException()
         {
-            graphicMotorSample.ResolutionHeight = zeroResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = zeroResolutionHeightSample;
         }
 
         [TestMethod]
