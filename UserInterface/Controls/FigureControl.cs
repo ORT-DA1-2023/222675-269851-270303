@@ -1,11 +1,7 @@
 ﻿using Render3D.BackEnd.Figures;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
-using Render3D.BackEnd.Figures;
-using Render3D.UserInterface;
 using UserInterface.Panels;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Render3D.UserInterface.Controls
 {

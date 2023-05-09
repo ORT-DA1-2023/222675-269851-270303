@@ -1,9 +1,6 @@
 ﻿using Render3D.BackEnd;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
-using Render3D.BackEnd;
-using Render3D.UserInterface;
 using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls

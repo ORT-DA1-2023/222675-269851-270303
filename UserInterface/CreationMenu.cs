@@ -6,10 +6,6 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form

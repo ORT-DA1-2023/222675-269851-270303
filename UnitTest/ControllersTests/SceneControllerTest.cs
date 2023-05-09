@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 
 namespace Render3D.UnitTest.ControllersTests
 {

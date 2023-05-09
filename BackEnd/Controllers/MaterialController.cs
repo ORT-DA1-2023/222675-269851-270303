@@ -25,10 +25,9 @@ namespace Render3D.BackEnd.Controllers
             }
             throw new BackEndException("material already exists");
         }
-        private void CreateLambertianMaterial(Client client, string materialName, int[] materialColors)
+        private void CreateLambertianMaterial(Client client, string materialName, Colour colour)
         {
-            Colour color = new Colour(materialColors[0], materialColors[1], materialColors[2]);
-            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = color };
+            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = colour };
             DataWarehouse.Materials.Add(material);
         }
 

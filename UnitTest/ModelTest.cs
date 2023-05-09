@@ -100,6 +100,19 @@ namespace Render3D.UnitTest
             };
             Assert.AreEqual(modelSample.Material, materialSample);
         }
+        [TestMethod]
+        public void GivenModelReturnsToString()
+        {
+            Figure figureSample = new Sphere() { Name = "figureName" };
+            Model modelSample = new Model()
+            {
+                Client = clientSample1,
+                Figure = figureSample,
+                Name = validName,
+            };
+            string expected = $"{validName}({figureSample.Position.X},{figureSample.Position.Y},{figureSample.Position.Z})";
+            Assert.AreEqual(modelSample.ToString(), expected);
+        }
 
     }
 }

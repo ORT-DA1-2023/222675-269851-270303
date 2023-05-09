@@ -61,7 +61,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
         {
-            Assert.AreEqual(graphicMotorDefaultSample.PixelSampling, pixelSamplingSampleDefault);
+            Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasTheDefaultResolution()
         {
-            Assert.AreEqual(graphicMotorSample.ResolutionHeight, resolutionHeightSampleDefault);
+            Assert.AreEqual(graphicMotorSample.ResolutionWidth, resolutionWidthSampleDefault);
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenGraphicMotorReturnsAspectRatio()
         {
-            GraphicMotor motor = new GraphicMotor() { ResolutionHeight = 300 };
+            GraphicMotor motor = new GraphicMotor() { ResolutionWidth = 300 };
             double ratio = motor.AspectRatio();
             Assert.AreEqual(1.5, ratio);
         }

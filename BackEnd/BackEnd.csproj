@@ -48,6 +48,7 @@
     <Compile Include="Controllers\FigureController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
+    <Compile Include="Controllers\SceneController.cs" />
     <Compile Include="GraphicMotorUtility\Camera.cs" />
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
