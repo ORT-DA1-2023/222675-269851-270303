@@ -45,8 +45,8 @@ namespace UserInterface.Panels
         {
             txtSceneName.Text = scene.Name;
             Camera cam = scene.Camera;
-            txtLookAt.Text = "(" + cam.LookAt.X + "," + cam.LookAt.Y + "," + cam.LookAt.Z + "," + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + "," + cam.LookFrom.Y + "," + cam.LookFrom.Z + "," + ")";
+            txtLookAt.Text = "(" + cam.LookAt.X + "," + cam.LookAt.Y + "," + cam.LookAt.Z + ")";
+            txtLookFrom.Text = "(" + cam.LookFrom.X + "," + cam.LookFrom.Y + "," + cam.LookFrom.Z  + ")";
             nrFov.Value = cam.Fov;
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
@@ -86,7 +86,7 @@ namespace UserInterface.Panels
 
         public bool IsValidFormat(string input)
         {
-            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*\)$");
+            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?(?:\s*,\s*-?\d+(\.\d+)?){2}\s*\)$|^\(\s*-?\d+(\.\d+)?(?:\s*,\s*-?\d+(\.\d+)?){2}\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 
@@ -107,6 +107,7 @@ namespace UserInterface.Panels
             if(IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
                 sceneController.EditCamera(scene,txtLookAt.Text, txtLookFrom.Text,(int)nrFov.Value);
+                LoadScene();
             }
         }
 
@@ -123,6 +124,7 @@ namespace UserInterface.Panels
                 return;
             }
             sceneController.AddModel(scene,model,position);
+            CheckRenderOutDated();
             LoadScene();
             cBoxAvailableModels.SelectedItem = null;
         }
@@ -142,6 +144,11 @@ namespace UserInterface.Panels
         {
             sceneController.RenderScene(scene);
             LoadScene();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

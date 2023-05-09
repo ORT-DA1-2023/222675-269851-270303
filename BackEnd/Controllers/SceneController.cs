@@ -20,7 +20,8 @@ namespace Render3D.BackEnd.Controllers
             {
                 Vector3D lookAtVector = GetVectorFromString(stringLookAt);
                 Vector3D lookFromVector = GetVectorFromString(stringLookFrom);
-                Camera camera = new Camera() {LookAt=lookAtVector,LookFrom=lookFromVector,Fov=fov};
+                Vector3D vectorUp = new Vector3D(0,1,0);
+                Camera camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio());
                 if(!scene.Camera.Equals(camera))
                 {
                     scene.Camera=camera;
@@ -143,8 +144,10 @@ namespace Render3D.BackEnd.Controllers
 
         public void AddModel(Scene scene, Model model, string position)
         {
-            Vector3D positionVector= GetVectorFromString(position);
-            Model newModel= new Model() { Client= model.Client, Name=model.Name, Figure=model.Figure,Material=model.Material};
+            Vector3D positionVector = GetVectorFromString(position);
+            Sphere sphere = (Sphere)model.Figure;
+            Figure newFigure = new Sphere() { Position = sphere.Position, Client = sphere.Client, Name = sphere.Name, Radius = sphere.Radius };
+            Model newModel= new Model() { Client= model.Client, Name=model.Name, Figure= newFigure, Material=model.Material};
             newModel.Figure.Position = positionVector;
             scene.PositionedModels.Add(newModel);
         }
