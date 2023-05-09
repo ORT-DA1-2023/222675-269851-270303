@@ -46,7 +46,7 @@ namespace UserInterface.Panels
             txtSceneName.Text = scene.Name;
             Camera cam = scene.Camera;
             txtLookAt.Text = "(" + cam.LookAt.X + ";" + cam.LookAt.Y + ";" + cam.LookAt.Z + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z  + ")";
+            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z + ")";
             nrFov.Value = cam.Fov;
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
@@ -54,23 +54,33 @@ namespace UserInterface.Panels
             {
                 cBoxAvailableModels.Items.Add(model);
             }
-            foreach(Model model in scene.PositionedModels)
+            foreach (Model model in scene.PositionedModels)
             {
                 cBoxPositionedModels.Items.Add(model);
             }
             pBoxRender.Image = scene.Preview;
             lblCameraError.Text = "";
             lblNameError.Text = "";
-            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
-            if(scene.LastRenderizationDate != null)
+            LastModifcationDateRefresh();
+            if (scene.LastRenderizationDate != null)
             {
-                lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+                LastRenderDateRefresh();
             }
             else
             {
                 lblLastRenderDate.Text = "this scene has not been rendered yet";
             }
             CheckRenderOutDated();
+        }
+
+        private void LastRenderDateRefresh()
+        {
+            lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+        }
+
+        private void LastModifcationDateRefresh()
+        {
+            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
         }
 
         private void CheckRenderOutDated()
