@@ -56,6 +56,7 @@
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
+            this.lblNameError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -65,6 +66,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblNameError);
             this.panel1.Controls.Add(this.btnChangeName);
             this.panel1.Controls.Add(this.lblCameraError);
             this.panel1.Controls.Add(this.btnChangeCamera);
@@ -122,7 +124,7 @@
             // btnGoBack
             // 
             this.btnGoBack.Location = new System.Drawing.Point(225, 455);
-            this.btnGoBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGoBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnGoBack.Name = "btnGoBack";
             this.btnGoBack.Size = new System.Drawing.Size(88, 36);
             this.btnGoBack.TabIndex = 21;
@@ -371,6 +373,17 @@
             this.cBoxPositionedModels.Size = new System.Drawing.Size(190, 32);
             this.cBoxPositionedModels.TabIndex = 1;
             // 
+            // lblNameError
+            // 
+            this.lblNameError.AutoSize = true;
+            this.lblNameError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameError.ForeColor = System.Drawing.Color.Red;
+            this.lblNameError.Location = new System.Drawing.Point(269, 43);
+            this.lblNameError.Name = "lblNameError";
+            this.lblNameError.Size = new System.Drawing.Size(35, 16);
+            this.lblNameError.TabIndex = 26;
+            this.lblNameError.Text = "error";
+            // 
             // SceneCreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,5 +437,6 @@
         private System.Windows.Forms.Button btnChangeCamera;
         private System.Windows.Forms.Label lblCameraError;
         private System.Windows.Forms.Button btnChangeName;
+        private System.Windows.Forms.Label lblNameError;
     }
 }

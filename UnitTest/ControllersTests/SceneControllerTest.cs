@@ -61,7 +61,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "scene already exists")]
-        public void GivenARepeatedModelFailsAddingItToTheList()
+        public void GivenARepeatedSceneFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_sceneController.DataWarehouse.Scenes.Count == 0);
@@ -71,7 +71,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
 
         [TestMethod]
-        public void GivenANewFigureNameItChanges()
+        public void GivenANewSceneNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _sceneController.AddScene("clientSample1", "SceneSample1");
@@ -79,7 +79,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.AreEqual("SceneSample2", _sceneController.DataWarehouse.Scenes[0].Name);
         }
         [TestMethod]
-        public void GivenANewFigureNameItDoesNotChange()
+        public void GivenARepeatedSceneNameItDoesNotChange()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _sceneController.AddScene("clientSample1", "SceneSample1");
@@ -89,7 +89,16 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.AreEqual("SceneSample2", _sceneController.DataWarehouse.Scenes[1].Name);
         }
         [TestMethod]
-        public void GivenANameDeletesTheFigure()
+        [ExpectedException(typeof(BackEndException), "Name cant be empty")]
+        public void GivenAnIncorrectSceneNameItThrowsException()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _sceneController.AddScene("clientSample1", "SceneSample1");
+            _sceneController.ChangeSceneName("clientSample1", "SceneSample1", "");
+            Assert.AreEqual("SceneSample1", _sceneController.DataWarehouse.Scenes[0].Name);
+        }
+        [TestMethod]
+        public void GivenANameDeletesTheScene()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _sceneController.AddScene("clientSample1", "SceneSample1");
@@ -118,13 +127,13 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_scene.Camera.Equals(testCamera));
         }
         [TestMethod]
-        [ExpectedException(typeof(System.FormatException), "Input string was not in a correct format.")]
+        [ExpectedException(typeof(BackEndException), "Fov must be between 0 and 160")]
         public void GivenAWrongCameraDoesNotAssignsItToTheScene()
         {
             _scene = new Scene() { Client = _clientSample, Name = "SceneSample1", Camera = _defaultCamera };
-            string lookAt = "(1;1;1";
-            string lookFrom = "(11;1)";
-            _sceneController.EditCamera(_scene, lookAt, lookFrom, 30);
+            string lookAt = "(1;1;1)";
+            string lookFrom = "(1;1;1)";
+            _sceneController.EditCamera(_scene, lookAt, lookFrom, -30);
         }
 
         [TestMethod]
@@ -158,5 +167,6 @@ namespace Render3D.UnitTest.ControllersTests
             _sceneController.RemoveModel(scene, model);
             Assert.IsTrue(scene.PositionedModels.Count == 0);
         }
+
     }
 }

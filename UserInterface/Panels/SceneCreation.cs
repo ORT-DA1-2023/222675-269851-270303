@@ -60,6 +60,7 @@ namespace UserInterface.Panels
             }
             pBoxRender.Image = scene.Preview;
             lblCameraError.Text = "";
+            lblNameError.Text = "";
             lblLastModificationDate.Text = "" + scene.LastModificationDate.Month+ "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
             if(scene.LastRenderizationDate != null)
             {
@@ -101,22 +102,28 @@ namespace UserInterface.Panels
         {
             if(IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
-                sceneController.EditCamera(scene,txtLookAt.Text, txtLookFrom.Text,(int)nrFov.Value);
-                LoadScene();
+                try
+                {
+                    sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value);
+                    LoadScene();
+                }catch (Exception ex)
+                {
+                    lblCameraError.Text = ex.Message;
+                }
+               
             }
         }
 
         private void BtnChangeName_Click(object sender, EventArgs e)
         {
-            
-            if(txtSceneName.Text == "")
-            {
-                lblCameraError.Text = "You can not put empty Vectors";
-            }
-            else
+            try
             {
                 sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
                 lblCameraError.Text = "";
+            }
+            catch(Exception ex)
+            {
+                lblNameError.Text = ex.Message;
             }
         }
 

@@ -127,9 +127,9 @@ namespace Render3D.BackEnd.Controllers
             {
                 scene = GetSceneByNameAndClient(clientName, oldName);
                 Scene tryName = new Scene() { Name=newName };
-            }catch(Exception)
+            }catch(Exception ex)
             {
-                return;
+                throw ex;
             }
             try
             {
