@@ -61,7 +61,7 @@ namespace UserInterface.Panels
             pBoxRender.Image = scene.Preview;
             lblCameraError.Text = "";
             lblNameError.Text = "";
-            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month+ "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
+            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
             if(scene.LastRenderizationDate != null)
             {
                 lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
