@@ -11,19 +11,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserInterface.Panels;
 
-namespace UserInterface.Controls
+namespace Render3D.UserInterface.Controls
 {
     public partial class SceneControl : UserControl
     {
-        string _oldName;
-        public SceneControl(Scene scene)
+        private string _oldName;
+        private Scene _scene;
+        public SceneControl(Scene selectedScene)
         {
             InitializeComponent();
-            lblSceneName.Text = scene.Name;
-            lblSceneModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
-            if(scene.Preview != null )
+            _scene = selectedScene;
+            lblSceneName.Text = _scene.Name;
+            _oldName = _scene.Name;
+            lblSceneModificationDate.Text = "" + _scene.LastModificationDate.Month + "/" + _scene.LastModificationDate.Day + "/" + _scene.LastModificationDate.Year + " " + _scene.LastModificationDate.Hour + ":" + _scene.LastModificationDate.Minute;
+            if(_scene.Preview != null )
             {
-                pBoxPreview.Image = scene.Preview;
+                pBoxPreview.Image = _scene.Preview;
             }
         }
 
@@ -35,13 +38,14 @@ namespace UserInterface.Controls
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            using (var nameChanger = new NameChanger(_oldName))
+            CreationMenu creation = (CreationMenu)this.Parent.Parent.Parent;
+            Render3DIU render = (Render3DIU)creation.Parent.Parent;
+            using (var scene = new SceneCreation(render.sceneController, render.clientName, _scene))
             {
-                var result = nameChanger.ShowDialog(this);
+                var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    string name = nameChanger.newName;
-                    ChecksForCorrectEdit(name);
+                    creation.Refresh("Scene");
                 }
             }
         }

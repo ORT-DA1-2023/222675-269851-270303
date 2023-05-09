@@ -1,13 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
@@ -76,7 +68,9 @@ namespace Render3D.UserInterface
             {
                 if (scene.Client.Name.Equals(render.clientName))
                 {
-                   //control
+                   SceneControl sceneControl= new SceneControl(scene);
+                   flObjectList.Controls.Add(sceneControl);
+
                 }
             }
         }
