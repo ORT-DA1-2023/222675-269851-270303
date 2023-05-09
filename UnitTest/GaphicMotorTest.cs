@@ -3,7 +3,6 @@ using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using System;
 using System.Drawing;
 
 namespace Render3D.UnitTest
@@ -15,7 +14,7 @@ namespace Render3D.UnitTest
         private Scene sceneSample;
 
         private const int resolutionHeightSample = 500;
-        private const int resolutionHeightSampleDefault = 3;
+        private const int resolutionWidthSampleDefault = 300;
         private const int negativeResolutionHeightSample = -1;
         private const int zeroResolutionHeightSample = 0;
 
@@ -50,10 +49,19 @@ namespace Render3D.UnitTest
                 Figure = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 3 },
                 Material = new LambertianMaterial() { Attenuation = new Colour(1, 1, 1) },
             };
-           
+
             GraphicMotor graphicMotor = new GraphicMotor();
             Bitmap bitmap = graphicMotor.RenderModelPreview(model);
             Assert.IsNotNull(bitmap);
+        }
+
+
+
+
+        [TestMethod]
+        public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        {
+            Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
         }
 
         [TestMethod]
@@ -71,14 +79,14 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasTheDefaultResolution()
         {
-            Assert.AreEqual(graphicMotorSample.ResolutionHeight, resolutionHeightSampleDefault);
+            Assert.AreEqual(graphicMotorSample.ResolutionWidth, resolutionWidthSampleDefault);
         }
 
         [TestMethod]
         public void GivenValidResolutionAssignsToGraphicMotor()
         {
-            graphicMotorSample.ResolutionHeight = resolutionHeightSample;
-            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionHeight);
+            graphicMotorSample.ResolutionWidth = resolutionHeightSample;
+            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionWidth);
         }
 
         [TestMethod]
@@ -128,22 +136,22 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenNegativeResolutionThrowsABackEndException()
         {
-            graphicMotorSample.ResolutionHeight = negativeResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = negativeResolutionHeightSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenZeroResolutionThrowsBackEndException()
         {
-            graphicMotorSample.ResolutionHeight = zeroResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = zeroResolutionHeightSample;
         }
 
         [TestMethod]
         public void GivenGraphicMotorReturnsAspectRatio()
         {
-            GraphicMotor motor = new GraphicMotor() { ResolutionHeight=300};
-            double ratio=  motor.AspectRatio();
-            Assert.AreEqual(1.5,ratio);
+            GraphicMotor motor = new GraphicMotor() { ResolutionWidth = 300 };
+            double ratio = motor.AspectRatio();
+            Assert.AreEqual(1.5, ratio);
         }
     }
 }

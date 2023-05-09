@@ -2,6 +2,8 @@
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
+
 
 namespace Render3D.UnitTest
 {

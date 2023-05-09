@@ -1,4 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +9,7 @@ namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private String _name;
+        protected string _name;
 
         public Scene()
         {
@@ -33,9 +35,7 @@ namespace Render3D.BackEnd
         public DateTime RegisterDate { get; }
         public DateTime LastModificationDate { get; private set; }
         public DateTime? LastRenderizationDate { get; set; }
-
         public List<Model> PositionedModels { get; set; }
-
         public Bitmap Preview { get; set; }
 
         public Colour ShootRay(Ray ray, int depth, Random random)
@@ -77,9 +77,9 @@ namespace Render3D.BackEnd
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
                 Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
                 return new Colour(
-                   hitRecord.Attenuation.Red() * color.PercentageRed,
-                    hitRecord.Attenuation.Green() * color.PercentageGreen,
-                    hitRecord.Attenuation.Blue() * color.PercentageBlue
+                   hitRecord.Attenuation.PercentageRed * color.PercentageRed,
+                    hitRecord.Attenuation.PercentageGreen * color.PercentageGreen,
+                    hitRecord.Attenuation.PercentageBlue * color.PercentageBlue
                     );
             }
 
@@ -94,7 +94,7 @@ namespace Render3D.BackEnd
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
             var colorStart = new Colour(1, 1, 1);
-            var colorEnd = new Colour(0.5, 0.7, 1.0); 
+            var colorEnd = new Colour(0.5, 0.7, 1.0);
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
 

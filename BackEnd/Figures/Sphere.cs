@@ -1,4 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.BackEnd.Figures
@@ -67,9 +69,9 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
-          public override String ToString()
+        public override String ToString()
         {
-            return base.ToString() +" "+ _radius;
+            return base.ToString() + " " + _radius;
         }
     }
 }

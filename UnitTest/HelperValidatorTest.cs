@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
+using Render3D.BackEnd.Utilities;
+
 
 namespace Render3D.UnitTest
 {
@@ -133,12 +134,12 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenIntLargestThanMaximumReturnsFalse()
         {
-            Assert.IsFalse(HelperValidator.IsANumberInRange(maxNumber+1, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxNumber + 1, minNumber, maxNumber));
         }
         [TestMethod]
         public void GivenIntSmallestThanMinimumReturnsFalse()
         {
-            Assert.IsFalse(HelperValidator.IsANumberInRange(minNumber-1, minNumber, maxNumber));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minNumber - 1, minNumber, maxNumber));
         }
 
         [TestMethod]
@@ -161,12 +162,12 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenDoubleLargestThanMaximumReturnsFalse()
         {
-            Assert.IsFalse(HelperValidator.IsANumberInRange(maxDouble+1, minDouble, maxDouble));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(maxDouble + 1, minDouble, maxDouble));
         }
         [TestMethod]
         public void GivenDoubleSmallestThanMinimumReturnsFalse()
         {
-            Assert.IsFalse(HelperValidator.IsANumberInRange(minDouble-1, minDouble, maxDouble));
+            Assert.IsFalse(HelperValidator.IsANumberInRange(minDouble - 1, minDouble, maxDouble));
         }
 
     }
