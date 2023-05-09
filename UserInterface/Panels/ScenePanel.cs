@@ -29,6 +29,7 @@ namespace Render3D.UserInterface.Panels
                 var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
+                    creation.Refresh("Scene");
                 }
             }
         }

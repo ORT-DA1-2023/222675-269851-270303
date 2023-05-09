@@ -92,16 +92,11 @@ namespace UserInterface.Panels
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+     
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
             if(IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
@@ -124,7 +119,7 @@ namespace UserInterface.Panels
                 return;
             }
             sceneController.AddModel(scene,model,position);
-            CheckRenderOutDated();
+            scene.UpdateLastModificationDate();
             LoadScene();
             cBoxAvailableModels.SelectedItem = null;
         }
@@ -136,6 +131,7 @@ namespace UserInterface.Panels
                 return;
             }
             sceneController.RemoveModel(scene,model);
+            scene.UpdateLastModificationDate();
             LoadScene();
             cBoxPositionedModels.SelectedItem = null;
         }
