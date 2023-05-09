@@ -58,6 +58,7 @@
             // 
             // pBoxPreview
             // 
+            this.pBoxPreview.Image = global::UserInterface.Properties.Resources.SceneWithoutPreview;
             this.pBoxPreview.Location = new System.Drawing.Point(3, 15);
             this.pBoxPreview.Name = "pBoxPreview";
             this.pBoxPreview.Size = new System.Drawing.Size(102, 75);

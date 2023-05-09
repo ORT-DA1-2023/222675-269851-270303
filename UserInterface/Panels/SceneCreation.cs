@@ -45,8 +45,8 @@ namespace UserInterface.Panels
         {
             txtSceneName.Text = scene.Name;
             Camera cam = scene.Camera;
-            txtLookAt.Text = "(" + cam.LookAt.X + "," + cam.LookAt.Y + "," + cam.LookAt.Z + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + "," + cam.LookFrom.Y + "," + cam.LookFrom.Z  + ")";
+            txtLookAt.Text = "(" + cam.LookAt.X + ";" + cam.LookAt.Y + ";" + cam.LookAt.Z + ")";
+            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z  + ")";
             nrFov.Value = cam.Fov;
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
@@ -86,7 +86,7 @@ namespace UserInterface.Panels
 
         public bool IsValidFormat(string input)
         {
-            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*\)$");
+            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?\s*;\s*-?\d+(\.\d+)?\s*;\s*-?\d+(\.\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 

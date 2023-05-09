@@ -13,7 +13,7 @@ namespace Render3D.BackEnd.Controllers
     {
         public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController { get; set; }
-        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
+        public GraphicMotor GraphicMotor { get; } = new GraphicMotor();
 
         public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov)
         {
@@ -29,16 +29,16 @@ namespace Render3D.BackEnd.Controllers
                     scene.UpdateLastModificationDate();
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-        
+                throw ex;
             }
         }
 
         private Vector3D GetVectorFromString(string stringLookAt)
         {
             Vector3D vector = null;
-            string[] values= stringLookAt.Substring(1,stringLookAt.Length-2).Split(',');
+            string[] values= stringLookAt.Substring(1,stringLookAt.Length-2).Split(';');
             double[] valuesInDouble= new double[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
