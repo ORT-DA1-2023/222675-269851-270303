@@ -66,12 +66,13 @@ namespace Render3D.UserInterface
                 try
                 {
                     render.clientController.CheckPassword(clientPassword);
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     lblWrongPasswordMessage.Text = ex.Message;
                     return;
                 }
-                
+
             }
             lblWrongPasswordMessage.Text = "";
         }
@@ -84,15 +85,16 @@ namespace Render3D.UserInterface
                 try
                 {
                     render.clientController.CheckName(clientName);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     lblWrongUsernameMessage.Text = ex.Message;
                     return;
                 }
-   
+
             }
-                lblWrongUsernameMessage.Text = "";
-            
+            lblWrongUsernameMessage.Text = "";
+
         }
 
         private void VariableInitialize(object sender, EventArgs e)

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Render3D.BackEnd.Materials;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -64,7 +64,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public double AspectRatio()
         {
-            return((double)ResolutionHeight) / WidthResolution();
+            return ((double)ResolutionHeight) / WidthResolution();
         }
 
         public Bitmap RenderModelPreview(Model model)

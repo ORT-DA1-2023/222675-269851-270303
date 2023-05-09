@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Render3D.BackEnd.Figures;
+using System;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Render3D.BackEnd.Figures;
-using Render3D.UserInterface;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Render3D.UserInterface.Controls
 {
-    
+
     public partial class FigureControl : UserControl
     {
         private string _oldName;
@@ -23,12 +13,12 @@ namespace Render3D.UserInterface.Controls
         {
             InitializeComponent();
             this.txtFigureName.Text = figure.Name;
-            this.lblFigureRadius.Text = ""+((Sphere)figure).Radius;
+            this.lblFigureRadius.Text = "" + ((Sphere)figure).Radius;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            _oldName= txtFigureName.Text;
+            _oldName = txtFigureName.Text;
             txtFigureName.ReadOnly = false;
             txtFigureName.BackColor = Color.Green;
         }
@@ -40,8 +30,8 @@ namespace Render3D.UserInterface.Controls
                 e.Handled = true;
                 ChecksForCorrectEdit();
             }
-            
-            
+
+
         }
 
         private void ClientLeaves(object sender, EventArgs e)
@@ -72,8 +62,8 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-        ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(txtFigureName.Text);
-        ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
+            ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(txtFigureName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
         }
     }
 }

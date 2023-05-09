@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
 
@@ -22,9 +19,9 @@ namespace Render3D.UnitTest.ControllersTests
         [TestInitialize]
         public void initialize()
         {
-            _dataWarehouse= new DataWarehouse();
-             _clientController = new ClientController() { DataWarehouse=_dataWarehouse};
-            _figureController = new FigureController() { DataWarehouse=_dataWarehouse, ClientController=_clientController};
+            _dataWarehouse = new DataWarehouse();
+            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
+            _figureController = new FigureController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
             _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
             _figureSample = new Sphere() { Client = _clientSample, Name = "figureSample1", Radius = 5 };
         }
@@ -65,7 +62,7 @@ namespace Render3D.UnitTest.ControllersTests
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _figureController.AddFigure("clientSample1", "figureSample1", 5);
             _figureController.ChangeFigureName("clientSample1", "figureSample1", "figureSample2");
-            Assert.AreEqual("figureSample2",_figureController.DataWarehouse.Figures[0].Name);
+            Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[0].Name);
         }
         [TestMethod]
         public void GivenANewFigureNameItDoesNotChange()

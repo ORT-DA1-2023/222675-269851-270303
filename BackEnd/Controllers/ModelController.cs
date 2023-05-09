@@ -1,12 +1,8 @@
 ﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Render3D.BackEnd.Utilities;
+using System;
 
 
 namespace Render3D.BackEnd.Controllers
@@ -15,7 +11,7 @@ namespace Render3D.BackEnd.Controllers
     {
         private DataWarehouse _dataWarehouse;
         private ClientController _clientController;
-        private GraphicMotor _graphicMotor= new GraphicMotor();
+        private readonly GraphicMotor _graphicMotor = new GraphicMotor();
 
         public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
         public ClientController ClientController { get => _clientController; set => _clientController = value; }
@@ -29,7 +25,7 @@ namespace Render3D.BackEnd.Controllers
             }
             catch (Exception)
             {
-                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure,material);
+                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure, material);
                 return;
             }
             throw new BackEndException("model already exists");

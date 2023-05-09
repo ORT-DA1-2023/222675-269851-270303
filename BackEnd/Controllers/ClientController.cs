@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Render3D.BackEnd.Utilities;
+﻿using Render3D.BackEnd.Utilities;
+using System;
 
 namespace Render3D.BackEnd.Controllers
 {
     public class ClientController
     {
         private DataWarehouse _dataWarehouse;
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse=value;} }
+        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
 
         public void SignIn(string clientName, string clientPassword)
         {
@@ -22,10 +17,10 @@ namespace Render3D.BackEnd.Controllers
             }
             catch (Exception)
             {
-                CreateAndAddAClient(clientName, clientPassword);
-            }        
+                SignUp(clientName, clientPassword);
+            }
         }
-        private void CreateAndAddAClient(string clientName, string clientPassword)
+        private void SignUp(string clientName, string clientPassword)
         {
             Client client = new Client() { Name = clientName, Password = clientPassword };
             _dataWarehouse.Clients.Add(client);
@@ -43,12 +38,12 @@ namespace Render3D.BackEnd.Controllers
         }
         public void CheckName(string clientName)
         {
-                Client client = new Client() { Name = clientName, Password = "ThisPasswordIsS4fe" };
+            _ = new Client() { Name = clientName, Password = "ThisPasswordIsS4fe" };
         }
 
         public void CheckPassword(string clientPassword)
         {
-                Client client = new Client() { Name = "validName", Password = clientPassword };
+            _ = new Client() { Name = "validName", Password = clientPassword };
         }
 
     }

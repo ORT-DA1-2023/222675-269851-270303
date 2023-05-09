@@ -1,11 +1,6 @@
 ﻿using Render3D.BackEnd.Figures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
 using Render3D.BackEnd.Utilities;
+using System;
 
 
 namespace Render3D.BackEnd.Controllers
@@ -22,17 +17,17 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 GetFigureByNameAndClient(clientName, figureName);
-                
+
             }
             catch (Exception)
             {
-               CreateAndAddFigure(ClientController.GetClientByName(clientName), figureName, figureRadius);
+                CreateSphere(ClientController.GetClientByName(clientName), figureName, figureRadius);
                 return;
             }
-         throw new BackEndException("figure already exists");
+            throw new BackEndException("figure already exists");
 
         }
-        private void CreateAndAddFigure(Client client, string figureName, double figureRadius)
+        private void CreateSphere(Client client, string figureName, double figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
             _dataWarehouse.Figures.Add(figure);
@@ -53,9 +48,10 @@ namespace Render3D.BackEnd.Controllers
         {
             try
             {
-                Figure figure =GetFigureByNameAndClient(clientName, figureName); 
+                Figure figure = GetFigureByNameAndClient(clientName, figureName);
                 _dataWarehouse.Figures.Remove(figure);
-            }catch (Exception)
+            }
+            catch (Exception)
             {
             }
 
@@ -65,20 +61,22 @@ namespace Render3D.BackEnd.Controllers
             Figure figure;
             try
             {
-                figure=GetFigureByNameAndClient(clientName, oldName);
-            }catch(Exception)
+                figure = GetFigureByNameAndClient(clientName, oldName);
+            }
+            catch (Exception)
             {
                 return;
             }
-          
+
             try
             {
                 GetFigureByNameAndClient(clientName, newName);
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 figure.Name = newName;
             }
-            
+
         }
 
     }

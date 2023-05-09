@@ -1,43 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
 {
     public partial class MaterialPanel : Form
     {
-        private int rgbLength =3;
+        private readonly int rgbLength = 3;
         private CreationMenu creation;
         private Render3DIU render;
         public MaterialPanel()
         {
             InitializeComponent();
-            
+
         }
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            String materialName= txtMaterialName.Text;
-            int[] materialColors= new int[rgbLength];
+            String materialName = txtMaterialName.Text;
+            int[] materialColors = new int[rgbLength];
             materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
             materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
             try
             {
-               render.materialController.AddMaterial(render.clientName, materialName, materialColors);
-            }catch (Exception ex)
+                render.materialController.AddLambertianMaterial(render.clientName, materialName, materialColors);
+            }
+            catch (Exception ex)
             {
                 lblExceptionError.Text = ex.Message;
                 return;
             }
             creation.ShowMaterialList();
-            txtMaterialName.Text="";
+            txtMaterialName.Text = "";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;
             nrBlueColor.Value = 0;

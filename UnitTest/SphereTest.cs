@@ -2,9 +2,8 @@
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-
 using Render3D.BackEnd.Materials;
+using System;
 namespace Render3D.UnitTest
 {
     [TestClass]
@@ -112,8 +111,8 @@ namespace Render3D.UnitTest
         public void GivenAFigureReturnsItsToString()
         {
             sphereSample.Name = validSphereName;
-            sphereSample.Radius= validRadius;
-            Assert.AreEqual(sphereSample.ToString(),validSphereName +" "+ validRadius);
+            sphereSample.Radius = validRadius;
+            Assert.AreEqual(sphereSample.ToString(), validSphereName + " " + validRadius);
         }
         [TestMethod]
         public void GivenRayWhichHitsASphereReturnsThereWasHit()

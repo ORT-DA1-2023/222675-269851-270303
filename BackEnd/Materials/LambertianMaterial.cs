@@ -26,7 +26,7 @@ namespace Render3D.BackEnd.Materials
             return vector;
         }
 
-        
+
 
         public override String ToString()
         {

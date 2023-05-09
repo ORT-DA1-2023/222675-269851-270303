@@ -1,20 +1,13 @@
 ﻿using Render3D.BackEnd.Materials;
-using Render3D.UserInterface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {
-        private Material _material;
+        private readonly Material _material;
         private string _oldName;
         public MaterialControl(Material material)
         {
@@ -25,7 +18,7 @@ namespace Render3D.UserInterface.Controls
             lblGreenColor.Text = "Green: " + _material.Attenuation.Green(); ;
             lblBlueColor.Text = "Blue: " + _material.Attenuation.Blue();
             pBoxMaterial.BackColor = Color.FromArgb(_material.Attenuation.Red(), _material.Attenuation.Red(), _material.Attenuation.Red());
-              
+
         }
 
         private void btnEditMaterialName_Click(object sender, EventArgs e)
@@ -36,7 +29,7 @@ namespace Render3D.UserInterface.Controls
         }
 
 
-        
+
         private void ClientLeaves(object sender, EventArgs e)
         {
             checksForCorrectEdit();
@@ -72,8 +65,8 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-         ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(txtMaterialName.Text);
-         ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+            ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(txtMaterialName.Text);
+            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
 
         }
 

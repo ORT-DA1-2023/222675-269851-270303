@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Render3D.BackEnd;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Render3D.BackEnd;
-using Render3D.UserInterface;
 
 namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        string oldName;
+        private string oldName;
         public ModelControl(Model model)
         {
             InitializeComponent();
             txtModelName.Text = model.Name;
-            lblModelFigure.Text= model.Figure.Name;
-            lblModelMaterial.Text= model.Material.Name;
+            lblModelFigure.Text = model.Figure.Name;
+            lblModelMaterial.Text = model.Material.Name;
             if (model.Preview != null)
             {
                 pBoxPreview.Image = model.Preview;

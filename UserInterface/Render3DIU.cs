@@ -1,22 +1,12 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Controllers;
-using Render3D.UserInterface.Panels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd.Utilities;
+using System.Windows.Forms;
 
 namespace Render3D.UserInterface
 {
     public partial class Render3DIU : Form
     {
-        public string clientName= "";
+        public string clientName = "";
         public DataWarehouse dataWarehouse = new DataWarehouse();
         public ClientController clientController = new ClientController();
         public FigureController figureController = new FigureController();

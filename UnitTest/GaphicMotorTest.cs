@@ -3,7 +3,6 @@ using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using System;
 using System.Drawing;
 
 namespace Render3D.UnitTest
@@ -50,7 +49,7 @@ namespace Render3D.UnitTest
                 Figure = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 3 },
                 Material = new LambertianMaterial() { Attenuation = new Colour(1, 1, 1) },
             };
-           
+
             GraphicMotor graphicMotor = new GraphicMotor();
             Bitmap bitmap = graphicMotor.RenderModelPreview(model);
             Assert.IsNotNull(bitmap);
@@ -141,9 +140,9 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenGraphicMotorReturnsAspectRatio()
         {
-            GraphicMotor motor = new GraphicMotor() { ResolutionHeight=300};
-            double ratio=  motor.AspectRatio();
-            Assert.AreEqual(1.5,ratio);
+            GraphicMotor motor = new GraphicMotor() { ResolutionHeight = 300 };
+            double ratio = motor.AspectRatio();
+            Assert.AreEqual(1.5, ratio);
         }
     }
 }

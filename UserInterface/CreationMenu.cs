@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Render3D.BackEnd;
+﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Render3D.UserInterface
 {
@@ -42,9 +35,9 @@ namespace Render3D.UserInterface
             foreach (Material material in materialList)
             {
 
-                    MaterialControl materialControl = new MaterialControl(material); //se cae aca
-                    flObjectList.Controls.Add(materialControl);
- 
+                MaterialControl materialControl = new MaterialControl(material); //se cae aca
+                flObjectList.Controls.Add(materialControl);
+
             }
         }
         public void ShowModelList()
@@ -78,11 +71,11 @@ namespace Render3D.UserInterface
             Refresh("Model");
         }
 
-        
+
 
         private void ShowObjectCreationPanel(object formSon)
         {
-            if(this.pnlObjectCreation.Controls.Count >0)
+            if (this.pnlObjectCreation.Controls.Count > 0)
             {
                 this.pnlObjectCreation.Controls.RemoveAt(0);
             }
@@ -103,7 +96,7 @@ namespace Render3D.UserInterface
         }
         public void Refresh(String toShow)
         {
-            if(toShow=="Material")
+            if (toShow == "Material")
             {
                 ShowObjectCreationPanel(new MaterialPanel());
                 ShowMaterialList();
@@ -113,7 +106,7 @@ namespace Render3D.UserInterface
                 ShowObjectCreationPanel(new FigurePanel());
                 ShowFigureList();
             }
-            if(toShow == "Model")
+            if (toShow == "Model")
             {
                 ShowObjectCreationPanel(new ModelPanel());
                 ShowModelList();
@@ -124,24 +117,24 @@ namespace Render3D.UserInterface
             }
 
         }
-        public bool FigureNameHasBeenChanged(String oldName,string newName)
+        public bool FigureNameHasBeenChanged(String oldName, string newName)
         {
-           render.figureController.ChangeFigureName(render.clientName,oldName, newName);
+            render.figureController.ChangeFigureName(render.clientName, oldName, newName);
             if (render.figureController.GetFigureByNameAndClient(render.clientName, newName).Name != null)
             {
                 return true;
             }
-            return false;   
+            return false;
         }
 
         public void DeleteFigure(string figureName)
         {
-          render.figureController.DeleteFigureInList(render.clientName,figureName);
+            render.figureController.DeleteFigureInList(render.clientName, figureName);
         }
 
         internal bool MaterialNameHasBeenChanged(string oldName, string newName)
         {
-             render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
+            render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
             if (render.materialController.GetMaterialByNameAndClient(render.clientName, newName) != null)
             {
                 return true;
@@ -151,12 +144,12 @@ namespace Render3D.UserInterface
 
         internal void DeleteMaterial(string materialName)
         {
-          render.materialController.DeleteMaterialInList(render.clientName, materialName);
+            render.materialController.DeleteMaterialInList(render.clientName, materialName);
         }
 
         internal bool ModelNameHasBeenChanged(string oldName, string newName)
         {
-             render.modelController.ChangeModelName(render.clientName,oldName,newName);
+            render.modelController.ChangeModelName(render.clientName, oldName, newName);
             if (render.modelController.GetModelByNameAndClient(render.clientName, newName) != null)
             {
                 return true;
@@ -166,7 +159,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteModel(string modelName)
         {
-         render.modelController.DeleteModelInList(render.clientName, modelName);
+            render.modelController.DeleteModelInList(render.clientName, modelName);
         }
 
         private void BtnScene_Click(object sender, EventArgs e)

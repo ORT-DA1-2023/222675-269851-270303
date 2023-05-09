@@ -1,12 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd.Controllers;
-using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Materials;
 using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 
 
@@ -24,7 +20,7 @@ namespace Render3D.UnitTest.ControllersTests
         private Figure _figure;
         private ModelController _modelController;
         private Model _modelSample;
-        private Colour _colour = new Colour(0, 0, 0);
+        private readonly Colour _colour = new Colour(0, 0, 0);
 
         [TestInitialize]
         public void Initialize()
@@ -42,7 +38,7 @@ namespace Render3D.UnitTest.ControllersTests
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure,_materialSample);
+            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
         [TestMethod]

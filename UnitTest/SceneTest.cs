@@ -1,14 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd.Utilities;
 using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 using System.Collections.Generic;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Controllers;
 using System.Drawing;
-using System.Reflection;
 
 namespace Render3D.UnitTest
 {
@@ -31,7 +29,7 @@ namespace Render3D.UnitTest
             Vector3D origin = new Vector3D(0, 0, 0);
             Vector3D direction = new Vector3D(1, 1, 1);
             raySample = new Ray(origin, direction);
-             materialSample = new LambertianMaterial()
+            materialSample = new LambertianMaterial()
             {
                 Attenuation = new Colour(1, 0, 0),
                 Ray = raySample,
@@ -41,7 +39,7 @@ namespace Render3D.UnitTest
                 Position = new Vector3D(5, 5, 5),
                 Radius = 2,
             };
-             modelSample = new Model()
+            modelSample = new Model()
             {
                 Figure = figure,
                 Material = materialSample,
@@ -204,11 +202,11 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-       public void GivenBitmapAssignsItToScene()
+        public void GivenBitmapAssignsItToScene()
         {
             Scene scene = new Scene();
             Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-            scene.Preview=bitmap;
+            scene.Preview = bitmap;
             Assert.AreEqual(bitmap, scene.Preview);
         }
         [TestMethod]
@@ -219,7 +217,7 @@ namespace Render3D.UnitTest
             Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             scene.Preview = bitmap;
             Assert.AreEqual(bitmap, scene.Preview);
-           
+
         }
 
         [TestMethod]

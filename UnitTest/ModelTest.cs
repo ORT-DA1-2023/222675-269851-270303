@@ -35,7 +35,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenNullBitmapDoesNotAssignToModel()
         {
-            Bitmap oldPreview= new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            Bitmap oldPreview = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             modelSample1.Preview = oldPreview;
             Bitmap newPreview = null;
             modelSample1.Preview = newPreview;
@@ -92,7 +92,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenModelReturnsItsMaterial()
         {
-            Material materialSample  = new LambertianMaterial { Client = clientSample1, Name = "materialName" };
+            Material materialSample = new LambertianMaterial { Client = clientSample1, Name = "materialName" };
             Model modelSample = new Model()
             {
                 Client = clientSample1,

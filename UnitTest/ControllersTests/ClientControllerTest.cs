@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd.Utilities;
 
@@ -20,9 +15,9 @@ namespace Render3D.UnitTest.ControllersTests
 
         [TestInitialize]
         public void initialize()
-        {    
+        {
             _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse=_dataWarehouse};
+            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
             _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
         }
 
@@ -53,7 +48,7 @@ namespace Render3D.UnitTest.ControllersTests
         public void GivenAClientReturnsFalseIfIsInNotTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_clientController.GetClientByName("clientSample2").Name==null);
+            Assert.IsTrue(_clientController.GetClientByName("clientSample2").Name == null);
         }
         [TestMethod]
         public void givenANameChecksIfIsValid()

@@ -1,17 +1,9 @@
-﻿using Render3D.BackEnd;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
 {
-    
+
     public partial class FigurePanel : Form
     {
         private CreationMenu creation;
@@ -24,18 +16,19 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            string figureName= txtFigureName.Text;
+            string figureName = txtFigureName.Text;
             string figureRadiusString = txtFigureRadius.Text;
             double figureRadius;
-            if (TryToParse(figureRadiusString)!=-1)
+            if (TryToParse(figureRadiusString) != -1)
             {
                 figureRadius = Convert.ToDouble(figureRadiusString);
                 try
                 {
                     render.figureController.AddFigure(render.clientName, figureName, figureRadius);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    lblExceptionError.Text= ex.Message;
+                    lblExceptionError.Text = ex.Message;
                 }
                 creation.ShowFigureList();
             }
@@ -51,11 +44,12 @@ namespace Render3D.UserInterface.Panels
         {
             try
             {
-               decimal radius= Decimal.Parse(figureRadiusString);
-                return radius; 
-            }catch 
-            { 
-                return -1; 
+                decimal radius = Decimal.Parse(figureRadiusString);
+                return radius;
+            }
+            catch
+            {
+                return -1;
             }
         }
 
