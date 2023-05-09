@@ -222,5 +222,10 @@ namespace Render3D.UserInterface
         {
             Refresh("Scene");
         }
+
+        internal void DeleteScene(string sceneName)
+        {
+           render.sceneController.DeleteSceneInList(render.clientName, sceneName);
+        }
     }
 }
