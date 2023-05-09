@@ -86,7 +86,7 @@ namespace UserInterface.Panels
 
         public bool IsValidFormat(string input)
         {
-            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?(?:\s*,\s*-?\d+(\.\d+)?){2}\s*\)$|^\(\s*-?\d+(\.\d+)?(?:\s*,\s*-?\d+(\.\d+)?){2}\s*\)$");
+            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 
@@ -108,7 +108,16 @@ namespace UserInterface.Panels
 
         private void BtnChangeName_Click(object sender, EventArgs e)
         {
-            sceneController.ChangeSceneName(scene.Client.Name,scene.Name, txtSceneName.Text);
+            
+            if(txtSceneName.Text == "")
+            {
+                lblCameraError.Text = "You can not put empty Vectors";
+            }
+            else
+            {
+                sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
+                lblCameraError.Text = "";
+            }
         }
 
         private void BtnAddModel_Click(object sender, EventArgs e)
@@ -142,9 +151,6 @@ namespace UserInterface.Panels
             LoadScene();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
     }
 }

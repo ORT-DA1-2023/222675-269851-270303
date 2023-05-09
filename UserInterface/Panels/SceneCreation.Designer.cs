@@ -88,7 +88,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1348, 657);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnChangeName
             // 
@@ -106,7 +105,7 @@
             this.lblCameraError.AutoSize = true;
             this.lblCameraError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCameraError.ForeColor = System.Drawing.Color.Red;
-            this.lblCameraError.Location = new System.Drawing.Point(623, 103);
+            this.lblCameraError.Location = new System.Drawing.Point(627, 103);
             this.lblCameraError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCameraError.Name = "lblCameraError";
             this.lblCameraError.Size = new System.Drawing.Size(45, 20);

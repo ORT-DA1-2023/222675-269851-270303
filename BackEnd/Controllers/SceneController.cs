@@ -2,6 +2,7 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace Render3D.BackEnd.Controllers
             double[] valuesInDouble= new double[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
-                valuesInDouble[i]= Double.Parse(values[i]);
+                valuesInDouble[i]= double.Parse(values[i]);
             }
             vector= new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
             return vector;
