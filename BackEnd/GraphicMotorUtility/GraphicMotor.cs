@@ -174,7 +174,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
-            Console.WriteLine(ppmString.ToString());
             return ppmString.ToString();
         }
 

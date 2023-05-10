@@ -20,12 +20,12 @@ namespace UserInterface.Panels
     {
         public Scene scene;
         public SceneController sceneController;
-        string client;
+        private string _client;
         public SceneCreation(SceneController newSceneController, string clientName, Scene selectedScene)
         {
             InitializeComponent();
             sceneController = newSceneController;
-            client= clientName;
+            _client= clientName;
             scene =selectedScene;
             if(scene==null )
             {
@@ -37,8 +37,8 @@ namespace UserInterface.Panels
         private void GenerateDefaultScene()
         {
             string name = sceneController.GetNextValidName();
-            sceneController.AddScene(client, name);
-            scene = sceneController.GetSceneByNameAndClient(client, name);
+            sceneController.AddScene(_client, name);
+            scene = sceneController.GetSceneByNameAndClient(_client, name);
         }
 
         private void LoadScene()
@@ -59,8 +59,11 @@ namespace UserInterface.Panels
                 cBoxPositionedModels.Items.Add(model);
             }
             pBoxRender.Image = scene.Preview;
-            lblCameraError.Text = "";
-            lblNameError.Text = "";
+            lblCamera.Text = "";
+            lblName.Text = "";
+            lblAddModel.Text = "";
+            lblRemoveModel.Text = "";
+            lblLoading.Text = "";
             LastModifcationDateRefresh();
             if (scene.LastRenderizationDate != null)
             {
@@ -116,9 +119,12 @@ namespace UserInterface.Panels
                 {
                     sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value);
                     LoadScene();
+                    lblCamera.ForeColor = Color.Green;
+                    lblCamera.Text = "Camera settings change correctly";
                 }catch (Exception ex)
                 {
-                    lblCameraError.Text = ex.Message;
+                    lblCamera.ForeColor = Color.Red;
+                    lblCamera.Text = ex.Message;
                 }
                
             }
@@ -129,11 +135,14 @@ namespace UserInterface.Panels
             try
             {
                 sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
-                lblCameraError.Text = "";
+                LoadScene();
+                lblName.ForeColor = Color.Green;
+                lblName.Text = "Name change correctly";
             }
             catch(Exception ex)
             {
-                lblNameError.Text = ex.Message;
+                lblName.ForeColor = Color.Red;
+                lblName.Text = ex.Message;
             }
         }
 
@@ -147,6 +156,8 @@ namespace UserInterface.Panels
             sceneController.AddModel(scene,model,position);
             scene.UpdateLastModificationDate();
             LoadScene();
+            lblAddModel.ForeColor = Color.Green;
+            lblAddModel.Text = "Added correctly";
             cBoxAvailableModels.SelectedItem = null;
         }
 
@@ -159,12 +170,16 @@ namespace UserInterface.Panels
             sceneController.RemoveModel(scene,model);
             scene.UpdateLastModificationDate();
             LoadScene();
+            lblRemoveModel.ForeColor = Color.Green;
+            lblRemoveModel.Text = "Remove correctly";
             cBoxPositionedModels.SelectedItem = null;
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            lblLoading.Text = "LOADING.....";
             sceneController.RenderScene(scene);
+            lblLoading.Text = "LOADING.....";
             LoadScene();
         }
 

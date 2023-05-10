@@ -2,9 +2,6 @@
 {
     partial class FigureControl
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
