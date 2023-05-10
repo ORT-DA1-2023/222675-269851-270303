@@ -117,7 +117,7 @@ namespace Render3D.BackEnd.Controllers
             }
             if (modelsWithMaterial.Count == 0)
             {
-                throw new BackEndException("No models with this material");
+                throw new BackEndException("No model found");
             }
             return modelsWithMaterial;
         }

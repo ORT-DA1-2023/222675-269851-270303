@@ -166,5 +166,25 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(scene.PositionedModels.Count == 0);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "no scene Found")]
+        public void GivenModelWithoutFigureThrowsException()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _sceneController.AddScene("clientSample1", "SceneSample1");
+            Scene scene = _sceneController.GetSceneByNameAndClient("clientSample1", "SceneSample1");
+            _sceneController.AddModel(scene, _model, "(1;1;1)");
+            _sceneController.GetSceneWithModel("test");
+        }
+        [TestMethod]
+        public void GivenSceneWithModelsReturnsList()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _sceneController.AddScene("clientSample1", "SceneSample1");
+            Scene scene = _sceneController.GetSceneByNameAndClient("clientSample1", "SceneSample1");
+            _sceneController.AddModel(scene, _model, "(1;1;1)");
+            Assert.IsTrue(_sceneController.GetSceneWithModel("testModel").Count > 0);
+        }
+
     }
 }

@@ -227,10 +227,12 @@ namespace Render3D.UserInterface
             {
                 List<Model> models = render.modelController.GetModelsWithFigure(figureName);
                 return true;
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
+        }
            
         internal bool MaterialIsPartOfModel(string materialName)
         {
@@ -245,6 +247,20 @@ namespace Render3D.UserInterface
                 return false;
             }
             
+        }
+
+        internal bool ModelIsPartOfScene(string modelName)
+        {
+            try
+            {
+                List<Scene> scene = render.sceneController.GetSceneWithModel(modelName);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
     }
 }

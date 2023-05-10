@@ -32,8 +32,12 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblSceneName.Text))
+            {
             ((CreationMenu)this.Parent.Parent.Parent).DeleteScene(lblSceneName.Text);
             ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
+            }
+
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)

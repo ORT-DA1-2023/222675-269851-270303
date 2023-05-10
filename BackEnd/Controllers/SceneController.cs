@@ -2,6 +2,7 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
 using System;
+using System.Collections.Generic;
 
 namespace Render3D.BackEnd.Controllers
 {
@@ -160,5 +161,25 @@ namespace Render3D.BackEnd.Controllers
             scene.UpdateLastRenderizationDate();
         }
 
+        public List<Scene> GetSceneWithModel(string modelName)
+        {
+            List<Scene> sceneWithModel = new List<Scene>();
+            foreach (Scene scene in DataWarehouse.Scenes)
+            {
+                foreach(Model model in scene.PositionedModels)
+                {
+                    if (model.Name.Equals(modelName))
+                    {
+                        sceneWithModel.Add(scene);
+                    }
+                }
+               
+            }
+            if (sceneWithModel.Count == 0)
+            {
+                throw new BackEndException("No scene found");
+            }
+            return sceneWithModel;
+        }
     }
 }
