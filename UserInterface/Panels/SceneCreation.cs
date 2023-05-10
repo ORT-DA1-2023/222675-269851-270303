@@ -66,7 +66,6 @@ namespace UserInterface.Panels
             lblName.Text = "";
             lblAddModel.Text = "";
             lblRemoveModel.Text = "";
-            lblLoading.Text = "";
             LastModifcationDateRefresh();
             if (scene.LastRenderizationDate != null)
             {
@@ -103,7 +102,7 @@ namespace UserInterface.Panels
 
         public bool IsValidFormat(string input)
         {
-            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\.\d+)?\s*;\s*-?\d+(\.\d+)?\s*;\s*-?\d+(\.\d+)?\s*\)$");
+            Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 
@@ -129,7 +128,12 @@ namespace UserInterface.Panels
                     lblCamera.ForeColor = Color.Red;
                     lblCamera.Text = ex.Message;
                 }
-               
+
+            }
+            else
+            {
+                lblCamera.ForeColor = Color.Red;
+                lblCamera.Text = "format not valid";
             }
         }
 
@@ -180,12 +184,9 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
-            lblLoading.Text = "LOADING.....";
             sceneController.RenderScene(scene);
-            lblLoading.Text = "LOADING.....";
             LoadScene();
         }
-
        
     }
 }

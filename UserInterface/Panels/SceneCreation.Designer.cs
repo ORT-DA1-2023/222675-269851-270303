@@ -48,18 +48,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblAddModel = new System.Windows.Forms.Label();
             this.btnAddModel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPosition = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblRemoveModel = new System.Windows.Forms.Label();
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
-            this.lblAddModel = new System.Windows.Forms.Label();
-            this.lblRemoveModel = new System.Windows.Forms.Label();
-            this.lblLoading = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -69,7 +68,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lblLoading);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Controls.Add(this.btnChangeName);
             this.panel1.Controls.Add(this.lblCamera);
@@ -316,6 +314,15 @@
             this.panel2.Size = new System.Drawing.Size(253, 657);
             this.panel2.TabIndex = 0;
             // 
+            // lblAddModel
+            // 
+            this.lblAddModel.AutoSize = true;
+            this.lblAddModel.Location = new System.Drawing.Point(89, 559);
+            this.lblAddModel.Name = "lblAddModel";
+            this.lblAddModel.Size = new System.Drawing.Size(58, 16);
+            this.lblAddModel.TabIndex = 8;
+            this.lblAddModel.Text = "correctly";
+            // 
             // btnAddModel
             // 
             this.btnAddModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -386,6 +393,15 @@
             this.panel3.Size = new System.Drawing.Size(253, 657);
             this.panel3.TabIndex = 1;
             // 
+            // lblRemoveModel
+            // 
+            this.lblRemoveModel.AutoSize = true;
+            this.lblRemoveModel.Location = new System.Drawing.Point(127, 559);
+            this.lblRemoveModel.Name = "lblRemoveModel";
+            this.lblRemoveModel.Size = new System.Drawing.Size(58, 16);
+            this.lblRemoveModel.TabIndex = 9;
+            this.lblRemoveModel.Text = "correctly";
+            // 
             // btnRemoveModel
             // 
             this.btnRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -419,33 +435,6 @@
             this.cBoxPositionedModels.Name = "cBoxPositionedModels";
             this.cBoxPositionedModels.Size = new System.Drawing.Size(252, 37);
             this.cBoxPositionedModels.TabIndex = 1;
-            // 
-            // lblAddModel
-            // 
-            this.lblAddModel.AutoSize = true;
-            this.lblAddModel.Location = new System.Drawing.Point(89, 559);
-            this.lblAddModel.Name = "lblAddModel";
-            this.lblAddModel.Size = new System.Drawing.Size(58, 16);
-            this.lblAddModel.TabIndex = 8;
-            this.lblAddModel.Text = "correctly";
-            // 
-            // lblRemoveModel
-            // 
-            this.lblRemoveModel.AutoSize = true;
-            this.lblRemoveModel.Location = new System.Drawing.Point(127, 559);
-            this.lblRemoveModel.Name = "lblRemoveModel";
-            this.lblRemoveModel.Size = new System.Drawing.Size(58, 16);
-            this.lblRemoveModel.TabIndex = 9;
-            this.lblRemoveModel.Text = "correctly";
-            // 
-            // lblLoading
-            // 
-            this.lblLoading.AutoSize = true;
-            this.lblLoading.Location = new System.Drawing.Point(581, 156);
-            this.lblLoading.Name = "lblLoading";
-            this.lblLoading.Size = new System.Drawing.Size(56, 16);
-            this.lblLoading.TabIndex = 27;
-            this.lblLoading.Text = "Loading";
             // 
             // SceneCreation
             // 
@@ -502,7 +491,6 @@
         private System.Windows.Forms.Label lblCamera;
         private System.Windows.Forms.Button btnChangeName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblLoading;
         private System.Windows.Forms.Label lblAddModel;
         private System.Windows.Forms.Label lblRemoveModel;
     }
