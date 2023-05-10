@@ -363,6 +363,7 @@
             // 
             // cBoxAvailableModels
             // 
+            this.cBoxAvailableModels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAvailableModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxAvailableModels.FormattingEnabled = true;
             this.cBoxAvailableModels.Location = new System.Drawing.Point(-1, 239);
@@ -410,6 +411,7 @@
             // 
             // cBoxPositionedModels
             // 
+            this.cBoxPositionedModels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxPositionedModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxPositionedModels.FormattingEnabled = true;
             this.cBoxPositionedModels.Location = new System.Drawing.Point(-1, 239);
