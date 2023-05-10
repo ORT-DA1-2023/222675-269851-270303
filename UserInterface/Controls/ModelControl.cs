@@ -50,8 +50,16 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
-            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
+            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblModelName.Text))
+            {
+
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
+            }
+            else{
+                lblErrorDeleteModel.Text = "A scene is using this model";
+            }
+
         }
     }
 }

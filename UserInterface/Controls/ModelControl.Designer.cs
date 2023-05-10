@@ -66,7 +66,7 @@
             // 
             this.lblModelFigure.AutoSize = true;
             this.lblModelFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelFigure.Location = new System.Drawing.Point(159, 64);
+            this.lblModelFigure.Location = new System.Drawing.Point(147, 65);
             this.lblModelFigure.Name = "lblModelFigure";
             this.lblModelFigure.Size = new System.Drawing.Size(83, 29);
             this.lblModelFigure.TabIndex = 9;
@@ -76,7 +76,7 @@
             // 
             this.lblModelMaterial.AutoSize = true;
             this.lblModelMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelMaterial.Location = new System.Drawing.Point(159, 94);
+            this.lblModelMaterial.Location = new System.Drawing.Point(147, 94);
             this.lblModelMaterial.Name = "lblModelMaterial";
             this.lblModelMaterial.Size = new System.Drawing.Size(99, 29);
             this.lblModelMaterial.TabIndex = 10;
@@ -85,10 +85,10 @@
             // pBoxPreview
             // 
             this.pBoxPreview.Image = global::UserInterface.Properties.Resources.Sphere;
-            this.pBoxPreview.Location = new System.Drawing.Point(0, 41);
-            this.pBoxPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pBoxPreview.Location = new System.Drawing.Point(20, 27);
+            this.pBoxPreview.Margin = new System.Windows.Forms.Padding(4);
             this.pBoxPreview.Name = "pBoxPreview";
-            this.pBoxPreview.Size = new System.Drawing.Size(133, 82);
+            this.pBoxPreview.Size = new System.Drawing.Size(104, 96);
             this.pBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBoxPreview.TabIndex = 11;
             this.pBoxPreview.TabStop = false;
@@ -97,7 +97,7 @@
             // 
             this.lblModelName.AutoSize = true;
             this.lblModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelName.Location = new System.Drawing.Point(159, 27);
+            this.lblModelName.Location = new System.Drawing.Point(147, 27);
             this.lblModelName.Name = "lblModelName";
             this.lblModelName.Size = new System.Drawing.Size(78, 29);
             this.lblModelName.TabIndex = 12;
