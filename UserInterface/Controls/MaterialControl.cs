@@ -43,7 +43,7 @@ namespace Render3D.UserInterface.Controls
             }
             else
             {
-                lblErrorDeleteMaterial.Text = "A model is using this material, can't be deleted";
+                lblErrorDeleteMaterial.Text = "A model is using this material";
             }
 
         }

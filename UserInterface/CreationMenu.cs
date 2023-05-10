@@ -227,11 +227,12 @@ namespace Render3D.UserInterface
             {
                 List<Model> models = render.modelController.GetModelsWithFigure(figureName);
                 return true;
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
-           
+        }  
         internal bool MaterialIsPartOfModel(string materialName)
         {
             try

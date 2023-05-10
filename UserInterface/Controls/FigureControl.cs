@@ -15,6 +15,7 @@ namespace Render3D.UserInterface.Controls
             this.lblFigureName.Text = figure.Name;
             _oldName=figure.Name;
             this.lblFigureRadius.Text = ""+((Sphere)figure).Radius;
+            lblErrorDeleteFigure.Text ="";
         }
 
         private void ChecksForCorrectEdit(string newName)
@@ -37,6 +38,10 @@ namespace Render3D.UserInterface.Controls
             {
                 ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(lblFigureName.Text);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
+            }
+            else
+            {
+                lblErrorDeleteFigure.Text= "A model is using this figure";
             }
         
         }
