@@ -134,7 +134,6 @@ namespace Render3D.BackEnd.Controllers
             }catch(Exception)
             {
                 scene.Name = newName;
-                scene.UpdateLastModificationDate();
             }
 
            

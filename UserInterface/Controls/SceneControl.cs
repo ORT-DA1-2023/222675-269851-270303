@@ -53,18 +53,5 @@ namespace Render3D.UserInterface.Controls
                 }
             }
         }
-        private void ChecksForCorrectEdit(string newName)
-        {
-
-            if (!_oldName.Equals(newName))
-            {
-
-                if (((CreationMenu)this.Parent.Parent.Parent).FigureNameHasBeenChanged(_oldName, newName))
-                {
-                    lblSceneName.Text = newName;
-                    _oldName = newName;
-                }
-            }
-        }
     }
 }
