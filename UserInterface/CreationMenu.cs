@@ -220,5 +220,20 @@ namespace Render3D.UserInterface
         {
            render.sceneController.DeleteSceneInList(render.clientName, sceneName);
         }
+
+        internal bool MaterialIsPartOfModel(string materialName)
+        {
+            try
+            {
+                List<Model> models = render.modelController.GetModelWithMaterial(materialName);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            
+        }
     }
 }

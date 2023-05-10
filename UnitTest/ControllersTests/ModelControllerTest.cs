@@ -105,6 +105,8 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
             Assert.IsTrue(_dataWarehouse.Models[0].Preview != null);
         }
+
+      
     }
 }
 

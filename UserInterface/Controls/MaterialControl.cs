@@ -35,8 +35,12 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-         ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
-         ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+            if (!((CreationMenu)this.Parent.Parent.Parent).MaterialIsPartOfModel(lblMaterialName.Text))
+            {
+
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+            }
 
         }
 

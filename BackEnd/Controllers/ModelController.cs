@@ -3,7 +3,7 @@ using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 using System;
-
+using System.Collections.Generic;
 
 namespace Render3D.BackEnd.Controllers
 {
@@ -86,6 +86,23 @@ namespace Render3D.BackEnd.Controllers
             {
             }
 
+        }
+
+        public List<Model> GetModelWithMaterial(string materialName)
+        {
+            List<Model> modelsWithMaterial = new List<Model>();
+           foreach(Model model in DataWarehouse.Models)
+            {
+                if(model.Material.Name.Equals(materialName))
+                {
+                    modelsWithMaterial.Add(model);
+                }
+            }
+            if (modelsWithMaterial.Count < 0)
+            {
+                throw new BackEndException("No models with this material");
+            }
+            return modelsWithMaterial;
         }
     }
 
