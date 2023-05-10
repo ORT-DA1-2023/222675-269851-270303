@@ -220,5 +220,18 @@ namespace Render3D.UserInterface
         {
            render.sceneController.DeleteSceneInList(render.clientName, sceneName);
         }
+
+        internal bool FigureIsPartOfModel(string figureName)
+        {
+            try
+            {
+                List<Model> models = render.modelController.GetModelsWithFigure(figureName);
+                return true;
+            }catch(Exception)
+            {
+                return false;
+            }
+           
+        }
     }
 }

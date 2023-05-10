@@ -70,7 +70,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap RenderModelPreview(Model model)
         {
-            ResolutionWidth = 300;
+            ResolutionWidth = 100;
             PixelSampling = 30;
             MaximumDepth = 10;
 

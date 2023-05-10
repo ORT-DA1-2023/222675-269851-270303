@@ -33,7 +33,7 @@ namespace Render3D.UnitTest.ControllersTests
             _modelSample = new Model() { Client = _clientSample, Name = "modelSample1", Figure = _figure, Material = _materialSample };
         }
         [TestMethod]
-        public void GivenANewModelAddsItToTheList()
+        public void GivenNewModelAddsItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
@@ -42,7 +42,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenANewWrongModelFailsAddingItToTheList()
+        public void GivenNewWrongModelFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
@@ -51,7 +51,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "modelSample already exists")]
-        public void GivenARepeatedModelFailsAddingItToTheList()
+        public void GivenRepeatedModelFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
@@ -60,7 +60,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
         [TestMethod]
-        public void givenANewModelNameItChanges()
+        public void givenNewModelNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -69,7 +69,7 @@ namespace Render3D.UnitTest.ControllersTests
 
         }
         [TestMethod]
-        public void givenANewModelNameItDoesNotChange()
+        public void givenNewModelNameItDoesNotChange()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -79,7 +79,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models[1].Name == "modelSample2");
         }
         [TestMethod]
-        public void GivenANameDeletesTheModel()
+        public void GivenNameDeletesTheModel()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -88,7 +88,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
         }
         [TestMethod]
-        public void GivenANameDoesNotDeleteTheModel()
+        public void GivenNameDoesNotDeleteTheModel()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -98,12 +98,27 @@ namespace Render3D.UnitTest.ControllersTests
         }
 
         [TestMethod]
-        public void GivenAModelItAssignsItsPreview()
+        public void GivenModelItAssignsItsPreview()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
             Assert.IsTrue(_dataWarehouse.Models[0].Preview != null);
+        }
+        [TestMethod]
+        public void GivenSceneWithModelReturnsList()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
+            Assert.IsTrue(_modelController.GetModelsWithFigure("figureSample1").Count > 0);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "no Models Found")]
+        public void GivenSceneWithoutModelThrowsException()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
+            _modelController.GetModelsWithFigure("figureSample2");
         }
     }
 }
