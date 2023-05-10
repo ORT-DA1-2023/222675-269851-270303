@@ -63,6 +63,7 @@ namespace Render3D.UserInterface
         {
             flObjectList.Controls.Clear();
             List<Scene> scenes =render.dataWarehouse.Scenes;
+            scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
             foreach(Scene scene in scenes)
             {
                 if (scene.Client.Name.Equals(render.clientName))

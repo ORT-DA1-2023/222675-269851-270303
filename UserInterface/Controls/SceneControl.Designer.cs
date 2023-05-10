@@ -39,11 +39,11 @@
             // lblSceneName
             // 
             this.lblSceneName.AutoSize = true;
-            this.lblSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSceneName.Location = new System.Drawing.Point(148, 18);
             this.lblSceneName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSceneName.Name = "lblSceneName";
-            this.lblSceneName.Size = new System.Drawing.Size(73, 29);
+            this.lblSceneName.Size = new System.Drawing.Size(61, 25);
             this.lblSceneName.TabIndex = 0;
             this.lblSceneName.Text = "name";
             // 
@@ -62,7 +62,7 @@
             // 
             this.pBoxPreview.Image = global::UserInterface.Properties.Resources.SceneWithoutPreview;
             this.pBoxPreview.Location = new System.Drawing.Point(4, 18);
-            this.pBoxPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pBoxPreview.Margin = new System.Windows.Forms.Padding(4);
             this.pBoxPreview.Name = "pBoxPreview";
             this.pBoxPreview.Size = new System.Drawing.Size(136, 92);
             this.pBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -73,7 +73,7 @@
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(312, 21);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(76, 37);
             this.btnEdit.TabIndex = 7;
@@ -85,7 +85,7 @@
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(312, 66);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(76, 37);
             this.btnDelete.TabIndex = 8;
@@ -102,7 +102,7 @@
             this.Controls.Add(this.pBoxPreview);
             this.Controls.Add(this.lblSceneModificationDate);
             this.Controls.Add(this.lblSceneName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SceneControl";
             this.Size = new System.Drawing.Size(388, 129);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxPreview)).EndInit();
