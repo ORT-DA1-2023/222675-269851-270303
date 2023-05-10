@@ -107,7 +107,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
 		
         [TestMethod]
-        public void GivenModelWithModelReturnsList()
+        public void GivenModelWithFigureReturnsList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -115,11 +115,26 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "no Models Found")]
-        public void GivenModelWithoutModelThrowsException()
+        public void GivenModelWithoutFigureThrowsException()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
             _modelController.GetModelsWithFigure("figureSample2");
+        }
+        [TestMethod]
+        public void GivenModelWithMaterialReturnsList()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
+            Assert.IsTrue(_modelController.GetModelWithMaterial("materialSample1").Count > 0);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "no Models Found")]
+        public void GivenModelWithoutModelThrowsException()
+        {
+            _clientController.SignIn("clientSample1", "PasswordExample1");
+            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
+            _modelController.GetModelsWithFigure("materialSample2");
         }
     }
 }

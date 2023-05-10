@@ -87,24 +87,23 @@ namespace Render3D.BackEnd.Controllers
             }
 
         }
-
-
         public List<Model> GetModelsWithFigure(string figureName)
         {
-            List<Model> modelsWithFigure = new List<Model>(); 
-            foreach(Model model in DataWarehouse.Models)
+            List<Model> modelsWithFigure = new List<Model>();
+            foreach (Model model in DataWarehouse.Models)
             {
                 if (model.Figure.Name.Equals(figureName))
                 {
                     modelsWithFigure.Add(model);
                 }
             }
-            if(modelsWithFigure.Count == 0) 
+            if (modelsWithFigure.Count == 0)
             {
                 throw new BackEndException("No models found");
             }
 
             return modelsWithFigure;
+        }
 			
         public List<Model> GetModelWithMaterial(string materialName)
         {
