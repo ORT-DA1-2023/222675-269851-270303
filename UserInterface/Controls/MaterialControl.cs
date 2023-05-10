@@ -15,8 +15,9 @@ namespace Render3D.UserInterface.Controls
             lblMaterialName.Text = material.Name;
             _oldName = material.Name;
             lblRedColor.Text = "Red: " + material.Attenuation.Red();
-            lblGreenColor.Text = "Green: " + material.Attenuation.Green(); ;
+            lblGreenColor.Text = "Green: " + material.Attenuation.Green();
             lblBlueColor.Text = "Blue: " + material.Attenuation.Blue();
+            lblErrorDeleteMaterial.Text = "";
             pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());        
         }
 
@@ -35,8 +36,15 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-         ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
-         ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+            if (!((CreationMenu)this.Parent.Parent.Parent).MaterialIsPartOfModel(lblMaterialName.Text))
+            {
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
+            }
+            else
+            {
+                lblErrorDeleteMaterial.Text = "A model is using this material, can't be deleted";
+            }
 
         }
 

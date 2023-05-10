@@ -232,6 +232,19 @@ namespace Render3D.UserInterface
                 return false;
             }
            
+        internal bool MaterialIsPartOfModel(string materialName)
+        {
+            try
+            {
+                List<Model> models = render.modelController.GetModelWithMaterial(materialName);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            
         }
     }
 }

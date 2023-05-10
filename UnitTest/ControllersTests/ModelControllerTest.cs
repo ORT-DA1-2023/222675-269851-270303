@@ -105,8 +105,9 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
             Assert.IsTrue(_dataWarehouse.Models[0].Preview != null);
         }
+		
         [TestMethod]
-        public void GivenSceneWithModelReturnsList()
+        public void GivenModelWithModelReturnsList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
@@ -114,7 +115,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "no Models Found")]
-        public void GivenSceneWithoutModelThrowsException()
+        public void GivenModelWithoutModelThrowsException()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
