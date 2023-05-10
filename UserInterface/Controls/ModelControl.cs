@@ -15,6 +15,7 @@ namespace Render3D.UserInterface.Controls
             _oldName = model.Name;
             lblModelFigure.Text= model.Figure.Name;
             lblModelMaterial.Text= model.Material.Name;
+            lblErrorDeleteModel.Text = "";
             if (model.Preview != null)
             {
                 pBoxPreview.Image = model.Preview;

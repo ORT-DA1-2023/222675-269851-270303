@@ -234,6 +234,7 @@ namespace Render3D.UserInterface
             }
         }
            
+
         internal bool MaterialIsPartOfModel(string materialName)
         {
             try
