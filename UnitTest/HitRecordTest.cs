@@ -33,7 +33,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenValidAttenuationAssingsToHitRecord()
+        public void GivenValidAttenuationAssingsToHitRecord()
         {
             attenuationSample = new Colour(7 / 255, 234 / 255, 34 / 255);
             hitRecordSample.Attenuation = attenuationSample;
@@ -57,7 +57,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidNormalItAssingsToTheHitRecord()
+        public void GivenAValidNormalItAssingsToTheHitRecord()
         {
             normalSample = new Vector3D(0, 0, 0);
             hitRecordSample.Normal = normalSample;

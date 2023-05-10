@@ -14,7 +14,7 @@ namespace Render3D.UnitTest.ControllersTests
         private Client _clientSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
@@ -51,26 +51,26 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_clientController.GetClientByName("clientSample2").Name == null);
         }
         [TestMethod]
-        public void givenANameChecksIfIsValid()
+        public void GivenANameChecksIfIsValid()
         {
             _clientController.CheckName("clientSample1");
         }
         [TestMethod]
 
         [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
-        public void givenANameChecksIfIsNotValid()
+        public void GivenANameChecksIfIsNotValid()
         {
             _clientController.CheckName("");
         }
 
         [TestMethod]
-        public void givenAPasswordChecksIfIsValid()
+        public void GivenAPasswordChecksIfIsValid()
         {
             _clientController.CheckPassword("ValidPassword1");
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name length must be between 5 and 25")]
-        public void givenAPasswordChecksIfIsNotValid()
+        public void GivenAPasswordChecksIfIsNotValid()
         {
             _clientController.CheckPassword("");
         }

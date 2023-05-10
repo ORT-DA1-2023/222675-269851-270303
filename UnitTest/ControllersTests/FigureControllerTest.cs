@@ -17,7 +17,7 @@ namespace Render3D.UnitTest.ControllersTests
         private Figure _figureSample;
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };

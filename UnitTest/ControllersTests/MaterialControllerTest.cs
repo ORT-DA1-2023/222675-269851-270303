@@ -20,7 +20,7 @@ namespace Render3D.UnitTest.ControllersTests
         private readonly int[] _colorArray = new int[] { 0, 0, 0 };
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
@@ -56,7 +56,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
         [TestMethod]
-        public void givenANewMaterialNameItChanges()
+        public void GivenANewMaterialNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
@@ -65,7 +65,7 @@ namespace Render3D.UnitTest.ControllersTests
 
         }
         [TestMethod]
-        public void givenANewMaterialNameItDoesNotChange()
+        public void GivenANewMaterialNameItDoesNotChange()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);

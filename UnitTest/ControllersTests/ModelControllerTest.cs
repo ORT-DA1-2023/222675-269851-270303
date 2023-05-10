@@ -60,7 +60,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
         }
         [TestMethod]
-        public void givenNewModelNameItChanges()
+        public void GivenNewModelNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
