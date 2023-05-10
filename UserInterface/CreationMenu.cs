@@ -117,7 +117,7 @@ namespace Render3D.UserInterface
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
-        public void Refresh(String toShow)
+        public void Refresh(string toShow)
         {
             if (toShow == "Material")
             {

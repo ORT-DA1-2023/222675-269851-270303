@@ -52,7 +52,10 @@ namespace UserInterface.Panels
             cBoxPositionedModels.Items.Clear();
             foreach (Model model in sceneController.DataWarehouse.Models)
             {
-                cBoxAvailableModels.Items.Add(model);
+                if (model.Client.Equals(scene.Client))
+                {
+                    cBoxAvailableModels.Items.Add(model);
+                }
             }
             foreach (Model model in scene.PositionedModels)
             {
