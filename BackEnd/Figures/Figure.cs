@@ -31,7 +31,7 @@ namespace Render3D.BackEnd.Figures
 
         protected void ValidateName(string value)
         {
-            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The _name must not be empty");
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The name must not be empty");
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name must not start or end with spaces");
         }
 
