@@ -2,6 +2,7 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
 using System;
+using System.Collections.Generic;
 
 namespace Render3D.BackEnd.Controllers
 {
@@ -17,15 +18,15 @@ namespace Render3D.BackEnd.Controllers
             {
                 Vector3D lookAtVector = GetVectorFromString(stringLookAt);
                 Vector3D lookFromVector = GetVectorFromString(stringLookFrom);
-                Vector3D vectorUp = new Vector3D(0,1,0);
+                Vector3D vectorUp = new Vector3D(0, 1, 0);
                 Camera camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio());
-                if(!scene.Camera.Equals(camera))
+                if (!scene.Camera.Equals(camera))
                 {
-                    scene.Camera=camera;
+                    scene.Camera = camera;
                     scene.UpdateLastModificationDate();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -33,14 +34,13 @@ namespace Render3D.BackEnd.Controllers
 
         private Vector3D GetVectorFromString(string stringLookAt)
         {
-            Vector3D vector = null;
-            string[] values= stringLookAt.Substring(1,stringLookAt.Length-2).Split(';');
-            double[] valuesInDouble= new double[values.Length];
+            string[] values = stringLookAt.Substring(1, stringLookAt.Length - 2).Split(';');
+            double[] valuesInDouble = new double[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
-                valuesInDouble[i]= double.Parse(values[i]);
+                valuesInDouble[i] = double.Parse(values[i]);
             }
-            vector= new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
+            Vector3D vector = new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
             return vector;
         }
 
@@ -61,27 +61,28 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 GetSceneByNameAndClient(clientName, sceneName);
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 CreateAndAddBlankScene(clientName, sceneName);
                 return;
             }
-            throw new BackEndException("scene already exists"); 
+            throw new BackEndException("scene already exists");
         }
 
         private void CreateAndAddBlankScene(string clientName, string sceneName)
         {
-            Client client=ClientController.GetClientByName(clientName);
+            Client client = ClientController.GetClientByName(clientName);
             Camera camera = new Camera();
-            Scene scene= new Scene() { Client = client, Name = sceneName,Camera=camera};
+            Scene scene = new Scene() { Client = client, Name = sceneName, Camera = camera };
             DataWarehouse.Scenes.Add(scene);
         }
 
         public string GetNextValidName()
         {
-            string posibleName= "Blank_name_";
+            string posibleName = "Blank_name_";
             int i = 1;
-            bool found= false;
+            bool found = false;
             while (!found)
             {
                 bool validName = true;
@@ -89,9 +90,9 @@ namespace Render3D.BackEnd.Controllers
                 {
                     if (scene.Name == posibleName + i)
                     {
-                        validName= false;
+                        validName = false;
                     }
-            }
+                }
                 if (validName)
                 {
                     found = true;
@@ -101,8 +102,8 @@ namespace Render3D.BackEnd.Controllers
                     i++;
                 }
             }
-            return posibleName+i;
-           
+            return posibleName + i;
+
         }
         public void DeleteSceneInList(string clientName, string sceneName)
         {
@@ -122,21 +123,22 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 scene = GetSceneByNameAndClient(clientName, oldName);
-                Scene tryName = new Scene() { Name=newName };
-            }catch(Exception ex)
+                Scene tryName = new Scene() { Name = newName };
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
             try
             {
                 GetSceneByNameAndClient(clientName, newName);
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 scene.Name = newName;
-                scene.UpdateLastModificationDate();
             }
 
-           
+
         }
 
         public void AddModel(Scene scene, Model model, string position)
@@ -144,12 +146,12 @@ namespace Render3D.BackEnd.Controllers
             Vector3D positionVector = GetVectorFromString(position);
             Sphere sphere = (Sphere)model.Figure;
             Figure newFigure = new Sphere() { Position = sphere.Position, Client = sphere.Client, Name = sphere.Name, Radius = sphere.Radius };
-            Model newModel= new Model() { Client= model.Client, Name=model.Name, Figure= newFigure, Material=model.Material};
+            Model newModel = new Model() { Client = model.Client, Name = model.Name, Figure = newFigure, Material = model.Material };
             newModel.Figure.Position = positionVector;
             scene.PositionedModels.Add(newModel);
         }
 
-        public void RemoveModel(Scene scene,Model model)
+        public void RemoveModel(Scene scene, Model model)
         {
             scene.PositionedModels.Remove(model);
         }
@@ -160,5 +162,25 @@ namespace Render3D.BackEnd.Controllers
             scene.UpdateLastRenderizationDate();
         }
 
+        public List<Scene> GetSceneWithModel(string modelName)
+        {
+            List<Scene> sceneWithModel = new List<Scene>();
+            foreach (Scene scene in DataWarehouse.Scenes)
+            {
+                foreach (Model model in scene.PositionedModels)
+                {
+                    if (model.Name.Equals(modelName))
+                    {
+                        sceneWithModel.Add(scene);
+                    }
+                }
+
+            }
+            if (sceneWithModel.Count == 0)
+            {
+                throw new BackEndException("No scene found");
+            }
+            return sceneWithModel;
+        }
     }
 }

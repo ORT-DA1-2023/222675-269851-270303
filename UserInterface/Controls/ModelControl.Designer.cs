@@ -34,14 +34,15 @@
             this.lblModelMaterial = new System.Windows.Forms.Label();
             this.pBoxPreview = new System.Windows.Forms.PictureBox();
             this.lblModelName = new System.Windows.Forms.Label();
+            this.lblErrorDeleteModel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDeleteModel
             // 
             this.btnDeleteModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteModel.Location = new System.Drawing.Point(200, 52);
-            this.btnDeleteModel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDeleteModel.Location = new System.Drawing.Point(214, 52);
+            this.btnDeleteModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDeleteModel.Name = "btnDeleteModel";
             this.btnDeleteModel.Size = new System.Drawing.Size(75, 24);
             this.btnDeleteModel.TabIndex = 8;
@@ -52,8 +53,8 @@
             // btnEditModelName
             // 
             this.btnEditModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditModelName.Location = new System.Drawing.Point(200, 22);
-            this.btnEditModelName.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEditModelName.Location = new System.Drawing.Point(216, 22);
+            this.btnEditModelName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEditModelName.Name = "btnEditModelName";
             this.btnEditModelName.Size = new System.Drawing.Size(75, 24);
             this.btnEditModelName.TabIndex = 7;
@@ -65,7 +66,7 @@
             // 
             this.lblModelFigure.AutoSize = true;
             this.lblModelFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelFigure.Location = new System.Drawing.Point(119, 52);
+            this.lblModelFigure.Location = new System.Drawing.Point(98, 52);
             this.lblModelFigure.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblModelFigure.Name = "lblModelFigure";
             this.lblModelFigure.Size = new System.Drawing.Size(65, 24);
@@ -76,7 +77,7 @@
             // 
             this.lblModelMaterial.AutoSize = true;
             this.lblModelMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelMaterial.Location = new System.Drawing.Point(119, 76);
+            this.lblModelMaterial.Location = new System.Drawing.Point(98, 76);
             this.lblModelMaterial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblModelMaterial.Name = "lblModelMaterial";
             this.lblModelMaterial.Size = new System.Drawing.Size(75, 24);
@@ -86,9 +87,9 @@
             // pBoxPreview
             // 
             this.pBoxPreview.Image = global::UserInterface.Properties.Resources.Sphere;
-            this.pBoxPreview.Location = new System.Drawing.Point(0, 33);
+            this.pBoxPreview.Location = new System.Drawing.Point(15, 22);
             this.pBoxPreview.Name = "pBoxPreview";
-            this.pBoxPreview.Size = new System.Drawing.Size(100, 67);
+            this.pBoxPreview.Size = new System.Drawing.Size(78, 78);
             this.pBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBoxPreview.TabIndex = 11;
             this.pBoxPreview.TabStop = false;
@@ -97,24 +98,37 @@
             // 
             this.lblModelName.AutoSize = true;
             this.lblModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelName.Location = new System.Drawing.Point(119, 22);
+            this.lblModelName.Location = new System.Drawing.Point(98, 22);
             this.lblModelName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblModelName.Name = "lblModelName";
             this.lblModelName.Size = new System.Drawing.Size(61, 24);
             this.lblModelName.TabIndex = 12;
             this.lblModelName.Text = "Name";
             // 
+            // lblErrorDeleteModel
+            // 
+            this.lblErrorDeleteModel.AutoSize = true;
+            this.lblErrorDeleteModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorDeleteModel.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorDeleteModel.Location = new System.Drawing.Point(2, 0);
+            this.lblErrorDeleteModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblErrorDeleteModel.Name = "lblErrorDeleteModel";
+            this.lblErrorDeleteModel.Size = new System.Drawing.Size(33, 15);
+            this.lblErrorDeleteModel.TabIndex = 13;
+            this.lblErrorDeleteModel.Text = "error";
+            // 
             // ModelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblErrorDeleteModel);
             this.Controls.Add(this.lblModelName);
             this.Controls.Add(this.pBoxPreview);
             this.Controls.Add(this.lblModelMaterial);
             this.Controls.Add(this.lblModelFigure);
             this.Controls.Add(this.btnDeleteModel);
             this.Controls.Add(this.btnEditModelName);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ModelControl";
             this.Size = new System.Drawing.Size(291, 118);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxPreview)).EndInit();
@@ -131,5 +145,6 @@
         private System.Windows.Forms.Label lblModelMaterial;
         private System.Windows.Forms.PictureBox pBoxPreview;
         private System.Windows.Forms.Label lblModelName;
+        private System.Windows.Forms.Label lblErrorDeleteModel;
     }
 }

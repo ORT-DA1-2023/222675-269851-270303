@@ -53,7 +53,7 @@
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(379, 78);
-            this.btnCreateFigure.TabIndex = 11;
+            this.btnCreateFigure.TabIndex = 13;
             this.btnCreateFigure.Text = "Create!!!";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
@@ -149,7 +149,7 @@
             0});
             this.nrRedColor.Name = "nrRedColor";
             this.nrRedColor.Size = new System.Drawing.Size(199, 29);
-            this.nrRedColor.TabIndex = 14;
+            this.nrRedColor.TabIndex = 10;
             // 
             // nrGreenColor
             // 
@@ -166,7 +166,7 @@
             0});
             this.nrGreenColor.Name = "nrGreenColor";
             this.nrGreenColor.Size = new System.Drawing.Size(199, 29);
-            this.nrGreenColor.TabIndex = 15;
+            this.nrGreenColor.TabIndex = 11;
             // 
             // nrBlueColor
             // 
@@ -183,7 +183,7 @@
             0});
             this.nrBlueColor.Name = "nrBlueColor";
             this.nrBlueColor.Size = new System.Drawing.Size(199, 29);
-            this.nrBlueColor.TabIndex = 16;
+            this.nrBlueColor.TabIndex = 12;
             // 
             // panel1
             // 

@@ -45,9 +45,10 @@ namespace Render3D.BackEnd.Controllers
         {
             try
             {
-                Figure figure =GetFigureByNameAndClient(clientName, figureName); 
+                Figure figure = GetFigureByNameAndClient(clientName, figureName);
                 DataWarehouse.Figures.Remove(figure);
-            }catch (Exception)
+            }
+            catch (Exception)
             {
             }
 
@@ -57,10 +58,10 @@ namespace Render3D.BackEnd.Controllers
             Figure figure;
             try
             {
-                figure=GetFigureByNameAndClient(clientName, oldName);
-                Figure correctNameCheck = new Sphere() { Name = newName};
+                figure = GetFigureByNameAndClient(clientName, oldName);
+                Figure correctNameCheck = new Sphere() { Name = newName };
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return;
             }

@@ -13,16 +13,14 @@ namespace Render3D.BackEnd
 
         protected string _name;
         protected string _password;
-        private readonly DateTime _registerDate;
 
 
         public Client()
         {
             RegisterDate = DateTimeProvider.Now;
-
         }
 
-        public String Name
+        public string Name
         {
             get { return _name; }
             set
@@ -31,7 +29,7 @@ namespace Render3D.BackEnd
                 _name = value;
             }
         }
-        public String Password
+        public string Password
         {
             get { return _password; }
             set
@@ -43,7 +41,7 @@ namespace Render3D.BackEnd
 
         public DateTime RegisterDate { get; }
 
-        private void ValidateName(String value)
+        private void ValidateName(string value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -55,7 +53,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        private void ValidatePassword(String value)
+        private void ValidatePassword(string value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -77,7 +75,7 @@ namespace Render3D.BackEnd
         }
         public bool Equals(Client p)
         {
-            return this.Name.Equals(p.Name);
+            return Name.Equals(p.Name);
         }
     }
 

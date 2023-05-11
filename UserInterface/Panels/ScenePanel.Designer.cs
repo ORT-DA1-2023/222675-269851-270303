@@ -2,9 +2,6 @@
 {
     partial class ScenePanel
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -37,9 +34,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(18, 353);
+            this.label2.Location = new System.Drawing.Point(-5, 433);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(367, 60);
+            this.label2.Size = new System.Drawing.Size(454, 75);
             this.label2.TabIndex = 5;
             this.label2.Text = "tip: You should already have al least one model.\r\n\r\nNote: A new window will open " +
     "for better accesibility.";
@@ -48,18 +46,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(92, 48);
+            this.label1.Location = new System.Drawing.Point(123, 59);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 24);
+            this.label1.Size = new System.Drawing.Size(242, 29);
             this.label1.TabIndex = 4;
             this.label1.Text = "Create a new Scene!!\r\n";
             // 
             // btnCreateScene
             // 
             this.btnCreateScene.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateScene.Location = new System.Drawing.Point(0, 191);
+            this.btnCreateScene.Location = new System.Drawing.Point(0, 235);
+            this.btnCreateScene.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCreateScene.Name = "btnCreateScene";
-            this.btnCreateScene.Size = new System.Drawing.Size(380, 120);
+            this.btnCreateScene.Size = new System.Drawing.Size(507, 148);
             this.btnCreateScene.TabIndex = 3;
             this.btnCreateScene.Text = "Create new Scene";
             this.btnCreateScene.UseVisualStyleBackColor = true;
@@ -67,16 +67,16 @@
             // 
             // ScenePanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 580);
+            this.ClientSize = new System.Drawing.Size(507, 714);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCreateScene);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ScenePanel";
             this.Text = "ScenePanel";
-            this.Shown += new System.EventHandler(this.VariableInitialize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

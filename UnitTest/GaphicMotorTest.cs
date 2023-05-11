@@ -59,7 +59,7 @@ namespace Render3D.UnitTest
 
 
         [TestMethod]
-        public void givenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        public void GivenAdefaultGraphicMotorItComparesDefaultPixelSampling()
         {
             Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
         }
@@ -71,13 +71,13 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenDefaultGraphicMotorItHasDefaultMaximumDepth()
+        public void GivenDefaultGraphicMotorItHasDefaultMaximumDepth()
         {
             Assert.AreEqual(graphicMotorSample.MaximumDepth, maximumDepthSampleDefault);
         }
 
         [TestMethod]
-        public void GivenDefaultGraphicMotorItHasTheDefaultResolution()
+        public void GivenDefaultGraphicMotorItHasDefaultResolution()
         {
             Assert.AreEqual(graphicMotorSample.ResolutionWidth, resolutionWidthSampleDefault);
         }

@@ -39,10 +39,10 @@
             // lblSceneName
             // 
             this.lblSceneName.AutoSize = true;
-            this.lblSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSceneName.Location = new System.Drawing.Point(111, 15);
             this.lblSceneName.Name = "lblSceneName";
-            this.lblSceneName.Size = new System.Drawing.Size(58, 24);
+            this.lblSceneName.Size = new System.Drawing.Size(49, 20);
             this.lblSceneName.TabIndex = 0;
             this.lblSceneName.Text = "name";
             // 
@@ -69,9 +69,9 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(234, 17);
+            this.btnEdit.Location = new System.Drawing.Point(242, 18);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(57, 30);
+            this.btnEdit.Size = new System.Drawing.Size(66, 30);
             this.btnEdit.TabIndex = 7;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(234, 54);
+            this.btnDelete.Location = new System.Drawing.Point(240, 54);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 30);
+            this.btnDelete.Size = new System.Drawing.Size(68, 30);
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.Controls.Add(this.lblSceneModificationDate);
             this.Controls.Add(this.lblSceneName);
             this.Name = "SceneControl";
-            this.Size = new System.Drawing.Size(291, 105);
+            this.Size = new System.Drawing.Size(308, 105);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

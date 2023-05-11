@@ -99,7 +99,6 @@ namespace Render3D.BackEnd
         }
 
 
-
         public void UpdateLastModificationDate()
         {
             LastModificationDate = DateTimeProvider.Now;

@@ -131,7 +131,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoCamerasWithDifferentFovsReturnsTheyAreNotEqual()
+        public void GivenTwoCamerasWithDifferentFovsReturnsAreNotEqual()
         {
             Camera camera1 = new Camera();
             camera1.Fov = 20;
@@ -142,7 +142,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoCamerasWithOnlySameFovReturnsTheyAreNotEqual()
+        public void GivenTwoCamerasWithOnlySameFovReturnsAreNotEqual()
         {
             Camera camera1 = new Camera
             {

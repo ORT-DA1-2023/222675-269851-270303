@@ -28,7 +28,7 @@ namespace Render3D.BackEnd.Materials
 
 
 
-        public override String ToString()
+        public override string ToString()
         {
             return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }

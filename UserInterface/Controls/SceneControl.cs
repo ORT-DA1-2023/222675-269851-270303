@@ -1,13 +1,5 @@
 ﻿using Render3D.BackEnd;
-using Render3D.UserInterface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserInterface.Panels;
 
@@ -24,7 +16,7 @@ namespace Render3D.UserInterface.Controls
             lblSceneName.Text = _scene.Name;
             _oldName = _scene.Name;
             lblSceneModificationDate.Text = "" + _scene.LastModificationDate.Month + "/" + _scene.LastModificationDate.Day + "/" + _scene.LastModificationDate.Year + " " + _scene.LastModificationDate.Hour + ":" + _scene.LastModificationDate.Minute;
-            if(_scene.Preview != null )
+            if (_scene.Preview != null)
             {
                 pBoxPreview.Image = _scene.Preview;
             }
@@ -32,8 +24,12 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).DeleteScene(lblSceneName.Text);
-            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
+            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblSceneName.Text))
+            {
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteScene(lblSceneName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
+            }
+
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -46,19 +42,6 @@ namespace Render3D.UserInterface.Controls
                 if (result == DialogResult.OK)
                 {
                     creation.Refresh("Scene");
-                }
-            }
-        }
-        private void ChecksForCorrectEdit(string newName)
-        {
-
-            if (!_oldName.Equals(newName))
-            {
-
-                if (((CreationMenu)this.Parent.Parent.Parent).FigureNameHasBeenChanged(_oldName, newName))
-                {
-                    lblSceneName.Text = newName;
-                    _oldName = newName;
                 }
             }
         }

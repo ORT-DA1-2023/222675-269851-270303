@@ -115,7 +115,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoDifferentColoursReturnsTheyAreNotEqual()
+        public void GivenTwoDifferentColoursReturnsAreNotEqual()
         {
             Colour red = new Colour(1, 0, 0);
             Colour white = new Colour(1, 1, 1);
@@ -123,7 +123,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTheSameColoursReturnsTheyAreEqual()
+        public void GivenSameColoursReturnsAreEqual()
         {
             Colour red1 = new Colour(1, 0, 0);
             Colour red2 = new Colour(1, 0, 0);

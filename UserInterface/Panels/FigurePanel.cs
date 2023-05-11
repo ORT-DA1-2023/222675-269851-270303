@@ -44,11 +44,12 @@ namespace Render3D.UserInterface.Panels
         {
             try
             {
-               double radius= double.Parse(figureRadiusString);
-                return radius; 
-            }catch 
-            { 
-                return -1; 
+                double radius = double.Parse(figureRadiusString);
+                return radius;
+            }
+            catch
+            {
+                return -1;
             }
         }
 

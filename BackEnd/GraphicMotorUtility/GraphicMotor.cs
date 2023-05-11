@@ -1,5 +1,5 @@
-using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -70,22 +70,19 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap RenderModelPreview(Model model)
         {
-            ResolutionWidth = 300;
+            ResolutionWidth = 100;
             PixelSampling = 30;
             MaximumDepth = 10;
 
             Scene previewScene = new Scene();
             model.Figure.Position = new Vector3D(0, 0, 0);
             previewScene.PositionedModels.Add(model);
-
             Sphere sphereSample = (Sphere)model.Figure;
             double radius = sphereSample.Radius;
-
-
-            Camera camera = new Camera(model.Figure.Position.Add(new Vector3D(2 * radius, 2 * radius, 2 * radius)), model.Figure.Position, new Vector3D(0, 2 * radius, 0), 60, 1);
+            Vector3D vectorUp = new Vector3D(0, 2 * radius, 0);
+            Vector3D twoTimesRadius = new Vector3D(2 * radius, 2 * radius, 2 * radius);
+            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, vectorUp, 60, 1);
             previewScene.Camera = camera;
-
-
             return Render(previewScene);
         }
 
@@ -97,12 +94,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             int height = ResolutionHeight();
             PixelMatrix = new PixelMatrix(width, height);
             PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix);
-            String imagePPM = CreateImagePPM(PixelMatrix.Matrix);
+            string imagePPM = CreateImagePPM(PixelMatrix.Matrix);
             Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
         }
 
-        private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
+        private Bitmap GenerateBitmap(Bitmap bitmap, string imagePPM)
         {
             string[] linesImagePPM = imagePPM.Split('\n');
             for (int i = 3; i < linesImagePPM.Length - 1; i++)
@@ -174,11 +171,10 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
-            Console.WriteLine(ppmString.ToString());
             return ppmString.ToString();
         }
 
-        private void ValidateNumberIsGreaterThanZero(int number, String word)
+        private void ValidateNumberIsGreaterThanZero(int number, string word)
         {
             if (number <= 0) throw new BackEndException($"The {word} must be greater than 0.");
         }
