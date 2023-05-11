@@ -1,17 +1,9 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Controllers;
 using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.UserInterface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UserInterface.Panels
@@ -20,18 +12,18 @@ namespace UserInterface.Panels
     {
         public Scene scene;
         public SceneController sceneController;
-        private string _client;
+        private readonly string _client;
         public SceneCreation(SceneController newSceneController, string clientName, Scene selectedScene)
         {
             InitializeComponent();
             sceneController = newSceneController;
-            _client= clientName;
-            scene =selectedScene;
-            if(scene==null )
+            _client = clientName;
+            scene = selectedScene;
+            if (scene == null)
             {
-              GenerateDefaultScene();
-            }        
-              LoadScene();
+                GenerateDefaultScene();
+            }
+            LoadScene();
         }
 
         private void GenerateDefaultScene()
@@ -90,7 +82,7 @@ namespace UserInterface.Panels
 
         private void CheckRenderOutDated()
         {
-            if (scene.LastRenderizationDate==null  || scene.LastRenderizationDate < (scene.LastModificationDate))
+            if (scene.LastRenderizationDate == null || scene.LastRenderizationDate < (scene.LastModificationDate))
             {
                 lblRenderOutDated.Text = "WARNING this render is outdated";
             }
@@ -112,10 +104,10 @@ namespace UserInterface.Panels
             this.Close();
         }
 
-     
+
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
-            if(IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
+            if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
                 try
                 {
@@ -123,7 +115,8 @@ namespace UserInterface.Panels
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     lblCamera.ForeColor = Color.Red;
                     lblCamera.Text = ex.Message;
@@ -146,7 +139,7 @@ namespace UserInterface.Panels
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 lblName.ForeColor = Color.Red;
                 lblName.Text = ex.Message;
@@ -160,7 +153,7 @@ namespace UserInterface.Panels
             {
                 return;
             }
-            sceneController.AddModel(scene,model,position);
+            sceneController.AddModel(scene, model, position);
             scene.UpdateLastModificationDate();
             LoadScene();
             lblAddModel.ForeColor = Color.Green;
@@ -174,7 +167,7 @@ namespace UserInterface.Panels
             {
                 return;
             }
-            sceneController.RemoveModel(scene,model);
+            sceneController.RemoveModel(scene, model);
             scene.UpdateLastModificationDate();
             LoadScene();
             lblRemoveModel.ForeColor = Color.Green;
@@ -187,6 +180,6 @@ namespace UserInterface.Panels
             sceneController.RenderScene(scene);
             LoadScene();
         }
-       
+
     }
 }

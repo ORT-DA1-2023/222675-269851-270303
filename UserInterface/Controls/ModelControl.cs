@@ -13,8 +13,8 @@ namespace Render3D.UserInterface.Controls
             InitializeComponent();
             lblModelName.Text = model.Name;
             _oldName = model.Name;
-            lblModelFigure.Text= model.Figure.Name;
-            lblModelMaterial.Text= model.Material.Name;
+            lblModelFigure.Text = model.Figure.Name;
+            lblModelMaterial.Text = model.Material.Name;
             lblErrorDeleteModel.Text = "";
             if (model.Preview != null)
             {
@@ -43,7 +43,7 @@ namespace Render3D.UserInterface.Controls
                 if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_oldName, newName))
                 {
                     lblModelName.Text = newName;
-                    _oldName=newName;
+                    _oldName = newName;
                 }
             }
         }
@@ -56,7 +56,8 @@ namespace Render3D.UserInterface.Controls
                 ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
             }
-            else{
+            else
+            {
                 lblErrorDeleteModel.Text = "A scene is using this model";
             }
 

@@ -30,9 +30,9 @@ namespace Render3D.UserInterface.Panels
                 {
                     lstFigure.Items.Add(figure);
                 }
-                
+
             }
-            foreach (Material material in materialList) 
+            foreach (Material material in materialList)
             {
                 if (material.Client.Name.Equals(render.clientName))
                 {

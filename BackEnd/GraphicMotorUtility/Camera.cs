@@ -9,26 +9,17 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private int _fov;
         private const int _minFov = 0;
         private const int _maxFov = 160;
+        private const double _degreesToRadians = Math.PI / 180;
+        private const double _ratioDimension = 16.0 / 9.0;
 
-        private const double degreesToRadians = Math.PI / 180;
         public Vector3D LookFrom { get; set; }
         public Vector3D LookAt { get; set; }
-
-        public Vector3D VectorW { get; set; }
-
         public Vector3D VectorU { get; set; }
-
         public Vector3D VectorV { get; set; }
-
+        public Vector3D VectorW { get; set; }
         public double HeightHalf { get; set; }
-
         public double AspectRatio { get; set; }
-
         public double WidthHalf { get; set; }
-
-
-
-
         public double Theta
         {
             get => _theta;
@@ -39,11 +30,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
 
         }
-
         public Vector3D VectorUp { get; set; }
-
         public Vector3D Corner_lowerLeft { get; set; }
-
         public Vector3D Horizontal { get; set; }
         public Vector3D Vertical { get; set; }
 
@@ -52,9 +40,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             LookAt = new Vector3D(0, 2, 5);
             VectorUp = new Vector3D(0, 1, 0);
             Fov = 30;
-            _theta = Fov * Math.PI / 180;
+            _theta = Fov * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
-            AspectRatio = 16.0 / 9.0;
+            AspectRatio = _ratioDimension;
             WidthHalf = AspectRatio * HeightHalf;
             LookFrom = new Vector3D(0, 2, 0);
             VectorW = LookFrom.Substract(LookAt).GetUnit();
@@ -71,7 +59,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             VectorUp = vectorUp;
             Fov = fieldOfView;
             AspectRatio = aspectRatio;
-            Theta = fieldOfView * Math.PI / 180;
+            Theta = fieldOfView * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
             WidthHalf = AspectRatio * HeightHalf;
             LookFrom = vectorLookFrom;
@@ -90,7 +78,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             {
                 ValidateName(value);
                 _fov = value;
-                _theta = Fov * degreesToRadians;
+                _theta = Fov * _degreesToRadians;
             }
         }
 

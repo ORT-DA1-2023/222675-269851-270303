@@ -12,7 +12,7 @@ namespace Render3D.UserInterface
         public FigureController figureController = new FigureController();
         public MaterialController materialController = new MaterialController();
         public ModelController modelController = new ModelController();
-        public SceneController sceneController= new SceneController();
+        public SceneController sceneController = new SceneController();
         public Render3DIU()
         {
             clientController.DataWarehouse = dataWarehouse;

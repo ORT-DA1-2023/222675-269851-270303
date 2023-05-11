@@ -69,7 +69,7 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(234, 17);
+            this.btnEdit.Location = new System.Drawing.Point(242, 18);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(66, 30);
             this.btnEdit.TabIndex = 7;
@@ -80,7 +80,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(232, 54);
+            this.btnDelete.Location = new System.Drawing.Point(240, 54);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(68, 30);
             this.btnDelete.TabIndex = 8;
@@ -98,7 +98,7 @@
             this.Controls.Add(this.lblSceneModificationDate);
             this.Controls.Add(this.lblSceneName);
             this.Name = "SceneControl";
-            this.Size = new System.Drawing.Size(300, 105);
+            this.Size = new System.Drawing.Size(308, 105);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

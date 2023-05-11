@@ -97,7 +97,7 @@ namespace Render3D.BackEnd
             var colorEnd = new Colour(0.5, 0.7, 1.0);
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
-        
+
 
         public void UpdateLastModificationDate()
         {

@@ -27,7 +27,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
 
         [TestMethod]
-        public void GivenANewFigureAddsItToTheList()
+        public void GivenNewFigureAddsItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
@@ -39,7 +39,7 @@ namespace Render3D.UnitTest.ControllersTests
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "the Radius must be greater than 1")]
-        public void GivenANewWrongFigureFailsTryingToAddItToTheList()
+        public void GivenNewWrongFigureFailsTryingToAddItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
@@ -48,7 +48,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "figure already exists")]
-        public void GivenAReapetedFigureFailsTryingToAddItToTheList()
+        public void GivenReapetedFigureFailsTryingToAddItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
@@ -57,7 +57,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 1);
         }
         [TestMethod]
-        public void GivenANewFigureNameItChanges()
+        public void GivenNewFigureNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _figureController.AddFigure("clientSample1", "figureSample1", 5);
@@ -65,7 +65,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[0].Name);
         }
         [TestMethod]
-        public void GivenANewFigureNameItDoesNotChange()
+        public void GivenNewFigureNameItDoesNotChange()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _figureController.AddFigure("clientSample1", "figureSample1", 1);
@@ -75,7 +75,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[1].Name);
         }
         [TestMethod]
-        public void GivenANameDeletesTheFigure()
+        public void GivenNameDeletesTheFigure()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _figureController.AddFigure("clientSample1", "figureSample1", 1);
@@ -84,7 +84,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 0);
         }
         [TestMethod]
-        public void GivenANameDoesNotDeleteTheFigure()
+        public void GivenNameDoesNotDeleteTheFigure()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _figureController.AddFigure("clientSample1", "figureSample1", 1);

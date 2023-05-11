@@ -80,14 +80,14 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTheLargestValidFovAssignsIt()
+        public void GivenLargestValidFovAssignsIt()
         {
             cameraSample.Fov = largestValidFov;
             Assert.AreEqual(largestValidFov, cameraSample.Fov);
         }
 
         [TestMethod]
-        public void GivenTheSmallestValidFovAssignsIt()
+        public void GivenSmallestValidFovAssignsIt()
         {
             cameraSample.Fov = smallestValidFov;
             Assert.AreEqual(smallestValidFov, cameraSample.Fov);

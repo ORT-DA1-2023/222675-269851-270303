@@ -27,7 +27,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenNameLargerThanTheMaximumReturnsFalse()
+        public void GivenNameLargerThanMaximumReturnsFalse()
         {
             bool result = HelperValidator.IsLengthBetween(elevenCharName, minLength, maxLength);
             Assert.IsFalse(result);

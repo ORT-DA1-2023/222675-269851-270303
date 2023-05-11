@@ -96,7 +96,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoClientsWithSameNameReturnTheyAreEqual()
+        public void GivenTwoClientsWithSameNameReturnAreEqual()
         {
             Client client2 = new Client()
             {

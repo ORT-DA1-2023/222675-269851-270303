@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
@@ -22,7 +22,7 @@ namespace Render3D.UserInterface
             List<Figure> figureList = render.dataWarehouse.Figures;
             foreach (Sphere figure in figureList)
             {
-                if(figure.Client.Name.Equals(render.clientName))
+                if (figure.Client.Name.Equals(render.clientName))
                 {
                     FigureControl figureControl = new FigureControl(figure);
                     flObjectList.Controls.Add(figureControl);
@@ -36,13 +36,13 @@ namespace Render3D.UserInterface
             List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Material material in materialList)
             {
-                if(material.Client.Name.Equals(render.clientName))
+                if (material.Client.Name.Equals(render.clientName))
                 {
                     MaterialControl materialControl = new MaterialControl(material);
                     flObjectList.Controls.Add(materialControl);
                 }
 
- 
+
             }
         }
         public void ShowModelList()
@@ -62,14 +62,14 @@ namespace Render3D.UserInterface
         public void ShowSceneList()
         {
             flObjectList.Controls.Clear();
-            List<Scene> scenes =render.dataWarehouse.Scenes;
+            List<Scene> scenes = render.dataWarehouse.Scenes;
             scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
-            foreach(Scene scene in scenes)
+            foreach (Scene scene in scenes)
             {
                 if (scene.Client.Name.Equals(render.clientName))
                 {
-                   SceneControl sceneControl= new SceneControl(scene);
-                   flObjectList.Controls.Add(sceneControl);
+                    SceneControl sceneControl = new SceneControl(scene);
+                    flObjectList.Controls.Add(sceneControl);
 
                 }
             }
@@ -142,7 +142,7 @@ namespace Render3D.UserInterface
             }
 
         }
-        public bool FigureNameHasBeenChanged(string oldName,string newName)
+        public bool FigureNameHasBeenChanged(string oldName, string newName)
         {
             try
             {
@@ -152,14 +152,14 @@ namespace Render3D.UserInterface
             catch (Exception)
             {
             }
-            render.figureController.ChangeFigureName(render.clientName,oldName, newName);
+            render.figureController.ChangeFigureName(render.clientName, oldName, newName);
             try
             {
                 render.figureController.GetFigureByNameAndClient(render.clientName, newName);
                 return true;
             }
-            catch (Exception) 
-            { 
+            catch (Exception)
+            {
                 return false;
             }
         }
@@ -185,7 +185,7 @@ namespace Render3D.UserInterface
                 render.materialController.GetMaterialByNameAndClient(render.clientName, newName);
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -219,7 +219,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteScene(string sceneName)
         {
-           render.sceneController.DeleteSceneInList(render.clientName, sceneName);
+            render.sceneController.DeleteSceneInList(render.clientName, sceneName);
         }
 
         internal bool FigureIsPartOfModel(string figureName)
@@ -234,7 +234,7 @@ namespace Render3D.UserInterface
                 return false;
             }
         }
-           
+
 
         internal bool MaterialIsPartOfModel(string materialName)
         {
@@ -248,7 +248,7 @@ namespace Render3D.UserInterface
 
                 return false;
             }
-            
+
         }
 
         internal bool ModelIsPartOfScene(string modelName)

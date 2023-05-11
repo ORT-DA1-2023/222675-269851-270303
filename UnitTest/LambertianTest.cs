@@ -23,8 +23,10 @@ namespace Render3D.UnitTest
             {
                 Name = clientSampleName
             };
-            materialSample = new LambertianMaterial();
-            materialSample.Client = clientSample;
+            materialSample = new LambertianMaterial
+            {
+                Client = clientSample
+            };
 
             hitSample = new HitRecord3D()
             {

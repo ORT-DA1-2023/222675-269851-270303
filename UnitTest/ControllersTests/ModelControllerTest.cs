@@ -18,7 +18,6 @@ namespace Render3D.UnitTest.ControllersTests
         private Material _materialSample;
         private Figure _figure;
         private ModelController _modelController;
-        private Model _modelSample;
         private readonly Colour _colour = new Colour(0, 0, 0);
 
         [TestInitialize]
@@ -30,7 +29,6 @@ namespace Render3D.UnitTest.ControllersTests
             _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Attenuation = _colour };
             _figure = new Sphere() { Client = _clientSample, Name = "figureSample1", Radius = 5 };
             _modelController = new ModelController() { ClientController = _clientController, DataWarehouse = _dataWarehouse };
-            _modelSample = new Model() { Client = _clientSample, Name = "modelSample1", Figure = _figure, Material = _materialSample };
         }
         [TestMethod]
         public void GivenNewModelAddsItToTheList()
@@ -105,7 +103,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
             Assert.IsTrue(_dataWarehouse.Models[0].Preview != null);
         }
-		
+
         [TestMethod]
         public void GivenModelWithFigureReturnsList()
         {

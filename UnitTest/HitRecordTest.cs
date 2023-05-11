@@ -49,7 +49,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenValidIntersectionAssingsToTheHitRecord()
+        public void GivenValidIntersectionAssingsToHitRecord()
         {
             intersectionSample = new Vector3D(0, 0, 0);
             hitRecordSample.Intersection = intersectionSample;
@@ -57,7 +57,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenAValidNormalItAssingsToTheHitRecord()
+        public void GivenAValidNormalItAssingsToHitRecord()
         {
             normalSample = new Vector3D(0, 0, 0);
             hitRecordSample.Normal = normalSample;

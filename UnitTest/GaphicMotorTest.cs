@@ -59,7 +59,7 @@ namespace Render3D.UnitTest
 
 
         [TestMethod]
-        public void GivenAdefaultGraphicMotorItComparesTheDefaultPixelSampling()
+        public void GivenAdefaultGraphicMotorItComparesDefaultPixelSampling()
         {
             Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
         }
@@ -77,7 +77,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenDefaultGraphicMotorItHasTheDefaultResolution()
+        public void GivenDefaultGraphicMotorItHasDefaultResolution()
         {
             Assert.AreEqual(graphicMotorSample.ResolutionWidth, resolutionWidthSampleDefault);
         }

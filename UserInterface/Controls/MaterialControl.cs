@@ -18,10 +18,10 @@ namespace Render3D.UserInterface.Controls
             lblGreenColor.Text = "Green: " + material.Attenuation.Green();
             lblBlueColor.Text = "Blue: " + material.Attenuation.Blue();
             lblErrorDeleteMaterial.Text = "";
-            pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());        
+            pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());
         }
 
- 
+
         private void ChecksForCorrectEdit(string newName)
         {
             if (!_oldName.Equals(newName))
@@ -29,7 +29,7 @@ namespace Render3D.UserInterface.Controls
                 if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(_oldName, newName))
                 {
                     lblMaterialName.Text = newName;
-                    _oldName=newName;
+                    _oldName = newName;
                 }
             }
         }
@@ -55,11 +55,11 @@ namespace Render3D.UserInterface.Controls
                 var result = nameChanger.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    string name=nameChanger.newName;
+                    string name = nameChanger.newName;
                     ChecksForCorrectEdit(name);
                 }
             }
-            
+
         }
     }
 }

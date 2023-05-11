@@ -2,9 +2,6 @@
 {
     partial class ScenePanel
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -80,7 +77,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ScenePanel";
             this.Text = "ScenePanel";
-            this.Shown += new System.EventHandler(this.VariableInitialize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
