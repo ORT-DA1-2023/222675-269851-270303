@@ -15,7 +15,7 @@ namespace Render3D.BackEnd.Materials
             return new Ray(hitRecord.Intersection, newVector);
         }
 
-        private Vector3D GetRandomInUnitFigure(Random random)
+        public override Vector3D GetRandomInUnitFigure(Random random)
         {
             Vector3D vector;
             do

@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd.Utilities;
+﻿using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
@@ -124,6 +125,16 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Vector3D horizontalPosition = Horizontal.Multiply(u);
             Vector3D verticalPosition = Vertical.Multiply(v);
             return new Ray(LookFrom, Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom));
+        }
+
+        public Ray GetRayForBlurCamera(double u, double v, Material material, Random random)
+        {
+            Vector3D vectorRandom = material.GetRandomInUnitFigure(random).Multiply(LensRadius);
+            Vector3D vectorOffset = VectorU.Multiply(vectorRandom.X).Add(VectorV.Multiply(vectorRandom.Y));
+            Vector3D horizontalPosition = Horizontal.Multiply(u);
+            Vector3D verticalPosition = Vertical.Multiply(v);
+            return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
+
         }
 
     }

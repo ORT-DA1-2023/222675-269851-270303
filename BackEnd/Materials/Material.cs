@@ -25,6 +25,8 @@ namespace Render3D.BackEnd.Materials
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
 
+        public abstract Vector3D GetRandomInUnitFigure(Random random);
+
         protected void ValidateName(string value)
         {
             if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("Name must not be empty");
