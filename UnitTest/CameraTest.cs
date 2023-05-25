@@ -20,6 +20,7 @@ namespace Render3D.UnitTest
         private readonly double validWidthHalf = 1;
         private readonly double validHeightHalf = 1;
         private readonly double validLensRadius = 2;
+        private readonly double validAperture = 2;
 
         private readonly int tooSmallFov = -1;
         private readonly int tooLargeFov = 161;
@@ -116,14 +117,26 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenCameraCreatedWithConstructorWithParametersAssignsProperties()
+        public void GivenCameraCreatedWithConstructorWithParametersToBlurAssignsProperties()
         {
-            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, 1);
+            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, validAspectRatio, validAperture);
             Assert.IsTrue(allOnes.Equals(camera.LookFrom));
             Assert.IsTrue(allTwos.Equals(camera.LookAt));
             Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
             Assert.IsTrue(camera.Fov == validFov);
-            Assert.IsTrue(camera.AspectRatio == 1);
+            Assert.IsTrue(camera.AspectRatio == validAspectRatio);
+            Assert.IsTrue(camera.LensRadius == validAperture / 2);
+        }
+
+        [TestMethod]
+        public void GivenCameraCreatedWithConstructorWithParametersAssignsProperties()
+        {
+            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, validAspectRatio);
+            Assert.IsTrue(allOnes.Equals(camera.LookFrom));
+            Assert.IsTrue(allTwos.Equals(camera.LookAt));
+            Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
+            Assert.IsTrue(camera.Fov == validFov);
+            Assert.IsTrue(camera.AspectRatio == validAspectRatio);
         }
 
     }

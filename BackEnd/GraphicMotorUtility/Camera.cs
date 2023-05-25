@@ -72,6 +72,28 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Horizontal = VectorU.Multiply((2 * WidthHalf));
             Vertical = VectorV.Multiply((2 * HeightHalf));
         }
+
+        public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio, double aperture)
+        {
+            double focalDistance = vectorLookFrom.Substract(vectorLookAt).Length();
+            LensRadius = aperture / 2;
+            LookAt = vectorLookAt;
+            VectorUp = vectorUp;
+            Fov = fieldOfView;
+            AspectRatio = aspectRatio;
+            Theta = fieldOfView * _degreesToRadians;
+            HeightHalf = Math.Tan(Theta / 2);
+            WidthHalf = AspectRatio * HeightHalf;
+            LookFrom = vectorLookFrom;
+            VectorW = vectorLookFrom.Substract(vectorLookAt).GetUnit();
+            VectorU = vectorUp.CrossProduct(VectorW).GetUnit();
+            VectorV = VectorW.CrossProduct(VectorU);
+            Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply(WidthHalf * focalDistance)).Substract(VectorV.Multiply(HeightHalf * focalDistance)).Substract(VectorW.Multiply(focalDistance));
+            Horizontal = VectorU.Multiply((2 * WidthHalf * focalDistance));
+            Vertical = VectorV.Multiply((2 * HeightHalf * focalDistance));
+        }
+
+
         public int Fov
         {
             get => _fov;
