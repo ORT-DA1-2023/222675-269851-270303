@@ -186,7 +186,11 @@ namespace UserInterface.Panels
             {
                 sceneController.RenderSceneBlur(scene);
             }
-            sceneController.RenderScene(scene);
+            else
+            {
+
+                sceneController.RenderScene(scene);
+            }
             LoadScene();
         }
 
