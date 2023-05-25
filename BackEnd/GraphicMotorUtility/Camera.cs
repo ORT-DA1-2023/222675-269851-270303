@@ -20,6 +20,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public double HeightHalf { get; set; }
         public double AspectRatio { get; set; }
         public double WidthHalf { get; set; }
+
+        public double LensRadius { get; set; }
         public double Theta
         {
             get => _theta;
