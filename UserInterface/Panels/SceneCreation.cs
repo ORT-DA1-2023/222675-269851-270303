@@ -111,7 +111,12 @@ namespace UserInterface.Panels
             {
                 try
                 {
-                    sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value);
+                    if(cmbBlur.Checked)
+                    {
+                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                    }
+                    string apertureNegative = "-1";
+                    sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
@@ -177,9 +182,28 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            if (cmbBlur.Checked)
+            {
+                sceneController.RenderSceneBlur(scene);
+            }
             sceneController.RenderScene(scene);
             LoadScene();
         }
 
+        private void cmbBlur_CheckedChanged(object sender, EventArgs e)
+        {
+            scene.UpdateLastModificationDate();
+            LoadScene();
+            if (!cmbBlur.Checked)
+            {
+                txtAperture.Enabled = false;
+                lblAperture.Enabled = false;
+            }
+            else
+            {
+                txtAperture.Enabled = true;
+                lblAperture.Enabled = true;
+            }
+        }
     }
 }
