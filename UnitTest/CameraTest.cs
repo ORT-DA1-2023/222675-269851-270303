@@ -19,6 +19,7 @@ namespace Render3D.UnitTest
         private readonly double validAspectRatio = 1;
         private readonly double validWidthHalf = 1;
         private readonly double validHeightHalf = 1;
+        private readonly double validLensRadius = 2;
 
         private readonly int tooSmallFov = -1;
         private readonly int tooLargeFov = 161;
@@ -77,6 +78,13 @@ namespace Render3D.UnitTest
         {
             cameraSample.Fov = validFov;
             Assert.AreEqual(validFov, cameraSample.Fov);
+        }
+
+        [TestMethod]
+        public void GivenAValidLensRadiusAssignsIt()
+        {
+            cameraSample.LensRadius = validLensRadius;
+            Assert.AreEqual(cameraSample.LensRadius, validLensRadius);
         }
 
         [TestMethod]
