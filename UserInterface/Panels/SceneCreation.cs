@@ -115,7 +115,8 @@ namespace UserInterface.Panels
         {
             if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
-                                   try
+                
+                    try
                     {
                         if (cmbBlur.Checked)
                         {
@@ -132,7 +133,7 @@ namespace UserInterface.Panels
                         lblCamera.ForeColor = Color.Red;
                         lblCamera.Text = ex.Message;
                     }
-                }
+                
               
 
             }
