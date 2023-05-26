@@ -115,14 +115,7 @@ namespace UserInterface.Panels
         {
             if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
-                if(!cmbBlur.Checked && IsValidFormatAperture(txtAperture.Text))
-                {
-                    lblCamera.ForeColor = Color.Red;
-                    lblCamera.Text = "Format not valid";
-                }
-                else
-                {
-                    try
+                                   try
                     {
                         if (cmbBlur.Checked)
                         {
