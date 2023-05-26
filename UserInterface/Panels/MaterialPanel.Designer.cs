@@ -30,11 +30,11 @@
         {
             this.btnCreateFigure = new System.Windows.Forms.Button();
             this.txtMaterialName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblRed = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblGreen = new System.Windows.Forms.Label();
+            this.lblBlue = new System.Windows.Forms.Label();
             this.nrRedColor = new System.Windows.Forms.NumericUpDown();
             this.nrGreenColor = new System.Windows.Forms.NumericUpDown();
             this.nrBlueColor = new System.Windows.Forms.NumericUpDown();
@@ -73,33 +73,33 @@
             this.txtMaterialName.Size = new System.Drawing.Size(265, 34);
             this.txtMaterialName.TabIndex = 9;
             // 
-            // label3
+            // lblRed
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblRed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(55, 267);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 29);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Red:";
+            this.lblRed.AutoSize = true;
+            this.lblRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRed.Location = new System.Drawing.Point(55, 267);
+            this.lblRed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRed.Name = "lblRed";
+            this.lblRed.Size = new System.Drawing.Size(64, 29);
+            this.lblRed.TabIndex = 8;
+            this.lblRed.Text = "Red:";
             // 
-            // label2
+            // lblName
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(55, 200);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 29);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Name:";
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(55, 200);
+            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(84, 29);
+            this.lblName.TabIndex = 7;
+            this.lblName.Text = "Name:";
             // 
             // label1
             // 
@@ -115,33 +115,33 @@
             this.label1.Text = "Create a new material!!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lblGreen
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblGreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(51, 327);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 29);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Green:";
+            this.lblGreen.AutoSize = true;
+            this.lblGreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGreen.Location = new System.Drawing.Point(51, 327);
+            this.lblGreen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGreen.Name = "lblGreen";
+            this.lblGreen.Size = new System.Drawing.Size(86, 29);
+            this.lblGreen.TabIndex = 12;
+            this.lblGreen.Text = "Green:";
             // 
-            // label5
+            // lblBlue
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblBlue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(55, 385);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 29);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Blue:";
+            this.lblBlue.AutoSize = true;
+            this.lblBlue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBlue.Location = new System.Drawing.Point(55, 385);
+            this.lblBlue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBlue.Name = "lblBlue";
+            this.lblBlue.Size = new System.Drawing.Size(68, 29);
+            this.lblBlue.TabIndex = 13;
+            this.lblBlue.Text = "Blue:";
             // 
             // nrRedColor
             // 
@@ -202,12 +202,12 @@
             this.panel1.Controls.Add(this.nrBlueColor);
             this.panel1.Controls.Add(this.btnCreateFigure);
             this.panel1.Controls.Add(this.nrGreenColor);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lblName);
             this.panel1.Controls.Add(this.nrRedColor);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lblRed);
+            this.panel1.Controls.Add(this.lblBlue);
             this.panel1.Controls.Add(this.txtMaterialName);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblGreen);
             this.panel1.Controls.Add(this.cmbMaterial);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 25);
@@ -233,7 +233,7 @@
             this.cmbMaterial.Items.AddRange(new object[] {
             "Lambertiano",
             "Metalico"});
-            this.cmbMaterial.Location = new System.Drawing.Point(167, 128);
+            this.cmbMaterial.Location = new System.Drawing.Point(167, 139);
             this.cmbMaterial.Name = "cmbMaterial";
             this.cmbMaterial.Size = new System.Drawing.Size(265, 24);
             this.cmbMaterial.TabIndex = 19;
@@ -246,7 +246,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMaterial.AutoSize = true;
             this.lblMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaterial.Location = new System.Drawing.Point(55, 123);
+            this.lblMaterial.Location = new System.Drawing.Point(55, 134);
             this.lblMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaterial.Name = "lblMaterial";
             this.lblMaterial.Size = new System.Drawing.Size(105, 29);
@@ -277,11 +277,11 @@
 
         private System.Windows.Forms.Button btnCreateFigure;
         private System.Windows.Forms.TextBox txtMaterialName;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRed;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblGreen;
+        private System.Windows.Forms.Label lblBlue;
         private System.Windows.Forms.NumericUpDown nrRedColor;
         private System.Windows.Forms.NumericUpDown nrGreenColor;
         private System.Windows.Forms.NumericUpDown nrBlueColor;
