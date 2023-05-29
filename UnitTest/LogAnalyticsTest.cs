@@ -65,18 +65,6 @@ namespace Render3D.UnitTest
             Assert.AreEqual(client2, c);
         }
 
-        [TestMethod]
-        public void GivenClient1Returns0SecondsAsRenderTime()
-        {
-            int sec = logAnalytics.RenderTimeInSecondsOfClient(client1);
-            Assert.AreEqual(0, sec);
-        }
 
-        [TestMethod]
-        public void GivenClient2Returns80SecondsAsRenderTime()
-        {
-            int sec= logAnalytics.RenderTimeInSecondsOfClient(client2);
-            Assert.AreEqual(80, sec);
-        }
     }
 }

@@ -87,9 +87,5 @@ namespace Render3D.BackEnd
             return (int)timeDifference.TotalSeconds;
         }
 
-        public bool Equals(Log l)
-        {
-            return l.RenderDate == RenderDate && l.Scene == Scene;
-        }
     }
 }
