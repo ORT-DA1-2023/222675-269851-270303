@@ -20,9 +20,12 @@ namespace Render3D.BackEnd
         public string TimeWindowSinceLastRender { get; set; }
         public Scene Scene { get; set; }
         public int NumberElementsInScene { get; set; }
+        public string Name { get;private set; }
 
         public Log(Scene scene, DateTime startedRenderDate)
         {
+            Name=scene.Name;
+
             Client = scene.Client;
             RenderDate = startedRenderDate;
 
@@ -37,6 +40,7 @@ namespace Render3D.BackEnd
 
         public Log(Scene scene)
         {
+            Name = $"Preview - {scene.Name}";
             Client = scene.Client;
             RenderDate = DateTimeProvider.Now;
             RenderTimeInSeconds = 0;
@@ -77,9 +81,6 @@ namespace Render3D.BackEnd
                 int days = secondsDifference / secondsPerDay;
                 return $"{days} day(s)";
             }
-
-
-
 
         }
     }

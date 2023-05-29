@@ -31,8 +31,20 @@ namespace Render3D.UnitTest
             modelSample = new Model();
         }
 
+        [TestMethod]
+        public void givenSceneLogReturnsItsName()
+        {
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+            Assert.AreEqual(sceneSample.Name, l.Name);
+        }
 
-   
+        [TestMethod]
+        public void givenPreviewLogReturnsPreviewAndName()
+        {
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+            Assert.AreEqual($"Preview - {sceneSample.Name}", l.Name);
+        }
+
         [TestMethod]
         public void GivenValidSceneAssignsTheScene()
         {
@@ -191,5 +203,6 @@ namespace Render3D.UnitTest
 
             Assert.AreEqual("100 day(s)", l.TimeWindowSinceLastRender);
         }
+
     }
 }
