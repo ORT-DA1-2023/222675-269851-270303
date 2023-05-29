@@ -50,6 +50,7 @@
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\SceneController.cs" />
     <Compile Include="GraphicMotorUtility\Camera.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
