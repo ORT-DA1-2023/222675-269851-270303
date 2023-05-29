@@ -14,17 +14,17 @@ namespace Render3D.BackEnd
         private const int secondsPerHour = 3600;
         private const int secondsPerDay = 86400;
 
-        public Client Client { get;set; }
+        public Client Client { get; set; }
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }
         public Scene Scene { get; set; }
         public int NumberElementsInScene { get; set; }
-        public string Name { get;private set; }
+        public string Name { get; private set; }
 
         public Log(Scene scene, DateTime startedRenderDate)
         {
-            Name=scene.Name;
+            Name = scene.Name;
 
             Client = scene.Client;
             RenderDate = startedRenderDate;
@@ -40,23 +40,20 @@ namespace Render3D.BackEnd
 
         public Log(Scene scene)
         {
-            Name = $"Preview - {scene.Name}";
+            Name = $"preview - {scene.Name}";
             Client = scene.Client;
             RenderDate = DateTimeProvider.Now;
             RenderTimeInSeconds = 0;
             Scene = scene;
             NumberElementsInScene = scene.PositionedModels.Count;
-            TimeWindowSinceLastRender = "First render";
+            TimeWindowSinceLastRender = null;
         }
 
-
-        private string TimeWindowBetweenTwoRenders(DateTime? lastRenderDate , DateTime currentRenderDate)
+        private string TimeWindowBetweenTwoRenders(DateTime? lastRenderDate, DateTime currentRenderDate)
         {
             if (lastRenderDate == null) return null;
 
-            TimeSpan timeDifference = (TimeSpan)(currentRenderDate - lastRenderDate);
-
-            int secondsDifference = (int)timeDifference.TotalSeconds;
+            int secondsDifference = SecondsBetweenDates((DateTime)lastRenderDate, currentRenderDate);
 
             if (secondsDifference == 0)
             {
@@ -83,5 +80,12 @@ namespace Render3D.BackEnd
             }
 
         }
+        private int SecondsBetweenDates(DateTime start, DateTime end)
+        {
+            TimeSpan timeDifference = (TimeSpan)(end - start);
+
+            return (int)timeDifference.TotalSeconds;
+        }
+
     }
 }

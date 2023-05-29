@@ -41,8 +41,8 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenPreviewLogReturnsPreviewAndName()
         {
-            Log l = new Log(sceneSample, DateTimeProvider.Now);
-            Assert.AreEqual($"Preview - {sceneSample.Name}", l.Name);
+            Log l = new Log(sceneSample);
+            Assert.AreEqual($"preview - {sceneSample.Name}", l.Name);
         }
 
         [TestMethod]
