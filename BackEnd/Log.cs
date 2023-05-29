@@ -10,9 +10,9 @@ namespace Render3D.BackEnd
 {
     public class Log
     {
-        private const int secondsPerMinute = 60;
-        private const int secondsPerHour = 3600;
-        private const int secondsPerDay = 86400;
+        private const int _secondsPerMinute = 60;
+        private const int _secondsPerHour = 3600;
+        private const int _secondsPerDay = 86400;
 
         public Client Client { get; set; }
         public int RenderTimeInSeconds { get; set; }
@@ -59,23 +59,23 @@ namespace Render3D.BackEnd
             {
                 return "0 second(s)";
             }
-            else if (secondsDifference < secondsPerMinute)
+            else if (secondsDifference < _secondsPerMinute)
             {
                 return $"{secondsDifference} second(s)";
             }
-            else if (secondsDifference < secondsPerHour)
+            else if (secondsDifference < _secondsPerHour)
             {
-                int minutes = secondsDifference / secondsPerMinute;
+                int minutes = secondsDifference / _secondsPerMinute;
                 return $"{minutes} minute(s)";
             }
-            else if (secondsDifference < secondsPerDay)
+            else if (secondsDifference < _secondsPerDay)
             {
-                int hours = secondsDifference / secondsPerHour;
+                int hours = secondsDifference / _secondsPerHour;
                 return $"{hours} hour(s)";
             }
             else
             {
-                int days = secondsDifference / secondsPerDay;
+                int days = secondsDifference / _secondsPerDay;
                 return $"{days} day(s)";
             }
 
@@ -87,5 +87,9 @@ namespace Render3D.BackEnd
             return (int)timeDifference.TotalSeconds;
         }
 
+        public bool Equals(Log l)
+        {
+            return l.RenderDate == RenderDate && l.Scene == Scene;
+        }
     }
 }
