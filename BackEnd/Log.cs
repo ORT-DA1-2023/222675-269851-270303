@@ -48,7 +48,7 @@ namespace Render3D.BackEnd
 
         private string TimeWindowBetweenTwoRenders(DateTime? lastRenderDate , DateTime currentRenderDate)
         {
-            return "First render";
+            return null;
         }
     }
 }

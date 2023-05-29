@@ -61,7 +61,40 @@ namespace Render3D.UnitTest
             Assert.AreEqual(sceneSample.Client, l.Client);
         }
 
+        [TestMethod]
+        public void givenLogReturnsItsRenderTimeInSeconds() {
+            Log l = new Log(sceneSample);
+            l.RenderTimeInSeconds = 1;
+            Assert.AreEqual(1, l.RenderTimeInSeconds);
+       
+        }
 
+        [TestMethod]
+        public void givenLogReturnsQuantityModelsInScene()
+        {
+            Log l = new Log(sceneSample,DateTimeProvider.Now);
+            Assert.AreEqual(sceneSample.PositionedModels.Count, l.NumberElementsInScene);
+        }
+
+        [TestMethod]
+        public void givenNeverRenderedSceneLogReturnsNullAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            Log l = new Log(sceneSample,DateTimeProvider.Now);
+            Assert.AreEqual(null, l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenAlreadyRenderedSceneLogReturns10secondsAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate= DateTimeProvider.Now;
+
+            DateTimeProvider.Now=DateTimeProvider.Now.AddSeconds(10);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("10 seconds", l.TimeWindowSinceLastRender);
+        }
 
     }
 }
