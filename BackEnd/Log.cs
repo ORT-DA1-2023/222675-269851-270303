@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Render3D.BackEnd
 {
@@ -45,10 +46,41 @@ namespace Render3D.BackEnd
         }
 
 
-
         private string TimeWindowBetweenTwoRenders(DateTime? lastRenderDate , DateTime currentRenderDate)
         {
-            return null;
+            if (lastRenderDate == null) return null;
+
+            TimeSpan timeDifference = (TimeSpan)(currentRenderDate - lastRenderDate);
+
+            int secondsDifference = (int)timeDifference.TotalSeconds;
+
+            if (secondsDifference == 0)
+            {
+                return "0 second(s)";
+            }
+            else if (secondsDifference < secondsPerMinute)
+            {
+                return $"{secondsDifference} second(s)";
+            }
+            else if (secondsDifference < secondsPerHour)
+            {
+                int minutes = secondsDifference / secondsPerMinute;
+                return $"{minutes} minute(s)";
+            }
+            else if (secondsDifference < secondsPerDay)
+            {
+                int hours = secondsDifference / secondsPerHour;
+                return $"{hours} hour(s)";
+            }
+            else
+            {
+                int days = secondsDifference / secondsPerDay;
+                return $"{days} day(s)";
+            }
+
+
+
+
         }
     }
 }

@@ -85,16 +85,111 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAlreadyRenderedSceneLogReturns10secondsAsTimeWindow()
+        public void givenASceneRenderedLessThanASecondAgoReturns0SecondsAsTimeWindow()
         {
             DateTimeProvider.Now = DateTime.Now;
             sceneSample.LastRenderizationDate= DateTimeProvider.Now;
 
-            DateTimeProvider.Now=DateTimeProvider.Now.AddSeconds(10);
+            DateTimeProvider.Now=DateTimeProvider.Now.AddMilliseconds(999);
             Log l = new Log(sceneSample, DateTimeProvider.Now);
 
-            Assert.AreEqual("10 seconds", l.TimeWindowSinceLastRender);
+            Assert.AreEqual("0 second(s)", l.TimeWindowSinceLastRender);
         }
 
+        [TestMethod]
+        public void givenASceneRendered10SecondsAgoReturns10SecondsAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddSeconds(10);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("10 second(s)", l.TimeWindowSinceLastRender);
+        }
+
+
+        [TestMethod]
+        public void givenASceneRendered59SecondsAgoReturns59SecondsAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddSeconds(59);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("59 second(s)", l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenASceneRendered1minuteAgoReturns1minuteAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddSeconds(60);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("1 minute(s)", l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenASceneRendered59minutesAgoReturns59MinutesAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddMinutes(59);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("59 minute(s)", l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenASceneRendered1hourAgoReturns1HourAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddHours(1);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("1 hour(s)", l.TimeWindowSinceLastRender);
+        }
+        [TestMethod]
+        public void givenASceneRendered23hours59MinutesAgoReturns23HoursAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddHours(23).AddMinutes(59);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("23 hour(s)", l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenASceneRendered1DayAgoReturns1DayAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddDays(1);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("1 day(s)", l.TimeWindowSinceLastRender);
+        }
+
+        [TestMethod]
+        public void givenASceneRendered100DayAgoReturns100DayAsTimeWindow()
+        {
+            DateTimeProvider.Now = DateTime.Now;
+            sceneSample.LastRenderizationDate = DateTimeProvider.Now;
+
+            DateTimeProvider.Now = DateTimeProvider.Now.AddDays(100);
+            Log l = new Log(sceneSample, DateTimeProvider.Now);
+
+            Assert.AreEqual("100 day(s)", l.TimeWindowSinceLastRender);
+        }
     }
 }
