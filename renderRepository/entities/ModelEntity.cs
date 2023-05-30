@@ -10,12 +10,9 @@ namespace renderRepository.entities
 {
     public class ModelEntity
     {
-        [Key]
-        [Column(Order = 0)]
+        public int Id { get; set; } 
         public string Name { get; set; }
-        [Key]
-        [Column(Order = 1)]
-        public ClientEntity ClientEntity { get; set; }
+        public ClientEntity Client { get; set; }
         public FigureEntity FigureEntity { get; set; }
         public MaterialEntity MaterialEntity { get; set; }
 

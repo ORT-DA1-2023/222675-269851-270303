@@ -10,11 +10,8 @@ namespace renderRepository.entities
 {
     public class FigureEntity
     {
-        [Key]
-        [Column(Order = 0)]
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Key]
-        [Column(Order = 1)]
         public ClientEntity Client { get; set; }
         public int Radius { get; set; }
 

@@ -55,9 +55,9 @@
     <Compile Include="entities\FigureEntity.cs" />
     <Compile Include="entities\MaterialEntity.cs" />
     <Compile Include="entities\ModelEntity.cs" />
-    <Compile Include="Migrations\202305291313590_v1.cs" />
-    <Compile Include="Migrations\202305291313590_v1.designer.cs">
-      <DependentUpon>202305291313590_v1.cs</DependentUpon>
+    <Compile Include="Migrations\202305292341095_v1.cs" />
+    <Compile Include="Migrations\202305292341095_v1.designer.cs">
+      <DependentUpon>202305292341095_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,9 +68,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305291313590_v1.resx">
-      <DependentUpon>202305291313590_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305292341095_v1.resx">
+      <DependentUpon>202305292341095_v1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackEnd\BackEnd.csproj">
+      <Project>{48A432F2-A97D-4C6A-9D2C-04DD26BA809F}</Project>
+      <Name>BackEnd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
