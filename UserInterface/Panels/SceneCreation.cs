@@ -1,5 +1,5 @@
 ﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Controllers;
+using Render3D.RenderLogic.Controllers;
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.Drawing;
@@ -98,6 +98,12 @@ namespace UserInterface.Panels
             return vectorFormat.IsMatch(input);
         }
 
+        public bool IsValidFormatAperture(string input)
+        {
+            Regex vectorFormat = new Regex(@"^(\d+(\.\d+)?),(\d+(\.\d+)?)$");
+            return vectorFormat.IsMatch(input);
+        }
+
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -109,24 +115,32 @@ namespace UserInterface.Panels
         {
             if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
             {
-                try
-                {
-                    sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value);
-                    LoadScene();
-                    lblCamera.ForeColor = Color.Green;
-                    lblCamera.Text = "Camera settings change correctly";
-                }
-                catch (Exception ex)
-                {
-                    lblCamera.ForeColor = Color.Red;
-                    lblCamera.Text = ex.Message;
-                }
+                
+                    try
+                    {
+                        if (cmbBlur.Checked)
+                        {
+                            sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                        }
+                        string apertureNegative = "-1";
+                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
+                        LoadScene();
+                        lblCamera.ForeColor = Color.Green;
+                        lblCamera.Text = "Camera settings change correctly";
+                    }
+                    catch (Exception ex)
+                    {
+                        lblCamera.ForeColor = Color.Red;
+                        lblCamera.Text = ex.Message;
+                    }
+                
+              
 
             }
             else
             {
                 lblCamera.ForeColor = Color.Red;
-                lblCamera.Text = "format not valid";
+                lblCamera.Text = "Format not valid";
             }
         }
 
@@ -177,9 +191,32 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
-            sceneController.RenderScene(scene);
+            if (cmbBlur.Checked)
+            {
+                sceneController.RenderSceneBlur(scene);
+            }
+            else
+            {
+
+                sceneController.RenderScene(scene);
+            }
             LoadScene();
         }
 
+        private void cmbBlur_CheckedChanged(object sender, EventArgs e)
+        {
+            scene.UpdateLastModificationDate();
+            LoadScene();
+            if (!cmbBlur.Checked)
+            {
+                txtAperture.Enabled = false;
+                lblAperture.Enabled = false;
+            }
+            else
+            {
+                txtAperture.Enabled = true;
+                lblAperture.Enabled = true;
+            }
+        }
     }
 }

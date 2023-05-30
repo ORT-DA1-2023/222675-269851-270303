@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd.Utilities;
+﻿using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
@@ -20,6 +21,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public double HeightHalf { get; set; }
         public double AspectRatio { get; set; }
         public double WidthHalf { get; set; }
+
+        public double LensRadius { get; set; }
         public double Theta
         {
             get => _theta;
@@ -70,6 +73,28 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Horizontal = VectorU.Multiply((2 * WidthHalf));
             Vertical = VectorV.Multiply((2 * HeightHalf));
         }
+
+        public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, Vector3D vectorUp, int fieldOfView, double aspectRatio, double aperture)
+        {
+            double focalDistance = vectorLookFrom.Substract(vectorLookAt).Length();
+            LensRadius = aperture / 2;
+            LookAt = vectorLookAt;
+            VectorUp = vectorUp;
+            Fov = fieldOfView;
+            AspectRatio = aspectRatio;
+            Theta = fieldOfView * _degreesToRadians;
+            HeightHalf = Math.Tan(Theta / 2);
+            WidthHalf = AspectRatio * HeightHalf;
+            LookFrom = vectorLookFrom;
+            VectorW = vectorLookFrom.Substract(vectorLookAt).GetUnit();
+            VectorU = vectorUp.CrossProduct(VectorW).GetUnit();
+            VectorV = VectorW.CrossProduct(VectorU);
+            Corner_lowerLeft = LookFrom.Substract(VectorU.Multiply(WidthHalf * focalDistance)).Substract(VectorV.Multiply(HeightHalf * focalDistance)).Substract(VectorW.Multiply(focalDistance));
+            Horizontal = VectorU.Multiply((2 * WidthHalf * focalDistance));
+            Vertical = VectorV.Multiply((2 * HeightHalf * focalDistance));
+        }
+
+
         public int Fov
         {
             get => _fov;
@@ -100,6 +125,27 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Vector3D horizontalPosition = Horizontal.Multiply(u);
             Vector3D verticalPosition = Vertical.Multiply(v);
             return new Ray(LookFrom, Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom));
+        }
+
+        public Ray GetRayForBlurCamera(double u, double v, Random random)
+        {
+            Vector3D vectorRandom = GetRandomInUnitForBlur(random).Multiply(LensRadius);
+            Vector3D vectorOffset = VectorU.Multiply(vectorRandom.X).Add(VectorV.Multiply(vectorRandom.Y));
+            Vector3D horizontalPosition = Horizontal.Multiply(u);
+            Vector3D verticalPosition = Vertical.Multiply(v);
+            return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
+
+        }
+
+        public Vector3D GetRandomInUnitForBlur(Random random)
+        {
+            Vector3D vector;
+            do
+            {
+                Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
+            return vector;
         }
 
     }
