@@ -47,8 +47,12 @@
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\SceneController.cs" />
+    <Compile Include="RepoService\IFigureRepo.cs" />
+    <Compile Include="RepoService\IMaterialRepo.cs" />
     <Compile Include="LogAnalytics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepoService\IClientRepo.cs" />
+    <Compile Include="RepoService\IModelRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackEnd\BackEnd.csproj">

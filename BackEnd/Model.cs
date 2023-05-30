@@ -37,6 +37,8 @@ namespace Render3D.BackEnd
             }
         }
 
+        public string Id { get; set; }
+
         private void ValidateName(string Name)
         {
             if (HelperValidator.IsAnEmptyString(Name)) throw new BackEndException("Name must not be empty");

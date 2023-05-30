@@ -26,6 +26,8 @@ namespace Render3D.BackEnd.Figures
             return Name;
         }
         public Vector3D Position { get => _position; set => _position = value; }
+        public object Id { get; set; }
+
         public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
         public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);
 

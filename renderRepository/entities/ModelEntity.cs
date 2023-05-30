@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,5 +17,15 @@ namespace renderRepository.entities
         public FigureEntity FigureEntity { get; set; }
         public MaterialEntity MaterialEntity { get; set; }
 
+        internal static ModelEntity FromDomain(Model model)
+        {
+            return new ModelEntity
+            {
+                Name = model.Name,
+                Client = ClientEntity.FromDomain(model.Client),
+                FigureEntity = FigureEntity.FromDomain(model.Figure),
+                MaterialEntity = MaterialEntity.FromDomain(model.Material)
+            };
+        }
     }
 }
