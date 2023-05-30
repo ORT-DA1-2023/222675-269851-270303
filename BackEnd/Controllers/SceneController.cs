@@ -12,14 +12,23 @@ namespace Render3D.BackEnd.Controllers
         public ClientController ClientController { get; set; }
         public GraphicMotor GraphicMotor { get; } = new GraphicMotor();
 
-        public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov)
+        public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov, string aperture)
         {
             try
             {
+                Camera camera;
                 Vector3D lookAtVector = GetVectorFromString(stringLookAt);
                 Vector3D lookFromVector = GetVectorFromString(stringLookFrom);
                 Vector3D vectorUp = new Vector3D(0, 1, 0);
-                Camera camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio());
+                double apertureDouble = double.Parse(aperture);
+                if (apertureDouble > 0)
+                {
+                    camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio(), apertureDouble);
+                }
+                else
+                {
+                    camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio());
+                }
                 if (!scene.Camera.Equals(camera))
                 {
                     scene.Camera = camera;
@@ -158,7 +167,8 @@ namespace Render3D.BackEnd.Controllers
 
         public void RenderScene(Scene scene)
         {
-            scene.Preview = GraphicMotor.Render(scene);
+            Boolean blur = false;
+            scene.Preview = GraphicMotor.Render(scene, blur);
             scene.UpdateLastRenderizationDate();
         }
 
@@ -181,6 +191,13 @@ namespace Render3D.BackEnd.Controllers
                 throw new BackEndException("No scene found");
             }
             return sceneWithModel;
+        }
+
+        public void RenderSceneBlur(Scene scene)
+        {
+            Boolean blur = true;
+            scene.Preview = GraphicMotor.Render(scene, blur);
+            scene.UpdateLastRenderizationDate();
         }
     }
 }

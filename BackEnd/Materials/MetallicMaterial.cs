@@ -1,18 +1,17 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.Materials
 {
-
-    public class LambertianMaterial : Material
+    public class MetallicMaterial : Material
     {
-        public LambertianMaterial() { }
-
         public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
-            Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure(random));
-            Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
-            return new Ray(hitRecord.Intersection, newVector);
+            throw new NotImplementedException();
         }
 
         private Vector3D GetRandomInUnitFigure(Random random)
@@ -26,13 +25,5 @@ namespace Render3D.BackEnd.Materials
             return vector;
         }
 
-
-
-
-
-        public override string ToString()
-        {
-            return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
-        }
     }
 }

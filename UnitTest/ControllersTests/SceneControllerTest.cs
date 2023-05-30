@@ -121,7 +121,7 @@ namespace Render3D.UnitTest.ControllersTests
             string lookAt = "(1;1;1)";
             string lookFrom = "(1;1;1)";
             Camera testCamera = new Camera() { LookAt = _vectorOfOnes, LookFrom = _vectorOfOnes, Fov = 30 };
-            _sceneController.EditCamera(_scene, lookAt, lookFrom, 30);
+            _sceneController.EditCamera(_scene, lookAt, lookFrom, 30, "-1");
             Assert.IsTrue(_scene.Camera.Equals(testCamera));
         }
         [TestMethod]
@@ -131,7 +131,7 @@ namespace Render3D.UnitTest.ControllersTests
             _scene = new Scene() { Client = _clientSample, Name = "SceneSample1", Camera = _defaultCamera };
             string lookAt = "(1;1;1)";
             string lookFrom = "(1;1;1)";
-            _sceneController.EditCamera(_scene, lookAt, lookFrom, -30);
+            _sceneController.EditCamera(_scene, lookAt, lookFrom, -30, "-1");
         }
 
         [TestMethod]
