@@ -1,9 +1,10 @@
-﻿using Render3D.BackEnd.Figures;
+﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
 using System;
 
 
-namespace Render3D.BackEnd.Controllers
+namespace Render3D.RenderLogic.Controllers
 {
     public class FigureController
     {
