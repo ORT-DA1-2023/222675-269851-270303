@@ -4,11 +4,11 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class Vector3D
     {
-        public Vector3D(double v1, double v2, double v3)
+        public Vector3D(double x, double y, double z)
         {
-            X = v1;
-            Y = v2;
-            Z = v3;
+            X = x;
+            Y = y;
+            Z = z;
         }
         public double X { get; set; }
         public double Y { get; set; }

@@ -43,21 +43,21 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsReturnsTheSum()
+        public void GivenTwoVectorsReturnsSum()
         {
             Assert.AreEqual(allOnes.Add(allOnes).X, allTwos.X);
             Assert.AreEqual(allOnes.Add(allOnes).Y, allTwos.Y);
             Assert.AreEqual(allOnes.Add(allOnes).Z, allTwos.Z);
         }
         [TestMethod]
-        public void GivenTwoVectorsReturnsTheDifference()
+        public void GivenTwoVectorsReturnsDifference()
         {
             Assert.AreEqual(allTwos.Substract(allOnes).X, allOnes.X);
             Assert.AreEqual(allTwos.Substract(allOnes).Y, allOnes.Y);
             Assert.AreEqual(allTwos.Substract(allOnes).Z, allOnes.Z);
         }
         [TestMethod]
-        public void GivenVectorAndDoubleMultiplyEachCoordenateByTheNumber()
+        public void GivenVectorAndDoubleMultiplyEachCoordenateByNumber()
         {
             Assert.AreEqual(allOnes.Multiply(two).X, allTwos.X);
             Assert.AreEqual(allOnes.Multiply(two).Y, allTwos.Y);
@@ -65,7 +65,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenVectorAndAdoubleDivideEachCoordenateByTheNumber()
+        public void GivenVectorAndAdoubleDivideEachCoordenateByNumber()
         {
             Assert.AreEqual(allTwos.Divide(two).X, allOnes.X);
             Assert.AreEqual(allTwos.Divide(two).Y, allOnes.Y);
@@ -73,7 +73,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsAddsTheSecondToTheFirstOne()
+        public void GivenTwoVectorsAddsTheSecondToFirstOne()
         {
             allOnes.AddTo(allOnes);
             Assert.AreEqual(allOnes.X, allTwos.X);
@@ -82,7 +82,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsSubstractsTheSecondToTheFirstOne()
+        public void GivenTwoVectorsSubstractsTheSecondToFirstOne()
         {
             allTwos.SubstractFrom(allOnes);
             Assert.AreEqual(allOnes.X, allTwos.X);
@@ -137,7 +137,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsWithSameComponentsReturnsTheyAreEqual()
+        public void GivenTwoVectorsWithSameComponentsReturnsAreEqual()
         {
             Vector3D vector1 = new Vector3D(1, 2, 3);
             Vector3D vector2 = new Vector3D(1, 2, 3);
@@ -145,7 +145,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsWithTwoComponentsInCommonReturnsTheyAreNotEqual()
+        public void GivenTwoVectorsWithTwoComponentsInCommonReturnsAreNotEqual()
         {
             Vector3D vector1 = new Vector3D(1, 2, 3);
             Vector3D vector2 = new Vector3D(1, 2, 1);
@@ -160,7 +160,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoVectorsWithNoComponentsInCommonReturnsTheyAreNotEqual()
+        public void GivenTwoVectorsWithNoComponentsInCommonReturnsAreNotEqual()
         {
             Vector3D vector1 = new Vector3D(0, 0, 0);
             Vector3D vector2 = new Vector3D(1, 1, 1);

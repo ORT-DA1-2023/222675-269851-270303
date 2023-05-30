@@ -1,35 +1,36 @@
-﻿using System;
+using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Render3D.BackEnd.Materials;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class GraphicMotor
     {
-        private int _resolutionHeight;
+        private int _resolutionWidth;
         private int _pixelSampling;
         private int _maximumDepth;
-        private const int _resultionWidthDefault = 2;
-        private const int _resolutionHeightDefault = 3;
+        private const int _resultionWidthDefault = 300;
+        private const int _resolutionHeightDefault = 200;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
 
         public GraphicMotor()
         {
-            ResolutionHeight = _resolutionHeightDefault;
+            ResolutionWidth = _resultionWidthDefault;
             PixelSampling = _pixelSamplingDefault;
             MaximumDepth = _maximumDepthDefault;
         }
 
-        public int ResolutionHeight
+        public int ResolutionWidth
         {
-            get { return _resolutionHeight; }
+            get { return _resolutionWidth; }
             set
             {
                 ValidateNumberIsGreaterThanZero(value, "resolution");
-                _resolutionHeight = value;
+                _resolutionWidth = value;
 
             }
         }
@@ -57,30 +58,31 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             }
         }
 
-        private int WidthResolution()
+        private int ResolutionHeight()
         {
-            return (ResolutionHeight * _resultionWidthDefault) / _resolutionHeightDefault;
+            return (ResolutionWidth * _resolutionHeightDefault) / _resultionWidthDefault;
         }
 
         public double AspectRatio()
         {
-            return((double)ResolutionHeight) / WidthResolution();
+            return ((double)ResolutionWidth) / ResolutionHeight();
         }
 
         public Bitmap RenderModelPreview(Model model)
         {
+            ResolutionWidth = 100;
+            PixelSampling = 30;
+            MaximumDepth = 10;
+
             Scene previewScene = new Scene();
+            model.Figure.Position = new Vector3D(0, 0, 0);
             previewScene.PositionedModels.Add(model);
-
-            Camera camera = new Camera
-            {
-                LookAt = model.Figure.Position,
-                LookFrom = model.Figure.Position.Add(new Vector3D(0, 0, -10)),
-                Fov = 160
-            };
-
+            Sphere sphereSample = (Sphere)model.Figure;
+            double radius = sphereSample.Radius;
+            Vector3D vectorUp = new Vector3D(0, 2 * radius, 0);
+            Vector3D twoTimesRadius = new Vector3D(2 * radius, 2 * radius, 2 * radius);
+            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, vectorUp, 60, 1);
             previewScene.Camera = camera;
-
             return Render(previewScene);
         }
 
@@ -88,16 +90,16 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap Render(Scene sceneSample)
         {
-            int width = WidthResolution();
-            int height = ResolutionHeight;
+            int width = ResolutionWidth;
+            int height = ResolutionHeight();
             PixelMatrix = new PixelMatrix(width, height);
             PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix);
-            String imagePPM = CreateImagePPM(PixelMatrix.Matrix);
+            string imagePPM = CreateImagePPM(PixelMatrix.Matrix);
             Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
         }
 
-        private Bitmap GenerateBitmap(Bitmap bitmap, String imagePPM)
+        private Bitmap GenerateBitmap(Bitmap bitmap, string imagePPM)
         {
             string[] linesImagePPM = imagePPM.Split('\n');
             for (int i = 3; i < linesImagePPM.Length - 1; i++)
@@ -107,8 +109,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                 var g = rgbValues[1];
                 var b = rgbValues[2];
                 var lineNumber = i - 3;
-                var pixelColumn = lineNumber % WidthResolution();
-                var pixelRow = lineNumber / WidthResolution();
+                var pixelColumn = lineNumber % ResolutionWidth;
+                var pixelRow = lineNumber / ResolutionWidth;
                 bitmap.SetPixel(pixelColumn, pixelRow, Color.FromArgb(int.Parse(r), int.Parse(g), int.Parse(b)));
             }
 
@@ -118,16 +120,16 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix)
         {
             Random random = new Random();
-            for (var row = ResolutionHeight - 1; row >= 0; row--)
+            for (var row = ResolutionHeight() - 1; row >= 0; row--)
             {
-                for (var column = 0; column < WidthResolution(); column++)
+                for (var column = 0; column < ResolutionWidth; column++)
                 {
                     Colour pixelColor = new Colour(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
 
-                        double u = (column + random.NextDouble()) / WidthResolution();
-                        double v = (row + random.NextDouble()) / ResolutionHeight;
+                        double u = (column + random.NextDouble()) / ResolutionWidth;
+                        double v = (row + random.NextDouble()) / ResolutionHeight();
                         Ray ray = sceneSample.Camera.GetRay(u, v);
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
                     }
@@ -141,9 +143,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public void SavePixel(int row, int column, Colour pixelRGB, Colour[,] matrix)
         {
             int posX = column;
-            int posY = ResolutionHeight - row - 1;
+            int posY = ResolutionHeight() - row - 1;
 
-            if (posY < ResolutionHeight)
+            if (posY < ResolutionHeight())
             {
                 matrix[posY, posX] = pixelRGB;
             }
@@ -155,8 +157,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private string CreateImagePPM(Colour[,] matrix)
         {
-            var width = WidthResolution();
-            var height = ResolutionHeight;
+            var width = ResolutionWidth;
+            var height = ResolutionHeight();
             StringBuilder ppmString = new StringBuilder();
             ppmString.AppendLine("P3");
             ppmString.AppendLine($"{width} {height}");
@@ -169,11 +171,10 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     ppmString.AppendLine($"{pixel.Red()} {pixel.Green()} {pixel.Blue()}");
                 }
             }
-            Console.WriteLine(ppmString.ToString());
             return ppmString.ToString();
         }
 
-        private void ValidateNumberIsGreaterThanZero(int number, String word)
+        private void ValidateNumberIsGreaterThanZero(int number, string word)
         {
             if (number <= 0) throw new BackEndException($"The {word} must be greater than 0.");
         }

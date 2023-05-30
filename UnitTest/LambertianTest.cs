@@ -14,7 +14,7 @@ namespace Render3D.UnitTest
 
         private Client clientSample;
         private readonly string clientSampleName = "clientSampleName";
-        HitRecord3D hitSample;
+        private HitRecord3D hitSample;
 
         [TestInitialize]
         public void Initialize()
@@ -23,8 +23,10 @@ namespace Render3D.UnitTest
             {
                 Name = clientSampleName
             };
-            materialSample = new LambertianMaterial();
-            materialSample.Client = clientSample;
+            materialSample = new LambertianMaterial
+            {
+                Client = clientSample
+            };
 
             hitSample = new HitRecord3D()
             {
@@ -71,8 +73,8 @@ namespace Render3D.UnitTest
         public void GivenMaterialReturnsItsToString()
         {
             materialSample.Name = validMaterialName;
-              materialSample.Attenuation = new Colour(1,1,0);
-              Assert.AreEqual (materialSample.ToString(), $"{validMaterialName} (255,255,0)");
+            materialSample.Attenuation = new Colour(1, 1, 0);
+            Assert.AreEqual(materialSample.ToString(), $"{validMaterialName} (255,255,0)");
         }
 
         [TestMethod]
@@ -88,7 +90,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenRayReflectedVerifiesItsOriginComesFromIntersection()
         {
-            Ray reflected=materialSample.ReflectsTheLight(hitSample, new Random());
+            Ray reflected = materialSample.ReflectsTheLight(hitSample, new Random());
             Assert.AreEqual(reflected.Origin, hitSample.Intersection);
         }
     }

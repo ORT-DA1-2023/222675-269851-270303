@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 
@@ -34,7 +33,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenValidAttenuationAssingsToHitRecord()
+        public void GivenValidAttenuationAssingsToHitRecord()
         {
             attenuationSample = new Colour(7 / 255, 234 / 255, 34 / 255);
             hitRecordSample.Attenuation = attenuationSample;
@@ -50,7 +49,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenValidIntersectionAssingsToTheHitRecord()
+        public void GivenValidIntersectionAssingsToHitRecord()
         {
             intersectionSample = new Vector3D(0, 0, 0);
             hitRecordSample.Intersection = intersectionSample;
@@ -58,7 +57,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidNormalItAssingsToTheHitRecord()
+        public void GivenAValidNormalItAssingsToHitRecord()
         {
             normalSample = new Vector3D(0, 0, 0);
             hitRecordSample.Normal = normalSample;

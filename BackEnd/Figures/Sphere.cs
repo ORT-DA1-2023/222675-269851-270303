@@ -1,6 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Utilities;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.BackEnd.Figures
@@ -35,30 +35,30 @@ namespace Render3D.BackEnd.Figures
         public override bool WasHit(Ray ray, double minDistance, double maxDistance)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
-            double a = ray.Direction.DotProduct(ray.Direction);
-            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
-            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
-            double discriminant = (b * b) - (4 * a * c);
+            double squaredTerm = ray.Direction.DotProduct(ray.Direction);
+            double linearTerm = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double independentTerm = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (linearTerm * linearTerm) - (4 * squaredTerm * independentTerm);
             if (discriminant < 0)
             {
                 return false;
             }
-            double t = ((-b - Math.Sqrt(discriminant)) / (2 * a));
-            return HelperValidator.IsANumberInRange(t, minDistance, maxDistance);
+            double distance = ((-linearTerm - Math.Sqrt(discriminant)) / (2 * squaredTerm));
+            return HelperValidator.IsANumberInRange(distance, minDistance, maxDistance);
 
         }
 
         public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Colour color)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
-            double a = ray.Direction.DotProduct(ray.Direction);
-            double b = vectorOriginCenter.DotProduct(ray.Direction) * 2;
-            double c = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
-            double discriminant = (b * b) - (4 * a * c);
-            double t = (((-1 * b) - Math.Sqrt(discriminant)) / (2 * a));
-            Vector3D intersectionPoint = ray.PointAt(t);
+            double squaredTerm = ray.Direction.DotProduct(ray.Direction);
+            double linearTerm = vectorOriginCenter.DotProduct(ray.Direction) * 2;
+            double independentTerm = vectorOriginCenter.DotProduct(vectorOriginCenter) - (Radius * Radius);
+            double discriminant = (linearTerm * linearTerm) - (4 * squaredTerm * independentTerm);
+            double distance = (((-1 * linearTerm) - Math.Sqrt(discriminant)) / (2 * squaredTerm));
+            Vector3D intersectionPoint = ray.PointAt(distance);
             Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
-            return new HitRecord3D(t, intersectionPoint, normal, color);
+            return new HitRecord3D(distance, intersectionPoint, normal, color);
         }
 
         private void ValidateRadius(double value)
@@ -69,9 +69,9 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
-          public override String ToString()
+        public override string ToString()
         {
-            return base.ToString() +" "+ _radius;
+            return base.ToString() + " " + _radius;
         }
     }
 }

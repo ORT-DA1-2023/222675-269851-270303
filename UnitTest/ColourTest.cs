@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd;
 
 namespace Render3D.UnitTest
 {
@@ -41,7 +40,7 @@ namespace Render3D.UnitTest
             double percentageRed = 0.5;
             double percentageGreen = 0.2;
             double percentageBlue = 0.1;
-           
+
             Colour colourSample = new Colour(percentageRed, percentageGreen, percentageBlue);
             int blueValue = colourSample.Blue();
 
@@ -116,7 +115,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoDifferentColoursReturnsTheyAreNotEqual()
+        public void GivenTwoDifferentColoursReturnsAreNotEqual()
         {
             Colour red = new Colour(1, 0, 0);
             Colour white = new Colour(1, 1, 1);
@@ -124,7 +123,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTheSameColoursReturnsTheyAreEqual()
+        public void GivenSameColoursReturnsAreEqual()
         {
             Colour red1 = new Colour(1, 0, 0);
             Colour red2 = new Colour(1, 0, 0);

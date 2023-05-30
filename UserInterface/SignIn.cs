@@ -46,8 +46,8 @@ namespace Render3D.UserInterface
 
         private void RepeatedPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
-            String clientPassword = txtClientPassword.Text;
-            String repeatedPassword = txtClientRepeatedPassword.Text;
+            string clientPassword = txtClientPassword.Text;
+            string repeatedPassword = txtClientRepeatedPassword.Text;
             if (!clientPassword.Equals(repeatedPassword) && (repeatedPassword != ""))
             {
                 lblPasswordsDontMatch.Text = "the password don't match";
@@ -60,39 +60,42 @@ namespace Render3D.UserInterface
 
         private void ClientPasswordKeyUpCheck(object sender, KeyEventArgs e)
         {
-            String clientPassword = txtClientPassword.Text;
+            string clientPassword = txtClientPassword.Text;
             if ((clientPassword != ""))
             {
                 try
                 {
                     render.clientController.CheckPassword(clientPassword);
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     lblWrongPasswordMessage.Text = ex.Message;
                     return;
                 }
-                
+
             }
+            RepeatedPasswordKeyUpCheck(sender, e);
             lblWrongPasswordMessage.Text = "";
         }
 
         private void UsernameKeyUpCheck(object sender, KeyEventArgs e)
         {
-            String clientName = txtClientName.Text;
+            string clientName = txtClientName.Text;
             if ((clientName != ""))
             {
                 try
                 {
                     render.clientController.CheckName(clientName);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     lblWrongUsernameMessage.Text = ex.Message;
                     return;
                 }
-   
+
             }
-                lblWrongUsernameMessage.Text = "";
-            
+            lblWrongUsernameMessage.Text = "";
+
         }
 
         private void VariableInitialize(object sender, EventArgs e)

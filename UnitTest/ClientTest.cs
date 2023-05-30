@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd.Utilities;
 using Render3D.BackEnd;
+using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.UnitTest
@@ -96,7 +96,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenTwoClientsWithSameNameReturnTheyAreEqual()
+        public void GivenTwoClientsWithSameNameReturnAreEqual()
         {
             Client client2 = new Client()
             {

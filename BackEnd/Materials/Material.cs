@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
-
 using System;
 
 namespace Render3D.BackEnd.Materials
@@ -10,7 +9,7 @@ namespace Render3D.BackEnd.Materials
     {
         protected string _name;
 
-        public String Name
+        public string Name
         {
             get => _name;
             set
@@ -33,7 +32,7 @@ namespace Render3D.BackEnd.Materials
 
         }
 
-        public override String ToString()
+        public override string ToString()
         {
             return Name;
         }
