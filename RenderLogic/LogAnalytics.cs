@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Render3D.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Render3D.BackEnd
+namespace Render3D.RenderLogic
 {
     public class LogAnalytics
     {
