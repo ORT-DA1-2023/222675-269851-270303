@@ -8,6 +8,7 @@ namespace Render3D.BackEnd.Materials
     {
         public LambertianMaterial() { }
 
+
         public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
             Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure(random));
@@ -27,12 +28,9 @@ namespace Render3D.BackEnd.Materials
         }
 
 
-
-
-
         public override string ToString()
         {
-            return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
+            return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
     }
 }

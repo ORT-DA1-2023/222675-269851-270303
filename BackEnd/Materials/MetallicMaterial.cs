@@ -9,6 +9,8 @@ namespace Render3D.BackEnd.Materials
 {
     public class MetallicMaterial : Material
     {
+        public double Blur { get; set; }
+
         public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
             throw new NotImplementedException();
@@ -25,5 +27,9 @@ namespace Render3D.BackEnd.Materials
             return vector;
         }
 
+        public override string ToString()
+        {
+            return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
+        }
     }
 }
