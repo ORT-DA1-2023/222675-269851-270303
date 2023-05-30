@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace renderRepository.entities
+{
+    public class MaterialEntity
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ClientEntity Client { get; set; }
+        public int Red {get; set;}
+        public int Green { get; set;}
+        public int Blue { get; set;}  
+        public int Blur { get; set;}
+    }
+}

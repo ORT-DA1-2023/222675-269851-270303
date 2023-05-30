@@ -9,6 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestRender3D", "UnitTest\UnitTestRender3D.csproj", "{B26712A1-600A-497A-B623-85D451955714}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "renderRepository", "renderRepository\renderRepository.csproj", "{B276A208-F453-4372-8E22-92A5ED630802}"
+
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +26,10 @@ Global
 		{45334A09-5BA3-46D6-9647-D9819947B799}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45334A09-5BA3-46D6-9647-D9819947B799}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45334A09-5BA3-46D6-9647-D9819947B799}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B26712A1-600A-497A-B623-85D451955714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B26712A1-600A-497A-B623-85D451955714}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B26712A1-600A-497A-B623-85D451955714}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B26712A1-600A-497A-B623-85D451955714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B276A208-F453-4372-8E22-92A5ED630802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B276A208-F453-4372-8E22-92A5ED630802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B276A208-F453-4372-8E22-92A5ED630802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B276A208-F453-4372-8E22-92A5ED630802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
