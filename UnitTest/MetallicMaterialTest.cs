@@ -9,8 +9,8 @@ namespace Render3D.UnitTest
     [TestClass]
     public class MetallicMaterialTest
     {
-        private LambertianMaterial materialSample;
-        private readonly string validMaterialName = "LambertianMaterialName";
+        private MetallicMaterial materialSample;
+        private readonly string validMaterialName = "MetallicMaterialName";
 
         private Client clientSample;
         private readonly string clientSampleName = "clientSampleName";
@@ -23,7 +23,7 @@ namespace Render3D.UnitTest
             {
                 Name = clientSampleName
             };
-            materialSample = new LambertianMaterial
+            materialSample = new MetallicMaterial
             {
                 Client = clientSample
             };
