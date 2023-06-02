@@ -84,7 +84,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void Save_ShouldSaveImageAsPpm()
+        public void GivenBitmapSavesItAsPPM()
         {
             Bitmap bitmap = new Bitmap(2, 2);
             string destinationPath = "test.ppm";
@@ -98,7 +98,6 @@ namespace Render3D.UnitTest
             Assert.AreEqual(".ppm", Path.GetExtension(destinationPath).ToLower());
             if (File.Exists(destinationPath))
                 File.Delete(destinationPath);
-
         }
     }
 }

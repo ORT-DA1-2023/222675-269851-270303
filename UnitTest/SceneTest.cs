@@ -195,7 +195,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenRayWithHitAssignsHitValues()
         {
-            Colour ret = sceneSample.ShootRay(raySample, 10, new Random());
+            Colour ret = sceneSample.ShootRay(raySample, 10);
             Assert.AreEqual(154, ret.Red());
             Assert.AreEqual(194, ret.Green());
             Assert.AreEqual(255, ret.Blue());
@@ -223,7 +223,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenShootRayWithoutHitDoesNotReturnMaterialColour()
         {
-            Colour result = sceneSample.ShootRay(raySample, 10, new Random());
+            Colour result = sceneSample.ShootRay(raySample, 10);
             sceneSample.PositionedModels.Add(modelSample);
 
             Colour materialColour = sceneSample.PositionedModels[0].Material.Attenuation;

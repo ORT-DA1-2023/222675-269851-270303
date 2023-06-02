@@ -119,7 +119,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix)
         {
-            Random random = new Random();
+            RandomSingleton random = RandomSingleton.Instance;
             for (var row = ResolutionHeight() - 1; row >= 0; row--)
             {
                 for (var column = 0; column < ResolutionWidth; column++)
@@ -131,7 +131,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double u = (column + random.NextDouble()) / ResolutionWidth;
                         double v = (row + random.NextDouble()) / ResolutionHeight();
                         Ray ray = sceneSample.Camera.GetRay(u, v);
-                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
+                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
                     SavePixel(row, column, pixelColor, matrix);

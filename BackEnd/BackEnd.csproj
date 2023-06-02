@@ -63,6 +63,7 @@
     <Compile Include="OutputSaver.cs" />
     <Compile Include="PDFSavingFormat.cs" />
     <Compile Include="PPMSavingFormat.cs" />
+    <Compile Include="RandomSingleton.cs" />
     <Compile Include="SavingFormat.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
