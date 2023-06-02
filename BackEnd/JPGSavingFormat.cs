@@ -10,7 +10,5 @@ namespace Render3D.BackEnd
         {
                 ppmImage.Save(jpgFilePath, ImageFormat.Jpeg);
         }
-
-
     }
 }
