@@ -38,7 +38,6 @@ namespace Render3D.UserInterface
                     lblExceptionError.Text = ex.Message;
                     return;
                 }
-                render.clientName = clientName;
                 render.EnterMenu();
             }
         }

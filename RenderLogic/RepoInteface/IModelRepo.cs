@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RenderLogic.RepoService
+namespace RenderLogic.RepoInterface
 {
     public interface IModelRepo
     {

@@ -23,7 +23,7 @@ namespace Render3D.UserInterface.Panels
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
             try
             {
-                render.materialController.AddLambertianMaterial(render.clientName, materialName, materialColors);
+                render.materialController.AddLambertianMaterial("", materialName, materialColors);
             }
             catch (Exception ex)
             {

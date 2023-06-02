@@ -22,7 +22,6 @@ namespace Render3D.BackEnd.Materials
         public Ray Ray { get; set; }
 
         public Colour Attenuation { get; set; }
-        public string Id { get; set; }
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
 

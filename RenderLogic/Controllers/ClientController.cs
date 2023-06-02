@@ -1,40 +1,41 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.Services;
 using System;
 
 namespace Render3D.RenderLogic.Controllers
 {
     public class ClientController
     {
+        public static ClientController clientController;
+        public Client Client { get; set; }
         public DataWarehouse DataWarehouse { get; set; }
+        public ClientService ClientService { get; set; }
+        public static ClientController Instance()
+        {
+            if(clientController == null)
+            {
+                clientController = new ClientController();  
+            }
+            return clientController;
+        }
 
         public void SignIn(string clientName, string clientPassword)
         {
-            try
-            {
+            try{
                 GetClientByName(clientName);
-                throw new Exception("client already exists");
+                throw new Exception("Client already exists");
             }
-            catch (Exception)
+            catch
             {
-                SignUp(clientName, clientPassword);
+                CreateAndAddClient(clientName, clientPassword);
             }
         }
-        private void SignUp(string clientName, string clientPassword)
+        private void CreateAndAddClient(string clientName, string clientPassword)
         {
-            Client client = new Client() { Name = clientName, Password = clientPassword };
-            DataWarehouse.Clients.Add(client);
-        }
-        public Client GetClientByName(string clientName)
-        {
-            foreach (Client client in DataWarehouse.Clients)
-            {
-                if (client.Name == clientName)
-                {
-                    return client;
-                }
-            }
-            throw new BackEndException("The client doesnt exist");
+           Client = new Client() { Name = clientName, Password = clientPassword };
+           ClientService.AddClient(Client);
+
         }
         public void CheckName(string clientName)
         {
@@ -46,5 +47,9 @@ namespace Render3D.RenderLogic.Controllers
             _ = new Client() { Name = "validName", Password = clientPassword };
         }
 
+        public Client GetClientByName(string clientName)
+        {
+            return ClientService.GetClientWithName(clientName);
+        }
     }
 }

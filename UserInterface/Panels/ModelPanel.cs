@@ -26,7 +26,7 @@ namespace Render3D.UserInterface.Panels
             List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Figure figure in figureList)
             {
-                if (figure.Client.Name.Equals(render.clientName))
+                if (figure.Client.Name.Equals(render.clientController.Client))
                 {
                     lstFigure.Items.Add(figure);
                 }
@@ -34,7 +34,7 @@ namespace Render3D.UserInterface.Panels
             }
             foreach (Material material in materialList)
             {
-                if (material.Client.Name.Equals(render.clientName))
+                if (material.Client.Name.Equals(""))
                 {
                     lstMaterial.Items.Add(material);
                 }
@@ -56,7 +56,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithPreview(render.clientName, modelName, figure, material);
+                    render.modelController.AddAModelWithPreview("", modelName, figure, material);
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +67,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithoutPreview(render.clientName, modelName, figure, material);
+                    render.modelController.AddAModelWithoutPreview("", modelName, figure, material);
                 }
                 catch (Exception ex)
                 {

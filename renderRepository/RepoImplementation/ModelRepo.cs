@@ -1,9 +1,9 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoService;
+using RenderLogic.RepoInterface;
 using renderRepository.entities;
 
-namespace renderRepository.ServiceRepoInterface
+namespace renderRepository.RepoImplementation
 {
     public class ModelIRepo :IModelRepo
     {
@@ -13,14 +13,9 @@ namespace renderRepository.ServiceRepoInterface
             using (var dbContext = new RenderContext())
             {
                 var entity = ModelEntity.FromDomain(model);
-
                 dbContext.ModelEntities.Add(entity);
-
                 dbContext.SaveChanges();
-
-                model.Id = entity.Id.ToString();
-
-                return entity.Id;
+                return 0;
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Render3D.UserInterface.Panels
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent;
             Render3DIU render = (Render3DIU)creation.Parent.Parent;
-            using (var scene = new SceneCreation(render.sceneController, render.clientName, null))
+            using (var scene = new SceneCreation(render.sceneController, "", null))
             {
                 var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)

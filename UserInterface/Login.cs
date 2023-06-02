@@ -35,7 +35,7 @@ namespace Render3D.UserInterface
             }
             txtClientName.Text = "";
             txtClientPassword.Text = "";
-            render.clientName = clientName;
+            render.clientController.Client = client;
             render.EnterMenu();
         }
         private void BtnSignIn_Click(object sender, EventArgs e)

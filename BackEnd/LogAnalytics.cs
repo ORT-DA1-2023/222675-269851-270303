@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Render3D.RenderLogic
+namespace Render3D.BackEnd
 {
     public class LogAnalytics
     {

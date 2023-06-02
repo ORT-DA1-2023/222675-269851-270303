@@ -22,7 +22,7 @@ namespace Render3D.UserInterface
             List<Figure> figureList = render.dataWarehouse.Figures;
             foreach (Sphere figure in figureList)
             {
-                if (figure.Client.Name.Equals(render.clientName))
+                if (figure.Client.Name.Equals(render.clientController.Client))
                 {
                     FigureControl figureControl = new FigureControl(figure);
                     flObjectList.Controls.Add(figureControl);
@@ -36,7 +36,7 @@ namespace Render3D.UserInterface
             List<Material> materialList = render.dataWarehouse.Materials;
             foreach (Material material in materialList)
             {
-                if (material.Client.Name.Equals(render.clientName))
+                if (material.Client.Name.Equals(render.clientController.Client))
                 {
                     MaterialControl materialControl = new MaterialControl(material);
                     flObjectList.Controls.Add(materialControl);
@@ -51,7 +51,7 @@ namespace Render3D.UserInterface
             List<Model> models = render.dataWarehouse.Models;
             foreach (Model model in models)
             {
-                if (model.Client.Name.Equals(render.clientName))
+                if (model.Client.Name.Equals(render.clientController.Client))
                 {
                     ModelControl modelControl = new ModelControl(model);
                     flObjectList.Controls.Add(modelControl);
@@ -66,7 +66,7 @@ namespace Render3D.UserInterface
             scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
             foreach (Scene scene in scenes)
             {
-                if (scene.Client.Name.Equals(render.clientName))
+                if (scene.Client.Name.Equals(render.clientController.Client))
                 {
                     SceneControl sceneControl = new SceneControl(scene);
                     flObjectList.Controls.Add(sceneControl);
@@ -78,6 +78,7 @@ namespace Render3D.UserInterface
 
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
+            render.clientController.Client = null;
             render.UserWantsToLogIn();
         }
         private void BtnMaterial_Click(object sender, EventArgs e)
@@ -114,7 +115,7 @@ namespace Render3D.UserInterface
         private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
-            lblShowClientName.Text = "Welcome back \n" + render.clientName + "!!";
+            lblShowClientName.Text = "Welcome back \n" + render.clientController.Client.ToString() + "!!";
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
@@ -146,16 +147,16 @@ namespace Render3D.UserInterface
         {
             try
             {
-                render.figureController.GetFigureByNameAndClient(render.clientName, newName);
+                render.figureController.GetFigureByNameAndClient("", newName);
                 return false;
             }
             catch (Exception)
             {
             }
-            render.figureController.ChangeFigureName(render.clientName, oldName, newName);
+            render.figureController.ChangeFigureName("", oldName, newName);
             try
             {
-                render.figureController.GetFigureByNameAndClient(render.clientName, newName);
+                render.figureController.GetFigureByNameAndClient("", newName);
                 return true;
             }
             catch (Exception)
@@ -166,23 +167,23 @@ namespace Render3D.UserInterface
 
         public void DeleteFigure(string figureName)
         {
-            render.figureController.DeleteFigureInList(render.clientName, figureName);
+            render.figureController.DeleteFigureInList("", figureName);
         }
 
         internal bool MaterialNameHasBeenChanged(string oldName, string newName)
         {
             try
             {
-                render.materialController.GetMaterialByNameAndClient(render.clientName, newName);
+                render.materialController.GetMaterialByNameAndClient("", newName);
                 return false;
             }
             catch (Exception)
             {
             }
-            render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
+            render.materialController.ChangeMaterialName("", oldName, newName);
             try
             {
-                render.materialController.GetMaterialByNameAndClient(render.clientName, newName);
+                render.materialController.GetMaterialByNameAndClient("", newName);
                 return true;
             }
             catch (Exception)
@@ -194,13 +195,13 @@ namespace Render3D.UserInterface
 
         internal void DeleteMaterial(string materialName)
         {
-            render.materialController.DeleteMaterialInList(render.clientName, materialName);
+            render.materialController.DeleteMaterialInList("", materialName);
         }
 
         internal bool ModelNameHasBeenChanged(string oldName, string newName)
         {
-            render.modelController.ChangeModelName(render.clientName, oldName, newName);
-            if (render.modelController.GetModelByNameAndClient(render.clientName, newName) != null)
+            render.modelController.ChangeModelName("", oldName, newName);
+            if (render.modelController.GetModelByNameAndClient("", newName) != null)
             {
                 return true;
             }
@@ -209,7 +210,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteModel(string modelName)
         {
-            render.modelController.DeleteModelInList(render.clientName, modelName);
+            render.modelController.DeleteModelInList("", modelName);
         }
 
         private void BtnScene_Click(object sender, EventArgs e)
@@ -219,7 +220,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteScene(string sceneName)
         {
-            render.sceneController.DeleteSceneInList(render.clientName, sceneName);
+            render.sceneController.DeleteSceneInList("", sceneName);
         }
 
         internal bool FigureIsPartOfModel(string figureName)

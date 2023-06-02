@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,28 +54,25 @@
   <ItemGroup>
     <Compile Include="entities\ClientEntity.cs" />
     <Compile Include="entities\FigureEntity.cs" />
+    <Compile Include="entities\LogEntity.cs" />
     <Compile Include="entities\MaterialEntity.cs" />
     <Compile Include="entities\ModelEntity.cs" />
-    <Compile Include="ServiceRepoInterface\FigureRepo.cs" />
-    <Compile Include="ServiceRepoInterface\MaterialRepo.cs" />
-    <Compile Include="Migrations\202305292341095_v1.cs" />
-    <Compile Include="Migrations\202305292341095_v1.designer.cs">
-      <DependentUpon>202305292341095_v1.cs</DependentUpon>
+    <Compile Include="entities\SceneEntity.cs" />
+    <Compile Include="Migrations\202306021252478_v1.cs" />
+    <Compile Include="Migrations\202306021252478_v1.designer.cs">
+      <DependentUpon>202306021252478_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="RepoImplementation\FigureRepo.cs" />
+    <Compile Include="RepoImplementation\MaterialRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderContext.cs" />
-    <Compile Include="ServiceRepoInterface\ClientRepo.cs" />
-    <Compile Include="ServiceRepoInterface\ModelRepo.cs" />
+    <Compile Include="RepoImplementation\ClientRepo.cs" />
+    <Compile Include="RepoImplementation\ModelRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305292341095_v1.resx">
-      <DependentUpon>202305292341095_v1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackEnd\BackEnd.csproj">
@@ -85,6 +83,11 @@
       <Project>{92df00fd-9ac7-4504-bdbe-33ce11601c13}</Project>
       <Name>RenderLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202306021252478_v1.resx">
+      <DependentUpon>202306021252478_v1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

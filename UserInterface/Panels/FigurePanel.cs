@@ -24,7 +24,7 @@ namespace Render3D.UserInterface.Panels
                 figureRadius = Convert.ToDouble(figureRadiusString);
                 try
                 {
-                    render.figureController.AddFigure(render.clientName, figureName, figureRadius);
+                    render.figureController.AddFigure(render.clientController.Client, figureName, figureRadius);
                 }
                 catch (Exception ex)
                 {

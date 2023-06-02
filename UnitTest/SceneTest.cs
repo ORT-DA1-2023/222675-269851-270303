@@ -106,7 +106,7 @@ namespace Render3D.UnitTest
             Scene scene = new Scene();
             DateTimeProvider.Reset();
 
-            Assert.AreEqual(JanuaryFirst2020, scene.RegisterDate);
+            Assert.AreEqual(JanuaryFirst2020, scene.CreationDate);
         }
 
         [TestMethod]

@@ -219,7 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackEnd\BackEnd.csproj">
-      <Project>{48A432F2-A97D-4C6A-9D2C-04DD26BA809F}</Project>
+      <Project>{48a432f2-a97d-4c6a-9d2c-04dd26ba809f}</Project>
       <Name>BackEnd</Name>
     </ProjectReference>
     <ProjectReference Include="..\RenderLogic\RenderLogic.csproj">

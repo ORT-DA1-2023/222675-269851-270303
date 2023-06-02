@@ -14,7 +14,7 @@ namespace Render3D.BackEnd
         public Scene()
         {
             Camera = new Camera();
-            RegisterDate = DateTimeProvider.Now;
+            CreationDate = DateTimeProvider.Now;
             LastModificationDate = DateTimeProvider.Now;
             PositionedModels = new List<Model>();
         }
@@ -32,7 +32,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        public DateTime RegisterDate { get; }
+        public DateTime CreationDate { get; set; }
         public DateTime LastModificationDate { get; private set; }
         public DateTime? LastRenderizationDate { get; set; }
         public List<Model> PositionedModels { get; set; }

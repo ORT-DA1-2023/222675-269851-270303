@@ -12,18 +12,40 @@ namespace renderRepository.entities
 {
     public class FigureEntity
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ClientEntity Client { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
         public double Radius { get; set; }
 
-        internal static FigureEntity FromDomain(Figure figure)
+        public static FigureEntity FromDomain(Figure figure)
         {
-            return new FigureEntity
+            int id;
+            try
             {
+                id = int.Parse(figure.Id);
+            }
+            catch (ArgumentNullException)
+            {
+                id = 0;
+            }
+            FigureEntity figureEntity = new FigureEntity
+            {
+                Id = id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius,
-                Client = ClientEntity.FromDomain(figure.Client)
+                ClientEntity = ClientEntity.FromDomain(figure.Client)
+            };
+            return figureEntity;
+        }
+        public Figure ToDomain()
+        {
+            return new Sphere
+            {
+                Id = ""+Id,
+                Name = Name,
+                Client = ClientEntity.ToDomain(),
+                Radius = Radius
             };
         }
     }
