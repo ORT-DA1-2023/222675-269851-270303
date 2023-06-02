@@ -12,10 +12,6 @@ namespace Render3D.UnitTest
     [TestClass]
     public class OutputSaverTest
     {
-        private const string outputPath = "salida";
-
-
-
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Could not save the file")]
         public void GivenNullDestinationJPGThrowsBackEndException()
@@ -38,17 +34,12 @@ namespace Render3D.UnitTest
             SavingFormat format = new JPGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
             outputSaver.Save();
-            try
-            {
 
-                Assert.IsTrue(File.Exists(destinationPath));
-                Assert.AreEqual(".jpg", Path.GetExtension(destinationPath).ToLower());
-            }
-            finally
-            {
-                if (File.Exists(destinationPath))
-                    File.Delete(destinationPath);
-            }
+            Assert.IsTrue(File.Exists(destinationPath));
+            Assert.AreEqual(".jpg", Path.GetExtension(destinationPath).ToLower());
+
+            if (File.Exists(destinationPath))
+                File.Delete(destinationPath);
         }
 
 
@@ -89,6 +80,25 @@ namespace Render3D.UnitTest
             OutputSaver outputSaver = new OutputSaver(bitmap, invalidDirectory, format);
 
             outputSaver.Save();
+
+        }
+
+        [TestMethod]
+        public void Save_ShouldSaveImageAsPpm()
+        {
+            Bitmap bitmap = new Bitmap(2, 2);
+            string destinationPath = "test.ppm";
+            SavingFormat format = new PPMSavingFormat();
+            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
+
+            outputSaver.Save();
+
+            Assert.IsTrue(File.Exists(destinationPath));
+
+            Assert.AreEqual(".ppm", Path.GetExtension(destinationPath).ToLower());
+            if (File.Exists(destinationPath))
+                File.Delete(destinationPath);
+
         }
     }
 }
