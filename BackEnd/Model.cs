@@ -23,6 +23,7 @@ namespace Render3D.BackEnd
             }
         }
 
+        public int Roughness { get; set; }
         public Figure Figure { get; set; }
         public Material Material { get; set; }
         public Bitmap Preview

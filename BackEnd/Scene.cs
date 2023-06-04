@@ -49,7 +49,7 @@ namespace Render3D.BackEnd
                 if (element.Figure.WasHit(ray, 0.001, moduleMax))
                 {
                     itWasAHit = true;
-                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation, element.Roughness);
                     modelSample = element;
                     hitRecord = hit;
                     moduleMax = hit.Module;
@@ -75,6 +75,10 @@ namespace Render3D.BackEnd
             if (MaxiumDepth > 0)
             {
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
+                if(newRay == null)
+                {
+                    return new Colour(0, 0, 0);
+                }
                 Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
                 return new Colour(
                    hitRecord.Attenuation.PercentageRed * color.PercentageRed,

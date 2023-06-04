@@ -48,7 +48,7 @@ namespace Render3D.BackEnd.Figures
 
         }
 
-        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Colour color)
+        public override HitRecord3D FigureHitRecord(Ray ray, double tMin, double tMax, Colour color, int roughness)
         {
             Vector3D vectorOriginCenter = ray.Origin.Substract(Position);
             double squaredTerm = ray.Direction.DotProduct(ray.Direction);
@@ -58,7 +58,7 @@ namespace Render3D.BackEnd.Figures
             double distance = (((-1 * linearTerm) - Math.Sqrt(discriminant)) / (2 * squaredTerm));
             Vector3D intersectionPoint = ray.PointAt(distance);
             Vector3D normal = intersectionPoint.Substract(Position).Divide(Radius);
-            return new HitRecord3D(distance, intersectionPoint, normal, color);
+            return new HitRecord3D(distance, intersectionPoint, normal, color, ray, roughness);
         }
 
         private void ValidateRadius(double value)
