@@ -14,6 +14,7 @@ namespace Render3D.UnitTest
         private readonly String validSphereName = "Name of the sphere";
         private Sphere sphereSample;
         private readonly double validRadius = 2;
+        private readonly int roughnessSample = 0;
         private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
         private readonly Colour colourSample = new Colour(1, 0.5, 0.1);
 
@@ -54,7 +55,7 @@ namespace Render3D.UnitTest
             moduleMaxSample = 0;
             moduleMinSample = 0;
             hitRecordSample = new HitRecord3D();
-            Assert.IsFalse(hitRecordSample.Equals(sphereSample.FigureHitRecord(rayIntersectionSample, moduleMinSample, moduleMaxSample, colourSample)));
+            Assert.IsFalse(hitRecordSample.Equals(sphereSample.FigureHitRecord(rayIntersectionSample, moduleMinSample, moduleMaxSample, colourSample, roughnessSample)));
         }
 
 
