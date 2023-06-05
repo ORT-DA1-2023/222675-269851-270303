@@ -15,6 +15,7 @@ namespace RepositoryFactory
         {
             ClientController.GetInstance().ClientService= new ClientService(clientRepo);
             FigureController.GetInstance().FigureService = new FigureService(figureRepo);
+            MaterialController.GetInstance().MaterialService = new MaterialService(materialRepo);
         }
 
     }
