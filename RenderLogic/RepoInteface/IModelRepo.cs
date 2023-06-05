@@ -1,14 +1,15 @@
 ﻿using Render3D.BackEnd;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RenderLogic.RepoInterface
 {
     public interface IModelRepo
     {
-        int AddModel(Model model);
+        void Add(Model model);
+        void Delete(int Id);
+        void ChangeName(int Id, string newName);
+        Model Get(int Id);
+        Model GetByNameAndClient(string name, Client client);
+        List<Model> GetModelsOfClient(Client client);
     }
 }

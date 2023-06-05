@@ -1,12 +1,7 @@
-﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd;
-using RenderLogic.RepoInterface;
-using System;
+﻿using Render3D.BackEnd;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Render3D.BackEnd.Materials;
+using RenderLogic.RepoInteface;
 
 namespace RenderLogic.Services
 {
@@ -36,7 +31,7 @@ namespace RenderLogic.Services
             return _materialRepo.GetByNameAndClient(MaterialName, client);
         }
 
-        public List<Material> GetMaterialOfClient(Client client)
+        public List<Material> GetMaterialsOfClient(Client client)
         {
             return _materialRepo.GetMaterialsOfClient(client);
         }
@@ -47,4 +42,4 @@ namespace RenderLogic.Services
         }
     }
 }
-}
+

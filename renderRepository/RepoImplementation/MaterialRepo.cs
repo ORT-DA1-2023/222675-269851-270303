@@ -1,7 +1,6 @@
 ﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoInterface;
+using RenderLogic.RepoInteface;
 using renderRepository.entities;
 using System.Collections.Generic;
 using System.Data;

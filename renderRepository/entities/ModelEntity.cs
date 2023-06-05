@@ -1,10 +1,12 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +18,10 @@ namespace renderRepository.entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ClientEntity Client { get; set; }
+        public ClientEntity ClientEntity { get; set; }
         public FigureEntity FigureEntity { get; set; }
         public MaterialEntity MaterialEntity { get; set; }
-        public Bitmap Preview {  get; set; }
+        public byte[] Preview {  get; set; }
 
         public static ModelEntity FromDomain(Model model)
         {
@@ -32,28 +34,39 @@ namespace renderRepository.entities
             {
                 id = 0;
             }
+            byte[] bytes = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                model.Preview.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                bytes =stream.ToArray();
+            }
             ModelEntity modelEntity = new ModelEntity
-            { 
-                Id =id,
+            {
+                Id = id,
                 Name = model.Name,
-                Client = ClientEntity.FromDomain(model.Client),
+                ClientEntity = ClientEntity.FromDomain(model.Client),
                 FigureEntity = FigureEntity.FromDomain(model.Figure),
                 MaterialEntity = MaterialEntity.FromDomain(model.Material),
-                Preview = model.Preview
+                Preview = bytes
             };
             return modelEntity;
         }
 
         public Model ToDomain()
         {
+            Bitmap bitmap = null;
+            using (MemoryStream stream = new MemoryStream(Preview))
+            {
+                bitmap= new Bitmap(stream);
+            }
             Model model = new Model
             {
                 Id = Id.ToString(),
                 Name = Name,
-                Client = Client.ToDomain(),
+                Client = ClientEntity.ToDomain(),
                 Figure = FigureEntity.ToDomain(),
                 Material = MaterialEntity.ToDomain(),
-                //Preview = Preview
+                Preview = bitmap
             };
             return model;
         }
