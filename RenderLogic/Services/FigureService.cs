@@ -19,9 +19,9 @@ namespace RenderLogic.Services
         {
             _figureRepo.Add(figure);
         }
-        public void RemoveFigure(Figure figure)
+        public void RemoveFigure(int Id)
         {
-            _figureRepo.Delete(int.Parse(figure.Id));
+            _figureRepo.Delete(Id);
         }
         public Figure GetFigure(int Id)
         {
@@ -39,7 +39,7 @@ namespace RenderLogic.Services
 
         internal void UpdateName(string id, string newName)
         {
-            throw new NotImplementedException();
+            _figureRepo.ChangeName(int.Parse(id), newName);
         }
     }
 }

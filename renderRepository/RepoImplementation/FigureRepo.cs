@@ -17,12 +17,21 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = FigureEntity.FromDomain(figure);
-
                 dbContext.FigureEntities.Add(entity);
-
                 dbContext.SaveChanges();
             }    
         }
+
+        public void ChangeName(int Id, string newName)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var entity =  dbContext.FigureEntities.Find(Id);
+                entity.Name = newName;
+                dbContext.SaveChanges();
+            }
+        }
+
         public void Delete(int Id)
         {
             using (var dbContext = new RenderContext())

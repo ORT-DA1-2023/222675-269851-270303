@@ -13,7 +13,7 @@ namespace Render3D.RenderLogic.Controllers
         public static FigureController figureController;
         public DataWarehouse DataWarehouse { get; set; }
         public FigureService FigureService { get; set; }
-        public ClientController ClientController { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
 
         public static FigureController GetInstance()
         {
@@ -40,12 +40,17 @@ namespace Render3D.RenderLogic.Controllers
         }
         private void CreateSphere(FigureDto figureDto)
         {
-            Figure figure = new Sphere() { Client = ClientController.Client, Name = figureDto.Name, Radius = figureDto.Radius };
+            Figure figure = new Sphere() 
+            { 
+                Client = ClientController.Client,
+                Name = figureDto.Name, 
+                Radius = figureDto.Radius
+            };
             FigureService.AddFigure(figure);
         }
         public void DeleteFigureInList(FigureDto figureDto)
         {
-
+            FigureService.RemoveFigure(int.Parse(figureDto.Id));
         }
 
         public List<FigureDto> GetFigures()

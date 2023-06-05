@@ -8,8 +8,10 @@ namespace RenderLogic.RepoInterface
     {
         void Add(Figure figure);
         void Delete(int Id);
+        void ChangeName(int Id, string newName);
         Figure Get(int Id);
         Figure GetByNameAndClient(string name, Client client);
         List<Figure> GetFiguresOfClient(Client client);
+       
     }
 }

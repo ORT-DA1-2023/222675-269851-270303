@@ -1,4 +1,5 @@
-﻿using RenderLogic.DataTransferObjects;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 
@@ -8,10 +9,12 @@ namespace Render3D.UserInterface.Panels
     public partial class FigurePanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
+        private readonly FigureController figureController; 
         public FigurePanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            lblExceptionError.Text = "";
         }
 
 
@@ -29,7 +32,7 @@ namespace Render3D.UserInterface.Panels
                         Name = txtFigureName.Text,
                         Radius = figureRadius,
                     };
-                    render.figureController.AddFigure(figureDto);
+                    figureController.AddFigure(figureDto);
                 }
                 catch (Exception ex)
                 {
@@ -61,8 +64,6 @@ namespace Render3D.UserInterface.Panels
         private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = (Render3DIU)creation.Parent.Parent;
-            lblExceptionError.Text = "";
         }
     }
 }
