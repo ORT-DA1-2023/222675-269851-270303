@@ -9,6 +9,7 @@ namespace RepositoryFactory
     {
         public IClientRepo clientRepo = new ClientRepo();
         public IFigureRepo figureRepo = new FigureRepo();
+        public IMaterialRepo materialRepo = new MaterialRepo();
 
         public void Initialize()
         {

@@ -13,6 +13,7 @@ namespace Render3D.UserInterface
         private Render3DIU render;
         private readonly ClientController clientController = ClientController.GetInstance();
         private readonly FigureController figureController = FigureController.GetInstance();
+        private readonly MaterialController materialController = MaterialController.GetInstance();
         public CreationMenu()
         {
             InitializeComponent();
@@ -131,11 +132,11 @@ namespace Render3D.UserInterface
             }
 
         }
-        public bool ChangeFigureName(string oldName, string newName)
+        public bool ChangeFigureName(FigureDto figureDto, string newName)
         {
             try
             {
-                figureController.ChangeName(oldName,newName);
+                figureController.ChangeName(figureDto,newName);
                 return true;
             }
             catch
@@ -149,9 +150,18 @@ namespace Render3D.UserInterface
             figureController.DeleteFigureInList(figure);
         }
 
-        internal bool MaterialNameHasBeenChanged(string oldName, string newName)
+        internal bool ChangeMaterialName(string oldName, string newName)
         {
-            render.materialController.ChangeMaterialName("", oldName, newName);
+            try
+            {
+                materialController.ChangeMaterialName(oldName, newName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
 
         }
 

@@ -11,25 +11,37 @@ namespace Render3D.RenderLogic.Controllers
     {
         public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController { get; set; }
+        protected static MaterialController materialController;
+        public static MaterialController GetInstance()
+        {
+            if (materialController == null)
+            {
+                materialController = new MaterialController();
+            }
+            return materialController;
+        }
 
         public void AddLambertianMaterial(MaterialDto materialDto)
         {
             try
             {
                 GetMaterialByNameAndClient(materialDto.Name);
-
+                throw new BackEndException("material already exists");
             }
             catch (Exception)
             {
                 Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
                 CreateLambertianMaterial(ClientController.Client, materialDto.Name, colour);
                 return;
-            }
-            throw new BackEndException("material already exists");
+            }          
         }
         private void CreateLambertianMaterial(Client client, string materialName, Colour colour)
         {
-            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = colour };
+            Material material = new LambertianMaterial() 
+            { 
+                Client = client,
+                Name = materialName, 
+                Attenuation = colour };
             DataWarehouse.Materials.Add(material);
         }
 

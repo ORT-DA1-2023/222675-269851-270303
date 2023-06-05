@@ -1,4 +1,5 @@
-﻿using RenderLogic.DataTransferObjects;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 
@@ -6,16 +7,17 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class MaterialPanel : Form
     {
-        private readonly int rgbLength = 3;
         private CreationMenu creation;
-        private Render3DIU render;
+        private readonly MaterialController materialController;
         public MaterialPanel()
         {
+            materialController = MaterialController.GetInstance();
             InitializeComponent();
+            lblExceptionError.Text = "";
 
         }
 
-        private void BtnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateMaterial_Click(object sender, EventArgs e)
         {
             MaterialDto materialDto = new MaterialDto
             {
@@ -26,7 +28,7 @@ namespace Render3D.UserInterface.Panels
             };
             try
             {
-                render.materialController.AddLambertianMaterial(materialDto);
+               materialController.AddLambertianMaterial(materialDto);
             }
             catch (Exception ex)
             {
@@ -44,8 +46,6 @@ namespace Render3D.UserInterface.Panels
         private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = ((CreationMenu)this.Parent.Parent);
-            render = ((Render3DIU)creation.Parent.Parent);
-            lblExceptionError.Text = "";
         }
     }
 }

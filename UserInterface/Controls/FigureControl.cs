@@ -9,14 +9,12 @@ namespace Render3D.UserInterface.Controls
 
     public partial class FigureControl : UserControl
     {
-        private string _oldName;
         private FigureDto _figureDto;
         public FigureControl(FigureDto figure)
         {
             InitializeComponent();
             this.lblFigureName.Text = figure.Name;
             _figureDto = figure;
-            _oldName = figure.Name;
             this.lblFigureRadius.Text = "" + figure.Radius;
             lblErrorDeleteFigure.Text = "";
         }
@@ -24,13 +22,11 @@ namespace Render3D.UserInterface.Controls
         private void ChecksForCorrectEdit(string newName)
         {
 
-            if (!_oldName.Equals(newName))
+            if (!_figureDto.Name.Equals(newName))
             {
-
-                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_figureDto.Id, newName))
                 {
                     lblFigureName.Text = newName;
-                    _oldName = newName;
                 }
             }
         }

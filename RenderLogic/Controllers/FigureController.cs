@@ -78,10 +78,20 @@ namespace Render3D.RenderLogic.Controllers
             return figureDtos;
         }
 
-        public void ChangeName(string oldName, string newName)
+        public void ChangeName(FigureDto figureDto, string newName)
         {
-            Figure figure=FigureService.GetFigureByNameAndClient(oldName,ClientController.Client);
-            FigureService.UpdateName(figure.Id, newName);
+            try
+            {
+                Figure figure = FigureService.GetFigureByNameAndClient(newName, ClientController.Client);
+                throw new Exception("That Name is already in use");
+            }
+            catch
+            {
+                FigureService.UpdateName(figureDto.Id, newName);
+
+            }
+       
+
         }
     }
 }

@@ -19,6 +19,7 @@ namespace renderRepository.RepoImplementation
                 var entity = FigureEntity.FromDomain(figure);
                 dbContext.FigureEntities.Add(entity);
                 dbContext.SaveChanges();
+                figure.Id = entity.Id.ToString();
             }    
         }
 

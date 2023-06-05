@@ -10,11 +10,13 @@ namespace Render3D.UserInterface.Controls
     public partial class MaterialControl : UserControl
     {
         private string _oldName;
+        private MaterialDto _materialDto;
         public MaterialControl(MaterialDto material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;
             _oldName = material.Name;
+            _materialDto = material;
             lblRedColor.Text = "Red: " + material.Red;
             lblGreenColor.Text = "Green: " + material.Green;
             lblBlueColor.Text = "Blue: " + material.Blue;
@@ -27,7 +29,7 @@ namespace Render3D.UserInterface.Controls
         {
             if (!_oldName.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChanged(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeMaterialName(_oldName, newName))
                 {
                     lblMaterialName.Text = newName;
                     _oldName = newName;

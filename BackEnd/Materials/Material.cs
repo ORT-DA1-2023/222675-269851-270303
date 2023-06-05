@@ -8,7 +8,7 @@ namespace Render3D.BackEnd.Materials
     public abstract class Material
     {
         protected string _name;
-
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
