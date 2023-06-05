@@ -147,14 +147,14 @@ namespace Render3D.UserInterface
 
         public void DeleteFigure(FigureDto figure)
         {
-            figureController.DeleteFigureInList(figure);
+            figureController.Delete(figure);
         }
 
-        internal bool ChangeMaterialName(string oldName, string newName)
+        internal bool ChangeMaterialName(MaterialDto materialDto,string newName)
         {
             try
             {
-                materialController.ChangeMaterialName(oldName, newName);
+                materialController.ChangeName(materialDto,newName);
                 return true;
             }
             catch
@@ -165,9 +165,9 @@ namespace Render3D.UserInterface
 
         }
 
-        internal void DeleteMaterial(string materialName)
+        internal void DeleteMaterial(MaterialDto materialDto)
         {
-            render.materialController.DeleteMaterialInList("", materialName);
+            materialController.Delete(materialDto);
         }
 
         internal bool ModelNameHasBeenChanged(string oldName, string newName)

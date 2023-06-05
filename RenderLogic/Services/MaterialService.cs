@@ -19,11 +19,11 @@ namespace RenderLogic.Services
             _materialRepo = materialRepo;
         }
 
-        public void AddFigure(Material material)
+        public void AddMaterial(Material material)
         {
             _materialRepo.Add(material);
         }
-        public void RemoveFigure(int Id)
+        public void RemoveMaterial(int Id)
         {
             _materialRepo.Delete(Id);
         }

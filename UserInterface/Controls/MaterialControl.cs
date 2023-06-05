@@ -9,13 +9,11 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {
-        private string _oldName;
         private MaterialDto _materialDto;
         public MaterialControl(MaterialDto material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;
-            _oldName = material.Name;
             _materialDto = material;
             lblRedColor.Text = "Red: " + material.Red;
             lblGreenColor.Text = "Green: " + material.Green;
@@ -27,12 +25,11 @@ namespace Render3D.UserInterface.Controls
 
         private void ChecksForCorrectEdit(string newName)
         {
-            if (!_oldName.Equals(newName))
+            if (!_materialDto.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ChangeMaterialName(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeMaterialName(_materialDto, newName))
                 {
                     lblMaterialName.Text = newName;
-                    _oldName = newName;
                 }
             }
         }
@@ -41,7 +38,7 @@ namespace Render3D.UserInterface.Controls
         {
             if (!((CreationMenu)this.Parent.Parent.Parent).MaterialIsPartOfModel(lblMaterialName.Text))
             {
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(lblMaterialName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(_materialDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
             }
             else
@@ -53,7 +50,7 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEditName_Click(object sender, EventArgs e)
         {
-            using (var nameChanger = new NameChanger(_oldName))
+            using (var nameChanger = new NameChanger(_materialDto.Name))
             {
                 var result = nameChanger.ShowDialog(this);
                 if (result == DialogResult.OK)

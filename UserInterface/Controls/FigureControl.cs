@@ -48,7 +48,7 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            using (var nameChanger = new NameChanger(_oldName))
+            using (var nameChanger = new NameChanger(_figureDto.Name))
             {
                 var result = nameChanger.ShowDialog(this);
                 if (result == DialogResult.OK)

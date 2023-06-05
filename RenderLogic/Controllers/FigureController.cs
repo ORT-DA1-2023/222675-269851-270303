@@ -48,7 +48,7 @@ namespace Render3D.RenderLogic.Controllers
             };
             FigureService.AddFigure(figure);
         }
-        public void DeleteFigureInList(FigureDto figureDto)
+        public void Delete(FigureDto figureDto)
         {
             FigureService.RemoveFigure(int.Parse(figureDto.Id));
         }

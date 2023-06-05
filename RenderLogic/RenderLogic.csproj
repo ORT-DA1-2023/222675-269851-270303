@@ -58,6 +58,7 @@
     <Compile Include="RepoInteface\IClientRepo.cs" />
     <Compile Include="RepoInteface\IModelRepo.cs" />
     <Compile Include="Services\FigureService.cs" />
+    <Compile Include="Services\MaterialService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackEnd\BackEnd.csproj">

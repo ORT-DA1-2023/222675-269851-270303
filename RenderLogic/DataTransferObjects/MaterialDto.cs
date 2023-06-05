@@ -8,6 +8,7 @@ namespace RenderLogic.DataTransferObjects
 {
     public class MaterialDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Red { get; set; }
         public int Green { get; set; }

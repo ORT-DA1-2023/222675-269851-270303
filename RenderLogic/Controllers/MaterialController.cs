@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
@@ -27,7 +28,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                GetMaterialByNameAndClient(materialDto.Name);
+                MaterialService.GetMaterialByNameAndClient(materialDto.Name,ClientController.Client);
                 throw new BackEndException("material already exists");
             }
             catch (Exception)
@@ -44,44 +45,53 @@ namespace Render3D.RenderLogic.Controllers
                 Client = client,
                 Name = materialName, 
                 Attenuation = colour };
-            DataWarehouse.Materials.Add(material);
+            MaterialService.AddMaterial(material);
         }
 
-        public Material GetMaterialByNameAndClient(string materialName)
-        {
-            Client client = ClientController.Client;
-            foreach (Material material in DataWarehouse.Materials)
-            {
-                if (material.Name == materialName && material.Client.Equals(client))
-                {
-                    return material;
-                }
-            }
-            throw new BackEndException("material doesnt exist");
-        }
-        public void ChangeMaterialName(MaterialDto materialDto, string newName)
+        public void ChangeName(MaterialDto materialDto, string newName)
         {
             try
             {
-                MaterialService
+                Material material = MaterialService.GetMaterialByNameAndClient(newName, ClientController.Client);
+                throw new Exception("There is already a material with that name");
+            }
+            catch
+            {
+                MaterialService.UpdateName(materialDto.Id, newName);
             }
         }
-        public void DeleteMaterialInList(string clientName, string materialName)
+        public void Delete(MaterialDto materialDto)
         {
-            try
-            {
-                Material material = GetMaterialByNameAndClient(materialName);
-                DataWarehouse.Materials.Remove(material);
-            }
-            catch (Exception)
-            {
-            }
-
+            MaterialService.RemoveMaterial(int.Parse(materialDto.Id));
         }
 
         public List<MaterialDto> GetMaterials()
         {
-            throw new NotImplementedException();
+
+            List<Material> MaterialList;
+            try
+            {
+                MaterialList = MaterialService.GetMaterialOfClient(ClientController.Client);
+            }
+            catch
+            {
+                throw new Exception("The client does not have any figures");
+            }
+
+            List<MaterialDto> materialDtos = new List<MaterialDto>();
+            foreach (Material mat in MaterialList)
+            {
+                MaterialDto matDto = new MaterialDto()
+                {
+                    Id = mat.Id,
+                    Name = mat.Name,
+                    Red = mat.Attenuation.Red(),
+                    Green = mat.Attenuation.Green(),
+                    Blue = mat.Attenuation.Blue()
+                };
+               materialDtos.Add(matDto);
+            }
+            return materialDtos;
         }
     }
 }
