@@ -3,9 +3,9 @@ using System.Drawing.Imaging;
 
 namespace Render3D.BackEnd
 {
-    public class PNGSavingFormat : SavingFormat
+    public class PNGSavingFormat : ISavingFormat
     {
-        public override void Save(Bitmap ppmImage, string FilePath)
+        public void Save(Bitmap ppmImage, string FilePath)
         {
             ppmImage.Save(FilePath, ImageFormat.Png);
         }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
-    public class PPMSavingFormat : SavingFormat
+    public class PPMSavingFormat : ISavingFormat
     {
-        public override void Save(Bitmap ppm, string directory)
+        public  void Save(Bitmap ppm, string directory)
         {
             ppm.Save(directory);
         }

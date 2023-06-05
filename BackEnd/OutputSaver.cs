@@ -13,9 +13,9 @@ namespace Render3D.BackEnd
     {
         private Bitmap _bitmap;
         private string _destinationPath;
-        private SavingFormat _format;
+        private ISavingFormat _format;
 
-        public OutputSaver(Bitmap ppm, string destinationPath,SavingFormat format) { 
+        public OutputSaver(Bitmap ppm, string destinationPath,ISavingFormat format) { 
             _bitmap = ppm;
             _destinationPath = destinationPath;
             _format = format;

@@ -19,7 +19,7 @@ namespace Render3D.UnitTest
             Bitmap bitmap = new Bitmap(10, 10);
 
             string destinationPath = null;
-            SavingFormat savingFormat = new JPGSavingFormat();
+            ISavingFormat savingFormat = new JPGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, savingFormat);
 
             outputSaver.Save();
@@ -28,10 +28,9 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void givenBitmapSavesItAsJPG()
         {
-            // Arrange
             Bitmap bitmap = new Bitmap(100, 100);
             string destinationPath = "test.jpg";
-            SavingFormat format = new JPGSavingFormat();
+            ISavingFormat format = new JPGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
             outputSaver.Save();
 
@@ -49,7 +48,7 @@ namespace Render3D.UnitTest
         {
             Bitmap bitmap = new Bitmap(100, 100);
             string destinationPath = "invalid/path/test.jpg";
-            SavingFormat format = new JPGSavingFormat();
+            ISavingFormat format = new JPGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 
             outputSaver.Save();
@@ -60,7 +59,7 @@ namespace Render3D.UnitTest
         {
             Bitmap bitmap = new Bitmap(10, 10);
             string destinationPath = "test.png";
-            SavingFormat format = new PNGSavingFormat();
+            ISavingFormat format = new PNGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 
             outputSaver.Save();
@@ -76,7 +75,7 @@ namespace Render3D.UnitTest
         {
             Bitmap bitmap = new Bitmap(100, 100);
             string invalidDirectory = "invalid/path/test.png";
-            SavingFormat format = new PNGSavingFormat();
+            ISavingFormat format = new PNGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, invalidDirectory, format);
 
             outputSaver.Save();
@@ -87,7 +86,7 @@ namespace Render3D.UnitTest
         {
             Bitmap bitmap = new Bitmap(2, 2);
             string destinationPath = "test.ppm";
-            SavingFormat format = new PPMSavingFormat();
+            ISavingFormat format = new PPMSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 
             outputSaver.Save();

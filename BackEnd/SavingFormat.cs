@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
-    public abstract class SavingFormat
+    public interface ISavingFormat
     {
-        public abstract void Save(Bitmap ppm, string directory);
+        void Save(Bitmap ppm, string directory);
     }
 }
