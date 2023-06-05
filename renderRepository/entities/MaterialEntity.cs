@@ -9,7 +9,6 @@ namespace renderRepository.entities
     public class MaterialEntity
     {
         [Key]
-        [Column(Order =1)]
         public int Id { get; set; }
         public string Name { get; set; }
         public ClientEntity ClientEntity { get; set; }
@@ -33,7 +32,7 @@ namespace renderRepository.entities
             {
                 Id = id,
                 Name = material.Name,
-                Client = ClientEntity.FromDomain(material.Client),
+                ClientEntity = ClientEntity.FromDomain(material.Client),
                 Red = material.Attenuation.Red(),
                 Green = material.Attenuation.Green(),
                 Blue = material.Attenuation.Blue(),
@@ -51,10 +50,10 @@ namespace renderRepository.entities
             {
                 return new LambertianMaterial
                 {
-                    Id = "" + Id,
+                    Id = Id.ToString(),
                     Name = Name,
                     Attenuation = new Colour(Red / 255f, Green / 255f, Blue / 255f),
-                    Client = Client.ToDomain()
+                    Client = ClientEntity.ToDomain()
                 };
             }
             //Metallic Material
