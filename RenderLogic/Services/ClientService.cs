@@ -12,8 +12,7 @@ namespace RenderLogic.Services
 
         public ClientService(IClientRepo clientRepo)
         {
-            _clientRepo = clientRepo;
-          
+            _clientRepo = clientRepo; 
         }
 
         public void AddClient(Client client)

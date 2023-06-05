@@ -7,11 +7,11 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class ClientController
     {
-        public static ClientController clientController;
+        protected static ClientController clientController;
         public Client Client { get; set; }
         public DataWarehouse DataWarehouse { get; set; }
         public ClientService ClientService { get; set; }
-        public static ClientController Instance()
+        public static ClientController GetInstance()
         {
             if(clientController == null)
             {
@@ -52,7 +52,7 @@ namespace Render3D.RenderLogic.Controllers
             return ClientService.GetClientWithName(clientName);
         }
 
-        public void ValidUser(string clientName, string clientPassword)
+        public void Login(string clientName, string clientPassword)
         {
             Client client;
             try

@@ -10,10 +10,12 @@ namespace Render3D.UserInterface.Controls
     public partial class FigureControl : UserControl
     {
         private string _oldName;
+        private FigureDto _figureDto;
         public FigureControl(FigureDto figure)
         {
             InitializeComponent();
             this.lblFigureName.Text = figure.Name;
+            _figureDto = figure;
             _oldName = figure.Name;
             this.lblFigureRadius.Text = "" + figure.Radius;
             lblErrorDeleteFigure.Text = "";
@@ -25,7 +27,7 @@ namespace Render3D.UserInterface.Controls
             if (!_oldName.Equals(newName))
             {
 
-                if (((CreationMenu)this.Parent.Parent.Parent).FigureNameHasBeenChanged(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_oldName, newName))
                 {
                     lblFigureName.Text = newName;
                     _oldName = newName;
@@ -37,7 +39,7 @@ namespace Render3D.UserInterface.Controls
         {
             if (!((CreationMenu)this.Parent.Parent.Parent).FigureIsPartOfModel(lblFigureName.Text))
             {
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(lblFigureName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(_figureDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
             }
             else

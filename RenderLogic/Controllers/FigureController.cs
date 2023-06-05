@@ -10,79 +10,73 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class FigureController
     {
+        public static FigureController figureController;
         public DataWarehouse DataWarehouse { get; set; }
         public FigureService FigureService { get; set; }
         public ClientController ClientController { get; set; }
+
+        public static FigureController GetInstance()
+        {
+            if(figureController == null)
+            {
+                figureController = new FigureController();
+            }
+            return figureController;
+        }
         public void AddFigure(FigureDto figureDto)
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(ClientController.Client, figureDto.Name);
-
+                FigureService.GetFigureByNameAndClient(figureDto.Name,ClientController.Client);
+                throw new BackEndException("figure already exists");
             }
             catch (Exception)
             {
                 CreateSphere(figureDto);
                 return;
             }
-            throw new BackEndException("figure already exists");
+            
 
         }
         private void CreateSphere(FigureDto figureDto)
         {
             Figure figure = new Sphere() { Client = ClientController.Client, Name = figureDto.Name, Radius = figureDto.Radius };
-            DataWarehouse.Figures.Add(figure);
+            FigureService.AddFigure(figure);
         }
-        public Figure GetFigureByNameAndClient(string figureName)
+        public void DeleteFigureInList(FigureDto figureDto)
         {
-            foreach (Figure figure in DataWarehouse.Figures)
-            {
-                if (figure.Name == figureName && figure.Client.Equals(""))
-                {
-                    return figure;
-                }
-            }
-            throw new BackEndException("figure doesnt exist");
-        }
-        public void DeleteFigureInList(string clientName, string figureName)
-        {
-            try
-            {
-                Figure figure = GetFigureByNameAndClient(clientName, figureName);
-                DataWarehouse.Figures.Remove(figure);
-            }
-            catch (Exception)
-            {
-            }
-
-        }
-        public void ChangeFigureName(string clientName, string oldName, string newName)
-        {
-            Figure figure;
-            try
-            {
-                figure = GetFigureByNameAndClient(clientName, oldName);
-                Figure correctNameCheck = new Sphere() { Name = newName };
-            }
-            catch (Exception)
-            {
-                return;
-            }
-
-            try
-            {
-                GetFigureByNameAndClient(clientName, newName);
-            }
-            catch (Exception)
-            {
-                figure.Name = newName;
-            }
 
         }
 
         public List<FigureDto> GetFigures()
         {
-            throw new NotImplementedException();
+            List<Figure> figureList;
+            try
+            {
+               figureList = FigureService.GetFigureOfClient(ClientController.Client);
+            }
+            catch
+            {
+                throw new Exception("The client does not have any figures");
+            }
+          List<FigureDto> figureDtos = new List<FigureDto>();
+            foreach(Figure fig in figureList)
+            {
+                FigureDto figDto = new FigureDto()
+                {
+                    Id = fig.Id,
+                    Name = fig.Name,
+                    Radius = ((Sphere)fig).Radius
+                };
+                figureDtos.Add(figDto);
+            }
+            return figureDtos;
+        }
+
+        public void ChangeName(string oldName, string newName)
+        {
+            Figure figure=FigureService.GetFigureByNameAndClient(oldName,ClientController.Client);
+            FigureService.UpdateName(figure.Id, newName);
         }
     }
 }

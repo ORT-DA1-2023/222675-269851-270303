@@ -1,4 +1,5 @@
 
+using Render3D.RenderLogic.Controllers;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
 using RenderLogic.DataTransferObjects;
@@ -10,6 +11,8 @@ namespace Render3D.UserInterface
     public partial class CreationMenu : Form
     {
         private Render3DIU render;
+        private readonly ClientController clientController = ClientController.GetInstance();
+        private readonly FigureController figureController = FigureController.GetInstance();
         public CreationMenu()
         {
             InitializeComponent();
@@ -18,7 +21,7 @@ namespace Render3D.UserInterface
         public void ShowFigureList()
         {
             flObjectList.Controls.Clear();
-            List<FigureDto> figureList = render.figureController.GetFigures();
+            List<FigureDto> figureList = figureController.GetFigures();
             foreach (FigureDto figure in figureList)
             {
                     FigureControl figureControl = new FigureControl(figure);
@@ -100,7 +103,7 @@ namespace Render3D.UserInterface
         private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
-            lblShowClientName.Text = "Welcome back \n" + render.clientController.GetClient() + "!!";
+            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient() + "!!";
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
@@ -128,31 +131,22 @@ namespace Render3D.UserInterface
             }
 
         }
-        public bool FigureNameHasBeenChanged(string oldName, string newName)
+        public bool ChangeFigureName(string oldName, string newName)
         {
             try
             {
-                render.figureController.GetFigureByNameAndClient(newName);
-                return false;
-            }
-            catch (Exception)
-            {
-            }
-            render.figureController.ChangeFigureName("", oldName, newName);
-            try
-            {
-                render.figureController.GetFigureByNameAndClient("", newName);
+                figureController.ChangeName(oldName,newName);
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
         }
 
-        public void DeleteFigure(string figureName)
+        public void DeleteFigure(FigureDto figure)
         {
-            render.figureController.DeleteFigureInList("", figureName);
+            figureController.DeleteFigureInList(figure);
         }
 
         internal bool MaterialNameHasBeenChanged(string oldName, string newName)

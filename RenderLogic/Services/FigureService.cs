@@ -3,9 +3,6 @@ using Render3D.BackEnd;
 using RenderLogic.RepoInterface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RenderLogic.Services
 {
@@ -22,13 +19,27 @@ namespace RenderLogic.Services
         {
             _figureRepo.Add(figure);
         }
-        public Figure GetFigure(string name, string clientName)
+        public void RemoveFigure(Figure figure)
         {
-            return _figureRepo.Get(name, clientName);
+            _figureRepo.Delete(int.Parse(figure.Id));
         }
-        public void GetFigureByNameAndClient(Client client, string figureName)
+        public Figure GetFigure(int Id)
         {
+            return _figureRepo.Get(Id);
+        }
+        public Figure GetFigureByNameAndClient(string figureName, Client client)
+        {
+            return _figureRepo.GetByNameAndClient(figureName, client);
+        }
 
+        public List<Figure> GetFigureOfClient(Client client)
+        {
+           return _figureRepo.GetFiguresOfClient(client);
+        }
+
+        internal void UpdateName(string id, string newName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

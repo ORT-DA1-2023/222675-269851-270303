@@ -18,7 +18,7 @@ namespace Render3D.UserInterface
             string clientPassword = txtClientPassword.Text;
             try
             {
-             render.clientController.ValidUser(clientName,clientPassword);
+             render.clientController.Login(clientName,clientPassword);
             }
             catch (Exception ex)
             {

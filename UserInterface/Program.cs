@@ -1,4 +1,5 @@
 ﻿using RenderLogic.RepoInterface;
+using RepositoryFactory;
 using System;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace Render3D.UserInterface
         [STAThread]
         private static void Main()
         {
+            RepoFactory repoFactory = new RepoFactory();
+            repoFactory.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Render3DIU());

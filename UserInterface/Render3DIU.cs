@@ -7,7 +7,7 @@ namespace Render3D.UserInterface
 {
     public partial class Render3DIU : Form
     {
-        public ClientController clientController = ClientController.Instance();
+        public ClientController clientController = ClientController.GetInstance();
         public FigureController figureController = new FigureController();
         public MaterialController materialController = new MaterialController();
         public ModelController modelController = new ModelController();
