@@ -14,13 +14,14 @@ namespace Render3D.UnitTest.ControllersTests
         private DataWarehouse _dataWarehouse;
         private MaterialController _materialController;
         private ClientController _clientController;
-        private Client _clientSample;
-        private Material _materialSample;
+
         private readonly Colour _color = new Colour(0, 0, 0);
         private readonly int[] _colorArray = new int[] { 0, 0, 0 };
 
         private const string lambertianMaterialName = "lambertialMaterialSample1";
         private const string lambertianMaterialNameChange = "lambertialMaterialSample2";
+        private const string metallicMaterialName = "metallicMaterialSample1";
+        private const string metallicMaterialNameChange = "metallicMaterialSample2";
         private const string clientSampleName = "clientSample1";
         private const string passwordSample = "PasswordExample1";
 
@@ -31,8 +32,7 @@ namespace Render3D.UnitTest.ControllersTests
             _dataWarehouse = new DataWarehouse();
             _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
             _materialController = new MaterialController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
-            _clientSample = new Client() { Name = clientSampleName, Password = passwordSample };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = lambertianMaterialName, Attenuation = _color };
+          
         }
         [TestMethod]
         public void GivenNewLambertianMaterialAddsItToTheList()
@@ -42,6 +42,16 @@ namespace Render3D.UnitTest.ControllersTests
             _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
+
+        [TestMethod]
+        public void GivenNewMetallicMaterialAddsItToTheList()
+        {
+            _clientController.SignIn(clientSampleName, passwordSample);
+            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
+            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray);
+            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
+        }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenNewWrongLambertianMaterialFailsAddingItToTheList()
