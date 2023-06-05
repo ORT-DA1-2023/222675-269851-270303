@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd.Materials;
+﻿
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,16 +10,16 @@ namespace Render3D.UserInterface.Controls
     public partial class MaterialControl : UserControl
     {
         private string _oldName;
-        public MaterialControl(Material material)
+        public MaterialControl(MaterialDto material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;
             _oldName = material.Name;
-            lblRedColor.Text = "Red: " + material.Attenuation.Red();
-            lblGreenColor.Text = "Green: " + material.Attenuation.Green();
-            lblBlueColor.Text = "Blue: " + material.Attenuation.Blue();
+            lblRedColor.Text = "Red: " + material.Red;
+            lblGreenColor.Text = "Green: " + material.Green;
+            lblBlueColor.Text = "Blue: " + material.Blue;
             lblErrorDeleteMaterial.Text = "";
-            pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());
+            pBoxMaterial.BackColor = Color.FromArgb(material.Red, material.Green, material.Blue);
         }
 
 

@@ -1,4 +1,4 @@
-﻿using Render3D.BackEnd;
+﻿using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -7,9 +7,9 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class SceneControl : UserControl
     {
-        private string _oldName;
-        private Scene _scene;
-        public SceneControl(Scene selectedScene)
+        private readonly string _oldName;
+        private readonly SceneDto _scene;
+        public SceneControl(SceneDto selectedScene)
         {
             InitializeComponent();
             _scene = selectedScene;
@@ -36,7 +36,7 @@ namespace Render3D.UserInterface.Controls
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent.Parent;
             Render3DIU render = (Render3DIU)creation.Parent.Parent;
-            using (var scene = new SceneCreation(render.sceneController, "", _scene))
+            using (var scene = new SceneCreation(render.sceneController, _scene))
             {
                 var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)

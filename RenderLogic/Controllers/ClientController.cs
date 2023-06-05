@@ -51,5 +51,33 @@ namespace Render3D.RenderLogic.Controllers
         {
             return ClientService.GetClientWithName(clientName);
         }
+
+        public void ValidUser(string clientName, string clientPassword)
+        {
+            Client client;
+            try
+            {
+              client = ClientService.GetClientWithName(clientName);
+              
+            }
+            catch 
+            {
+                throw new Exception("a Client with that name does not exist");
+            }
+            if (client.Password == clientPassword)
+            {
+                Client = client;
+            }
+        }
+
+        public void LogOut()
+        {
+           Client =null;
+        }
+
+        public string GetClient()
+        {
+            return Client.Name;
+        }
     }
 }

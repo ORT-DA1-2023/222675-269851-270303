@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+﻿using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,32 +21,23 @@ namespace Render3D.UserInterface.Panels
             render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
-            List<Figure> figureList = render.dataWarehouse.Figures;
-            List<Material> materialList = render.dataWarehouse.Materials;
-            foreach (Figure figure in figureList)
+            List<FigureDto> figureList = render.modelController.GetFigures();
+            List<MaterialDto> materialList = render.modelController.GetMaterials();
+            foreach (FigureDto figure in figureList)
             {
-                if (figure.Client.Name.Equals(render.clientController.Client))
-                {
                     lstFigure.Items.Add(figure);
-                }
-
             }
-            foreach (Material material in materialList)
+            foreach (MaterialDto material in materialList)
             {
-                if (material.Client.Name.Equals(""))
-                {
                     lstMaterial.Items.Add(material);
-                }
             }
             lblExceptionError.Text = "";
         }
 
-        private void BtnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateModel_Click(object sender, EventArgs e)
         {
             string modelName = txtModelName.Text;
-            Figure figure = lstFigure.SelectedItem as Figure;
-            Material material = lstMaterial.SelectedItem as Material;
-            if (figure == null || material == null)
+            if (!(lstFigure.SelectedItem is FigureDto figure) || !(lstMaterial.SelectedItem is MaterialDto material))
             {
                 return;
             }
@@ -56,7 +46,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithPreview("", modelName, figure, material);
+                    render.modelController.AddAModelWithPreview(modelName, figure, material);
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +57,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithoutPreview("", modelName, figure, material);
+                    render.modelController.AddAModelWithoutPreview(modelName, figure, material);
                 }
                 catch (Exception ex)
                 {

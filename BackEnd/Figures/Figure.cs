@@ -11,6 +11,7 @@ namespace Render3D.BackEnd.Figures
         protected Vector3D _position;
 
         public Client Client { get; set; }
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
@@ -20,7 +21,7 @@ namespace Render3D.BackEnd.Figures
                 _name = value;
             }
         }
-        public string Id { get; set; }
+
 
         public override string ToString()
         {

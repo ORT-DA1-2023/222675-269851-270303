@@ -2,6 +2,7 @@
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 
@@ -54,9 +55,9 @@ namespace Render3D.RenderLogic.Controllers
             return vector;
         }
 
-        public Scene GetSceneByNameAndClient(string clientName, string sceneName)
+        public Scene GetSceneByNameAndClient(string sceneName)
         {
-            Client client = ClientController.GetClientByName(clientName);
+            Client client = ClientController.Client;
             foreach (Scene scene in DataWarehouse.Scenes)
             {
                 if (scene.Name == sceneName && scene.Client.Equals(client))
@@ -66,23 +67,23 @@ namespace Render3D.RenderLogic.Controllers
             }
             throw new BackEndException("scene doesnt exist");
         }
-        public void AddScene(string clientName, string sceneName)
+        public void AddScene(string sceneName)
         {
             try
             {
-                GetSceneByNameAndClient(clientName, sceneName);
+                GetSceneByNameAndClient(sceneName);
             }
             catch (Exception)
             {
-                CreateAndAddBlankScene(clientName, sceneName);
+                CreateAndAddBlankScene(sceneName);
                 return;
             }
             throw new BackEndException("scene already exists");
         }
 
-        private void CreateAndAddBlankScene(string clientName, string sceneName)
+        private void CreateAndAddBlankScene(string sceneName)
         {
-            Client client = ClientController.GetClientByName(clientName);
+            Client client = ClientController.Client;
             Camera camera = new Camera();
             Scene scene = new Scene() { Client = client, Name = sceneName, Camera = camera };
             DataWarehouse.Scenes.Add(scene);
@@ -119,7 +120,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Scene scene = GetSceneByNameAndClient(clientName, sceneName);
+                Scene scene = GetSceneByNameAndClient(sceneName);
                 DataWarehouse.Scenes.Remove(scene);
             }
             catch (Exception)
@@ -127,12 +128,12 @@ namespace Render3D.RenderLogic.Controllers
             }
         }
 
-        public void ChangeSceneName(string clientName, string oldName, string newName)
+        public void ChangeSceneName(string oldName, string newName)
         {
             Scene scene;
             try
             {
-                scene = GetSceneByNameAndClient(clientName, oldName);
+                scene = GetSceneByNameAndClient(oldName);
                 Scene tryName = new Scene() { Name = newName };
             }
             catch (Exception ex)
@@ -141,7 +142,7 @@ namespace Render3D.RenderLogic.Controllers
             }
             try
             {
-                GetSceneByNameAndClient(clientName, newName);
+                GetSceneByNameAndClient(newName);
             }
             catch (Exception)
             {
@@ -196,9 +197,14 @@ namespace Render3D.RenderLogic.Controllers
 
         public void RenderSceneBlur(Scene scene)
         {
-            Boolean blur = true;
+            bool blur = true;
             scene.Preview = GraphicMotor.Render(scene, blur);
             scene.UpdateLastRenderizationDate();
+        }
+
+        public List<SceneDto> GetScenes()
+        {
+            throw new NotImplementedException();
         }
     }
 }

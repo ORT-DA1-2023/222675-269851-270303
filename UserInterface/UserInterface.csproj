@@ -218,10 +218,6 @@
     <None Include="Images\SceneWithoutPreview.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BackEnd\BackEnd.csproj">
-      <Project>{48a432f2-a97d-4c6a-9d2c-04dd26ba809f}</Project>
-      <Name>BackEnd</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RenderLogic\RenderLogic.csproj">
       <Project>{92df00fd-9ac7-4504-bdbe-33ce11601c13}</Project>
       <Name>RenderLogic</Name>

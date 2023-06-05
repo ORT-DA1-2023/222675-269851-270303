@@ -1,4 +1,4 @@
-﻿using Render3D.BackEnd.Figures;
+﻿using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -10,12 +10,12 @@ namespace Render3D.UserInterface.Controls
     public partial class FigureControl : UserControl
     {
         private string _oldName;
-        public FigureControl(Figure figure)
+        public FigureControl(FigureDto figure)
         {
             InitializeComponent();
             this.lblFigureName.Text = figure.Name;
             _oldName = figure.Name;
-            this.lblFigureRadius.Text = "" + ((Sphere)figure).Radius;
+            this.lblFigureRadius.Text = "" + figure.Radius;
             lblErrorDeleteFigure.Text = "";
         }
 

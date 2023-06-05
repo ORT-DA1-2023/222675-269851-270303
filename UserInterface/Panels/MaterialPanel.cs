@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenderLogic.DataTransferObjects;
+using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
@@ -16,14 +17,16 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            String materialName = txtMaterialName.Text;
-            int[] materialColors = new int[rgbLength];
-            materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
-            materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
-            materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
+            MaterialDto materialDto = new MaterialDto
+            {
+                Name = txtMaterialName.Text,
+                Red = Convert.ToInt32(Math.Round(nrRedColor.Value)),
+                Green = Convert.ToInt32(Math.Round(nrGreenColor.Value)),
+                Blue = Convert.ToInt32(Math.Round(nrBlueColor.Value))
+            };
             try
             {
-                render.materialController.AddLambertianMaterial("", materialName, materialColors);
+                render.materialController.AddLambertianMaterial(materialDto);
             }
             catch (Exception ex)
             {

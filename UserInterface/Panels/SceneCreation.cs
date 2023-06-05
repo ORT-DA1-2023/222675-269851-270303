@@ -1,6 +1,5 @@
-﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
-using Render3D.BackEnd.GraphicMotorUtility;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -10,14 +9,12 @@ namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        public Scene scene;
+        public SceneDto scene;
         public SceneController sceneController;
-        private readonly string _client;
-        public SceneCreation(SceneController newSceneController, string clientName, Scene selectedScene)
+        public SceneCreation(SceneController newSceneController, SceneDto selectedScene)
         {
             InitializeComponent();
             sceneController = newSceneController;
-            _client = clientName;
             scene = selectedScene;
             if (scene == null)
             {
@@ -29,8 +26,8 @@ namespace UserInterface.Panels
         private void GenerateDefaultScene()
         {
             string name = sceneController.GetNextValidName();
-            sceneController.AddScene(_client, name);
-            scene = sceneController.GetSceneByNameAndClient(_client, name);
+            sceneController.AddScene(name);
+            scene = sceneController.GetSceneByNameAndClient(name);
         }
 
         private void LoadScene()

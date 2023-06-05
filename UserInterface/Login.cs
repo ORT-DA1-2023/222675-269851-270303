@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface
@@ -17,25 +16,17 @@ namespace Render3D.UserInterface
         {
             string clientName = txtClientName.Text;
             string clientPassword = txtClientPassword.Text;
-            Client client;
             try
             {
-                client = render.clientController.GetClientByName(clientName);
+             render.clientController.ValidUser(clientName,clientPassword);
             }
             catch (Exception ex)
             {
                 lblExceptionError.Text = ex.Message;
                 return;
             }
-
-            if (!client.Password.Equals(clientPassword))
-            {
-                lblExceptionError.Text = "Password is incorrect";
-                return;
-            }
             txtClientName.Text = "";
             txtClientPassword.Text = "";
-            render.clientController.Client = client;
             render.EnterMenu();
         }
         private void BtnSignIn_Click(object sender, EventArgs e)

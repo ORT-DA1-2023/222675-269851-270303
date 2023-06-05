@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenderLogic.DataTransferObjects;
+using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
@@ -16,7 +17,6 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            string figureName = txtFigureName.Text;
             string figureRadiusString = txtFigureRadius.Text;
             double figureRadius;
             if (TryToParse(figureRadiusString) != -1)
@@ -24,7 +24,12 @@ namespace Render3D.UserInterface.Panels
                 figureRadius = Convert.ToDouble(figureRadiusString);
                 try
                 {
-                    render.figureController.AddFigure(render.clientController.Client, figureName, figureRadius);
+                    FigureDto figureDto = new FigureDto()
+                    {
+                        Name = txtFigureName.Text,
+                        Radius = figureRadius,
+                    };
+                    render.figureController.AddFigure(figureDto);
                 }
                 catch (Exception ex)
                 {

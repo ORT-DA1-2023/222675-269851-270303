@@ -1,4 +1,4 @@
-﻿using Render3D.BackEnd;
+﻿using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -8,7 +8,7 @@ namespace Render3D.UserInterface.Controls
     public partial class ModelControl : UserControl
     {
         private string _oldName;
-        public ModelControl(Model model)
+        public ModelControl(ModelDto model)
         {
             InitializeComponent();
             lblModelName.Text = model.Name;

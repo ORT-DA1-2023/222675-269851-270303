@@ -1,9 +1,10 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 using System;
-
+using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -12,29 +13,28 @@ namespace Render3D.RenderLogic.Controllers
         public DataWarehouse DataWarehouse { get; set; }
         public FigureService FigureService { get; set; }
         public ClientController ClientController { get; set; }
-        public void AddFigure(Client client, string figureName, double figureRadius)
+        public void AddFigure(FigureDto figureDto)
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(client, figureName);
+                FigureService.GetFigureByNameAndClient(ClientController.Client, figureDto.Name);
 
             }
             catch (Exception)
             {
-                //CreateSphere(ClientController.GetClientByName(clientName), figureName, figureRadius);
+                CreateSphere(figureDto);
                 return;
             }
             throw new BackEndException("figure already exists");
 
         }
-        private void CreateSphere(Client client, string figureName, double figureRadius)
+        private void CreateSphere(FigureDto figureDto)
         {
-            Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
+            Figure figure = new Sphere() { Client = ClientController.Client, Name = figureDto.Name, Radius = figureDto.Radius };
             DataWarehouse.Figures.Add(figure);
         }
-        public Figure GetFigureByNameAndClient(string clientName, string figureName)
+        public Figure GetFigureByNameAndClient(string figureName)
         {
-           // Client client = ClientController.GetClientByName(clientName);
             foreach (Figure figure in DataWarehouse.Figures)
             {
                 if (figure.Name == figureName && figure.Client.Equals(""))
@@ -80,5 +80,9 @@ namespace Render3D.RenderLogic.Controllers
 
         }
 
+        public List<FigureDto> GetFigures()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

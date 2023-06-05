@@ -1,8 +1,9 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
 using System;
-
+using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -11,17 +12,17 @@ namespace Render3D.RenderLogic.Controllers
         public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController { get; set; }
 
-        public void AddLambertianMaterial(string clientName, string materialName, int[] materialColors)
+        public void AddLambertianMaterial(MaterialDto materialDto)
         {
             try
             {
-                GetMaterialByNameAndClient(clientName, materialName);
+                GetMaterialByNameAndClient(materialDto.Name);
 
             }
             catch (Exception)
             {
-                Colour colour = new Colour(materialColors[0] / 255f, materialColors[1] / 255f, materialColors[2] / 255f);
-                CreateLambertianMaterial(ClientController.GetClientByName(clientName), materialName, colour);
+                Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
+                CreateLambertianMaterial(ClientController.Client, materialDto.Name, colour);
                 return;
             }
             throw new BackEndException("material already exists");
@@ -32,9 +33,9 @@ namespace Render3D.RenderLogic.Controllers
             DataWarehouse.Materials.Add(material);
         }
 
-        public Material GetMaterialByNameAndClient(string clientName, string materialName)
+        public Material GetMaterialByNameAndClient(string materialName)
         {
-            Client client = ClientController.GetClientByName(clientName);
+            Client client = ClientController.Client;
             foreach (Material material in DataWarehouse.Materials)
             {
                 if (material.Name == materialName && material.Client.Equals(client))
@@ -44,12 +45,12 @@ namespace Render3D.RenderLogic.Controllers
             }
             throw new BackEndException("material doesnt exist");
         }
-        public void ChangeMaterialName(string clientName, string oldName, string newName)
+        public void ChangeMaterialName(string oldName, string newName)
         {
             Material material;
             try
             {
-                material = GetMaterialByNameAndClient(clientName, oldName);
+                material = GetMaterialByNameAndClient(oldName);
                 Material checkMaterialName = new LambertianMaterial() { Name = newName };
             }
             catch (Exception)
@@ -58,7 +59,7 @@ namespace Render3D.RenderLogic.Controllers
             }
             try
             {
-                GetMaterialByNameAndClient(clientName, newName);
+                GetMaterialByNameAndClient(newName);
             }
             catch (Exception)
             {
@@ -69,13 +70,18 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Material material = GetMaterialByNameAndClient(clientName, materialName);
+                Material material = GetMaterialByNameAndClient(materialName);
                 DataWarehouse.Materials.Remove(material);
             }
             catch (Exception)
             {
             }
 
+        }
+
+        public List<MaterialDto> GetMaterials()
+        {
+            throw new NotImplementedException();
         }
     }
 }
