@@ -24,6 +24,7 @@ namespace Render3D.UnitTest.ControllersTests
         private const string metallicMaterialNameChange = "metallicMaterialSample2";
         private const string clientSampleName = "clientSample1";
         private const string passwordSample = "PasswordExample1";
+        private const double blurSample = 0.5;
 
 
         [TestInitialize]
@@ -48,7 +49,7 @@ namespace Render3D.UnitTest.ControllersTests
         {
             _clientController.SignIn(clientSampleName, passwordSample);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray);
+            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
 
