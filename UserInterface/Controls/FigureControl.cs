@@ -24,7 +24,7 @@ namespace Render3D.UserInterface.Controls
 
             if (!_figureDto.Name.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_figureDto.Id, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_figureDto, newName))
                 {
                     lblFigureName.Text = newName;
                 }
