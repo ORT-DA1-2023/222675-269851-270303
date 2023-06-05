@@ -56,31 +56,30 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenBitmapSavesItAsPDF()
+        public void GivenBitmapSavesItAsPNG()
         {
             Bitmap bitmap = new Bitmap(10, 10);
-            string destinationPath = "test.pdf";
-            SavingFormat format = new PDFSavingFormat();
+            string destinationPath = "test.png";
+            SavingFormat format = new PNGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 
             outputSaver.Save();
             Assert.IsTrue(File.Exists(destinationPath));
-            Assert.AreEqual(".pdf", Path.GetExtension(destinationPath).ToLower());
+            Assert.AreEqual(".png", Path.GetExtension(destinationPath).ToLower());
 
             if (File.Exists(destinationPath)) File.Delete(destinationPath);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Could not save the file")]
-        public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCasePDF()
+        public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCasePNG()
         {
             Bitmap bitmap = new Bitmap(100, 100);
-            string invalidDirectory = "invalid/path/test.pdf";
-            SavingFormat format = new PDFSavingFormat();
+            string invalidDirectory = "invalid/path/test.png";
+            SavingFormat format = new PNGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, invalidDirectory, format);
 
             outputSaver.Save();
-
         }
 
         [TestMethod]
