@@ -29,7 +29,7 @@ namespace Render3D.UnitTest.ControllersTests
             _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Attenuation = _color };
         }
         [TestMethod]
-        public void GivenNewMaterialAddsItToTheList()
+        public void GivenNewLambertianMaterialAddsItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
@@ -38,7 +38,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenNewWrongMaterialFailsAddingItToTheList()
+        public void GivenNewWrongLambertianMaterialFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
@@ -47,7 +47,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "materialSample already exists")]
-        public void GivenRepeatedMaterialFailsAddingItToTheList()
+        public void GivenRepeatedLambertianMaterialFailsAddingItToTheList()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
@@ -56,7 +56,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
         [TestMethod]
-        public void GivenNewMaterialNameItChanges()
+        public void GivenNewLambertianMaterialNameItChanges()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
@@ -65,7 +65,7 @@ namespace Render3D.UnitTest.ControllersTests
 
         }
         [TestMethod]
-        public void GivenNewMaterialNameItDoesNotChange()
+        public void GivenNewLambertianMaterialNameItDoesNotChange()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
@@ -75,7 +75,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials[1].Name == "materialSample2");
         }
         [TestMethod]
-        public void GivenNameDeletesTheMaterial()
+        public void GivenNameDeletesTheLambertianMaterial()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
@@ -84,7 +84,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
         }
         [TestMethod]
-        public void GivenNameDoesNotDeleteTheMaterial()
+        public void GivenNameDoesNotDeleteTheLambertianMaterial()
         {
             _clientController.SignIn("clientSample1", "PasswordExample1");
             _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);

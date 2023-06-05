@@ -38,7 +38,7 @@ namespace Render3D.UserInterface
             {
                 if (material.Client.Name.Equals(render.clientName))
                 {
-                    MaterialControl materialControl = new MaterialControl(material);
+                    LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
                     flObjectList.Controls.Add(materialControl);
                 }
 
