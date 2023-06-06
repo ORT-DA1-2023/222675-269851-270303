@@ -169,5 +169,29 @@ namespace Render3D.RenderLogic.Controllers
             }
             return modelDtos;
         }
+
+        public bool CheckIfFigureIsInAModel(FigureDto figure)
+        {
+            try
+            {
+                ModelService.GetModelsWithFigure(ConvertFigureDto(figure));
+                return false;
+            }catch
+            {
+                return true; 
+            }
+        }
+        public bool CheckIfMaterialIsInAModel(MaterialDto material)
+        {
+            try
+            {
+                ModelService.GetModelsWithMaterial(ConvertMaterialDto(material));
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
     }
 }

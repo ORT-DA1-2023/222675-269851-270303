@@ -69,6 +69,7 @@
     <Compile Include="RenderContext.cs" />
     <Compile Include="RepoImplementation\ClientRepo.cs" />
     <Compile Include="RepoImplementation\ModelRepo.cs" />
+    <Compile Include="RepoImplementation\SceneRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

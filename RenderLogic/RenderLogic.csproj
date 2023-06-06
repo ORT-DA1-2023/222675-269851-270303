@@ -52,6 +52,7 @@
     <Compile Include="DataTransferObjects\ModelDto.cs" />
     <Compile Include="DataTransferObjects\SceneDto.cs" />
     <Compile Include="RepoInteface\IMaterialRepo.cs" />
+    <Compile Include="RepoInteface\ISceneRepo.cs" />
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="RepoInteface\IFigureRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

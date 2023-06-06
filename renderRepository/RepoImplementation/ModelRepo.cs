@@ -1,9 +1,9 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 
 namespace renderRepository.RepoImplementation
@@ -87,6 +87,40 @@ namespace renderRepository.RepoImplementation
                 entity.Preview = modelEntity.Preview;
                 dbContext.SaveChanges();
             }
+        }
+
+        public List<Model> GetModelsWithFigure(Figure figure)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var modelEntities = dbContext.ModelEntities
+                    .Where(f => f.FigureEntity == FigureEntity.FromDomain(figure))
+                    .ToList();
+                List<Model> Models = new List<Model>();
+                foreach (var m in modelEntities)
+                {
+                    Models.Add(m.ToDomain());
+                }
+                return Models;
+            }
+
+        }
+
+        public List<Model> GetModelsWithMaterial(Material material)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var modelEntities = dbContext.ModelEntities
+                    .Where(f => f.MaterialEntity == MaterialEntity.FromDomain(material))
+                    .ToList();
+                List<Model> Models = new List<Model>();
+                foreach (var m in modelEntities)
+                {
+                    Models.Add(m.ToDomain());
+                }
+                return Models;
+            }
+
         }
     }
 }

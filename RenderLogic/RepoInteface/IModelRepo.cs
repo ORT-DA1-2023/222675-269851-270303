@@ -1,6 +1,7 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace RenderLogic.RepoInterface
 {
@@ -13,5 +14,7 @@ namespace RenderLogic.RepoInterface
         Model GetByNameAndClient(string name, Client client);
         List<Model> GetModelsOfClient(Client client);
         void UpdatePreview(Model model);
+        List<Model> GetModelsWithFigure(Figure figure);
+        List<Model> GetModelsWithMaterial(Material material);
     }
 }

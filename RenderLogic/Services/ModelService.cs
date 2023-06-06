@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using RenderLogic.RepoInterface;
 using System;
 using System.Drawing;
+using RenderLogic.DataTransferObjects;
+using Render3D.BackEnd.Figures;
 
 namespace RenderLogic.Services
 {
@@ -46,6 +48,16 @@ namespace RenderLogic.Services
         internal void UpdatePreview(Model model)
         {
             _modelRepo.UpdatePreview(model);
+        }
+
+        internal List<Model> GetModelsWithFigure(Figure figure)
+        {
+            return _modelRepo.GetModelsWithFigure(figure);
+        }
+
+        internal List<Model> GetModelsWithMaterial(Material material)
+        {
+            return _modelRepo.GetModelsWithMaterial(material);
         }
     }
 }

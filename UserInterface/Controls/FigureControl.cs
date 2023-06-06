@@ -1,4 +1,5 @@
-﻿using RenderLogic.DataTransferObjects;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -9,12 +10,16 @@ namespace Render3D.UserInterface.Controls
 
     public partial class FigureControl : UserControl
     {
-        private FigureDto _figureDto;
+        private readonly FigureDto _figureDto;
+        private readonly FigureController figureController;
+        private readonly ModelController modelController;
         public FigureControl(FigureDto figure)
         {
             InitializeComponent();
             this.lblFigureName.Text = figure.Name;
             _figureDto = figure;
+            figureController = FigureController.GetInstance();
+            modelController = ModelController.GetInstance();
             this.lblFigureRadius.Text = "" + figure.Radius;
             lblErrorDeleteFigure.Text = "";
         }
@@ -27,15 +32,16 @@ namespace Render3D.UserInterface.Controls
                 if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_figureDto, newName))
                 {
                     lblFigureName.Text = newName;
+                    _figureDto.Name = newName;
                 }
             }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (!((CreationMenu)this.Parent.Parent.Parent).FigureIsPartOfModel(lblFigureName.Text))
+            if (!modelController.CheckIfFigureIsInAModel(_figureDto))
             {
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(_figureDto);
+                figureController.Delete(_figureDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
             }
             else

@@ -1,4 +1,5 @@
 ﻿
+using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
@@ -9,12 +10,16 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class MaterialControl : UserControl
     {
-        private MaterialDto _materialDto;
+        private readonly MaterialDto _materialDto;
+        private readonly ModelController modelController;
+        private readonly MaterialController materialController;
         public MaterialControl(MaterialDto material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;
             _materialDto = material;
+            modelController = ModelController.GetInstance();
+            materialController = MaterialController.GetInstance();
             lblRedColor.Text = "Red: " + material.Red;
             lblGreenColor.Text = "Green: " + material.Green;
             lblBlueColor.Text = "Blue: " + material.Blue;
@@ -37,9 +42,9 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-            if (!((CreationMenu)this.Parent.Parent.Parent).MaterialIsPartOfModel(lblMaterialName.Text))
+            if (!modelController.CheckIfMaterialIsInAModel(_materialDto))
             {
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteMaterial(_materialDto);
+                materialController.Delete(_materialDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Material");
             }
             else

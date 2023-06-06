@@ -146,10 +146,6 @@ namespace Render3D.UserInterface
             }
         }
 
-        public void DeleteFigure(FigureDto figure)
-        {
-            figureController.Delete(figure);
-        }
 
         internal bool ChangeMaterialName(MaterialDto materialDto,string newName)
         {
@@ -201,40 +197,12 @@ namespace Render3D.UserInterface
             render.sceneController.DeleteSceneInList("", sceneName);
         }
 
-        internal bool FigureIsPartOfModel(string figureName)
-        {
-            try
-            {
-                List<ModelDto> models = modelController.GetModelsWithFigure(figureName);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-
-        internal bool MaterialIsPartOfModel(string materialName)
-        {
-            try
-            {
-                List<ModelDto> models = modelController.GetModelWithMaterial(materialName);
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-
-        }
 
         internal bool ModelIsPartOfScene(string modelName)
         {
             try
             {
-                List<SceneDto> scene = render.sceneController.GetSceneWithModel(modelName);
+               // List<SceneDto> scene = render.sceneController.GetSceneWithModel(modelName);
                 return true;
             }
             catch (Exception)
