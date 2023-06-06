@@ -1,12 +1,8 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Materials;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RenderLogic.RepoInteface
+namespace RenderLogic.RepoInterface
 {
     public interface IMaterialRepo
     {

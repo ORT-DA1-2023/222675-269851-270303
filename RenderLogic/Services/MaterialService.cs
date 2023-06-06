@@ -1,7 +1,7 @@
 ﻿using Render3D.BackEnd;
 using System.Collections.Generic;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoInteface;
+using RenderLogic.RepoInterface;
 
 namespace RenderLogic.Services
 {

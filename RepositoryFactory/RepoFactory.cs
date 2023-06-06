@@ -10,12 +10,14 @@ namespace RepositoryFactory
         public IClientRepo clientRepo = new ClientRepo();
         public IFigureRepo figureRepo = new FigureRepo();
         public IMaterialRepo materialRepo = new MaterialRepo();
+        public IModelRepo modelRepo = new ModelRepo();
 
         public void Initialize()
         {
             ClientController.GetInstance().ClientService= new ClientService(clientRepo);
             FigureController.GetInstance().FigureService = new FigureService(figureRepo);
             MaterialController.GetInstance().MaterialService = new MaterialService(materialRepo);
+            ModelController.GetInstance().ModelService = new ModelService(modelRepo);
         }
 
     }

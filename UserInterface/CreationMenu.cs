@@ -14,6 +14,7 @@ namespace Render3D.UserInterface
         private readonly ClientController clientController = ClientController.GetInstance();
         private readonly FigureController figureController = FigureController.GetInstance();
         private readonly MaterialController materialController = MaterialController.GetInstance();
+        private readonly ModelController modelController = ModelController.GetInstance();
         public CreationMenu()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace Render3D.UserInterface
         public void ShowMaterialList()
         {
             flObjectList.Controls.Clear();
-            List<MaterialDto> materialList = render.materialController.GetMaterials();
+            List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (MaterialDto material in materialList)
             {
                     MaterialControl materialControl = new MaterialControl(material);
@@ -44,7 +45,7 @@ namespace Render3D.UserInterface
         public void ShowModelList()
         {
             flObjectList.Controls.Clear();
-            List<ModelDto> models = render.modelController.GetModels();
+            List<ModelDto> models = modelController.GetModels();
             foreach (ModelDto model in models)
             {
                     ModelControl modelControl = new ModelControl(model);
@@ -67,7 +68,7 @@ namespace Render3D.UserInterface
 
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
-            render.clientController.LogOut();
+            clientController.LogOut();
             render.UserWantsToLogIn();
         }
         private void BtnMaterial_Click(object sender, EventArgs e)
@@ -170,19 +171,24 @@ namespace Render3D.UserInterface
             materialController.Delete(materialDto);
         }
 
-        internal bool ModelNameHasBeenChanged(string oldName, string newName)
+        internal bool ModelNameHasBeenChanged(ModelDto modelDto, string newName)
         {
-            render.modelController.ChangeModelName("", oldName, newName);
-            if (render.modelController.GetModelByNameAndClient("", newName) != null)
+            try
             {
+                modelController.ChangeName(modelDto, newName);
                 return true;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
+            
+            
         }
 
-        internal void DeleteModel(string modelName)
+        internal void DeleteModel(ModelDto model)
         {
-            render.modelController.DeleteModelInList(modelName);
+            render.modelController.Delete(model);
         }
 
         private void BtnScene_Click(object sender, EventArgs e)
@@ -199,7 +205,7 @@ namespace Render3D.UserInterface
         {
             try
             {
-                List<ModelDto> models = render.modelController.GetModelsWithFigure(figureName);
+                List<ModelDto> models = modelController.GetModelsWithFigure(figureName);
                 return true;
             }
             catch (Exception)
@@ -213,7 +219,7 @@ namespace Render3D.UserInterface
         {
             try
             {
-                List<ModelDto> models = render.modelController.GetModelWithMaterial(materialName);
+                List<ModelDto> models = modelController.GetModelWithMaterial(materialName);
                 return true;
             }
             catch (Exception)

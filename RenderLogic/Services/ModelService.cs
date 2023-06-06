@@ -2,6 +2,8 @@
 using Render3D.BackEnd;
 using System.Collections.Generic;
 using RenderLogic.RepoInterface;
+using System;
+using System.Drawing;
 
 namespace RenderLogic.Services
 {
@@ -26,20 +28,24 @@ namespace RenderLogic.Services
         {
             return _modelRepo.Get(Id);
         }
-        public Model GetMaterialByNameAndClient(string modelName, Client client)
+        public Model GetModelByNameAndClient(string modelName, Client client)
         {
             return _modelRepo.GetByNameAndClient(modelName, client);
         }
 
-        public List<Model> GetMaterialOfClient(Client client)
+        public List<Model> GetModelsOfClient(Client client)
         {
             return _modelRepo.GetModelsOfClient(client);
         }
 
         internal void UpdateName(string id, string newName)
         {
-            _modelRepo.ChangeName(int.Parse(id), newName);
+            _modelRepo.UpdateName(int.Parse(id), newName);
         }
 
+        internal void UpdatePreview(Model model)
+        {
+            _modelRepo.UpdatePreview(model);
+        }
     }
 }

@@ -4,6 +4,7 @@ using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
+using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -13,22 +14,31 @@ namespace Render3D.RenderLogic.Controllers
     {
         public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController { get; set; }
-        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
+        public GraphicMotor GraphicMotor = new GraphicMotor();
+        public ModelService ModelService { get; set; }
+        protected static ModelController modelController;
+
+        public static ModelController GetInstance()
+        {
+            if (modelController == null)
+            {
+                modelController = new ModelController();
+            }
+            return modelController;
+        }
         public void AddAModelWithoutPreview(string modelName, FigureDto figureDto, MaterialDto materialDto)
         {
-
             try
             {
-                GetModelByNameAndClient(modelName);
-
+                ModelService.GetModelByNameAndClient(modelName,ClientController.Client);
+                throw new BackEndException("model already exists");
             }
             catch (Exception)
             {
                 
-                CreateAndAddModel(ClientController.Client, modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
-                return;
+                CreateAndAddModel(modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
             }
-            throw new BackEndException("model already exists");
+           
         }
 
         private Material ConvertMaterialDto(MaterialDto materialDto)
@@ -64,7 +74,7 @@ namespace Render3D.RenderLogic.Controllers
                 Radius = ((Sphere)figure).Radius
             };
         }
-        public MaterialDto convertMaterial(Material material)
+        public MaterialDto ConvertMaterial(Material material)
         {
             int blur=0;
             try
@@ -99,77 +109,65 @@ namespace Render3D.RenderLogic.Controllers
             AddAModelWithoutPreview(modelName, figure, material);
             AddPreviewToTheModel(modelName);
         }
-        private void CreateAndAddModel(Client client, string modelName, Figure figure, Material material)
+        private void CreateAndAddModel(string modelName, Figure figure, Material material)
         {
-            Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
-            DataWarehouse.Models.Add(model);
-        }
-        public Model GetModelByNameAndClient(string modelName)
-        {
-            Client client = ClientController.Client;
-            foreach (Model model in DataWarehouse.Models)
+            Model model = new Model()
             {
-                if (model.Name == modelName && model.Client.Equals(client))
-                {
-                    return model;
-                }
-            }
-            throw new BackEndException("model doesnt exist");
+                Client=ClientController.Client,
+                Name = modelName,
+                Figure = figure, 
+                Material = material };
+            ModelService.AddModel(model);
         }
         private void AddPreviewToTheModel(string modelName)
         {
-            Model model = GetModelByNameAndClient(modelName);
+            Model model = ModelService.GetModelByNameAndClient(modelName,ClientController.Client);
             model.Preview = GraphicMotor.RenderModelPreview(model);
+            ModelService.UpdatePreview(model);
         }
-        public void ChangeModelName(string oldName, string newName)
-        {
-            Model model;
-            try
-            {
-                model = GetModelByNameAndClient(oldName);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            try
-            {
-                GetModelByNameAndClient(newName);
-            }
-            catch (Exception)
-            {
-                model.Name = newName;
-            }
-        }
-
-        public void DeleteModelInList(string modelName)
+        public void ChangeName(ModelDto modelDto, string newName)
         {
             try
             {
-                Model model = GetModelByNameAndClient(modelName);
-                DataWarehouse.Models.Remove(model);
+                Model material = ModelService.GetModelByNameAndClient(newName, ClientController.Client);
+                throw new Exception("There is already a material with that name");
             }
-            catch (Exception)
+            catch
             {
+                ModelService.UpdateName(modelDto.Id, newName);
             }
-
-        }
-       
-        public List<FigureDto> GetFigures()
-        {
-            List<FigureDto> figureDtos = new List<FigureDto>();
-            return figureDtos;
-        }
-        public List<MaterialDto> GetMaterials() 
-        {
-            List<MaterialDto> materialDtos = new List<MaterialDto>();
-            return materialDtos;
         }
 
+        public void Delete(ModelDto modelDto)
+        {
+            ModelService.RemoveModel(int.Parse(modelDto.Id));
+        }
         public List<ModelDto> GetModels()
         {
-            throw new NotImplementedException();
+
+            List<Model> Modellist;
+            try
+            {
+                Modellist = ModelService.GetModelsOfClient(ClientController.Client);
+            }
+            catch
+            {
+                throw new Exception("The client does not have any figures");
+            }
+
+            List<ModelDto> modelDtos = new List<ModelDto>();
+            foreach (Model mod in Modellist)
+            {
+                ModelDto modDto = new ModelDto()
+                {
+                    Id = mod.Id,
+                    Name = mod.Name,
+                    Figure= ConvertFigure(mod.Figure),
+                    Material = ConvertMaterial(mod.Material),
+                };
+                modelDtos.Add(modDto);
+            }
+            return modelDtos;
         }
     }
-
 }

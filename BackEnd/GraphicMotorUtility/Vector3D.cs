@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
 {
@@ -84,6 +85,16 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public bool Equals(Vector3D other)
         {
             return ((X == other.X) && (Y == other.Y) && (Z == other.Z));
+        }
+        public override string ToString()
+        {
+            return X + "," + Y + "," +Z;
+        }
+        public static Vector3D FromString(string s)
+        {
+            var vectorInArray = s?.Split(',').Select(double.Parse).ToArray();
+            Vector3D vector = new Vector3D(vectorInArray[0], vectorInArray[1], vectorInArray[2]);
+            return vector;
         }
     }
 }

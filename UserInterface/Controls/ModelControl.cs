@@ -7,12 +7,12 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        private string _oldName;
+       private readonly ModelDto _modelDto;
         public ModelControl(ModelDto model)
         {
             InitializeComponent();
             lblModelName.Text = model.Name;
-            _oldName = model.Name;
+            _modelDto = model;
             lblModelFigure.Text = model.Figure.Name;
             lblModelMaterial.Text = model.Material.Name;
             lblErrorDeleteModel.Text = "";
@@ -24,7 +24,7 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEditModelName_Click(object sender, EventArgs e)
         {
-            using (var nameChanger = new NameChanger(_oldName))
+            using (var nameChanger = new NameChanger(_modelDto.Name))
             {
                 var result = nameChanger.ShowDialog(this);
                 if (result == DialogResult.OK)
@@ -38,12 +38,12 @@ namespace Render3D.UserInterface.Controls
 
         private void ChecksForCorrectEdit(string newName)
         {
-            if (!_oldName.Equals(newName))
+            if (!_modelDto.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_modelDto, newName))
                 {
                     lblModelName.Text = newName;
-                    _oldName = newName;
+                    _modelDto.Name = newName;
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace Render3D.UserInterface.Controls
             if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblModelName.Text))
             {
 
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
+                ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(_modelDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
             }
             else

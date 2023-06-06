@@ -2,13 +2,15 @@
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 
 namespace renderRepository.RepoImplementation
 {
-    public class ModelIRepo :IModelRepo
+    public class ModelRepo :IModelRepo
     {
-        public ModelIRepo() { }
+        public ModelRepo() { }
 
         public void Add(Model model)
         {
@@ -21,7 +23,7 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public void ChangeName(int Id, string newName)
+        public void UpdateName(int Id, string newName)
         {
             using (var dbContext = new RenderContext())
             {
@@ -73,6 +75,17 @@ namespace renderRepository.RepoImplementation
                     clientModels.Add(m.ToDomain());
                 }
                 return clientModels;
+            }
+        }
+
+        public void UpdatePreview(Model model)
+        {
+           ModelEntity modelEntity= ModelEntity.FromDomain(model);
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.ModelEntities.Find(model.Id);
+                entity.Preview = modelEntity.Preview;
+                dbContext.SaveChanges();
             }
         }
     }

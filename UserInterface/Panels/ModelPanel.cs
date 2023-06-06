@@ -1,4 +1,5 @@
-﻿using RenderLogic.DataTransferObjects;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,9 +11,15 @@ namespace Render3D.UserInterface.Panels
     {
         private CreationMenu creation;
         private Render3DIU render;
+        private readonly FigureController figureController;
+        private readonly MaterialController materialController;
+        private readonly ModelController modelController;
         public ModelPanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            modelController = ModelController.GetInstance();
         }
 
         private void VariableInitialize(object sender, EventArgs e)
@@ -21,8 +28,8 @@ namespace Render3D.UserInterface.Panels
             render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
-            List<FigureDto> figureList = render.modelController.GetFigures();
-            List<MaterialDto> materialList = render.modelController.GetMaterials();
+            List<FigureDto> figureList = figureController.GetFigures();
+            List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (FigureDto figure in figureList)
             {
                     lstFigure.Items.Add(figure);
@@ -46,7 +53,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithPreview(modelName, figure, material);
+                    modelController.AddAModelWithPreview(modelName, figure, material);
                 }
                 catch (Exception ex)
                 {
@@ -57,7 +64,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithoutPreview(modelName, figure, material);
+                    modelController.AddAModelWithoutPreview(modelName, figure, material);
                 }
                 catch (Exception ex)
                 {

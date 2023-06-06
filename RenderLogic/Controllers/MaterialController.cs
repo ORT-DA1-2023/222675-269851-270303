@@ -71,7 +71,7 @@ namespace Render3D.RenderLogic.Controllers
             List<Material> MaterialList;
             try
             {
-                MaterialList = MaterialService.GetMaterialOfClient(ClientController.Client);
+                MaterialList = MaterialService.GetMaterialsOfClient(ClientController.Client);
             }
             catch
             {

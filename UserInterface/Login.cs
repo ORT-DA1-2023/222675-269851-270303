@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.RenderLogic.Controllers;
+using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface
@@ -6,8 +7,10 @@ namespace Render3D.UserInterface
     public partial class Login : Form
     {
         private Render3DIU render;
+        private readonly ClientController clientController;
         public Login()
         {
+            clientController = ClientController.GetInstance();
             InitializeComponent();
         }
 
@@ -18,7 +21,7 @@ namespace Render3D.UserInterface
             string clientPassword = txtClientPassword.Text;
             try
             {
-             render.clientController.Login(clientName,clientPassword);
+             clientController.Login(clientName,clientPassword);
             }
             catch (Exception ex)
             {

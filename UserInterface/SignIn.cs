@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Render3D.RenderLogic.Controllers;
+using System;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface
@@ -6,9 +8,11 @@ namespace Render3D.UserInterface
     public partial class SignIn : Form
     {
         private Render3DIU render;
+        private ClientController clientController;
         public SignIn()
         {
             InitializeComponent();
+            clientController = ClientController.GetInstance();
             lblPasswordsDontMatch.Text = "";
             lblWrongPasswordMessage.Text = "";
             lblWrongUsernameMessage.Text = "";
@@ -31,7 +35,7 @@ namespace Render3D.UserInterface
             {
                 try
                 {
-                    render.clientController.SignIn(clientName, clientPassword);
+                    clientController.SignIn(clientName, clientPassword);
                 }
                 catch (Exception ex)
                 {
@@ -64,7 +68,7 @@ namespace Render3D.UserInterface
             {
                 try
                 {
-                    render.clientController.CheckPassword(clientPassword);
+                    clientController.CheckPassword(clientPassword);
                 }
                 catch (Exception ex)
                 {
@@ -84,7 +88,7 @@ namespace Render3D.UserInterface
             {
                 try
                 {
-                    render.clientController.CheckName(clientName);
+                    clientController.CheckName(clientName);
                 }
                 catch (Exception ex)
                 {
