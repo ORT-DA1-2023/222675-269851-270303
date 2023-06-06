@@ -17,13 +17,30 @@ namespace Render3D.UserInterface.Panels
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
             String materialName = txtMaterialName.Text;
+            double blur = Convert.ToDouble(txtBlur.Text);
             int[] materialColors = new int[rgbLength];
             materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
             materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
             materialColors[2] = Convert.ToInt32(Math.Round(nrBlueColor.Value));
             try
             {
-                render.materialController.AddLambertianMaterial(render.clientName, materialName, materialColors);
+                if(cmbMaterial.SelectedItem == null)
+                {
+                    throw new Exception("You must select a material type");
+                }
+                else
+                {
+                    if (cmbMaterial.SelectedItem.Equals("Lambertian"))
+                    {
+                        render.materialController.AddLambertianMaterial(render.clientName, materialName, materialColors);
+                    }
+                    else if (cmbMaterial.SelectedItem.Equals("Metallic"))
+                    {
+                        render.materialController.AddMetallicMaterial(render.clientName, materialName, materialColors, blur);
+                    }
+                }
+                
+               
             }
             catch (Exception ex)
             {
@@ -43,6 +60,18 @@ namespace Render3D.UserInterface.Panels
             creation = ((CreationMenu)this.Parent.Parent);
             render = ((Render3DIU)creation.Parent.Parent);
             lblExceptionError.Text = "";
+        }
+
+        private void cmbMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbMaterial.SelectedItem.Equals("Lambertian")) {
+                txtBlur.Enabled = false;
+                lblBlur.Enabled = false;
+            }else if (cmbMaterial.SelectedItem.Equals("Metallic"))
+            {
+                txtBlur.Enabled = true;
+                lblBlur.Enabled = true;
+            }
         }
     }
 }

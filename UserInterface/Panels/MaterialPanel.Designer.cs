@@ -39,9 +39,11 @@
             this.nrGreenColor = new System.Windows.Forms.NumericUpDown();
             this.nrBlueColor = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMaterial = new System.Windows.Forms.Label();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.cmbMaterial = new System.Windows.Forms.ComboBox();
-            this.lblMaterial = new System.Windows.Forms.Label();
+            this.lblBlur = new System.Windows.Forms.Label();
+            this.txtBlur = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nrRedColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrGreenColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrBlueColor)).BeginInit();
@@ -53,7 +55,7 @@
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 582);
-            this.btnCreateFigure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCreateFigure.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(505, 96);
             this.btnCreateFigure.TabIndex = 13;
@@ -68,7 +70,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaterialName.Location = new System.Drawing.Point(167, 195);
-            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaterialName.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaterialName.Name = "txtMaterialName";
             this.txtMaterialName.Size = new System.Drawing.Size(265, 34);
             this.txtMaterialName.TabIndex = 9;
@@ -80,7 +82,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRed.AutoSize = true;
             this.lblRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRed.Location = new System.Drawing.Point(55, 267);
+            this.lblRed.Location = new System.Drawing.Point(51, 266);
             this.lblRed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRed.Name = "lblRed";
             this.lblRed.Size = new System.Drawing.Size(64, 29);
@@ -94,7 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(55, 200);
+            this.lblName.Location = new System.Drawing.Point(51, 200);
             this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(84, 29);
@@ -107,7 +109,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(48, 15);
+            this.label1.Location = new System.Drawing.Point(54, 22);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(294, 31);
@@ -136,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBlue.AutoSize = true;
             this.lblBlue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBlue.Location = new System.Drawing.Point(55, 385);
+            this.lblBlue.Location = new System.Drawing.Point(51, 385);
             this.lblBlue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBlue.Name = "lblBlue";
             this.lblBlue.Size = new System.Drawing.Size(68, 29);
@@ -196,6 +198,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtBlur);
+            this.panel1.Controls.Add(this.lblBlur);
             this.panel1.Controls.Add(this.lblMaterial);
             this.panel1.Controls.Add(this.lblExceptionError);
             this.panel1.Controls.Add(this.label1);
@@ -215,6 +219,20 @@
             this.panel1.Size = new System.Drawing.Size(505, 678);
             this.panel1.TabIndex = 17;
             // 
+            // lblMaterial
+            // 
+            this.lblMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMaterial.AutoSize = true;
+            this.lblMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaterial.Location = new System.Drawing.Point(51, 134);
+            this.lblMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMaterial.Name = "lblMaterial";
+            this.lblMaterial.Size = new System.Drawing.Size(105, 29);
+            this.lblMaterial.TabIndex = 20;
+            this.lblMaterial.Text = "Material:";
+            // 
             // lblExceptionError
             // 
             this.lblExceptionError.AutoSize = true;
@@ -231,27 +249,40 @@
             // 
             this.cmbMaterial.FormattingEnabled = true;
             this.cmbMaterial.Items.AddRange(new object[] {
-            "Lambertiano",
-            "Metalico"});
+            "Lambertian",
+            "Metallic"});
             this.cmbMaterial.Location = new System.Drawing.Point(167, 139);
             this.cmbMaterial.Name = "cmbMaterial";
             this.cmbMaterial.Size = new System.Drawing.Size(265, 24);
             this.cmbMaterial.TabIndex = 19;
-            this.cmbMaterial.Text = "Lambertiano";
+            this.cmbMaterial.SelectedIndexChanged += new System.EventHandler(this.cmbMaterial_SelectedIndexChanged);
             // 
-            // lblMaterial
+            // lblBlur
             // 
-            this.lblMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMaterial.AutoSize = true;
-            this.lblMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaterial.Location = new System.Drawing.Point(55, 134);
-            this.lblMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMaterial.Name = "lblMaterial";
-            this.lblMaterial.Size = new System.Drawing.Size(105, 29);
-            this.lblMaterial.TabIndex = 20;
-            this.lblMaterial.Text = "Material:";
+            this.lblBlur.AutoSize = true;
+            this.lblBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBlur.Location = new System.Drawing.Point(51, 456);
+            this.lblBlur.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBlur.Name = "lblBlur";
+            this.lblBlur.Size = new System.Drawing.Size(62, 29);
+            this.lblBlur.TabIndex = 21;
+            this.lblBlur.Text = "Blur:";
+            // 
+            // txtBlur
+            // 
+            this.txtBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBlur.Location = new System.Drawing.Point(167, 453);
+            this.txtBlur.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBlur.Name = "txtBlur";
+            this.txtBlur.Size = new System.Drawing.Size(63, 34);
+            this.txtBlur.TabIndex = 22;
+            this.txtBlur.Text = "0.0";
             // 
             // MaterialPanel
             // 
@@ -260,7 +291,7 @@
             this.ClientSize = new System.Drawing.Size(507, 714);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MaterialPanel";
             this.Text = "Material";
             this.Shown += new System.EventHandler(this.VariablesInitialize);
@@ -289,5 +320,7 @@
         private System.Windows.Forms.Label lblExceptionError;
         private System.Windows.Forms.Label lblMaterial;
         private System.Windows.Forms.ComboBox cmbMaterial;
+        private System.Windows.Forms.TextBox txtBlur;
+        private System.Windows.Forms.Label lblBlur;
     }
 }

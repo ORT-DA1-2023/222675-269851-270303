@@ -1,6 +1,6 @@
 ﻿namespace Render3D.UserInterface.Controls
 {
-    partial class MaterialControl
+    partial class MetallicMaterialControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -6,10 +6,10 @@ using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
-    public partial class MaterialControl : UserControl
+    public partial class MetallicMaterialControl : UserControl
     {
         private string _oldName;
-        public MaterialControl(Material material)
+        public MetallicMaterialControl(Material material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;
@@ -17,6 +17,7 @@ namespace Render3D.UserInterface.Controls
             lblRedColor.Text = "Red: " + material.Attenuation.Red();
             lblGreenColor.Text = "Green: " + material.Attenuation.Green();
             lblBlueColor.Text = "Blue: " + material.Attenuation.Blue();
+            lblBlur.Text = "Blur: " + ((MetallicMaterial)material).Blur;
             lblErrorDeleteMaterial.Text = "";
             pBoxMaterial.BackColor = Color.FromArgb(material.Attenuation.Red(), material.Attenuation.Green(), material.Attenuation.Blue());
         }

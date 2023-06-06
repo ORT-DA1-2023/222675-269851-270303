@@ -38,8 +38,18 @@ namespace Render3D.UserInterface
             {
                 if (material.Client.Name.Equals(render.clientName))
                 {
-                    LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
-                    flObjectList.Controls.Add(materialControl);
+                    if(material is LambertianMaterial)
+                    {
+                        LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
+                        flObjectList.Controls.Add(materialControl);
+                    }
+                    else if (material is MetallicMaterial) 
+                    {
+                        MetallicMaterialControl materialControl = new MetallicMaterialControl(material);
+                        flObjectList.Controls.Add(materialControl);
+                    }
+                    
+                    
                 }
 
 
