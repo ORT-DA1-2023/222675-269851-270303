@@ -475,7 +475,7 @@
             this.cmbBlur.TabIndex = 29;
             this.cmbBlur.Text = "Blur";
             this.cmbBlur.UseVisualStyleBackColor = true;
-            this.cmbBlur.CheckedChanged += new System.EventHandler(this.cmbBlur_CheckedChanged);
+            this.cmbBlur.CheckedChanged += new System.EventHandler(this.CmbBlur_CheckedChanged);
             // 
             // SceneCreation
             // 

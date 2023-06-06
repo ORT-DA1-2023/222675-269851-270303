@@ -14,6 +14,17 @@ namespace Render3D.RenderLogic.Controllers
         public ClientController ClientController { get; set; }
         public GraphicMotor GraphicMotor { get; } = new GraphicMotor();
 
+        protected static SceneController sceneController;
+        
+        public static SceneController GetInstance()
+        {
+            if(sceneController == null)
+            {
+                sceneController = new SceneController();
+            }
+            return sceneController;
+        }
+
         public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov, string aperture)
         {
             try
@@ -55,38 +66,14 @@ namespace Render3D.RenderLogic.Controllers
             return vector;
         }
 
-        public Scene GetSceneByNameAndClient(string sceneName)
-        {
-            Client client = ClientController.Client;
-            foreach (Scene scene in DataWarehouse.Scenes)
-            {
-                if (scene.Name == sceneName && scene.Client.Equals(client))
-                {
-                    return scene;
-                }
-            }
-            throw new BackEndException("scene doesnt exist");
-        }
         public void AddScene(string sceneName)
         {
-            try
-            {
-                GetSceneByNameAndClient(sceneName);
-            }
-            catch (Exception)
-            {
-                CreateAndAddBlankScene(sceneName);
-                return;
-            }
-            throw new BackEndException("scene already exists");
+         
         }
 
         private void CreateAndAddBlankScene(string sceneName)
         {
-            Client client = ClientController.Client;
-            Camera camera = new Camera();
-            Scene scene = new Scene() { Client = client, Name = sceneName, Camera = camera };
-            DataWarehouse.Scenes.Add(scene);
+         
         }
 
         public string GetNextValidName()
@@ -118,38 +105,11 @@ namespace Render3D.RenderLogic.Controllers
         }
         public void DeleteSceneInList(string clientName, string sceneName)
         {
-            try
-            {
-                Scene scene = GetSceneByNameAndClient(sceneName);
-                DataWarehouse.Scenes.Remove(scene);
-            }
-            catch (Exception)
-            {
-            }
         }
 
         public void ChangeSceneName(string oldName, string newName)
         {
-            Scene scene;
-            try
-            {
-                scene = GetSceneByNameAndClient(oldName);
-                Scene tryName = new Scene() { Name = newName };
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            try
-            {
-                GetSceneByNameAndClient(newName);
-            }
-            catch (Exception)
-            {
-                scene.Name = newName;
-            }
-
-
+          
         }
 
         public void AddModel(Scene scene, Model model, string position)
@@ -169,7 +129,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public void RenderScene(Scene scene)
         {
-            Boolean blur = false;
+            bool blur = false;
             scene.Preview = GraphicMotor.Render(scene, blur);
             scene.UpdateLastRenderizationDate();
         }

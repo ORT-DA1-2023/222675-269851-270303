@@ -3,6 +3,7 @@ using RenderLogic.RepoInteface;
 using renderRepository.entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace renderRepository.RepoImplementation
 {
@@ -12,37 +13,77 @@ namespace renderRepository.RepoImplementation
         {
             using (var dbContext = new RenderContext())
             {
+                var entity = SceneEntity.FromDomain(scene);
+                dbContext.SceneEntities.Add(entity);
+                dbContext.SaveChanges();
+                scene.Id = entity.Id.ToString();
             }
         }
 
         public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.SceneEntities.Find(Id);
+                dbContext.SceneEntities.Remove(entity);
+                dbContext.SaveChanges();
+            }
         }
 
         public Scene Get(int Id)
         {
-            throw new NotImplementedException();
+            using (var dbContext = new RenderContext())
+            {
+                SceneEntity sceneEntity = dbContext.SceneEntities.Find(Id);
+                return sceneEntity.ToDomain();
+            }
         }
 
         public Scene GetByNameAndClient(string name, Client client)
         {
-            throw new NotImplementedException();
+            using (var dbContext = new RenderContext())
+            {
+                var sceneEntity = dbContext.SceneEntities
+                    .Where(f => f.Name == name && f.ClientEntity == ClientEntity.FromDomain(client));
+                return sceneEntity.ElementAt(0).ToDomain();
+            }
         }
 
         public List<Scene> GetScenesOfClient(Client client)
         {
-            throw new NotImplementedException();
+            using (var dbContext = new RenderContext())
+            {
+                var sceneEntities = dbContext.SceneEntities
+                    .Where(f => f.ClientEntity == ClientEntity.FromDomain(client))
+                    .ToList();
+                List<Scene> clientScene = new List<Scene>();
+                foreach (var m in sceneEntities)
+                {
+                    clientScene.Add(m.ToDomain());
+                }
+                return clientScene;
+            }
         }
 
         public void UpdateName(int Id, string newName)
         {
-            throw new NotImplementedException();
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.SceneEntities.Find(Id);
+                entity.Name = newName;
+                dbContext.SaveChanges();
+            }
         }
 
         public void UpdatePreview(Scene scene)
         {
-            throw new NotImplementedException();
+            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.SceneEntities.Find(scene.Id);
+                entity.Preview = SceneEntity.Preview;
+                dbContext.SaveChanges();
+            }
         }
     }
 }

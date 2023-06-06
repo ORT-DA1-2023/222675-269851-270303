@@ -9,14 +9,14 @@ namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        public SceneDto scene;
+        private SceneDto _sceneDto;
         public SceneController sceneController;
-        public SceneCreation(SceneController newSceneController, SceneDto selectedScene)
+        public SceneCreation(SceneDto selectedScene)
         {
             InitializeComponent();
-            sceneController = newSceneController;
-            scene = selectedScene;
-            if (scene == null)
+            sceneController = SceneController.GetInstance();
+            _sceneDto = selectedScene;
+            if (_sceneDto == null)
             {
                 GenerateDefaultScene();
             }
@@ -27,36 +27,25 @@ namespace UserInterface.Panels
         {
             string name = sceneController.GetNextValidName();
             sceneController.AddScene(name);
-            scene = sceneController.GetSceneByNameAndClient(name);
         }
 
         private void LoadScene()
         {
-            txtSceneName.Text = scene.Name;
-            Camera cam = scene.Camera;
-            txtLookAt.Text = "(" + cam.LookAt.X + ";" + cam.LookAt.Y + ";" + cam.LookAt.Z + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z + ")";
-            nrFov.Value = cam.Fov;
+            txtSceneName.Text = _sceneDto.Name;
+            txtLookAt.Text = "(" + _sceneDto.LookAt[0] + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
+            txtLookFrom.Text = "(" + _sceneDto.LookFrom[0] + ";" + _sceneDto.LookFrom[1] + ";" + _sceneDto.LookFrom[2] + ")";
+            nrFov.Value = _sceneDto.Fov;
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
-            foreach (Model model in sceneController.DataWarehouse.Models)
-            {
-                if (model.Client.Equals(scene.Client))
-                {
-                    cBoxAvailableModels.Items.Add(model);
-                }
-            }
-            foreach (Model model in scene.PositionedModels)
-            {
-                cBoxPositionedModels.Items.Add(model);
-            }
-            pBoxRender.Image = scene.Preview;
+            //all models
+            //positioned Models
+            pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
             lblAddModel.Text = "";
             lblRemoveModel.Text = "";
             LastModifcationDateRefresh();
-            if (scene.LastRenderizationDate != null)
+            if (_sceneDto.LastRenderizationDate != null)
             {
                 LastRenderDateRefresh();
             }
@@ -69,17 +58,17 @@ namespace UserInterface.Panels
 
         private void LastRenderDateRefresh()
         {
-            lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+            lblLastRenderDate.Text = "" + ((DateTime)_sceneDto.LastRenderizationDate).Month + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Day + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Year + " " + ((DateTime)_sceneDto.LastRenderizationDate).Hour + ":" + ((DateTime)_sceneDto.LastRenderizationDate).Minute;
         }
 
         private void LastModifcationDateRefresh()
         {
-            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
+            lblLastModificationDate.Text = "" + _sceneDto.LastModificationDate.Month + "/" + _sceneDto.LastModificationDate.Day + "/" + _sceneDto.LastModificationDate.Year + " " + _sceneDto.LastModificationDate.Hour + ":" + _sceneDto.LastModificationDate.Minute;
         }
 
         private void CheckRenderOutDated()
         {
-            if (scene.LastRenderizationDate == null || scene.LastRenderizationDate < (scene.LastModificationDate))
+            if (_sceneDto.LastRenderizationDate == null || _sceneDto.LastRenderizationDate < (_sceneDto.LastModificationDate))
             {
                 lblRenderOutDated.Text = "WARNING this render is outdated";
             }
@@ -117,10 +106,10 @@ namespace UserInterface.Panels
                     {
                         if (cmbBlur.Checked)
                         {
-                            sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                            //sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
                         }
                         string apertureNegative = "-1";
-                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
+                        //sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
                         LoadScene();
                         lblCamera.ForeColor = Color.Green;
                         lblCamera.Text = "Camera settings change correctly";
@@ -145,7 +134,7 @@ namespace UserInterface.Panels
         {
             try
             {
-                sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
+                sceneController.ChangeSceneName(_sceneDto.Name, txtSceneName.Text);
                 LoadScene();
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";
@@ -159,50 +148,30 @@ namespace UserInterface.Panels
 
         private void BtnAddModel_Click(object sender, EventArgs e)
         {
-            string position = txtPosition.Text;
-            if (!(cBoxAvailableModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.AddModel(scene, model, position);
-            scene.UpdateLastModificationDate();
-            LoadScene();
-            lblAddModel.ForeColor = Color.Green;
-            lblAddModel.Text = "Added correctly";
-            cBoxAvailableModels.SelectedItem = null;
+          
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
-            if (!(cBoxPositionedModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.RemoveModel(scene, model);
-            scene.UpdateLastModificationDate();
-            LoadScene();
-            lblRemoveModel.ForeColor = Color.Green;
-            lblRemoveModel.Text = "Remove correctly";
-            cBoxPositionedModels.SelectedItem = null;
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
             if (cmbBlur.Checked)
             {
-                sceneController.RenderSceneBlur(scene);
+                //sceneController.RenderSceneBlur(_sceneDto);
             }
             else
             {
 
-                sceneController.RenderScene(scene);
+                //sceneController.RenderScene(_sceneDto);
             }
             LoadScene();
         }
 
-        private void cmbBlur_CheckedChanged(object sender, EventArgs e)
+        private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-            scene.UpdateLastModificationDate();
+            //_sceneDto.UpdateLastModificationDate();
             LoadScene();
             if (!cmbBlur.Checked)
             {

@@ -1,5 +1,6 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,9 @@ namespace renderRepository.entities
         public string Name { get; set; }
         public virtual ClientEntity ClientEntity { get; set; }
         public double Radius { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
         public static FigureEntity FromDomain(Figure figure)
         {
@@ -34,18 +38,23 @@ namespace renderRepository.entities
                 Id = id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius,
-                ClientEntity = ClientEntity.FromDomain(figure.Client)
+                ClientEntity = ClientEntity.FromDomain(figure.Client),
+                X= figure.Position.X,
+                Y= figure.Position.Y,
+                Z = figure.Position.Z
             };
             return figureEntity;
         }
         public Figure ToDomain()
         {
+            Vector3D position = new Vector3D(X, Y, Z);
             return new Sphere
             {
                 Id = ""+Id,
                 Name = Name,
                 Client = ClientEntity.ToDomain(),
-                Radius = Radius
+                Radius = Radius,
+                Position= position
             };
         }
     }

@@ -21,6 +21,7 @@ namespace renderRepository.entities
         public ClientEntity ClientEntity { get; set; }
         public FigureEntity FigureEntity { get; set; }
         public MaterialEntity MaterialEntity { get; set; }
+        public SceneEntity SceneEntity { get; set; }
         public byte[] Preview {  get; set; }
 
         public static ModelEntity FromDomain(Model model)
@@ -47,7 +48,8 @@ namespace renderRepository.entities
                 ClientEntity = ClientEntity.FromDomain(model.Client),
                 FigureEntity = FigureEntity.FromDomain(model.Figure),
                 MaterialEntity = MaterialEntity.FromDomain(model.Material),
-                Preview = bytes
+                Preview = bytes,
+                
             };
             return modelEntity;
         }
