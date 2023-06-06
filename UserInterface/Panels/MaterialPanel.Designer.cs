@@ -39,11 +39,11 @@
             this.nrGreenColor = new System.Windows.Forms.NumericUpDown();
             this.nrBlueColor = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtBlur = new System.Windows.Forms.TextBox();
+            this.lblBlur = new System.Windows.Forms.Label();
             this.lblMaterial = new System.Windows.Forms.Label();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.cmbMaterial = new System.Windows.Forms.ComboBox();
-            this.lblBlur = new System.Windows.Forms.Label();
-            this.txtBlur = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nrRedColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrGreenColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrBlueColor)).BeginInit();
@@ -219,6 +219,33 @@
             this.panel1.Size = new System.Drawing.Size(505, 678);
             this.panel1.TabIndex = 17;
             // 
+            // txtBlur
+            // 
+            this.txtBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBlur.Location = new System.Drawing.Point(167, 453);
+            this.txtBlur.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBlur.Name = "txtBlur";
+            this.txtBlur.Size = new System.Drawing.Size(63, 34);
+            this.txtBlur.TabIndex = 22;
+            this.txtBlur.Text = "0,0";
+            // 
+            // lblBlur
+            // 
+            this.lblBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBlur.AutoSize = true;
+            this.lblBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBlur.Location = new System.Drawing.Point(51, 456);
+            this.lblBlur.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBlur.Name = "lblBlur";
+            this.lblBlur.Size = new System.Drawing.Size(62, 29);
+            this.lblBlur.TabIndex = 21;
+            this.lblBlur.Text = "Blur:";
+            // 
             // lblMaterial
             // 
             this.lblMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -247,42 +274,16 @@
             // 
             // cmbMaterial
             // 
+            this.cmbMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMaterial.FormattingEnabled = true;
             this.cmbMaterial.Items.AddRange(new object[] {
             "Lambertian",
             "Metallic"});
             this.cmbMaterial.Location = new System.Drawing.Point(167, 139);
             this.cmbMaterial.Name = "cmbMaterial";
-            this.cmbMaterial.Size = new System.Drawing.Size(265, 24);
+            this.cmbMaterial.Size = new System.Drawing.Size(156, 24);
             this.cmbMaterial.TabIndex = 19;
             this.cmbMaterial.SelectedIndexChanged += new System.EventHandler(this.cmbMaterial_SelectedIndexChanged);
-            // 
-            // lblBlur
-            // 
-            this.lblBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBlur.AutoSize = true;
-            this.lblBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBlur.Location = new System.Drawing.Point(51, 456);
-            this.lblBlur.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBlur.Name = "lblBlur";
-            this.lblBlur.Size = new System.Drawing.Size(62, 29);
-            this.lblBlur.TabIndex = 21;
-            this.lblBlur.Text = "Blur:";
-            // 
-            // txtBlur
-            // 
-            this.txtBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBlur.Location = new System.Drawing.Point(167, 453);
-            this.txtBlur.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBlur.Name = "txtBlur";
-            this.txtBlur.Size = new System.Drawing.Size(63, 34);
-            this.txtBlur.TabIndex = 22;
-            this.txtBlur.Text = "0.0";
             // 
             // MaterialPanel
             // 

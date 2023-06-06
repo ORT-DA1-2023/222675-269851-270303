@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
@@ -17,7 +18,7 @@ namespace Render3D.UserInterface.Panels
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
             String materialName = txtMaterialName.Text;
-            double blur = Convert.ToDouble(txtBlur.Text);
+            
             int[] materialColors = new int[rgbLength];
             materialColors[0] = Convert.ToInt32(Math.Round(nrRedColor.Value));
             materialColors[1] = Convert.ToInt32(Math.Round(nrGreenColor.Value));
@@ -36,7 +37,16 @@ namespace Render3D.UserInterface.Panels
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))
                     {
-                        render.materialController.AddMetallicMaterial(render.clientName, materialName, materialColors, blur);
+                        if (IsValidFormat(txtBlur.Text))
+                        {
+                            double blur = Convert.ToDouble(txtBlur.Text);
+                            render.materialController.AddMetallicMaterial(render.clientName, materialName, materialColors, blur);
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid blur, the format is: number,number");
+                        }
+                        
                     }
                 }
                 
@@ -53,6 +63,12 @@ namespace Render3D.UserInterface.Panels
             nrGreenColor.Value = 0;
             nrBlueColor.Value = 0;
             lblExceptionError.Text = "";
+        }
+
+        public bool IsValidFormat(string input)
+        {
+            Regex vectorFormat = new Regex(@"^\d+,\d+$");
+            return vectorFormat.IsMatch(input);
         }
 
         private void VariablesInitialize(object sender, EventArgs e)
