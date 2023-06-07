@@ -50,21 +50,18 @@ namespace Render3D.UserInterface
             List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (MaterialDto material in materialList)
             {
-                if (material.Client.Name.Equals(render.clientName))
-                {
-                    if(material is LambertianMaterial)
+                    if(material.Blur ==0)
                     {
                         LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
                         flObjectList.Controls.Add(materialControl);
                     }
-                    else if (material is MetallicMaterial) 
+                    else 
                     {
                         MetallicMaterialControl materialControl = new MetallicMaterialControl(material);
                         flObjectList.Controls.Add(materialControl);
                     }
                     
                     
-                }
 
 
             }

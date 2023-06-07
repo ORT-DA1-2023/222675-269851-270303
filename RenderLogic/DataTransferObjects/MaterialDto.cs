@@ -13,6 +13,6 @@ namespace RenderLogic.DataTransferObjects
         public int Red { get; set; }
         public int Green { get; set; }
         public int Blue { get; set; }
-        public int Blur { get; set; }
+        public double Blur { get; set; }
     }
 }

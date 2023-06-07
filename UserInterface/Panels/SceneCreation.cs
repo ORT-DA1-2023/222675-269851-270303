@@ -109,7 +109,7 @@ namespace UserInterface.Panels
                         {
                              if(IsValidFormatAperture(txtAperture.Text))
                              {
-                                sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                                sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
                              }
                              else
                              {

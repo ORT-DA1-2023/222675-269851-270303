@@ -47,18 +47,18 @@ namespace Render3D.RenderLogic.Controllers
                 Attenuation = colour };
             MaterialService.AddMaterial(material);
         }
-        /*
-        public void AddMetallicMaterial(string clientName, string materialName, int[] materialColors, double blur)
+        public void AddMetallicMaterial(MaterialDto materialDto)
         {
             try
             {
-                GetMaterialByNameAndClient(clientName, materialName);
+                MaterialService.GetMaterialByNameAndClient(materialDto.Name, ClientController.Client);
+                throw new BackEndException("material already exists");
 
             }
             catch (Exception)
             {
-                Colour colour = new Colour(materialColors[0] / 255f, materialColors[1] / 255f, materialColors[2] / 255f);
-                CreateMetallicMaterial(ClientController.GetClientByName(clientName), materialName, colour, blur);
+                Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
+                CreateMetallicMaterial(ClientController.Client, materialDto.Name, colour,materialDto.Blur);
                 return;
             }
             throw new BackEndException("material already exists");
@@ -69,7 +69,6 @@ namespace Render3D.RenderLogic.Controllers
             Material material = new MetallicMaterial() { Client = client, Name = materialName, Attenuation = colour, Blur = blur };
             DataWarehouse.Materials.Add(material);
         }
-        */
 
         public void ChangeName(MaterialDto materialDto, string newName)
         {

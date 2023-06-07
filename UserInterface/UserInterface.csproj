@@ -215,6 +215,10 @@
       <Project>{92DF00FD-9AC7-4504-BDBE-33CE11601C13}</Project>
       <Name>RenderLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RepositoryFactory\RepositoryFactory.csproj">
+      <Project>{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}</Project>
+      <Name>RepositoryFactory</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\LoginIcon.png" />
