@@ -1,5 +1,5 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.RepoInteface;
+using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System;
 using System.Collections.Generic;

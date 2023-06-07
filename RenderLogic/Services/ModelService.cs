@@ -2,9 +2,6 @@
 using Render3D.BackEnd;
 using System.Collections.Generic;
 using RenderLogic.RepoInterface;
-using System;
-using System.Drawing;
-using RenderLogic.DataTransferObjects;
 using Render3D.BackEnd.Figures;
 
 namespace RenderLogic.Services
