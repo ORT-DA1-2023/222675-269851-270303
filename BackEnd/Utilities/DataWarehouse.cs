@@ -13,13 +13,13 @@ namespace Render3D.BackEnd.Utilities
         private readonly List<Material> _materialsCreated = new List<Material>();
         private readonly List<Model> _modelsCreated = new List<Model>();
         private readonly List<Scene> _scenesCreated = new List<Scene>();
-
+        private readonly List <Log>  _logsCreated = new List<Log>();
         public List<Client> Clients { get => _clientsCreated; }
         public List<Figure> Figures { get => _figuresCreated; }
         public List<Material> Materials { get => _materialsCreated; }
         public List<Model> Models { get => _modelsCreated; }
         public List<Scene> Scenes { get => _scenesCreated; }
-
+        public List <Log> Logs { get => _logsCreated; }
 
 
     }

@@ -10,6 +10,7 @@ namespace Render3D.BackEnd
     {
         private string _name;
         private Bitmap _preview;
+        public string Id { get; set; }
 
         public Client Client { get; set; }
 

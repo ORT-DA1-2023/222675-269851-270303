@@ -1,29 +1,14 @@
-﻿using Render3D.BackEnd.Controllers;
-using Render3D.BackEnd.Utilities;
+﻿using Render3D.RenderLogic.Controllers;
 using System.Windows.Forms;
+using RenderLogic;
+using RenderLogic.RepoInterface;
 
 namespace Render3D.UserInterface
 {
     public partial class Render3DIU : Form
     {
-        public string clientName = "";
-        public DataWarehouse dataWarehouse = new DataWarehouse();
-        public ClientController clientController = new ClientController();
-        public FigureController figureController = new FigureController();
-        public MaterialController materialController = new MaterialController();
-        public ModelController modelController = new ModelController();
-        public SceneController sceneController = new SceneController();
         public Render3DIU()
-        {
-            clientController.DataWarehouse = dataWarehouse;
-            figureController.DataWarehouse = dataWarehouse;
-            figureController.ClientController = clientController;
-            materialController.DataWarehouse = dataWarehouse;
-            materialController.ClientController = clientController;
-            modelController.DataWarehouse = dataWarehouse;
-            modelController.ClientController = clientController;
-            sceneController.DataWarehouse = dataWarehouse;
-            sceneController.ClientController = clientController;
+        {       
             InitializeComponent();
             UserWantsToLogIn();
         }

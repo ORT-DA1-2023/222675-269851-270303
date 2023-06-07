@@ -38,7 +38,7 @@ namespace Render3D.UnitTest
         public void GivenValidSceneRenderMethodReturnsBitmap()
         {
             sceneSample = new Scene();
-            Assert.AreNotEqual(graphicMotorSample.Render(sceneSample), null);
+            Assert.AreNotEqual(graphicMotorSample.Render(sceneSample, false), null);
         }
 
         [TestMethod]

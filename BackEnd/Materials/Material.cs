@@ -8,7 +8,7 @@ namespace Render3D.BackEnd.Materials
     public abstract class Material
     {
         protected string _name;
-
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
@@ -24,6 +24,7 @@ namespace Render3D.BackEnd.Materials
         public Colour Attenuation { get; set; }
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
+
 
         protected void ValidateName(string value)
         {

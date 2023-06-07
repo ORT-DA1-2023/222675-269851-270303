@@ -81,19 +81,19 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             double radius = sphereSample.Radius;
             Vector3D vectorUp = new Vector3D(0, 2 * radius, 0);
             Vector3D twoTimesRadius = new Vector3D(2 * radius, 2 * radius, 2 * radius);
-            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, vectorUp, 60, 1);
+            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, 60);
             previewScene.Camera = camera;
-            return Render(previewScene);
+            return Render(previewScene, false);
         }
 
         public Bitmap Bitmap { get; set; }
 
-        public Bitmap Render(Scene sceneSample)
+        public Bitmap Render(Scene sceneSample, Boolean blur)
         {
             int width = ResolutionWidth;
             int height = ResolutionHeight();
             PixelMatrix = new PixelMatrix(width, height);
-            PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix);
+            PixelMatrix.Matrix = CreateMatrix(sceneSample, PixelMatrix.Matrix, blur);
             string imagePPM = CreateImagePPM(PixelMatrix.Matrix);
             Bitmap = GenerateBitmap(new Bitmap(width, height), imagePPM);
             return Bitmap;
@@ -117,7 +117,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix)
+        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix, Boolean blur)
         {
             Random random = new Random();
             for (var row = ResolutionHeight() - 1; row >= 0; row--)
@@ -127,10 +127,18 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                     Colour pixelColor = new Colour(0, 0, 0);
                     for (int sample = 0; sample < PixelSampling; sample++)
                     {
-
+                        Ray ray;
                         double u = (column + random.NextDouble()) / ResolutionWidth;
                         double v = (row + random.NextDouble()) / ResolutionHeight();
-                        Ray ray = sceneSample.Camera.GetRay(u, v);
+                        if (blur)
+                        {
+                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v, random);
+                        }
+                        else
+                        {
+                             ray = sceneSample.Camera.GetRay(u, v);
+                        }
+      
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
