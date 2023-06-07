@@ -1,7 +1,6 @@
-﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd;
+﻿using Render3D.BackEnd;
 using RenderLogic.RepoInterface;
+using System;
 using System.Collections.Generic;
 
 namespace RenderLogic.Services
@@ -45,6 +44,11 @@ namespace RenderLogic.Services
         internal void UpdatePreview(Scene scene)
         {
             _sceneRepo.UpdatePreview(scene);
+        }
+
+        internal void UpdateCamera(Scene scene)
+        {
+            _sceneRepo.UpdateCamera(scene);
         }
     }
 }

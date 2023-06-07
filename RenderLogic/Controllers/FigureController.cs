@@ -86,12 +86,10 @@ namespace Render3D.RenderLogic.Controllers
                 throw new Exception("That Name is already in use");
             }
             catch
-            {
-                FigureService.UpdateName(figureDto.Id, newName);
-
+            {             
             }
-       
-
+            Figure tryName = new Sphere() { Name = newName };
+            FigureService.UpdateName(figureDto.Id, newName);
         }
     }
 }

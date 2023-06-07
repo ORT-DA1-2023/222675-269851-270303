@@ -11,19 +11,32 @@ namespace Render3D.UserInterface
     public partial class CreationMenu : Form
     {
         private Render3DIU render;
-        private readonly ClientController clientController = ClientController.GetInstance();
-        private readonly FigureController figureController = FigureController.GetInstance();
-        private readonly MaterialController materialController = MaterialController.GetInstance();
-        private readonly ModelController modelController = ModelController.GetInstance();
+        private readonly ClientController clientController;
+        private readonly FigureController figureController;
+        private readonly MaterialController materialController;
+        private readonly ModelController modelController;
+        private readonly SceneController sceneController;
         public CreationMenu()
         {
             InitializeComponent();
+            clientController = ClientController.GetInstance();
+            figureController = FigureController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            modelController = ModelController.GetInstance();
+            sceneController = SceneController.GetInstance();
         }
 
         public void ShowFigureList()
         {
             flObjectList.Controls.Clear();
-            List<FigureDto> figureList = figureController.GetFigures();
+            List<FigureDto> figureList;
+            try
+            {
+                 figureList=figureController.GetFigures();
+            }catch
+            {
+                return;
+            }       
             foreach (FigureDto figure in figureList)
             {
                     FigureControl figureControl = new FigureControl(figure);
@@ -56,7 +69,7 @@ namespace Render3D.UserInterface
         public void ShowSceneList()
         {
             flObjectList.Controls.Clear();
-            List<SceneDto> scenes = render.sceneController.GetScenes();
+            List<SceneDto> scenes = sceneController.GetScenes();
             scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
             foreach (SceneDto scene in scenes)
             {  
@@ -184,7 +197,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteModel(ModelDto model)
         {
-            render.modelController.Delete(model);
+            modelController.Delete(model);
         }
 
         private void BtnScene_Click(object sender, EventArgs e)
@@ -194,7 +207,7 @@ namespace Render3D.UserInterface
 
         internal void DeleteScene(string sceneName)
         {
-            render.sceneController.DeleteSceneInList("", sceneName);
+            sceneController.DeleteSceneInList("", sceneName);
         }
 
 

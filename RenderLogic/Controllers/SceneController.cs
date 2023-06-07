@@ -3,6 +3,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
+using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,8 @@ namespace Render3D.RenderLogic.Controllers
     {
         public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController { get; set; }
-        public GraphicMotor GraphicMotor { get; } = new GraphicMotor();
+        public GraphicMotor GraphicMotor = new GraphicMotor();
+        public SceneService SceneService { get; set; }
 
         protected static SceneController sceneController;
         
@@ -25,27 +27,37 @@ namespace Render3D.RenderLogic.Controllers
             return sceneController;
         }
 
-        public void EditCamera(Scene scene, string stringLookAt, string stringLookFrom, int fov, string aperture)
+        public void EditCamera(SceneDto sceneDto, string stringLookAt, string stringLookFrom, int fov, string aperture)
         {
             try
             {
-                Camera camera;
-                Vector3D lookAtVector = GetVectorFromString(stringLookAt);
-                Vector3D lookFromVector = GetVectorFromString(stringLookFrom);
-                Vector3D vectorUp = new Vector3D(0, 1, 0);
+                double[] lookAt= GetVectorFromString(stringLookAt);
+                double[] lookFrom = GetVectorFromString(stringLookFrom);
                 double apertureDouble = double.Parse(aperture);
-                if (apertureDouble > 0)
+                SceneDto sceneNewCamera = new SceneDto() 
                 {
-                    camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio(), apertureDouble);
-                }
-                else
+                    LookAt= lookAt, 
+                    LookFrom = lookFrom, 
+                    Fov =fov, 
+                    Aperture = apertureDouble };
+                if (!CameraAreEqual(sceneDto, sceneNewCamera))
                 {
-                    camera = new Camera(lookFromVector, lookAtVector, vectorUp, fov, GraphicMotor.AspectRatio());
-                }
-                if (!scene.Camera.Equals(camera))
-                {
-                    scene.Camera = camera;
+                    Camera camera = new Camera(
+                        new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
+                        new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
+                        fov,
+                        sceneDto.Aperture);
+                    Scene scene = new Scene()
+                    {
+                        Id = sceneDto.Id,
+                        Name = sceneDto.Name,
+                        LastModificationDate = sceneDto.LastModificationDate,
+                        LastRenderizationDate = sceneDto.LastRenderizationDate,
+                        Camera = camera,
+                    };
                     scene.UpdateLastModificationDate();
+                    SceneService.UpdateCamera(scene);
+
                 }
             }
             catch (Exception ex)
@@ -54,7 +66,16 @@ namespace Render3D.RenderLogic.Controllers
             }
         }
 
-        private Vector3D GetVectorFromString(string stringLookAt)
+        private bool CameraAreEqual(SceneDto scene, SceneDto sceneNewCamera)
+        {
+            if (!Array.Equals(scene.LookAt, sceneNewCamera.LookAt)) return false;
+            if(!Array.Equals(scene.LookFrom, sceneNewCamera.LookFrom)) return false;
+            if(scene.Aperture != sceneNewCamera.Aperture) return false;
+            if(scene.Fov != sceneNewCamera.Fov) return false;
+            return true;
+        }
+
+        private double[] GetVectorFromString(string stringLookAt)
         {
             string[] values = stringLookAt.Substring(1, stringLookAt.Length - 2).Split(';');
             double[] valuesInDouble = new double[values.Length];
@@ -62,18 +83,30 @@ namespace Render3D.RenderLogic.Controllers
             {
                 valuesInDouble[i] = double.Parse(values[i]);
             }
-            Vector3D vector = new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
-            return vector;
+            return valuesInDouble;
         }
 
         public void AddScene(string sceneName)
         {
-         
+            try
+            {
+                SceneService.GetSceneByNameAndClient(sceneName, ClientController.Client);
+                throw new Exception("scene already exists");
+            }
+            catch
+            {
+                CreateAndAddBlankScene(sceneName);
+            }
         }
 
         private void CreateAndAddBlankScene(string sceneName)
         {
-         
+            Scene scene = new Scene
+            {
+                Name = sceneName,
+                Client = ClientController.Client,
+            };
+            SceneService.AddScene(scene);
         }
 
         public string GetNextValidName()
@@ -107,19 +140,22 @@ namespace Render3D.RenderLogic.Controllers
         {
         }
 
-        public void ChangeSceneName(string oldName, string newName)
+        public void ChangeSceneName(SceneDto sceneDto, string newName)
         {
-          
+            try
+            {
+                SceneService.GetSceneByNameAndClient(newName, ClientController.Client);
+                throw new Exception("Name already in use");
+            }
+            catch 
+            {
+            }
+            Scene tryName = new Scene() { Name = newName };
+            SceneService.UpdateName(sceneDto.Id, newName);
         }
 
         public void AddModel(Scene scene, Model model, string position)
         {
-            Vector3D positionVector = GetVectorFromString(position);
-            Sphere sphere = (Sphere)model.Figure;
-            Figure newFigure = new Sphere() { Position = sphere.Position, Client = sphere.Client, Name = sphere.Name, Radius = sphere.Radius };
-            Model newModel = new Model() { Client = model.Client, Name = model.Name, Figure = newFigure, Material = model.Material };
-            newModel.Figure.Position = positionVector;
-            scene.PositionedModels.Add(newModel);
         }
 
         public void RemoveModel(Scene scene, Model model)

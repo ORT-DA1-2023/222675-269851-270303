@@ -65,6 +65,24 @@ namespace renderRepository.RepoImplementation
             }
         }
 
+        public void UpdateCamera(Scene scene)
+        {
+            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.SceneEntities.Find(scene.Id);
+                entity.LookFromX = SceneEntity.LookFromX;
+                entity.LookFromY = SceneEntity.LookFromY;
+                entity.LookFromZ = SceneEntity.LookFromZ;
+                entity.LookAtX = SceneEntity.LookAtX;
+                entity.LookAtY = SceneEntity.LookAtY;
+                entity.LookAtZ = SceneEntity.LookAtZ;
+                entity.Fov = SceneEntity.Fov;
+                entity.Aperture = SceneEntity.Aperture;
+                dbContext.SaveChanges();
+            }
+        }
+
         public void UpdateName(int Id, string newName)
         {
             using (var dbContext = new RenderContext())

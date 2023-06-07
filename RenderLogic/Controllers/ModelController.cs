@@ -34,8 +34,7 @@ namespace Render3D.RenderLogic.Controllers
                 throw new BackEndException("model already exists");
             }
             catch (Exception)
-            {
-                
+            {              
                 CreateAndAddModel(modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
             }
            
@@ -134,8 +133,9 @@ namespace Render3D.RenderLogic.Controllers
             }
             catch
             {
-                ModelService.UpdateName(modelDto.Id, newName);
             }
+            Model tryName = new Model() { Name = newName };
+            ModelService.UpdateName(modelDto.Id, newName);
         }
 
         public void Delete(ModelDto modelDto)

@@ -40,7 +40,7 @@ namespace renderRepository.entities
             {
                 Id = id,
                 Name = scene.Name,
-                Client =ClientEntity.FromDomain(scene.Client),
+                ClientEntity =ClientEntity.FromDomain(scene.Client),
                 CreationDate = scene.CreationDate,
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderizationDate = scene.LastRenderizationDate,
@@ -50,7 +50,7 @@ namespace renderRepository.entities
                 LookAtX = scene.Camera.LookAt.X,
                 LookAtY = scene.Camera.LookAt.Y,
                 LookAtZ = scene.Camera.LookAt.Z,
-                Fov = scene.Camera.Fov               
+                Fov = scene.Camera.Fov,
             };
             return sceneEntity;
         }
@@ -58,7 +58,7 @@ namespace renderRepository.entities
         {
             Vector3D lookFrom = new Vector3D(LookFromX,LookFromY,LookFromZ);
             Vector3D lookAt = new Vector3D(LookAtX, LookAtY, LookAtZ);
-            Camera camera = new Camera(lookFrom,lookAt, new Vector3D(1, 1, 1), Fov,1);
+            Camera camera = new Camera(lookFrom,lookAt, Fov);
             return new Scene
             {
                 Id = Id.ToString(),
@@ -67,7 +67,7 @@ namespace renderRepository.entities
                 CreationDate = CreationDate,
                 LastModificationDate = LastModificationDate,
                 LastRenderizationDate = LastRenderizationDate,
-                Client = Client.ToDomain()
+                Client = ClientEntity.ToDomain()
             };
         }
     }

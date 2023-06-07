@@ -12,5 +12,6 @@ namespace RenderLogic.RepoInterface
         Scene GetByNameAndClient(string name, Client client);
         List<Scene> GetScenesOfClient(Client client);
         void UpdatePreview(Scene scene);
+        void UpdateCamera(Scene scene);
     }
 }

@@ -9,7 +9,7 @@ namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        private SceneDto _sceneDto;
+        private readonly SceneDto _sceneDto;
         public SceneController sceneController;
         public SceneCreation(SceneDto selectedScene)
         {
@@ -134,7 +134,7 @@ namespace UserInterface.Panels
         {
             try
             {
-                sceneController.ChangeSceneName(_sceneDto.Name, txtSceneName.Text);
+                sceneController.ChangeSceneName(_sceneDto, txtSceneName.Text);
                 LoadScene();
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";

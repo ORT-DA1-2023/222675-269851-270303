@@ -57,8 +57,9 @@ namespace Render3D.RenderLogic.Controllers
             }
             catch
             {
-                MaterialService.UpdateName(materialDto.Id, newName);
             }
+            Material tryName = new LambertianMaterial() { Name = newName };
+            MaterialService.UpdateName(materialDto.Id, newName);
         }
         public void Delete(MaterialDto materialDto)
         {

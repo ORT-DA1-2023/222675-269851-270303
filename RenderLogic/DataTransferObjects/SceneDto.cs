@@ -6,9 +6,9 @@ namespace RenderLogic.DataTransferObjects
 {
     public class SceneDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public int Aperture { get; set; }
+        public double Aperture { get; set; }
         public double[] LookFrom { get; set; }
         public double[] LookAt { get; set; }
         public int Fov { get; set; }

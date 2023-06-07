@@ -90,24 +90,24 @@
                         LookAtY = c.Double(nullable: false),
                         LookAtZ = c.Double(nullable: false),
                         Fov = c.Int(nullable: false),
-                        Client_Id = c.Int(),
+                        ClientEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ClientEntities", t => t.Client_Id)
-                .Index(t => t.Client_Id);
+                .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
+                .Index(t => t.ClientEntity_Id);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.ModelEntities", "SceneEntity_Id", "dbo.SceneEntities");
-            DropForeignKey("dbo.SceneEntities", "Client_Id", "dbo.ClientEntities");
+            DropForeignKey("dbo.SceneEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropForeignKey("dbo.ModelEntities", "MaterialEntity_Id", "dbo.MaterialEntities");
             DropForeignKey("dbo.ModelEntities", "FigureEntity_Id", "dbo.FigureEntities");
             DropForeignKey("dbo.ModelEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropForeignKey("dbo.MaterialEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropForeignKey("dbo.FigureEntities", "ClientEntity_Id", "dbo.ClientEntities");
-            DropIndex("dbo.SceneEntities", new[] { "Client_Id" });
+            DropIndex("dbo.SceneEntities", new[] { "ClientEntity_Id" });
             DropIndex("dbo.ModelEntities", new[] { "SceneEntity_Id" });
             DropIndex("dbo.ModelEntities", new[] { "MaterialEntity_Id" });
             DropIndex("dbo.ModelEntities", new[] { "FigureEntity_Id" });

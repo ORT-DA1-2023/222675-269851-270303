@@ -14,7 +14,6 @@ namespace Render3D.UserInterface.Panels
         private void BtnCreateScene_Click(object sender, EventArgs e)
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent;
-            Render3DIU render = (Render3DIU)creation.Parent.Parent;
             using (var scene = new SceneCreation(null))
             {
                 var result = scene.ShowDialog(this);
