@@ -126,5 +126,21 @@ namespace renderRepository.RepoImplementation
                 dbContext.SaveChanges();
             }
         }
+
+        public List<Scene> GetScenesWithModel(Model model)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var sceneEntities = dbContext.SceneEntities
+                    .Where(s => s.ModelEntities.Contains(ModelEntity.FromDomain(model)))
+                    .ToList();
+                List<Scene> scenes = new List<Scene>();
+                foreach (var s in sceneEntities)
+                {
+                    scenes.Add(s.ToDomain());
+                }
+                return scenes;
+            }
+        }
     }
 }

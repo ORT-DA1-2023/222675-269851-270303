@@ -141,6 +141,7 @@ namespace Render3D.RenderLogic.Controllers
         }
         public void Delete(SceneDto sceneDto)
         {
+            SceneService.RemoveScene(int.Parse(sceneDto.Id));
         }
 
         public void ChangeSceneName(SceneDto sceneDto, string newName)
@@ -259,5 +260,25 @@ namespace Render3D.RenderLogic.Controllers
             }
            return modelDtos;
         }
+
+        public bool CheckIfModelIsInAScene(ModelDto modelDto)
+        {
+            Model model = new Model()
+            {
+                Id =modelDto.Id,
+                Name = modelDto.Name,
+                Client = ClientController.Client
+            };
+            try
+            {
+                List<Scene> ExpectedEmptyList = SceneService.GetScenesWithModel(model);
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
     }
 }

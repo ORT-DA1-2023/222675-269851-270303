@@ -61,5 +61,10 @@ namespace RenderLogic.Services
         {
             _sceneRepo.RemoveModel(id,model);
         }
+
+        internal List<Scene> GetScenesWithModel(Model model)
+        {
+           return _sceneRepo.GetScenesWithModel(model);
+        }
     }
 }

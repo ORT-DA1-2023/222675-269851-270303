@@ -16,5 +16,6 @@ namespace RenderLogic.RepoInterface
         void UpdateCamera(Scene scene);
         void AddModel(int id,Model model);
         void RemoveModel(int id, Model model);
+        List<Scene> GetScenesWithModel(Model model);
     }
 }

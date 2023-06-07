@@ -24,9 +24,10 @@ namespace Render3D.UserInterface.Controls
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
-        {          
-                sceneController.Delete(lblSceneName.Text);
-                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
+        {
+            sceneController.Delete(_sceneDto);
+            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
+
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)

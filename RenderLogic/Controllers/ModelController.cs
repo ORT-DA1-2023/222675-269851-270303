@@ -174,7 +174,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                ModelService.GetModelsWithFigure(ConvertFigureDto(figure));
+               List<Model> expectedEmptyList = ModelService.GetModelsWithFigure(ConvertFigureDto(figure));
                 return false;
             }catch
             {
@@ -185,7 +185,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                ModelService.GetModelsWithMaterial(ConvertMaterialDto(material));
+                List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(ConvertMaterialDto(material));
                 return false;
             }
             catch

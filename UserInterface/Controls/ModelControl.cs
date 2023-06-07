@@ -1,4 +1,5 @@
-﻿using RenderLogic.DataTransferObjects;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -8,11 +9,13 @@ namespace Render3D.UserInterface.Controls
     public partial class ModelControl : UserControl
     {
        private readonly ModelDto _modelDto;
+        private readonly SceneController sceneController;
         public ModelControl(ModelDto model)
         {
             InitializeComponent();
             lblModelName.Text = model.Name;
             _modelDto = model;
+            sceneController = SceneController.GetInstance();
             lblModelFigure.Text = model.Figure.Name;
             lblModelMaterial.Text = model.Material.Name;
             lblErrorDeleteModel.Text = "";
@@ -50,7 +53,7 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblModelName.Text))
+            if (!sceneController.CheckIfModelIsInAScene(_modelDto))
             {
 
                 ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(_modelDto);
