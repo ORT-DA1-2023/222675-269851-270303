@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using RenderLogic.DataTransferObjects;
 using System.Collections.Generic;
 
 namespace RenderLogic.RepoInterface
@@ -13,5 +14,7 @@ namespace RenderLogic.RepoInterface
         List<Scene> GetScenesOfClient(Client client);
         void UpdatePreview(Scene scene);
         void UpdateCamera(Scene scene);
+        void AddModel(int id,Model model);
+        void RemoveModel(int id, Model model);
     }
 }

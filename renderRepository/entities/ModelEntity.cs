@@ -21,7 +21,6 @@ namespace renderRepository.entities
         public ClientEntity ClientEntity { get; set; }
         public FigureEntity FigureEntity { get; set; }
         public MaterialEntity MaterialEntity { get; set; }
-        public SceneEntity SceneEntity { get; set; }
         public byte[] Preview {  get; set; }
 
         public static ModelEntity FromDomain(Model model)

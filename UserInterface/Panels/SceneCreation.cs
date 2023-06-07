@@ -37,8 +37,8 @@ namespace UserInterface.Panels
             nrFov.Value = _sceneDto.Fov;
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
-            //all models
-            //positioned Models
+            cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
+            cBoxPositionedModels.DataSource =sceneController.GetPositionedModels(_sceneDto);
             pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
@@ -106,10 +106,13 @@ namespace UserInterface.Panels
                     {
                         if (cmbBlur.Checked)
                         {
-                            //sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                            sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
                         }
+                    else
+                    {
                         string apertureNegative = "-1";
-                        //sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
+                        sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
+                    }           
                         LoadScene();
                         lblCamera.ForeColor = Color.Green;
                         lblCamera.Text = "Camera settings change correctly";
@@ -148,7 +151,10 @@ namespace UserInterface.Panels
 
         private void BtnAddModel_Click(object sender, EventArgs e)
         {
-          
+
+          ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
+            sceneController.AddModel(_sceneDto, model, txtPosition.Text);
+                
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
@@ -159,19 +165,18 @@ namespace UserInterface.Panels
         {
             if (cmbBlur.Checked)
             {
-                //sceneController.RenderSceneBlur(_sceneDto);
+                sceneController.RenderScene(_sceneDto,true);
             }
             else
             {
 
-                //sceneController.RenderScene(_sceneDto);
+                sceneController.RenderScene(_sceneDto,false);
             }
             LoadScene();
         }
 
         private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-            //_sceneDto.UpdateLastModificationDate();
             LoadScene();
             if (!cmbBlur.Checked)
             {

@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using RenderLogic.DataTransferObjects;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System;
@@ -44,7 +45,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var sceneEntity = dbContext.SceneEntities
-                    .Where(f => f.Name == name && f.ClientEntity == ClientEntity.FromDomain(client));
+                    .Where(s => s.Name == name && s.ClientEntity == ClientEntity.FromDomain(client));
                 return sceneEntity.ElementAt(0).ToDomain();
             }
         }
@@ -54,12 +55,12 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(f => f.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(s => s.ClientEntity == ClientEntity.FromDomain(client))
                     .ToList();
                 List<Scene> clientScene = new List<Scene>();
-                foreach (var m in sceneEntities)
+                foreach (var s in sceneEntities)
                 {
-                    clientScene.Add(m.ToDomain());
+                    clientScene.Add(s.ToDomain());
                 }
                 return clientScene;
             }
@@ -93,6 +94,17 @@ namespace renderRepository.RepoImplementation
             }
         }
 
+        public void AddModel(int id, Model model)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
+                ModelEntity modelEntity = ModelEntity.FromDomain(model);
+                sceneEntity.ModelEntities.Add(modelEntity);
+                dbContext.SaveChanges();
+            }
+        }
+
         public void UpdatePreview(Scene scene)
         {
             SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
@@ -100,6 +112,17 @@ namespace renderRepository.RepoImplementation
             {
                 var entity = dbContext.SceneEntities.Find(scene.Id);
                 entity.Preview = SceneEntity.Preview;
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void RemoveModel(int id, Model model)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
+                ModelEntity modelEntity = ModelEntity.FromDomain(model);
+                sceneEntity.ModelEntities.Remove(modelEntity);
                 dbContext.SaveChanges();
             }
         }

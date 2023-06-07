@@ -13,7 +13,7 @@ namespace Render3D.RenderLogic.Controllers
     public class ModelController
     {
         public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public ModelService ModelService { get; set; }
         protected static ModelController modelController;
@@ -135,7 +135,7 @@ namespace Render3D.RenderLogic.Controllers
             {
             }
             Model tryName = new Model() { Name = newName };
-            ModelService.UpdateName(modelDto.Id, newName);
+            ModelService.UpdateName(int.Parse(modelDto.Id), newName);
         }
 
         public void Delete(ModelDto modelDto)

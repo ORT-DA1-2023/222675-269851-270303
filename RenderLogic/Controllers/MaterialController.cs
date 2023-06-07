@@ -12,7 +12,7 @@ namespace Render3D.RenderLogic.Controllers
     public class MaterialController
     {
         public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
         protected static MaterialController materialController;
         public MaterialService MaterialService { get; set; }
         public static MaterialController GetInstance()

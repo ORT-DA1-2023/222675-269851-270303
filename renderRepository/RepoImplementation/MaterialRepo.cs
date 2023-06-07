@@ -57,7 +57,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                    .Where(f => f.Name == name && f.ClientEntity == ClientEntity.FromDomain(client));
+                    .Where(m => m.Name == name && m.ClientEntity == ClientEntity.FromDomain(client));
                 return materialEntities.ElementAt(0).ToDomain();
             }
         }

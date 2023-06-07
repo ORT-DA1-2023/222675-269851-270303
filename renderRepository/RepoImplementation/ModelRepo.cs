@@ -67,7 +67,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(f => f.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(m => m.ClientEntity == ClientEntity.FromDomain(client))
+                    .GroupBy(m => m.Name)
+                    .Select(m => m.First())
                     .ToList();
                 List<Model> clientModels = new List<Model>();
                 foreach (var m in modelEntities)
@@ -94,7 +96,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(f => f.FigureEntity == FigureEntity.FromDomain(figure))
+                    .Where(m => m.FigureEntity == FigureEntity.FromDomain(figure))
                     .ToList();
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)
@@ -111,7 +113,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(f => f.MaterialEntity == MaterialEntity.FromDomain(material))
+                    .Where(m => m.MaterialEntity == MaterialEntity.FromDomain(material))
                     .ToList();
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)

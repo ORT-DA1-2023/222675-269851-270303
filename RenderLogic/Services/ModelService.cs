@@ -3,6 +3,7 @@ using Render3D.BackEnd;
 using System.Collections.Generic;
 using RenderLogic.RepoInterface;
 using Render3D.BackEnd.Figures;
+using System;
 
 namespace RenderLogic.Services
 {
@@ -37,9 +38,9 @@ namespace RenderLogic.Services
             return _modelRepo.GetModelsOfClient(client);
         }
 
-        internal void UpdateName(string id, string newName)
+        internal void UpdateName(int id, string newName)
         {
-            _modelRepo.UpdateName(int.Parse(id), newName);
+            _modelRepo.UpdateName(id, newName);
         }
 
         internal void UpdatePreview(Model model)
@@ -56,5 +57,6 @@ namespace RenderLogic.Services
         {
             return _modelRepo.GetModelsWithMaterial(material);
         }
+
     }
 }

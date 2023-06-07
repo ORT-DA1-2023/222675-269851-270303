@@ -204,24 +204,5 @@ namespace Render3D.UserInterface
         {
             Refresh("Scene");
         }
-
-        internal void DeleteScene(string sceneName)
-        {
-            sceneController.DeleteSceneInList("", sceneName);
-        }
-
-
-        internal bool ModelIsPartOfScene(string modelName)
-        {
-            try
-            {
-               // List<SceneDto> scene = render.sceneController.GetSceneWithModel(modelName);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
     }
 }

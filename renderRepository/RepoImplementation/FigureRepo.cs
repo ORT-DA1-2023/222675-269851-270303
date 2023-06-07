@@ -67,6 +67,8 @@ namespace renderRepository.RepoImplementation
             {
                 var FigureEntities = dbContext.FigureEntities
                     .Where(f=> f.ClientEntity == ClientEntity.FromDomain(client))
+                    .GroupBy(f =>f.Name)
+                    .Select(f=> f.First())
                     .ToList();
                 List<Figure> clientFigures = new List<Figure>();
                 foreach (var f in FigureEntities) 

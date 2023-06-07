@@ -1,20 +1,23 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Render3D.RenderLogic.Controllers
 {
     public class SceneController
     {
         public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public SceneService SceneService { get; set; }
+        public ModelService ModelService { get; set; }
 
         protected static SceneController sceneController;
         
@@ -31,8 +34,8 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                double[] lookAt= GetVectorFromString(stringLookAt);
-                double[] lookFrom = GetVectorFromString(stringLookFrom);
+                double[] lookAt= GetArrayFromString(stringLookAt);
+                double[] lookFrom = GetArrayFromString(stringLookFrom);
                 double apertureDouble = double.Parse(aperture);
                 SceneDto sceneNewCamera = new SceneDto() 
                 {
@@ -75,7 +78,7 @@ namespace Render3D.RenderLogic.Controllers
             return true;
         }
 
-        private double[] GetVectorFromString(string stringLookAt)
+        private double[] GetArrayFromString(string stringLookAt)
         {
             string[] values = stringLookAt.Substring(1, stringLookAt.Length - 2).Split(';');
             double[] valuesInDouble = new double[values.Length];
@@ -136,7 +139,7 @@ namespace Render3D.RenderLogic.Controllers
             return posibleName + i;
 
         }
-        public void DeleteSceneInList(string clientName, string sceneName)
+        public void Delete(SceneDto sceneDto)
         {
         }
 
@@ -151,56 +154,110 @@ namespace Render3D.RenderLogic.Controllers
             {
             }
             Scene tryName = new Scene() { Name = newName };
-            SceneService.UpdateName(sceneDto.Id, newName);
+            SceneService.UpdateName(int.Parse(sceneDto.Id), newName);
         }
 
-        public void AddModel(Scene scene, Model model, string position)
+        public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
         {
+            Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
+            Model model = ModelService.GetModel(int.Parse(modelDto.Id));
+            double[] pos = GetArrayFromString(position);
+            Vector3D positionVector = new Vector3D(pos[0], pos[1], pos[2]);
+            model.Figure.Id = null;
+            model.Figure.Position = positionVector;
+            model.Id = null;
+            SceneService.AddModel(int.Parse(scene.Id), model);
         }
 
-        public void RemoveModel(Scene scene, Model model)
+        public void RemoveModel(string sceneId, ModelDto modelDto)
         {
-            scene.PositionedModels.Remove(model);
+            Model model = ModelService.GetModel(int.Parse(modelDto.Id));
+            SceneService.RemoveModel(int.Parse(sceneId), model);
         }
 
-        public void RenderScene(Scene scene)
+        public void RenderScene(SceneDto sceneDto, bool useBlur)
         {
-            bool blur = false;
-            scene.Preview = GraphicMotor.Render(scene, blur);
-            scene.UpdateLastRenderizationDate();
-        }
-
-        public List<Scene> GetSceneWithModel(string modelName)
-        {
-            List<Scene> sceneWithModel = new List<Scene>();
-            foreach (Scene scene in DataWarehouse.Scenes)
+            Camera camera = new Camera(
+                new Vector3D(sceneDto.LookFrom[0], sceneDto.LookFrom[1], sceneDto.LookFrom[2]),
+                new Vector3D(sceneDto.LookAt[0], sceneDto.LookAt[1], sceneDto.LookAt[2]),
+                sceneDto.Fov,
+                sceneDto.Aperture
+                );
+            Scene scene = new Scene()
             {
-                foreach (Model model in scene.PositionedModels)
-                {
-                    if (model.Name.Equals(modelName))
-                    {
-                        sceneWithModel.Add(scene);
-                    }
-                }
-
-            }
-            if (sceneWithModel.Count == 0)
-            {
-                throw new BackEndException("No scene found");
-            }
-            return sceneWithModel;
-        }
-
-        public void RenderSceneBlur(Scene scene)
-        {
-            bool blur = true;
-            scene.Preview = GraphicMotor.Render(scene, blur);
+                Id = sceneDto.Id,
+                Name = sceneDto.Name,
+                Camera = camera,
+                LastModificationDate = sceneDto.LastModificationDate,
+                LastRenderizationDate = sceneDto.LastRenderizationDate,
+            };
+            scene.Preview = GraphicMotor.Render(scene, useBlur);
             scene.UpdateLastRenderizationDate();
+            SceneService.UpdatePreview(scene);
         }
+
+
 
         public List<SceneDto> GetScenes()
         {
             throw new NotImplementedException();
+        }
+
+        public List<ModelDto> GetAvailableModels()
+        {
+            List <Model> models= ModelService.GetModelsOfClient(ClientController.Client);
+            return ModelsIntoDtos(models);
+        }
+        public FigureDto ConvertFigure(Figure figure)
+        {
+            return new FigureDto()
+            {
+                Name = figure.Name,
+                Radius = ((Sphere)figure).Radius
+            };
+        }
+        public MaterialDto ConvertMaterial(Material material)
+        {
+            int blur = 0;
+            try
+            {
+                //blur = ((MetallicMaterial)material).Blur;
+            }
+            catch (Exception e)
+            {
+            }
+            return new MaterialDto()
+            {
+                Name = material.Name,
+                Red = material.Attenuation.Red(),
+                Green = material.Attenuation.Green(),
+                Blue = material.Attenuation.Blue(),
+                Blur = blur,
+            };
+        }
+
+        public List<ModelDto> GetPositionedModels(SceneDto sceneDto)
+        {
+            Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
+            return ModelsIntoDtos(scene.PositionedModels);
+        }
+
+        private List<ModelDto> ModelsIntoDtos(List<Model> positionedModels)
+        {
+            List<ModelDto> modelDtos = new List<ModelDto>();
+            foreach (Model model in positionedModels)
+            {
+                ModelDto modelDto = new ModelDto()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Figure = ConvertFigure(model.Figure),
+                    Material = ConvertMaterial(model.Material),
+                    Preview = model.Preview,
+                };
+                modelDtos.Add(modelDto);
+            }
+           return modelDtos;
         }
     }
 }

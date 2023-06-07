@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using RenderLogic.DataTransferObjects;
 using RenderLogic.RepoInterface;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,9 @@ namespace RenderLogic.Services
             return _sceneRepo.GetScenesOfClient(client);
         }
 
-        internal void UpdateName(string id, string newName)
+        internal void UpdateName(int id, string newName)
         {
-            _sceneRepo.UpdateName(int.Parse(id), newName);
+            _sceneRepo.UpdateName(id, newName);
         }
 
         internal void UpdatePreview(Scene scene)
@@ -49,6 +50,16 @@ namespace RenderLogic.Services
         internal void UpdateCamera(Scene scene)
         {
             _sceneRepo.UpdateCamera(scene);
+        }
+
+        internal void AddModel(int id, Model model)
+        {
+            _sceneRepo.AddModel(id, model);
+        }
+
+        internal void RemoveModel(int id, Model model)
+        {
+            _sceneRepo.RemoveModel(id,model);
         }
     }
 }
