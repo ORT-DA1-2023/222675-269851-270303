@@ -89,7 +89,7 @@ namespace Render3D.RenderLogic.Controllers
             {             
             }
             Figure tryName = new Sphere() { Name = newName };
-            FigureService.UpdateName(figureDto.Id, newName);
+            FigureService.UpdateName(int.Parse(figureDto.Id), newName);
         }
     }
 }

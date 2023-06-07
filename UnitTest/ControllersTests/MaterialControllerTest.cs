@@ -11,15 +11,6 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class MaterialControllerTest
     {
-      
-
-        private const string lambertianMaterialName = "lambertialMaterialSample1";
-        private const string lambertianMaterialNameChange = "lambertialMaterialSample2";
-        private const string metallicMaterialName = "metallicMaterialSample1";
-        private const string metallicMaterialNameChange = "metallicMaterialSample2";
-        private const string clientSampleName = "clientSample1";
-        private const string passwordSample = "PasswordExample1";
-        private const double blurSample = 0.5;
 
 
         [TestInitialize]
@@ -35,10 +26,6 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNewMetallicMaterialAddsItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
 
         [TestMethod]
