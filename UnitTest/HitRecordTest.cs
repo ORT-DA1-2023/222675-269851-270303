@@ -11,7 +11,9 @@ namespace Render3D.UnitTest
         private double moduleSample;
         private Vector3D intersectionSample;
         private Vector3D normalSample;
-        private Colour attenuationSample;
+        private Colour attenuationSample; 
+        private Ray raySample;
+        private int roughness;
 
         [TestInitialize]
         public void Initialize()
@@ -25,7 +27,10 @@ namespace Render3D.UnitTest
             moduleSample = 1;
             intersectionSample = new Vector3D(0, 0, 0);
             normalSample = new Vector3D(0, 0, 0);
-            hitRecordSample = new HitRecord3D(moduleSample, intersectionSample, normalSample, attenuationSample);
+            attenuationSample = new Colour(0, 0, 0);
+            raySample = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
+            roughness = 0;
+            hitRecordSample = new HitRecord3D(moduleSample, intersectionSample, normalSample, attenuationSample, raySample, roughness);
             Assert.AreEqual(moduleSample, hitRecordSample.Module);
             Assert.AreEqual(intersectionSample, hitRecordSample.Intersection);
             Assert.AreEqual(normalSample, hitRecordSample.Normal);
@@ -39,6 +44,16 @@ namespace Render3D.UnitTest
             hitRecordSample.Attenuation = attenuationSample;
             Assert.AreEqual(attenuationSample, hitRecordSample.Attenuation);
         }
+
+        [TestMethod]
+        public void GivenValidRayAssingsToHitRecord()
+        {
+            raySample = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
+            hitRecordSample.Ray = raySample;
+            Assert.AreEqual(raySample, hitRecordSample.Ray);
+        }
+
+
 
         [TestMethod]
         public void GivenValidModuleAssingsToHitRecord()

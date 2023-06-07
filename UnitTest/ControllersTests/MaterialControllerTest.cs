@@ -13,19 +13,37 @@ namespace Render3D.UnitTest.ControllersTests
     {
       
 
+        private const string lambertianMaterialName = "lambertialMaterialSample1";
+        private const string lambertianMaterialNameChange = "lambertialMaterialSample2";
+        private const string metallicMaterialName = "metallicMaterialSample1";
+        private const string metallicMaterialNameChange = "metallicMaterialSample2";
+        private const string clientSampleName = "clientSample1";
+        private const string passwordSample = "PasswordExample1";
+        private const double blurSample = 0.5;
+
+
         [TestInitialize]
         public void Initialize()
         {
           
         }
         [TestMethod]
-        public void GivenNewMaterialAddsItToTheList()
+        public void GivenNewLambertianMaterialAddsItToTheList()
         {
-
         }
+
+        [TestMethod]
+        public void GivenNewMetallicMaterialAddsItToTheList()
+        {
+            _clientController.SignIn(clientSampleName, passwordSample);
+            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
+            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
+            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
+        }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenNewWrongMaterialFailsAddingItToTheList()
+        public void GivenNewWrongLambertianMaterialFailsAddingItToTheList()
         {
            
         }
@@ -40,7 +58,8 @@ namespace Render3D.UnitTest.ControllersTests
         {
         }
         [TestMethod]
-        public void GivenNewMaterialNameItDoesNotChange()
+        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
+        public void GivenNewWrongMetallicMaterialFailsAddingItToTheList()
         {
            
         }
@@ -49,8 +68,10 @@ namespace Render3D.UnitTest.ControllersTests
         {
 
         }
+
         [TestMethod]
-        public void GivenNameDoesNotDeleteTheMaterial()
+        [ExpectedException(typeof(BackEndException), "lambertialMaterialSample1 already exists")]
+        public void GivenRepeatedLambertianMaterialFailsAddingItToTheList()
         {
         }
 

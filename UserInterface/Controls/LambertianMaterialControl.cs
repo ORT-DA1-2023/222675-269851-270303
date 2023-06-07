@@ -8,12 +8,13 @@ using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
-    public partial class MaterialControl : UserControl
+    public partial class LambertianMaterialControl : UserControl
     {
         private readonly MaterialDto _materialDto;
         private readonly ModelController modelController;
         private readonly MaterialController materialController;
-        public MaterialControl(MaterialDto material)
+
+        public LambertianMaterialControl(Material material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;

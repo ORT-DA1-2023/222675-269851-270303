@@ -21,6 +21,8 @@ namespace Render3D.BackEnd.Materials
         public Client Client { get; set; }
         public Ray Ray { get; set; }
 
+
+
         public Colour Attenuation { get; set; }
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
@@ -33,10 +35,8 @@ namespace Render3D.BackEnd.Materials
 
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+
+        
 
     }
 }

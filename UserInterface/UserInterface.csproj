@@ -62,11 +62,17 @@
     <Compile Include="Controls\FigureControl.Designer.cs">
       <DependentUpon>FigureControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MaterialControl.cs">
+    <Compile Include="Controls\MetallicMaterialControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MaterialControl.Designer.cs">
-      <DependentUpon>MaterialControl.cs</DependentUpon>
+    <Compile Include="Controls\MetallicMaterialControl.Designer.cs">
+      <DependentUpon>MetallicMaterialControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LambertianMaterialControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LambertianMaterialControl.Designer.cs">
+      <DependentUpon>LambertianMaterialControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModelControl.cs">
       <SubType>UserControl</SubType>
@@ -145,8 +151,11 @@
     <EmbeddedResource Include="Controls\FigureControl.resx">
       <DependentUpon>FigureControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MaterialControl.resx">
-      <DependentUpon>MaterialControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\MetallicMaterialControl.resx">
+      <DependentUpon>MetallicMaterialControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LambertianMaterialControl.resx">
+      <DependentUpon>LambertianMaterialControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>

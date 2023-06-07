@@ -78,17 +78,18 @@ namespace UserInterface.Panels
             }
         }
 
+        public bool IsValidFormatAperture(string input)
+        {
+            Regex vectorFormat = new Regex(@"^\d+,\d+$");
+            return vectorFormat.IsMatch(input);
+        }
+
         public bool IsValidFormat(string input)
         {
             Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 
-        public bool IsValidFormatAperture(string input)
-        {
-            Regex vectorFormat = new Regex(@"^(\d+(\.\d+)?),(\d+(\.\d+)?)$");
-            return vectorFormat.IsMatch(input);
-        }
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
@@ -106,7 +107,14 @@ namespace UserInterface.Panels
                     {
                         if (cmbBlur.Checked)
                         {
-                            sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                             if(IsValidFormatAperture(txtAperture.Text))
+                             {
+                                sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                             }
+                             else
+                             {
+                                 throw new Exception("Aperture format not valid");
+                              }                      
                         }
                     else
                     {

@@ -1,6 +1,7 @@
-﻿using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
@@ -28,7 +29,34 @@ namespace Render3D.UserInterface.Panels
             };
             try
             {
-               materialController.AddLambertianMaterial(materialDto);
+              
+                if(cmbMaterial.SelectedItem == null)
+                {
+                    throw new Exception("You must select a material type");
+                }
+                else
+                {
+                    if (cmbMaterial.SelectedItem.Equals("Lambertian"))
+                    {
+                         materialController.AddLambertianMaterial(materialDto);
+                    }
+                    else if (cmbMaterial.SelectedItem.Equals("Metallic"))
+                    {
+                        if (IsValidFormat(txtBlur.Text))
+                        {
+                            double blur = Convert.ToDouble(txtBlur.Text);
+                            materialDto.Blur= blur;
+                            materialController.AddMetallicMaterial(materialDto);
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid blur, the format is: number,number");
+                        }
+                        
+                    }
+                }
+                
+               
             }
             catch (Exception ex)
             {
@@ -43,9 +71,27 @@ namespace Render3D.UserInterface.Panels
             lblExceptionError.Text = "";
         }
 
+        public bool IsValidFormat(string input)
+        {
+            Regex vectorFormat = new Regex(@"^\d+,\d+$");
+            return vectorFormat.IsMatch(input);
+        }
+
         private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = ((CreationMenu)this.Parent.Parent);
+        }
+
+        private void cmbMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbMaterial.SelectedItem.Equals("Lambertian")) {
+                txtBlur.Enabled = false;
+                lblBlur.Enabled = false;
+            }else if (cmbMaterial.SelectedItem.Equals("Metallic"))
+            {
+                txtBlur.Enabled = true;
+                lblBlur.Enabled = true;
+            }
         }
     }
 }
