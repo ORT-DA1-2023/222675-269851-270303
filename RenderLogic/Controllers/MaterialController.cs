@@ -1,5 +1,4 @@
 ﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
@@ -28,7 +27,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                MaterialService.GetMaterialByNameAndClient(materialDto.Name,ClientController.Client);
+                MaterialService.GetMaterialByNameAndClient(materialDto.Name,int.Parse(ClientController.Client.Id));
                 throw new BackEndException("material already exists");
             }
             catch (Exception)
@@ -69,14 +68,15 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Material material = MaterialService.GetMaterialByNameAndClient(newName, ClientController.Client);
-                throw new Exception("There is already a material with that name");
+                Material material = MaterialService.GetMaterialByNameAndClient(newName, int.Parse(ClientController.Client.Id));
             }
             catch
             {
+                Material tryName = new LambertianMaterial() { Name = newName };
+                MaterialService.UpdateName(int.Parse(materialDto.Id), newName);
             }
-            Material tryName = new LambertianMaterial() { Name = newName };
-            MaterialService.UpdateName(int.Parse(materialDto.Id), newName);
+            throw new Exception("There is already a material with that name");
+
         }
         public void Delete(MaterialDto materialDto)
         {
@@ -89,7 +89,7 @@ namespace Render3D.RenderLogic.Controllers
             List<Material> MaterialList;
             try
             {
-                MaterialList = MaterialService.GetMaterialsOfClient(ClientController.Client);
+                MaterialList = MaterialService.GetMaterialsOfClient(int.Parse(ClientController.Client.Id));
             }
             catch
             {

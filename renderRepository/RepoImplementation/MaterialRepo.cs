@@ -6,6 +6,7 @@ using renderRepository.entities;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace renderRepository.RepoImplementation
 {
@@ -56,22 +57,23 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public Material GetByNameAndClient(string name, Client client)
+        public Material GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                    .Where(m => m.Name == name && m.ClientEntity == ClientEntity.FromDomain(client));
-                return materialEntities.ElementAt(0).ToDomain();
+                    .Where(m => m.Name == name && m.ClientEntity.Id == clientId)
+                    .FirstOrDefault();
+                return materialEntities.ToDomain();
             }
         }
 
-        public List<Material> GetMaterialsOfClient(Client client)
+        public List<Material> GetMaterialsOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                    .Where(f => f.ClientEntity == ClientEntity.FromDomain(client))
+                     .Where(m=> m.ClientEntity.Id == clientId)
                     .ToList();
                 List<Material> clientMaterials = new List<Material>();
                 foreach (var m in materialEntities)

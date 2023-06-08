@@ -34,6 +34,10 @@ namespace Render3D.UserInterface.Controls
                     lblFigureName.Text = newName;
                     _figureDto.Name = newName;
                 }
+                else
+                {
+                    lblErrorDeleteFigure.Text = "Figure name is either not valid or already taken";
+                }
             }
         }
 

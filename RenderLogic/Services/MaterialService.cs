@@ -26,14 +26,14 @@ namespace RenderLogic.Services
         {
             return _materialRepo.Get(Id);
         }
-        public Material GetMaterialByNameAndClient(string MaterialName, Client client)
+        public Material GetMaterialByNameAndClient(string MaterialName, int clientId)
         {
-            return _materialRepo.GetByNameAndClient(MaterialName, client);
+            return _materialRepo.GetByNameAndClient(MaterialName, clientId);
         }
 
-        public List<Material> GetMaterialsOfClient(Client client)
+        public List<Material> GetMaterialsOfClient(int clientId)
         {
-            return _materialRepo.GetMaterialsOfClient(client);
+            return _materialRepo.GetMaterialsOfClient(clientId);
         }
 
         internal void UpdateName(int id, string newName)

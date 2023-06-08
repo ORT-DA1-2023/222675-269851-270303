@@ -60,8 +60,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var figureEntity = dbContext.FigureEntities
-                    .Where(f => f.Name == name && f.ClientEntity.Id == clientId);
-                return figureEntity.ElementAt(0).ToDomain();
+                    .Where(f => f.Name == name && f.ClientEntity.Id == clientId)
+                    .FirstOrDefault();
+                return figureEntity.ToDomain();
             }
         }
         public List<Figure> GetFiguresOfClient(int clientId)

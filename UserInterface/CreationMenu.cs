@@ -30,13 +30,7 @@ namespace Render3D.UserInterface
         {
             flObjectList.Controls.Clear();
             List<FigureDto> figureList;
-            try
-            {
-                 figureList=figureController.GetFigures();
-            }catch
-            {
-                return;
-            }       
+            figureList=figureController.GetFigures();     
             foreach (FigureDto figure in figureList)
             {
                     FigureControl figureControl = new FigureControl(figure);

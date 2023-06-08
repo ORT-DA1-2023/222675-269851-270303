@@ -37,6 +37,10 @@ namespace Render3D.UserInterface.Controls
                     lblMaterialName.Text = newName;
                     _materialDto.Name = newName;
                 }
+                else
+                {
+                    lblErrorDeleteMaterial.Text = "invalid name or name already in use";
+                }
             }
         }
 

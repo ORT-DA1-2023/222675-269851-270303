@@ -27,15 +27,14 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));
-                throw new BackEndException("figure already exists");
+                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));    
             }
             catch (Exception)
             {
                 CreateSphere(figureDto);
                 return;
             }
-            
+            throw new BackEndException("figure already exists");
 
         }
         private void CreateSphere(FigureDto figureDto)
@@ -83,13 +82,15 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 Figure figure = FigureService.GetFigureByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-                throw new Exception("That Name is already in use");
+                
             }
             catch
-            {             
+            {
+                Figure tryName = new Sphere() { Name = newName };
+                FigureService.UpdateName(int.Parse(figureDto.Id), newName);
             }
-            Figure tryName = new Sphere() { Name = newName };
-            FigureService.UpdateName(int.Parse(figureDto.Id), newName);
+            throw new Exception("That Name is already in use");
+           
         }
     }
 }
