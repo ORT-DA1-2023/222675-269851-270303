@@ -1,5 +1,4 @@
-﻿
-using Render3D.RenderLogic.Controllers;
+﻿using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
@@ -8,12 +7,13 @@ using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
-    public partial class MaterialControl : UserControl
+    public partial class LambertianMaterialControl : UserControl
     {
         private readonly MaterialDto _materialDto;
         private readonly ModelController modelController;
         private readonly MaterialController materialController;
-        public MaterialControl(MaterialDto material)
+
+        public LambertianMaterialControl(MaterialDto material)
         {
             InitializeComponent();
             lblMaterialName.Text = material.Name;

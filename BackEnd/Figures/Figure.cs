@@ -31,7 +31,7 @@ namespace Render3D.BackEnd.Figures
        
 
         public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
-        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);
+        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color, int roughness);
 
         protected void ValidateName(string value)
         {

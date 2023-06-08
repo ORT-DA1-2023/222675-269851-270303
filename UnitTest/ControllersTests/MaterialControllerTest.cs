@@ -11,7 +11,7 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class MaterialControllerTest
     {
-      
+
 
         [TestInitialize]
         public void Initialize()
@@ -19,13 +19,18 @@ namespace Render3D.UnitTest.ControllersTests
           
         }
         [TestMethod]
-        public void GivenNewMaterialAddsItToTheList()
+        public void GivenNewLambertianMaterialAddsItToTheList()
         {
-
         }
+
+        [TestMethod]
+        public void GivenNewMetallicMaterialAddsItToTheList()
+        {
+        }
+
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenNewWrongMaterialFailsAddingItToTheList()
+        public void GivenNewWrongLambertianMaterialFailsAddingItToTheList()
         {
            
         }
@@ -40,7 +45,8 @@ namespace Render3D.UnitTest.ControllersTests
         {
         }
         [TestMethod]
-        public void GivenNewMaterialNameItDoesNotChange()
+        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
+        public void GivenNewWrongMetallicMaterialFailsAddingItToTheList()
         {
            
         }
@@ -49,8 +55,10 @@ namespace Render3D.UnitTest.ControllersTests
         {
 
         }
+
         [TestMethod]
-        public void GivenNameDoesNotDeleteTheMaterial()
+        [ExpectedException(typeof(BackEndException), "lambertialMaterialSample1 already exists")]
+        public void GivenRepeatedLambertianMaterialFailsAddingItToTheList()
         {
         }
 
