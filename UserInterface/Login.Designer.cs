@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblClientName = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
+            this.BtnLog = new System.Windows.Forms.Button();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.btnSignUp = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.txtClientName = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.BtnLog = new System.Windows.Forms.Button();
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +76,16 @@
             this.pnlLogin.Name = "pnlLogin";
             this.pnlLogin.Size = new System.Drawing.Size(1000, 580);
             this.pnlLogin.TabIndex = 1;
+            // 
+            // BtnLog
+            // 
+            this.BtnLog.Location = new System.Drawing.Point(628, 458);
+            this.BtnLog.Name = "BtnLog";
+            this.BtnLog.Size = new System.Drawing.Size(139, 26);
+            this.BtnLog.TabIndex = 19;
+            this.BtnLog.Text = "Log analytics";
+            this.BtnLog.UseVisualStyleBackColor = true;
+            this.BtnLog.Click += new System.EventHandler(this.BtnLog_Click);
             // 
             // lblExceptionError
             // 
@@ -164,16 +174,6 @@
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(205, 40);
             this.txtClientName.TabIndex = 2;
-            // 
-            // BtnLog
-            // 
-            this.BtnLog.Location = new System.Drawing.Point(563, 458);
-            this.BtnLog.Name = "BtnLog";
-            this.BtnLog.Size = new System.Drawing.Size(139, 26);
-            this.BtnLog.TabIndex = 19;
-            this.BtnLog.Text = "Log analytics";
-            this.BtnLog.UseVisualStyleBackColor = true;
-            this.BtnLog.Click += new System.EventHandler(this.BtnLog_Click);
             // 
             // Login
             // 

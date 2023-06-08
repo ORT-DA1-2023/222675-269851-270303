@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UserInterface
 {
-    public partial class Log : Form
+    public partial class LogUI : Form
     {
-        public Log()
+        public LogUI()
         {
             InitializeComponent();
         }
@@ -40,6 +40,11 @@ namespace UserInterface
         private void GoBackLog_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void LogUI_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -86,11 +86,11 @@
     <Compile Include="Controls\SceneControl.Designer.cs">
       <DependentUpon>SceneControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs">
+    <Compile Include="LogUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Log.Designer.cs">
-      <DependentUpon>Log.cs</DependentUpon>
+    <Compile Include="LogUI.Designer.cs">
+      <DependentUpon>LogUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Panels\NameChanger.cs">
       <SubType>Form</SubType>
@@ -169,8 +169,8 @@
     <EmbeddedResource Include="Controls\SceneControl.resx">
       <DependentUpon>SceneControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Log.resx">
-      <DependentUpon>Log.cs</DependentUpon>
+    <EmbeddedResource Include="LogUI.resx">
+      <DependentUpon>LogUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\NameChanger.resx">
       <DependentUpon>NameChanger.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace UserInterface
 {
-    partial class Log
+    partial class LogUI
     {
         /// <summary>
         /// Required designer variable.
@@ -104,6 +104,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.User,
@@ -112,8 +115,9 @@
             this.TimeWindow,
             this.SceneName,
             this.NumberElementsInScene});
-            this.dataGridView1.Location = new System.Drawing.Point(73, 208);
+            this.dataGridView1.Location = new System.Drawing.Point(99, 209);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(643, 114);
             this.dataGridView1.TabIndex = 6;
             // 
@@ -149,7 +153,7 @@
             // 
             // GoBackLog
             // 
-            this.GoBackLog.Location = new System.Drawing.Point(591, 382);
+            this.GoBackLog.Location = new System.Drawing.Point(709, 365);
             this.GoBackLog.Name = "GoBackLog";
             this.GoBackLog.Size = new System.Drawing.Size(75, 23);
             this.GoBackLog.TabIndex = 7;
@@ -157,11 +161,11 @@
             this.GoBackLog.UseVisualStyleBackColor = true;
             this.GoBackLog.Click += new System.EventHandler(this.GoBackLog_Click);
             // 
-            // Log
+            // LogUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(984, 541);
             this.Controls.Add(this.GoBackLog);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblMostRenderedUser);
@@ -170,8 +174,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblAverageTimeInSeconds);
             this.Controls.Add(this.lblRenderTime);
-            this.Name = "Log";
-            this.Text = "Form1";
+            this.Name = "LogUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Log History";
+            this.Load += new System.EventHandler(this.LogUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

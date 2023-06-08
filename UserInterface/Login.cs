@@ -3,6 +3,7 @@ using Render3D.RenderLogic.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UserInterface;
 
 namespace Render3D.UserInterface
 {
@@ -50,9 +51,8 @@ namespace Render3D.UserInterface
 
         private void BtnLog_Click(object sender, EventArgs e)
         {
-            List<Log> logs = new List<Log>();
-            var a = new LogAnalytics(logs);
-            
+            var window = new LogUI();
+            window.Show();
         }
     }
 }
