@@ -23,13 +23,15 @@ namespace Render3D.RenderLogic.Controllers
         public void SignIn(string clientName, string clientPassword)
         {
             try{
-                GetClientByName(clientName);
-                throw new Exception("Client already exists");
+                GetClientByName(clientName);            
             }
             catch
             {
                 CreateAndAddClient(clientName, clientPassword);
+                return;
             }
+            throw new Exception("Client already exists");
+           
         }
         private void CreateAndAddClient(string clientName, string clientPassword)
         {

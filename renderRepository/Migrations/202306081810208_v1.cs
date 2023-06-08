@@ -43,7 +43,7 @@
                         Red = c.Int(nullable: false),
                         Green = c.Int(nullable: false),
                         Blue = c.Int(nullable: false),
-                        Blur = c.Int(nullable: false),
+                        Blur = c.Double(nullable: false),
                         ClientEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)

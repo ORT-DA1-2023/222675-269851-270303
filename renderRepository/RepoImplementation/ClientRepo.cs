@@ -20,6 +20,7 @@ namespace renderRepository.RepoImplementation
                 dbContext.ClientEntities.Add(entity);
 
                 dbContext.SaveChanges();
+                client.Id = entity.Id.ToString();
             }
         }
 

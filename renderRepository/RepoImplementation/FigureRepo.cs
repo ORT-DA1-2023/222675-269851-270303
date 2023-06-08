@@ -17,6 +17,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = FigureEntity.FromDomain(figure);
+                int clientId = int.Parse(figure.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
                 dbContext.FigureEntities.Add(entity);
                 dbContext.SaveChanges();
                 figure.Id = entity.Id.ToString();
@@ -52,23 +55,23 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public Figure GetByNameAndClient(string name, Client client)
+        public Figure GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var figureEntity = dbContext.FigureEntities
-                    .Where(f => f.Name == name && f.ClientEntity == ClientEntity.FromDomain(client));
+                    .Where(f => f.Name == name && f.ClientEntity.Id == clientId);
                 return figureEntity.ElementAt(0).ToDomain();
             }
         }
-        public List<Figure> GetFiguresOfClient(Client client)
+        public List<Figure> GetFiguresOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var FigureEntities = dbContext.FigureEntities
-                    .Where(f=> f.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(f=> f.ClientEntity.Id == clientId)
                     .GroupBy(f =>f.Name)
-                    .Select(f=> f.First())
+                    .Select(f=> f.FirstOrDefault())
                     .ToList();
                 List<Figure> clientFigures = new List<Figure>();
                 foreach (var f in FigureEntities) 

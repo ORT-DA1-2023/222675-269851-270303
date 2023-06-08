@@ -27,7 +27,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(figureDto.Name,ClientController.Client);
+                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));
                 throw new BackEndException("figure already exists");
             }
             catch (Exception)
@@ -58,7 +58,7 @@ namespace Render3D.RenderLogic.Controllers
             List<Figure> figureList;
             try
             {
-               figureList = FigureService.GetFigureOfClient(ClientController.Client);
+               figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
             }
             catch
             {
@@ -82,7 +82,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Figure figure = FigureService.GetFigureByNameAndClient(newName, ClientController.Client);
+                Figure figure = FigureService.GetFigureByNameAndClient(newName, int.Parse(ClientController.Client.Id));
                 throw new Exception("That Name is already in use");
             }
             catch

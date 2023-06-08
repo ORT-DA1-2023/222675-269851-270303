@@ -24,7 +24,7 @@ namespace Render3D.RenderLogic.Controllers
             return materialController;
         }
 
-        public void AddLambertianMaterial(MaterialDto materialDto)
+        public void AddMaterial(MaterialDto materialDto)
         {
             try
             {
@@ -34,40 +34,35 @@ namespace Render3D.RenderLogic.Controllers
             catch (Exception)
             {
                 Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
-                CreateLambertianMaterial(ClientController.Client, materialDto.Name, colour);
-                return;
+                if (materialDto.Blur != 0)
+                {
+                    CreateMetallicMaterial(materialDto.Name, colour, materialDto.Blur);
+                }
+                else
+                {
+                    CreateLambertianMaterial(materialDto.Name, colour);
+                }
             }          
         }
-        private void CreateLambertianMaterial(Client client, string materialName, Colour colour)
+        private void CreateLambertianMaterial(string materialName, Colour colour)
         {
             Material material = new LambertianMaterial() 
             { 
-                Client = client,
+                Client = ClientController.Client,
                 Name = materialName, 
                 Attenuation = colour };
             MaterialService.AddMaterial(material);
-        }
-        public void AddMetallicMaterial(MaterialDto materialDto)
-        {
-            try
-            {
-                MaterialService.GetMaterialByNameAndClient(materialDto.Name, ClientController.Client);
-                throw new BackEndException("material already exists");
+        }         
 
-            }
-            catch (Exception)
-            {
-                Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
-                CreateMetallicMaterial(ClientController.Client, materialDto.Name, colour,materialDto.Blur);
-                return;
-            }
-            throw new BackEndException("material already exists");
-        }
-
-        private void CreateMetallicMaterial(Client client, string materialName, Colour colour, double blur)
+        private void CreateMetallicMaterial(string materialName, Colour colour, double blur)
         {
-            Material material = new MetallicMaterial() { Client = client, Name = materialName, Attenuation = colour, Blur = blur };
-            DataWarehouse.Materials.Add(material);
+            Material material = new MetallicMaterial()
+            {
+                Client = ClientController.Client, 
+                Name = materialName, 
+                Attenuation = colour, 
+                Blur = blur };
+           MaterialService.AddMaterial(material);
         }
 
         public void ChangeName(MaterialDto materialDto, string newName)

@@ -38,7 +38,7 @@ namespace Render3D.UserInterface.Panels
                 {
                     if (cmbMaterial.SelectedItem.Equals("Lambertian"))
                     {
-                         materialController.AddLambertianMaterial(materialDto);
+                         materialController.AddMaterial(materialDto);
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))
                     {
@@ -46,7 +46,7 @@ namespace Render3D.UserInterface.Panels
                         {
                             double blur = Convert.ToDouble(txtBlur.Text);
                             materialDto.Blur= blur;
-                            materialController.AddMetallicMaterial(materialDto);
+                            materialController.AddMaterial(materialDto);
                         }
                         else
                         {

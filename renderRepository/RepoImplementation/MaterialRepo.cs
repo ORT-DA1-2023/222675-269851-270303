@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
@@ -17,6 +18,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = MaterialEntity.FromDomain(material);
+                int clientId = int.Parse(material.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
                 dbContext.MaterialEntities.Add(entity);
                 dbContext.SaveChanges();
                 material.Id = entity.Id.ToString();
