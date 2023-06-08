@@ -1,5 +1,7 @@
-﻿using Render3D.RenderLogic.Controllers;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface
@@ -44,6 +46,13 @@ namespace Render3D.UserInterface
         {
             render = (Render3DIU)this.Parent.Parent;
             lblExceptionError.Text = "";
+        }
+
+        private void BtnLog_Click(object sender, EventArgs e)
+        {
+            List<Log> logs = new List<Log>();
+            var a = new LogAnalytics(logs);
+            
         }
     }
 }
