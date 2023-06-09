@@ -5,6 +5,7 @@ using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace renderRepository.RepoImplementation
 {
@@ -17,6 +18,15 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = ModelEntity.FromDomain(model);
+                int clientId = int.Parse(model.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
+                int figureId = int.Parse(model.Figure.Id);
+                var figure = dbContext.FigureEntities.Find(figureId);
+                entity.FigureEntity = figure;
+                int materialId = int.Parse(model.Material.Id);
+                var material = dbContext.MaterialEntities.Find(materialId);
+                entity.MaterialEntity = material;   
                 dbContext.ModelEntities.Add(entity);
                 dbContext.SaveChanges();
                 model.Id = entity.Id.ToString();
@@ -52,24 +62,25 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public Model GetByNameAndClient(string name, Client client)
+        public Model GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(f => f.Name == name && f.ClientEntity == ClientEntity.FromDomain(client));
-                return modelEntities.ElementAt(0).ToDomain();
+                   .Where(m => m.Name == name && m.ClientEntity.Id == clientId)
+                    .FirstOrDefault();
+                return modelEntities.ToDomain();
             }
         }
 
-        public List<Model> GetModelsOfClient(Client client)
+        public List<Model> GetModelsOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(m => m.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(m => m.ClientEntity.Id == clientId)
                     .GroupBy(m => m.Name)
-                    .Select(m => m.First())
+                    .Select(m => m.FirstOrDefault())
                     .ToList();
                 List<Model> clientModels = new List<Model>();
                 foreach (var m in modelEntities)
@@ -91,12 +102,12 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public List<Model> GetModelsWithFigure(Figure figure)
+        public List<Model> GetModelsWithFigure(int figureId)
         {
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(m => m.FigureEntity == FigureEntity.FromDomain(figure))
+                    .Where(m => m.FigureEntity.Id == figureId)
                     .ToList();
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)
@@ -108,12 +119,12 @@ namespace renderRepository.RepoImplementation
 
         }
 
-        public List<Model> GetModelsWithMaterial(Material material)
+        public List<Model> GetModelsWithMaterial(int materialId)
         {
             using (var dbContext = new RenderContext())
             {
                 var modelEntities = dbContext.ModelEntities
-                    .Where(m => m.MaterialEntity == MaterialEntity.FromDomain(material))
+                    .Where(m => m.MaterialEntity.Id == materialId)
                     .ToList();
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)

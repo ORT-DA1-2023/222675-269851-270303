@@ -10,7 +10,6 @@ namespace Render3D.UserInterface.Panels
     public partial class ModelPanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
         private readonly FigureController figureController;
         private readonly MaterialController materialController;
         private readonly ModelController modelController;
@@ -25,7 +24,6 @@ namespace Render3D.UserInterface.Panels
         private void VariableInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
             List<FigureDto> figureList = figureController.GetFigures();
@@ -34,10 +32,12 @@ namespace Render3D.UserInterface.Panels
             {
                     lstFigure.Items.Add(figure);
             }
+            lstFigure.DisplayMember = "Name";
             foreach (MaterialDto material in materialList)
             {
                     lstMaterial.Items.Add(material);
             }
+            lstMaterial.DisplayMember = "Name";
             lblExceptionError.Text = "";
         }
 

@@ -28,14 +28,14 @@ namespace RenderLogic.Services
         {
             return _modelRepo.Get(Id);
         }
-        public Model GetModelByNameAndClient(string modelName, Client client)
+        public Model GetModelByNameAndClient(string modelName, int clientId)
         {
-            return _modelRepo.GetByNameAndClient(modelName, client);
+            return _modelRepo.GetByNameAndClient(modelName, clientId);
         }
 
-        public List<Model> GetModelsOfClient(Client client)
+        public List<Model> GetModelsOfClient(int clientId)
         {
-            return _modelRepo.GetModelsOfClient(client);
+            return _modelRepo.GetModelsOfClient(clientId);
         }
 
         internal void UpdateName(int id, string newName)
@@ -48,14 +48,14 @@ namespace RenderLogic.Services
             _modelRepo.UpdatePreview(model);
         }
 
-        internal List<Model> GetModelsWithFigure(Figure figure)
+        internal List<Model> GetModelsWithFigure(int figureId)
         {
-            return _modelRepo.GetModelsWithFigure(figure);
+            return _modelRepo.GetModelsWithFigure(figureId);
         }
 
-        internal List<Model> GetModelsWithMaterial(Material material)
+        internal List<Model> GetModelsWithMaterial(int materialId)
         {
-            return _modelRepo.GetModelsWithMaterial(material);
+            return _modelRepo.GetModelsWithMaterial(materialId);
         }
 
     }

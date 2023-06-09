@@ -206,7 +206,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<ModelDto> GetAvailableModels()
         {
-            List <Model> models= ModelService.GetModelsOfClient(ClientController.Client);
+            List <Model> models= ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
             return ModelsIntoDtos(models);
         }
         public FigureDto ConvertFigure(Figure figure)
