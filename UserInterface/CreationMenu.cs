@@ -221,5 +221,10 @@ namespace Render3D.UserInterface
         {
            render.sceneController.DeleteSceneInList(render.clientName, sceneName);
         }
+
+        private void lblShowClientName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

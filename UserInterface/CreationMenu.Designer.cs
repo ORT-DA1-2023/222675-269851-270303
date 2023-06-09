@@ -86,8 +86,9 @@
             this.lblShowClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblShowClientName.Size = new System.Drawing.Size(141, 48);
             this.lblShowClientName.TabIndex = 0;
-            this.lblShowClientName.Text = "Welcome back \r\nUser!!";
+            this.lblShowClientName.Text = "Welcome back \r\nUser";
             this.lblShowClientName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblShowClientName.Click += new System.EventHandler(this.lblShowClientName_Click);
             // 
             // btnScene
             // 
@@ -97,7 +98,7 @@
             this.btnScene.Name = "btnScene";
             this.btnScene.Size = new System.Drawing.Size(157, 48);
             this.btnScene.TabIndex = 4;
-            this.btnScene.Text = "Scenes!";
+            this.btnScene.Text = "Scenes";
             this.btnScene.UseVisualStyleBackColor = true;
             this.btnScene.Click += new System.EventHandler(this.BtnScene_Click);
             // 
@@ -109,7 +110,7 @@
             this.btnModel.Name = "btnModel";
             this.btnModel.Size = new System.Drawing.Size(157, 48);
             this.btnModel.TabIndex = 3;
-            this.btnModel.Text = "Models!";
+            this.btnModel.Text = "Models";
             this.btnModel.UseVisualStyleBackColor = true;
             this.btnModel.Click += new System.EventHandler(this.BtnModel_Click);
             // 
@@ -121,7 +122,7 @@
             this.btnMaterial.Name = "btnMaterial";
             this.btnMaterial.Size = new System.Drawing.Size(157, 48);
             this.btnMaterial.TabIndex = 2;
-            this.btnMaterial.Text = "Materials!";
+            this.btnMaterial.Text = "Materials";
             this.btnMaterial.UseVisualStyleBackColor = true;
             this.btnMaterial.Click += new System.EventHandler(this.BtnMaterial_Click);
             // 
@@ -133,7 +134,7 @@
             this.btnFigure.Name = "btnFigure";
             this.btnFigure.Size = new System.Drawing.Size(157, 48);
             this.btnFigure.TabIndex = 1;
-            this.btnFigure.Text = "Figures!";
+            this.btnFigure.Text = "Figures";
             this.btnFigure.UseVisualStyleBackColor = true;
             this.btnFigure.Click += new System.EventHandler(this.BtnFigure_Click);
             // 

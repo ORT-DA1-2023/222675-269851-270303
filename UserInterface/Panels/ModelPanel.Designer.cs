@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lstMaterial = new System.Windows.Forms.ComboBox();
+            this.lstFigure = new System.Windows.Forms.ComboBox();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.lblModelName = new System.Windows.Forms.Label();
             this.txtModelName = new System.Windows.Forms.TextBox();
@@ -39,8 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lstFigure = new System.Windows.Forms.ComboBox();
-            this.lstMaterial = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 551);
             this.panel1.TabIndex = 0;
+            // 
+            // lstMaterial
+            // 
+            this.lstMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMaterial.FormattingEnabled = true;
+            this.lstMaterial.Location = new System.Drawing.Point(81, 298);
+            this.lstMaterial.Name = "lstMaterial";
+            this.lstMaterial.Size = new System.Drawing.Size(212, 32);
+            this.lstMaterial.TabIndex = 20;
+            // 
+            // lstFigure
+            // 
+            this.lstFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFigure.FormattingEnabled = true;
+            this.lstFigure.Location = new System.Drawing.Point(81, 177);
+            this.lstFigure.Name = "lstFigure";
+            this.lstFigure.Size = new System.Drawing.Size(212, 32);
+            this.lstFigure.TabIndex = 19;
             // 
             // lblExceptionError
             // 
@@ -118,7 +136,7 @@
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 7;
-            this.btnCreateFigure.Text = "Create!!!";
+            this.btnCreateFigure.Text = "Create";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
             // 
@@ -128,11 +146,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(77, 341);
+            this.label5.Location = new System.Drawing.Point(77, 333);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(234, 40);
+            this.label5.Size = new System.Drawing.Size(211, 40);
             this.label5.TabIndex = 6;
-            this.label5.Text = "tip: if the list is empty you should\r\n start by creating a material";
+            this.label5.Text = "If the list is empty you should\r\n start by creating a material";
             // 
             // label4
             // 
@@ -142,9 +160,9 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(77, 210);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 40);
+            this.label4.Size = new System.Drawing.Size(211, 40);
             this.label4.TabIndex = 5;
-            this.label4.Text = "tip: if the list is empty you should\r\n start by creating a figure";
+            this.label4.Text = "If the list is empty you should\r\n start by creating a figure";
             // 
             // label3
             // 
@@ -176,29 +194,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(43, 23);
+            this.label1.Location = new System.Drawing.Point(54, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(221, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Create a new model!!!";
-            // 
-            // lstFigure
-            // 
-            this.lstFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFigure.FormattingEnabled = true;
-            this.lstFigure.Location = new System.Drawing.Point(81, 177);
-            this.lstFigure.Name = "lstFigure";
-            this.lstFigure.Size = new System.Drawing.Size(212, 32);
-            this.lstFigure.TabIndex = 19;
-            // 
-            // lstMaterial
-            // 
-            this.lstMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstMaterial.FormattingEnabled = true;
-            this.lstMaterial.Location = new System.Drawing.Point(81, 298);
-            this.lstMaterial.Name = "lstMaterial";
-            this.lstMaterial.Size = new System.Drawing.Size(212, 32);
-            this.lstMaterial.TabIndex = 20;
             // 
             // ModelPanel
             // 

@@ -40,9 +40,10 @@
             this.txtClientName = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pnlLogin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClientName
@@ -50,7 +51,7 @@
             this.lblClientName.AutoSize = true;
             this.lblClientName.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientName.Location = new System.Drawing.Point(260, 72);
+            this.lblClientName.Location = new System.Drawing.Point(548, 67);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(103, 22);
@@ -59,14 +60,15 @@
             // 
             // pnlLogin
             // 
-            this.pnlLogin.BackColor = System.Drawing.Color.White;
+            this.pnlLogin.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlLogin.Controls.Add(this.pictureBox2);
+            this.pnlLogin.Controls.Add(this.label2);
             this.pnlLogin.Controls.Add(this.lblExceptionError);
             this.pnlLogin.Controls.Add(this.btnSignUp);
             this.pnlLogin.Controls.Add(this.label1);
             this.pnlLogin.Controls.Add(this.btnLogin);
             this.pnlLogin.Controls.Add(this.txtClientPassword);
             this.pnlLogin.Controls.Add(this.lblClientPassword);
-            this.pnlLogin.Controls.Add(this.pictureBox1);
             this.pnlLogin.Controls.Add(this.txtClientName);
             this.pnlLogin.Controls.Add(this.lblClientName);
             this.pnlLogin.Location = new System.Drawing.Point(0, 0);
@@ -80,7 +82,7 @@
             this.lblExceptionError.AutoSize = true;
             this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
-            this.lblExceptionError.Location = new System.Drawing.Point(261, 317);
+            this.lblExceptionError.Location = new System.Drawing.Point(549, 293);
             this.lblExceptionError.Name = "lblExceptionError";
             this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
             this.lblExceptionError.TabIndex = 18;
@@ -92,9 +94,9 @@
             this.btnSignUp.BackColor = System.Drawing.Color.LightBlue;
             this.btnSignUp.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnSignUp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F);
-            this.btnSignUp.Location = new System.Drawing.Point(264, 396);
+            this.btnSignUp.Location = new System.Drawing.Point(543, 363);
             this.btnSignUp.Name = "btnSignUp";
-            this.btnSignUp.Size = new System.Drawing.Size(160, 41);
+            this.btnSignUp.Size = new System.Drawing.Size(214, 41);
             this.btnSignUp.TabIndex = 8;
             this.btnSignUp.Text = "Sign up";
             this.btnSignUp.UseVisualStyleBackColor = false;
@@ -104,7 +106,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(260, 373);
+            this.label1.Location = new System.Drawing.Point(548, 340);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 20);
             this.label1.TabIndex = 7;
@@ -114,10 +116,10 @@
             // 
             this.btnLogin.BackColor = System.Drawing.Color.LightBlue;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(264, 258);
+            this.btnLogin.Location = new System.Drawing.Point(543, 234);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(10);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(205, 49);
+            this.btnLogin.Size = new System.Drawing.Size(214, 49);
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -126,7 +128,7 @@
             // txtClientPassword
             // 
             this.txtClientPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientPassword.Location = new System.Drawing.Point(264, 185);
+            this.txtClientPassword.Location = new System.Drawing.Point(552, 176);
             this.txtClientPassword.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.txtClientPassword.Name = "txtClientPassword";
             this.txtClientPassword.PasswordChar = '*';
@@ -138,7 +140,7 @@
             this.lblClientPassword.AutoSize = true;
             this.lblClientPassword.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblClientPassword.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientPassword.Location = new System.Drawing.Point(260, 161);
+            this.lblClientPassword.Location = new System.Drawing.Point(548, 152);
             this.lblClientPassword.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.lblClientPassword.Name = "lblClientPassword";
             this.lblClientPassword.Size = new System.Drawing.Size(100, 22);
@@ -148,22 +150,37 @@
             // txtClientName
             // 
             this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientName.Location = new System.Drawing.Point(264, 96);
+            this.txtClientName.Location = new System.Drawing.Point(552, 91);
             this.txtClientName.Margin = new System.Windows.Forms.Padding(100, 0, 10, 0);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(205, 29);
             this.txtClientName.TabIndex = 2;
             // 
-            // pictureBox1
+            // label2
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(602, 109);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(261, 240);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(71, 58);
+            this.label2.Margin = new System.Windows.Forms.Padding(400);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(187, 31);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Raytracing 3D";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.InitialImage = null;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 104);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(316, 218);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 20;
+            this.pictureBox2.TabStop = false;
             // 
             // Login
             // 
@@ -180,7 +197,7 @@
             this.Shown += new System.EventHandler(this.VariablesInitialize);
             this.pnlLogin.ResumeLayout(false);
             this.pnlLogin.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -198,7 +215,8 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         public System.Windows.Forms.TextBox txtClientPassword;
         private System.Windows.Forms.Label lblExceptionError;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -95,7 +95,7 @@
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 5;
-            this.btnCreateFigure.Text = "Create!!!";
+            this.btnCreateFigure.Text = "Create";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
             // 
@@ -105,12 +105,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(51, 35);
+            this.label1.Location = new System.Drawing.Point(63, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 25);
+            this.label1.Size = new System.Drawing.Size(199, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Create a new figure!!";
+            this.label1.Text = "Create a new figure";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblExceptionError
             // 
