@@ -59,5 +59,10 @@ namespace Render3D.UserInterface
             render = (Render3DIU)this.Parent.Parent;
             lblExceptionError.Text = "";
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
