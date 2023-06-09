@@ -269,16 +269,12 @@ namespace Render3D.RenderLogic.Controllers
                 Name = modelDto.Name,
                 Client = ClientController.Client
             };
-            try
-            {
                 List<Scene> ExpectedEmptyList = SceneService.GetScenesWithModel(model);
+            if(ExpectedEmptyList.Count == 0)
+            {
                 return false;
             }
-            catch
-            {
-                return true;
-            }
+            return true;
         }
-
     }
 }

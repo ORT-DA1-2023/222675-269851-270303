@@ -10,12 +10,12 @@ namespace renderRepository.entities
     {
         [Key]
         public int Id { get; set; }
-        public ClientEntity ClientEntity { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastModificationDate { get; set; }
         public DateTime? LastRenderizationDate { get; set; }
-        public ICollection<ModelEntity> ModelEntities { get; set; }
+        public virtual ICollection<ModelEntity> ModelEntities { get; set; }
         public byte[] Preview {get; set; }
         public double Aperture { get; set; }
         public double LookFromX { get; set; }

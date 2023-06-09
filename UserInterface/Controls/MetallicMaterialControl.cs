@@ -33,7 +33,7 @@ namespace Render3D.UserInterface.Controls
         {
             if (!_materialDto.Name.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ChangeMaterialName(_materialDto, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChange(_materialDto, newName))
                 {
                     lblMaterialName.Text = newName;
                     _materialDto.Name = newName;

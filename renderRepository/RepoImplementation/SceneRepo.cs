@@ -36,7 +36,13 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 SceneEntity sceneEntity = dbContext.SceneEntities.Find(Id);
-                return sceneEntity.ToDomain();
+                var scene = sceneEntity.ToDomain();
+                var models = sceneEntity.ModelEntities;
+                foreach (var model in models)
+                {
+                    scene.PositionedModels.Add(model.ToDomain());
+                }
+                return scene;
             }
         }
 
@@ -45,8 +51,15 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var sceneEntity = dbContext.SceneEntities
-                    .Where(s => s.Name == name && s.ClientEntity == ClientEntity.FromDomain(client));
-                return sceneEntity.ElementAt(0).ToDomain();
+                    .Where(s => s.Name == name && s.ClientEntity == ClientEntity.FromDomain(client))
+                    .FirstOrDefault();
+                var scene = sceneEntity.ToDomain();
+                var models = sceneEntity.ModelEntities;
+                foreach (var model in models)
+                {
+                    scene.PositionedModels.Add(model.ToDomain());
+                }
+                return scene;
             }
         }
 
@@ -60,6 +73,12 @@ namespace renderRepository.RepoImplementation
                 List<Scene> clientScene = new List<Scene>();
                 foreach (var s in sceneEntities)
                 {
+                    var scene= s.ToDomain();
+                    var models = s.ModelEntities;
+                    foreach (var model in models)
+                    {
+                        scene.PositionedModels.Add(model.ToDomain());
+                    }
                     clientScene.Add(s.ToDomain());
                 }
                 return clientScene;
@@ -129,10 +148,11 @@ namespace renderRepository.RepoImplementation
 
         public List<Scene> GetScenesWithModel(Model model)
         {
+            ModelEntity modelEntity = ModelEntity.FromDomain(model);
             using (var dbContext = new RenderContext())
             {
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(s => s.ModelEntities.Contains(ModelEntity.FromDomain(model)))
+                    .Where(s => s.ModelEntities.Any(m => m.Id == modelEntity.Id))
                     .ToList();
                 List<Scene> scenes = new List<Scene>();
                 foreach (var s in sceneEntities)

@@ -165,7 +165,7 @@ namespace Render3D.UserInterface
         }
 
 
-        internal bool ChangeMaterialName(MaterialDto materialDto,string newName)
+        internal bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
         {
             try
             {
@@ -198,11 +198,6 @@ namespace Render3D.UserInterface
             }
             
             
-        }
-
-        internal void DeleteModel(ModelDto model)
-        {
-            modelController.Delete(model);
         }
 
         private void BtnScene_Click(object sender, EventArgs e)
