@@ -3,6 +3,7 @@ using Render3D.BackEnd.Figures;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -61,6 +62,7 @@ namespace renderRepository.RepoImplementation
             {
                 var figureEntity = dbContext.FigureEntities
                     .Where(f => f.Name == name && f.ClientEntity.Id == clientId)
+                    .Include(f => f.ClientEntity)
                     .FirstOrDefault();
                 return figureEntity.ToDomain();
             }

@@ -13,7 +13,6 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class SceneController
     {
-        public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController = ClientController.GetInstance();
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public SceneService SceneService { get; set; }
@@ -114,29 +113,30 @@ namespace Render3D.RenderLogic.Controllers
 
         public string GetNextValidName()
         {
-            string posibleName = "Blank_name_";
-            int i = 1;
-            bool found = false;
-            while (!found)
-            {
-                bool validName = true;
-                foreach (Scene scene in DataWarehouse.Scenes)
-                {
-                    if (scene.Name == posibleName + i)
-                    {
-                        validName = false;
-                    }
-                }
-                if (validName)
-                {
-                    found = true;
-                }
-                else
-                {
-                    i++;
-                }
-            }
-            return posibleName + i;
+            //string posibleName = "Blank_name_";
+            //int i = 1;
+            //bool found = false;
+            //while (!found)
+            //{
+            //    bool validName = true;
+            //    foreach (Scene scene in DataWarehouse.Scenes)
+            //    {
+            //        if (scene.Name == posibleName + i)
+            //        {
+            //            validName = false;
+            //        }
+            //    }
+            //    if (validName)
+            //    {
+            //        found = true;
+            //    }
+            //    else
+            //    {
+            //        i++;
+            //    }
+            //}
+            //return posibleName + i;
+            return null;
 
         }
         public void Delete(SceneDto sceneDto)

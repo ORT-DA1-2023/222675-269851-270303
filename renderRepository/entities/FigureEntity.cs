@@ -2,6 +2,7 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace renderRepository.entities
 {

@@ -4,6 +4,7 @@ using Render3D.BackEnd.Materials;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -58,7 +59,12 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 ModelEntity modelEntity = dbContext.ModelEntities.Find(Id);
-                return modelEntity.ToDomain();
+                var figure = modelEntity.FigureEntity.ToDomain();
+                var material = modelEntity.MaterialEntity.ToDomain();
+                var model = modelEntity.ToDomain();
+                model.Figure = figure;
+                model.Material = material;
+                return model;
             }
         }
 
@@ -66,10 +72,15 @@ namespace renderRepository.RepoImplementation
         {
             using (var dbContext = new RenderContext())
             {
-                var modelEntities = dbContext.ModelEntities
+                var modelEntity = dbContext.ModelEntities
                    .Where(m => m.Name == name && m.ClientEntity.Id == clientId)
                     .FirstOrDefault();
-                return modelEntities.ToDomain();
+                var figure = modelEntity.FigureEntity.ToDomain();
+                var material = modelEntity.MaterialEntity.ToDomain();
+                var model = modelEntity.ToDomain();
+                model.Material = material;
+                model.Figure = figure;
+                return model;
             }
         }
 
@@ -85,7 +96,12 @@ namespace renderRepository.RepoImplementation
                 List<Model> clientModels = new List<Model>();
                 foreach (var m in modelEntities)
                 {
-                    clientModels.Add(m.ToDomain());
+                    var figure =m.FigureEntity.ToDomain();
+                    var material =m.MaterialEntity.ToDomain();
+                    var model = m.ToDomain();
+                    model.Material = material;
+                    model.Figure = figure;
+                    clientModels.Add(model);
                 }
                 return clientModels;
             }
@@ -94,9 +110,10 @@ namespace renderRepository.RepoImplementation
         public void UpdatePreview(Model model)
         {
            ModelEntity modelEntity= ModelEntity.FromDomain(model);
+            int id = int.Parse(model.Id);
             using (var dbContext = new RenderContext())
             {
-                var entity = dbContext.ModelEntities.Find(model.Id);
+                var entity = dbContext.ModelEntities.Find(id);
                 entity.Preview = modelEntity.Preview;
                 dbContext.SaveChanges();
             }
@@ -112,7 +129,12 @@ namespace renderRepository.RepoImplementation
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)
                 {
-                    Models.Add(m.ToDomain());
+                    var figure = m.FigureEntity.ToDomain();
+                    var material = m.MaterialEntity.ToDomain();
+                    var model = m.ToDomain();
+                    model.Material = material;
+                    model.Figure = figure;
+                    Models.Add(model);
                 }
                 return Models;
             }
@@ -129,6 +151,11 @@ namespace renderRepository.RepoImplementation
                 List<Model> Models = new List<Model>();
                 foreach (var m in modelEntities)
                 {
+                    var figure = m.FigureEntity.ToDomain();
+                    var material = m.MaterialEntity.ToDomain();
+                    var model = m.ToDomain();
+                    model.Material = material;
+                    model.Figure = figure;
                     Models.Add(m.ToDomain());
                 }
                 return Models;

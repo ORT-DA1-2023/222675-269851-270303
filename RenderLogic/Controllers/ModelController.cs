@@ -12,7 +12,6 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class ModelController
     {
-        public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController = ClientController.GetInstance();
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public ModelService ModelService { get; set; }
@@ -157,7 +156,7 @@ namespace Render3D.RenderLogic.Controllers
             }
             catch
             {
-                throw new Exception("The client does not have any figures");
+                throw new Exception("The client does not have any models");
             }
 
             List<ModelDto> modelDtos = new List<ModelDto>();
@@ -169,6 +168,7 @@ namespace Render3D.RenderLogic.Controllers
                     Name = mod.Name,
                     Figure= ConvertFigure(mod.Figure),
                     Material = ConvertMaterial(mod.Material),
+                    Preview = mod.Preview,
                 };
                 modelDtos.Add(modDto);
             }
@@ -177,26 +177,21 @@ namespace Render3D.RenderLogic.Controllers
 
         public bool CheckIfFigureIsInAModel(FigureDto figureDto)
         {
-            try
-            {
                List<Model> expectedEmptyList = ModelService.GetModelsWithFigure(int.Parse(figureDto.Id));
-                return false;
-            }catch
+            if(expectedEmptyList.Count == 0)
             {
-                return true; 
+                return false;
             }
+            return true;
         }
         public bool CheckIfMaterialIsInAModel(MaterialDto materialDto)
         {
-            try
+            List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(int.Parse(materialDto.Id));
+            if (expectedEmptyList.Count == 0)
             {
-                List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(int.Parse(materialDto.Id));
                 return false;
             }
-            catch
-            {
-                return true;
-            }
+            return true;
         }
     }
 }

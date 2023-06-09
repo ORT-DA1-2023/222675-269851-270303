@@ -1,6 +1,7 @@
 ﻿using Render3D.BackEnd;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.IO;
 
@@ -11,9 +12,9 @@ namespace renderRepository.entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ClientEntity ClientEntity { get; set; }
-        public FigureEntity FigureEntity { get; set; }
-        public MaterialEntity MaterialEntity { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
+        public virtual FigureEntity FigureEntity { get; set; }
+        public virtual MaterialEntity MaterialEntity { get; set; }
         public byte[] Preview {  get; set; }
 
         public static ModelEntity FromDomain(Model model)
@@ -69,8 +70,6 @@ namespace renderRepository.entities
             {
                 Id = Id.ToString(),
                 Name = Name,
-                Figure = FigureEntity.ToDomain(),
-                Material = MaterialEntity.ToDomain(),
                 Preview = bitmap
             };
             return model;

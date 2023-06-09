@@ -9,7 +9,6 @@ namespace Render3D.RenderLogic.Controllers
     {
         protected static ClientController clientController;
         public Client Client { get; set; }
-        public DataWarehouse DataWarehouse { get; set; }
         public ClientService ClientService { get; set; }
         public static ClientController GetInstance()
         {

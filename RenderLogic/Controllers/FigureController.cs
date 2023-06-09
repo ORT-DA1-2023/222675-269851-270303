@@ -11,7 +11,6 @@ namespace Render3D.RenderLogic.Controllers
     public class FigureController
     {
         public static FigureController figureController;
-        public DataWarehouse DataWarehouse { get; set; }
         public FigureService FigureService { get; set; }
         public ClientController ClientController = ClientController.GetInstance();
 

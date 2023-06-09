@@ -55,7 +55,6 @@
     <Compile Include="GraphicMotorUtility\PixelMatrix.cs" />
     <Compile Include="GraphicMotorUtility\Vector3D.cs" />
     <Compile Include="Utilities\HelperValidator.cs" />
-    <Compile Include="Utilities\DataWarehouse.cs" />
     <Compile Include="Materials\LambertianMaterial.cs" />
     <Compile Include="Materials\Material.cs" />
     <Compile Include="Client.cs" />

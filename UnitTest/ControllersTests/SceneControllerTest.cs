@@ -12,16 +12,7 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class SceneControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-        private Client _clientSample;
-        private SceneController _sceneController;
-        private Camera _defaultCamera;
-        private Scene _scene;
-        private Model _model;
-        private Material _material;
-        private Figure _figure;
-        private Vector3D _vectorOfOnes;
+      
 
         [TestInitialize]
         public void Initialize()
