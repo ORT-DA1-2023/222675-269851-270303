@@ -12,6 +12,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _maxFov = 160;
         private const double _degreesToRadians = Math.PI / 180;
         private const double _ratioDimension = 16.0 / 9.0;
+        private const int defaultFov = 30;
 
         public Vector3D LookFrom { get; set; }
         public Vector3D LookAt { get; set; }
@@ -42,7 +43,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         {
             LookAt = new Vector3D(0, 2, 5);
             VectorUp = new Vector3D(0, 1, 0);
-            Fov = 30;
+            Fov = defaultFov;
             _theta = Fov * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
             AspectRatio = _ratioDimension;
