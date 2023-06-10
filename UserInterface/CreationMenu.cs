@@ -6,6 +6,8 @@ using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UserInterface;
+
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
@@ -203,6 +205,12 @@ namespace Render3D.UserInterface
         private void BtnScene_Click(object sender, EventArgs e)
         {
             Refresh("Scene");
+        }
+
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            var log = new LogUI();
+            log.Show();
         }
     }
 }

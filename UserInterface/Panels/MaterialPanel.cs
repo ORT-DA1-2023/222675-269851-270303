@@ -85,6 +85,7 @@ namespace Render3D.UserInterface.Panels
         private void cmbMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmbMaterial.SelectedItem.Equals("Lambertian")) {
+                txtBlur.Text = "0,0";
                 txtBlur.Enabled = false;
                 lblBlur.Enabled = false;
             }else if (cmbMaterial.SelectedItem.Equals("Metallic"))
