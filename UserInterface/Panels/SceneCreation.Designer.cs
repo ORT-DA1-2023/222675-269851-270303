@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblNameError = new System.Windows.Forms.Label();
             this.btnChangeName = new System.Windows.Forms.Button();
             this.lblCameraError = new System.Windows.Forms.Label();
@@ -55,14 +60,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblSuccessfulNameChange = new System.Windows.Forms.Label();
+            this.lblSuccessfulCameraSettingsChange = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -72,6 +77,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblSuccessfulCameraSettingsChange);
+            this.panel1.Controls.Add(this.lblSuccessfulNameChange);
+            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
@@ -100,12 +108,60 @@
             this.panel1.Size = new System.Drawing.Size(1011, 534);
             this.panel1.TabIndex = 0;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(196, 37);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(149, 39);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "To change the scene name\r\nedit it below and click Change\r\nto confirm the change";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label12.Location = new System.Drawing.Point(423, 243);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(294, 40);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "Rendering...\r\nPlease wait, it may last a few seconds";
+            this.label12.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(521, 422);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(116, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Last Modification Date:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(527, 445);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(94, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Last Render Date:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(196, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 24);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Scene title";
+            // 
             // lblNameError
             // 
             this.lblNameError.AutoSize = true;
             this.lblNameError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNameError.ForeColor = System.Drawing.Color.Red;
-            this.lblNameError.Location = new System.Drawing.Point(258, 93);
+            this.lblNameError.Location = new System.Drawing.Point(197, 132);
             this.lblNameError.Name = "lblNameError";
             this.lblNameError.Size = new System.Drawing.Size(35, 16);
             this.lblNameError.TabIndex = 26;
@@ -113,9 +169,9 @@
             // 
             // btnChangeName
             // 
-            this.btnChangeName.Location = new System.Drawing.Point(200, 68);
+            this.btnChangeName.Location = new System.Drawing.Point(192, 108);
             this.btnChangeName.Name = "btnChangeName";
-            this.btnChangeName.Size = new System.Drawing.Size(57, 23);
+            this.btnChangeName.Size = new System.Drawing.Size(87, 23);
             this.btnChangeName.TabIndex = 25;
             this.btnChangeName.Text = "Change name";
             this.btnChangeName.UseVisualStyleBackColor = true;
@@ -126,7 +182,7 @@
             this.lblCameraError.AutoSize = true;
             this.lblCameraError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCameraError.ForeColor = System.Drawing.Color.Red;
-            this.lblCameraError.Location = new System.Drawing.Point(464, 71);
+            this.lblCameraError.Location = new System.Drawing.Point(465, 71);
             this.lblCameraError.Name = "lblCameraError";
             this.lblCameraError.Size = new System.Drawing.Size(35, 16);
             this.lblCameraError.TabIndex = 24;
@@ -171,6 +227,7 @@
             0,
             0,
             0});
+            this.nrFov.ValueChanged += new System.EventHandler(this.nrFov_ValueChanged);
             // 
             // lblRenderOutDated
             // 
@@ -201,6 +258,7 @@
             this.lblLastRenderDate.Size = new System.Drawing.Size(10, 13);
             this.lblLastRenderDate.TabIndex = 11;
             this.lblLastRenderDate.Text = "-";
+            this.lblLastRenderDate.Click += new System.EventHandler(this.lblLastRenderDate_Click);
             // 
             // btnRender
             // 
@@ -232,12 +290,13 @@
             // txtSceneName
             // 
             this.txtSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSceneName.Location = new System.Drawing.Point(200, 36);
+            this.txtSceneName.Location = new System.Drawing.Point(192, 79);
             this.txtSceneName.Name = "txtSceneName";
             this.txtSceneName.Size = new System.Drawing.Size(153, 26);
             this.txtSceneName.TabIndex = 7;
             this.txtSceneName.Text = "New_BlankScene_1";
             this.txtSceneName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSceneName.TextChanged += new System.EventHandler(this.txtSceneName_TextChanged);
             // 
             // txtLookAt
             // 
@@ -248,6 +307,7 @@
             this.txtLookAt.TabIndex = 5;
             this.txtLookAt.Text = "(0;2;5)";
             this.txtLookAt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLookAt.TextChanged += new System.EventHandler(this.txtLookAt_TextChanged);
             // 
             // txtLookFrom
             // 
@@ -258,6 +318,7 @@
             this.txtLookFrom.TabIndex = 4;
             this.txtLookFrom.Text = "(0;2;0)";
             this.txtLookFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLookFrom.TextChanged += new System.EventHandler(this.txtLookFrom_TextChanged);
             // 
             // label1
             // 
@@ -292,6 +353,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.btnAddModel);
             this.panel2.Controls.Add(this.label7);
@@ -344,6 +407,7 @@
             this.txtPosition.TabIndex = 5;
             this.txtPosition.Text = "(0;0;0)";
             this.txtPosition.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPosition.TextChanged += new System.EventHandler(this.txtPosition_TextChanged);
             // 
             // label6
             // 
@@ -358,12 +422,15 @@
             // 
             // cBoxAvailableModels
             // 
-            this.cBoxAvailableModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxAvailableModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.cBoxAvailableModels.ForeColor = System.Drawing.Color.Gray;
             this.cBoxAvailableModels.FormattingEnabled = true;
             this.cBoxAvailableModels.Location = new System.Drawing.Point(3, 155);
             this.cBoxAvailableModels.Name = "cBoxAvailableModels";
-            this.cBoxAvailableModels.Size = new System.Drawing.Size(182, 32);
+            this.cBoxAvailableModels.Size = new System.Drawing.Size(182, 28);
             this.cBoxAvailableModels.TabIndex = 0;
+            this.cBoxAvailableModels.Text = "Models";
+            this.cBoxAvailableModels.SelectedIndexChanged += new System.EventHandler(this.cBoxAvailableModels_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -377,6 +444,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 534);
             this.panel3.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(13, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(155, 48);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Remove a \r\npositioned model";
             // 
             // btnRemoveModel
             // 
@@ -402,6 +479,7 @@
             // cBoxPositionedModels
             // 
             this.cBoxPositionedModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.cBoxPositionedModels.ForeColor = System.Drawing.Color.DimGray;
             this.cBoxPositionedModels.FormattingEnabled = true;
             this.cBoxPositionedModels.Location = new System.Drawing.Point(3, 194);
             this.cBoxPositionedModels.Name = "cBoxPositionedModels";
@@ -409,54 +487,49 @@
             this.cBoxPositionedModels.TabIndex = 1;
             this.cBoxPositionedModels.Text = "Click here to see all models";
             // 
-            // label5
+            // lblSuccessfulNameChange
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(196, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 24);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Scene title";
+            this.lblSuccessfulNameChange.AutoSize = true;
+            this.lblSuccessfulNameChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuccessfulNameChange.ForeColor = System.Drawing.Color.Green;
+            this.lblSuccessfulNameChange.Location = new System.Drawing.Point(196, 148);
+            this.lblSuccessfulNameChange.Name = "lblSuccessfulNameChange";
+            this.lblSuccessfulNameChange.Size = new System.Drawing.Size(138, 16);
+            this.lblSuccessfulNameChange.TabIndex = 31;
+            this.lblSuccessfulNameChange.Text = "Successfully changed";
+            this.lblSuccessfulNameChange.Visible = false;
             // 
-            // label9
+            // lblSuccessfulCameraSettingsChange
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(13, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(155, 48);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Remove a \r\npositioned model";
+            this.lblSuccessfulCameraSettingsChange.AutoSize = true;
+            this.lblSuccessfulCameraSettingsChange.ForeColor = System.Drawing.Color.Green;
+            this.lblSuccessfulCameraSettingsChange.Location = new System.Drawing.Point(643, 74);
+            this.lblSuccessfulCameraSettingsChange.Name = "lblSuccessfulCameraSettingsChange";
+            this.lblSuccessfulCameraSettingsChange.Size = new System.Drawing.Size(89, 13);
+            this.lblSuccessfulCameraSettingsChange.TabIndex = 32;
+            this.lblSuccessfulCameraSettingsChange.Text = "Settings Updated";
+            this.lblSuccessfulCameraSettingsChange.Visible = false;
             // 
-            // label10
+            // label15
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(527, 445);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(94, 13);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "Last Render Date:";
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Green;
+            this.label15.Location = new System.Drawing.Point(12, 407);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(69, 13);
+            this.label15.TabIndex = 33;
+            this.label15.Text = "Model added";
+            this.label15.Visible = false;
             // 
-            // label11
+            // label14
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(521, 422);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(116, 13);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Last Modification Date:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label12.Location = new System.Drawing.Point(423, 239);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(294, 40);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "Rendering...\r\nPlease wait, it may last a few seconds";
-            this.label12.Visible = false;
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(12, 421);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 13);
+            this.label14.TabIndex = 34;
+            this.label14.Visible = false;
             // 
             // SceneCreation
             // 
@@ -518,5 +591,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblSuccessfulNameChange;
+        private System.Windows.Forms.Label lblSuccessfulCameraSettingsChange;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
