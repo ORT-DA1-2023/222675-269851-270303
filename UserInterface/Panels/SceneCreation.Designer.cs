@@ -48,6 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnAddModel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPosition = new System.Windows.Forms.TextBox();
@@ -57,7 +58,11 @@
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -67,6 +72,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.lblNameError);
             this.panel1.Controls.Add(this.btnChangeName);
             this.panel1.Controls.Add(this.lblCameraError);
@@ -96,7 +105,7 @@
             this.lblNameError.AutoSize = true;
             this.lblNameError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNameError.ForeColor = System.Drawing.Color.Red;
-            this.lblNameError.Location = new System.Drawing.Point(269, 43);
+            this.lblNameError.Location = new System.Drawing.Point(258, 93);
             this.lblNameError.Name = "lblNameError";
             this.lblNameError.Size = new System.Drawing.Size(35, 16);
             this.lblNameError.TabIndex = 26;
@@ -104,11 +113,11 @@
             // 
             // btnChangeName
             // 
-            this.btnChangeName.Location = new System.Drawing.Point(196, 47);
+            this.btnChangeName.Location = new System.Drawing.Point(200, 68);
             this.btnChangeName.Name = "btnChangeName";
             this.btnChangeName.Size = new System.Drawing.Size(57, 23);
             this.btnChangeName.TabIndex = 25;
-            this.btnChangeName.Text = "Change";
+            this.btnChangeName.Text = "Change name";
             this.btnChangeName.UseVisualStyleBackColor = true;
             this.btnChangeName.Click += new System.EventHandler(this.BtnChangeName_Click);
             // 
@@ -117,7 +126,7 @@
             this.lblCameraError.AutoSize = true;
             this.lblCameraError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCameraError.ForeColor = System.Drawing.Color.Red;
-            this.lblCameraError.Location = new System.Drawing.Point(470, 84);
+            this.lblCameraError.Location = new System.Drawing.Point(464, 71);
             this.lblCameraError.Name = "lblCameraError";
             this.lblCameraError.Size = new System.Drawing.Size(35, 16);
             this.lblCameraError.TabIndex = 24;
@@ -125,11 +134,12 @@
             // 
             // btnChangeCamera
             // 
-            this.btnChangeCamera.Location = new System.Drawing.Point(724, 28);
+            this.btnChangeCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.btnChangeCamera.Location = new System.Drawing.Point(723, 20);
             this.btnChangeCamera.Name = "btnChangeCamera";
-            this.btnChangeCamera.Size = new System.Drawing.Size(91, 37);
+            this.btnChangeCamera.Size = new System.Drawing.Size(82, 51);
             this.btnChangeCamera.TabIndex = 23;
-            this.btnChangeCamera.Text = "Change";
+            this.btnChangeCamera.Text = "Update settings";
             this.btnChangeCamera.UseVisualStyleBackColor = true;
             this.btnChangeCamera.Click += new System.EventHandler(this.BtnChangeCamera_Click);
             // 
@@ -177,20 +187,20 @@
             // 
             this.lblLastModificationDate.AutoSize = true;
             this.lblLastModificationDate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblLastModificationDate.Location = new System.Drawing.Point(222, 87);
+            this.lblLastModificationDate.Location = new System.Drawing.Point(643, 422);
             this.lblLastModificationDate.Name = "lblLastModificationDate";
-            this.lblLastModificationDate.Size = new System.Drawing.Size(106, 13);
+            this.lblLastModificationDate.Size = new System.Drawing.Size(10, 13);
             this.lblLastModificationDate.TabIndex = 12;
-            this.lblLastModificationDate.Text = "last modification date";
+            this.lblLastModificationDate.Text = "-";
             // 
             // lblLastRenderDate
             // 
             this.lblLastRenderDate.AutoSize = true;
-            this.lblLastRenderDate.Location = new System.Drawing.Point(632, 376);
+            this.lblLastRenderDate.Location = new System.Drawing.Point(643, 445);
             this.lblLastRenderDate.Name = "lblLastRenderDate";
-            this.lblLastRenderDate.Size = new System.Drawing.Size(85, 13);
+            this.lblLastRenderDate.Size = new System.Drawing.Size(10, 13);
             this.lblLastRenderDate.TabIndex = 11;
-            this.lblLastRenderDate.Text = "LastRenderDate";
+            this.lblLastRenderDate.Text = "-";
             // 
             // btnRender
             // 
@@ -213,7 +223,7 @@
             // 
             // pBoxRender
             // 
-            this.pBoxRender.Location = new System.Drawing.Point(417, 156);
+            this.pBoxRender.Location = new System.Drawing.Point(417, 171);
             this.pBoxRender.Name = "pBoxRender";
             this.pBoxRender.Size = new System.Drawing.Size(300, 200);
             this.pBoxRender.TabIndex = 8;
@@ -222,7 +232,7 @@
             // txtSceneName
             // 
             this.txtSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSceneName.Location = new System.Drawing.Point(196, 14);
+            this.txtSceneName.Location = new System.Drawing.Point(200, 36);
             this.txtSceneName.Name = "txtSceneName";
             this.txtSceneName.Size = new System.Drawing.Size(153, 26);
             this.txtSceneName.TabIndex = 7;
@@ -294,6 +304,16 @@
             this.panel2.Size = new System.Drawing.Size(190, 534);
             this.panel2.TabIndex = 0;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 125);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(140, 24);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Select a model:";
+            // 
             // btnAddModel
             // 
             this.btnAddModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -309,18 +329,18 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 247);
+            this.label7.Location = new System.Drawing.Point(3, 221);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 24);
+            this.label7.Size = new System.Drawing.Size(168, 24);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Position:";
+            this.label7.Text = "Select the position:";
             // 
             // txtPosition
             // 
             this.txtPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPosition.Location = new System.Drawing.Point(90, 245);
+            this.txtPosition.Location = new System.Drawing.Point(37, 248);
             this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(76, 26);
+            this.txtPosition.Size = new System.Drawing.Size(95, 26);
             this.txtPosition.TabIndex = 5;
             this.txtPosition.Text = "(0;0;0)";
             this.txtPosition.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -340,29 +360,30 @@
             // 
             this.cBoxAvailableModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxAvailableModels.FormattingEnabled = true;
-            this.cBoxAvailableModels.Location = new System.Drawing.Point(-5, 155);
+            this.cBoxAvailableModels.Location = new System.Drawing.Point(3, 155);
             this.cBoxAvailableModels.Name = "cBoxAvailableModels";
-            this.cBoxAvailableModels.Size = new System.Drawing.Size(190, 32);
+            this.cBoxAvailableModels.Size = new System.Drawing.Size(182, 32);
             this.cBoxAvailableModels.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.btnRemoveModel);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.cBoxPositionedModels);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(821, 0);
+            this.panel3.Location = new System.Drawing.Point(811, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(190, 534);
+            this.panel3.Size = new System.Drawing.Size(200, 534);
             this.panel3.TabIndex = 1;
             // 
             // btnRemoveModel
             // 
             this.btnRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveModel.Location = new System.Drawing.Point(-1, 489);
+            this.btnRemoveModel.Location = new System.Drawing.Point(3, 238);
             this.btnRemoveModel.Name = "btnRemoveModel";
-            this.btnRemoveModel.Size = new System.Drawing.Size(190, 44);
+            this.btnRemoveModel.Size = new System.Drawing.Size(174, 44);
             this.btnRemoveModel.TabIndex = 8;
             this.btnRemoveModel.Text = "remove model";
             this.btnRemoveModel.UseVisualStyleBackColor = true;
@@ -372,7 +393,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(13, 14);
+            this.label8.Location = new System.Drawing.Point(3, 163);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(165, 24);
             this.label8.TabIndex = 2;
@@ -380,22 +401,62 @@
             // 
             // cBoxPositionedModels
             // 
-            this.cBoxPositionedModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxPositionedModels.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.cBoxPositionedModels.FormattingEnabled = true;
-            this.cBoxPositionedModels.Location = new System.Drawing.Point(-1, 194);
+            this.cBoxPositionedModels.Location = new System.Drawing.Point(3, 194);
             this.cBoxPositionedModels.Name = "cBoxPositionedModels";
-            this.cBoxPositionedModels.Size = new System.Drawing.Size(190, 32);
+            this.cBoxPositionedModels.Size = new System.Drawing.Size(196, 25);
             this.cBoxPositionedModels.TabIndex = 1;
+            this.cBoxPositionedModels.Text = "Click here to see all models";
             // 
-            // label4
+            // label5
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 125);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 24);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Select a model:";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(196, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 24);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Scene title";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(13, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(155, 48);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Remove a \r\npositioned model";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(527, 445);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(94, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Last Render Date:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(521, 422);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(116, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Last Modification Date:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label12.Location = new System.Drawing.Point(423, 239);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(294, 40);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "Rendering...\r\nPlease wait, it may last a few seconds";
+            this.label12.Visible = false;
             // 
             // SceneCreation
             // 
@@ -452,5 +513,10 @@
         private System.Windows.Forms.Button btnChangeName;
         private System.Windows.Forms.Label lblNameError;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label12;
     }
 }

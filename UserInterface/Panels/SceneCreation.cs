@@ -154,8 +154,12 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            label12.Visible = true;
+            label12.Update();
             sceneController.RenderScene(scene);
             LoadScene();
+            label12.Visible=false;
+            label12.Update();
         }
 
         private void label6_Click(object sender, EventArgs e)

@@ -30,7 +30,6 @@ namespace Render3D.UserInterface.Controls
 
         private void ChecksForCorrectEdit(string newName)
         {
-
             if (!_oldName.Equals(newName))
             {
 
@@ -38,8 +37,10 @@ namespace Render3D.UserInterface.Controls
                 {
                     lblFigureName.Text=newName;
                     _oldName = newName;
+
                 }
             }
+
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -58,6 +59,7 @@ namespace Render3D.UserInterface.Controls
                 {
                     string name = nameChanger.newName;
                     ChecksForCorrectEdit(name);
+ 
                 }
             }
 
