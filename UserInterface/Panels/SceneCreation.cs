@@ -65,7 +65,7 @@ namespace UserInterface.Panels
             }
             else
             {
-                lblLastRenderDate.Text = "this scene has not been rendered yet";
+                lblLastRenderDate.Text = "This scene has not been rendered yet";
             }
             CheckRenderOutDated();
         }
@@ -98,7 +98,13 @@ namespace UserInterface.Panels
             return vectorFormat.IsMatch(input);
         }
 
-        public bool IsValidFormat(string input)
+        public bool IsValidNumberAperture(string input)
+        {
+            double aperture = double.Parse(input);
+            return aperture>0.0&&aperture<=3.0;
+        }
+
+        public bool IsValidFormatVector(string input)
         {
             Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
@@ -114,14 +120,14 @@ namespace UserInterface.Panels
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
-            if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
+            if (IsValidFormatVector(txtLookFrom.Text) && IsValidFormatVector(txtLookAt.Text))
             {
                 
                     try
                     {
                         if (cmbBlur.Checked)
                         {
-                             if(IsValidFormatAperture(txtAperture.Text))
+                             if(IsValidFormatAperture(txtAperture.Text)&& IsValidNumberAperture(txtAperture.Text))
                              {
                                 sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
                              }
@@ -129,14 +135,19 @@ namespace UserInterface.Panels
                              {
                                  throw new Exception("Aperture format not valid");
                               }
-                           
-                        }
-                        string apertureNegative = "-1";
-                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
-                        LoadScene();
-                        lblCamera.ForeColor = Color.Green;
-                        lblCamera.Text = "Camera settings change correctly";
+
                     }
+                    else
+                    {
+                        string apertureZero = "0";
+                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureZero);
+                       
+                    }
+                    LoadScene();
+                    lblCamera.ForeColor = Color.Green;
+                    lblCamera.Text = "Camera settings change correctly";
+
+                }
                     catch (Exception ex)
                     {
                         lblCamera.ForeColor = Color.Red;
