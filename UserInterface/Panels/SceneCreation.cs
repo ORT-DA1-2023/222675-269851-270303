@@ -154,7 +154,6 @@ namespace UserInterface.Panels
             scene.UpdateLastModificationDate();
             LoadScene();
             cBoxAvailableModels.SelectedIndex = 0;
-            //cBoxAvailableModels.SelectedItem = null;
             cBoxAvailableModels.Update();
             label15.Visible = true;
             label15.Update();

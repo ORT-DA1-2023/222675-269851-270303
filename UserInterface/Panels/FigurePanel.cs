@@ -33,18 +33,20 @@ namespace Render3D.UserInterface.Panels
                 try
                 {
                     render.figureController.AddFigure(render.clientName, figureName, figureRadius);
-                }catch(Exception ex)
+                    txtFigureName.Text = "";
+                    txtFigureRadius.Text = "";
+                }
+                catch(Exception ex)
                 {
-                    lblExceptionError.Text= ex.Message;
+                    lblExceptionError.Text= "The name must not be empty";
                 }
                 creation.ShowFigureList();
             }
             else
             {
-                lblExceptionError.Text = "the radius must be a number";
+                lblExceptionError.Text = "the radius must be a positive number";
             }
-            txtFigureName.Text = "";
-            txtFigureRadius.Text = "";
+
         }
 
         private double TryToParse(string figureRadiusString)
@@ -67,6 +69,16 @@ namespace Render3D.UserInterface.Panels
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblExceptionError_Click(object sender, EventArgs e)
         {
 
         }

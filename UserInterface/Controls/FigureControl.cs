@@ -37,7 +37,7 @@ namespace Render3D.UserInterface.Controls
                 {
                     lblFigureName.Text=newName;
                     _oldName = newName;
-
+                 
                 }
             }
 
@@ -59,7 +59,8 @@ namespace Render3D.UserInterface.Controls
                 {
                     string name = nameChanger.newName;
                     ChecksForCorrectEdit(name);
- 
+                   
+                  
                 }
             }
 

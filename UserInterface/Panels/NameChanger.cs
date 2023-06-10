@@ -24,6 +24,7 @@ namespace UserInterface.Panels
         {
             newName = txtName.Text;
             this.DialogResult = DialogResult.OK;
+ 
             this.Close();
         }
 
