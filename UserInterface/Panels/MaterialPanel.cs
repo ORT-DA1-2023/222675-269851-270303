@@ -34,6 +34,7 @@ namespace Render3D.UserInterface.Panels
                     if (cmbMaterial.SelectedItem.Equals("Lambertian"))
                     {
                         render.materialController.AddLambertianMaterial(render.clientName, materialName, materialColors);
+                        ResetValues();
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))
                     {
@@ -41,6 +42,7 @@ namespace Render3D.UserInterface.Panels
                         {
                             double blur = Convert.ToDouble(txtBlur.Text);
                             render.materialController.AddMetallicMaterial(render.clientName, materialName, materialColors, blur);
+                            ResetValues();
                         }
                         else
                         {
@@ -58,6 +60,13 @@ namespace Render3D.UserInterface.Panels
                 return;
             }
             creation.ShowMaterialList();
+            
+
+        }
+
+
+        public void ResetValues()
+        {
             txtMaterialName.Text = "";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;

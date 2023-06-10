@@ -44,6 +44,7 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
+            lblExceptionError.Text = "";
             string modelName = txtModelName.Text;
             Figure figure = lstFigure.SelectedItem as Figure;
             Material material = lstMaterial.SelectedItem as Material;
@@ -57,6 +58,7 @@ namespace Render3D.UserInterface.Panels
                 try
                 {
                     render.modelController.AddAModelWithPreview(render.clientName, modelName, figure, material);
+                    txtModelName.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -68,6 +70,7 @@ namespace Render3D.UserInterface.Panels
                 try
                 {
                     render.modelController.AddAModelWithoutPreview(render.clientName, modelName, figure, material);
+                    txtModelName.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -77,7 +80,6 @@ namespace Render3D.UserInterface.Panels
             }
 
             creation.ShowModelList();
-            txtModelName.Text = "";
 
         }
     }

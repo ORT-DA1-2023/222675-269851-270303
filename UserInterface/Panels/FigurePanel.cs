@@ -25,6 +25,8 @@ namespace Render3D.UserInterface.Panels
                 try
                 {
                     render.figureController.AddFigure(render.clientName, figureName, figureRadius);
+                    txtFigureName.Text = "";
+                    txtFigureRadius.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -36,8 +38,7 @@ namespace Render3D.UserInterface.Panels
             {
                 lblExceptionError.Text = "the radius must be a number";
             }
-            txtFigureName.Text = "";
-            txtFigureRadius.Text = "";
+           
         }
 
         private double TryToParse(string figureRadiusString)
