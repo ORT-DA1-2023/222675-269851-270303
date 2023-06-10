@@ -21,6 +21,8 @@ namespace RepositoryFactory
             ModelController.GetInstance().ModelService = new ModelService(modelRepo);
             SceneController.GetInstance().SceneService = new SceneService(sceneRepo);
             SceneController.GetInstance().ModelService = new ModelService(modelRepo);
+            SceneController.GetInstance().MaterialService = new MaterialService(materialRepo);
+            SceneController.GetInstance().FigureService = new FigureService(figureRepo);
         }
 
     }

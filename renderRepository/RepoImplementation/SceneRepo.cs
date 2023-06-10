@@ -13,6 +13,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = SceneEntity.FromDomain(scene);
+
                 int clientId = int.Parse(scene.Client.Id);
                 var client = dbContext.ClientEntities.Find(clientId);
                 entity.ClientEntity = client;
@@ -103,18 +104,18 @@ namespace renderRepository.RepoImplementation
 
         public void UpdateCamera(Scene scene)
         {
-            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             using (var dbContext = new RenderContext())
             {
-                var entity = dbContext.SceneEntities.Find(scene.Id);
-                entity.LookFromX = SceneEntity.LookFromX;
-                entity.LookFromY = SceneEntity.LookFromY;
-                entity.LookFromZ = SceneEntity.LookFromZ;
-                entity.LookAtX = SceneEntity.LookAtX;
-                entity.LookAtY = SceneEntity.LookAtY;
-                entity.LookAtZ = SceneEntity.LookAtZ;
-                entity.Fov = SceneEntity.Fov;
-                entity.Aperture = SceneEntity.Aperture;
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.LookFromX = sceneEntity.LookFromX;
+                entity.LookFromY = sceneEntity.LookFromY;
+                entity.LookFromZ = sceneEntity.LookFromZ;
+                entity.LookAtX = sceneEntity.LookAtX;
+                entity.LookAtY = sceneEntity.LookAtY;
+                entity.LookAtZ = sceneEntity.LookAtZ;
+                entity.Fov = sceneEntity.Fov;
+                entity.Aperture = sceneEntity.Aperture;
                 dbContext.SaveChanges();
             }
         }
@@ -131,22 +132,30 @@ namespace renderRepository.RepoImplementation
 
         public void AddModel(int id, Model model)
         {
+            ModelEntity modelEntity = ModelEntity.FromDomain(model);
+            FigureEntity figureEntity = FigureEntity.FromDomain(model.Figure);
+            MaterialEntity materialEntity = MaterialEntity.FromDomain(model.Material);
+            modelEntity.MaterialEntity = materialEntity;
+            modelEntity.FigureEntity = figureEntity;
             using (var dbContext = new RenderContext())
             {
-                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
-                ModelEntity modelEntity = ModelEntity.FromDomain(model);
-                sceneEntity.ModelEntities.Add(modelEntity);
+                dbContext.FigureEntities.Add(figureEntity);
+                dbContext.MaterialEntities.Add(materialEntity);
+                dbContext.ModelEntities.Add(modelEntity);
+                var scene = dbContext.SceneEntities.Find(id);
+                scene.ModelEntities.Add(modelEntity);
                 dbContext.SaveChanges();
             }
         }
 
         public void UpdatePreview(Scene scene)
         {
-            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             using (var dbContext = new RenderContext())
             {
-                var entity = dbContext.SceneEntities.Find(scene.Id);
-                entity.Preview = SceneEntity.Preview;
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.Preview = sceneEntity.Preview;
+                entity.LastRenderizationDate = sceneEntity.LastRenderizationDate;
                 dbContext.SaveChanges();
             }
         }
@@ -157,7 +166,7 @@ namespace renderRepository.RepoImplementation
             {
                 SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
                 ModelEntity modelEntity = ModelEntity.FromDomain(model);
-                sceneEntity.ModelEntities.Remove(modelEntity);
+                dbContext.ModelEntities.Remove(modelEntity);
                 dbContext.SaveChanges();
             }
         }

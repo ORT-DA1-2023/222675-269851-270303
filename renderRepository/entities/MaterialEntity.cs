@@ -22,11 +22,18 @@ namespace renderRepository.entities
             try
             {
                 id = int.Parse(material.Id);
-                blur= ((MetallicMaterial)material).Blur;
+
             }
             catch (ArgumentNullException)
             {
                 id = 0;
+            }
+            try
+            {
+                blur = ((MetallicMaterial)material).Blur;
+            }
+            catch
+            {
                 blur = 0;
             }
             MaterialEntity materialEntity = new MaterialEntity

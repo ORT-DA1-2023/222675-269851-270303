@@ -40,7 +40,6 @@ namespace renderRepository.entities
             {
                 Id = id,
                 Name = scene.Name,
-                ClientEntity =ClientEntity.FromDomain(scene.Client),
                 CreationDate = scene.CreationDate,
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderizationDate = scene.LastRenderizationDate,

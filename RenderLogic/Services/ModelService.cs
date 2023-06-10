@@ -57,6 +57,5 @@ namespace RenderLogic.Services
         {
             return _modelRepo.GetModelsWithMaterial(materialId);
         }
-
     }
 }

@@ -18,6 +18,8 @@ namespace Render3D.RenderLogic.Controllers
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public SceneService SceneService { get; set; }
         public ModelService ModelService { get; set; }
+        public FigureService FigureService { get; set; }
+        public MaterialService MaterialService { get; set; }  
 
         protected static SceneController sceneController;
         
@@ -132,13 +134,16 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 SceneService.GetSceneByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-                throw new Exception("Name already in use");
+               
             }
             catch 
             {
+                Scene tryName = new Scene() { Name = newName };
+                SceneService.UpdateName(int.Parse(sceneDto.Id), newName);
+                return;
             }
-            Scene tryName = new Scene() { Name = newName };
-            SceneService.UpdateName(int.Parse(sceneDto.Id), newName);
+            throw new Exception("Name already in use");
+            
         }
 
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
@@ -147,37 +152,29 @@ namespace Render3D.RenderLogic.Controllers
             Model model = ModelService.GetModel(int.Parse(modelDto.Id));
             double[] pos = GetArrayFromString(position);
             Vector3D positionVector = new Vector3D(pos[0], pos[1], pos[2]);
-            model.Figure.Id = null;
             model.Figure.Position = positionVector;
             model.Id = null;
+            model.Figure.Id = null;
+            model.Material.Id = null;
             SceneService.AddModel(int.Parse(scene.Id), model);
         }
 
-        public void RemoveModel(string sceneId, ModelDto modelDto)
+        public void RemoveModel(ModelDto modelDto)
         {
-            Model model = ModelService.GetModel(int.Parse(modelDto.Id));
-            SceneService.RemoveModel(int.Parse(sceneId), model);
+            int modelId = int.Parse(modelDto.Id);
+            int figureId= int.Parse(modelDto.Figure.Id);
+            int materialId= int.Parse(modelDto.Material.Id);
+            ModelService.RemoveModel(modelId);
+            FigureService.RemoveFigure(figureId);
+            MaterialService.RemoveMaterial(materialId);
         }
 
         public void RenderScene(SceneDto sceneDto, bool useBlur)
         {
-            Camera camera = new Camera(
-                new Vector3D(sceneDto.LookFrom[0], sceneDto.LookFrom[1], sceneDto.LookFrom[2]),
-                new Vector3D(sceneDto.LookAt[0], sceneDto.LookAt[1], sceneDto.LookAt[2]),
-                sceneDto.Fov,
-                sceneDto.Aperture
-                );
-            Scene scene = new Scene()
-            {
-                Id = sceneDto.Id,
-                Name = sceneDto.Name,
-                Camera = camera,
-                LastModificationDate = sceneDto.LastModificationDate,
-                LastRenderizationDate = sceneDto.LastRenderizationDate,
-            };
+            Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
             scene.Preview = GraphicMotor.Render(scene, useBlur);
             scene.UpdateLastRenderizationDate();
-            SceneService.UpdatePreview(scene);
+            SceneService.UpdatePreview(scene);      
         }
 
 
@@ -231,6 +228,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             return new FigureDto()
             {
+                Id = figure.Id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius
             };
@@ -247,6 +245,7 @@ namespace Render3D.RenderLogic.Controllers
             }
             return new MaterialDto()
             {
+                Id = material.Id,
                 Name = material.Name,
                 Red = material.Attenuation.Red(),
                 Green = material.Attenuation.Green(),

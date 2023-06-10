@@ -10,7 +10,7 @@ namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        private readonly SceneDto _sceneDto;
+        private SceneDto _sceneDto;
         public SceneController sceneController;
         public SceneCreation(SceneDto selectedScene)
         {
@@ -33,7 +33,7 @@ namespace UserInterface.Panels
                             try
                             {
                                 sceneController.AddScene(name);
-                                _sceneDto = sceneController.GetScene(name);
+                                _sceneDto= new SceneDto() { Name= name }; 
                                 valid = true;
                             }
                             catch
@@ -49,12 +49,11 @@ namespace UserInterface.Panels
 
         private void LoadScene()
         {
+            _sceneDto = sceneController.GetScene(_sceneDto.Name);
             txtSceneName.Text = _sceneDto.Name;
             txtLookAt.Text = "(" + _sceneDto.LookAt[0] + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
             txtLookFrom.Text = "(" + _sceneDto.LookFrom[0] + ";" + _sceneDto.LookFrom[1] + ";" + _sceneDto.LookFrom[2] + ")";
             nrFov.Value = _sceneDto.Fov;
-            cBoxAvailableModels.Items.Clear();
-            cBoxPositionedModels.Items.Clear();
             cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
             cBoxAvailableModels.DisplayMember = "Name";
             cBoxPositionedModels.DataSource =sceneController.GetPositionedModels(_sceneDto);
@@ -65,7 +64,7 @@ namespace UserInterface.Panels
             lblAddModel.Text = "";
             lblRemoveModel.Text = "";
             LastModifcationDateRefresh();
-            if (_sceneDto.LastRenderizationDate != null)
+            if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
                 LastRenderDateRefresh();
             }
@@ -166,6 +165,7 @@ namespace UserInterface.Panels
             try
             {
                 sceneController.ChangeSceneName(_sceneDto, txtSceneName.Text);
+                _sceneDto.Name = txtSceneName.Text;
                 LoadScene();
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";
@@ -181,12 +181,19 @@ namespace UserInterface.Panels
         {
 
           ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-            sceneController.AddModel(_sceneDto, model, txtPosition.Text);
-                
+          sceneController.AddModel(_sceneDto, model, txtPosition.Text);
+            lblAddModel.Text = "Model Added Correctly";  
+            lblAddModel.ForeColor = Color.Green;
+            LoadScene();
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
+            ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
+            sceneController.RemoveModel(model);
+            lblRemoveModel.Text = "Model Removed Correctly";
+            lblRemoveModel.ForeColor = Color.Green;
+            LoadScene();
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
