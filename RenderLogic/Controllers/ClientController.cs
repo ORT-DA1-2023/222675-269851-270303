@@ -58,16 +58,19 @@ namespace Render3D.RenderLogic.Controllers
             Client client;
             try
             {
-              client = ClientService.GetClientWithName(clientName);
-              
+              client = ClientService.GetClientWithName(clientName);    
             }
             catch 
             {
-                throw new Exception("a Client with that name does not exist");
+                throw new Exception("A Client with that name does not exist");
             }
             if (client.Password == clientPassword)
             {
                 Client = client;
+            }
+            else
+            {
+                throw new Exception("Password Incorrect");
             }
         }
 

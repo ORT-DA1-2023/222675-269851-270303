@@ -27,14 +27,14 @@ namespace RenderLogic.Services
         {
             return _sceneRepo.Get(Id);
         }
-        public Scene GetSceneByNameAndClient(string sceneName, Client client)
+        public Scene GetSceneByNameAndClient(string sceneName, int clientId)
         {
-            return _sceneRepo.GetByNameAndClient(sceneName, client);
+            return _sceneRepo.GetByNameAndClient(sceneName, clientId);
         }
 
-        public List<Scene> GetScenesOfClient(Client client)
+        public List<Scene> GetScenesOfClient(int clientId)
         {
-            return _sceneRepo.GetScenesOfClient(client);
+            return _sceneRepo.GetScenesOfClient(clientId);
         }
 
         internal void UpdateName(int id, string newName)

@@ -10,8 +10,8 @@ namespace RenderLogic.RepoInterface
         void Delete(int Id);
         void UpdateName(int Id, string newName);
         Scene Get(int Id);
-        Scene GetByNameAndClient(string name, Client client);
-        List<Scene> GetScenesOfClient(Client client);
+        Scene GetByNameAndClient(string name, int clientId);
+        List<Scene> GetScenesOfClient(int clientId);
         void UpdatePreview(Scene scene);
         void UpdateCamera(Scene scene);
         void AddModel(int id,Model model);

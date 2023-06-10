@@ -1,8 +1,6 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.DataTransferObjects;
 using RenderLogic.RepoInterface;
 using renderRepository.entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +13,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = SceneEntity.FromDomain(scene);
+                int clientId = int.Parse(scene.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
                 dbContext.SceneEntities.Add(entity);
                 dbContext.SaveChanges();
                 scene.Id = entity.Id.ToString();
@@ -38,46 +39,61 @@ namespace renderRepository.RepoImplementation
                 SceneEntity sceneEntity = dbContext.SceneEntities.Find(Id);
                 var scene = sceneEntity.ToDomain();
                 var models = sceneEntity.ModelEntities;
-                foreach (var model in models)
+                foreach (var modelEntity in models)
                 {
-                    scene.PositionedModels.Add(model.ToDomain());
+                    var material = modelEntity.MaterialEntity.ToDomain();
+                    var figure = modelEntity.FigureEntity.ToDomain();
+                    var model = modelEntity.ToDomain();
+                    model.Figure = figure;
+                    model.Material = material;
+                    scene.PositionedModels.Add(model);
                 }
                 return scene;
             }
         }
 
-        public Scene GetByNameAndClient(string name, Client client)
+        public Scene GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var sceneEntity = dbContext.SceneEntities
-                    .Where(s => s.Name == name && s.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(s => s.Name == name && s.ClientEntity.Id == clientId)
                     .FirstOrDefault();
                 var scene = sceneEntity.ToDomain();
                 var models = sceneEntity.ModelEntities;
-                foreach (var model in models)
+                foreach (var modelEntity in models)
                 {
-                    scene.PositionedModels.Add(model.ToDomain());
+                    var material = modelEntity.MaterialEntity.ToDomain();
+                    var figure = modelEntity.FigureEntity.ToDomain();
+                    var model = modelEntity.ToDomain();
+                    model.Figure = figure;
+                    model.Material = material;
+                    scene.PositionedModels.Add(model);
                 }
                 return scene;
             }
         }
 
-        public List<Scene> GetScenesOfClient(Client client)
+        public List<Scene> GetScenesOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(s => s.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(s => s.ClientEntity.Id == clientId)
                     .ToList();
                 List<Scene> clientScene = new List<Scene>();
                 foreach (var s in sceneEntities)
                 {
                     var scene= s.ToDomain();
                     var models = s.ModelEntities;
-                    foreach (var model in models)
+                    foreach (var modelEntity in models)
                     {
-                        scene.PositionedModels.Add(model.ToDomain());
+                        var material = modelEntity.MaterialEntity.ToDomain();
+                        var figure = modelEntity.FigureEntity.ToDomain();
+                        var model = modelEntity.ToDomain();
+                        model.Figure = figure;
+                        model.Material = material;
+                        scene.PositionedModels.Add(model);
                     }
                     clientScene.Add(s.ToDomain());
                 }

@@ -77,9 +77,9 @@ namespace Render3D.UserInterface
             List<SceneDto> scenes = sceneController.GetScenes();
             scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
             foreach (SceneDto scene in scenes)
-            {  
-                    SceneControl sceneControl = new SceneControl(scene);
-                    flObjectList.Controls.Add(sceneControl);
+            {
+                SceneControl sceneControl = new SceneControl(scene);
+                flObjectList.Controls.Add(sceneControl);
             }
         }
 

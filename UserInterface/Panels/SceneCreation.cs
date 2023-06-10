@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace UserInterface.Panels
 {
@@ -16,18 +17,35 @@ namespace UserInterface.Panels
             InitializeComponent();
             sceneController = SceneController.GetInstance();
             _sceneDto = selectedScene;
+            
             if (_sceneDto == null)
             {
-                GenerateDefaultScene();
+                string name="";
+                bool valid= false;
+                while (!valid)
+                {
+                    using (var nameChanger = new NameChanger(""))
+                    {
+                        var result = nameChanger.ShowDialog(this);
+                        if (result == DialogResult.OK)
+                        {
+                            name= nameChanger.newName;
+                            try
+                            {
+                                sceneController.AddScene(name);
+                                _sceneDto = sceneController.GetScene(name);
+                                valid = true;
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
             }
             LoadScene();
         }
 
-        private void GenerateDefaultScene()
-        {
-            string name = sceneController.GetNextValidName();
-            sceneController.AddScene(name);
-        }
 
         private void LoadScene()
         {
@@ -38,7 +56,9 @@ namespace UserInterface.Panels
             cBoxAvailableModels.Items.Clear();
             cBoxPositionedModels.Items.Clear();
             cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
+            cBoxAvailableModels.DisplayMember = "Name";
             cBoxPositionedModels.DataSource =sceneController.GetPositionedModels(_sceneDto);
+            cBoxPositionedModels.DisplayMember = "Name";
             pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";

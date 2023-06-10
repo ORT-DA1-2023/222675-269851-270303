@@ -67,7 +67,6 @@ namespace renderRepository.entities
                 CreationDate = CreationDate,
                 LastModificationDate = LastModificationDate,
                 LastRenderizationDate = LastRenderizationDate,
-                Client = ClientEntity.ToDomain()
             };
         }
     }

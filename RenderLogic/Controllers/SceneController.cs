@@ -8,6 +8,7 @@ using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -92,13 +93,23 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                SceneService.GetSceneByNameAndClient(sceneName, ClientController.Client);
-                throw new Exception("scene already exists");
+                Scene scene = new Scene() { Name = sceneName };
+            }
+            catch (BackEndException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            try
+            {
+                SceneService.GetSceneByNameAndClient(sceneName, int.Parse(ClientController.Client.Id));
+                
             }
             catch
             {
                 CreateAndAddBlankScene(sceneName);
+                return;
             }
+            throw new Exception("scene already exists");
         }
 
         private void CreateAndAddBlankScene(string sceneName)
@@ -111,34 +122,6 @@ namespace Render3D.RenderLogic.Controllers
             SceneService.AddScene(scene);
         }
 
-        public string GetNextValidName()
-        {
-            //string posibleName = "Blank_name_";
-            //int i = 1;
-            //bool found = false;
-            //while (!found)
-            //{
-            //    bool validName = true;
-            //    foreach (Scene scene in DataWarehouse.Scenes)
-            //    {
-            //        if (scene.Name == posibleName + i)
-            //        {
-            //            validName = false;
-            //        }
-            //    }
-            //    if (validName)
-            //    {
-            //        found = true;
-            //    }
-            //    else
-            //    {
-            //        i++;
-            //    }
-            //}
-            //return posibleName + i;
-            return null;
-
-        }
         public void Delete(SceneDto sceneDto)
         {
             SceneService.RemoveScene(int.Parse(sceneDto.Id));
@@ -148,7 +131,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                SceneService.GetSceneByNameAndClient(newName, ClientController.Client);
+                SceneService.GetSceneByNameAndClient(newName, int.Parse(ClientController.Client.Id));
                 throw new Exception("Name already in use");
             }
             catch 
@@ -201,7 +184,42 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<SceneDto> GetScenes()
         {
-            throw new NotImplementedException();
+            List<Scene> scenes = SceneService.GetScenesOfClient(int.Parse(ClientController.Client.Id));
+            return ScenesIntoDtos(scenes);
+        }
+
+        private List<SceneDto> ScenesIntoDtos(List<Scene> scenes)
+        {
+            List<SceneDto> sceneDtos= new List<SceneDto>();
+            foreach(Scene scene in scenes)
+            {
+                DateTime lastRenderizationDate;
+                try
+                {
+                    lastRenderizationDate = ((DateTime)scene.LastRenderizationDate);
+                }
+                catch
+                {
+                    lastRenderizationDate= DateTime.MinValue;
+                }
+                double[] lookAt = new double[] { scene.Camera.LookAt.X, scene.Camera.LookAt.Y, scene.Camera.LookAt.Z };
+                double[] lookFrom = new double[] { scene.Camera.LookFrom.X, scene.Camera.LookFrom.Y, scene.Camera.LookFrom.Z };
+                SceneDto sceneDto = new SceneDto()
+                {
+                    Id = scene.Id,
+                    Name = scene.Name,
+                    Preview = scene.Preview,
+                    LastModificationDate = scene.LastModificationDate,
+                    LastRenderizationDate = lastRenderizationDate,
+                    Models = ModelsIntoDtos(scene.PositionedModels),
+                    Aperture = scene.Camera.LensRadius * 2,
+                    LookAt = lookAt,
+                    LookFrom = lookFrom,
+                    Fov = scene.Camera.Fov
+                };
+                sceneDtos.Add(sceneDto);
+            }
+            return sceneDtos;
         }
 
         public List<ModelDto> GetAvailableModels()
@@ -219,10 +237,10 @@ namespace Render3D.RenderLogic.Controllers
         }
         public MaterialDto ConvertMaterial(Material material)
         {
-            int blur = 0;
+            double blur = 0;
             try
             {
-                //blur = ((MetallicMaterial)material).Blur;
+                blur = ((MetallicMaterial)material).Blur;
             }
             catch (Exception e)
             {
@@ -275,6 +293,36 @@ namespace Render3D.RenderLogic.Controllers
                 return false;
             }
             return true;
+        }
+
+        public SceneDto GetScene(string name)
+        {
+            Scene scene = SceneService.GetSceneByNameAndClient(name, int.Parse(ClientController.Client.Id));
+            DateTime lastRenderizationDate;
+            try
+            {
+                lastRenderizationDate = ((DateTime)scene.LastRenderizationDate);
+            }
+            catch
+            {
+                lastRenderizationDate = DateTime.MinValue;
+            }
+            double[] lookAt = new double[] { scene.Camera.LookAt.X, scene.Camera.LookAt.Y, scene.Camera.LookAt.Z };
+            double[] lookFrom = new double[] { scene.Camera.LookFrom.X, scene.Camera.LookFrom.Y, scene.Camera.LookFrom.Z };
+            SceneDto sceneDto = new SceneDto()
+            {
+                Id = scene.Id,
+                Name = scene.Name,
+                Preview = scene.Preview,
+                LastModificationDate = scene.LastModificationDate,
+                LastRenderizationDate = lastRenderizationDate,
+                Models = ModelsIntoDtos(scene.PositionedModels),
+                Aperture = scene.Camera.LensRadius * 2,
+                LookAt = lookAt,
+                LookFrom = lookFrom,
+                Fov = scene.Camera.Fov
+            };
+            return sceneDto;
         }
     }
 }
