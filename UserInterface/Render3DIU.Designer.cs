@@ -34,6 +34,7 @@
             // pnLayout
             // 
             this.pnLayout.AutoSize = true;
+            this.pnLayout.BackColor = System.Drawing.SystemColors.Control;
             this.pnLayout.Location = new System.Drawing.Point(0, 0);
             this.pnLayout.Name = "pnLayout";
             this.pnLayout.Size = new System.Drawing.Size(1000, 580);
