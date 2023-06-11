@@ -250,8 +250,11 @@ namespace UserInterface.Panels
             lblExporting.Update();
             BtnRender_Click(sender, e);
 
-            //TO DO: Logic
+            
+            //pasar formato:
 
+            SceneController s = new SceneController();
+           
 
             lblExporting.Visible = false;
             lblExporting.Update();

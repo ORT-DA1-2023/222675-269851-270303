@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblRenderingNotification = new System.Windows.Forms.Label();
+            this.lblExporting = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSelectPath = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -46,13 +49,13 @@
             this.lblLastRenderDate = new System.Windows.Forms.Label();
             this.btnRender = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.pBoxRender = new System.Windows.Forms.PictureBox();
             this.txtSceneName = new System.Windows.Forms.TextBox();
             this.txtLookAt = new System.Windows.Forms.TextBox();
             this.txtLookFrom = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pBoxRender = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAddModel = new System.Windows.Forms.Label();
             this.btnAddModel = new System.Windows.Forms.Button();
@@ -66,9 +69,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblExporting = new System.Windows.Forms.Label();
-            this.lblRenderingNotification = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -78,6 +79,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.lblRenderingNotification);
             this.panel1.Controls.Add(this.lblExporting);
             this.panel1.Controls.Add(this.label5);
@@ -110,6 +112,37 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1011, 534);
             this.panel1.TabIndex = 0;
+            // 
+            // lblRenderingNotification
+            // 
+            this.lblRenderingNotification.AutoSize = true;
+            this.lblRenderingNotification.BackColor = System.Drawing.Color.Transparent;
+            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblRenderingNotification.ForeColor = System.Drawing.Color.Green;
+            this.lblRenderingNotification.Location = new System.Drawing.Point(352, 346);
+            this.lblRenderingNotification.Name = "lblRenderingNotification";
+            this.lblRenderingNotification.Size = new System.Drawing.Size(235, 26);
+            this.lblRenderingNotification.TabIndex = 33;
+            this.lblRenderingNotification.Text = "Rendering...\r\nPlease wait, the process may last a few seconds";
+            this.lblRenderingNotification.Visible = false;
+            // 
+            // lblExporting
+            // 
+            this.lblExporting.AutoSize = true;
+            this.lblExporting.Location = new System.Drawing.Point(502, 495);
+            this.lblExporting.Name = "lblExporting";
+            this.lblExporting.Size = new System.Drawing.Size(132, 26);
+            this.lblExporting.TabIndex = 32;
+            this.lblExporting.Text = "Rendering and exporting...\r\nPlease wait";
+            this.lblExporting.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(687, 423);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 31;
             // 
             // label4
             // 
@@ -293,14 +326,6 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // pBoxRender
-            // 
-            this.pBoxRender.Location = new System.Drawing.Point(357, 116);
-            this.pBoxRender.Name = "pBoxRender";
-            this.pBoxRender.Size = new System.Drawing.Size(330, 200);
-            this.pBoxRender.TabIndex = 8;
-            this.pBoxRender.TabStop = false;
-            // 
             // txtSceneName
             // 
             this.txtSceneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -360,6 +385,14 @@
             this.label2.Size = new System.Drawing.Size(80, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Look from";
+            // 
+            // pBoxRender
+            // 
+            this.pBoxRender.Location = new System.Drawing.Point(357, 116);
+            this.pBoxRender.Name = "pBoxRender";
+            this.pBoxRender.Size = new System.Drawing.Size(330, 200);
+            this.pBoxRender.TabIndex = 8;
+            this.pBoxRender.TabStop = false;
             // 
             // panel2
             // 
@@ -493,36 +526,17 @@
             this.cBoxPositionedModels.Size = new System.Drawing.Size(190, 32);
             this.cBoxPositionedModels.TabIndex = 1;
             // 
-            // label5
+            // comboBox1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(687, 423);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 13);
-            this.label5.TabIndex = 31;
-            // 
-            // lblExporting
-            // 
-            this.lblExporting.AutoSize = true;
-            this.lblExporting.Location = new System.Drawing.Point(502, 495);
-            this.lblExporting.Name = "lblExporting";
-            this.lblExporting.Size = new System.Drawing.Size(132, 26);
-            this.lblExporting.TabIndex = 32;
-            this.lblExporting.Text = "Rendering and exporting...\r\nPlease wait";
-            this.lblExporting.Visible = false;
-            // 
-            // lblRenderingNotification
-            // 
-            this.lblRenderingNotification.AutoSize = true;
-            this.lblRenderingNotification.BackColor = System.Drawing.Color.Transparent;
-            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lblRenderingNotification.ForeColor = System.Drawing.Color.Green;
-            this.lblRenderingNotification.Location = new System.Drawing.Point(352, 346);
-            this.lblRenderingNotification.Name = "lblRenderingNotification";
-            this.lblRenderingNotification.Size = new System.Drawing.Size(235, 26);
-            this.lblRenderingNotification.TabIndex = 33;
-            this.lblRenderingNotification.Text = "Rendering...\r\nPlease wait, the process may last a few seconds";
-            this.lblRenderingNotification.Visible = false;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PPM",
+            "PNG",
+            "JPG"});
+            this.comboBox1.Location = new System.Drawing.Point(642, 406);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 34;
             // 
             // SceneCreation
             // 
@@ -591,5 +605,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblExporting;
         private System.Windows.Forms.Label lblRenderingNotification;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

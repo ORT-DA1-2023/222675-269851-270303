@@ -44,6 +44,7 @@
             this.lblMaterial = new System.Windows.Forms.Label();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.cmbMaterial = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nrRedColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrGreenColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrBlueColor)).BeginInit();
@@ -72,6 +73,7 @@
             this.txtMaterialName.Name = "txtMaterialName";
             this.txtMaterialName.Size = new System.Drawing.Size(200, 29);
             this.txtMaterialName.TabIndex = 9;
+            this.txtMaterialName.TextChanged += new System.EventHandler(this.txtMaterialName_TextChanged);
             // 
             // lblRed
             // 
@@ -154,6 +156,7 @@
             this.nrRedColor.Name = "nrRedColor";
             this.nrRedColor.Size = new System.Drawing.Size(199, 29);
             this.nrRedColor.TabIndex = 10;
+            this.nrRedColor.ValueChanged += new System.EventHandler(this.nrRedColor_ValueChanged);
             // 
             // nrGreenColor
             // 
@@ -171,6 +174,7 @@
             this.nrGreenColor.Name = "nrGreenColor";
             this.nrGreenColor.Size = new System.Drawing.Size(199, 29);
             this.nrGreenColor.TabIndex = 11;
+            this.nrGreenColor.ValueChanged += new System.EventHandler(this.nrGreenColor_ValueChanged);
             // 
             // nrBlueColor
             // 
@@ -188,9 +192,11 @@
             this.nrBlueColor.Name = "nrBlueColor";
             this.nrBlueColor.Size = new System.Drawing.Size(199, 29);
             this.nrBlueColor.TabIndex = 12;
+            this.nrBlueColor.ValueChanged += new System.EventHandler(this.nrBlueColor_ValueChanged);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtBlur);
             this.panel1.Controls.Add(this.lblBlur);
             this.panel1.Controls.Add(this.lblMaterial);
@@ -223,6 +229,7 @@
             this.txtBlur.Size = new System.Drawing.Size(48, 29);
             this.txtBlur.TabIndex = 22;
             this.txtBlur.Text = "0,0";
+            this.txtBlur.TextChanged += new System.EventHandler(this.txtBlur_TextChanged);
             // 
             // lblBlur
             // 
@@ -269,11 +276,23 @@
             "Lambertian",
             "Metallic"});
             this.cmbMaterial.Location = new System.Drawing.Point(125, 113);
-            this.cmbMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.cmbMaterial.Name = "cmbMaterial";
             this.cmbMaterial.Size = new System.Drawing.Size(118, 21);
             this.cmbMaterial.TabIndex = 19;
             this.cmbMaterial.SelectedIndexChanged += new System.EventHandler(this.cmbMaterial_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Green;
+            this.label2.Location = new System.Drawing.Point(125, 429);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Successfully added";
+            this.label2.Visible = false;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // MaterialPanel
             // 
@@ -312,5 +331,6 @@
         private System.Windows.Forms.ComboBox cmbMaterial;
         private System.Windows.Forms.TextBox txtBlur;
         private System.Windows.Forms.Label lblBlur;
+        private System.Windows.Forms.Label label2;
     }
 }

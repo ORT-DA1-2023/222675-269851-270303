@@ -41,11 +41,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.lstMaterial);
             this.panel1.Controls.Add(this.lstFigure);
             this.panel1.Controls.Add(this.lblExceptionError);
@@ -110,7 +112,7 @@
             // 
             this.txtModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtModelName.Location = new System.Drawing.Point(81, 109);
-            this.txtModelName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtModelName.Margin = new System.Windows.Forms.Padding(2);
             this.txtModelName.Name = "txtModelName";
             this.txtModelName.Size = new System.Drawing.Size(212, 28);
             this.txtModelName.TabIndex = 9;
@@ -202,6 +204,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Create a new model";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(182, 399);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "label6";
+            this.label6.Visible = false;
+            // 
             // ModelPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,5 +245,6 @@
         private System.Windows.Forms.Label lblExceptionError;
         private System.Windows.Forms.ComboBox lstFigure;
         private System.Windows.Forms.ComboBox lstMaterial;
+        private System.Windows.Forms.Label label6;
     }
 }

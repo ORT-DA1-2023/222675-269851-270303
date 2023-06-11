@@ -19,13 +19,13 @@ namespace Render3D.RenderLogic.Controllers
         public SceneService SceneService { get; set; }
         public ModelService ModelService { get; set; }
         public FigureService FigureService { get; set; }
-        public MaterialService MaterialService { get; set; }  
+        public MaterialService MaterialService { get; set; }
 
         protected static SceneController sceneController;
-        
+
         public static SceneController GetInstance()
         {
-            if(sceneController == null)
+            if (sceneController == null)
             {
                 sceneController = new SceneController();
             }
@@ -36,15 +36,16 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                double[] lookAt= GetArrayFromString(stringLookAt);
+                double[] lookAt = GetArrayFromString(stringLookAt);
                 double[] lookFrom = GetArrayFromString(stringLookFrom);
                 double apertureDouble = double.Parse(aperture);
-                SceneDto sceneNewCamera = new SceneDto() 
+                SceneDto sceneNewCamera = new SceneDto()
                 {
-                    LookAt= lookAt, 
-                    LookFrom = lookFrom, 
-                    Fov =fov, 
-                    Aperture = apertureDouble };
+                    LookAt = lookAt,
+                    LookFrom = lookFrom,
+                    Fov = fov,
+                    Aperture = apertureDouble
+                };
                 if (!CameraAreEqual(sceneDto, sceneNewCamera))
                 {
                     Camera camera = new Camera(
@@ -74,9 +75,9 @@ namespace Render3D.RenderLogic.Controllers
         private bool CameraAreEqual(SceneDto scene, SceneDto sceneNewCamera)
         {
             if (!Array.Equals(scene.LookAt, sceneNewCamera.LookAt)) return false;
-            if(!Array.Equals(scene.LookFrom, sceneNewCamera.LookFrom)) return false;
-            if(scene.Aperture != sceneNewCamera.Aperture) return false;
-            if(scene.Fov != sceneNewCamera.Fov) return false;
+            if (!Array.Equals(scene.LookFrom, sceneNewCamera.LookFrom)) return false;
+            if (scene.Aperture != sceneNewCamera.Aperture) return false;
+            if (scene.Fov != sceneNewCamera.Fov) return false;
             return true;
         }
 
@@ -104,7 +105,7 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 SceneService.GetSceneByNameAndClient(sceneName, int.Parse(ClientController.Client.Id));
-                
+
             }
             catch
             {
@@ -134,16 +135,16 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 SceneService.GetSceneByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-               
+
             }
-            catch 
+            catch
             {
                 Scene tryName = new Scene() { Name = newName };
                 SceneService.UpdateName(int.Parse(sceneDto.Id), newName);
                 return;
             }
             throw new Exception("Name already in use");
-            
+
         }
 
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
@@ -162,8 +163,8 @@ namespace Render3D.RenderLogic.Controllers
         public void RemoveModel(ModelDto modelDto)
         {
             int modelId = int.Parse(modelDto.Id);
-            int figureId= int.Parse(modelDto.Figure.Id);
-            int materialId= int.Parse(modelDto.Material.Id);
+            int figureId = int.Parse(modelDto.Figure.Id);
+            int materialId = int.Parse(modelDto.Material.Id);
             ModelService.RemoveModel(modelId);
             FigureService.RemoveFigure(figureId);
             MaterialService.RemoveMaterial(materialId);
@@ -174,7 +175,7 @@ namespace Render3D.RenderLogic.Controllers
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
             scene.Preview = GraphicMotor.Render(scene, useBlur);
             scene.UpdateLastRenderizationDate();
-            SceneService.UpdatePreview(scene);      
+            SceneService.UpdatePreview(scene);
         }
 
 
@@ -187,8 +188,8 @@ namespace Render3D.RenderLogic.Controllers
 
         private List<SceneDto> ScenesIntoDtos(List<Scene> scenes)
         {
-            List<SceneDto> sceneDtos= new List<SceneDto>();
-            foreach(Scene scene in scenes)
+            List<SceneDto> sceneDtos = new List<SceneDto>();
+            foreach (Scene scene in scenes)
             {
                 DateTime lastRenderizationDate;
                 try
@@ -197,7 +198,7 @@ namespace Render3D.RenderLogic.Controllers
                 }
                 catch
                 {
-                    lastRenderizationDate= DateTime.MinValue;
+                    lastRenderizationDate = DateTime.MinValue;
                 }
                 double[] lookAt = new double[] { scene.Camera.LookAt.X, scene.Camera.LookAt.Y, scene.Camera.LookAt.Z };
                 double[] lookFrom = new double[] { scene.Camera.LookFrom.X, scene.Camera.LookFrom.Y, scene.Camera.LookFrom.Z };
@@ -221,7 +222,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<ModelDto> GetAvailableModels()
         {
-            List <Model> models= ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
+            List<Model> models = ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
             return ModelsIntoDtos(models);
         }
         public FigureDto ConvertFigure(Figure figure)
@@ -240,7 +241,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 blur = ((MetallicMaterial)material).Blur;
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
             return new MaterialDto()
@@ -275,19 +276,19 @@ namespace Render3D.RenderLogic.Controllers
                 };
                 modelDtos.Add(modelDto);
             }
-           return modelDtos;
+            return modelDtos;
         }
 
         public bool CheckIfModelIsInAScene(ModelDto modelDto)
         {
             Model model = new Model()
             {
-                Id =modelDto.Id,
+                Id = modelDto.Id,
                 Name = modelDto.Name,
                 Client = ClientController.Client
             };
-                List<Scene> ExpectedEmptyList = SceneService.GetScenesWithModel(model);
-            if(ExpectedEmptyList.Count == 0)
+            List<Scene> ExpectedEmptyList = SceneService.GetScenesWithModel(model);
+            if (ExpectedEmptyList.Count == 0)
             {
                 return false;
             }
@@ -322,6 +323,27 @@ namespace Render3D.RenderLogic.Controllers
                 Fov = scene.Camera.Fov
             };
             return sceneDto;
+        }
+
+        public void ExportRender(SceneDto s, string directory, string savingFormat)
+        {
+            ISavingFormat format;
+            switch (savingFormat)
+            {
+                case "PPM":
+                    format = new PPMSavingFormat();
+                    break;
+                case "PNG":
+                    format = new PNGSavingFormat();
+                    break;
+                case "JPG":
+                    format = new JPGSavingFormat();
+                    break;
+                default:
+                    throw new BackEndException("Invalid Format");
+            }
+            OutputSaver o = new OutputSaver(s.Preview, directory, format);
+            o.Save();
         }
     }
 }
