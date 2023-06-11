@@ -240,7 +240,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 blur = ((MetallicMaterial)material).Blur;
             }
-            catch (Exception e)
+            catch
             {
             }
             return new MaterialDto()

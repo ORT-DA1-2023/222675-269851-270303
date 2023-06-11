@@ -145,7 +145,7 @@ namespace UserInterface.Panels
                     else
                     {
                         string apertureZero = "0";
-                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureZero);
+                        sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureZero);
                        
                     }
                     LoadScene();
