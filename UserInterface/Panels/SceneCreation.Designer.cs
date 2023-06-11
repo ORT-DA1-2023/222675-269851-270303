@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnSelectPath = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.cmbBlur = new System.Windows.Forms.CheckBox();
             this.txtAperture = new System.Windows.Forms.TextBox();
@@ -63,9 +65,10 @@
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
-            this.btnSelectPath = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblExporting = new System.Windows.Forms.Label();
+            this.lblRenderingNotification = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -75,6 +78,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblRenderingNotification);
+            this.panel1.Controls.Add(this.lblExporting);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.btnSelectPath);
             this.panel1.Controls.Add(this.button3);
@@ -92,22 +98,39 @@
             this.panel1.Controls.Add(this.lblLastRenderDate);
             this.panel1.Controls.Add(this.btnRender);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.pBoxRender);
             this.panel1.Controls.Add(this.txtSceneName);
             this.panel1.Controls.Add(this.txtLookAt);
             this.panel1.Controls.Add(this.txtLookFrom);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.pBoxRender);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1011, 534);
             this.panel1.TabIndex = 0;
             // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 23);
+            this.label4.TabIndex = 0;
+            // 
+            // btnSelectPath
+            // 
+            this.btnSelectPath.Location = new System.Drawing.Point(642, 439);
+            this.btnSelectPath.Name = "btnSelectPath";
+            this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectPath.TabIndex = 2;
+            this.btnSelectPath.Text = "Select Path";
+            this.btnSelectPath.UseVisualStyleBackColor = true;
+            this.btnSelectPath.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(642, 481);
+            this.button3.Location = new System.Drawing.Point(640, 468);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(105, 41);
             this.button3.TabIndex = 30;
@@ -118,10 +141,11 @@
             // cmbBlur
             // 
             this.cmbBlur.AutoSize = true;
-            this.cmbBlur.Location = new System.Drawing.Point(310, 156);
+            this.cmbBlur.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.cmbBlur.Location = new System.Drawing.Point(425, 64);
             this.cmbBlur.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBlur.Name = "cmbBlur";
-            this.cmbBlur.Size = new System.Drawing.Size(44, 17);
+            this.cmbBlur.Size = new System.Drawing.Size(52, 21);
             this.cmbBlur.TabIndex = 29;
             this.cmbBlur.Text = "Blur";
             this.cmbBlur.UseVisualStyleBackColor = true;
@@ -175,7 +199,7 @@
             this.lblCamera.AutoSize = true;
             this.lblCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCamera.ForeColor = System.Drawing.Color.Red;
-            this.lblCamera.Location = new System.Drawing.Point(553, 75);
+            this.lblCamera.Location = new System.Drawing.Point(721, 69);
             this.lblCamera.Name = "lblCamera";
             this.lblCamera.Size = new System.Drawing.Size(35, 16);
             this.lblCamera.TabIndex = 24;
@@ -193,10 +217,10 @@
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(225, 428);
+            this.btnGoBack.Location = new System.Drawing.Point(210, 473);
             this.btnGoBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(124, 63);
+            this.btnGoBack.Size = new System.Drawing.Size(103, 36);
             this.btnGoBack.TabIndex = 21;
             this.btnGoBack.Text = "Go back";
             this.btnGoBack.UseVisualStyleBackColor = true;
@@ -225,7 +249,7 @@
             this.lblRenderOutDated.AutoSize = true;
             this.lblRenderOutDated.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRenderOutDated.ForeColor = System.Drawing.Color.Red;
-            this.lblRenderOutDated.Location = new System.Drawing.Point(414, 374);
+            this.lblRenderOutDated.Location = new System.Drawing.Point(360, 330);
             this.lblRenderOutDated.Name = "lblRenderOutDated";
             this.lblRenderOutDated.Size = new System.Drawing.Size(35, 16);
             this.lblRenderOutDated.TabIndex = 19;
@@ -244,7 +268,7 @@
             // lblLastRenderDate
             // 
             this.lblLastRenderDate.AutoSize = true;
-            this.lblLastRenderDate.Location = new System.Drawing.Point(632, 376);
+            this.lblLastRenderDate.Location = new System.Drawing.Point(502, 414);
             this.lblLastRenderDate.Name = "lblLastRenderDate";
             this.lblLastRenderDate.Size = new System.Drawing.Size(85, 13);
             this.lblLastRenderDate.TabIndex = 11;
@@ -252,7 +276,7 @@
             // 
             // btnRender
             // 
-            this.btnRender.Location = new System.Drawing.Point(605, 117);
+            this.btnRender.Location = new System.Drawing.Point(576, 322);
             this.btnRender.Name = "btnRender";
             this.btnRender.Size = new System.Drawing.Size(112, 33);
             this.btnRender.TabIndex = 10;
@@ -271,9 +295,9 @@
             // 
             // pBoxRender
             // 
-            this.pBoxRender.Location = new System.Drawing.Point(417, 156);
+            this.pBoxRender.Location = new System.Drawing.Point(357, 116);
             this.pBoxRender.Name = "pBoxRender";
-            this.pBoxRender.Size = new System.Drawing.Size(300, 200);
+            this.pBoxRender.Size = new System.Drawing.Size(330, 200);
             this.pBoxRender.TabIndex = 8;
             this.pBoxRender.TabStop = false;
             // 
@@ -355,6 +379,7 @@
             // lblAddModel
             // 
             this.lblAddModel.AutoSize = true;
+            this.lblAddModel.ForeColor = System.Drawing.Color.Green;
             this.lblAddModel.Location = new System.Drawing.Point(67, 454);
             this.lblAddModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAddModel.Name = "lblAddModel";
@@ -429,6 +454,7 @@
             // lblRemoveModel
             // 
             this.lblRemoveModel.AutoSize = true;
+            this.lblRemoveModel.ForeColor = System.Drawing.Color.Green;
             this.lblRemoveModel.Location = new System.Drawing.Point(95, 454);
             this.lblRemoveModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRemoveModel.Name = "lblRemoveModel";
@@ -467,25 +493,36 @@
             this.cBoxPositionedModels.Size = new System.Drawing.Size(190, 32);
             this.cBoxPositionedModels.TabIndex = 1;
             // 
-            // btnSelectPath
+            // label5
             // 
-            this.btnSelectPath.Location = new System.Drawing.Point(642, 439);
-            this.btnSelectPath.Name = "btnSelectPath";
-            this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectPath.TabIndex = 2;
-            this.btnSelectPath.Text = "Select Path";
-            this.btnSelectPath.UseVisualStyleBackColor = true;
-            this.btnSelectPath.Click += new System.EventHandler(this.button2_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(687, 423);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 31;
             // 
-            // label4
+            // lblExporting
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(652, 465);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "label4";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.lblExporting.AutoSize = true;
+            this.lblExporting.Location = new System.Drawing.Point(502, 495);
+            this.lblExporting.Name = "lblExporting";
+            this.lblExporting.Size = new System.Drawing.Size(132, 26);
+            this.lblExporting.TabIndex = 32;
+            this.lblExporting.Text = "Rendering and exporting...\r\nPlease wait";
+            this.lblExporting.Visible = false;
+            // 
+            // lblRenderingNotification
+            // 
+            this.lblRenderingNotification.AutoSize = true;
+            this.lblRenderingNotification.BackColor = System.Drawing.Color.Transparent;
+            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblRenderingNotification.ForeColor = System.Drawing.Color.Green;
+            this.lblRenderingNotification.Location = new System.Drawing.Point(352, 346);
+            this.lblRenderingNotification.Name = "lblRenderingNotification";
+            this.lblRenderingNotification.Size = new System.Drawing.Size(235, 26);
+            this.lblRenderingNotification.TabIndex = 33;
+            this.lblRenderingNotification.Text = "Rendering...\r\nPlease wait, the process may last a few seconds";
+            this.lblRenderingNotification.Visible = false;
             // 
             // SceneCreation
             // 
@@ -551,5 +588,8 @@
         private System.Windows.Forms.Button btnSelectPath;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblExporting;
+        private System.Windows.Forms.Label lblRenderingNotification;
     }
 }

@@ -132,14 +132,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double v = (row + random.NextDouble()) / ResolutionHeight();
                         if (blur)
                         {
-                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v, random);
+                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v);
                         }
                         else
                         {
                              ray = sceneSample.Camera.GetRay(u, v);
                         }
       
-                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
+                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
                     SavePixel(row, column, pixelColor, matrix);

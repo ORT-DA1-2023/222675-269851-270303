@@ -11,12 +11,12 @@ namespace Render3D.BackEnd.Materials
     {
         public double Blur { get; set; }
 
-        public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
+        public override Ray ReflectsTheLight(HitRecord3D hitRecord)
         {
             Ray rayScattered = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
             Vector3D vectorReflected = reflect(hitRecord.Ray.Direction.GetUnit(), hitRecord.Normal);
             rayScattered.Origin = hitRecord.Intersection;
-            rayScattered.Direction = vectorReflected.Add(GetRandomInUnitFigure(random).Multiply(hitRecord.Roughness)
+            rayScattered.Direction = vectorReflected.Add(GetRandomInUnitFigure().Multiply(hitRecord.Roughness)
             );
             if (rayScattered.Direction.DotProduct(hitRecord.Normal) > 0)
             {
@@ -34,11 +34,12 @@ namespace Render3D.BackEnd.Materials
             return vectorV.Substract(vectorN.Multiply(2 * dotVN));
         }
 
-        private Vector3D GetRandomInUnitFigure(Random random)
+        private Vector3D GetRandomInUnitFigure()
         {
             Vector3D vector;
             do
             {
+                RandomSingleton random = RandomSingleton.Instance;
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
             } while (vector.SquaredLength() >= 1);
@@ -49,5 +50,7 @@ namespace Render3D.BackEnd.Materials
         {
             return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
+        
+
     }
 }

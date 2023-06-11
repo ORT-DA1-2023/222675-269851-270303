@@ -1,4 +1,5 @@
-﻿using Render3D.RenderLogic.Controllers;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
@@ -198,6 +199,8 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            lblRenderingNotification.Visible = true;
+            lblRenderingNotification.Update();
             if (cmbBlur.Checked)
             {
                 sceneController.RenderScene(_sceneDto,true);
@@ -207,7 +210,10 @@ namespace UserInterface.Panels
 
                 sceneController.RenderScene(_sceneDto,false);
             }
+
             LoadScene();
+            lblRenderingNotification.Visible = false;
+            lblRenderingNotification.Update();
         }
 
         private void CmbBlur_CheckedChanged(object sender, EventArgs e)
@@ -229,19 +235,26 @@ namespace UserInterface.Panels
         {
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                label4.Text = folderBrowserDialog1.SelectedPath;
+                label5.Text = folderBrowserDialog1.SelectedPath;
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void Label4_Click(object sender, EventArgs e)
         {
 
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
+            lblExporting.Visible = true;
+            lblExporting.Update();
             BtnRender_Click(sender, e);
 
+            //TO DO: Logic
+
+
+            lblExporting.Visible = false;
+            lblExporting.Update();
         }
     }
 }
