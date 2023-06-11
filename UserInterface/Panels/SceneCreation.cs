@@ -224,5 +224,24 @@ namespace UserInterface.Panels
                 lblAperture.Enabled = true;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                label4.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            BtnRender_Click(sender, e);
+
+        }
     }
 }
