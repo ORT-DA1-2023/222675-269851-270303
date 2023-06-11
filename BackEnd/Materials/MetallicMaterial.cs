@@ -11,12 +11,12 @@ namespace Render3D.BackEnd.Materials
     {
         public double Blur { get; set; }
 
-        public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
+        public override Ray ReflectsTheLight(HitRecord3D hitRecord)
         {
             Ray rayScattered = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
             Vector3D vectorReflected = Reflect(hitRecord.Ray.Direction.GetUnit(), hitRecord.Normal);
             rayScattered.Origin = hitRecord.Intersection;
-            rayScattered.Direction = vectorReflected.Add(GetRandomInUnitFigure(random).Multiply(hitRecord.Roughness)
+            rayScattered.Direction = vectorReflected.Add(GetRandomInUnitFigure().Multiply(hitRecord.Roughness)
             );
             if (rayScattered.Direction.DotProduct(hitRecord.Normal) > 0)
             {
@@ -34,8 +34,9 @@ namespace Render3D.BackEnd.Materials
             return vectorV.Substract(vectorN.Multiply(2 * dotVN));
         }
 
-        private Vector3D GetRandomInUnitFigure(Random random)
+        private Vector3D GetRandomInUnitFigure()
         {
+            RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
             do
             {
