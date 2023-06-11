@@ -25,7 +25,7 @@ namespace Render3D.BackEnd.Materials
 
         public Colour Attenuation { get; set; }
 
-        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
+        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord);
 
 
         protected void ValidateName(string value)
