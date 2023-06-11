@@ -3,7 +3,6 @@ using Render3D.BackEnd;
 using System;
 using System.Collections.Generic;
 using Render3D.BackEnd.Utilities;
-using Render3D.RenderLogic;
 
 namespace Render3D.UnitTest
 {

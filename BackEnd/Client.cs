@@ -40,6 +40,7 @@ namespace Render3D.BackEnd
         }
 
         public DateTime RegisterDate { get; set; }
+        public string Id { get; set; }
 
         private void ValidateName(string value)
         {

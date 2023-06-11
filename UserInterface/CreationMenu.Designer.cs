@@ -39,6 +39,7 @@
             this.btnFigure = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.pnlMenuControler = new System.Windows.Forms.Panel();
+            this.btnLogs = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.pnlMenuControler.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +153,7 @@
             // 
             this.pnlMenuControler.BackColor = System.Drawing.Color.White;
             this.pnlMenuControler.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMenuControler.Controls.Add(this.btnLogs);
             this.pnlMenuControler.Controls.Add(this.lblShowClientName);
             this.pnlMenuControler.Controls.Add(this.btnLogOut);
             this.pnlMenuControler.Controls.Add(this.btnScene);
@@ -164,6 +166,18 @@
             this.pnlMenuControler.Name = "pnlMenuControler";
             this.pnlMenuControler.Size = new System.Drawing.Size(319, 580);
             this.pnlMenuControler.TabIndex = 2;
+            // 
+            // btnLogs
+            // 
+            this.btnLogs.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLogs.Location = new System.Drawing.Point(52, 313);
+            this.btnLogs.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnLogs.Name = "btnLogs";
+            this.btnLogs.Size = new System.Drawing.Size(157, 48);
+            this.btnLogs.TabIndex = 5;
+            this.btnLogs.Text = "Logs";
+            this.btnLogs.UseVisualStyleBackColor = true;
+            this.btnLogs.Click += new System.EventHandler(this.btnLogs_Click);
             // 
             // CreationMenu
             // 
@@ -197,5 +211,6 @@
         private System.Windows.Forms.Panel pnlObjectCreation;
         private System.Windows.Forms.Panel pnlMenuControler;
         private System.Windows.Forms.FlowLayoutPanel flObjectList;
+        private System.Windows.Forms.Button btnLogs;
     }
 }

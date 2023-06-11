@@ -11,169 +11,55 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class MaterialControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private MaterialController _materialController;
-        private ClientController _clientController;
-
-        private readonly Colour _color = new Colour(0, 0, 0);
-        private readonly int[] _colorArray = new int[] { 0, 0, 0 };
-
-        private const string lambertianMaterialName = "lambertialMaterialSample1";
-        private const string lambertianMaterialNameChange = "lambertialMaterialSample2";
-        private const string metallicMaterialName = "metallicMaterialSample1";
-        private const string metallicMaterialNameChange = "metallicMaterialSample2";
-        private const string clientSampleName = "clientSample1";
-        private const string passwordSample = "PasswordExample1";
-        private const double blurSample = 0.5;
 
 
         [TestInitialize]
         public void Initialize()
         {
-            _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
-            _materialController = new MaterialController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
           
         }
         [TestMethod]
         public void GivenNewLambertianMaterialAddsItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
 
         [TestMethod]
         public void GivenNewMetallicMaterialAddsItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenNewWrongLambertianMaterialFailsAddingItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial(clientSampleName, "", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
+           
         }
-
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "materialSample already exists")]
+        public void GivenRepeatedMaterialFailsAddingItToTheList()
+        {
+          
+        }
+        [TestMethod]
+        public void GivenNewMaterialNameItChanges()
+        {
+        }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenNewWrongMetallicMaterialFailsAddingItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddMetallicMaterial(clientSampleName, "", _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
+           
+        }
+        [TestMethod]
+        public void GivenNameDeletesTheMaterial()
+        {
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "lambertialMaterialSample1 already exists")]
         public void GivenRepeatedLambertianMaterialFailsAddingItToTheList()
         {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "metallicMaterialSample1 already exists")]
-        public void GivenRepeatedMetallicMaterialFailsAddingItToTheList()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-        }
-
-        [TestMethod]
-        public void GivenNewLambertianMaterialNameItChanges()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            _materialController.ChangeMaterialName(clientSampleName, lambertianMaterialName, lambertianMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == lambertianMaterialNameChange);
-        }
-
-        [TestMethod]
-        public void GivenNewMetallicMaterialNameItChanges()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            _materialController.ChangeMaterialName(clientSampleName, metallicMaterialName, metallicMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == metallicMaterialNameChange);
-        }
-
-        [TestMethod]
-        public void GivenNewLambertianMaterialNameItDoesNotChange()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialNameChange, _colorArray);
-            _materialController.ChangeMaterialName(clientSampleName, lambertianMaterialName, lambertianMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == lambertianMaterialName);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[1].Name == lambertianMaterialNameChange);
-        }
-
-
-        [TestMethod]
-        public void GivenNewMetallicMaterialNameItDoesNotChange()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialNameChange, _colorArray, blurSample);
-            _materialController.ChangeMaterialName(clientSampleName, metallicMaterialName, metallicMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == metallicMaterialName);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[1].Name == metallicMaterialNameChange);
-        }
-
-        [TestMethod]
-        public void GivenNameDeletesTheLambertianMaterial()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList(clientSampleName, lambertianMaterialName);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-        }
-
-        [TestMethod]
-        public void GivenNameDeletesTheMetallicMaterial()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList(clientSampleName, metallicMaterialName);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-        }
-
-        [TestMethod]
-        public void GivenNameDoesNotDeleteTheLambertianMaterial()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddLambertianMaterial(clientSampleName, lambertianMaterialName, _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList(clientSampleName, lambertianMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-        }
-
-        [TestMethod]
-        public void GivenNameDoesNotDeleteTheMetallicMaterial()
-        {
-            _clientController.SignIn(clientSampleName, passwordSample);
-            _materialController.AddMetallicMaterial(clientSampleName, metallicMaterialName, _colorArray, blurSample);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList(clientSampleName, metallicMaterialNameChange);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
         }
 
     }

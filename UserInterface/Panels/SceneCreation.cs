@@ -1,65 +1,70 @@
-﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
-using Render3D.BackEnd.GraphicMotorUtility;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        public Scene scene;
+        private SceneDto _sceneDto;
         public SceneController sceneController;
-        private readonly string _client;
-        public SceneCreation(SceneController newSceneController, string clientName, Scene selectedScene)
+        public SceneCreation(SceneDto selectedScene)
         {
             InitializeComponent();
-            sceneController = newSceneController;
-            _client = clientName;
-            scene = selectedScene;
-            if (scene == null)
+            sceneController = SceneController.GetInstance();
+            _sceneDto = selectedScene;
+            
+            if (_sceneDto == null)
             {
-                GenerateDefaultScene();
+                string name="";
+                bool valid= false;
+                while (!valid)
+                {
+                    using (var nameChanger = new NameChanger(""))
+                    {
+                        var result = nameChanger.ShowDialog(this);
+                        if (result == DialogResult.OK)
+                        {
+                            name= nameChanger.newName;
+                            try
+                            {
+                                sceneController.AddScene(name);
+                                _sceneDto= new SceneDto() { Name= name }; 
+                                valid = true;
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
             }
             LoadScene();
         }
 
-        private void GenerateDefaultScene()
-        {
-            string name = sceneController.GetNextValidName();
-            sceneController.AddScene(_client, name);
-            scene = sceneController.GetSceneByNameAndClient(_client, name);
-        }
 
         private void LoadScene()
         {
-            txtSceneName.Text = scene.Name;
-            Camera cam = scene.Camera;
-            txtLookAt.Text = "(" + cam.LookAt.X + ";" + cam.LookAt.Y + ";" + cam.LookAt.Z + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z + ")";
-            nrFov.Value = cam.Fov;
-            cBoxAvailableModels.Items.Clear();
-            cBoxPositionedModels.Items.Clear();
-            foreach (Model model in sceneController.DataWarehouse.Models)
-            {
-                if (model.Client.Equals(scene.Client))
-                {
-                    cBoxAvailableModels.Items.Add(model);
-                }
-            }
-            foreach (Model model in scene.PositionedModels)
-            {
-                cBoxPositionedModels.Items.Add(model);
-            }
-            pBoxRender.Image = scene.Preview;
+            _sceneDto = sceneController.GetScene(_sceneDto.Name);
+            txtSceneName.Text = _sceneDto.Name;
+            txtLookAt.Text = "(" + _sceneDto.LookAt[0] + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
+            txtLookFrom.Text = "(" + _sceneDto.LookFrom[0] + ";" + _sceneDto.LookFrom[1] + ";" + _sceneDto.LookFrom[2] + ")";
+            nrFov.Value = _sceneDto.Fov;
+            cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
+            cBoxAvailableModels.DisplayMember = "Name";
+            cBoxPositionedModels.DataSource =sceneController.GetPositionedModels(_sceneDto);
+            cBoxPositionedModels.DisplayMember = "Name";
+            pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
             lblAddModel.Text = "";
             lblRemoveModel.Text = "";
             LastModifcationDateRefresh();
-            if (scene.LastRenderizationDate != null)
+            if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
                 LastRenderDateRefresh();
             }
@@ -72,17 +77,17 @@ namespace UserInterface.Panels
 
         private void LastRenderDateRefresh()
         {
-            lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+            lblLastRenderDate.Text = "" + ((DateTime)_sceneDto.LastRenderizationDate).Month + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Day + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Year + " " + ((DateTime)_sceneDto.LastRenderizationDate).Hour + ":" + ((DateTime)_sceneDto.LastRenderizationDate).Minute;
         }
 
         private void LastModifcationDateRefresh()
         {
-            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
+            lblLastModificationDate.Text = "" + _sceneDto.LastModificationDate.Month + "/" + _sceneDto.LastModificationDate.Day + "/" + _sceneDto.LastModificationDate.Year + " " + _sceneDto.LastModificationDate.Hour + ":" + _sceneDto.LastModificationDate.Minute;
         }
 
         private void CheckRenderOutDated()
         {
-            if (scene.LastRenderizationDate == null || scene.LastRenderizationDate < (scene.LastModificationDate))
+            if (_sceneDto.LastRenderizationDate == null || _sceneDto.LastRenderizationDate < (_sceneDto.LastModificationDate))
             {
                 lblRenderOutDated.Text = "WARNING this render is outdated";
             }
@@ -129,7 +134,7 @@ namespace UserInterface.Panels
                         {
                              if(IsValidFormatAperture(txtAperture.Text)&& IsValidNumberAperture(txtAperture.Text))
                              {
-                                sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                                sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
                              }
                              else
                              {
@@ -168,7 +173,8 @@ namespace UserInterface.Panels
         {
             try
             {
-                sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
+                sceneController.ChangeSceneName(_sceneDto, txtSceneName.Text);
+                _sceneDto.Name = txtSceneName.Text;
                 LoadScene();
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";
@@ -182,50 +188,39 @@ namespace UserInterface.Panels
 
         private void BtnAddModel_Click(object sender, EventArgs e)
         {
-            string position = txtPosition.Text;
-            if (!(cBoxAvailableModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.AddModel(scene, model, position);
-            scene.UpdateLastModificationDate();
-            LoadScene();
+
+          ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
+          sceneController.AddModel(_sceneDto, model, txtPosition.Text);
+            lblAddModel.Text = "Model Added Correctly";  
             lblAddModel.ForeColor = Color.Green;
-            lblAddModel.Text = "Added correctly";
-            cBoxAvailableModels.SelectedItem = null;
+            LoadScene();
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
-            if (!(cBoxPositionedModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.RemoveModel(scene, model);
-            scene.UpdateLastModificationDate();
-            LoadScene();
+            ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
+            sceneController.RemoveModel(model);
+            lblRemoveModel.Text = "Model Removed Correctly";
             lblRemoveModel.ForeColor = Color.Green;
-            lblRemoveModel.Text = "Remove correctly";
-            cBoxPositionedModels.SelectedItem = null;
+            LoadScene();
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
             if (cmbBlur.Checked)
             {
-                sceneController.RenderSceneBlur(scene);
+                sceneController.RenderScene(_sceneDto,true);
             }
             else
             {
 
-                sceneController.RenderScene(scene);
+                sceneController.RenderScene(_sceneDto,false);
             }
             LoadScene();
         }
 
-        private void cmbBlur_CheckedChanged(object sender, EventArgs e)
+        private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-            scene.UpdateLastModificationDate();
             LoadScene();
             if (!cmbBlur.Checked)
             {

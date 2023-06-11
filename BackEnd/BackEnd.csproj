@@ -46,6 +46,7 @@
     <Compile Include="BackEndException.cs" />
     <Compile Include="GraphicMotorUtility\Camera.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="LogAnalytics.cs" />
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Materials\MetallicMaterial.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
@@ -54,7 +55,6 @@
     <Compile Include="GraphicMotorUtility\PixelMatrix.cs" />
     <Compile Include="GraphicMotorUtility\Vector3D.cs" />
     <Compile Include="Utilities\HelperValidator.cs" />
-    <Compile Include="Utilities\DataWarehouse.cs" />
     <Compile Include="Materials\LambertianMaterial.cs" />
     <Compile Include="Materials\Material.cs" />
     <Compile Include="Client.cs" />

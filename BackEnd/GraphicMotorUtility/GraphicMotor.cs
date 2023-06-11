@@ -81,7 +81,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             double radius = sphereSample.Radius;
             Vector3D vectorUp = new Vector3D(0, 2 * radius, 0);
             Vector3D twoTimesRadius = new Vector3D(2 * radius, 2 * radius, 2 * radius);
-            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, vectorUp, 60, 1);
+            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, 60);
             previewScene.Camera = camera;
             return Render(previewScene, false);
         }

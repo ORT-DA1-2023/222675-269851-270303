@@ -3,6 +3,8 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
+using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -10,118 +12,186 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class ModelController
     {
-        public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
-        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
-        public void AddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
-        {
+        public ClientController ClientController = ClientController.GetInstance();
+        public GraphicMotor GraphicMotor = new GraphicMotor();
+        public ModelService ModelService { get; set; }
+        protected static ModelController modelController;
 
+        public static ModelController GetInstance()
+        {
+            if (modelController == null)
+            {
+                modelController = new ModelController();
+            }
+            return modelController;
+        }
+        public void AddAModelWithoutPreview(string modelName, FigureDto figureDto, MaterialDto materialDto)
+        {
             try
             {
-                GetModelByNameAndClient(clientName, modelName);
-
+                ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));
+                throw new BackEndException("model already exists");
             }
             catch (Exception)
+            {              
+                CreateAndAddModel(modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
+            }         
+        }
+
+        private Material ConvertMaterialDto(MaterialDto materialDto)
+        {
+            Material material;
+            if (materialDto.Blur == 0)
             {
-                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure, material);
-                return;
-            }
-            throw new BackEndException("model already exists");
-        }
-        public void AddAModelWithPreview(string clientName, string modelName, Figure figure, Material material)
-        {
-            AddAModelWithoutPreview(clientName, modelName, figure, material);
-            AddPreviewToTheModel(clientName, modelName);
-        }
-        private void CreateAndAddModel(Client client, string modelName, Figure figure, Material material)
-        {
-            Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
-            DataWarehouse.Models.Add(model);
-        }
-        public Model GetModelByNameAndClient(string clientName, string modelName)
-        {
-            Client client = ClientController.GetClientByName(clientName);
-            foreach (Model model in DataWarehouse.Models)
-            {
-                if (model.Name == modelName && model.Client.Equals(client))
+                material = new LambertianMaterial()
                 {
-                    return model;
-                }
+                    Id = materialDto.Id,
+                    Client = ClientController.Client,
+                    Name = materialDto.Name,
+                    Attenuation = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f),
+                };
             }
-            throw new BackEndException("model doesnt exist");
+            else
+            {
+                material = new MetallicMaterial()
+                {
+                    Id = materialDto.Id,
+                    Client = ClientController.Client,
+                    Name = materialDto.Name,
+                    Attenuation = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f),
+                    Blur=materialDto.Blur,
+                };
+            }
+            return material;
+           
         }
-        private void AddPreviewToTheModel(string clientName, string modelName)
+        public FigureDto ConvertFigure(Figure figure)
         {
-            Model model = GetModelByNameAndClient(clientName, modelName);
+            return new FigureDto()
+            {
+                Id = figure.Id,
+                Name = figure.Name,
+                Radius = ((Sphere)figure).Radius
+            };
+        }
+        public MaterialDto ConvertMaterial(Material material)
+        {
+            double blur;
+            try
+            {
+                blur = ((MetallicMaterial)material).Blur;
+            }catch
+            {
+                blur=0;
+            }
+            return new MaterialDto()
+            {
+                Id = material.Id,
+                Name = material.Name,
+                Red = material.Attenuation.Red(),
+                Green = material.Attenuation.Green(),
+                Blue = material.Attenuation.Blue(),
+                Blur = blur,
+            };
+        }
+
+        private Figure ConvertFigureDto(FigureDto figureDto)
+        {
+            Figure figure = new Sphere()
+            {
+                Id = figureDto.Id,
+                Client = ClientController.Client,
+                Name= figureDto.Name,
+                Radius = figureDto.Radius,
+            };
+            return figure;
+        }
+
+        public void AddAModelWithPreview(string modelName, FigureDto figure, MaterialDto material)
+        {
+            AddAModelWithoutPreview(modelName, figure, material);
+            AddPreviewToTheModel(modelName);
+        }
+        private void CreateAndAddModel(string modelName, Figure figure, Material material)
+        {
+            Model model = new Model()
+            {
+                Client=ClientController.Client,
+                Name = modelName,
+                Figure = figure, 
+                Material = material };
+            ModelService.AddModel(model);
+        }
+        private void AddPreviewToTheModel(string modelName)
+        {
+            Model model = ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));
             model.Preview = GraphicMotor.RenderModelPreview(model);
+            ModelService.UpdatePreview(model);
         }
-        public void ChangeModelName(string clientName, string oldName, string newName)
+        public void ChangeName(ModelDto modelDto, string newName)
         {
-            Model model;
             try
             {
-                model = GetModelByNameAndClient(clientName, oldName);
+                Model material = ModelService.GetModelByNameAndClient(newName, int.Parse(ClientController.Client.Id));
+                throw new Exception("There is already a material with that name");
             }
-            catch (Exception)
+            catch
             {
-                return;
             }
-            try
-            {
-                GetModelByNameAndClient(clientName, newName);
-            }
-            catch (Exception)
-            {
-                model.Name = newName;
-            }
+            Model tryName = new Model() { Name = newName };
+            ModelService.UpdateName(int.Parse(modelDto.Id), newName);
         }
 
-        public void DeleteModelInList(string clientName, string modelName)
+        public void Delete(ModelDto modelDto)
         {
+            ModelService.RemoveModel(int.Parse(modelDto.Id));
+        }
+        public List<ModelDto> GetModels()
+        {
+
+            List<Model> Modellist;
             try
             {
-                Model model = GetModelByNameAndClient(clientName, modelName);
-                DataWarehouse.Models.Remove(model);
+                Modellist = ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
             }
-            catch (Exception)
+            catch
             {
+                throw new Exception("The client does not have any models");
             }
 
-        }
-        public List<Model> GetModelsWithFigure(string figureName)
-        {
-            List<Model> modelsWithFigure = new List<Model>();
-            foreach (Model model in DataWarehouse.Models)
+            List<ModelDto> modelDtos = new List<ModelDto>();
+            foreach (Model mod in Modellist)
             {
-                if (model.Figure.Name.Equals(figureName))
+                ModelDto modDto = new ModelDto()
                 {
-                    modelsWithFigure.Add(model);
-                }
+                    Id = mod.Id,
+                    Name = mod.Name,
+                    Figure= ConvertFigure(mod.Figure),
+                    Material = ConvertMaterial(mod.Material),
+                    Preview = mod.Preview,
+                };
+                modelDtos.Add(modDto);
             }
-            if (modelsWithFigure.Count == 0)
-            {
-                throw new BackEndException("No models found");
-            }
-
-            return modelsWithFigure;
+            return modelDtos;
         }
 
-        public List<Model> GetModelWithMaterial(string materialName)
+        public bool CheckIfFigureIsInAModel(FigureDto figureDto)
         {
-            List<Model> modelsWithMaterial = new List<Model>();
-            foreach (Model model in DataWarehouse.Models)
+               List<Model> expectedEmptyList = ModelService.GetModelsWithFigure(int.Parse(figureDto.Id));
+            if(expectedEmptyList.Count == 0)
             {
-                if (model.Material.Name.Equals(materialName))
-                {
-                    modelsWithMaterial.Add(model);
-                }
+                return false;
             }
-            if (modelsWithMaterial.Count == 0)
+            return true;
+        }
+        public bool CheckIfMaterialIsInAModel(MaterialDto materialDto)
+        {
+            List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(int.Parse(materialDto.Id));
+            if (expectedEmptyList.Count == 0)
             {
-                throw new BackEndException("No model found");
+                return false;
             }
-            return modelsWithMaterial;
+            return true;
         }
     }
-
 }

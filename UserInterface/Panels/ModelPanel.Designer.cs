@@ -146,7 +146,7 @@
             this.btnCreateFigure.TabIndex = 8;
             this.btnCreateFigure.Text = "Create!!!";
             this.btnCreateFigure.UseVisualStyleBackColor = true;
-            this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
+            this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateModel_Click);
             // 
             // label5
             // 

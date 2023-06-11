@@ -1,5 +1,5 @@
-﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,45 +10,42 @@ namespace Render3D.UserInterface.Panels
     public partial class ModelPanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
+        private readonly FigureController figureController;
+        private readonly MaterialController materialController;
+        private readonly ModelController modelController;
         public ModelPanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            modelController = ModelController.GetInstance();
         }
 
         private void VariableInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
-            List<Figure> figureList = render.dataWarehouse.Figures;
-            List<Material> materialList = render.dataWarehouse.Materials;
-            foreach (Figure figure in figureList)
+            List<FigureDto> figureList = figureController.GetFigures();
+            List<MaterialDto> materialList = materialController.GetMaterials();
+            foreach (FigureDto figure in figureList)
             {
-                if (figure.Client.Name.Equals(render.clientName))
-                {
                     lstFigure.Items.Add(figure);
-                }
-
             }
-            foreach (Material material in materialList)
+            lstFigure.DisplayMember = "Name";
+            foreach (MaterialDto material in materialList)
             {
-                if (material.Client.Name.Equals(render.clientName))
-                {
                     lstMaterial.Items.Add(material);
-                }
             }
+            lstMaterial.DisplayMember = "Name";
             lblExceptionError.Text = "";
         }
 
-        private void BtnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateModel_Click(object sender, EventArgs e)
         {
             lblExceptionError.Text = "";
             string modelName = txtModelName.Text;
-            Figure figure = lstFigure.SelectedItem as Figure;
-            Material material = lstMaterial.SelectedItem as Material;
-            if (figure == null || material == null)
+            if (!(lstFigure.SelectedItem is FigureDto figure) || !(lstMaterial.SelectedItem is MaterialDto material))
             {
                 return;
             }
@@ -57,7 +54,8 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithPreview(render.clientName, modelName, figure, material);
+                   
+                    modelController.AddAModelWithPreview(modelName, figure, material);
                     txtModelName.Text = "";
                 }
                 catch (Exception ex)
@@ -69,8 +67,9 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithoutPreview(render.clientName, modelName, figure, material);
-                    txtModelName.Text = "";
+                
+                    modelController.AddAModelWithoutPreview(modelName, figure, material);
+                     txtModelName.Text = "";
                 }
                 catch (Exception ex)
                 {
