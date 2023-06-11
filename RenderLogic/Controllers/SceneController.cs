@@ -168,7 +168,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public void RenderScene(Scene scene)
         {
-            Boolean blur = false;
+            bool blur = false;   
             scene.Preview = GraphicMotor.Render(scene, blur);
             scene.UpdateLastRenderizationDate();
         }
@@ -196,7 +196,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public void RenderSceneBlur(Scene scene)
         {
-            Boolean blur = true;
+            bool blur = true;
             scene.Preview = GraphicMotor.Render(scene, blur);
             scene.UpdateLastRenderizationDate();
         }

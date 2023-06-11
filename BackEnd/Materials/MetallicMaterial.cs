@@ -14,7 +14,7 @@ namespace Render3D.BackEnd.Materials
         public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
         {
             Ray rayScattered = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
-            Vector3D vectorReflected = reflect(hitRecord.Ray.Direction.GetUnit(), hitRecord.Normal);
+            Vector3D vectorReflected = Reflect(hitRecord.Ray.Direction.GetUnit(), hitRecord.Normal);
             rayScattered.Origin = hitRecord.Intersection;
             rayScattered.Direction = vectorReflected.Add(GetRandomInUnitFigure(random).Multiply(hitRecord.Roughness)
             );
@@ -28,7 +28,7 @@ namespace Render3D.BackEnd.Materials
             }
         }
 
-        private Vector3D reflect(Vector3D vectorV, Vector3D vectorN)
+        private Vector3D Reflect(Vector3D vectorV, Vector3D vectorN)
         {
             var dotVN = vectorV.DotProduct(vectorN);
             return vectorV.Substract(vectorN.Multiply(2 * dotVN));

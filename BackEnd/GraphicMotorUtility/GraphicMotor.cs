@@ -88,7 +88,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap Bitmap { get; set; }
 
-        public Bitmap Render(Scene sceneSample, Boolean blur)
+        public Bitmap Render(Scene sceneSample, bool blur)
         {
             int width = ResolutionWidth;
             int height = ResolutionHeight();
@@ -117,7 +117,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix, Boolean blur)
+        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix, bool blur)
         {
             Random random = new Random();
             for (var row = ResolutionHeight() - 1; row >= 0; row--)
