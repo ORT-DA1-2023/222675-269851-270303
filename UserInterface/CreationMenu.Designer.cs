@@ -54,7 +54,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(610, 580);
+            this.panel3.Size = new System.Drawing.Size(636, 580);
             this.panel3.TabIndex = 1;
             // 
             // flObjectList
@@ -63,7 +63,7 @@
             this.flObjectList.Location = new System.Drawing.Point(318, -1);
             this.flObjectList.Margin = new System.Windows.Forms.Padding(0);
             this.flObjectList.Name = "flObjectList";
-            this.flObjectList.Size = new System.Drawing.Size(290, 579);
+            this.flObjectList.Size = new System.Drawing.Size(316, 579);
             this.flObjectList.TabIndex = 0;
             // 
             // pnlObjectCreation
@@ -71,10 +71,10 @@
             this.pnlObjectCreation.BackColor = System.Drawing.Color.White;
             this.pnlObjectCreation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlObjectCreation.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlObjectCreation.Location = new System.Drawing.Point(610, 0);
+            this.pnlObjectCreation.Location = new System.Drawing.Point(636, 0);
             this.pnlObjectCreation.Margin = new System.Windows.Forms.Padding(0);
             this.pnlObjectCreation.Name = "pnlObjectCreation";
-            this.pnlObjectCreation.Size = new System.Drawing.Size(390, 580);
+            this.pnlObjectCreation.Size = new System.Drawing.Size(364, 580);
             this.pnlObjectCreation.TabIndex = 0;
             // 
             // lblShowClientName

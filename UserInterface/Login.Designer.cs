@@ -134,7 +134,7 @@
             this.lblExceptionError.AutoSize = true;
             this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
-            this.lblExceptionError.Location = new System.Drawing.Point(560, 316);
+            this.lblExceptionError.Location = new System.Drawing.Point(560, 320);
             this.lblExceptionError.Name = "lblExceptionError";
             this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
             this.lblExceptionError.TabIndex = 18;
@@ -222,7 +222,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(560, 303);
+            this.label5.Location = new System.Drawing.Point(560, 307);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 23;
