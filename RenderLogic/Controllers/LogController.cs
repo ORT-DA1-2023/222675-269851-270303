@@ -1,4 +1,6 @@
-﻿using Render3D.RenderLogic.Controllers;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 
 namespace RenderLogic.Controllers
@@ -16,6 +18,17 @@ namespace RenderLogic.Controllers
                 logController = new LogController();
             }
             return logController;
+        }
+        public void AddLogFromScene(LogDto logDto)
+        {
+
+        }
+        public void AddLogFromPreview(LogDto logDto)
+        {
+            Log log= new Log()
+            {
+
+            }
         }
     }
 }
