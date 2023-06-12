@@ -40,6 +40,7 @@ namespace Render3D.BackEnd.Materials
             Vector3D vector;
             do
             {
+                RandomSingleton random = RandomSingleton.Instance;
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
                 vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
             } while (vector.SquaredLength() >= 1);
@@ -50,5 +51,7 @@ namespace Render3D.BackEnd.Materials
         {
             return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
+        
+
     }
 }

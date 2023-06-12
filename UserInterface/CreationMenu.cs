@@ -125,7 +125,7 @@ namespace Render3D.UserInterface
         private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
-            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient() + "!!";
+            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient();
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
@@ -211,6 +211,11 @@ namespace Render3D.UserInterface
         {
             var log = new LogUI();
             log.Show();
+        }
+
+        private void pnlObjectCreation_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

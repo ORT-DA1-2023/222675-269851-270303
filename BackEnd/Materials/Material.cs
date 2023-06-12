@@ -21,12 +21,9 @@ namespace Render3D.BackEnd.Materials
         public Client Client { get; set; }
         public Ray Ray { get; set; }
 
-
-
         public Colour Attenuation { get; set; }
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord);
-
 
         protected void ValidateName(string value)
         {
@@ -34,9 +31,7 @@ namespace Render3D.BackEnd.Materials
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
 
         }
-
-
-        
+ 
 
     }
 }

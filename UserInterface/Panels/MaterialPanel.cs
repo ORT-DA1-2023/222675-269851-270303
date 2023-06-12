@@ -57,6 +57,7 @@ namespace Render3D.UserInterface.Panels
                         }
                         
                     }
+                    
                 }
                 
                
@@ -74,11 +75,14 @@ namespace Render3D.UserInterface.Panels
 
         public void ResetValues()
         {
+     
             txtMaterialName.Text = "";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;
             nrBlueColor.Value = 0;
             lblExceptionError.Text = "";
+            label2.Visible = true;
+            label2.Update();
         }
 
         public bool IsValidFormat(string input)
@@ -103,6 +107,43 @@ namespace Render3D.UserInterface.Panels
                 txtBlur.Enabled = true;
                 lblBlur.Enabled = true;
             }
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void txtMaterialName_TextChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrRedColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrGreenColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrBlueColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void txtBlur_TextChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

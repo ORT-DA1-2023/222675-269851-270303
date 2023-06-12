@@ -125,7 +125,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Ray GetRayForBlurCamera(double u, double v)
         {
-            RandomSingleton random = RandomSingleton.Instance;
             Vector3D vectorRandom = GetRandomInUnitForBlur().Multiply(LensRadius);
             Vector3D vectorOffset = VectorU.Multiply(vectorRandom.X).Add(VectorV.Multiply(vectorRandom.Y));
             Vector3D horizontalPosition = Horizontal.Multiply(u);
@@ -134,10 +133,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         }
         
+
         public Vector3D GetRandomInUnitForBlur()
         {
             RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
+            RandomSingleton random = RandomSingleton.Instance;
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());

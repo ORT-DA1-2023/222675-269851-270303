@@ -1,4 +1,5 @@
-﻿using Render3D.RenderLogic.Controllers;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
@@ -51,8 +52,13 @@ namespace UserInterface.Panels
         {
             _sceneDto = sceneController.GetScene(_sceneDto.Name);
             txtSceneName.Text = _sceneDto.Name;
-            txtLookAt.Text = "(" + _sceneDto.LookAt[0] + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
-            txtLookFrom.Text = "(" + _sceneDto.LookFrom[0] + ";" + _sceneDto.LookFrom[1] + ";" + _sceneDto.LookFrom[2] + ")";
+            XLookAt.Text = $"{_sceneDto.LookAt[0]}";
+            YLookAt.Text = $"{_sceneDto.LookAt[1]}";
+            ZLookAt.Text = $"{_sceneDto.LookAt[2]}";
+           // txtLookAt.Text = "(" +  + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
+            XLookFrom.Text = $"{_sceneDto.LookFrom[0]}";
+            YLookFrom.Text = $"{_sceneDto.LookFrom[1]}";
+            ZLookFrom.Text = $"{_sceneDto.LookFrom[2]}";
             nrFov.Value = _sceneDto.Fov;
             cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
             cBoxAvailableModels.DisplayMember = "Name";
@@ -70,7 +76,7 @@ namespace UserInterface.Panels
             }
             else
             {
-                lblLastRenderDate.Text = "This scene has not been rendered yet";
+                lblLastRenderDate.Text = "Never";
             }
             CheckRenderOutDated();
         }
@@ -125,7 +131,9 @@ namespace UserInterface.Panels
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
-            if (IsValidFormatVector(txtLookFrom.Text) && IsValidFormatVector(txtLookAt.Text))
+            string lookFromText = $"({XLookFrom.Text};{YLookFrom.Text};{ZLookFrom.Text})";
+            string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
+            if (IsValidFormat(lookFromText) && IsValidFormat(lookAtText))
             {
                 
                     try
@@ -134,7 +142,7 @@ namespace UserInterface.Panels
                         {
                              if(IsValidFormatAperture(txtAperture.Text)&& IsValidNumberAperture(txtAperture.Text))
                              {
-                                sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                                sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
                              }
                              else
                              {
@@ -190,7 +198,9 @@ namespace UserInterface.Panels
         {
 
           ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-          sceneController.AddModel(_sceneDto, model, txtPosition.Text);
+            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
+
+          sceneController.AddModel(_sceneDto, model, position);
             lblAddModel.Text = "Model Added Correctly";  
             lblAddModel.ForeColor = Color.Green;
             LoadScene();
@@ -207,6 +217,8 @@ namespace UserInterface.Panels
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            lblRenderingNotification.Visible = true;
+            lblRenderingNotification.Update();
             if (cmbBlur.Checked)
             {
                 sceneController.RenderScene(_sceneDto,true);
@@ -216,7 +228,10 @@ namespace UserInterface.Panels
 
                 sceneController.RenderScene(_sceneDto,false);
             }
+
             LoadScene();
+            lblRenderingNotification.Visible = false;
+            lblRenderingNotification.Update();
         }
 
         private void CmbBlur_CheckedChanged(object sender, EventArgs e)
@@ -232,6 +247,52 @@ namespace UserInterface.Panels
                 txtAperture.Enabled = true;
                 lblAperture.Enabled = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                label5.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void Label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            lblExporting.Visible = true;
+            lblExporting.Update();
+            BtnRender_Click(sender, e);
+
+            SceneController s = new SceneController(); //TODO
+           // s.ExportRenderScene(_sceneDto,true);
+
+            lblExporting.Visible = false;
+            lblExporting.Update();
+        }
+
+        private void txtLookFrom_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCamera_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
