@@ -1,44 +1,38 @@
 ﻿using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Render3D.BackEnd.Controllers
 {
     public class FigureController
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
-        public ClientController ClientController { get => _clientController; set => _clientController = value; }
+        public DataWarehouse DataWarehouse { get; set; }
+        public ClientController ClientController { get; set; }
         public void AddFigure(string clientName, string figureName, double figureRadius)
         {
             try
             {
                 GetFigureByNameAndClient(clientName, figureName);
-                
+
             }
             catch (Exception)
             {
-               CreateAndAddFigure(ClientController.GetClientByName(clientName), figureName, figureRadius);
+                CreateSphere(ClientController.GetClientByName(clientName), figureName, figureRadius);
                 return;
             }
-         throw new BackEndException("figure already exists");
+            throw new BackEndException("figure already exists");
 
         }
-        private void CreateAndAddFigure(Client client, string figureName, double figureRadius)
+        private void CreateSphere(Client client, string figureName, double figureRadius)
         {
             Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
-            _dataWarehouse.Figures.Add(figure);
+            DataWarehouse.Figures.Add(figure);
         }
         public Figure GetFigureByNameAndClient(string clientName, string figureName)
         {
             Client client = ClientController.GetClientByName(clientName);
-            foreach (Figure figure in _dataWarehouse.Figures)
+            foreach (Figure figure in DataWarehouse.Figures)
             {
                 if (figure.Name == figureName && figure.Client.Equals(client))
                 {
@@ -51,9 +45,10 @@ namespace Render3D.BackEnd.Controllers
         {
             try
             {
-                Figure figure =GetFigureByNameAndClient(clientName, figureName); 
-                _dataWarehouse.Figures.Remove(figure);
-            }catch (Exception)
+                Figure figure = GetFigureByNameAndClient(clientName, figureName);
+                DataWarehouse.Figures.Remove(figure);
+            }
+            catch (Exception)
             {
             }
 
@@ -63,20 +58,23 @@ namespace Render3D.BackEnd.Controllers
             Figure figure;
             try
             {
-                figure=GetFigureByNameAndClient(clientName, oldName);
-            }catch(Exception)
+                figure = GetFigureByNameAndClient(clientName, oldName);
+                Figure correctNameCheck = new Sphere() { Name = newName };
+            }
+            catch (Exception)
             {
                 return;
             }
-          
+
             try
             {
                 GetFigureByNameAndClient(clientName, newName);
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 figure.Name = newName;
             }
-            
+
         }
 
     }

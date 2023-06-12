@@ -1,63 +1,69 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
 {
-    
+
     public partial class ModelPanel : Form
     {
-        CreationMenu creation;
-        Render3DIU render;
+        private CreationMenu creation;
+        private readonly FigureController figureController;
+        private readonly MaterialController materialController;
+        private readonly ModelController modelController;
         public ModelPanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            modelController = ModelController.GetInstance();
         }
 
         private void VariableInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
-            List<Figure> figureList= render.dataWarehouse.Figures;
-            List <Material> materialList=render.dataWarehouse.Materials;
-            foreach (Figure figure in figureList)
+            List<FigureDto> figureList = figureController.GetFigures();
+            List<MaterialDto> materialList = materialController.GetMaterials();
+            foreach (FigureDto figure in figureList)
             {
-                lstFigure.Items.Add(figure);
+                    lstFigure.Items.Add(figure);
             }
-            foreach (Material material in materialList) 
-            { 
-                lstMaterial.Items.Add(material);
+            lstFigure.DisplayMember = "Name";
+            foreach (MaterialDto material in materialList)
+            {
+                    lstMaterial.Items.Add(material);
             }
+            lstMaterial.DisplayMember = "Name";
             lblExceptionError.Text = "";
         }
 
-        private void BtnCreateFigure_Click(object sender, EventArgs e)
+        private void BtnCreateModel_Click(object sender, EventArgs e)
         {
-            string modelName= txtModelName.Text; 
-            Figure figure= lstFigure.SelectedItem as Figure;
-            Material material= lstMaterial.SelectedItem as Material;
-            if (figure == null || material==null) {
+            lblExceptionError.Text = "";
+            string modelName = txtModelName.Text;
+            if (!(lstFigure.SelectedItem is FigureDto figure) || !(lstMaterial.SelectedItem is MaterialDto material))
+            {
                 return;
             }
 
             if (checkGeneratePreview.Checked)
             {
-                try {
-                    render.modelController.AddAModelWithPreview(render.clientName, modelName, figure, material);
+                try
+                {
+                   
+                    modelController.AddAModelWithPreview(modelName, figure, material);
+                    txtModelName.Text = "";
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
                 }
             }
@@ -65,18 +71,23 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                    render.modelController.AddAModelWithoutPreview(render.clientName, modelName, figure, material);
+                
+                    modelController.AddAModelWithoutPreview(modelName, figure, material);
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
+
                 }
 
             }
-            
-            creation.ShowModelList();
-            txtModelName.Text = "";
 
+            creation.ShowModelList();
+            
         }
     }
 }

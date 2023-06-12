@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 using System.Collections.Generic;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Controllers;
 using System.Drawing;
-using System.Reflection;
 
 namespace Render3D.UnitTest
 {
@@ -18,95 +17,88 @@ namespace Render3D.UnitTest
         private readonly string sceneSampleName = "sceneSampleName";
         private readonly Client clientSample = new Client() { Name = "Joe", Password = "S4fePassword" };
         private readonly List<Model> positionedModels = new List<Model>();
-        private readonly Vector3D randomCameraPosition = new Vector3D(1, 1, 0);
-        private readonly Vector3D differentRandomCameraPosition = new Vector3D(2, 3, 0);
-        private readonly Vector3D randomObjectivePosition = new Vector3D(1, 1, 0);
-        private readonly Vector3D differentRandomObjectivePosition = new Vector3D(5, 1, 3);
-        private readonly int randomFoV = 30;
-        private Ray ray;
-        private Model model;
-        private Material material;
-        [TestInitialize]
+        private Ray raySample;
+        private Model modelSample;
+        private Material materialSample;
 
-        public void initialize()
+        [TestInitialize]
+        public void Initialize()
         {
             sceneSample = new Scene() { Name = sceneSampleName };
 
             Vector3D origin = new Vector3D(0, 0, 0);
             Vector3D direction = new Vector3D(1, 1, 1);
-            ray = new Ray(origin, direction);
-             material = new LambertianMaterial()
+            raySample = new Ray(origin, direction);
+            materialSample = new LambertianMaterial()
             {
                 Attenuation = new Colour(1, 0, 0),
-                Ray = ray,
+                Ray = raySample,
             };
             Figure figure = new Sphere()
             {
                 Position = new Vector3D(5, 5, 5),
                 Radius = 2,
             };
-             model = new Model()
+            modelSample = new Model()
             {
                 Figure = figure,
-                Material = material,
+                Material = materialSample,
             };
 
         }
 
         [TestMethod]
-        public void givenAValidClientItAssignsItToTheScene()
+        public void GivenValidClientAssignsItToScene()
         {
             sceneSample.Client = clientSample;
             Assert.IsTrue(sceneSample.Client.Equals(clientSample));
         }
 
         [TestMethod]
-        public void givenAValidNameItAssignsItToTheScene()
+        public void GivenValidNameAssignsItToScene()
         {
             sceneSample.Name = sceneSampleName;
             Assert.AreEqual(sceneSample.Name, sceneSampleName);
         }
 
         [TestMethod]
-        public void givenAValidPositionedModelsItAssignsItToTheScene()
+        public void GivenValidPositionedModelsAssignsItToScene()
         {
             sceneSample.PositionedModels = positionedModels;
             Assert.AreEqual(sceneSample.PositionedModels, positionedModels);
         }
 
         [TestMethod]
-        public void givenACameraItAssignsItToTheScene()
+        public void GivenCameraAssignsToScene()
         {
             Camera camera = new Camera();
             sceneSample.Camera = camera;
             Assert.AreEqual(sceneSample.Camera, camera);
         }
 
-
-
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant be empty")]
-        public void givenAnEmptyNameItThrowsABackEndException()
+        public void GivenEmptyNameThrowsBackEndException()
         {
             sceneSample.Name = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
-        public void givenANameThatStartsWithSpacesItThrowsABackEndException()
+        public void GivenNameStartingWithSpaceThrowsBackEndException()
         {
             sceneSample.Name = " " + sceneSampleName;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with blank")]
-        public void givenANameThatEndsWithSpacesItThrowsABackEndException()
+        public void GivenNameEndingWithSpaceThrowsBackEndException()
         {
             sceneSample.Name = sceneSampleName + " ";
         }
 
         [TestMethod]
-        public void givenASceneItReturnsItsRegisteredDate()
+        public void GivenSceneReturnsRegisteredDate()
         {
             DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
             DateTimeProvider.Now = JanuaryFirst2020;
@@ -114,18 +106,18 @@ namespace Render3D.UnitTest
             Scene scene = new Scene();
             DateTimeProvider.Reset();
 
-            Assert.AreEqual(JanuaryFirst2020, scene.RegisterDate);
+            Assert.AreEqual(JanuaryFirst2020, scene.CreationDate);
         }
 
         [TestMethod]
-        public void givenASceneItReturnsNullInRenderizationDateIfItWasNeverRendered()
+        public void GivenSceneReturnsANullRenderizationDateIfItWasNeverRendered()
         {
             Scene scene = new Scene();
             Assert.IsNull(scene.LastRenderizationDate);
         }
 
         [TestMethod]
-        public void givenASceneItReturnsItsLastRenderizationDate()
+        public void GivenSceneReturnsLastRenderizationDate()
         {
             DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
             DateTime FebruaryFirst2020 = new DateTime(2020, 2, 1);
@@ -138,10 +130,8 @@ namespace Render3D.UnitTest
             Assert.AreEqual(FebruaryFirst2020, scene.LastRenderizationDate);
         }
 
-
-
         [TestMethod]
-        public void givenTwoCamerasWithDifferentFovsItReturnsTheyAreNotEqual()
+        public void GivenTwoCamerasWithDifferentFovsReturnsAreNotEqual()
         {
             Camera camera1 = new Camera();
             camera1.Fov = 20;
@@ -152,40 +142,47 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenTwoCamerasWithOnlyTheSameFovItReturnsTheyAreNotEqual()
+        public void GivenTwoCamerasWithOnlySameFovReturnsAreNotEqual()
         {
-            Camera camera1 = new Camera();
-            camera1.Fov = 20;
-            camera1.LookAt = new Vector3D(1, 1, 1);
-            camera1.LookFrom = new Vector3D(0, 0, 0);
+            Camera camera1 = new Camera
+            {
+                Fov = 20,
+                LookAt = new Vector3D(1, 1, 1),
+                LookFrom = new Vector3D(0, 0, 0)
+            };
 
-            Camera camera2 = new Camera();
-            camera2.Fov = 20;
-            camera2.LookAt = new Vector3D(2, 2, 2);
-            camera2.LookFrom = new Vector3D(-2, -2, -2);
+            Camera camera2 = new Camera
+            {
+                Fov = 20,
+                LookAt = new Vector3D(2, 2, 2),
+                LookFrom = new Vector3D(-2, -2, -2)
+            };
 
             Assert.IsFalse(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenTwoEqualCamerasItReturnsTrue()
+        public void GivenTwoEqualCamerasReturnsTrue()
         {
-            Camera camera1 = new Camera();
-            camera1.Fov = 20;
-            camera1.LookAt = new Vector3D(1, 1, 1);
-            camera1.LookFrom = new Vector3D(2, 2, 2);
+            Camera camera1 = new Camera
+            {
+                Fov = 20,
+                LookAt = new Vector3D(1, 1, 1),
+                LookFrom = new Vector3D(2, 2, 2)
+            };
 
-            Camera camera2 = new Camera();
-            camera2.Fov = 20;
-            camera2.LookAt = new Vector3D(1, 1, 1);
-            camera2.LookFrom = new Vector3D(2, 2, 2);
-            bool b = camera1.Equals(camera2);
+            Camera camera2 = new Camera
+            {
+                Fov = 20,
+                LookAt = new Vector3D(1, 1, 1),
+                LookFrom = new Vector3D(2, 2, 2)
+            };
 
-            Assert.IsTrue(b);
+            Assert.IsTrue(camera1.Equals(camera2));
         }
 
         [TestMethod]
-        public void givenAnExistingSceneItUpdatesTheLastModifiedDate()
+        public void GivenExistingSceneUpdatesLastModificationDate()
         {
             Scene scene = new Scene();
             DateTime JanuaryFirst2020 = new DateTime(2020, 1, 1);
@@ -196,39 +193,38 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenARayItWithHitAssignsTheHitValues()
+        public void GivenRayWithHitAssignsHitValues()
         {
-            Colour ret = sceneSample.ShootRay(ray, 10, new Random());
+            Colour ret = sceneSample.ShootRay(raySample, 10);
             Assert.AreEqual(154, ret.Red());
             Assert.AreEqual(194, ret.Green());
             Assert.AreEqual(255, ret.Blue());
-
         }
 
         [TestMethod]
-       public void givenASceneItSetsThePreview()
+        public void GivenBitmapAssignsItToScene()
         {
             Scene scene = new Scene();
             Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-            scene.Preview=bitmap;
+            scene.Preview = bitmap;
             Assert.AreEqual(bitmap, scene.Preview);
         }
         [TestMethod]
-        public void givenASceneItReturnsThePreview()
+        public void GivenSceneReturnsItsPreview()
         {
             Scene scene = new Scene();
             Assert.IsNull(scene.Preview);
             Bitmap bitmap = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             scene.Preview = bitmap;
             Assert.AreEqual(bitmap, scene.Preview);
-           
+
         }
 
         [TestMethod]
-        public void ShootRayWithoutHitDoesNotReturnTheMaterialColour()
+        public void GivenShootRayWithoutHitDoesNotReturnMaterialColour()
         {
-            Colour result = sceneSample.ShootRay(ray, 10, new Random());
-            sceneSample.PositionedModels.Add(model);
+            Colour result = sceneSample.ShootRay(raySample, 10);
+            sceneSample.PositionedModels.Add(modelSample);
 
             Colour materialColour = sceneSample.PositionedModels[0].Material.Attenuation;
             Assert.AreNotEqual(materialColour, result);

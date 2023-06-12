@@ -1,69 +1,85 @@
-﻿using Render3D.BackEnd;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
 {
-    
+
     public partial class FigurePanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
+        private readonly FigureController figureController;
         public FigurePanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            lblExceptionError.Text = "";
         }
 
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            string figureName= txtFigureName.Text;
+            lblExceptionError.Text = "";
             string figureRadiusString = txtFigureRadius.Text;
             double figureRadius;
-            if (TryToParse(figureRadiusString)!=-1)
-            {
-                figureRadius = Convert.ToDouble(figureRadiusString);
-                try
-                {
-                    render.figureController.AddFigure(render.clientName, figureName, figureRadius);
-                }catch(Exception ex)
-                {
-                    lblExceptionError.Text= ex.Message;
-                }
-                creation.ShowFigureList();
-            }
-            else
+            if (TryToParse(figureRadiusString) == -1)
             {
                 lblExceptionError.Text = "the radius must be a number";
+                return;
             }
+            figureRadius = Convert.ToDouble(figureRadiusString);
+            try
+            {
+                FigureDto figureDto = new FigureDto()
+                {
+                    Name = txtFigureName.Text,
+                    Radius = figureRadius,
+                };
+                figureController.AddFigure(figureDto);
+            }
+            catch (Exception ex)
+            {
+                lblExceptionError.Text = ex.Message;
+                return;
+            }
+            creation.ShowFigureList();
             txtFigureName.Text = "";
             txtFigureRadius.Text = "";
+            lblCorrectlyAdded.Visible = true;
+            lblCorrectlyAdded.Update();
+
+
         }
 
-        private decimal TryToParse(string figureRadiusString)
+        private double TryToParse(string figureRadiusString)
         {
             try
             {
-               decimal radius= Decimal.Parse(figureRadiusString);
-                return radius; 
-            }catch 
-            { 
-                return -1; 
+                double radius = double.Parse(figureRadiusString);
+                return radius;
+            }
+            catch
+            {
+                return -1;
             }
         }
 
         private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = (Render3DIU)creation.Parent.Parent;
-            lblExceptionError.Text = "";
+        }
+
+        private void txtFigureName_TextChanged(object sender, EventArgs e)
+        {
+            lblCorrectlyAdded.Visible = false;
+            lblCorrectlyAdded.Update();
+        }
+
+        private void txtFigureRadius_TextChanged(object sender, EventArgs e)
+        {
+            lblCorrectlyAdded.Visible = false;
+            lblCorrectlyAdded.Update();
         }
     }
 }

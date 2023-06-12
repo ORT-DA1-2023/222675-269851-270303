@@ -1,79 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
+using System;
 using System.Windows.Forms;
-using Render3D.BackEnd.Figures;
-using Render3D.UserInterface;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using UserInterface.Panels;
+
 
 namespace Render3D.UserInterface.Controls
 {
-    
+
     public partial class FigureControl : UserControl
     {
-        private string _oldName;
-        public FigureControl(Figure figure)
+        private readonly FigureDto _figureDto;
+        private readonly FigureController figureController;
+        private readonly ModelController modelController;
+        public FigureControl(FigureDto figure)
         {
             InitializeComponent();
-            this.txtFigureName.Text = figure.Name;
-            this.lblFigureRadius.Text = ""+((Sphere)figure).Radius;
+            this.lblFigureName.Text = figure.Name;
+            _figureDto = figure;
+            figureController = FigureController.GetInstance();
+            modelController = ModelController.GetInstance();
+            this.lblFigureRadius.Text = "" + figure.Radius;
+            lblErrorDeleteFigure.Text = "";
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
+        private void ChecksForCorrectEdit(string newName)
         {
-            _oldName= txtFigureName.Text;
-            txtFigureName.ReadOnly = false;
-            txtFigureName.BackColor = Color.Green;
-        }
 
-        private void ClientPressEnter(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            if (!_figureDto.Name.Equals(newName))
             {
-                e.Handled = true;
-                ChecksForCorrectEdit();
-            }
-            
-            
-        }
-
-        private void ClientLeaves(object sender, EventArgs e)
-        {
-            ChecksForCorrectEdit();
-
-        }
-        private void ChecksForCorrectEdit()
-        {
-            txtFigureName.ReadOnly = true;
-            if (!_oldName.Equals(txtFigureName.Text))
-            {
-
-                if (((CreationMenu)this.Parent.Parent.Parent).FigureNameHasBeenChanged(_oldName, txtFigureName.Text))
+                if (((CreationMenu)this.Parent.Parent.Parent).ChangeFigureName(_figureDto, newName))
                 {
-                    txtFigureName.BackColor = Color.White;
+                    lblFigureName.Text = newName;
+                    _figureDto.Name = newName;
                 }
                 else
                 {
-                    txtFigureName.BackColor = Color.Red;
+                    lblErrorDeleteFigure.Text = "Figure name is either not valid or already taken";
                 }
-            }
-            else
-            {
-                txtFigureName.BackColor = Color.White;
             }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-        ((CreationMenu)this.Parent.Parent.Parent).DeleteFigure(txtFigureName.Text);
-        ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
+            if (!modelController.CheckIfFigureIsInAModel(_figureDto))
+            {
+                figureController.Delete(_figureDto);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Figure");
+            }
+            else
+            {
+                lblErrorDeleteFigure.Text = "A model is using this figure";
+            }
+
+        }
+
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            using (var nameChanger = new NameChanger(_figureDto.Name))
+            {
+                var result = nameChanger.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    string name = nameChanger.newName;
+                    ChecksForCorrectEdit(name);
+                }
+            }
+
         }
     }
 }

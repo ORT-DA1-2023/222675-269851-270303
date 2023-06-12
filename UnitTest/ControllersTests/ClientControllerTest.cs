@@ -1,81 +1,75 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+using Render3D.RenderLogic.Controllers;
+using RenderLogic.RepoInterface;
+using RenderLogic.Services;
+using renderRepository.RepoImplementation;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Render3D.BackEnd.Controllers;
 
 namespace Render3D.UnitTest.ControllersTests
 {
     [TestClass]
     public class ClientControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-        private Client _clientSample;
+        ClientController clientController;
+        ClientService clientService;
+        IClientRepo clientRepo;
 
         [TestInitialize]
-        public void initialize()
-        {    
-            _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse=_dataWarehouse};
-            _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
+        public void Initialize()
+        {
+            clientController = ClientController.GetInstance();
+            clientRepo = new ClientRepo();
+            clientService = new ClientService(clientRepo);
+            clientController.ClientService = clientService;
         }
 
         [TestMethod]
-        public void GivenANewClientReturnsTrueAfterAddingItToTheList()
+        public void GivenNewClientSavesIt()
         {
-            Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_clientSample.Equals((_clientController.DataWarehouse).Clients[0]));
-            Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 1);
+            clientController.SignIn("ClientTest", "4Testing");
+            clientController.Login("ClientTest", "4Testing");
+            clientController.Client.Name = "ClientTest";
+            clientController.RemoveClient("clientTest");
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
-        public void GivenANewWrongClientReturnsFalseAfterTryingToAddItToTheList()
+        [ExpectedException(typeof(Exception), "Client Already Exists")]
+        public void GivenAClientThatAlreadyExistsThrowsException()
         {
-            Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
-            _clientController.SignIn("", "");
-            Assert.IsTrue((_clientController.DataWarehouse).Clients.Count == 0);
+            clientController.SignIn("ClientTest", "4Testing");
+            clientController.SignIn("ClientTest", "4Testing");
+            clientController.RemoveClient("clientTest");
+
         }
         [TestMethod]
-        public void GivenAClientReturnsTrueIfIsInTheList()
+        [ExpectedException(typeof(Exception), "A Client with that name does not exist")]
+        public void GivenClientReturnsFalseIfIsNotInTheList()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_clientController.GetClientByName("clientSample1").Equals(_clientSample));
+            clientController.Login("ClientTest", "4Testing");
         }
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "The client doesnt exist")]
-        public void GivenAClientReturnsFalseIfIsInNotTheList()
+        public void GivenNameChecksIfIsValid()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_clientController.GetClientByName("clientSample2").Name==null);
-        }
-        [TestMethod]
-        public void givenANameChecksIfIsValid()
-        {
-            _clientController.CheckName("clientSample1");
+            clientController.CheckName("ClientTest");
         }
         [TestMethod]
 
         [ExpectedException(typeof(BackEndException), "Name length must be between 3 and 20")]
-        public void givenANameChecksIfIsNotValid()
+        public void GivenNameChecksIfIsNotValid()
         {
-            _clientController.CheckName("");
+            clientController.CheckName("");
         }
 
         [TestMethod]
-        public void givenAPasswordChecksIfIsValid()
+        public void GivenPasswordChecksIfIsValid()
         {
-            _clientController.CheckPassword("ValidPassword1");
+            clientController.CheckPassword("4Testing");
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name length must be between 5 and 25")]
-        public void givenAPasswordChecksIfIsNotValid()
+        public void GivenPasswordChecksIfIsNotValid()
         {
-            _clientController.CheckPassword("");
+            clientController.CheckPassword("");
         }
     }
 }

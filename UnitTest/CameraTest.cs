@@ -14,12 +14,13 @@ namespace Render3D.UnitTest
         private readonly Vector3D oneTwoThree = new Vector3D(1, 2, 3);
         private readonly int validFov = 30;
 
-        private const int smallestValidFov = 0;
-        private const int largestValidFov = 160;
-        private const double validAspectRatio = 1;
-        private const double validWidthHalf = 1;
-        private const double validHeightHalf = 1;
-
+        private readonly int smallestValidFov = 0;
+        private readonly int largestValidFov = 160;
+        private readonly double validAspectRatio = 1;
+        private readonly double validWidthHalf = 1;
+        private readonly double validHeightHalf = 1;
+        private readonly double validLensRadius = 2;
+        private readonly double validAperture = 2;
 
         private readonly int tooSmallFov = -1;
         private readonly int tooLargeFov = 161;
@@ -31,14 +32,14 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidWidthHalfItAssingsToTheCamara()
+        public void GivenValidWidthHalfAssingsToCamera()
         {
             cameraSample.WidthHalf = validWidthHalf;
             Assert.AreEqual(validWidthHalf, cameraSample.WidthHalf);
         }
 
         [TestMethod]
-        public void grivenAValidFovItCalculatesThetaToAssingsTheCamera()
+        public void GivenValidFovAssignsThetaToCamera()
         {
             double theta = validFov * Math.PI / 180;
             cameraSample.Theta = theta;
@@ -46,51 +47,49 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidHeightHalfItAssingsToTheCamara()
+        public void GivenValidHeightHalfAssingsToCamara()
         {
             cameraSample.HeightHalf = validHeightHalf;
             Assert.AreEqual(validHeightHalf, cameraSample.HeightHalf);
         }
 
-
-
         [TestMethod]
-        public void givenAValidAspectRatioItAssingsToTheCamera()
-        {
-            cameraSample.AspectRatio = validAspectRatio;
-            Assert.AreEqual(validAspectRatio, cameraSample.AspectRatio);
-        }
-
-
-        [TestMethod]
-        public void givenAVectorItAssignsItAsLookFrom()
+        public void GivenVectorAssignsAsLookFrom()
         {
             cameraSample.LookFrom = allOnes;
             Assert.AreEqual(allOnes, cameraSample.LookFrom);
         }
 
         [TestMethod]
-        public void givenAVectorItAssignsItAsLookAt()
+        public void GivenVectorAssignsAsLookAt()
         {
             cameraSample.LookAt = allOnes;
             Assert.AreEqual(allOnes, cameraSample.LookAt);
         }
 
         [TestMethod]
-        public void givenAValidFovItAssignsIt()
+        public void GivenValidFovAssignsIt()
         {
             cameraSample.Fov = validFov;
             Assert.AreEqual(validFov, cameraSample.Fov);
         }
 
         [TestMethod]
-        public void givenTheLargestValidFovItAssignsIt()
+        public void GivenAValidLensRadiusAssignsIt()
+        {
+            cameraSample.LensRadius = validLensRadius;
+            Assert.AreEqual(cameraSample.LensRadius, validLensRadius);
+        }
+
+        [TestMethod]
+        public void GivenLargestValidFovAssignsIt()
         {
             cameraSample.Fov = largestValidFov;
             Assert.AreEqual(largestValidFov, cameraSample.Fov);
         }
+
         [TestMethod]
-        public void givenTheSmallestValidFovItAssignsIt()
+        public void GivenSmallestValidFovAssignsIt()
         {
             cameraSample.Fov = smallestValidFov;
             Assert.AreEqual(smallestValidFov, cameraSample.Fov);
@@ -98,27 +97,35 @@ namespace Render3D.UnitTest
 
         [ExpectedException(typeof(BackEndException), "FoV must be between 0 and 160")]
         [TestMethod]
-        public void givenATooSmallFovItThrowsABackendException()
+        public void GivenTooSmallFovThrowsABackendException()
         {
             cameraSample.Fov = tooSmallFov;
         }
-        [ExpectedException(typeof(BackEndException), "FoV must be between 0 and 160")]
 
+        [ExpectedException(typeof(BackEndException), "FoV must be between 0 and 160")]
         [TestMethod]
-        public void givenATooLargeFovItThrowsABackendException()
+        public void GivenTooLargeFovThrowsABackendException()
         {
             cameraSample.Fov = tooLargeFov;
         }
 
         [TestMethod]
-        public void givenACameraCreatedWithTheConstructorWithParametersItassignsTheProperties()
+        public void GivenCameraCreatedWithConstructorWithParametersToBlurAssignsProperties()
         {
-            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, 1);
+            Camera camera = new Camera(allOnes, allTwos, validFov, validAperture);
             Assert.IsTrue(allOnes.Equals(camera.LookFrom));
             Assert.IsTrue(allTwos.Equals(camera.LookAt));
-            Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
             Assert.IsTrue(camera.Fov == validFov);
-            Assert.IsTrue(camera.AspectRatio == 1);
+            Assert.IsTrue(camera.LensRadius == validAperture / 2);
+        }
+
+        [TestMethod]
+        public void GivenCameraCreatedWithConstructorWithParametersAssignsProperties()
+        {
+            Camera camera = new Camera(allOnes, allTwos, validFov);
+            Assert.IsTrue(allOnes.Equals(camera.LookFrom));
+            Assert.IsTrue(allTwos.Equals(camera.LookAt));
+            Assert.IsTrue(camera.Fov == validFov);
         }
 
     }

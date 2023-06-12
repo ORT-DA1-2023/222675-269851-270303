@@ -2,8 +2,8 @@
 using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
 using System;
-
 namespace Render3D.UnitTest
 {
     [TestClass]
@@ -12,34 +12,34 @@ namespace Render3D.UnitTest
 
         private Client clientSample;
         private readonly String validSphereName = "Name of the sphere";
-        private Sphere newSphericalFigure;
+        private Sphere sphereSample;
         private readonly double validRadius = 2;
+        private readonly int roughnessSample = 0;
         private readonly Vector3D positionSample = new Vector3D(0, 0, 0);
-        private readonly Colour colorSample = new Colour(1, 0.5, 0.1);
+        private readonly Colour colourSample = new Colour(1, 0.5, 0.1);
 
         private double moduleMaxSample;
         private double moduleMinSample;
-        private Ray rayIntersection;
-        private HitRecord3D hitRecord;
+        private Ray rayIntersectionSample;
+        private HitRecord3D hitRecordSample;
 
 
         [TestInitialize]
-        public void initialize()
+        public void Initialize()
         {
-            clientSample = new Client() { Name = "client1Name" };
-
-            newSphericalFigure = new Sphere();
+            clientSample = new Client() { Name = "clientSampleName" };
+            sphereSample = new Sphere();
         }
 
         [TestMethod]
-        public void givenAValidVectorItAssignsItToTheFigure()
+        public void GivenValidVectorAssignsToFigure()
         {
-            newSphericalFigure.Position = positionSample;
-            Assert.AreEqual(positionSample, newSphericalFigure.Position);
+            sphereSample.Position = positionSample;
+            Assert.AreEqual(positionSample, sphereSample.Position);
         }
 
         [TestMethod]
-        public void givenASphereCreatedWithTheConstructorWithAttributesItAssignsCorrectlyTheAttributes()
+        public void GivenSphereCreatedWithConstructorWithAttributesAssignsCorrectlyAllAttributes()
         {
             Vector3D allOnes = new Vector3D(1, 1, 1);
             double radius = 2.3;
@@ -49,74 +49,74 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenAValidModuleAnd2VectorItReturnsAHitRecord()
+        public void GivenValidModuleAndTwoVectorsReturnsHitRecord()
         {
-            rayIntersection = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
+            rayIntersectionSample = new Ray(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
             moduleMaxSample = 0;
             moduleMinSample = 0;
-            hitRecord = new HitRecord3D();
-            Assert.IsFalse(hitRecord.Equals(newSphericalFigure.FigureHitRecord(rayIntersection, moduleMinSample, moduleMaxSample, colorSample)));
+            hitRecordSample = new HitRecord3D();
+            Assert.IsFalse(hitRecordSample.Equals(sphereSample.FigureHitRecord(rayIntersectionSample, moduleMinSample, moduleMaxSample, colourSample, roughnessSample)));
         }
 
 
         [TestMethod]
-        public void givenAValidNameItAssignsItToTheSphere()
+        public void GivenValidNameAssigndToSphere()
         {
-            newSphericalFigure.Name = validSphereName;
-            Assert.AreEqual(validSphereName, newSphericalFigure.Name);
+            sphereSample.Name = validSphereName;
+            Assert.AreEqual(validSphereName, sphereSample.Name);
 
         }
 
         [TestMethod]
-        public void givenASphereItAssignsAClientAsItsOwner()
+        public void GivenSphereAssignsClientAsOwner()
         {
-            newSphericalFigure.Client = clientSample;
-            Assert.AreEqual(newSphericalFigure.Client, clientSample);
+            sphereSample.Client = clientSample;
+            Assert.AreEqual(sphereSample.Client, clientSample);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The radius must be greater than 0")]
-        public void givenANegativeRadiusItThrowsABackEndException()
+        public void GivenNegativeRadiusThrowsBackEndException()
         {
-            newSphericalFigure.Radius = -1;
+            sphereSample.Radius = -1;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The radius must be greater than 0")]
-        public void givenAZeroRadiusItThrowsABackEndException()
+        public void GivenZeroRadiusThrowsBackEndException()
         {
-            newSphericalFigure.Radius = 0;
+            sphereSample.Radius = 0;
         }
 
         [TestMethod]
-        public void givenAValidRadiusOfItAssignsItToTheSphere()
+        public void GivenValidRadiusAssignsItToSphere()
         {
-            newSphericalFigure.Radius = validRadius;
-            Assert.AreEqual(newSphericalFigure.Radius, validRadius);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
-        public void givenANameThatStartsWithSpacesItThrowsABackEndException()
-        {
-            newSphericalFigure.Name = " " + validSphereName;
+            sphereSample.Radius = validRadius;
+            Assert.AreEqual(sphereSample.Radius, validRadius);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
-        public void givenANameThatEndsWithSpacesItThrowsABackEndException()
+        public void GivenNameStartingWithSpacesThrowsBackEndException()
         {
-            newSphericalFigure.Name = validSphereName + " ";
+            sphereSample.Name = " " + validSphereName;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BackEndException), "The name must not start or end with spaces")]
+        public void GivenNameEndingWithSpacesThrowsBackEndException()
+        {
+            sphereSample.Name = validSphereName + " ";
         }
         [TestMethod]
-        public void givenAFigureReturnsAString()
+        public void GivenAFigureReturnsItsToString()
         {
-            newSphericalFigure.Name = validSphereName;
-            newSphericalFigure.Radius= validRadius;
-            Assert.AreEqual(newSphericalFigure.ToString(),validSphereName +" "+ validRadius);
+            sphereSample.Name = validSphereName;
+            sphereSample.Radius = validRadius;
+            Assert.AreEqual(sphereSample.ToString(), validSphereName + " " + validRadius);
         }
         [TestMethod]
-        public void givenARayWhichHitsASphereItReturnsTrue()
+        public void GivenRayWhichHitsASphereReturnsThereWasHit()
         {
             Sphere sphere = new Sphere() { Position = new Vector3D(1, 1, 1), Radius = 1 };
             Vector3D direction = new Vector3D(1, 1, 1);
@@ -128,7 +128,7 @@ namespace Render3D.UnitTest
             Assert.IsTrue(sphere.WasHit(ray, minDistance, maxDistance));
         }
         [TestMethod]
-        public void givenARayWhichHitsASphereButNotInRangeItReturnsFalse()
+        public void GivenRayWhichHitsSphereButNotInRangeReturnsThereWasNoHit()
         {
             Sphere sphere = new Sphere() { Position = new Vector3D(10, 10, 10), Radius = 1 };
             Vector3D direction = new Vector3D(1, 1, 1);
@@ -141,7 +141,7 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenARayWhichDoesNotHitASphereItReturnsFalse()
+        public void GivenRayWhichDoesNotHitSphereReturnsFalse()
         {
             Sphere sphere = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 1 };
             Vector3D direction = new Vector3D(1, 1, 1);

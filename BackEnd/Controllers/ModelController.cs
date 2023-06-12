@@ -1,22 +1,17 @@
 ﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.Controllers
 {
     public class ModelController
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-        private GraphicMotor _graphicMotor= new GraphicMotor();
-
-        public DataWarehouse DataWarehouse { get => _dataWarehouse; set { _dataWarehouse = value; } }
-        public ClientController ClientController { get => _clientController; set => _clientController = value; }
+        public DataWarehouse DataWarehouse { get; set; }
+        public ClientController ClientController { get; set; }
+        public GraphicMotor GraphicMotor { get; set; } = new GraphicMotor();
         public void AddAModelWithoutPreview(string clientName, string modelName, Figure figure, Material material)
         {
 
@@ -27,7 +22,7 @@ namespace Render3D.BackEnd.Controllers
             }
             catch (Exception)
             {
-                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure,material);
+                CreateAndAddModel(ClientController.GetClientByName(clientName), modelName, figure, material);
                 return;
             }
             throw new BackEndException("model already exists");
@@ -40,12 +35,12 @@ namespace Render3D.BackEnd.Controllers
         private void CreateAndAddModel(Client client, string modelName, Figure figure, Material material)
         {
             Model model = new Model() { Client = client, Name = modelName, Figure = figure, Material = material };
-            _dataWarehouse.Models.Add(model);
+            DataWarehouse.Models.Add(model);
         }
         public Model GetModelByNameAndClient(string clientName, string modelName)
         {
             Client client = ClientController.GetClientByName(clientName);
-            foreach (Model model in _dataWarehouse.Models)
+            foreach (Model model in DataWarehouse.Models)
             {
                 if (model.Name == modelName && model.Client.Equals(client))
                 {
@@ -57,7 +52,7 @@ namespace Render3D.BackEnd.Controllers
         private void AddPreviewToTheModel(string clientName, string modelName)
         {
             Model model = GetModelByNameAndClient(clientName, modelName);
-            model.Preview = _graphicMotor.RenderModelPreview(model);
+            model.Preview = GraphicMotor.RenderModelPreview(model);
         }
         public void ChangeModelName(string clientName, string oldName, string newName)
         {
@@ -85,12 +80,46 @@ namespace Render3D.BackEnd.Controllers
             try
             {
                 Model model = GetModelByNameAndClient(clientName, modelName);
-                _dataWarehouse.Models.Remove(model);
+                DataWarehouse.Models.Remove(model);
             }
             catch (Exception)
             {
             }
 
+        }
+        public List<Model> GetModelsWithFigure(string figureName)
+        {
+            List<Model> modelsWithFigure = new List<Model>();
+            foreach (Model model in DataWarehouse.Models)
+            {
+                if (model.Figure.Name.Equals(figureName))
+                {
+                    modelsWithFigure.Add(model);
+                }
+            }
+            if (modelsWithFigure.Count == 0)
+            {
+                throw new BackEndException("No models found");
+            }
+
+            return modelsWithFigure;
+        }
+
+        public List<Model> GetModelWithMaterial(string materialName)
+        {
+            List<Model> modelsWithMaterial = new List<Model>();
+            foreach (Model model in DataWarehouse.Models)
+            {
+                if (model.Material.Name.Equals(materialName))
+                {
+                    modelsWithMaterial.Add(model);
+                }
+            }
+            if (modelsWithMaterial.Count == 0)
+            {
+                throw new BackEndException("No model found");
+            }
+            return modelsWithMaterial;
         }
     }
 

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using Render3D.BackEnd.Utilities;
+using System;
+
 
 namespace Render3D.BackEnd
 {
@@ -20,16 +13,14 @@ namespace Render3D.BackEnd
 
         protected string _name;
         protected string _password;
-        private readonly DateTime _registerDate;
 
 
         public Client()
         {
             RegisterDate = DateTimeProvider.Now;
-
         }
 
-        public String Name
+        public string Name
         {
             get { return _name; }
             set
@@ -38,7 +29,7 @@ namespace Render3D.BackEnd
                 _name = value;
             }
         }
-        public String Password
+        public string Password
         {
             get { return _password; }
             set
@@ -48,9 +39,10 @@ namespace Render3D.BackEnd
             }
         }
 
-        public DateTime RegisterDate { get; }
+        public DateTime RegisterDate { get; set; }
+        public string Id { get; set; }
 
-        private void ValidateName(String value)
+        private void ValidateName(string value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -62,7 +54,7 @@ namespace Render3D.BackEnd
             }
         }
 
-        private void ValidatePassword(String value)
+        private void ValidatePassword(string value)
         {
             if (!HelperValidator.IsAlphanumerical(value))
             {
@@ -84,7 +76,7 @@ namespace Render3D.BackEnd
         }
         public bool Equals(Client p)
         {
-            return this.Name.Equals(p.Name);
+            return Name.Equals(p.Name);
         }
     }
 

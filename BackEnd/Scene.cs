@@ -1,4 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,17 +9,16 @@ namespace Render3D.BackEnd
 {
     public class Scene
     {
-        private String _name;
+        protected string _name;
 
         public Scene()
         {
             Camera = new Camera();
-            RegisterDate = DateTimeProvider.Now;
+            CreationDate = DateTimeProvider.Now;
             LastModificationDate = DateTimeProvider.Now;
             PositionedModels = new List<Model>();
         }
-
-
+        public string Id { get; set; }
         public Client Client { get; set; }
         public Camera Camera { get; set; }
         public string Name
@@ -30,15 +31,13 @@ namespace Render3D.BackEnd
             }
         }
 
-        public DateTime RegisterDate { get; }
-        public DateTime LastModificationDate { get; private set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModificationDate { get; set; }
         public DateTime? LastRenderizationDate { get; set; }
-
         public List<Model> PositionedModels { get; set; }
-
         public Bitmap Preview { get; set; }
 
-        public Colour ShootRay(Ray ray, int depth, Random random)
+        public Colour ShootRay(Ray ray, int depth)
         {
             HitRecord3D hitRecord = null;
             double moduleMax = Math.Pow(10, 38);
@@ -49,20 +48,21 @@ namespace Render3D.BackEnd
                 if (element.Figure.WasHit(ray, 0.001, moduleMax))
                 {
                     itWasAHit = true;
-                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation);
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation, element.Roughness);
                     modelSample = element;
                     hitRecord = hit;
                     moduleMax = hit.Module;
                 }
             }
-            return ElementAttenuation(depth, hitRecord, random, modelSample, ray, itWasAHit);
+            return ElementAttenuation(depth, hitRecord, modelSample, ray, itWasAHit);
         }
 
-        private Colour ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample, Ray ray, bool itWasAHit)
+        private Colour ElementAttenuation(int MaxiumDepth, HitRecord3D hitRecord, Model modelSample, Ray ray, bool itWasAHit)
         {
+            RandomSingleton random = RandomSingleton.Instance;
             if (itWasAHit)
             {
-                return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, random, modelSample);
+                return GetAttenuationOfTheFigure(MaxiumDepth, hitRecord, modelSample);
             }
             else
             {
@@ -70,16 +70,21 @@ namespace Render3D.BackEnd
             }
         }
 
-        private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Random random, Model modelSample)
+        private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Model modelSample)
         {
             if (MaxiumDepth > 0)
             {
-                Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord, random);
-                Colour color = ShootRay(newRay, MaxiumDepth - 1, random);
+                Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord);
+                if(newRay == null)
+                {
+                    return new Colour(0, 0, 0);
+                }
+                
+                Colour color = ShootRay(newRay, MaxiumDepth - 1);
                 return new Colour(
-                   hitRecord.Attenuation.Red() * color.PercentageRed,
-                    hitRecord.Attenuation.Green() * color.PercentageGreen,
-                    hitRecord.Attenuation.Blue() * color.PercentageBlue
+                   hitRecord.Attenuation.PercentageRed * color.PercentageRed,
+                    hitRecord.Attenuation.PercentageGreen * color.PercentageGreen,
+                    hitRecord.Attenuation.PercentageBlue * color.PercentageBlue
                     );
             }
 
@@ -94,10 +99,9 @@ namespace Render3D.BackEnd
             var vectorDirectionUnit = ray.Direction.GetUnit();
             var posY = 0.5 * (vectorDirectionUnit.Y + 1);
             var colorStart = new Colour(1, 1, 1);
-            var colorEnd = new Colour(0.5, 0.7, 1.0); 
+            var colorEnd = new Colour(0.5, 0.7, 1.0);
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
-
 
 
         public void UpdateLastModificationDate()

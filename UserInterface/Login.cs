@@ -1,49 +1,46 @@
-﻿using System;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Render3D.BackEnd;
 using UserInterface;
 
 namespace Render3D.UserInterface
 {
     public partial class Login : Form
     {
-        Render3DIU render;
+        private Render3DIU render;
+        private readonly ClientController clientController;
         public Login()
         {
+            clientController = ClientController.GetInstance();
             InitializeComponent();
         }
 
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string clientName= txtClientName.Text;
-            string clientPassword= txtClientPassword.Text;
-            Client client;
+            string clientName = txtClientName.Text;
+            string clientPassword = txtClientPassword.Text;
+
+            label5.Visible = true;
+            label5.Update();
+
             try
-            {
-                client = render.clientController.GetClientByName(clientName);
+            {        
+             clientController.Login(clientName,clientPassword);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 lblExceptionError.Text = ex.Message;
-                return;
-            }
-            
-            if (!client.Password.Equals(clientPassword))
-            {
-                lblExceptionError.Text = "Password is incorrect";
+                label5.Visible = false;
+                label5.Update();
                 return;
             }
             txtClientName.Text = "";
             txtClientPassword.Text = "";
-            render.clientName = clientName;
+            label5.Visible = false;
+            label5.Update();
             render.EnterMenu();
         }
         private void BtnSignIn_Click(object sender, EventArgs e)
@@ -58,6 +55,12 @@ namespace Render3D.UserInterface
         {
             render = (Render3DIU)this.Parent.Parent;
             lblExceptionError.Text = "";
+        }
+
+        private void BtnLog_Click(object sender, EventArgs e)
+        {
+            var window = new LogUI();
+            window.Show();
         }
     }
 }

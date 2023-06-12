@@ -1,66 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+
+using Render3D.RenderLogic.Controllers;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
+using RenderLogic.DataTransferObjects;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using UserInterface;
 
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
     {
         private Render3DIU render;
+        private readonly ClientController clientController;
+        private readonly FigureController figureController;
+        private readonly MaterialController materialController;
+        private readonly ModelController modelController;
+        private readonly SceneController sceneController;
         public CreationMenu()
         {
             InitializeComponent();
+            clientController = ClientController.GetInstance();
+            figureController = FigureController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            modelController = ModelController.GetInstance();
+            sceneController = SceneController.GetInstance();
         }
 
         public void ShowFigureList()
         {
             flObjectList.Controls.Clear();
-            List<Figure> figureList = render.dataWarehouse.Figures;
-            foreach (Sphere figure in figureList)
+            List<FigureDto> figureList;
+            figureList=figureController.GetFigures();     
+            foreach (FigureDto figure in figureList)
             {
-                FigureControl figureControl = new FigureControl(figure);
-                flObjectList.Controls.Add(figureControl);
+                    FigureControl figureControl = new FigureControl(figure);
+                    flObjectList.Controls.Add(figureControl);
             }
         }
 
         public void ShowMaterialList()
         {
             flObjectList.Controls.Clear();
-            List<Material> materialList = render.dataWarehouse.Materials;
-            foreach (Material material in materialList)
+            List<MaterialDto> materialList = materialController.GetMaterials();
+            foreach (MaterialDto material in materialList)
             {
+                    if(material.Blur <0)
+                    {
+                        LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
+                        flObjectList.Controls.Add(materialControl);
+                    }
+                    else 
+                    {
+                        MetallicMaterialControl materialControl = new MetallicMaterialControl(material);
+                        flObjectList.Controls.Add(materialControl);
+                    }
+                    
+                    
 
-                    MaterialControl materialControl = new MaterialControl(material); //se cae aca
-                    flObjectList.Controls.Add(materialControl);
- 
+
             }
         }
         public void ShowModelList()
         {
             flObjectList.Controls.Clear();
-            List<Model> models = render.dataWarehouse.Models;
-            foreach (Model model in models)
+            List<ModelDto> models = modelController.GetModels();
+            foreach (ModelDto model in models)
             {
-                ModelControl modelControl = new ModelControl(model);
-                flObjectList.Controls.Add(modelControl);
+                    ModelControl modelControl = new ModelControl(model);
+                    flObjectList.Controls.Add(modelControl);
+            }
+        }
+
+        public void ShowSceneList()
+        {
+            flObjectList.Controls.Clear();
+            List<SceneDto> scenes = sceneController.GetScenes();
+            scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
+            foreach (SceneDto scene in scenes)
+            {
+                SceneControl sceneControl = new SceneControl(scene);
+                flObjectList.Controls.Add(sceneControl);
             }
         }
 
 
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
+            clientController.LogOut();
             render.UserWantsToLogIn();
         }
         private void BtnMaterial_Click(object sender, EventArgs e)
@@ -78,11 +106,11 @@ namespace Render3D.UserInterface
             Refresh("Model");
         }
 
-        
+
 
         private void ShowObjectCreationPanel(object formSon)
         {
-            if(this.pnlObjectCreation.Controls.Count >0)
+            if (this.pnlObjectCreation.Controls.Count > 0)
             {
                 this.pnlObjectCreation.Controls.RemoveAt(0);
             }
@@ -97,13 +125,13 @@ namespace Render3D.UserInterface
         private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
-            lblShowClientName.Text = "Welcome back \n" + render.clientName + "!!";
+            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient();
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
-        public void Refresh(String toShow)
+        public void Refresh(string toShow)
         {
-            if(toShow=="Material")
+            if (toShow == "Material")
             {
                 ShowObjectCreationPanel(new MaterialPanel());
                 ShowMaterialList();
@@ -113,7 +141,7 @@ namespace Render3D.UserInterface
                 ShowObjectCreationPanel(new FigurePanel());
                 ShowFigureList();
             }
-            if(toShow == "Model")
+            if (toShow == "Model")
             {
                 ShowObjectCreationPanel(new ModelPanel());
                 ShowModelList();
@@ -121,57 +149,73 @@ namespace Render3D.UserInterface
             if (toShow == "Scene")
             {
                 ShowObjectCreationPanel(new ScenePanel());
+                ShowSceneList();
             }
 
         }
-        public bool FigureNameHasBeenChanged(String oldName,string newName)
+        public bool ChangeFigureName(FigureDto figureDto, string newName)
         {
-           render.figureController.ChangeFigureName(render.clientName,oldName, newName);
-            if (render.figureController.GetFigureByNameAndClient(render.clientName, newName).Name != null)
+            try
             {
+                figureController.ChangeName(figureDto,newName);
                 return true;
             }
-            return false;   
-        }
-
-        public void DeleteFigure(string figureName)
-        {
-          render.figureController.DeleteFigureInList(render.clientName,figureName);
-        }
-
-        internal bool MaterialNameHasBeenChanged(string oldName, string newName)
-        {
-             render.materialController.ChangeMaterialName(render.clientName, oldName, newName);
-            if (render.materialController.GetMaterialByNameAndClient(render.clientName, newName) != null)
+            catch
             {
+                return false;
+            }
+        }
+
+
+        internal bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
+        {
+            try
+            {
+                materialController.ChangeName(materialDto,newName);
                 return true;
             }
-            return false;
-        }
-
-        internal void DeleteMaterial(string materialName)
-        {
-          render.materialController.DeleteMaterialInList(render.clientName, materialName);
-        }
-
-        internal bool ModelNameHasBeenChanged(string oldName, string newName)
-        {
-             render.modelController.ChangeModelName(render.clientName,oldName,newName);
-            if (render.modelController.GetModelByNameAndClient(render.clientName, newName) != null)
+            catch
             {
+                return false;
+            }
+            
+
+        }
+
+        internal void DeleteMaterial(MaterialDto materialDto)
+        {
+            materialController.Delete(materialDto);
+        }
+
+        internal bool ModelNameHasBeenChanged(ModelDto modelDto, string newName)
+        {
+            try
+            {
+                modelController.ChangeName(modelDto, newName);
                 return true;
             }
-            return false;
-        }
-
-        internal void DeleteModel(string modelName)
-        {
-         render.modelController.DeleteModelInList(render.clientName, modelName);
+            catch
+            {
+                return false;
+            }
+            
+            
         }
 
         private void BtnScene_Click(object sender, EventArgs e)
         {
             Refresh("Scene");
+        }
+
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            var log = new LogUI();
+            log.Show();
+        }
+
+        private void pnlObjectCreation_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

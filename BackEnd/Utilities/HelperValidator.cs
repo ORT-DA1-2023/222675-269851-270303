@@ -1,32 +1,31 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.Utilities
 {
     public class HelperValidator
     {
-        public static bool IsLengthBetween(String name, int minLength, int maxLength)
+        public static bool IsLengthBetween(string name, int minLength, int maxLength)
         {
             return name.Length >= minLength && name.Length <= maxLength;
         }
 
-        public static bool IsTrimmable(String name)
+        public static bool IsTrimmable(string name)
         {
             return !name.Equals(name.Trim());
         }
-        public static bool IsAlphanumerical(String name)
+        public static bool IsAlphanumerical(string name)
         {
             return name.All(char.IsLetterOrDigit);
         }
-        public static bool ContainsANumber(String name)
+        public static bool ContainsANumber(string name)
         {
             return name.Any(char.IsDigit);
         }
-        public static bool ContainsACapital(String name)
+        public static bool ContainsACapital(string name)
         {
             return name.Any(char.IsUpper);
         }
-        public static bool IsAnEmptyString(String name)
+        public static bool IsAnEmptyString(string name)
         {
             return name.Length == 0;
         }

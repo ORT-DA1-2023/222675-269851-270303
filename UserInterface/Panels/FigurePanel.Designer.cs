@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCorrectlyAdded = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             this.txtFigureName.Name = "txtFigureName";
             this.txtFigureName.Size = new System.Drawing.Size(191, 29);
             this.txtFigureName.TabIndex = 3;
+            this.txtFigureName.TextChanged += new System.EventHandler(this.txtFigureName_TextChanged);
             // 
             // label3
             // 
@@ -73,6 +75,7 @@
             this.txtFigureRadius.Name = "txtFigureRadius";
             this.txtFigureRadius.Size = new System.Drawing.Size(191, 29);
             this.txtFigureRadius.TabIndex = 4;
+            this.txtFigureRadius.TextChanged += new System.EventHandler(this.txtFigureRadius_TextChanged);
             // 
             // label2
             // 
@@ -89,14 +92,15 @@
             // 
             // btnCreateFigure
             // 
+            this.btnCreateFigure.BackColor = System.Drawing.Color.Yellow;
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
             this.btnCreateFigure.Name = "btnCreateFigure";
             this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 5;
-            this.btnCreateFigure.Text = "Create!!!";
-            this.btnCreateFigure.UseVisualStyleBackColor = true;
+            this.btnCreateFigure.Text = "Create";
+            this.btnCreateFigure.UseVisualStyleBackColor = false;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
             // 
             // label1
@@ -107,24 +111,25 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(51, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 25);
+            this.label1.Size = new System.Drawing.Size(199, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Create a new figure!!";
+            this.label1.Text = "Create a new figure";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblExceptionError
             // 
             this.lblExceptionError.AutoSize = true;
-            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblExceptionError.ForeColor = System.Drawing.Color.DarkRed;
             this.lblExceptionError.Location = new System.Drawing.Point(65, 337);
             this.lblExceptionError.Name = "lblExceptionError";
-            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.Size = new System.Drawing.Size(42, 20);
             this.lblExceptionError.TabIndex = 18;
             this.lblExceptionError.Text = "error";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblCorrectlyAdded);
             this.panel1.Controls.Add(this.lblExceptionError);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnCreateFigure);
@@ -137,6 +142,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 551);
             this.panel1.TabIndex = 6;
+            // 
+            // lblCorrectlyAdded
+            // 
+            this.lblCorrectlyAdded.AutoSize = true;
+            this.lblCorrectlyAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.lblCorrectlyAdded.ForeColor = System.Drawing.Color.Green;
+            this.lblCorrectlyAdded.Location = new System.Drawing.Point(68, 357);
+            this.lblCorrectlyAdded.Name = "lblCorrectlyAdded";
+            this.lblCorrectlyAdded.Size = new System.Drawing.Size(112, 18);
+            this.lblCorrectlyAdded.TabIndex = 19;
+            this.lblCorrectlyAdded.Text = "Correctly added";
+            this.lblCorrectlyAdded.Visible = false;
             // 
             // FigurePanel
             // 
@@ -164,5 +181,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblExceptionError;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblCorrectlyAdded;
     }
 }

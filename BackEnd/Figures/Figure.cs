@@ -1,4 +1,6 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Utilities;
 
 namespace Render3D.BackEnd.Figures
 {
@@ -9,6 +11,7 @@ namespace Render3D.BackEnd.Figures
         protected Vector3D _position;
 
         public Client Client { get; set; }
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
@@ -19,17 +22,20 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
+
         public override string ToString()
         {
             return Name;
         }
         public Vector3D Position { get => _position; set => _position = value; }
+       
+
         public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
-        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);
+        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color, int roughness);
 
         protected void ValidateName(string value)
         {
-            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The _name must not be empty");
+            if (HelperValidator.IsAnEmptyString(value)) throw new BackEndException("The name must not be empty");
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Name must not start or end with spaces");
         }
 

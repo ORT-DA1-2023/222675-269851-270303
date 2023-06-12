@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
+using System;
 using System.Windows.Forms;
-using Render3D.BackEnd;
-using Render3D.UserInterface;
+using UserInterface.Panels;
 
 namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        string oldName;
-        public ModelControl(Model model)
+       private readonly ModelDto _modelDto;
+        private readonly ModelController modelController;
+        private readonly SceneController sceneController;
+        public ModelControl(ModelDto model)
         {
             InitializeComponent();
-            txtModelName.Text = model.Name;
-            lblModelFigure.Text= model.Figure.Name;
-            lblModelMaterial.Text= model.Material.Name;
+            lblModelName.Text = model.Name;
+            _modelDto = model;
+            sceneController = SceneController.GetInstance();
+            modelController = ModelController.GetInstance();
+            lblModelFigure.Text = model.Figure.Name;
+            lblModelMaterial.Text = model.Material.Name;
+            lblErrorDeleteModel.Text = "";
             if (model.Preview != null)
             {
                 pBoxPreview.Image = model.Preview;
@@ -29,49 +30,42 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEditModelName_Click(object sender, EventArgs e)
         {
-            oldName = txtModelName.Text;
-            txtModelName.ReadOnly = false;
-            txtModelName.BackColor = Color.Green;
-        }
-
-        private void ClientPressEnter(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            using (var nameChanger = new NameChanger(_modelDto.Name))
             {
-                e.Handled = true;
-                ChecksForCorrectEdit();
-            }
-        }
-
-        private void ClientLeaves(object sender, EventArgs e)
-        {
-            ChecksForCorrectEdit();
-        }
-
-        private void ChecksForCorrectEdit()
-        {
-            txtModelName.ReadOnly = true;
-            if (!oldName.Equals(txtModelName.Text))
-            {
-                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(oldName, txtModelName.Text))
+                var result = nameChanger.ShowDialog(this);
+                if (result == DialogResult.OK)
                 {
-                    txtModelName.BackColor = Color.White;
-                }
-                else
-                {
-                    txtModelName.BackColor = Color.Red;
+                    string name = nameChanger.newName;
+                    ChecksForCorrectEdit(name);
                 }
             }
-            else
+        }
+
+
+        private void ChecksForCorrectEdit(string newName)
+        {
+            if (!_modelDto.Equals(newName))
             {
-                txtModelName.BackColor = Color.White;
+                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_modelDto, newName))
+                {
+                    lblModelName.Text = newName;
+                    _modelDto.Name = newName;
+                }
             }
         }
 
         private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(txtModelName.Text);
-            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
+            if (!sceneController.CheckIfModelIsInAScene(_modelDto))
+            {
+                modelController.Delete(_modelDto);
+                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
+            }
+            else
+            {
+                lblErrorDeleteModel.Text = "A scene is using this model";
+            }
+
         }
     }
 }
