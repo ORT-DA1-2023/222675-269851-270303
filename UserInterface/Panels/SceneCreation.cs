@@ -69,6 +69,11 @@ namespace UserInterface.Panels
             lblName.Text = "";
             lblAddModel.Visible = false;
             lblRemoveModel.Visible = false;
+            if (_sceneDto.Aperture > 0)
+            {
+                cmbBlur.Checked = true;
+                lblAperture.Text=_sceneDto.Aperture.ToString();
+            }
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
