@@ -277,7 +277,7 @@ namespace UserInterface.Panels
             lblExporting.Visible = true;
             lblExporting.Update();
             BtnRender_Click(sender, e);
-
+            _sceneDto.Preview = new Bitmap(pBoxRender.Image);
             sceneController.ExportRender(_sceneDto, label5.Text + "\\render." + comboBox1.Text, comboBox1.Text);
 
             lblExporting.Visible = false;

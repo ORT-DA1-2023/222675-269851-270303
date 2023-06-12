@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd;
+﻿using Microsoft.SqlServer.Server;
+using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Resources;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 
@@ -331,43 +333,38 @@ namespace Render3D.RenderLogic.Controllers
 
         public void ExportRender(SceneDto s, string directory, string savingFormat)
         {
-            Bitmap b = s.Preview;
-            //s.Preview.Save(directory, ImageFormat.Jpeg);
+            Bitmap bitmap = s.Preview;
 
-            /*ISavingFormat format;
-            switch (savingFormat)
+            // Save the image as a PNG or JPEG
+            if (savingFormat == "png") { s.Preview.Save(directory + "\\render.png", ImageFormat.Png); return; }
+            if (savingFormat == "jpg") { s.Preview.Save(directory + "\\render.jpg", ImageFormat.Jpeg); return; }
+            if (savingFormat == "ppm")
             {
-                case "ppm":
-                    format = new PPMSavingFormat();
-                    break;
-                case "png":
-                    format = new PNGSavingFormat();
-                    break;
-                case "jpg":
-                    format = new JPGSavingFormat();
-                    break;
-                default:
-                    throw new BackEndException("Invalid Format");
+
+                using (StreamWriter writer = new StreamWriter(directory))
+                {
+                    // Write the PPM file header
+                    writer.WriteLine("P3");  // Magic number for PPM
+                    writer.WriteLine($"{bitmap.Width} {bitmap.Height}");  // Width and height
+                    writer.WriteLine("255");  // Maximum color value
+
+                    // Write the pixel data
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        for (int x = 0; x < bitmap.Width; x++)
+                        {
+                            Color pixelColor = bitmap.GetPixel(x, y);
+                            writer.Write($"{pixelColor.R} {pixelColor.G} {pixelColor.B} ");
+                        }
+                        writer.WriteLine();  // Move to the next line after each row
+                    }
+                }
+
+                return;
             }
-            OutputSaver o = new OutputSaver(s.Preview, directory, format);
-            o.Save();*/
 
-
-            byte[] bitmapBytes;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                // Save the bitmap to the memory stream as PNG
-                b.Save(stream, ImageFormat.Png);
-
-                // Convert the memory stream to a byte array
-               bitmapBytes = stream.ToArray();
-
-                // Now you have the bitmap image as a byte array ('bitmapBytes')
-            }
-            File.WriteAllBytes(directory, bitmapBytes);
-
-
-
+            throw new Exception("error");
         }
+
     }
 }

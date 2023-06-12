@@ -8,7 +8,6 @@ namespace Render3D.BackEnd
     {
         public void Save(Bitmap image, string FilePath)
         {
- 
             image.Save(FilePath, System.Drawing.Imaging.ImageFormat.Png);
         }
     }
