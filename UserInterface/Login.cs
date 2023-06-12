@@ -27,8 +27,7 @@ namespace Render3D.UserInterface
             label5.Update();
 
             try
-            {
-               
+            {        
              clientController.Login(clientName,clientPassword);
             }
             catch (Exception ex)

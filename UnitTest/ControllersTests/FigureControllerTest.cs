@@ -3,7 +3,9 @@ using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
-
+using RenderLogic.Services;
+using RenderLogic.RepoInterface;
+using renderRepository.RepoImplementation;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -11,15 +13,21 @@ namespace Render3D.UnitTest.ControllersTests
     public class FigureControllerTest
     {
 
+        FigureController figureController;
+        FigureService figureService;
+        IFigureRepo figureRepo;
 
         [TestInitialize]
         public void Initialize()
         {
-
+            figureController = FigureController.GetInstance();
+            figureRepo = new FigureRepo();
+            figureService = new FigureService(figureRepo);
+            figureController.FigureService = figureService;
         }
 
         [TestMethod]
-        public void GivenNewFigureAddsItToTheList()
+        public void GivenNewFigureSavesIt()
         {
 
         }

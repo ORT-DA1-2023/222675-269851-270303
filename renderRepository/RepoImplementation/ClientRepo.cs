@@ -41,8 +41,7 @@ namespace renderRepository.RepoImplementation
             }
         }
         public Client GetClientByName(string name)
-        {
-           
+        {    
                 try
                 {
                 using (var dbContext = new RenderContext())

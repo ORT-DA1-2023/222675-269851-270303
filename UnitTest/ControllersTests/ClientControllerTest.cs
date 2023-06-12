@@ -29,6 +29,7 @@ namespace Render3D.UnitTest.ControllersTests
         {
             clientController.SignIn("ClientTest", "4Testing");
             clientController.Login("ClientTest", "4Testing");
+            clientController.Client.Name = "ClientTest";
             clientController.RemoveClient("clientTest");
         }
         [TestMethod]
