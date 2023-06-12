@@ -29,7 +29,7 @@ namespace Render3D.UnitTest
         public void givenBitmapSavesItAsJPG()
         {
             Bitmap bitmap = new Bitmap(100, 100);
-            string destinationPath = "test.jpg";
+            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.jpg";
             ISavingFormat format = new JPGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
             outputSaver.Save();
@@ -58,7 +58,7 @@ namespace Render3D.UnitTest
         public void GivenBitmapSavesItAsPNG()
         {
             Bitmap bitmap = new Bitmap(10, 10);
-            string destinationPath = "test.png";
+            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.png";
             ISavingFormat format = new PNGSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 
@@ -85,7 +85,7 @@ namespace Render3D.UnitTest
         public void GivenBitmapSavesItAsPPM()
         {
             Bitmap bitmap = new Bitmap(2, 2);
-            string destinationPath = "test.ppm";
+            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.ppm";
             ISavingFormat format = new PPMSavingFormat();
             OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
 

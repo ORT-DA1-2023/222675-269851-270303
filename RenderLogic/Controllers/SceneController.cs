@@ -7,6 +7,9 @@ using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 
@@ -328,23 +331,43 @@ namespace Render3D.RenderLogic.Controllers
 
         public void ExportRender(SceneDto s, string directory, string savingFormat)
         {
-            ISavingFormat format;
+            Bitmap b = s.Preview;
+            //s.Preview.Save(directory, ImageFormat.Jpeg);
+
+            /*ISavingFormat format;
             switch (savingFormat)
             {
-                case "PPM":
+                case "ppm":
                     format = new PPMSavingFormat();
                     break;
-                case "PNG":
+                case "png":
                     format = new PNGSavingFormat();
                     break;
-                case "JPG":
+                case "jpg":
                     format = new JPGSavingFormat();
                     break;
                 default:
                     throw new BackEndException("Invalid Format");
             }
             OutputSaver o = new OutputSaver(s.Preview, directory, format);
-            o.Save();
+            o.Save();*/
+
+
+            byte[] bitmapBytes;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                // Save the bitmap to the memory stream as PNG
+                b.Save(stream, ImageFormat.Png);
+
+                // Convert the memory stream to a byte array
+               bitmapBytes = stream.ToArray();
+
+                // Now you have the bitmap image as a byte array ('bitmapBytes')
+            }
+            File.WriteAllBytes(directory, bitmapBytes);
+
+
+
         }
     }
 }

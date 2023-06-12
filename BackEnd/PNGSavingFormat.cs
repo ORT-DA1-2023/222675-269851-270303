@@ -1,13 +1,15 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace Render3D.BackEnd
 {
     public class PNGSavingFormat : ISavingFormat
     {
-        public void Save(Bitmap ppmImage, string FilePath)
+        public void Save(Bitmap image, string FilePath)
         {
-            ppmImage.Save(FilePath, ImageFormat.Png);
+ 
+            image.Save(FilePath, System.Drawing.Imaging.ImageFormat.Png);
         }
     }
 }

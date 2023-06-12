@@ -278,12 +278,25 @@ namespace UserInterface.Panels
             lblExporting.Update();
             BtnRender_Click(sender, e);
 
-            SceneController s = new SceneController(); //TODO
-           // s.ExportRenderScene(_sceneDto,true);
+            sceneController.ExportRender(_sceneDto, label5.Text + "\\render." + comboBox1.Text, comboBox1.Text);
 
             lblExporting.Visible = false;
             lblExporting.Update();
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pBoxRender_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
