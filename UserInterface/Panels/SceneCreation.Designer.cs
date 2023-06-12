@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label25 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -86,6 +87,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -94,7 +98,6 @@
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -148,6 +151,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1011, 534);
             this.panel1.TabIndex = 0;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(225, 430);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(99, 17);
+            this.radioButton1.TabIndex = 56;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Save as default";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
@@ -573,7 +587,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 403);
+            this.label5.Location = new System.Drawing.Point(3, 380);
+            this.label5.MaximumSize = new System.Drawing.Size(170, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(10, 13);
             this.label5.TabIndex = 31;
@@ -747,6 +762,9 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.label28);
+            this.panel3.Controls.Add(this.label27);
             this.panel3.Controls.Add(this.label26);
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.lblExporting);
@@ -765,6 +783,35 @@
             this.panel3.Size = new System.Drawing.Size(190, 534);
             this.panel3.TabIndex = 1;
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.textBox1.Location = new System.Drawing.Point(10, 263);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(120, 21);
+            this.textBox1.TabIndex = 57;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.Green;
+            this.label28.Location = new System.Drawing.Point(22, 513);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(110, 13);
+            this.label28.TabIndex = 53;
+            this.label28.Text = "Successfully exported";
+            this.label28.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.ForeColor = System.Drawing.Color.DarkRed;
+            this.label27.Location = new System.Drawing.Point(16, 513);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 13);
+            this.label27.TabIndex = 52;
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -778,7 +825,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 366);
+            this.label10.Location = new System.Drawing.Point(1, 365);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 13);
             this.label10.TabIndex = 35;
@@ -788,7 +835,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(12, 267);
+            this.label9.Location = new System.Drawing.Point(6, 236);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(126, 24);
             this.label9.TabIndex = 10;
@@ -837,17 +884,6 @@
             this.cBoxPositionedModels.Name = "cBoxPositionedModels";
             this.cBoxPositionedModels.Size = new System.Drawing.Size(139, 32);
             this.cBoxPositionedModels.TabIndex = 1;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(225, 430);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(99, 17);
-            this.radioButton1.TabIndex = 56;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Save as default";
-            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // SceneCreation
             // 
@@ -942,5 +978,8 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

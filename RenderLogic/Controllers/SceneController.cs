@@ -152,7 +152,7 @@ namespace Render3D.RenderLogic.Controllers
             throw new Exception("Name already in use");
 
         }
-
+ 
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
         {
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
@@ -163,7 +163,9 @@ namespace Render3D.RenderLogic.Controllers
             model.Id = null;
             model.Figure.Id = null;
             model.Material.Id = null;
-            SceneService.AddModel(int.Parse(scene.Id), model);
+            scene.UpdateLastModificationDate();
+            SceneService.AddModel(scene, model);
+            
         }
 
         public void RemoveModel(ModelDto modelDto)
@@ -336,8 +338,8 @@ namespace Render3D.RenderLogic.Controllers
             Bitmap bitmap = s.Preview;
 
             // Save the image as a PNG or JPEG
-            if (savingFormat == "png") { s.Preview.Save(directory + "\\render.png", ImageFormat.Png); return; }
-            if (savingFormat == "jpg") { s.Preview.Save(directory + "\\render.jpg", ImageFormat.Jpeg); return; }
+            if (savingFormat == "png") { s.Preview.Save(directory, ImageFormat.Png); return; }
+            if (savingFormat == "jpg") { s.Preview.Save(directory, ImageFormat.Jpeg); return; }
             if (savingFormat == "ppm")
             {
 
@@ -363,8 +365,17 @@ namespace Render3D.RenderLogic.Controllers
                 return;
             }
 
-            throw new Exception("error");
+            throw new Exception("could not save the file");
         }
 
+        public bool IsValidDirectory(string path)
+        {
+           return  Directory.Exists(path);
+        }
+
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
     }
 }

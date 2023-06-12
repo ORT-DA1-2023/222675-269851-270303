@@ -52,14 +52,14 @@ namespace RenderLogic.Services
             _sceneRepo.UpdateCamera(scene);
         }
 
-        internal void AddModel(int id, Model model)
+        internal void AddModel(Scene scene, Model model)
         {
-            _sceneRepo.AddModel(id, model);
+            _sceneRepo.AddModel(scene, model);
         }
 
-        internal void RemoveModel(int id, Model model)
+        internal void RemoveModel(Scene s, Model model)
         {
-            _sceneRepo.RemoveModel(id,model);
+            _sceneRepo.RemoveModel(s,model);
         }
 
         internal List<Scene> GetScenesWithModel(Model model)

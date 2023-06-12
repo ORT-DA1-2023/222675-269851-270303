@@ -130,8 +130,9 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public void AddModel(int id, Model model)
+        public void AddModel(Scene scene, Model model)
         {
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             ModelEntity modelEntity = ModelEntity.FromDomain(model);
             FigureEntity figureEntity = FigureEntity.FromDomain(model.Figure);
             MaterialEntity materialEntity = MaterialEntity.FromDomain(model.Material);
@@ -142,8 +143,9 @@ namespace renderRepository.RepoImplementation
                 dbContext.FigureEntities.Add(figureEntity);
                 dbContext.MaterialEntities.Add(materialEntity);
                 dbContext.ModelEntities.Add(modelEntity);
-                var scene = dbContext.SceneEntities.Find(id);
-                scene.ModelEntities.Add(modelEntity);
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.LastModificationDate = sceneEntity.LastModificationDate;
+                entity.ModelEntities.Add(modelEntity);
                 dbContext.SaveChanges();
             }
         }
@@ -160,13 +162,15 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public void RemoveModel(int id, Model model)
+        public void RemoveModel(Scene scene, Model model)
         {
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             using (var dbContext = new RenderContext())
             {
-                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
+                SceneEntity entity = dbContext.SceneEntities.Find(sceneEntity.Id);
                 ModelEntity modelEntity = ModelEntity.FromDomain(model);
                 dbContext.ModelEntities.Remove(modelEntity);
+                entity.LastModificationDate= sceneEntity.LastModificationDate;
                 dbContext.SaveChanges();
             }
         }

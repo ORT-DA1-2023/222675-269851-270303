@@ -18,11 +18,11 @@ namespace UserInterface.Panels
             InitializeComponent();
             sceneController = SceneController.GetInstance();
             _sceneDto = selectedScene;
-            
+
             if (_sceneDto == null)
             {
-                string name="";
-                bool valid= false;
+                string name = "";
+                bool valid = false;
                 while (!valid)
                 {
                     using (var nameChanger = new NameChanger(""))
@@ -30,11 +30,11 @@ namespace UserInterface.Panels
                         var result = nameChanger.ShowDialog(this);
                         if (result == DialogResult.OK)
                         {
-                            name= nameChanger.newName;
+                            name = nameChanger.newName;
                             try
                             {
                                 sceneController.AddScene(name);
-                                _sceneDto= new SceneDto() { Name= name }; 
+                                _sceneDto = new SceneDto() { Name = name };
                                 valid = true;
                             }
                             catch
@@ -55,14 +55,13 @@ namespace UserInterface.Panels
             XLookAt.Text = $"{_sceneDto.LookAt[0]}";
             YLookAt.Text = $"{_sceneDto.LookAt[1]}";
             ZLookAt.Text = $"{_sceneDto.LookAt[2]}";
-           // txtLookAt.Text = "(" +  + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
             XLookFrom.Text = $"{_sceneDto.LookFrom[0]}";
             YLookFrom.Text = $"{_sceneDto.LookFrom[1]}";
             ZLookFrom.Text = $"{_sceneDto.LookFrom[2]}";
             nrFov.Value = _sceneDto.Fov;
-            cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
+            cBoxAvailableModels.DataSource = sceneController.GetAvailableModels();
             cBoxAvailableModels.DisplayMember = "Name";
-            cBoxPositionedModels.DataSource =sceneController.GetPositionedModels(_sceneDto);
+            cBoxPositionedModels.DataSource = sceneController.GetPositionedModels(_sceneDto);
             cBoxPositionedModels.DisplayMember = "Name";
             pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
@@ -72,7 +71,7 @@ namespace UserInterface.Panels
             if (_sceneDto.Aperture > 0)
             {
                 cmbBlur.Checked = true;
-                lblAperture.Text=_sceneDto.Aperture.ToString();
+                lblAperture.Text = _sceneDto.Aperture.ToString();
             }
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
@@ -117,7 +116,7 @@ namespace UserInterface.Panels
         public bool IsValidNumberAperture(string input)
         {
             double aperture = double.Parse(input);
-            return aperture>0.0&&aperture<=3.0;
+            return aperture > 0.0 && aperture <= 3.0;
         }
 
         public bool IsValidFormatVector(string input)
@@ -146,38 +145,38 @@ namespace UserInterface.Panels
             string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
             if (IsValidFormatVector(lookFromText) && IsValidFormatVector(lookAtText))
             {
-                
-                    try
+
+                try
+                {
+                    if (cmbBlur.Checked)
                     {
-                        if (cmbBlur.Checked)
+                        if (IsValidFormatAperture(txtAperture.Text) && IsValidNumberAperture(txtAperture.Text))
                         {
-                             if(IsValidFormatAperture(txtAperture.Text)&& IsValidNumberAperture(txtAperture.Text))
-                             {
-                                sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
-                             }
-                             else
-                             {
-                                 throw new Exception("Aperture format not valid");
-                              }
+                            sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
+                        }
+                        else
+                        {
+                            throw new Exception("Aperture format not valid");
+                        }
 
                     }
                     else
                     {
                         string apertureZero = "0";
                         sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
-                       
+
                     }
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
 
                 }
-                    catch (Exception ex)
-                    {
-                        lblCamera.ForeColor = Color.Red;
-                        lblCamera.Text = ex.Message;
-                    }
-       
+                catch (Exception ex)
+                {
+                    lblCamera.ForeColor = Color.Red;
+                    lblCamera.Text = ex.Message;
+                }
+
             }
             else
             {
@@ -206,13 +205,15 @@ namespace UserInterface.Panels
         private void BtnAddModel_Click(object sender, EventArgs e)
         {
 
-          ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-          string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
-          sceneController.AddModel(_sceneDto, model, position);
+            ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
+            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
+            sceneController.AddModel(_sceneDto, model, position);
             LoadScene();
-            lblRenderOutDated.Text="WARNING this render is outdated";
+            lblRenderOutDated.Text = "WARNING this render is outdated";
             lblAddModel.Visible = true;
             lblRemoveModel.Update();
+
+            
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
@@ -231,12 +232,12 @@ namespace UserInterface.Panels
             lblRenderingNotification.Update();
             if (cmbBlur.Checked)
             {
-                sceneController.RenderScene(_sceneDto,true);
+                sceneController.RenderScene(_sceneDto, true);
             }
             else
             {
 
-                sceneController.RenderScene(_sceneDto,false);
+                sceneController.RenderScene(_sceneDto, false);
             }
 
             LoadScene();
@@ -261,7 +262,7 @@ namespace UserInterface.Panels
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 label5.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -274,14 +275,42 @@ namespace UserInterface.Panels
 
         private void Button3_Click(object sender, EventArgs e)
         {
+            label28.Visible = false;
+            label28.Update();
+            label27.Text = "";
+
+            if (label5.Text == "-") { label27.Text = "Select a directory"; return; }
+            if (comboBox1.SelectedIndex == -1) { label27.Text = "Select a format"; return; }
+
+            bool dirExists = sceneController.IsValidDirectory(label5.Text);
+
+            if (!dirExists) { label27.Text = "Could not access the directory"; return; }
+
+            if (sceneController.FileExists(label5.Text + "\\" + textBox1.Text+"."+comboBox1.Text))
+            {
+                label27.Text = "There is a file with that name"; return;
+            }
+
+
             lblExporting.Visible = true;
             lblExporting.Update();
             BtnRender_Click(sender, e);
             _sceneDto.Preview = new Bitmap(pBoxRender.Image);
-            sceneController.ExportRender(_sceneDto, label5.Text + "\\render." + comboBox1.Text, comboBox1.Text);
+            try
+            {
+                sceneController.ExportRender(_sceneDto, label5.Text + "\\" + textBox1.Text +"."+ comboBox1.Text, comboBox1.Text);
+            }
+            catch (Exception)
+            {
+                label27.Text = "Could not save the file";
+                return;
+            }
 
             lblExporting.Visible = false;
             lblExporting.Update();
+
+            label28.Visible = true;
+            label28.Update();
         }
 
         private void label5_Click(object sender, EventArgs e)
