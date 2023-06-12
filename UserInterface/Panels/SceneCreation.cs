@@ -67,8 +67,13 @@ namespace UserInterface.Panels
             pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
-            lblAddModel.Text = "";
-            lblRemoveModel.Text = "";
+            lblAddModel.Visible = false;
+            lblRemoveModel.Visible = false;
+            if (_sceneDto.Aperture > 0)
+            {
+                cmbBlur.Checked = true;
+                lblAperture.Text=_sceneDto.Aperture.ToString();
+            }
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
@@ -109,7 +114,13 @@ namespace UserInterface.Panels
             return vectorFormat.IsMatch(input);
         }
 
-        public bool IsValidFormat(string input)
+        public bool IsValidNumberAperture(string input)
+        {
+            double aperture = double.Parse(input);
+            return aperture>0.0&&aperture<=3.0;
+        }
+
+        public bool IsValidFormatVector(string input)
         {
             Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
@@ -122,44 +133,51 @@ namespace UserInterface.Panels
             this.Close();
         }
 
+        public bool IsValidFormat(string input)
+        {
+            Regex vectorFormat = new Regex(@"^(\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s)$");
+            return vectorFormat.IsMatch(input);
+        }
+
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
             string lookFromText = $"({XLookFrom.Text};{YLookFrom.Text};{ZLookFrom.Text})";
             string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
-            if (IsValidFormat(lookFromText) && IsValidFormat(lookAtText))
+            if (IsValidFormatVector(lookFromText) && IsValidFormatVector(lookAtText))
             {
                 
                     try
                     {
                         if (cmbBlur.Checked)
                         {
-                             if(IsValidFormatAperture(txtAperture.Text))
+                             if(IsValidFormatAperture(txtAperture.Text)&& IsValidNumberAperture(txtAperture.Text))
                              {
                                 sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
                              }
                              else
                              {
                                  throw new Exception("Aperture format not valid");
-                              }                      
-                        }
+                              }
+
+                    }
                     else
                     {
-                        string apertureNegative = "-1";
-                        sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureNegative);
-                    }           
-                        LoadScene();
-                        lblCamera.ForeColor = Color.Green;
-                        lblCamera.Text = "Camera settings change correctly";
+                        string apertureZero = "0";
+                        sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
+                       
                     }
+                    LoadScene();
+                    lblCamera.ForeColor = Color.Green;
+                    lblCamera.Text = "Camera settings change correctly";
+
+                }
                     catch (Exception ex)
                     {
                         lblCamera.ForeColor = Color.Red;
                         lblCamera.Text = ex.Message;
                     }
-                
-              
-
+       
             }
             else
             {
@@ -189,21 +207,22 @@ namespace UserInterface.Panels
         {
 
           ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
-
+          string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
           sceneController.AddModel(_sceneDto, model, position);
-            lblAddModel.Text = "Model Added Correctly";  
-            lblAddModel.ForeColor = Color.Green;
             LoadScene();
+            lblRenderOutDated.Text="WARNING this render is outdated";
+            lblAddModel.Visible = true;
+            lblRemoveModel.Update();
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
             ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
             sceneController.RemoveModel(model);
-            lblRemoveModel.Text = "Model Removed Correctly";
-            lblRemoveModel.ForeColor = Color.Green;
             LoadScene();
+            lblRenderOutDated.Text = "WARNING this render is outdated";
+            lblRemoveModel.Visible = true;
+            lblRemoveModel.Update();
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
@@ -266,24 +285,5 @@ namespace UserInterface.Panels
             lblExporting.Update();
         }
 
-        private void txtLookFrom_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCamera_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

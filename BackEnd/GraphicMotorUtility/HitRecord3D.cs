@@ -11,8 +11,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public Ray Ray { get; set; }
         public int Roughness { get; set; }
 
-
-
         public HitRecord3D()
         {
             Module = 0;

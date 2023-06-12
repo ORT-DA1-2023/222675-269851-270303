@@ -11,6 +11,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _minFov = 0;
         private const int _maxFov = 160;
         private const double _degreesToRadians = Math.PI / 180;
+
+        private const int defaultFov = 30;
         private const double AspectRatio = 3 / 2;
 
         public Vector3D VectorUp = new Vector3D(0, 1, 0);
@@ -41,7 +43,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         {
             LookAt = new Vector3D(0, 2, 5);
             VectorUp = new Vector3D(0, 1, 0);
-            Fov = 30;
+            Fov = defaultFov;
             _theta = Fov * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
             WidthHalf = AspectRatio * HeightHalf;
@@ -130,11 +132,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
 
         }
+        
 
         public Vector3D GetRandomInUnitForBlur()
         {
-            Vector3D vector;
             RandomSingleton random = RandomSingleton.Instance;
+            Vector3D vector;
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());

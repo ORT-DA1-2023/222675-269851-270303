@@ -79,6 +79,7 @@ namespace Render3D.BackEnd
                 {
                     return new Colour(0, 0, 0);
                 }
+                
                 Colour color = ShootRay(newRay, MaxiumDepth - 1);
                 return new Colour(
                    hitRecord.Attenuation.PercentageRed * color.PercentageRed,
