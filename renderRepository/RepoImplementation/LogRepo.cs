@@ -17,10 +17,7 @@ namespace renderRepository.RepoImplementation
                 var entity = LogEntity.FromDomain(log);
                 int clientId = int.Parse(log.Client.Id);
                 var client = dbContext.ClientEntities.Find(clientId);
-                int sceneId = int.Parse(log.Scene.Id);
-                var scene = dbContext.SceneEntities.Find(sceneId);
                 entity.ClientEntity = client;
-                entity.SceneEntity = scene;
                 dbContext.LogEntities.Add(entity);
                 dbContext.SaveChanges();
                 log.Id = entity.Id.ToString();
@@ -36,10 +33,8 @@ namespace renderRepository.RepoImplementation
                 foreach (var logE in logEntities)
                 {
                     Client client = logE.ClientEntity.ToDomain();
-                    Scene scene = logE.SceneEntity.ToDomain();
                     Log log = logE.ToDomain();
                     log.Client = client;
-                    log.Scene = scene;
                     logs.Add(log);
                 }
                 return logs;

@@ -3,6 +3,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 using System;
@@ -20,6 +21,7 @@ namespace Render3D.RenderLogic.Controllers
         public ModelService ModelService { get; set; }
         public FigureService FigureService { get; set; }
         public MaterialService MaterialService { get; set; }
+        public LogController LogController = LogController.GetInstance();
 
         protected static SceneController sceneController;
 
@@ -174,7 +176,9 @@ namespace Render3D.RenderLogic.Controllers
         public void RenderScene(SceneDto sceneDto, bool useBlur)
         {
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
+            DateTime renderStarts = DateTime.Now;
             scene.Preview = GraphicMotor.Render(scene, useBlur);
+            LogController.AddLogFromScene(scene, renderStarts);
             scene.UpdateLastRenderizationDate();
             SceneService.UpdatePreview(scene);
         }
