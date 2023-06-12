@@ -22,17 +22,26 @@ namespace Render3D.UserInterface
         {
             string clientName = txtClientName.Text;
             string clientPassword = txtClientPassword.Text;
+
+            label5.Visible = true;
+            label5.Update();
+
             try
             {
+               
              clientController.Login(clientName,clientPassword);
             }
             catch (Exception ex)
             {
                 lblExceptionError.Text = ex.Message;
+                label5.Visible = false;
+                label5.Update();
                 return;
             }
             txtClientName.Text = "";
             txtClientPassword.Text = "";
+            label5.Visible = false;
+            label5.Update();
             render.EnterMenu();
         }
         private void BtnSignIn_Click(object sender, EventArgs e)

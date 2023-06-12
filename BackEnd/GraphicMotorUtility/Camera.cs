@@ -11,6 +11,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _minFov = 0;
         private const int _maxFov = 160;
         private const double _degreesToRadians = Math.PI / 180;
+
+        private const int defaultFov = 30;
         private const double AspectRatio = 3 / 2;
 
         public Vector3D VectorUp = new Vector3D(0, 1, 0);
@@ -41,7 +43,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         {
             LookAt = new Vector3D(0, 2, 5);
             VectorUp = new Vector3D(0, 1, 0);
-            Fov = 30;
+            Fov = defaultFov;
             _theta = Fov * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
             WidthHalf = AspectRatio * HeightHalf;
@@ -121,18 +123,20 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return new Ray(LookFrom, Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom));
         }
 
-        public Ray GetRayForBlurCamera(double u, double v, Random random)
+        public Ray GetRayForBlurCamera(double u, double v)
         {
-            Vector3D vectorRandom = GetRandomInUnitForBlur(random).Multiply(LensRadius);
+            Vector3D vectorRandom = GetRandomInUnitForBlur().Multiply(LensRadius);
             Vector3D vectorOffset = VectorU.Multiply(vectorRandom.X).Add(VectorV.Multiply(vectorRandom.Y));
             Vector3D horizontalPosition = Horizontal.Multiply(u);
             Vector3D verticalPosition = Vertical.Multiply(v);
             return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
 
         }
+        
 
-        public Vector3D GetRandomInUnitForBlur(Random random)
+        public Vector3D GetRandomInUnitForBlur()
         {
+            RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
             do
             {

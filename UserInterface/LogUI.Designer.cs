@@ -42,13 +42,14 @@
             this.SceneName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumberElementsInScene = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoBackLog = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblRenderTime
             // 
             this.lblRenderTime.AutoSize = true;
-            this.lblRenderTime.Location = new System.Drawing.Point(28, 32);
+            this.lblRenderTime.Location = new System.Drawing.Point(538, 83);
             this.lblRenderTime.Name = "lblRenderTime";
             this.lblRenderTime.Size = new System.Drawing.Size(154, 13);
             this.lblRenderTime.TabIndex = 0;
@@ -58,7 +59,7 @@
             // lblAverageTimeInSeconds
             // 
             this.lblAverageTimeInSeconds.AutoSize = true;
-            this.lblAverageTimeInSeconds.Location = new System.Drawing.Point(188, 32);
+            this.lblAverageTimeInSeconds.Location = new System.Drawing.Point(698, 83);
             this.lblAverageTimeInSeconds.Name = "lblAverageTimeInSeconds";
             this.lblAverageTimeInSeconds.Size = new System.Drawing.Size(13, 13);
             this.lblAverageTimeInSeconds.TabIndex = 1;
@@ -68,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 58);
+            this.label1.Location = new System.Drawing.Point(538, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 13);
             this.label1.TabIndex = 2;
@@ -77,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(188, 58);
+            this.label2.Location = new System.Drawing.Point(698, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 3;
@@ -86,7 +87,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(523, 32);
+            this.label3.Location = new System.Drawing.Point(538, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 13);
             this.label3.TabIndex = 4;
@@ -96,7 +97,7 @@
             // lblMostRenderedUser
             // 
             this.lblMostRenderedUser.AutoSize = true;
-            this.lblMostRenderedUser.Location = new System.Drawing.Point(672, 32);
+            this.lblMostRenderedUser.Location = new System.Drawing.Point(687, 56);
             this.lblMostRenderedUser.Name = "lblMostRenderedUser";
             this.lblMostRenderedUser.Size = new System.Drawing.Size(10, 13);
             this.lblMostRenderedUser.TabIndex = 5;
@@ -115,57 +116,76 @@
             this.TimeWindow,
             this.SceneName,
             this.NumberElementsInScene});
-            this.dataGridView1.Location = new System.Drawing.Point(99, 209);
+            this.dataGridView1.Location = new System.Drawing.Point(88, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(643, 114);
+            this.dataGridView1.Size = new System.Drawing.Size(647, 184);
             this.dataGridView1.TabIndex = 6;
             // 
             // User
             // 
             this.User.HeaderText = "User";
             this.User.Name = "User";
+            this.User.ReadOnly = true;
             // 
             // RenderTimeInSeconds
             // 
             this.RenderTimeInSeconds.HeaderText = "Render time in seconds";
             this.RenderTimeInSeconds.Name = "RenderTimeInSeconds";
+            this.RenderTimeInSeconds.ReadOnly = true;
             // 
             // RenderDate
             // 
             this.RenderDate.HeaderText = "Render Date";
             this.RenderDate.Name = "RenderDate";
+            this.RenderDate.ReadOnly = true;
             // 
             // TimeWindow
             // 
             this.TimeWindow.HeaderText = "Time window with the last render";
             this.TimeWindow.Name = "TimeWindow";
+            this.TimeWindow.ReadOnly = true;
             // 
             // SceneName
             // 
             this.SceneName.HeaderText = "Scene name";
             this.SceneName.Name = "SceneName";
+            this.SceneName.ReadOnly = true;
             // 
             // NumberElementsInScene
             // 
             this.NumberElementsInScene.HeaderText = "Number of elements in scene";
             this.NumberElementsInScene.Name = "NumberElementsInScene";
+            this.NumberElementsInScene.ReadOnly = true;
             // 
             // GoBackLog
             // 
-            this.GoBackLog.Location = new System.Drawing.Point(709, 365);
+            this.GoBackLog.BackColor = System.Drawing.Color.Yellow;
+            this.GoBackLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.GoBackLog.Location = new System.Drawing.Point(769, 440);
             this.GoBackLog.Name = "GoBackLog";
-            this.GoBackLog.Size = new System.Drawing.Size(75, 23);
+            this.GoBackLog.Size = new System.Drawing.Size(85, 44);
             this.GoBackLog.TabIndex = 7;
             this.GoBackLog.Text = "Back";
-            this.GoBackLog.UseVisualStyleBackColor = true;
+            this.GoBackLog.UseVisualStyleBackColor = false;
             this.GoBackLog.Click += new System.EventHandler(this.GoBackLog_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(27, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(115, 24);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Log History";
             // 
             // LogUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 541);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.GoBackLog);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblMostRenderedUser);
@@ -200,5 +220,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SceneName;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumberElementsInScene;
         private System.Windows.Forms.Button GoBackLog;
+        private System.Windows.Forms.Label label4;
     }
 }

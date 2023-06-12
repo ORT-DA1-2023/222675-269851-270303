@@ -73,6 +73,7 @@
     <Compile Include="LogTest.cs" />
     <Compile Include="LogAnalyticsTest.cs" />
     <Compile Include="MetallicMaterialTest.cs" />
+    <Compile Include="OutputSaverTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>

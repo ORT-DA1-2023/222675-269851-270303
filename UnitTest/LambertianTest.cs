@@ -90,7 +90,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenRayReflectedVerifiesItsOriginComesFromIntersection()
         {
-            Ray reflected = materialSample.ReflectsTheLight(hitSample, new Random());
+            Ray reflected = materialSample.ReflectsTheLight(hitSample);
             Assert.AreEqual(reflected.Origin, hitSample.Intersection);
         }
     }

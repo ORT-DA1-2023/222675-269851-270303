@@ -43,6 +43,7 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateModel_Click(object sender, EventArgs e)
         {
+            lblExceptionError.Text = "";
             string modelName = txtModelName.Text;
             if (!(lstFigure.SelectedItem is FigureDto figure) || !(lstMaterial.SelectedItem is MaterialDto material))
             {
@@ -53,10 +54,16 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
+                   
                     modelController.AddAModelWithPreview(modelName, figure, material);
+                    txtModelName.Text = "";
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
                 }
             }
@@ -64,18 +71,23 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
+                
                     modelController.AddAModelWithoutPreview(modelName, figure, material);
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
+
                 }
 
             }
 
             creation.ShowModelList();
-            txtModelName.Text = "";
-
+            
         }
     }
 }
