@@ -1,11 +1,9 @@
 ﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
-using System;
 using System.Collections.Generic;
 
-namespace RenderLogic.Controllers
+namespace Render3D.RenderLogic.Controllers
 {
     public class LogController
     {

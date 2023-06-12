@@ -22,6 +22,14 @@ namespace Render3D.UnitTest.ControllersTests
             clientRepo = new ClientRepo();
             clientService = new ClientService(clientRepo);
             clientController.ClientService = clientService;
+            try
+            {
+                clientController.RemoveClient("clientTest");
+            }
+            catch
+            {
+
+            }
         }
 
         [TestMethod]
@@ -29,7 +37,7 @@ namespace Render3D.UnitTest.ControllersTests
         {
             clientController.SignIn("ClientTest", "4Testing");
             clientController.Login("ClientTest", "4Testing");
-            clientController.Client.Name = "ClientTest";
+            Assert.AreEqual(clientController.Client.Name, "ClientTest");
             clientController.RemoveClient("clientTest");
         }
         [TestMethod]
@@ -38,12 +46,11 @@ namespace Render3D.UnitTest.ControllersTests
         {
             clientController.SignIn("ClientTest", "4Testing");
             clientController.SignIn("ClientTest", "4Testing");
-            clientController.RemoveClient("clientTest");
 
         }
         [TestMethod]
         [ExpectedException(typeof(Exception), "A Client with that name does not exist")]
-        public void GivenClientReturnsFalseIfIsNotInTheList()
+        public void GivenClientThrowsExceptionIfItIsNotSaved()
         {
             clientController.Login("ClientTest", "4Testing");
         }
@@ -70,6 +77,12 @@ namespace Render3D.UnitTest.ControllersTests
         public void GivenPasswordChecksIfIsNotValid()
         {
             clientController.CheckPassword("");
+        }
+        [TestMethod]
+        public void LogsOut()
+        {
+            clientController.LogOut();
+            Assert.AreEqual(clientController.Client, null);
         }
     }
 }
