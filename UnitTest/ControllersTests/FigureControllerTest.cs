@@ -107,7 +107,7 @@ namespace Render3D.UnitTest.ControllersTests
             figureController.ChangeName(figureController.GetFigures()[0], "figureTest2");
         }
         [TestMethod]
-        public void GivenDtoDeletesTheFigure()
+        public void GivenFigureDeletesIt()
         {
             figureController.ClientController.SignIn("ClientTest", "4Testing");
             figureController.AddFigure(new FigureDto()
@@ -120,6 +120,25 @@ namespace Render3D.UnitTest.ControllersTests
             figureController.Delete(listDto[0]);
             List<FigureDto> listDto2 = figureController.GetFigures();
             Assert.AreEqual(listDto2.Count, 0);
+        }
+        [TestCleanup]
+        public void CleanUp()
+        {
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
     }
 }

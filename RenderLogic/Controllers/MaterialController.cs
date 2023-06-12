@@ -27,7 +27,6 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 MaterialService.GetMaterialByNameAndClient(materialDto.Name,int.Parse(ClientController.Client.Id));
-                throw new BackEndException("material already exists");
             }
             catch (Exception)
             {
@@ -35,12 +34,15 @@ namespace Render3D.RenderLogic.Controllers
                 if (materialDto.Blur != 0)
                 {
                     CreateMetallicMaterial(materialDto.Name, colour, materialDto.Blur);
+                    return;
                 }
                 else
                 {
                     CreateLambertianMaterial(materialDto.Name, colour);
+                    return;
                 }
-            }          
+            }
+                throw new Exception("material already exists");
         }
         private void CreateLambertianMaterial(string materialName, Colour colour)
         {
