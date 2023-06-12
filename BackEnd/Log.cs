@@ -9,13 +9,15 @@ namespace Render3D.BackEnd
         private const int _secondsPerHour = 3600;
         private const int _secondsPerDay = 86400;
 
+        public string Id { get; set; }
         public Client Client { get; set; }
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }
         public Scene Scene { get; set; }
         public int NumberElementsInScene { get; set; }
-        public string Name { get; private set; }
+        public string Name { get; set; }
+        public Log() { }
 
         public Log(Scene scene, DateTime startedRenderDate)
         {
