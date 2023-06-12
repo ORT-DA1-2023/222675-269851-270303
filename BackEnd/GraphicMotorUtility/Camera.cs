@@ -138,7 +138,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         {
             RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
-            RandomSingleton random = RandomSingleton.Instance;
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());

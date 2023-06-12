@@ -128,6 +128,12 @@ namespace UserInterface.Panels
             this.Close();
         }
 
+        public bool IsValidFormat(string input)
+        {
+            Regex vectorFormat = new Regex(@"^(\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s)$");
+            return vectorFormat.IsMatch(input);
+        }
+
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
@@ -153,7 +159,7 @@ namespace UserInterface.Panels
                     else
                     {
                         string apertureZero = "0";
-                        sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureZero);
+                        sceneController.EditCamera(_sceneDto, lookAtText, lookAtText, (int)nrFov.Value, apertureZero);
                        
                     }
                     LoadScene();
