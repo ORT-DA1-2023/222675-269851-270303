@@ -2,7 +2,6 @@
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
@@ -29,13 +28,14 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));
-                throw new BackEndException("model already exists");
+                ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));   
             }
-            catch (Exception)
+            catch
             {              
                 CreateAndAddModel(modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
-            }         
+                return;
+            }
+            throw new Exception("model already exists");
         }
 
         private Material ConvertMaterialDto(MaterialDto materialDto)
@@ -140,7 +140,7 @@ namespace Render3D.RenderLogic.Controllers
                 ModelService.UpdateName(int.Parse(modelDto.Id), newName);
                 return;
             }
-            throw new Exception("There is already a material with that name");
+            throw new Exception("There is already a model with that name");
 
         }
 
