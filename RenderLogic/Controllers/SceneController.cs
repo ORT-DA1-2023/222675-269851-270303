@@ -97,16 +97,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Scene scene = new Scene() { Name = sceneName };
-            }
-            catch (BackEndException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            try
-            {
                 SceneService.GetSceneByNameAndClient(sceneName, int.Parse(ClientController.Client.Id));
-
             }
             catch
             {
