@@ -90,7 +90,7 @@
             this.lblExceptionError.AutoSize = true;
             this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
-            this.lblExceptionError.Location = new System.Drawing.Point(78, 399);
+            this.lblExceptionError.Location = new System.Drawing.Point(78, 396);
             this.lblExceptionError.Name = "lblExceptionError";
             this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
             this.lblExceptionError.TabIndex = 18;
@@ -207,11 +207,12 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Green;
             this.label6.Location = new System.Drawing.Point(182, 399);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(99, 13);
             this.label6.TabIndex = 21;
-            this.label6.Text = "label6";
+            this.label6.Text = "Successfully added";
             this.label6.Visible = false;
             // 
             // ModelPanel

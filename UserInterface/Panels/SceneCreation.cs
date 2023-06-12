@@ -52,8 +52,13 @@ namespace UserInterface.Panels
         {
             _sceneDto = sceneController.GetScene(_sceneDto.Name);
             txtSceneName.Text = _sceneDto.Name;
-            txtLookAt.Text = "(" + _sceneDto.LookAt[0] + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
-            txtLookFrom.Text = "(" + _sceneDto.LookFrom[0] + ";" + _sceneDto.LookFrom[1] + ";" + _sceneDto.LookFrom[2] + ")";
+            XLookAt.Text = $"{_sceneDto.LookAt[0]}";
+            YLookAt.Text = $"{_sceneDto.LookAt[1]}";
+            ZLookAt.Text = $"{_sceneDto.LookAt[2]}";
+           // txtLookAt.Text = "(" +  + ";" + _sceneDto.LookAt[1] + ";" + _sceneDto.LookAt[2] + ")";
+            XLookFrom.Text = $"{_sceneDto.LookFrom[0]}";
+            YLookFrom.Text = $"{_sceneDto.LookFrom[1]}";
+            ZLookFrom.Text = $"{_sceneDto.LookFrom[2]}";
             nrFov.Value = _sceneDto.Fov;
             cBoxAvailableModels.DataSource =sceneController.GetAvailableModels();
             cBoxAvailableModels.DisplayMember = "Name";
@@ -120,7 +125,9 @@ namespace UserInterface.Panels
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
-            if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
+            string lookFromText = $"({XLookFrom.Text};{YLookFrom.Text};{ZLookFrom.Text})";
+            string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
+            if (IsValidFormat(lookFromText) && IsValidFormat(lookAtText))
             {
                 
                     try
@@ -129,7 +136,7 @@ namespace UserInterface.Panels
                         {
                              if(IsValidFormatAperture(txtAperture.Text))
                              {
-                                sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                                sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
                              }
                              else
                              {
@@ -139,7 +146,7 @@ namespace UserInterface.Panels
                     else
                     {
                         string apertureNegative = "-1";
-                        sceneController.EditCamera(_sceneDto, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
+                        sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureNegative);
                     }           
                         LoadScene();
                         lblCamera.ForeColor = Color.Green;
@@ -182,7 +189,9 @@ namespace UserInterface.Panels
         {
 
           ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-          sceneController.AddModel(_sceneDto, model, txtPosition.Text);
+            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
+
+          sceneController.AddModel(_sceneDto, model, position);
             lblAddModel.Text = "Model Added Correctly";  
             lblAddModel.ForeColor = Color.Green;
             LoadScene();
@@ -250,14 +259,31 @@ namespace UserInterface.Panels
             lblExporting.Update();
             BtnRender_Click(sender, e);
 
-            
-            //pasar formato:
-
-            SceneController s = new SceneController();
-           
+            SceneController s = new SceneController(); //TODO
+           // s.ExportRenderScene(_sceneDto,true);
 
             lblExporting.Visible = false;
             lblExporting.Update();
+        }
+
+        private void txtLookFrom_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCamera_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
