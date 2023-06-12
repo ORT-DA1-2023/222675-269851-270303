@@ -41,6 +41,12 @@ namespace Render3D.UnitTest.ControllersTests
             clientController.RemoveClient("clientTest");
         }
         [TestMethod]
+        public void GivenClientGetsIt()
+        {
+            clientController.SignIn("ClientTest", "4Testing");
+            Assert.AreEqual(clientController.GetClient(), "ClientTest");
+        }
+        [TestMethod]
         [ExpectedException(typeof(Exception), "Client Already Exists")]
         public void GivenAClientThatAlreadyExistsThrowsException()
         {
@@ -53,6 +59,13 @@ namespace Render3D.UnitTest.ControllersTests
         public void GivenClientThrowsExceptionIfItIsNotSaved()
         {
             clientController.Login("ClientTest", "4Testing");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Password incorrect")]
+        public void GivenClientWithWrongPasswordThrowsException()
+        {
+            clientController.SignIn("ClientTest", "4Testing");
+            clientController.Login("ClientTest", "4Testing2");
         }
         [TestMethod]
         public void GivenNameChecksIfIsValid()

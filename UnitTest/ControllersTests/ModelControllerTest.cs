@@ -86,7 +86,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNewModelSavesIt()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -107,7 +107,7 @@ namespace Render3D.UnitTest.ControllersTests
         [ExpectedException(typeof(Exception), "model already exists")]
         public void GivenRepeatedModelThrowsException()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -127,7 +127,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNewModelNameItChanges()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -149,7 +149,7 @@ namespace Render3D.UnitTest.ControllersTests
         [ExpectedException(typeof(Exception), "There is already a model with that name")]
         public void GivenNewModelNameItDoesNotChange()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -170,7 +170,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNameDeletesTheModel()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -190,7 +190,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenMaterialCheckIfIsInModel()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -210,7 +210,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenMaterialCheckIfIsNotInModel()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");    
+            modelController.ClientController.SignIn("ClientTest", "4Testing");    
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -246,7 +246,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenFigureCheckIfIsInModel()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
@@ -266,14 +266,14 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenFigureCheckIfIsNotInModel()
         {
-            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
                 Red = 255,
                 Blue = 255,
                 Green = 255,
-                Blur = 0,
+                Blur = 1,
             });
             figureController.AddFigure(new FigureDto()
             {
@@ -303,7 +303,7 @@ namespace Render3D.UnitTest.ControllersTests
             try
             {
                 modelController.ClientController.Login("ClientTest", "4Testing");
-                List<ModelDto> modelDtos = new List<ModelDto>();
+                List<ModelDto> modelDtos = modelController.GetModels();
                 foreach (ModelDto modelDto in modelDtos)
                 {
                     modelController.Delete(modelDto);

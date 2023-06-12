@@ -158,7 +158,6 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.AreEqual(listDto2.Count, 0);
 
         }
-
         [TestCleanup]
         public void CleanUp()
         {

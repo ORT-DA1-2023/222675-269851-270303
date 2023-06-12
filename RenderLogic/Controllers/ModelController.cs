@@ -152,15 +152,7 @@ namespace Render3D.RenderLogic.Controllers
         {
 
             List<Model> Modellist;
-            try
-            {
-                Modellist = ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
-            }
-            catch
-            {
-                throw new Exception("The client does not have any models");
-            }
-
+            Modellist = ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
             List<ModelDto> modelDtos = new List<ModelDto>();
             foreach (Model mod in Modellist)
             {

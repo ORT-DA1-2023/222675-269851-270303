@@ -53,15 +53,8 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<FigureDto> GetFigures()
         {
-            List<Figure> figureList;
-            try
-            {
-               figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
-            }
-            catch
-            {
-                throw new Exception("The client does not have any figures");
-            }
+          List<Figure> figureList;
+          figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
           List<FigureDto> figureDtos = new List<FigureDto>();
             foreach(Figure fig in figureList)
             {

@@ -89,15 +89,7 @@ namespace Render3D.RenderLogic.Controllers
         {
 
             List<Material> MaterialList;
-            try
-            {
-                MaterialList = MaterialService.GetMaterialsOfClient(int.Parse(ClientController.Client.Id));
-            }
-            catch
-            {
-                throw new Exception("The client does not have any figures");
-            }
-
+            MaterialList = MaterialService.GetMaterialsOfClient(int.Parse(ClientController.Client.Id));
             List<MaterialDto> materialDtos = new List<MaterialDto>();
 
             foreach (Material mat in MaterialList)
