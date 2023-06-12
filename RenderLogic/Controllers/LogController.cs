@@ -2,6 +2,8 @@
 using Render3D.RenderLogic.Controllers;
 using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
+using System;
+using System.Collections.Generic;
 
 namespace RenderLogic.Controllers
 {
@@ -27,6 +29,32 @@ namespace RenderLogic.Controllers
         {
             
 
+        }
+
+        public List<LogDto> GetLogs()
+        {
+            List<LogDto > logsDtoList = new List<LogDto>();
+            List<Log> logs= LogService.GetLogs();
+            foreach (Log log in logs)
+            {
+                LogDto logDto = new LogDto()
+                {
+                    Id = log.Id,
+                    Name = log.Name,
+                    ClientId = log.Client.Id,
+                    ClientName = log.Client.Name,
+                    NumberElementsInScene = log.NumberElementsInScene,
+                    RenderDate = log.RenderDate,
+                    RenderTimeInSeconds = log.RenderTimeInSeconds,
+                    SceneId = log.Scene.Id,
+                    SceneName = log.Scene.Name,
+                    NumberOfElements = log.Scene.PositionedModels.Count,
+                    TimeWindowSinceLastRender = log.TimeWindowSinceLastRender,
+
+                };
+                logsDtoList.Add(logDto);
+            }
+            return logsDtoList;
         }
     }
 }

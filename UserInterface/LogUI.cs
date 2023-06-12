@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Render3D.RenderLogic.Controllers;
+using RenderLogic.Controllers;
+using RenderLogic.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,29 +15,12 @@ namespace UserInterface
 {
     public partial class LogUI : Form
     {
+       private readonly LogController _logController;
         public LogUI()
         {
             InitializeComponent();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblAverageTimeInSeconds_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+            _logController = LogController.GetInstance();
+            List <LogDto> logs= _logController.GetLogs();
         }
 
         private void GoBackLog_Click(object sender, EventArgs e)
@@ -42,9 +28,5 @@ namespace UserInterface
             this.Close();
         }
 
-        private void LogUI_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -54,7 +54,6 @@
             this.lblRenderTime.Size = new System.Drawing.Size(154, 13);
             this.lblRenderTime.TabIndex = 0;
             this.lblRenderTime.Text = "Average render time (seconds):";
-            this.lblRenderTime.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblAverageTimeInSeconds
             // 
@@ -64,7 +63,6 @@
             this.lblAverageTimeInSeconds.Size = new System.Drawing.Size(13, 13);
             this.lblAverageTimeInSeconds.TabIndex = 1;
             this.lblAverageTimeInSeconds.Text = "0";
-            this.lblAverageTimeInSeconds.Click += new System.EventHandler(this.lblAverageTimeInSeconds_Click);
             // 
             // label1
             // 
@@ -92,7 +90,6 @@
             this.label3.Size = new System.Drawing.Size(143, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "User who rendered the most:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblMostRenderedUser
             // 
@@ -197,7 +194,6 @@
             this.Name = "LogUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log History";
-            this.Load += new System.EventHandler(this.LogUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -11,7 +11,9 @@ namespace RenderLogic.DataTransferObjects
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }
-        public SceneDto Scene { get; set; }
+        public string SceneName { get; set; }
+        public string SceneId { get; set; }
+        public int NumberOfElements { get; set; }
         public int NumberElementsInScene { get; set; }
         public string Name { get; set; }
     }
