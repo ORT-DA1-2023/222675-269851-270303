@@ -123,18 +123,20 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return new Ray(LookFrom, Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom));
         }
 
-        public Ray GetRayForBlurCamera(double u, double v, RandomSingleton random)
+        public Ray GetRayForBlurCamera(double u, double v)
         {
-            Vector3D vectorRandom = GetRandomInUnitForBlur(random).Multiply(LensRadius);
+            RandomSingleton random = RandomSingleton.Instance;
+            Vector3D vectorRandom = GetRandomInUnitForBlur().Multiply(LensRadius);
             Vector3D vectorOffset = VectorU.Multiply(vectorRandom.X).Add(VectorV.Multiply(vectorRandom.Y));
             Vector3D horizontalPosition = Horizontal.Multiply(u);
             Vector3D verticalPosition = Vertical.Multiply(v);
             return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
 
         }
-
-        public Vector3D GetRandomInUnitForBlur(RandomSingleton random)
+        
+        public Vector3D GetRandomInUnitForBlur()
         {
+            RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
             do
             {

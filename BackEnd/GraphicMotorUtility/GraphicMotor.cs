@@ -132,7 +132,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double v = (row + random.NextDouble()) / ResolutionHeight();
                         if (blur)
                         {
-                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v, random);
+                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v);
                         }
                         else
                         {
