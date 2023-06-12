@@ -39,12 +39,12 @@
             this.nrGreenColor = new System.Windows.Forms.NumericUpDown();
             this.nrBlueColor = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtBlur = new System.Windows.Forms.TextBox();
             this.lblBlur = new System.Windows.Forms.Label();
             this.lblMaterial = new System.Windows.Forms.Label();
             this.lblExceptionError = new System.Windows.Forms.Label();
             this.cmbMaterial = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nrRedColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrGreenColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nrBlueColor)).BeginInit();
@@ -53,6 +53,7 @@
             // 
             // btnCreateFigure
             // 
+            this.btnCreateFigure.BackColor = System.Drawing.Color.Yellow;
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
@@ -60,7 +61,7 @@
             this.btnCreateFigure.Size = new System.Drawing.Size(379, 78);
             this.btnCreateFigure.TabIndex = 13;
             this.btnCreateFigure.Text = "Create";
-            this.btnCreateFigure.UseVisualStyleBackColor = true;
+            this.btnCreateFigure.UseVisualStyleBackColor = false;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateMaterial_Click);
             // 
             // txtMaterialName
@@ -218,6 +219,18 @@
             this.panel1.Size = new System.Drawing.Size(379, 551);
             this.panel1.TabIndex = 17;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Green;
+            this.label2.Location = new System.Drawing.Point(125, 429);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Successfully added";
+            this.label2.Visible = false;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // txtBlur
             // 
             this.txtBlur.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -281,18 +294,6 @@
             this.cmbMaterial.Size = new System.Drawing.Size(118, 21);
             this.cmbMaterial.TabIndex = 19;
             this.cmbMaterial.SelectedIndexChanged += new System.EventHandler(this.cmbMaterial_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(125, 429);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Successfully added";
-            this.label2.Visible = false;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // MaterialPanel
             // 

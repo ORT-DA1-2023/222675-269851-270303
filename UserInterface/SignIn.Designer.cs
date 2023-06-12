@@ -73,28 +73,30 @@
             // lblExceptionError
             // 
             this.lblExceptionError.AutoSize = true;
-            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblExceptionError.ForeColor = System.Drawing.Color.DarkRed;
             this.lblExceptionError.Location = new System.Drawing.Point(374, 452);
             this.lblExceptionError.Name = "lblExceptionError";
-            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.Size = new System.Drawing.Size(42, 20);
             this.lblExceptionError.TabIndex = 17;
             this.lblExceptionError.Text = "error";
             // 
             // btnGoBack
             // 
+            this.btnGoBack.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnGoBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGoBack.Location = new System.Drawing.Point(32, 472);
+            this.btnGoBack.Location = new System.Drawing.Point(813, 485);
             this.btnGoBack.Margin = new System.Windows.Forms.Padding(60);
             this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(102, 39);
+            this.btnGoBack.Size = new System.Drawing.Size(104, 48);
             this.btnGoBack.TabIndex = 16;
             this.btnGoBack.Text = "Go back";
-            this.btnGoBack.UseVisualStyleBackColor = true;
+            this.btnGoBack.UseVisualStyleBackColor = false;
             this.btnGoBack.Click += new System.EventHandler(this.BtnGoBack_Click);
             // 
             // btnSignIn
             // 
+            this.btnSignIn.BackColor = System.Drawing.Color.Yellow;
             this.btnSignIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSignIn.Location = new System.Drawing.Point(377, 391);
             this.btnSignIn.Margin = new System.Windows.Forms.Padding(0);
@@ -102,39 +104,39 @@
             this.btnSignIn.Size = new System.Drawing.Size(102, 39);
             this.btnSignIn.TabIndex = 15;
             this.btnSignIn.Text = "Sign In";
-            this.btnSignIn.UseVisualStyleBackColor = true;
+            this.btnSignIn.UseVisualStyleBackColor = false;
             this.btnSignIn.Click += new System.EventHandler(this.BtnSignIn_Click);
             // 
             // lblPasswordsDontMatch
             // 
             this.lblPasswordsDontMatch.AutoSize = true;
-            this.lblPasswordsDontMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPasswordsDontMatch.ForeColor = System.Drawing.Color.Red;
+            this.lblPasswordsDontMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblPasswordsDontMatch.ForeColor = System.Drawing.Color.DarkRed;
             this.lblPasswordsDontMatch.Location = new System.Drawing.Point(374, 352);
             this.lblPasswordsDontMatch.Name = "lblPasswordsDontMatch";
-            this.lblPasswordsDontMatch.Size = new System.Drawing.Size(35, 16);
+            this.lblPasswordsDontMatch.Size = new System.Drawing.Size(42, 20);
             this.lblPasswordsDontMatch.TabIndex = 14;
             this.lblPasswordsDontMatch.Text = "error";
             // 
             // lblWrongPasswordMessage
             // 
             this.lblWrongPasswordMessage.AutoSize = true;
-            this.lblWrongPasswordMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWrongPasswordMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblWrongPasswordMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblWrongPasswordMessage.ForeColor = System.Drawing.Color.DarkRed;
             this.lblWrongPasswordMessage.Location = new System.Drawing.Point(374, 253);
             this.lblWrongPasswordMessage.Name = "lblWrongPasswordMessage";
-            this.lblWrongPasswordMessage.Size = new System.Drawing.Size(35, 16);
+            this.lblWrongPasswordMessage.Size = new System.Drawing.Size(42, 20);
             this.lblWrongPasswordMessage.TabIndex = 13;
             this.lblWrongPasswordMessage.Text = "error";
             // 
             // lblWrongUsernameMessage
             // 
             this.lblWrongUsernameMessage.AutoSize = true;
-            this.lblWrongUsernameMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWrongUsernameMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblWrongUsernameMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblWrongUsernameMessage.ForeColor = System.Drawing.Color.DarkRed;
             this.lblWrongUsernameMessage.Location = new System.Drawing.Point(374, 152);
             this.lblWrongUsernameMessage.Name = "lblWrongUsernameMessage";
-            this.lblWrongUsernameMessage.Size = new System.Drawing.Size(35, 16);
+            this.lblWrongUsernameMessage.Size = new System.Drawing.Size(42, 20);
             this.lblWrongUsernameMessage.TabIndex = 12;
             this.lblWrongUsernameMessage.Text = "error";
             // 

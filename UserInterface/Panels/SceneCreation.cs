@@ -76,7 +76,7 @@ namespace UserInterface.Panels
             }
             else
             {
-                lblLastRenderDate.Text = "this scene has not been rendered yet";
+                lblLastRenderDate.Text = "Never";
             }
             CheckRenderOutDated();
         }

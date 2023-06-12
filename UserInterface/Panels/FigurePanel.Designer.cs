@@ -92,6 +92,7 @@
             // 
             // btnCreateFigure
             // 
+            this.btnCreateFigure.BackColor = System.Drawing.Color.Yellow;
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
@@ -99,7 +100,7 @@
             this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 5;
             this.btnCreateFigure.Text = "Create";
-            this.btnCreateFigure.UseVisualStyleBackColor = true;
+            this.btnCreateFigure.UseVisualStyleBackColor = false;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateFigure_Click);
             // 
             // label1

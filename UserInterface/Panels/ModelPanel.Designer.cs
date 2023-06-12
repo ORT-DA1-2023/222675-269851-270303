@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.lstMaterial = new System.Windows.Forms.ComboBox();
             this.lstFigure = new System.Windows.Forms.ComboBox();
             this.lblExceptionError = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 551);
             this.panel1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Green;
+            this.label6.Location = new System.Drawing.Point(182, 399);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Successfully added";
+            this.label6.Visible = false;
             // 
             // lstMaterial
             // 
@@ -133,6 +144,7 @@
             // 
             // btnCreateFigure
             // 
+            this.btnCreateFigure.BackColor = System.Drawing.Color.Yellow;
             this.btnCreateFigure.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCreateFigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFigure.Location = new System.Drawing.Point(0, 473);
@@ -141,7 +153,7 @@
             this.btnCreateFigure.Size = new System.Drawing.Size(380, 78);
             this.btnCreateFigure.TabIndex = 8;
             this.btnCreateFigure.Text = "Create";
-            this.btnCreateFigure.UseVisualStyleBackColor = true;
+            this.btnCreateFigure.UseVisualStyleBackColor = false;
             this.btnCreateFigure.Click += new System.EventHandler(this.BtnCreateModel_Click);
             // 
             // label5
@@ -204,21 +216,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Create a new model";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Green;
-            this.label6.Location = new System.Drawing.Point(182, 399);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Successfully added";
-            this.label6.Visible = false;
-            // 
             // ModelPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(380, 551);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

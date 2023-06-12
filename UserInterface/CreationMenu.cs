@@ -212,5 +212,10 @@ namespace Render3D.UserInterface
             var log = new LogUI();
             log.Show();
         }
+
+        private void pnlObjectCreation_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
