@@ -1,12 +1,12 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class LogService
     {

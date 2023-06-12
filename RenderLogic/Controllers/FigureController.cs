@@ -1,8 +1,8 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -33,7 +33,7 @@ namespace Render3D.RenderLogic.Controllers
                 CreateSphere(figureDto);
                 return;
             }
-            throw new BackEndException("figure already exists");
+            throw new BackEndException("Figure already exists");
 
         }
         private void CreateSphere(FigureDto figureDto)
@@ -87,6 +87,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 Figure tryName = new Sphere() { Name = newName };
                 FigureService.UpdateName(int.Parse(figureDto.Id), newName);
+                return;
             }
             throw new Exception("That Name is already in use");
            

@@ -1,6 +1,6 @@
 ﻿using Render3D.BackEnd;
 
-namespace RenderLogic.RepoInterface
+namespace Render3D.RenderLogic.RepoInterface
 {
     public interface IClientRepo
     {

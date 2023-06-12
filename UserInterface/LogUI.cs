@@ -1,5 +1,5 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

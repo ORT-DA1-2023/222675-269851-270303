@@ -1,7 +1,7 @@
 ﻿using Render3D.BackEnd;
 using System;
 
-namespace RenderLogic.DataTransferObjects
+namespace Render3D.RenderLogic.DataTransferObjects
 {
     public class LogDto
     {

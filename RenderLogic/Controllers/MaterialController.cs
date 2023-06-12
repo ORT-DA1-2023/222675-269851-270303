@@ -1,8 +1,8 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -73,6 +73,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 Material tryName = new LambertianMaterial() { Name = newName };
                 MaterialService.UpdateName(int.Parse(materialDto.Id), newName);
+                return;
             }
             throw new Exception("There is already a material with that name");
 

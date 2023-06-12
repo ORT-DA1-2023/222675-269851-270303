@@ -1,7 +1,4 @@
-﻿using Render3D.RenderLogic.Controllers;
-using System.Windows.Forms;
-using RenderLogic;
-using RenderLogic.RepoInterface;
+﻿using System.Windows.Forms;
 
 namespace Render3D.UserInterface
 {

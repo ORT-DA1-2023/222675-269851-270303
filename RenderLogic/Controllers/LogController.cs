@@ -1,6 +1,6 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Controllers

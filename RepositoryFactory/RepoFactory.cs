@@ -1,6 +1,6 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.RepoInterface;
-using RenderLogic.Services;
+using Render3D.RenderLogic.RepoInterface;
+using Render3D.RenderLogic.Services;
 using renderRepository.RepoImplementation;
 using System.Linq.Expressions;
 

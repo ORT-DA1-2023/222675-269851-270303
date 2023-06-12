@@ -3,8 +3,8 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -132,14 +132,16 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Model material = ModelService.GetModelByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-                throw new Exception("There is already a material with that name");
+                Model material = ModelService.GetModelByNameAndClient(newName, int.Parse(ClientController.Client.Id));            
             }
             catch
             {
+                Model tryName = new Model() { Name = newName };
+                ModelService.UpdateName(int.Parse(modelDto.Id), newName);
+                return;
             }
-            Model tryName = new Model() { Name = newName };
-            ModelService.UpdateName(int.Parse(modelDto.Id), newName);
+            throw new Exception("There is already a material with that name");
+
         }
 
         public void Delete(ModelDto modelDto)

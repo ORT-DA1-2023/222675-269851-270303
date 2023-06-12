@@ -3,7 +3,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
 
-namespace RenderLogic.RepoInterface
+namespace Render3D.RenderLogic.RepoInterface
 {
     public interface IModelRepo
     {

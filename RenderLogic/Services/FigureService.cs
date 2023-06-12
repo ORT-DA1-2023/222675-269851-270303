@@ -1,10 +1,10 @@
 ﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 using System;
 using System.Collections.Generic;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class FigureService
     {

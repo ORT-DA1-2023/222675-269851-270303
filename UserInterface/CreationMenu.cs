@@ -2,7 +2,7 @@
 using Render3D.RenderLogic.Controllers;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

@@ -1,9 +1,9 @@
 ﻿using Render3D.BackEnd;
 using System.Collections.Generic;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class MaterialService
     {

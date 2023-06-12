@@ -1,9 +1,9 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 using System;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class ClientService
     {

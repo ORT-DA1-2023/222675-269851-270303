@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace RenderLogic.DataTransferObjects
+namespace Render3D.RenderLogic.DataTransferObjects
 {
     public class ModelDto
     {

@@ -1,8 +1,7 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.DataTransferObjects;
 using System.Collections.Generic;
 
-namespace RenderLogic.RepoInterface
+namespace Render3D.RenderLogic.RepoInterface
 {
     public interface ISceneRepo
     {
