@@ -25,7 +25,8 @@ namespace Render3D.UserInterface.Panels
                 Name = txtMaterialName.Text,
                 Red = Convert.ToInt32(Math.Round(nrRedColor.Value)),
                 Green = Convert.ToInt32(Math.Round(nrGreenColor.Value)),
-                Blue = Convert.ToInt32(Math.Round(nrBlueColor.Value))
+                Blue = Convert.ToInt32(Math.Round(nrBlueColor.Value)),
+                Blur = -1,
             };
             try
             {
@@ -38,6 +39,7 @@ namespace Render3D.UserInterface.Panels
                 {
                     if (cmbMaterial.SelectedItem.Equals("Lambertian"))
                     {
+
                          materialController.AddMaterial(materialDto);
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))

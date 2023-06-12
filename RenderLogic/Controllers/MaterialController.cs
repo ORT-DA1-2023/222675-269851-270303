@@ -96,15 +96,26 @@ namespace Render3D.RenderLogic.Controllers
             }
 
             List<MaterialDto> materialDtos = new List<MaterialDto>();
+
             foreach (Material mat in MaterialList)
             {
+                double blur;
+                try
+                {
+                    blur = ((MetallicMaterial)mat).Blur;
+                }
+                catch
+                {
+                    blur = -1;
+                }
                 MaterialDto matDto = new MaterialDto()
                 {
                     Id = mat.Id,
                     Name = mat.Name,
                     Red = mat.Attenuation.Red(),
                     Green = mat.Attenuation.Green(),
-                    Blue = mat.Attenuation.Blue()
+                    Blue = mat.Attenuation.Blue(),
+                    Blur = blur,
                 };
                materialDtos.Add(matDto);
             }

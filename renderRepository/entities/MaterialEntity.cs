@@ -49,7 +49,7 @@ namespace renderRepository.entities
         }
         public Material ToDomain() 
         {
-            if (Blur == 0)
+            if (Blur <0)
             {
                 return new LambertianMaterial
                 {

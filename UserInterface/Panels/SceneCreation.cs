@@ -20,7 +20,7 @@ namespace UserInterface.Panels
             
             if (_sceneDto == null)
             {
-                string name="";
+                string name;
                 bool valid= false;
                 while (!valid)
                 {
@@ -63,6 +63,11 @@ namespace UserInterface.Panels
             lblName.Text = "";
             lblAddModel.Text = "";
             lblRemoveModel.Text = "";
+            if (_sceneDto.Aperture > 0)
+            {
+                cmbBlur.Checked = true;
+                lblAperture.Text = _sceneDto.Aperture.ToString();
+            }
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {

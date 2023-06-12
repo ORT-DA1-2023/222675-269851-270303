@@ -46,7 +46,7 @@ namespace Render3D.UserInterface
             List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (MaterialDto material in materialList)
             {
-                    if(material.Blur ==0)
+                    if(material.Blur <0)
                     {
                         LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
                         flObjectList.Controls.Add(materialControl);
