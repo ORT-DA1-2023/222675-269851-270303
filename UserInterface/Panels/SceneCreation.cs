@@ -67,8 +67,8 @@ namespace UserInterface.Panels
             pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
-            lblAddModel.Text = "";
-            lblRemoveModel.Text = "";
+            lblAddModel.Visible = false;
+            lblRemoveModel.Visible = false;
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
@@ -202,23 +202,22 @@ namespace UserInterface.Panels
         {
 
           ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
-            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
-
+          string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
           sceneController.AddModel(_sceneDto, model, position);
-            lblAddModel.Text = "Model Added Correctly";  
-            lblAddModel.ForeColor = Color.Green;
             LoadScene();
             lblRenderOutDated.Text="WARNING this render is outdated";
+            lblAddModel.Visible = true;
+            lblRemoveModel.Update();
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
             ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
             sceneController.RemoveModel(model);
-            lblRemoveModel.Visible = true;
-            lblRemoveModel.ForeColor = Color.Green;
             LoadScene();
             lblRenderOutDated.Text = "WARNING this render is outdated";
+            lblRemoveModel.Visible = true;
+            lblRemoveModel.Update();
         }
 
         private void BtnRender_Click(object sender, EventArgs e)

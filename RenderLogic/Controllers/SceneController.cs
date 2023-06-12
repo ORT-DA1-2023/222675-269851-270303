@@ -53,7 +53,7 @@ namespace Render3D.RenderLogic.Controllers
                    
                         new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                         fov,
-                        sceneDto.Aperture);
+                        sceneNewCamera.Aperture);
                     Scene scene = new Scene()
                     {
                         Id = sceneDto.Id,
