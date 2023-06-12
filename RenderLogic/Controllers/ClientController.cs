@@ -83,5 +83,9 @@ namespace Render3D.RenderLogic.Controllers
         {
             return Client.Name;
         }
+        public void RemoveClient(string name)
+        {
+            ClientService.RemoveClient(name);
+        }
     }
 }

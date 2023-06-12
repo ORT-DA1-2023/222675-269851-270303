@@ -63,5 +63,17 @@ namespace renderRepository.RepoImplementation
                     throw e;
                 }
         }
+
+        public void Remove(string name)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.ClientEntities
+                    .Where(c => c.Name== name)
+                    .FirstOrDefault();
+                dbContext.ClientEntities.Remove(entity);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }

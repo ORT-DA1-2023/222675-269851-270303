@@ -42,6 +42,10 @@ namespace RenderLogic.Services
             }
             
         }
+        public void RemoveClient(string name)
+        {
+            _clientRepo.Remove(name);
+        }
        
     }
 }

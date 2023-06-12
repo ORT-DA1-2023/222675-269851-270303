@@ -21,14 +21,12 @@ namespace RenderLogic.Controllers
         }
         public void AddLogFromScene(LogDto logDto)
         {
-
+            
         }
         public void AddLogFromPreview(LogDto logDto)
         {
-            Log log= new Log()
-            {
+            
 
-            }
         }
     }
 }

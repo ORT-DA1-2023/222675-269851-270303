@@ -76,6 +76,7 @@
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\RenderLogic\RenderLogic.csproj">
       <Project>{92df00fd-9ac7-4504-bdbe-33ce11601c13}</Project>
       <Name>RenderLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\renderRepository\renderRepository.csproj">
+      <Project>{B276A208-F453-4372-8E22-92A5ED630802}</Project>
+      <Name>renderRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

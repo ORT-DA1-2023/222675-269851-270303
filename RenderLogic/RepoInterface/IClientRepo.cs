@@ -7,5 +7,6 @@ namespace RenderLogic.RepoInterface
         void Add(Client client);
         Client Get(int id);
         Client GetClientByName(string Name);
+        void Remove(string name);
     }
 }

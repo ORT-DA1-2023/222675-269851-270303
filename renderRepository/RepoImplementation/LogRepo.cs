@@ -45,4 +45,5 @@ namespace renderRepository.RepoImplementation
                 return logs;
             }
         }
+    }
 }
