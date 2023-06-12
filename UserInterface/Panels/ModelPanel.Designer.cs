@@ -68,10 +68,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.label6.ForeColor = System.Drawing.Color.Green;
             this.label6.Location = new System.Drawing.Point(182, 399);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 13);
+            this.label6.Size = new System.Drawing.Size(135, 18);
             this.label6.TabIndex = 21;
             this.label6.Text = "Successfully added";
             this.label6.Visible = false;
@@ -99,11 +100,11 @@
             // lblExceptionError
             // 
             this.lblExceptionError.AutoSize = true;
-            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblExceptionError.ForeColor = System.Drawing.Color.DarkRed;
             this.lblExceptionError.Location = new System.Drawing.Point(78, 396);
             this.lblExceptionError.Name = "lblExceptionError";
-            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.Size = new System.Drawing.Size(42, 20);
             this.lblExceptionError.TabIndex = 18;
             this.lblExceptionError.Text = "error";
             // 

@@ -189,28 +189,28 @@
             // 
             // ZLookAt
             // 
-            this.ZLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.ZLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.ZLookAt.Location = new System.Drawing.Point(336, 311);
             this.ZLookAt.Name = "ZLookAt";
-            this.ZLookAt.Size = new System.Drawing.Size(40, 20);
+            this.ZLookAt.Size = new System.Drawing.Size(40, 21);
             this.ZLookAt.TabIndex = 51;
             this.ZLookAt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YLookAt
             // 
-            this.YLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.YLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.YLookAt.Location = new System.Drawing.Point(336, 279);
             this.YLookAt.Name = "YLookAt";
-            this.YLookAt.Size = new System.Drawing.Size(40, 20);
+            this.YLookAt.Size = new System.Drawing.Size(40, 21);
             this.YLookAt.TabIndex = 50;
             this.YLookAt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // XLookAt
             // 
-            this.XLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.XLookAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.XLookAt.Location = new System.Drawing.Point(336, 247);
             this.XLookAt.Name = "XLookAt";
-            this.XLookAt.Size = new System.Drawing.Size(40, 20);
+            this.XLookAt.Size = new System.Drawing.Size(40, 21);
             this.XLookAt.TabIndex = 49;
             this.XLookAt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -227,10 +227,11 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label14.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label14.Location = new System.Drawing.Point(533, 36);
+            this.label14.Location = new System.Drawing.Point(512, 38);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(113, 13);
+            this.label14.Size = new System.Drawing.Size(150, 17);
             this.label14.TabIndex = 38;
             this.label14.Text = "Last modification date:";
             // 
@@ -247,10 +248,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label13.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label13.Location = new System.Drawing.Point(533, 58);
+            this.label13.Location = new System.Drawing.Point(545, 58);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.Size = new System.Drawing.Size(117, 17);
             this.label13.TabIndex = 37;
             this.label13.Text = "Last render date:";
             // 
@@ -267,29 +269,29 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(201, 66);
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label12.Location = new System.Drawing.Point(196, 75);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(142, 36);
+            this.label12.Size = new System.Drawing.Size(171, 39);
             this.label12.TabIndex = 36;
             this.label12.Text = "To change the name of the scene,\r\nedit it above and click Change to\r\nconfirm the " +
     "changes";
             // 
             // ZLookFrom
             // 
-            this.ZLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.ZLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.ZLookFrom.Location = new System.Drawing.Point(225, 314);
             this.ZLookFrom.Name = "ZLookFrom";
-            this.ZLookFrom.Size = new System.Drawing.Size(40, 20);
+            this.ZLookFrom.Size = new System.Drawing.Size(40, 21);
             this.ZLookFrom.TabIndex = 45;
             this.ZLookFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YLookFrom
             // 
-            this.YLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.YLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.YLookFrom.Location = new System.Drawing.Point(225, 282);
             this.YLookFrom.Name = "YLookFrom";
-            this.YLookFrom.Size = new System.Drawing.Size(40, 20);
+            this.YLookFrom.Size = new System.Drawing.Size(40, 21);
             this.YLookFrom.TabIndex = 44;
             this.YLookFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -305,10 +307,10 @@
             // 
             // XLookFrom
             // 
-            this.XLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.XLookFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.XLookFrom.Location = new System.Drawing.Point(225, 250);
             this.XLookFrom.Name = "XLookFrom";
-            this.XLookFrom.Size = new System.Drawing.Size(40, 20);
+            this.XLookFrom.Size = new System.Drawing.Size(40, 21);
             this.XLookFrom.TabIndex = 43;
             this.XLookFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.XLookFrom.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
@@ -317,11 +319,11 @@
             // 
             this.lblRenderingNotification.AutoSize = true;
             this.lblRenderingNotification.BackColor = System.Drawing.SystemColors.Control;
-            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblRenderingNotification.ForeColor = System.Drawing.Color.Green;
-            this.lblRenderingNotification.Location = new System.Drawing.Point(512, 220);
+            this.lblRenderingNotification.Location = new System.Drawing.Point(469, 212);
             this.lblRenderingNotification.Name = "lblRenderingNotification";
-            this.lblRenderingNotification.Size = new System.Drawing.Size(235, 26);
+            this.lblRenderingNotification.Size = new System.Drawing.Size(311, 34);
             this.lblRenderingNotification.TabIndex = 33;
             this.lblRenderingNotification.Text = "Rendering...\r\nPlease wait, the process may last a few seconds";
             this.lblRenderingNotification.Visible = false;
@@ -349,10 +351,10 @@
             // txtAperture
             // 
             this.txtAperture.Enabled = false;
-            this.txtAperture.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.txtAperture.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtAperture.Location = new System.Drawing.Point(205, 401);
             this.txtAperture.Name = "txtAperture";
-            this.txtAperture.Size = new System.Drawing.Size(50, 20);
+            this.txtAperture.Size = new System.Drawing.Size(50, 23);
             this.txtAperture.TabIndex = 28;
             this.txtAperture.Text = "1,0";
             this.txtAperture.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -371,18 +373,18 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.ForeColor = System.Drawing.Color.Red;
-            this.lblName.Location = new System.Drawing.Point(196, 106);
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblName.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblName.Location = new System.Drawing.Point(196, 123);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 16);
+            this.lblName.Size = new System.Drawing.Size(40, 18);
             this.lblName.TabIndex = 26;
             this.lblName.Text = "error";
             // 
             // btnChangeName
             // 
             this.btnChangeName.BackColor = System.Drawing.Color.Yellow;
-            this.btnChangeName.Location = new System.Drawing.Point(355, 36);
+            this.btnChangeName.Location = new System.Drawing.Point(355, 33);
             this.btnChangeName.Name = "btnChangeName";
             this.btnChangeName.Size = new System.Drawing.Size(52, 37);
             this.btnChangeName.TabIndex = 25;
@@ -393,11 +395,11 @@
             // lblCamera
             // 
             this.lblCamera.AutoSize = true;
-            this.lblCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCamera.ForeColor = System.Drawing.Color.Red;
+            this.lblCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblCamera.ForeColor = System.Drawing.Color.DarkRed;
             this.lblCamera.Location = new System.Drawing.Point(205, 495);
             this.lblCamera.Name = "lblCamera";
-            this.lblCamera.Size = new System.Drawing.Size(35, 16);
+            this.lblCamera.Size = new System.Drawing.Size(40, 18);
             this.lblCamera.TabIndex = 24;
             this.lblCamera.Text = "error";
             this.lblCamera.Click += new System.EventHandler(this.lblCamera_Click);
@@ -428,7 +430,7 @@
             // 
             // nrFov
             // 
-            this.nrFov.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.nrFov.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.nrFov.Location = new System.Drawing.Point(315, 397);
             this.nrFov.Maximum = new decimal(new int[] {
             160,
@@ -436,7 +438,7 @@
             0,
             0});
             this.nrFov.Name = "nrFov";
-            this.nrFov.Size = new System.Drawing.Size(36, 20);
+            this.nrFov.Size = new System.Drawing.Size(61, 23);
             this.nrFov.TabIndex = 20;
             this.nrFov.Value = new decimal(new int[] {
             30,
@@ -447,11 +449,11 @@
             // lblRenderOutDated
             // 
             this.lblRenderOutDated.AutoSize = true;
-            this.lblRenderOutDated.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRenderOutDated.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblRenderOutDated.ForeColor = System.Drawing.Color.Maroon;
             this.lblRenderOutDated.Location = new System.Drawing.Point(469, 343);
             this.lblRenderOutDated.Name = "lblRenderOutDated";
-            this.lblRenderOutDated.Size = new System.Drawing.Size(35, 16);
+            this.lblRenderOutDated.Size = new System.Drawing.Size(40, 18);
             this.lblRenderOutDated.TabIndex = 19;
             this.lblRenderOutDated.Text = "error";
             // 
@@ -459,7 +461,7 @@
             // 
             this.lblLastModificationDate.AutoSize = true;
             this.lblLastModificationDate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblLastModificationDate.Location = new System.Drawing.Point(668, 38);
+            this.lblLastModificationDate.Location = new System.Drawing.Point(668, 41);
             this.lblLastModificationDate.Name = "lblLastModificationDate";
             this.lblLastModificationDate.Size = new System.Drawing.Size(10, 13);
             this.lblLastModificationDate.TabIndex = 12;
@@ -468,7 +470,7 @@
             // lblLastRenderDate
             // 
             this.lblLastRenderDate.AutoSize = true;
-            this.lblLastRenderDate.Location = new System.Drawing.Point(668, 58);
+            this.lblLastRenderDate.Location = new System.Drawing.Point(668, 61);
             this.lblLastRenderDate.Name = "lblLastRenderDate";
             this.lblLastRenderDate.Size = new System.Drawing.Size(10, 13);
             this.lblLastRenderDate.TabIndex = 11;
@@ -535,9 +537,9 @@
             // 
             // pBoxRender
             // 
-            this.pBoxRender.Location = new System.Drawing.Point(459, 140);
+            this.pBoxRender.Location = new System.Drawing.Point(450, 138);
             this.pBoxRender.Name = "pBoxRender";
-            this.pBoxRender.Size = new System.Drawing.Size(330, 200);
+            this.pBoxRender.Size = new System.Drawing.Size(339, 202);
             this.pBoxRender.TabIndex = 8;
             this.pBoxRender.TabStop = false;
             // 
@@ -557,10 +559,11 @@
             // lblExporting
             // 
             this.lblExporting.AutoSize = true;
+            this.lblExporting.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.lblExporting.ForeColor = System.Drawing.Color.Green;
-            this.lblExporting.Location = new System.Drawing.Point(13, 402);
+            this.lblExporting.Location = new System.Drawing.Point(3, 416);
             this.lblExporting.Name = "lblExporting";
-            this.lblExporting.Size = new System.Drawing.Size(132, 26);
+            this.lblExporting.Size = new System.Drawing.Size(163, 32);
             this.lblExporting.TabIndex = 32;
             this.lblExporting.Text = "Rendering and exporting...\r\nPlease wait";
             this.lblExporting.Visible = false;
@@ -588,7 +591,7 @@
             // 
             this.btnExport.BackColor = System.Drawing.Color.Yellow;
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnExport.Location = new System.Drawing.Point(3, 441);
+            this.btnExport.Location = new System.Drawing.Point(4, 465);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(178, 41);
             this.btnExport.TabIndex = 30;
@@ -698,11 +701,12 @@
             // lblAddModel
             // 
             this.lblAddModel.AutoSize = true;
+            this.lblAddModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.lblAddModel.ForeColor = System.Drawing.Color.Green;
             this.lblAddModel.Location = new System.Drawing.Point(12, 278);
             this.lblAddModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAddModel.Name = "lblAddModel";
-            this.lblAddModel.Size = new System.Drawing.Size(47, 13);
+            this.lblAddModel.Size = new System.Drawing.Size(52, 15);
             this.lblAddModel.TabIndex = 8;
             this.lblAddModel.Text = "correctly";
             // 
@@ -710,7 +714,7 @@
             // 
             this.btnAddModel.BackColor = System.Drawing.Color.Yellow;
             this.btnAddModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnAddModel.Location = new System.Drawing.Point(10, 301);
+            this.btnAddModel.Location = new System.Drawing.Point(3, 310);
             this.btnAddModel.Name = "btnAddModel";
             this.btnAddModel.Size = new System.Drawing.Size(175, 44);
             this.btnAddModel.TabIndex = 7;
@@ -791,11 +795,12 @@
             // lblRemoveModel
             // 
             this.lblRemoveModel.AutoSize = true;
+            this.lblRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.lblRemoveModel.ForeColor = System.Drawing.Color.Green;
             this.lblRemoveModel.Location = new System.Drawing.Point(13, 105);
             this.lblRemoveModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRemoveModel.Name = "lblRemoveModel";
-            this.lblRemoveModel.Size = new System.Drawing.Size(47, 13);
+            this.lblRemoveModel.Size = new System.Drawing.Size(58, 16);
             this.lblRemoveModel.TabIndex = 9;
             this.lblRemoveModel.Text = "correctly";
             // 

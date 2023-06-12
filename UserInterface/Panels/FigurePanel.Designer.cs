@@ -119,11 +119,11 @@
             // lblExceptionError
             // 
             this.lblExceptionError.AutoSize = true;
-            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExceptionError.ForeColor = System.Drawing.Color.Red;
+            this.lblExceptionError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
+            this.lblExceptionError.ForeColor = System.Drawing.Color.DarkRed;
             this.lblExceptionError.Location = new System.Drawing.Point(65, 337);
             this.lblExceptionError.Name = "lblExceptionError";
-            this.lblExceptionError.Size = new System.Drawing.Size(35, 16);
+            this.lblExceptionError.Size = new System.Drawing.Size(42, 20);
             this.lblExceptionError.TabIndex = 18;
             this.lblExceptionError.Text = "error";
             // 
@@ -146,10 +146,11 @@
             // lblCorrectlyAdded
             // 
             this.lblCorrectlyAdded.AutoSize = true;
+            this.lblCorrectlyAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.lblCorrectlyAdded.ForeColor = System.Drawing.Color.Green;
             this.lblCorrectlyAdded.Location = new System.Drawing.Point(68, 357);
             this.lblCorrectlyAdded.Name = "lblCorrectlyAdded";
-            this.lblCorrectlyAdded.Size = new System.Drawing.Size(81, 13);
+            this.lblCorrectlyAdded.Size = new System.Drawing.Size(112, 18);
             this.lblCorrectlyAdded.TabIndex = 19;
             this.lblCorrectlyAdded.Text = "Correctly added";
             this.lblCorrectlyAdded.Visible = false;
