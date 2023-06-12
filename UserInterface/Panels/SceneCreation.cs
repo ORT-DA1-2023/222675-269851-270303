@@ -139,7 +139,7 @@ namespace UserInterface.Panels
         {
             string lookFromText = $"({XLookFrom.Text};{YLookFrom.Text};{ZLookFrom.Text})";
             string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
-            if (IsValidFormat(lookFromText) && IsValidFormat(lookAtText))
+            if (IsValidFormatVector(lookFromText) && IsValidFormatVector(lookAtText))
             {
                 
                     try
@@ -159,7 +159,7 @@ namespace UserInterface.Panels
                     else
                     {
                         string apertureZero = "0";
-                        sceneController.EditCamera(_sceneDto, lookAtText, lookAtText, (int)nrFov.Value, apertureZero);
+                        sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
                        
                     }
                     LoadScene();
@@ -172,9 +172,7 @@ namespace UserInterface.Panels
                         lblCamera.ForeColor = Color.Red;
                         lblCamera.Text = ex.Message;
                     }
-                
-              
-
+       
             }
             else
             {
@@ -210,15 +208,17 @@ namespace UserInterface.Panels
             lblAddModel.Text = "Model Added Correctly";  
             lblAddModel.ForeColor = Color.Green;
             LoadScene();
+            lblRenderOutDated.Text="WARNING this render is outdated";
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
             ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
             sceneController.RemoveModel(model);
-            lblRemoveModel.Text = "Model Removed Correctly";
+            lblRemoveModel.Visible = true;
             lblRemoveModel.ForeColor = Color.Green;
             LoadScene();
+            lblRenderOutDated.Text = "WARNING this render is outdated";
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
@@ -281,24 +281,5 @@ namespace UserInterface.Panels
             lblExporting.Update();
         }
 
-        private void txtLookFrom_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCamera_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

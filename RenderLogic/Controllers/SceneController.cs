@@ -49,8 +49,9 @@ namespace Render3D.RenderLogic.Controllers
                 if (!CameraAreEqual(sceneDto, sceneNewCamera))
                 {
                     Camera camera = new Camera(
-                        new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                         new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
+                   
+                        new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                         fov,
                         sceneDto.Aperture);
                     Scene scene = new Scene()

@@ -313,7 +313,6 @@
             this.XLookFrom.Size = new System.Drawing.Size(40, 21);
             this.XLookFrom.TabIndex = 43;
             this.XLookFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.XLookFrom.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // lblRenderingNotification
             // 
@@ -402,7 +401,6 @@
             this.lblCamera.Size = new System.Drawing.Size(40, 18);
             this.lblCamera.TabIndex = 24;
             this.lblCamera.Text = "error";
-            this.lblCamera.Click += new System.EventHandler(this.lblCamera_Click);
             // 
             // btnChangeCamera
             // 
@@ -619,7 +617,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(190, 534);
             this.panel2.TabIndex = 0;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label7
             // 
