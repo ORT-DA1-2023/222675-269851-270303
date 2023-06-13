@@ -1,5 +1,4 @@
-﻿using Org.BouncyCastle.Cmp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace Render3D.BackEnd
             {
                 _format.Save(_bitmap, _destinationPath);
             }
-            catch (Exception) {
+            catch (Exception e) {
                 throw new BackEndException("Could not save the file");
             }
         }

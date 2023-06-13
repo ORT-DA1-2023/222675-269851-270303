@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd;
+﻿using Microsoft.SqlServer.Server;
+using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
@@ -7,6 +8,10 @@ using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Resources;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 
@@ -54,7 +59,7 @@ namespace Render3D.RenderLogic.Controllers
                    
                         new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                         fov,
-                        sceneDto.Aperture);
+                        sceneNewCamera.Aperture);
                     Scene scene = new Scene()
                     {
                         Id = sceneDto.Id,
@@ -139,7 +144,7 @@ namespace Render3D.RenderLogic.Controllers
             throw new Exception("Name already in use");
 
         }
-
+ 
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
         {
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
@@ -150,7 +155,9 @@ namespace Render3D.RenderLogic.Controllers
             model.Id = null;
             model.Figure.Id = null;
             model.Material.Id = null;
-            SceneService.AddModel(int.Parse(scene.Id), model);
+            scene.UpdateLastModificationDate();
+            SceneService.AddModel(scene, model);
+            
         }
 
         public void RemoveModel(ModelDto modelDto)
@@ -322,23 +329,47 @@ namespace Render3D.RenderLogic.Controllers
 
         public void ExportRender(SceneDto s, string directory, string savingFormat)
         {
-            ISavingFormat format;
-            switch (savingFormat)
+            Bitmap bitmap = s.Preview;
+
+            // Save the image as a PNG or JPEG
+            if (savingFormat == "png") { s.Preview.Save(directory, ImageFormat.Png); return; }
+            if (savingFormat == "jpg") { s.Preview.Save(directory, ImageFormat.Jpeg); return; }
+            if (savingFormat == "ppm")
             {
-                case "PPM":
-                    format = new PPMSavingFormat();
-                    break;
-                case "PNG":
-                    format = new PNGSavingFormat();
-                    break;
-                case "JPG":
-                    format = new JPGSavingFormat();
-                    break;
-                default:
-                    throw new BackEndException("Invalid Format");
+
+                using (StreamWriter writer = new StreamWriter(directory))
+                {
+                    // Write the PPM file header
+                    writer.WriteLine("P3");  // Magic number for PPM
+                    writer.WriteLine($"{bitmap.Width} {bitmap.Height}");  // Width and height
+                    writer.WriteLine("255");  // Maximum color value
+
+                    // Write the pixel data
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        for (int x = 0; x < bitmap.Width; x++)
+                        {
+                            Color pixelColor = bitmap.GetPixel(x, y);
+                            writer.Write($"{pixelColor.R} {pixelColor.G} {pixelColor.B} ");
+                        }
+                        writer.WriteLine();  // Move to the next line after each row
+                    }
+                }
+
+                return;
             }
-            OutputSaver o = new OutputSaver(s.Preview, directory, format);
-            o.Save();
+
+            throw new Exception("could not save the file");
+        }
+
+        public bool IsValidDirectory(string path)
+        {
+           return  Directory.Exists(path);
+        }
+
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
         }
     }
 }

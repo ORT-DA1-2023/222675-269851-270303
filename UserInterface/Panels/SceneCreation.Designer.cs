@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -86,6 +87,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -94,6 +98,8 @@
             this.btnRemoveModel = new System.Windows.Forms.Button();
             this.cBoxPositionedModels = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nrFov)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxRender)).BeginInit();
@@ -103,6 +109,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.label25);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.label23);
@@ -146,6 +153,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1011, 534);
             this.panel1.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(260, 430);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(100, 17);
+            this.checkBox1.TabIndex = 57;
+            this.checkBox1.Text = "Save as default";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
@@ -250,11 +267,11 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label13.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label13.Location = new System.Drawing.Point(545, 58);
+            this.label13.Location = new System.Drawing.Point(504, 55);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(117, 17);
+            this.label13.Size = new System.Drawing.Size(158, 17);
             this.label13.TabIndex = 37;
-            this.label13.Text = "Last render date:";
+            this.label13.Text = "Last renderization date:";
             // 
             // label20
             // 
@@ -318,11 +335,11 @@
             // 
             this.lblRenderingNotification.AutoSize = true;
             this.lblRenderingNotification.BackColor = System.Drawing.SystemColors.Control;
-            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblRenderingNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.lblRenderingNotification.ForeColor = System.Drawing.Color.Green;
-            this.lblRenderingNotification.Location = new System.Drawing.Point(469, 212);
+            this.lblRenderingNotification.Location = new System.Drawing.Point(465, 217);
             this.lblRenderingNotification.Name = "lblRenderingNotification";
-            this.lblRenderingNotification.Size = new System.Drawing.Size(311, 34);
+            this.lblRenderingNotification.Size = new System.Drawing.Size(268, 30);
             this.lblRenderingNotification.TabIndex = 33;
             this.lblRenderingNotification.Text = "Rendering...\r\nPlease wait, the process may last a few seconds";
             this.lblRenderingNotification.Visible = false;
@@ -406,7 +423,7 @@
             // 
             this.btnChangeCamera.BackColor = System.Drawing.Color.Yellow;
             this.btnChangeCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnChangeCamera.Location = new System.Drawing.Point(201, 444);
+            this.btnChangeCamera.Location = new System.Drawing.Point(205, 451);
             this.btnChangeCamera.Name = "btnChangeCamera";
             this.btnChangeCamera.Size = new System.Drawing.Size(175, 41);
             this.btnChangeCamera.TabIndex = 23;
@@ -449,7 +466,7 @@
             this.lblRenderOutDated.AutoSize = true;
             this.lblRenderOutDated.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblRenderOutDated.ForeColor = System.Drawing.Color.Maroon;
-            this.lblRenderOutDated.Location = new System.Drawing.Point(469, 343);
+            this.lblRenderOutDated.Location = new System.Drawing.Point(436, 341);
             this.lblRenderOutDated.Name = "lblRenderOutDated";
             this.lblRenderOutDated.Size = new System.Drawing.Size(40, 18);
             this.lblRenderOutDated.TabIndex = 19;
@@ -537,31 +554,32 @@
             // 
             this.pBoxRender.Location = new System.Drawing.Point(450, 138);
             this.pBoxRender.Name = "pBoxRender";
-            this.pBoxRender.Size = new System.Drawing.Size(339, 202);
+            this.pBoxRender.Size = new System.Drawing.Size(300, 200);
             this.pBoxRender.TabIndex = 8;
             this.pBoxRender.TabStop = false;
+            this.pBoxRender.Click += new System.EventHandler(this.pBoxRender_Click);
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "PPM",
-            "PNG",
-            "JPG"});
-            this.comboBox1.Location = new System.Drawing.Point(16, 300);
+            "ppm",
+            "png",
+            "jpg"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 357);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 34;
-            this.comboBox1.Text = "Select format";
             // 
             // lblExporting
             // 
             this.lblExporting.AutoSize = true;
-            this.lblExporting.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.lblExporting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblExporting.ForeColor = System.Drawing.Color.Green;
-            this.lblExporting.Location = new System.Drawing.Point(3, 416);
+            this.lblExporting.Location = new System.Drawing.Point(6, 398);
             this.lblExporting.Name = "lblExporting";
-            this.lblExporting.Size = new System.Drawing.Size(163, 32);
+            this.lblExporting.Size = new System.Drawing.Size(132, 26);
             this.lblExporting.TabIndex = 32;
             this.lblExporting.Text = "Rendering and exporting...\r\nPlease wait";
             this.lblExporting.Visible = false;
@@ -569,15 +587,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 403);
+            this.label5.Location = new System.Drawing.Point(6, 305);
+            this.label5.MaximumSize = new System.Drawing.Size(170, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 31;
-            this.label5.Text = "-";
+            this.label5.Text = "None";
             // 
             // btnSelectPath
             // 
-            this.btnSelectPath.Location = new System.Drawing.Point(16, 328);
+            this.btnSelectPath.Location = new System.Drawing.Point(101, 280);
             this.btnSelectPath.Name = "btnSelectPath";
             this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
             this.btnSelectPath.TabIndex = 2;
@@ -589,7 +608,7 @@
             // 
             this.btnExport.BackColor = System.Drawing.Color.Yellow;
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnExport.Location = new System.Drawing.Point(4, 465);
+            this.btnExport.Location = new System.Drawing.Point(4, 439);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(178, 41);
             this.btnExport.TabIndex = 30;
@@ -703,9 +722,9 @@
             this.lblAddModel.Location = new System.Drawing.Point(12, 278);
             this.lblAddModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAddModel.Name = "lblAddModel";
-            this.lblAddModel.Size = new System.Drawing.Size(52, 15);
+            this.lblAddModel.Size = new System.Drawing.Size(54, 15);
             this.lblAddModel.TabIndex = 8;
-            this.lblAddModel.Text = "correctly";
+            this.lblAddModel.Text = "Correctly";
             // 
             // btnAddModel
             // 
@@ -742,6 +761,11 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label30);
+            this.panel3.Controls.Add(this.label29);
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.label28);
+            this.panel3.Controls.Add(this.label27);
             this.panel3.Controls.Add(this.label26);
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.lblExporting);
@@ -759,6 +783,36 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 534);
             this.panel3.TabIndex = 1;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.textBox1.Location = new System.Drawing.Point(7, 232);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(120, 21);
+            this.textBox1.TabIndex = 57;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.Green;
+            this.label28.Location = new System.Drawing.Point(22, 487);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(110, 13);
+            this.label28.TabIndex = 53;
+            this.label28.Text = "Successfully exported";
+            this.label28.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.ForeColor = System.Drawing.Color.DarkRed;
+            this.label27.Location = new System.Drawing.Point(22, 498);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 13);
+            this.label27.TabIndex = 52;
             // 
             // label26
             // 
@@ -773,9 +827,10 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 366);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label10.Location = new System.Drawing.Point(3, 283);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 13);
+            this.label10.Size = new System.Drawing.Size(92, 16);
             this.label10.TabIndex = 35;
             this.label10.Text = "Path selected:";
             // 
@@ -783,7 +838,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(12, 267);
+            this.label9.Location = new System.Drawing.Point(-1, 178);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(126, 24);
             this.label9.TabIndex = 10;
@@ -792,14 +847,14 @@
             // lblRemoveModel
             // 
             this.lblRemoveModel.AutoSize = true;
-            this.lblRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.lblRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblRemoveModel.ForeColor = System.Drawing.Color.Green;
             this.lblRemoveModel.Location = new System.Drawing.Point(13, 105);
             this.lblRemoveModel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRemoveModel.Name = "lblRemoveModel";
-            this.lblRemoveModel.Size = new System.Drawing.Size(58, 16);
+            this.lblRemoveModel.Size = new System.Drawing.Size(48, 13);
             this.lblRemoveModel.TabIndex = 9;
-            this.lblRemoveModel.Text = "correctly";
+            this.lblRemoveModel.Text = "Correctly";
             // 
             // label8
             // 
@@ -815,7 +870,7 @@
             // 
             this.btnRemoveModel.BackColor = System.Drawing.Color.Yellow;
             this.btnRemoveModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnRemoveModel.Location = new System.Drawing.Point(3, 139);
+            this.btnRemoveModel.Location = new System.Drawing.Point(4, 125);
             this.btnRemoveModel.Name = "btnRemoveModel";
             this.btnRemoveModel.Size = new System.Drawing.Size(182, 44);
             this.btnRemoveModel.TabIndex = 8;
@@ -832,6 +887,26 @@
             this.cBoxPositionedModels.Name = "cBoxPositionedModels";
             this.cBoxPositionedModels.Size = new System.Drawing.Size(139, 32);
             this.cBoxPositionedModels.TabIndex = 1;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label29.Location = new System.Drawing.Point(6, 216);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(79, 15);
+            this.label29.TabIndex = 58;
+            this.label29.Text = "Select name:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label30.Location = new System.Drawing.Point(4, 341);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(52, 16);
+            this.label30.TabIndex = 59;
+            this.label30.Text = "Format:";
             // 
             // SceneCreation
             // 
@@ -925,5 +1000,11 @@
         private System.Windows.Forms.TextBox XLookAt;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
     }
 }

@@ -66,6 +66,7 @@ namespace renderRepository.entities
                 LookAtZ = scene.Camera.LookAt.Z,
                 Fov = scene.Camera.Fov,
                 Preview = bytes,
+                Aperture =scene.Camera.LensRadius/2
             };
             return sceneEntity;
         }
@@ -73,7 +74,10 @@ namespace renderRepository.entities
         {
             Vector3D lookFrom = new Vector3D(LookFromX,LookFromY,LookFromZ);
             Vector3D lookAt = new Vector3D(LookAtX, LookAtY, LookAtZ);
-            Camera camera = new Camera(lookFrom,lookAt, Fov);
+            Camera camera = new Camera(lookFrom, lookAt, Fov)
+            {
+                LensRadius = Aperture * 2
+            };
             Bitmap bitmap;
             try
             {
@@ -95,6 +99,7 @@ namespace renderRepository.entities
                 LastModificationDate = LastModificationDate,
                 LastRenderizationDate = LastRenderizationDate,
                 Preview = bitmap,
+                
             };
         }
     }
