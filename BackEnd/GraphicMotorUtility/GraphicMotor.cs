@@ -21,7 +21,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _maximumDepthPreview = 10;
         private const int _fovCameraPreview = 60;
         private Vector3D _modelPositionPreview = new Vector3D(0, 0, 0);
-        
+
+        public Bitmap Bitmap { get; set; }
+        public PixelMatrix PixelMatrix { get; set; }
 
         public GraphicMotor()
         {
@@ -40,9 +42,6 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
             }
         }
-
-        public PixelMatrix PixelMatrix { get; set; }
-
 
         public int MaximumDepth
         {
@@ -91,7 +90,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return Render(previewScene, false);
         }
 
-        public Bitmap Bitmap { get; set; }
+        
 
         public Bitmap Render(Scene sceneSample, bool blur)
         {
