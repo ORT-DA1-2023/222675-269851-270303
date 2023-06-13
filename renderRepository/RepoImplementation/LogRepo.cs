@@ -1,5 +1,6 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
+using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System;
@@ -21,6 +22,17 @@ namespace renderRepository.RepoImplementation
                 dbContext.LogEntities.Add(entity);
                 dbContext.SaveChanges();
                 log.Id = entity.Id.ToString();
+            }
+        }
+
+        public void DeleteLog(Log log)
+        {
+            LogEntity logE = LogEntity.FromDomain(log);
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.LogEntities.Find(logE.Id);
+                dbContext.LogEntities.Remove(entity);
+                dbContext.SaveChanges();
             }
         }
 

@@ -20,9 +20,9 @@ namespace Render3D.UserInterface.Controls
             _materialDto = material;
             modelController = ModelController.GetInstance();
             materialController = MaterialController.GetInstance();
-            lblRedColor.Text = "Red: " + material.Red;
-            lblGreenColor.Text = "Green: " + material.Green;
-            lblBlueColor.Text = "Blue: " + material.Blue;
+            lblRedColor.Text = "R: " + material.Red;
+            lblGreenColor.Text = "G: " + material.Green;
+            lblBlueColor.Text = "B: " + material.Blue;
             lblErrorDeleteMaterial.Text = "";
             pBoxMaterial.BackColor = Color.FromArgb(material.Red, material.Green, material.Blue);
         }

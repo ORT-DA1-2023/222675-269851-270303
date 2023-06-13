@@ -91,7 +91,7 @@ namespace Render3D.RenderLogic.Controllers
             return maxClient + " : " + maxTime;
         }
 
-        public int RenderTimeInSecondsOfClient(Client client)
+        private int RenderTimeInSecondsOfClient(Client client)
         {
             int timeInSeconds = 0;
             foreach (Log l in LogsCreated)
@@ -115,6 +115,14 @@ namespace Render3D.RenderLogic.Controllers
                 }
             }
             return clientList;
+        }
+
+        public void Delete(LogDto log)
+        {
+            LogService.DeleteLog(new Log()
+            {
+                Id= log.Id 
+            });
         }
     }
 }

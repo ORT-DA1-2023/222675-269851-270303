@@ -153,6 +153,7 @@ namespace Render3D.RenderLogic.Controllers
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
         {
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
+            scene.Client = ClientController.Client;
             Model model = ModelService.GetModel(int.Parse(modelDto.Id));
             double[] pos = GetArrayFromString(position);
             Vector3D positionVector = new Vector3D(pos[0], pos[1], pos[2]);

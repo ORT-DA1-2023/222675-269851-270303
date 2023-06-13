@@ -61,6 +61,7 @@
     <Compile Include="ControllersTests\ClientControllerTest.cs" />
     <Compile Include="ClientTest.cs" />
     <Compile Include="ControllersTests\FigureControllerTest.cs" />
+    <Compile Include="ControllersTests\LogControllerTest.cs" />
     <Compile Include="ControllersTests\MaterialControllerTest.cs" />
     <Compile Include="ControllersTests\ModelControllerTest.cs" />
     <Compile Include="ControllersTests\SceneControllerTest.cs" />
@@ -99,6 +100,10 @@
     <ProjectReference Include="..\renderRepository\renderRepository.csproj">
       <Project>{B276A208-F453-4372-8E22-92A5ED630802}</Project>
       <Name>renderRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryFactory\RepositoryFactory.csproj">
+      <Project>{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}</Project>
+      <Name>RepositoryFactory</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

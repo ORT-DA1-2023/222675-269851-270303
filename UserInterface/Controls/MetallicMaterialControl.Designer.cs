@@ -49,9 +49,9 @@
             this.lblRedColor.Location = new System.Drawing.Point(18, 86);
             this.lblRedColor.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.lblRedColor.Name = "lblRedColor";
-            this.lblRedColor.Size = new System.Drawing.Size(53, 25);
+            this.lblRedColor.Size = new System.Drawing.Size(31, 25);
             this.lblRedColor.TabIndex = 0;
-            this.lblRedColor.Text = "Red:";
+            this.lblRedColor.Text = "R:";
             // 
             // lblGreenColor
             // 
@@ -61,21 +61,21 @@
             this.lblGreenColor.Location = new System.Drawing.Point(97, 86);
             this.lblGreenColor.Margin = new System.Windows.Forms.Padding(40, 0, 3, 0);
             this.lblGreenColor.Name = "lblGreenColor";
-            this.lblGreenColor.Size = new System.Drawing.Size(72, 25);
+            this.lblGreenColor.Size = new System.Drawing.Size(33, 25);
             this.lblGreenColor.TabIndex = 1;
-            this.lblGreenColor.Text = "Green:";
+            this.lblGreenColor.Text = "G:";
             // 
             // lblBlueColor
             // 
             this.lblBlueColor.AutoSize = true;
             this.lblBlueColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBlueColor.ForeColor = System.Drawing.Color.Blue;
-            this.lblBlueColor.Location = new System.Drawing.Point(202, 86);
+            this.lblBlueColor.Location = new System.Drawing.Point(183, 86);
             this.lblBlueColor.Margin = new System.Windows.Forms.Padding(40, 0, 3, 0);
             this.lblBlueColor.Name = "lblBlueColor";
-            this.lblBlueColor.Size = new System.Drawing.Size(57, 25);
+            this.lblBlueColor.Size = new System.Drawing.Size(31, 25);
             this.lblBlueColor.TabIndex = 2;
-            this.lblBlueColor.Text = "Blue:";
+            this.lblBlueColor.Text = "B:";
             // 
             // btnDeleteMaterial
             // 
@@ -156,7 +156,7 @@
             this.lblBlur.TabIndex = 12;
             this.lblBlur.Text = "Blur:";
             // 
-            // MaterialControl
+            // MetallicMaterialControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -171,7 +171,7 @@
             this.Controls.Add(this.lblGreenColor);
             this.Controls.Add(this.lblRedColor);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "MaterialControl";
+            this.Name = "MetallicMaterialControl";
             this.Size = new System.Drawing.Size(388, 129);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).EndInit();
             this.ResumeLayout(false);

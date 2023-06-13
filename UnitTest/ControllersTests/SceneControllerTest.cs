@@ -1,17 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
 using Render3D.RenderLogic.DataTransferObjects;
-using Render3D.RenderLogic.RepoInterface;
-using Render3D.RenderLogic.Services;
-using renderRepository.RepoImplementation;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System;
+using RepositoryFactory;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -20,47 +12,22 @@ namespace Render3D.UnitTest.ControllersTests
     public class SceneControllerTest
     {
         ModelController modelController;
-        ModelService modelService;
-        IModelRepo modelRepo;
         MaterialController materialController;
-        MaterialService materialService;
-        ClientService clientService;
-        IMaterialRepo materialRepo;
-        IClientRepo clientRepo;
         FigureController figureController;
-        FigureService figureService;
-        IFigureRepo figureRepo;
         SceneController sceneController;
-        SceneService sceneService;
-        ISceneRepo sceneRepo;
-
+        LogController logController;
+        RepoFactory repo = new RepoFactory();
+        
 
         [TestInitialize]
         public void Initialize()
         {
+            logController = LogController.GetInstance();
             modelController = ModelController.GetInstance();
-            modelRepo = new ModelRepo();
-            modelService = new ModelService(modelRepo);
-            modelController.ModelService = modelService;
             materialController = MaterialController.GetInstance();
-            materialRepo = new MaterialRepo();
-            clientRepo = new ClientRepo();
-            materialService = new MaterialService(materialRepo);
-            clientService = new ClientService(clientRepo);
-            materialController.ClientController.ClientService = clientService;
-            materialController.MaterialService = materialService;
-            figureController = FigureController.GetInstance();
-            figureRepo = new FigureRepo();
-            figureService = new FigureService(figureRepo);
-            figureController.ClientController.ClientService = clientService;
-            figureController.FigureService = figureService;
+            figureController = FigureController.GetInstance();           
             sceneController = SceneController.GetInstance();
-            sceneRepo = new SceneRepo();
-            sceneService = new SceneService(sceneRepo);
-            sceneController.SceneService = sceneService;
-            sceneController.ModelService = modelService;
-            sceneController.MaterialService = materialService;
-            sceneController.FigureService = figureService;
+            repo.Initialize();
             try
             {
                 sceneController.ClientController.Login("ClientTest", "4Testing");
@@ -150,7 +117,7 @@ namespace Render3D.UnitTest.ControllersTests
         }
 
         [TestMethod]
-        public void GivenNewCameraAssignsItToScene()
+        public void GivenNewCameraWithDifferentLookAtAssignsItToScene()
         {
             sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
@@ -159,6 +126,66 @@ namespace Render3D.UnitTest.ControllersTests
             sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"4");
             SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.LookAt[0], 1);
+            Assert.AreEqual(scene.Fov, 40);
+            double aperture = 4;
+            Assert.AreEqual(scene.Aperture, aperture);
+        }
+        [TestMethod]
+        public void GivenNewCameraWithDifferentLookFromAssignsItToScene()
+        {
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            string allOnes = "(1;1;1)";
+            string lookAt = "(0;2;5)";
+            sceneController.EditCamera(sceneDto, lookAt, allOnes, 40, "4");
+            SceneDto scene = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(scene.LookAt[0], 0);
+            Assert.AreEqual(scene.Fov, 40);
+            double aperture = 4;
+            Assert.AreEqual(scene.Aperture, aperture);
+        }
+        [TestMethod]
+        public void GivenNewCameraWithDifferentApertureAssignsItToScene()
+        {
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            string lookAt = "(0;2;5)";
+            string lookFrom = "(0;2;0)";
+            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
+            SceneDto scene = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(scene.LookFrom[0], 0);
+            Assert.AreEqual(scene.Fov, 40);
+            double aperture = 4;
+            Assert.AreEqual(scene.Aperture, aperture);
+        }
+        [TestMethod]
+        public void GivenNewCameraWithDifferentFovAssignsItToScene()
+        {
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            string lookAt = "(0;2;5)";
+            string lookFrom = "(0;2;0)";
+            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
+            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 50, "4");
+            SceneDto scene = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(scene.Fov, 50);
+            double aperture = 4;
+            Assert.AreEqual(scene.Aperture, aperture);
+        }
+        [TestMethod]
+        public void GiventheSameCameraDoesNotAssignsItToScene()
+        {
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            string lookAt = "(0;2;5)";
+            string lookFrom = "(0;2;0)";
+            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
+            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
+            SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.Fov, 40);
             double aperture = 4;
             Assert.AreEqual(scene.Aperture, aperture);
@@ -211,6 +238,79 @@ namespace Render3D.UnitTest.ControllersTests
             sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
             sceneController.RemoveModel(sceneController.GetPositionedModels(sceneController.GetScene("SceneTest"))[0]);
         }
+        [TestMethod]
+        public void GivenNewModelsGetList()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            Assert.AreEqual(sceneController.GetAvailableModels()[0].Name,"ModelTest");
+        }
+        [TestMethod]
+        public void GivenModelReturnsTrueIfIsInAScene()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            sceneController.AddScene("SceneTest");
+            ModelDto model = modelController.GetModels()[0];
+            sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
+            Assert.IsTrue(sceneController.CheckIfModelIsInAScene(model));
+        }
+        [TestMethod]
+        public void GivenModelReturnsFalseIfIsInAScene()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            ModelDto model = modelController.GetModels()[0];
+            Assert.IsFalse(sceneController.CheckIfModelIsInAScene(model));
+        }
+        [TestMethod]
+        public void GivenSceneSavesBitmapAfterRender()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            sceneController.RenderScene(sceneController.GetScenes()[0], false);
+            Assert.IsTrue(sceneController.GetScenes()[0].Preview!=null);
+        }
+
 
         [TestCleanup]
         public void CleanUp()

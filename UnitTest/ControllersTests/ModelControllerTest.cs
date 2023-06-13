@@ -7,6 +7,7 @@ using renderRepository.RepoImplementation;
 using Render3D.RenderLogic.DataTransferObjects;
 using System.Collections.Generic;
 using System;
+using RepositoryFactory;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -15,37 +16,20 @@ namespace Render3D.UnitTest.ControllersTests
     public class ModelControllerTest
     {
         ModelController modelController;
-        ModelService modelService;
-        IModelRepo modelRepo;
         MaterialController materialController;
-        MaterialService materialService;
-        ClientService clientService;
-        IMaterialRepo materialRepo;
-        IClientRepo clientRepo;
         FigureController figureController;
-        FigureService figureService;
-        IFigureRepo figureRepo;
+        RepoFactory repo = new RepoFactory();
+
+
 
 
         [TestInitialize]
         public void Initialize()
         {
             modelController = ModelController.GetInstance();
-            modelRepo = new ModelRepo();
-            modelService = new ModelService(modelRepo);
-            modelController.ModelService = modelService;
             materialController = MaterialController.GetInstance();
-            materialRepo = new MaterialRepo();
-            clientRepo = new ClientRepo();
-            materialService = new MaterialService(materialRepo);
-            clientService = new ClientService(clientRepo);
-            materialController.ClientController.ClientService = clientService;
-            materialController.MaterialService = materialService;
             figureController = FigureController.GetInstance();
-            figureRepo = new FigureRepo();
-            figureService = new FigureService(figureRepo);
-            figureController.ClientController.ClientService = clientService;
-            figureController.FigureService = figureService;
+            repo.Initialize();
             try
             {
                 modelController.ClientController.Login("ClientTest", "4Testing");

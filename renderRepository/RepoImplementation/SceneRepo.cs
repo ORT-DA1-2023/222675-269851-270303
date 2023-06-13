@@ -140,6 +140,11 @@ namespace renderRepository.RepoImplementation
             modelEntity.FigureEntity = figureEntity;
             using (var dbContext = new RenderContext())
             {
+                int clientId = int.Parse(scene.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                figureEntity.ClientEntity = client;
+                materialEntity.ClientEntity = client;
+                modelEntity.ClientEntity = client;
                 dbContext.FigureEntities.Add(figureEntity);
                 dbContext.MaterialEntities.Add(materialEntity);
                 dbContext.ModelEntities.Add(modelEntity);
@@ -177,11 +182,12 @@ namespace renderRepository.RepoImplementation
 
         public List<Scene> GetScenesWithModel(Model model)
         {
-            ModelEntity modelEntity = ModelEntity.FromDomain(model);
+            int id = ModelEntity.FromDomain(model).Id;
             using (var dbContext = new RenderContext())
             {
+                var modelEntity = dbContext.ModelEntities.Find(id);
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(s => s.ModelEntities.Any(m => m.Id == modelEntity.Id))
+                    .Where(s => s.ModelEntities.Any(m => m.Name == modelEntity.Name && m.ClientEntity.Id == modelEntity.ClientEntity.Id))
                     .ToList();
                 List<Scene> scenes = new List<Scene>();
                 foreach (var s in sceneEntities)

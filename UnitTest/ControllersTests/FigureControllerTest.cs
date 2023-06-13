@@ -9,29 +9,21 @@ using renderRepository.RepoImplementation;
 using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
+using RepositoryFactory;
 
 namespace Render3D.UnitTest.ControllersTests
 {
     [TestClass]
     public class FigureControllerTest
     {
-
         FigureController figureController;
-        FigureService figureService;
-        ClientService clientService;
-        IFigureRepo figureRepo;
-        IClientRepo clientRepo;
+        RepoFactory repo = new RepoFactory();
 
         [TestInitialize]
         public void Initialize()
         {
             figureController = FigureController.GetInstance();
-            figureRepo = new FigureRepo();
-            clientRepo = new ClientRepo();
-            figureService = new FigureService(figureRepo);
-            clientService = new ClientService(clientRepo);
-            figureController.ClientController.ClientService = clientService;
-            figureController.FigureService = figureService;
+            repo.Initialize();
             try
             {
                 figureController.ClientController.Login("ClientTest", "4Testing");
