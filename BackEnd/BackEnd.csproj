@@ -45,16 +45,16 @@
   <ItemGroup>
     <Compile Include="BackEndException.cs" />
     <Compile Include="GraphicMotorUtility\Camera.cs" />
-    <Compile Include="JPGSavingDriver.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="LogAnalytics.cs" />
+    <Compile Include="IODrivers\SavingDrivers\JPGSavingDriver.cs" />
+    <Compile Include="RenderLogs\Log.cs" />
+    <Compile Include="RenderLogs\LogAnalytics.cs" />
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Materials\MetallicMaterial.cs" />
-    <Compile Include="OutputDriver.cs" />
-    <Compile Include="PNGSavingDriver.cs" />
-    <Compile Include="PPMSavingDriver.cs" />
-    <Compile Include="RandomSingleton.cs" />
-    <Compile Include="SavingFormat.cs" />
+    <Compile Include="IODrivers\OutputDriver.cs" />
+    <Compile Include="IODrivers\SavingDrivers\PNGSavingDriver.cs" />
+    <Compile Include="IODrivers\SavingDrivers\PPMSavingDriver.cs" />
+    <Compile Include="Utilities\RandomSingleton.cs" />
+    <Compile Include="IODrivers\ISavingFormat.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
     <Compile Include="GraphicMotorUtility\HitRecord3D.cs" />
     <Compile Include="GraphicMotorUtility\GraphicMotor.cs" />
