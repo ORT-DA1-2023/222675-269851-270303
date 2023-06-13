@@ -279,7 +279,8 @@ namespace UserInterface.Panels
             label28.Update();
             label27.Text = "";
 
-            if (label5.Text == "-") { label27.Text = "Select a directory"; return; }
+            if (textBox1.Text == "") { label27.Text = "Select a name for the file"; return; }
+            if (label5.Text == "None") { label27.Text = "Select a directory"; return; }
             if (comboBox1.SelectedIndex == -1) { label27.Text = "Select a format"; return; }
 
             bool dirExists = sceneController.IsValidDirectory(label5.Text);
@@ -313,17 +314,12 @@ namespace UserInterface.Panels
             label28.Update();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pBoxRender_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
