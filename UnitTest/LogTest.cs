@@ -32,64 +32,37 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void givenSceneLogReturnsItsName()
+        public void GivenSceneLogReturnsItsName()
         {
             Log l = new Log(sceneSample, DateTimeProvider.Now);
             Assert.AreEqual(sceneSample.Name, l.Name);
         }
 
         [TestMethod]
-        public void givenPreviewLogReturnsPreviewAndName()
+        public void GivenPreviewLogReturnsPreviewAndName()
         {
-            Log l = new Log(sceneSample);
+            Log l = new Log(sceneSample.Name);
             Assert.AreEqual($"preview - {sceneSample.Name}", l.Name);
         }
 
-        [TestMethod]
-        public void GivenValidSceneAssignsTheScene()
-        {
-            Log l = new Log(sceneSample,DateTimeProvider.Now);
-            Assert.AreEqual(sceneSample, l.Scene);
-        }
 
         [TestMethod]
-        public void GivenValidPreviewAssignsTheScene()
-        {
-            Log l = new Log(sceneSample);
-            Assert.AreEqual(sceneSample, l.Scene);
-        }
-
-        [TestMethod]
-        public void GivenValidSceneAssignsTheClient()
-        {
-            Log l = new Log(sceneSample, DateTimeProvider.Now);
-            Assert.AreEqual(sceneSample.Client, l.Client);
-        }
-
-        [TestMethod]
-        public void GivenValidPreviewAssignsTheClient()
-        {
-            Log l = new Log(sceneSample);
-            Assert.AreEqual(sceneSample.Client, l.Client);
-        }
-
-        [TestMethod]
-        public void givenLogReturnsItsRenderTimeInSeconds() {
-            Log l = new Log(sceneSample);
+        public void GivenLogReturnsItsRenderTimeInSeconds() {
+            Log l = new Log(sceneSample, DateTime.Now);
             l.RenderTimeInSeconds = 1;
             Assert.AreEqual(1, l.RenderTimeInSeconds);
        
         }
 
         [TestMethod]
-        public void givenLogReturnsQuantityModelsInScene()
+        public void GivenLogReturnsQuantityModelsInScene()
         {
             Log l = new Log(sceneSample,DateTimeProvider.Now);
-            Assert.AreEqual(sceneSample.PositionedModels.Count, l.NumberElementsInScene);
+            Assert.AreEqual(sceneSample.PositionedModels.Count, l.NumberElements);
         }
 
         [TestMethod]
-        public void givenNeverRenderedSceneLogReturnsNullAsTimeWindow()
+        public void GivenNeverRenderedSceneLogReturnsNullAsTimeWindow()
         {
             DateTimeProvider.Now = DateTime.Now;
             Log l = new Log(sceneSample,DateTimeProvider.Now);

@@ -79,7 +79,6 @@
     <Compile Include="HitRecordTest.cs" />
     <Compile Include="ColourTest.cs" />
     <Compile Include="LogTest.cs" />
-    <Compile Include="LogAnalyticsTest.cs" />
     <Compile Include="MetallicMaterialTest.cs" />
     <Compile Include="OutputSaverTest.cs" />
     <Compile Include="VectorTest.cs" />

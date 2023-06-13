@@ -56,7 +56,7 @@ namespace Render3D.UnitTest.ControllersTests
                 Red = 255,
                 Blue = 255,
                 Green = 255,
-                Blur =0, 
+                Blur =-1, 
             });
             Assert.AreEqual(materialController.GetMaterials()[0].Name, "materialTest");
         }

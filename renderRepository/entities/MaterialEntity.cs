@@ -34,7 +34,7 @@ namespace renderRepository.entities
             }
             catch
             {
-                blur = 0;
+                blur = -1;
             }
             MaterialEntity materialEntity = new MaterialEntity
             {
