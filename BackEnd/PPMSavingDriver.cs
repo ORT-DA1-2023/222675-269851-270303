@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render3D.BackEnd.IODrivers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.FileFormat
 {
     public class PPMSavingDriver : ISavingFormat
     {
@@ -14,12 +15,10 @@ namespace Render3D.BackEnd
         {
             using (StreamWriter writer = new StreamWriter(directory))
             {
-                // Write the PPM file header
-                writer.WriteLine("P3");  // Magic number for PPM
-                writer.WriteLine($"{bitmap.Width} {bitmap.Height}");  // Width and height
-                writer.WriteLine("255");  // Maximum color value
-
-                // Write the pixel data
+                writer.WriteLine("P3");
+                writer.WriteLine($"{bitmap.Width} {bitmap.Height}");
+                writer.WriteLine("255");
+  
                 for (int y = 0; y < bitmap.Height; y++)
                 {
                     for (int x = 0; x < bitmap.Width; x++)
@@ -27,7 +26,7 @@ namespace Render3D.BackEnd
                         Color pixelColor = bitmap.GetPixel(x, y);
                         writer.Write($"{pixelColor.R} {pixelColor.G} {pixelColor.B} ");
                     }
-                    writer.WriteLine();  // Move to the next line after each row
+                    writer.WriteLine();
                 }
             }
         }
