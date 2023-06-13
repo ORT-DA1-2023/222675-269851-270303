@@ -22,9 +22,6 @@ namespace UserInterface.Panels
             if (_sceneDto == null)
             {
                 string name;
-                bool valid = false;
-                while (!valid)
-                {
                     NameChanger nameChanger = new NameChanger("");
                     DialogResult result = nameChanger.ShowDialog(this);
                     if (result == DialogResult.OK)
@@ -34,24 +31,24 @@ namespace UserInterface.Panels
                         {
                             sceneController.AddScene(name);
                             _sceneDto = new SceneDto() { Name = name };
-                            valid = true;
                         }
                         catch
                         {
+                            this.DialogResult = DialogResult.Cancel;
+                            this.Close();
                         }
-                    }
-                    else
-                    {
-                        valid = true;
-                    }
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
                 }
             }
             if(_sceneDto != null)
             {
                 LoadScene();
             }
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+
         }
 
 

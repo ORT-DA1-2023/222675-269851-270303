@@ -40,6 +40,10 @@ namespace Render3D.UserInterface.Controls
                 {
                     creation.Refresh("Scene");
                 }
+                else
+                {
+                    scene.Close();
+                }
             }
         }
     }
