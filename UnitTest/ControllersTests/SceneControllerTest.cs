@@ -30,6 +30,16 @@ namespace Render3D.UnitTest.ControllersTests
             repo.Initialize();
             try
             {
+                logController.ClientController.Login("ClientTest", "4Testing");
+                List<LogDto> logDtos = logController.GetLogs();
+                foreach (LogDto log in logDtos)
+                {
+                    logController.Delete(log);
+                }
+            }
+            catch { }
+            try
+            {
                 sceneController.ClientController.Login("ClientTest", "4Testing");
                 List<SceneDto> sceneDtos = sceneController.GetScenes();
                 foreach(SceneDto sceneDto in sceneDtos)
@@ -165,11 +175,12 @@ namespace Render3D.UnitTest.ControllersTests
         {
             sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
-            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
             string lookAt = "(0;2;5)";
             string lookFrom = "(0;2;0)";
-            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
-            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 50, "4");
+            sceneController.EditCamera(sceneDtoV1, lookAt, lookFrom, 40, "4");
+            SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            sceneController.EditCamera(sceneDtoV2, lookAt, lookFrom, 50, "4");
             SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.Fov, 50);
             double aperture = 4;
@@ -180,11 +191,12 @@ namespace Render3D.UnitTest.ControllersTests
         {
             sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
-            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
             string lookAt = "(0;2;5)";
             string lookFrom = "(0;2;0)";
-            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
-            sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
+            sceneController.EditCamera(sceneDtoV1, lookAt, lookFrom, 40, "4");
+            SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            sceneController.EditCamera(sceneDtoV2, lookAt, lookFrom, 40, "4");
             SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.Fov, 40);
             double aperture = 4;
@@ -215,6 +227,7 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.Models[0].Name, "ModelTest");
         }
+
         [TestMethod]
         public void GivenModelRemovesItFromListOfPositionedModels()
         {

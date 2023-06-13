@@ -18,18 +18,28 @@ namespace Render3D.UnitTest.ControllersTests
         ModelController modelController;
         MaterialController materialController;
         FigureController figureController;
+        LogController logController;
         RepoFactory repo = new RepoFactory();
-
-
 
 
         [TestInitialize]
         public void Initialize()
         {
+            logController = LogController.GetInstance();
             modelController = ModelController.GetInstance();
             materialController = MaterialController.GetInstance();
             figureController = FigureController.GetInstance();
             repo.Initialize();
+            try
+            {
+                logController.ClientController.Login("ClientTest", "4Testing");
+                List<LogDto> logDtos = logController.GetLogs();
+                foreach (LogDto log in logDtos)
+                {
+                    logController.Delete(log);
+                }
+            }
+            catch { }
             try
             {
                 modelController.ClientController.Login("ClientTest", "4Testing");

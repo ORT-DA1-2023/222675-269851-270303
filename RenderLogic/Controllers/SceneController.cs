@@ -42,8 +42,6 @@ namespace Render3D.RenderLogic.Controllers
 
         public void EditCamera(SceneDto sceneDto, string stringLookAt, string stringLookFrom, int fov, string aperture)
         {
-            try
-            {
                 double[] lookAt = GetArrayFromString(stringLookAt);
                 double[] lookFrom = GetArrayFromString(stringLookFrom);
                 double apertureDouble = double.Parse(aperture);
@@ -73,17 +71,23 @@ namespace Render3D.RenderLogic.Controllers
                     scene.UpdateLastModificationDate();
                     SceneService.UpdateCamera(scene);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
         }
 
         private bool CameraAreEqual(SceneDto scene, SceneDto sceneNewCamera)
         {
-            if (!Array.Equals(scene.LookAt, sceneNewCamera.LookAt)) return false;
-            if (!Array.Equals(scene.LookFrom, sceneNewCamera.LookFrom)) return false;
+            if (scene.LookAt[0] != sceneNewCamera.LookAt[0]
+                || scene.LookAt[1]!= sceneNewCamera.LookAt[1]
+                || scene.LookAt[2] != sceneNewCamera.LookAt[2])
+            {
+                return false;
+            }
+            if (scene.LookFrom[0] != sceneNewCamera.LookFrom[0]
+                || scene.LookFrom[1] != sceneNewCamera.LookFrom[1]
+                || scene.LookFrom[2] != sceneNewCamera.LookFrom[2])
+            {
+                return false;
+            }
             if (scene.Aperture != sceneNewCamera.Aperture) return false;
             if (scene.Fov != sceneNewCamera.Fov) return false;
             return true;
