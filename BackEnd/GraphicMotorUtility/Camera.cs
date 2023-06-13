@@ -8,12 +8,17 @@ namespace Render3D.BackEnd.GraphicMotorUtility
     {
         private double _theta;
         private int _fov;
+
         private const int _minFov = 0;
         private const int _maxFov = 160;
         private const double _degreesToRadians = Math.PI / 180;
-
-        private const int defaultFov = 30;
+        private const int _defaultFov = 30;
+        private const int _minimumSquaredLength =  1;
         private const double AspectRatio = 3 / 2;
+        private Vector3D _lookAtSampleVector = new Vector3D(0, 2, 5);
+        private Vector3D _vectorUpSampleVector = new Vector3D(0, 1, 0);
+        private Vector3D _lookFromSampleVector = new Vector3D(0, 2, 0);
+        private Vector3D _vectorTempMultSubstract = new Vector3D(1, 1, 1);
 
         public Vector3D VectorUp = new Vector3D(0, 1, 0);
         public Vector3D LookFrom { get; set; }
@@ -41,13 +46,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Camera()
         {
-            LookAt = new Vector3D(0, 2, 5);
-            VectorUp = new Vector3D(0, 1, 0);
-            Fov = defaultFov;
+            LookAt = _lookAtSampleVector;
+            VectorUp = _vectorUpSampleVector;
+            Fov = _defaultFov;
             _theta = Fov * _degreesToRadians;
             HeightHalf = Math.Tan(Theta / 2);
             WidthHalf = AspectRatio * HeightHalf;
-            LookFrom = new Vector3D(0, 2, 0);
+            LookFrom = _lookFromSampleVector;
             VectorW = LookFrom.Substract(LookAt).GetUnit();
             VectorU = VectorUp.CrossProduct(VectorW).GetUnit();
             VectorV = VectorW.CrossProduct(VectorU);
@@ -141,8 +146,8 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
-            } while (vector.SquaredLength() >= 1);
+                vector = vectorTemp.Multiply(2).Substract(_vectorTempMultSubstract);
+            } while (vector.SquaredLength() >= _minimumSquaredLength);
             return vector;
         }
 

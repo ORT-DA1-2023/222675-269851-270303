@@ -8,7 +8,7 @@ namespace Render3D.BackEnd.Figures
     public class Sphere : Figure
     {
         private double _radius;
-        private const string sphereSampleName = "SphereSample";
+        private const string _sphereSampleName = "SphereSample";
 
         public double Radius
         {
@@ -23,7 +23,7 @@ namespace Render3D.BackEnd.Figures
         public Sphere()
         {
             _radius = 1;
-            _name = sphereSampleName;
+            _name = _sphereSampleName;
             _position = new Vector3D(0, 0, 0);
         }
 
