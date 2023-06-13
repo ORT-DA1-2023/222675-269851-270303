@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Render3D.BackEnd
 {
-    public class PPMSavingFormat : ISavingFormat
+    public class JPGSavingDriver : ISavingFormat
     {
-        public  void Save(Bitmap ppm, string directory)
+        public void Save(Bitmap bmp, string directory)
         {
-            ppm.Save(directory);
+            bmp.Save(directory, ImageFormat.Jpeg);
         }
     }
 }

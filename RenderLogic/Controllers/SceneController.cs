@@ -335,37 +335,28 @@ namespace Render3D.RenderLogic.Controllers
 
         public void ExportRender(SceneDto s, string directory, string savingFormat)
         {
+
             Bitmap bitmap = s.Preview;
+            ISavingFormat format;
 
-            // Save the image as a PNG or JPEG
-            if (savingFormat == "png") { s.Preview.Save(directory, ImageFormat.Png); return; }
-            if (savingFormat == "jpg") { s.Preview.Save(directory, ImageFormat.Jpeg); return; }
-            if (savingFormat == "ppm")
+            switch (savingFormat)
             {
-
-                using (StreamWriter writer = new StreamWriter(directory))
-                {
-                    // Write the PPM file header
-                    writer.WriteLine("P3");  // Magic number for PPM
-                    writer.WriteLine($"{bitmap.Width} {bitmap.Height}");  // Width and height
-                    writer.WriteLine("255");  // Maximum color value
-
-                    // Write the pixel data
-                    for (int y = 0; y < bitmap.Height; y++)
-                    {
-                        for (int x = 0; x < bitmap.Width; x++)
-                        {
-                            Color pixelColor = bitmap.GetPixel(x, y);
-                            writer.Write($"{pixelColor.R} {pixelColor.G} {pixelColor.B} ");
-                        }
-                        writer.WriteLine();  // Move to the next line after each row
-                    }
-                }
-
-                return;
+                case "png":
+                    format = new PNGsavingDriver();
+                    break;
+                case "jpg":
+                    format = new JPGSavingDriver();
+                    break;
+                case "ppm":
+                    format = new PPMSavingDriver();
+                    break;
+                default:
+                    throw new Exception("invalid format");
             }
 
-            throw new Exception("could not save the file");
+            OutputDriver o = new OutputDriver(format);
+            o.Save(bitmap, directory);
+
         }
 
         public bool IsValidDirectory(string path)
