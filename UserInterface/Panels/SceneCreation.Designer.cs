@@ -577,7 +577,7 @@
             this.lblExporting.AutoSize = true;
             this.lblExporting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblExporting.ForeColor = System.Drawing.Color.Green;
-            this.lblExporting.Location = new System.Drawing.Point(6, 398);
+            this.lblExporting.Location = new System.Drawing.Point(22, 494);
             this.lblExporting.Name = "lblExporting";
             this.lblExporting.Size = new System.Drawing.Size(132, 26);
             this.lblExporting.TabIndex = 32;
@@ -798,7 +798,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.ForeColor = System.Drawing.Color.Green;
-            this.label28.Location = new System.Drawing.Point(22, 487);
+            this.label28.Location = new System.Drawing.Point(22, 481);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(110, 13);
             this.label28.TabIndex = 53;
