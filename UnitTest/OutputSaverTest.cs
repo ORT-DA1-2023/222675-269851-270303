@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Render3D.BackEnd;
-using Render3D.BackEnd.GraphicMotorUtility;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using Render3D.BackEnd.IODrivers;
-using Render3D.BackEnd.FileFormat;
+using Render3D.BackEnd.Output.FileFormat;
+using Render3D.BackEnd.IODrivers.Output;
 
 namespace Render3D.UnitTest
 {

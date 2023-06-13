@@ -1,21 +1,16 @@
-﻿using Microsoft.SqlServer.Server;
-using Render3D.BackEnd;
+﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.FileFormat;
+using Render3D.BackEnd.Output.FileFormat;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.IODrivers;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
 using RenderLogic.DataTransferObjects;
 using RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Resources;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Xml.Linq;
+using Render3D.BackEnd.IODrivers.Output;
 
 namespace Render3D.RenderLogic.Controllers
 {
