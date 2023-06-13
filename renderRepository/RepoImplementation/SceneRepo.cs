@@ -170,11 +170,18 @@ namespace renderRepository.RepoImplementation
         public void RemoveModel(Scene scene, Model model)
         {
             SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
+            int modelEntity = int.Parse(model.Id);
+            int figureEntity = int.Parse(model.Figure.Id);
+            int materialEntity = int.Parse(model.Material.Id);
             using (var dbContext = new RenderContext())
             {
                 SceneEntity entity = dbContext.SceneEntities.Find(sceneEntity.Id);
-                ModelEntity modelEntity = ModelEntity.FromDomain(model);
-                dbContext.ModelEntities.Remove(modelEntity);
+                var modelToDelete = dbContext.ModelEntities.Find(modelEntity);
+                var figureToDelete = dbContext.FigureEntities.Find(figureEntity);
+                var materialToDelete = dbContext.MaterialEntities.Find(materialEntity);
+                dbContext.ModelEntities.Remove(modelToDelete);
+                dbContext.MaterialEntities.Remove(materialToDelete);
+                dbContext.FigureEntities.Remove(figureToDelete);
                 entity.LastModificationDate= sceneEntity.LastModificationDate;
                 dbContext.SaveChanges();
             }

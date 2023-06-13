@@ -22,29 +22,36 @@ namespace UserInterface.Panels
             if (_sceneDto == null)
             {
                 string name;
-                bool valid= false;
+                bool valid = false;
                 while (!valid)
                 {
-                    using (var nameChanger = new NameChanger(""))
+                    NameChanger nameChanger = new NameChanger("");
+                    DialogResult result = nameChanger.ShowDialog(this);
+                    if (result == DialogResult.OK)
                     {
-                        var result = nameChanger.ShowDialog(this);
-                        if (result == DialogResult.OK)
+                        name = nameChanger.newName;
+                        try
                         {
-                            name = nameChanger.newName;
-                            try
-                            {
-                                sceneController.AddScene(name);
-                                _sceneDto = new SceneDto() { Name = name };
-                                valid = true;
-                            }
-                            catch
-                            {
-                            }
+                            sceneController.AddScene(name);
+                            _sceneDto = new SceneDto() { Name = name };
+                            valid = true;
                         }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        valid = true;
                     }
                 }
             }
-            LoadScene();
+            if(_sceneDto != null)
+            {
+                LoadScene();
+            }
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
 
@@ -212,7 +219,7 @@ namespace UserInterface.Panels
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
             ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
-            sceneController.RemoveModel(model);
+            sceneController.RemoveModel(_sceneDto,model);
             LoadScene();
             lblRenderOutDated.Text = "WARNING this render is outdated";
             lblRemoveModel.Visible = true;

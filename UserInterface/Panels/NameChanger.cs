@@ -20,8 +20,9 @@ namespace UserInterface.Panels
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Cancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult=DialogResult.Cancel;
             this.Close();
         }
     }

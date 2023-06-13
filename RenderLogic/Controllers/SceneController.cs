@@ -133,7 +133,7 @@ namespace Render3D.RenderLogic.Controllers
             List<ModelDto> models = GetPositionedModels(sceneDto);
             foreach (ModelDto modelDto in models)
             {
-                RemoveModel(modelDto);
+                RemoveModel(sceneDto, modelDto);
             }
             SceneService.RemoveScene(int.Parse(sceneDto.Id));
         }
@@ -170,14 +170,19 @@ namespace Render3D.RenderLogic.Controllers
             
         }
 
-        public void RemoveModel(ModelDto modelDto)
+        public void RemoveModel(SceneDto sceneDto,ModelDto modelDto)
         {
-            int modelId = int.Parse(modelDto.Id);
-            int figureId = int.Parse(modelDto.Figure.Id);
-            int materialId = int.Parse(modelDto.Material.Id);
-            ModelService.RemoveModel(modelId);
-            FigureService.RemoveFigure(figureId);
-            MaterialService.RemoveMaterial(materialId);
+            Scene s = new Scene
+            {
+                Id = sceneDto.Id,
+            };
+            s.UpdateLastModificationDate();
+            Model m = new Model
+            { Id = modelDto.Id,
+                Figure = new Sphere { Id = modelDto.Figure.Id, },
+                Material = new LambertianMaterial { Id = modelDto.Material.Id,}
+            };
+            SceneService.RemoveModel(s, m);
         }
 
         public void RenderScene(SceneDto sceneDto, bool useBlur)

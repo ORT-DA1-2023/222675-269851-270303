@@ -133,12 +133,14 @@ namespace Render3D.UnitTest.ControllersTests
             sceneController.AddScene("SceneTest");
             SceneDto sceneDto = sceneController.GetScene("SceneTest");
             string allOnes = "(1;1;1)";
+            DateTime beforeChange = sceneDto.LastModificationDate;
             sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"4");
-            SceneDto scene = sceneController.GetScene("SceneTest");
-            Assert.AreEqual(scene.LookAt[0], 1);
-            Assert.AreEqual(scene.Fov, 40);
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <=sceneDtoV1.LastModificationDate);
+            Assert.AreEqual(sceneDtoV1.LookAt[0], 1);
+            Assert.AreEqual(sceneDtoV1.Fov, 40);
             double aperture = 4;
-            Assert.AreEqual(scene.Aperture, aperture);
+            Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
         public void GivenNewCameraWithDifferentLookFromAssignsItToScene()
@@ -148,12 +150,14 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDto = sceneController.GetScene("SceneTest");
             string allOnes = "(1;1;1)";
             string lookAt = "(0;2;5)";
+            DateTime beforeChange = sceneDto.LastModificationDate;
             sceneController.EditCamera(sceneDto, lookAt, allOnes, 40, "4");
-            SceneDto scene = sceneController.GetScene("SceneTest");
-            Assert.AreEqual(scene.LookAt[0], 0);
-            Assert.AreEqual(scene.Fov, 40);
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
+            Assert.AreEqual(sceneDtoV1.LookAt[0], 0);
+            Assert.AreEqual(sceneDtoV1.Fov, 40);
             double aperture = 4;
-            Assert.AreEqual(scene.Aperture, aperture);
+            Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
         public void GivenNewCameraWithDifferentApertureAssignsItToScene()
@@ -163,12 +167,14 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDto = sceneController.GetScene("SceneTest");
             string lookAt = "(0;2;5)";
             string lookFrom = "(0;2;0)";
+            DateTime beforeChange = sceneDto.LastModificationDate;
             sceneController.EditCamera(sceneDto, lookAt, lookFrom, 40, "4");
-            SceneDto scene = sceneController.GetScene("SceneTest");
-            Assert.AreEqual(scene.LookFrom[0], 0);
-            Assert.AreEqual(scene.Fov, 40);
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
+            Assert.AreEqual(sceneDtoV1.LookFrom[0], 0);
+            Assert.AreEqual(sceneDtoV1.Fov, 40);
             double aperture = 4;
-            Assert.AreEqual(scene.Aperture, aperture);
+            Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
         public void GivenNewCameraWithDifferentFovAssignsItToScene()
@@ -180,11 +186,13 @@ namespace Render3D.UnitTest.ControllersTests
             string lookFrom = "(0;2;0)";
             sceneController.EditCamera(sceneDtoV1, lookAt, lookFrom, 40, "4");
             SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            DateTime beforeChange = sceneDtoV2.LastModificationDate;
             sceneController.EditCamera(sceneDtoV2, lookAt, lookFrom, 50, "4");
-            SceneDto scene = sceneController.GetScene("SceneTest");
-            Assert.AreEqual(scene.Fov, 50);
+            SceneDto sceneDtoV3 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
+            Assert.AreEqual(sceneDtoV3.Fov, 50);
             double aperture = 4;
-            Assert.AreEqual(scene.Aperture, aperture);
+            Assert.AreEqual(sceneDtoV3.Aperture, aperture);
         }
         [TestMethod]
         public void GiventheSameCameraDoesNotAssignsItToScene()
@@ -196,11 +204,13 @@ namespace Render3D.UnitTest.ControllersTests
             string lookFrom = "(0;2;0)";
             sceneController.EditCamera(sceneDtoV1, lookAt, lookFrom, 40, "4");
             SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            DateTime beforeChange = sceneDtoV2.LastModificationDate;
             sceneController.EditCamera(sceneDtoV2, lookAt, lookFrom, 40, "4");
-            SceneDto scene = sceneController.GetScene("SceneTest");
-            Assert.AreEqual(scene.Fov, 40);
+            SceneDto sceneDtoV3 = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(beforeChange, sceneDtoV3.LastModificationDate);
+            Assert.AreEqual(sceneDtoV3.Fov, 40);
             double aperture = 4;
-            Assert.AreEqual(scene.Aperture, aperture);
+            Assert.AreEqual(sceneDtoV3.Aperture, aperture);
         }
 
         [TestMethod]
@@ -223,7 +233,11 @@ namespace Render3D.UnitTest.ControllersTests
             modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
             sceneController.AddScene("SceneTest");
             ModelDto model = modelController.GetModels()[0];
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
+            DateTime beforeChange = sceneDtoV1.LastModificationDate;
             sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
+            SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <= sceneDtoV2.LastModificationDate);
             SceneDto scene = sceneController.GetScene("SceneTest");
             Assert.AreEqual(scene.Models[0].Name, "ModelTest");
         }
@@ -249,7 +263,11 @@ namespace Render3D.UnitTest.ControllersTests
             sceneController.AddScene("SceneTest");
             ModelDto model = modelController.GetModels()[0];
             sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
-            sceneController.RemoveModel(sceneController.GetPositionedModels(sceneController.GetScene("SceneTest"))[0]);
+            SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
+            DateTime beforeChange = sceneDtoV1.LastModificationDate;
+            sceneController.RemoveModel(sceneDtoV1, sceneController.GetPositionedModels(sceneDtoV1)[0]);
+            SceneDto sceneDtoV2 = sceneController.GetScene("SceneTest");
+            Assert.IsTrue(beforeChange <= sceneDtoV2.LastModificationDate);
         }
         [TestMethod]
         public void GivenNewModelsGetList()
