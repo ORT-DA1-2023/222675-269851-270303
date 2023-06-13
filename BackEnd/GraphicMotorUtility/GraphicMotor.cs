@@ -16,6 +16,12 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _resolutionHeightDefault = 200;
         private const int _pixelSamplingDefault = 50;
         private const int _maximumDepthDefault = 20;
+        private const int _resolutionWidthPreview = 100;
+        private const int _pixelSamplingPreview = 30;
+        private const int _maximumDepthPreview = 10;
+        private const int _fovCameraPreview = 60;
+        private Vector3D _modelPositionPreview = new Vector3D(0, 0, 0);
+        
 
         public GraphicMotor()
         {
@@ -70,18 +76,17 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap RenderModelPreview(Model model)
         {
-            ResolutionWidth = 100;
-            PixelSampling = 30;
-            MaximumDepth = 10;
+            ResolutionWidth = _resolutionWidthPreview;
+            PixelSampling = _pixelSamplingPreview;
+            MaximumDepth = _maximumDepthPreview;
 
             Scene previewScene = new Scene();
-            model.Figure.Position = new Vector3D(0, 0, 0);
+            model.Figure.Position = _modelPositionPreview;
             previewScene.PositionedModels.Add(model);
             Sphere sphereSample = (Sphere)model.Figure;
             double radius = sphereSample.Radius;
-            Vector3D vectorUp = new Vector3D(0, 2 * radius, 0);
             Vector3D twoTimesRadius = new Vector3D(2 * radius, 2 * radius, 2 * radius);
-            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, 60);
+            Camera camera = new Camera(model.Figure.Position.Add(twoTimesRadius), model.Figure.Position, _fovCameraPreview);
             previewScene.Camera = camera;
             return Render(previewScene, false);
         }
