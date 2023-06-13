@@ -13,12 +13,14 @@ namespace Render3D.UserInterface.Panels
         private readonly FigureController figureController;
         private readonly MaterialController materialController;
         private readonly ModelController modelController;
+        private readonly LogController logController;
         public ModelPanel()
         {
             InitializeComponent();
             figureController = FigureController.GetInstance();
             materialController = MaterialController.GetInstance();
             modelController = ModelController.GetInstance();
+            logController = LogController.GetInstance();
         }
 
         private void VariableInitialize(object sender, EventArgs e)
@@ -54,8 +56,8 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                   
                     modelController.AddAModelWithPreview(modelName, figure, material);
+                    logController.AddLogFromPreview(modelName);
                     txtModelName.Text = "";
                     label6.Visible = true;
                     label6.Update();

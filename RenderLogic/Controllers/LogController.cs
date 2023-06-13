@@ -10,6 +10,8 @@ namespace Render3D.RenderLogic.Controllers
         public static LogController logController;
         public ClientController ClientController = ClientController.GetInstance();
         public LogService LogService { get; set; }
+        public List<Log> LogsCreated;
+        private readonly int _secondsPerMinute = 60;
 
         public static LogController GetInstance()
         {
@@ -19,21 +21,24 @@ namespace Render3D.RenderLogic.Controllers
             }
             return logController;
         }
-        public void AddLogFromScene(LogDto logDto)
+        public void AddLogFromScene(Scene scene, DateTime starts)
         {
-            
+            Log log = new Log(scene,starts);
+            log.Client = ClientController.Client;
+            LogService.AddLog(log);
         }
-        public void AddLogFromPreview(LogDto logDto)
+        public void AddLogFromPreview(string modelName)
         {
-            
-
+            Log log = new Log(modelName);
+            log.Client = ClientController.Client;
+            LogService.AddLog(log);
         }
 
         public List<LogDto> GetLogs()
         {
             List<LogDto > logsDtoList = new List<LogDto>();
-            List<Log> logs= LogService.GetLogs();
-            foreach (Log log in logs)
+           LogsCreated = LogService.GetLogs();
+            foreach (Log log in LogsCreated)
             {
                 LogDto logDto = new LogDto()
                 {
@@ -41,18 +46,74 @@ namespace Render3D.RenderLogic.Controllers
                     Name = log.Name,
                     ClientId = log.Client.Id,
                     ClientName = log.Client.Name,
-                    NumberElementsInScene = log.NumberElementsInScene,
+                    NumberElements = log.NumberElements,
                     RenderDate = log.RenderDate,
                     RenderTimeInSeconds = log.RenderTimeInSeconds,
-                    SceneId = log.Scene.Id,
-                    SceneName = log.Scene.Name,
-                    NumberOfElements = log.Scene.PositionedModels.Count,
                     TimeWindowSinceLastRender = log.TimeWindowSinceLastRender,
-
                 };
                 logsDtoList.Add(logDto);
             }
             return logsDtoList;
+        }
+        public int GetAverageRenderTimeInSeconds()
+        {
+            int totalSeconds = 0;
+            int totalNumberLogs = LogsCreated.Count;
+
+            foreach (var log in LogsCreated)
+            {
+                totalSeconds += log.RenderTimeInSeconds;
+            }
+            return totalSeconds / totalNumberLogs;
+        }
+
+        public int GetAverageRenderTimeInMinutes()
+        {
+            return GetAverageRenderTimeInSeconds() / _secondsPerMinute;
+        }
+
+        public string ClientWithMostRenderTime()
+        {
+            List<Client> clientList = GetClientListWhoRendered();
+            int maxTime = 0;
+            string maxClient = null;
+
+            foreach (Client cl in clientList)
+            {
+                int t = RenderTimeInSecondsOfClient(cl);
+                if (t > maxTime)
+                {
+                    maxTime = t;
+                    maxClient = cl.Name;
+                }
+            }
+            return maxClient + " : " + maxTime;
+        }
+
+        public int RenderTimeInSecondsOfClient(Client client)
+        {
+            int timeInSeconds = 0;
+            foreach (Log l in LogsCreated)
+            {
+                if (l.Client.Equals(client))
+                {
+                    timeInSeconds += l.RenderTimeInSeconds;
+                }
+            }
+            return timeInSeconds;
+        }
+
+        private List<Client> GetClientListWhoRendered()
+        {
+            List<Client> clientList = new List<Client>();
+            foreach (var log in LogsCreated)
+            {
+                if (!clientList.Contains(log.Client))
+                {
+                    clientList.Add(log.Client);
+                }
+            }
+            return clientList;
         }
     }
 }

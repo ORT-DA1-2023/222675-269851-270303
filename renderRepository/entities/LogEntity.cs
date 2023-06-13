@@ -8,13 +8,13 @@ namespace renderRepository.entities
     {
         [Key]
         public int Id { get; set; }
-        public ClientEntity ClientEntity { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }
-        public SceneEntity SceneEntity { get; set; }
-        public int NumberElementsInScene { get; set; }
+        public int NumberElements { get; set; }
         public string Name { get; set; }
+
 
         public static LogEntity FromDomain(Log log)
         {
@@ -33,7 +33,7 @@ namespace renderRepository.entities
                 Name = log.Name,
                 RenderDate = log.RenderDate,
                 RenderTimeInSeconds = log.RenderTimeInSeconds,
-                NumberElementsInScene = log.NumberElementsInScene,
+                NumberElements = log.NumberElements,
                 TimeWindowSinceLastRender = log.TimeWindowSinceLastRender,
             };
         }
@@ -46,7 +46,7 @@ namespace renderRepository.entities
                 Name = Name,
                 RenderDate = RenderDate,
                 RenderTimeInSeconds = RenderTimeInSeconds,
-                NumberElementsInScene = NumberElementsInScene,
+                NumberElements = NumberElements,
                 TimeWindowSinceLastRender = TimeWindowSinceLastRender,
             };
         }

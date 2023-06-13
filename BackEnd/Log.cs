@@ -14,35 +14,26 @@ namespace Render3D.BackEnd
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }
-        public Scene Scene { get; set; }
-        public int NumberElementsInScene { get; set; }
+        public int NumberElements { get; set; }
         public string Name { get; set; }
         public Log() { }
 
         public Log(Scene scene, DateTime startedRenderDate)
         {
             Name = scene.Name;
-
-            Client = scene.Client;
             RenderDate = startedRenderDate;
-
             TimeSpan difference = DateTimeProvider.Now - RenderDate;
             RenderTimeInSeconds = (int)difference.TotalSeconds;
-
-            Scene = scene;
-            NumberElementsInScene = scene.PositionedModels.Count;
-
+            NumberElements = scene.PositionedModels.Count;
             TimeWindowSinceLastRender = TimeWindowBetweenTwoRenders(scene.LastRenderizationDate, startedRenderDate);
         }
 
-        public Log(Scene scene)
+        public Log(string modelName)
         {
-            Name = $"preview - {scene.Name}";
-            Client = scene.Client;
+            Name = $"preview - {modelName}";
             RenderDate = DateTimeProvider.Now;
             RenderTimeInSeconds = 0;
-            Scene = scene;
-            NumberElementsInScene = scene.PositionedModels.Count;
+            NumberElements = 1;
             TimeWindowSinceLastRender = null;
         }
 

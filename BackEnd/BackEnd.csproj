@@ -52,7 +52,6 @@
     <Compile Include="BackEndException.cs" />
     <Compile Include="GraphicMotorUtility\Camera.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="LogAnalytics.cs" />
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Materials\MetallicMaterial.cs" />
     <Compile Include="JPGSavingFormat.cs" />
