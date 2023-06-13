@@ -1,7 +1,7 @@
 ﻿using Render3D.BackEnd.Utilities;
 using System;
 
-namespace Render3D.BackEnd
+namespace Render3D.BackEnd.Logs
 {
     public class Log
     {
