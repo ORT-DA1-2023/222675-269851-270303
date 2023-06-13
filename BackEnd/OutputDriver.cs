@@ -10,7 +10,7 @@ namespace Render3D.BackEnd.IODrivers
     public class OutputDriver
     {
         private readonly ISavingFormat _format;
-        public OutputDriver(ISavingFormat format)
+        public OutputDriver (ISavingFormat format)
         {
             _format = format;
         }

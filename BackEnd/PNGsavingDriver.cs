@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.FileFormat
 {
-    public class PNGsavingDriver : ISavingFormat
+    public class PNGSavingDriver : ISavingFormat
     {
         public void Save(Bitmap bmp, string directory)
         {

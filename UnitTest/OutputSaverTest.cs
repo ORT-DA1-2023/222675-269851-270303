@@ -5,34 +5,40 @@ using Render3D.BackEnd.GraphicMotorUtility;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-
+using Render3D.BackEnd.IODrivers;
+using Render3D.BackEnd.FileFormat;
 
 namespace Render3D.UnitTest
 {
     [TestClass]
     public class OutputSaverTest
-    {/*
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Could not save the file")]
-        public void GivenNullDestinationJPGThrowsBackEndException()
+    {
+        Bitmap bitmapSample;
+
+
+        [TestInitialize]
+        public void Initialize()
         {
-            Bitmap bitmap = new Bitmap(10, 10);
-
-            string destinationPath = null;
-            ISavingFormat savingFormat = new JPGSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, savingFormat);
-
-            outputSaver.Save();
+            bitmapSample = new Bitmap(20, 20);
         }
 
         [TestMethod]
-        public void givenBitmapSavesItAsJPG()
+        [ExpectedException(typeof(ArgumentNullException), "Value cannot be null")]
+        public void GivenNullDestinationJPGThrowsBackEndException()
         {
-            Bitmap bitmap = new Bitmap(100, 100);
-            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.jpg";
-            ISavingFormat format = new JPGSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
-            outputSaver.Save();
+            string destinationPath = null;
+            ISavingFormat savingFormat = new JPGSavingDriver();
+            OutputDriver o = new OutputDriver(savingFormat);
+            o.Save(bitmapSample, destinationPath);
+        }
+        
+        [TestMethod]
+        public void GivenBitmapSavesItAsJPG()
+        {
+            string destinationPath = "test.jpg";
+            ISavingFormat format = new JPGSavingDriver();
+            OutputDriver outputSaver = new OutputDriver(format);
+            outputSaver.Save(bitmapSample, destinationPath);
 
             Assert.IsTrue(File.Exists(destinationPath));
             Assert.AreEqual(".jpg", Path.GetExtension(destinationPath).ToLower());
@@ -41,62 +47,59 @@ namespace Render3D.UnitTest
                 File.Delete(destinationPath);
         }
 
-
+        
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Could not save the file")]
+        [ExpectedException(typeof(System.Runtime.InteropServices.ExternalException))]
         public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCaseJPG()
         {
-            Bitmap bitmap = new Bitmap(100, 100);
             string destinationPath = "invalid/path/test.jpg";
-            ISavingFormat format = new JPGSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
+            ISavingFormat format = new JPGSavingDriver();
+            OutputDriver outputSaver = new OutputDriver(format);
 
-            outputSaver.Save();
+            outputSaver.Save(bitmapSample, destinationPath);
         }
-
+        
         [TestMethod]
         public void GivenBitmapSavesItAsPNG()
         {
-            Bitmap bitmap = new Bitmap(10, 10);
-            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.png";
-            ISavingFormat format = new PNGSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
+            string destinationPath = "test.png";
+            ISavingFormat format = new PNGSavingDriver();
+            OutputDriver outputSaver = new OutputDriver(format);
 
-            outputSaver.Save();
+            outputSaver.Save(bitmapSample, destinationPath);
+
             Assert.IsTrue(File.Exists(destinationPath));
             Assert.AreEqual(".png", Path.GetExtension(destinationPath).ToLower());
 
             if (File.Exists(destinationPath)) File.Delete(destinationPath);
         }
-
+        
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Could not save the file")]
+        [ExpectedException(typeof(System.Runtime.InteropServices.ExternalException))]
         public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCasePNG()
         {
-            Bitmap bitmap = new Bitmap(100, 100);
             string invalidDirectory = "invalid/path/test.png";
-            ISavingFormat format = new PNGSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, invalidDirectory, format);
+            ISavingFormat format = new PNGSavingDriver();
+            OutputDriver outputSaver = new OutputDriver(format);
 
-            outputSaver.Save();
+            outputSaver.Save(bitmapSample, invalidDirectory);
         }
 
         [TestMethod]
         public void GivenBitmapSavesItAsPPM()
         {
-            Bitmap bitmap = new Bitmap(2, 2);
-            string destinationPath = "C:\\Users\\diego\\OneDrive\\Escritorio\\PRUEBAS DA1\\test.ppm";
-            ISavingFormat format = new PPMSavingFormat();
-            OutputSaver outputSaver = new OutputSaver(bitmap, destinationPath, format);
+            string destinationPath = "test.ppm";
+            ISavingFormat format = new PPMSavingDriver();
+            OutputDriver outputSaver = new OutputDriver(format);
 
-            outputSaver.Save();
+            outputSaver.Save(bitmapSample, destinationPath);
 
             Assert.IsTrue(File.Exists(destinationPath));
 
             Assert.AreEqual(".ppm", Path.GetExtension(destinationPath).ToLower());
             if (File.Exists(destinationPath))
                 File.Delete(destinationPath);
-        }*/
+        }
     }
 }
 

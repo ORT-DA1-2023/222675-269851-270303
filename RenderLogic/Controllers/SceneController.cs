@@ -344,7 +344,7 @@ namespace Render3D.RenderLogic.Controllers
             switch (savingFormat)
             {
                 case "png":
-                    format = new PNGsavingDriver();
+                    format = new PNGSavingDriver();
                     break;
                 case "jpg":
                     format = new JPGSavingDriver();

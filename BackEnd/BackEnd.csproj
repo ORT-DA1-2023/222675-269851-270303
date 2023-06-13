@@ -51,7 +51,7 @@
     <Compile Include="Materials\Colour.cs" />
     <Compile Include="Materials\MetallicMaterial.cs" />
     <Compile Include="OutputDriver.cs" />
-    <Compile Include="PNGsavingDriver.cs" />
+    <Compile Include="PNGSavingDriver.cs" />
     <Compile Include="PPMSavingDriver.cs" />
     <Compile Include="RandomSingleton.cs" />
     <Compile Include="SavingFormat.cs" />
