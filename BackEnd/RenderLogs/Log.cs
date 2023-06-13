@@ -8,6 +8,7 @@ namespace Render3D.BackEnd.Logs
         private const int _secondsPerMinute = 60;
         private const int _secondsPerHour = 3600;
         private const int _secondsPerDay = 86400;
+        private const string _0Seconds = "0 second(s)";
 
         public Client Client { get; set; }
         public int RenderTimeInSeconds { get; set; }
@@ -52,7 +53,7 @@ namespace Render3D.BackEnd.Logs
 
             if (secondsDifference == 0)
             {
-                return "0 second(s)";
+                return _0Seconds;
             }
             else if (secondsDifference < _secondsPerMinute)
             {
