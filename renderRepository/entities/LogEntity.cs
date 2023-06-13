@@ -8,7 +8,7 @@ namespace renderRepository.entities
     {
         [Key]
         public int Id { get; set; }
-        public ClientEntity ClientEntity { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
         public int RenderTimeInSeconds { get; set; }
         public DateTime RenderDate { get; set; }
         public string TimeWindowSinceLastRender { get; set; }

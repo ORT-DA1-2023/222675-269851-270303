@@ -28,7 +28,8 @@ namespace renderRepository.RepoImplementation
         {
             using (var dbContext = new RenderContext())
             {
-                var logEntities = dbContext.LogEntities.ToList();
+                var logEntities = dbContext.LogEntities
+                    .ToList();
                 List<Log> logs = new List<Log>();
                 foreach (var logE in logEntities)
                 {
