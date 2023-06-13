@@ -41,7 +41,7 @@ namespace Render3D.RenderLogic.Controllers
         private Material ConvertMaterialDto(MaterialDto materialDto)
         {
             Material material;
-            if (materialDto.Blur == 0)
+            if (materialDto.Blur < 0)
             {
                 material = new LambertianMaterial()
                 {
@@ -65,7 +65,7 @@ namespace Render3D.RenderLogic.Controllers
             return material;
            
         }
-        public FigureDto ConvertFigure(Figure figure)
+        private FigureDto ConvertFigure(Figure figure)
         {
             return new FigureDto()
             {
@@ -74,7 +74,7 @@ namespace Render3D.RenderLogic.Controllers
                 Radius = ((Sphere)figure).Radius
             };
         }
-        public MaterialDto ConvertMaterial(Material material)
+        private MaterialDto ConvertMaterial(Material material)
         {
             double blur;
             try

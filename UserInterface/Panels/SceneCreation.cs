@@ -132,12 +132,6 @@ namespace UserInterface.Panels
             this.Close();
         }
 
-        public bool IsValidFormat(string input)
-        {
-            Regex vectorFormat = new Regex(@"^(\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s)$");
-            return vectorFormat.IsMatch(input);
-        }
-
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
@@ -156,9 +150,9 @@ namespace UserInterface.Panels
                         }
                         else
                         {
-                            throw new Exception("Aperture format not valid");
+                            lblCamera.Text="Aperture format not valid";
+                            lblCamera.ForeColor = Color.Red;
                         }
-
                     }
                     else
                     {
@@ -169,7 +163,6 @@ namespace UserInterface.Panels
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
-
                 }
                 catch (Exception ex)
                 {

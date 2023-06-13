@@ -111,23 +111,23 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNewSceneSavesIt()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             Assert.AreEqual(sceneController.GetScenes()[0].Name, "SceneTest");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "scene already exists")]
+        [ExpectedException(typeof(Exception), "scene already exists")]
         public void GivenRepeatedSceneThrowsException()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             sceneController.AddScene("SceneTest");
         }
         [TestMethod]
         public void GivenNewSceneNameItChanges()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             sceneController.ChangeSceneName(sceneController.GetScenes()[0], "SceneTest2");
             Assert.AreEqual(sceneController.GetScenes()[0].Name, "SceneTest2");
@@ -136,7 +136,7 @@ namespace Render3D.UnitTest.ControllersTests
         [ExpectedException(typeof(Exception), "There is already a scene with that name")]
         public void GivenRepeatedSceneNameItDoesNotChange()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             sceneController.AddScene("SceneTest2");
             sceneController.ChangeSceneName(sceneController.GetScenes()[0], "SceneTest2");
@@ -144,49 +144,122 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenNameDeletesScene()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             sceneController.Delete(sceneController.GetScenes()[0]);
-        }
-        [TestMethod]
-        public void GivenNameDoesNotDeleteFigure()
-        {
         }
 
         [TestMethod]
         public void GivenNewCameraAssignsItToScene()
         {
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Fov must be between 0 and 160")]
-        public void GivenWrongCameraDoesNotAssignsItToScene()
-        {
-        }
-
-        [TestMethod]
-        public void GivenScenesGetTheNextValidName()
-        {
+            sceneController.ClientController.SignIn("ClientTest", "4Testing");
+            sceneController.AddScene("SceneTest");
+            SceneDto sceneDto = sceneController.GetScene("SceneTest");
+            string allOnes = "(1;1;1)";
+            sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"4");
+            SceneDto scene = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(scene.LookAt[0], 1);
+            Assert.AreEqual(scene.Fov, 40);
+            double aperture = 4;
+            Assert.AreEqual(scene.Aperture, aperture);
         }
 
         [TestMethod]
         public void GivenNewModelAddsItToListOfPositionedModels()
-        { 
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            sceneController.AddScene("SceneTest");
+            ModelDto model = modelController.GetModels()[0];
+            sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
+            SceneDto scene = sceneController.GetScene("SceneTest");
+            Assert.AreEqual(scene.Models[0].Name, "ModelTest");
         }
         [TestMethod]
         public void GivenModelRemovesItFromListOfPositionedModels()
         {
-           
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            sceneController.AddScene("SceneTest");
+            ModelDto model = modelController.GetModels()[0];
+            sceneController.AddModel(sceneController.GetScene("SceneTest"), model, "(1;1;1)");
+            sceneController.RemoveModel(sceneController.GetPositionedModels(sceneController.GetScene("SceneTest"))[0]);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "no scene Found")]
-        public void GivenModelWithoutFigureThrowsException()
+        [TestCleanup]
+        public void CleanUp()
         {
+            try
+            {
+                modelController.ClientController.Login("ClientTest", "4Testing");
+                List<SceneDto> sceneDtos = sceneController.GetScenes();
+                foreach(SceneDto sceneDto in sceneDtos)
+                {
+                    sceneController.Delete(sceneDto);
+                }
+            }
+            catch { }
+            try
+            {
+                modelController.ClientController.Login("ClientTest", "4Testing");
+                List<ModelDto> modelDtos = modelController.GetModels();
+                foreach (ModelDto modelDto in modelDtos)
+                {
+                    modelController.Delete(modelDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.Login("ClientTest", "4Testing");
+                List<MaterialDto> materialDtos = materialController.GetMaterials();
+                foreach (MaterialDto materialDto in materialDtos)
+                {
+                    materialController.Delete(materialDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
-        [TestMethod]
-        public void GivenSceneWithModelsReturnsList()
-        {
-        }
-
     }
 }

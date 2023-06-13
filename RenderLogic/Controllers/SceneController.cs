@@ -70,7 +70,6 @@ namespace Render3D.RenderLogic.Controllers
                     };
                     scene.UpdateLastModificationDate();
                     SceneService.UpdateCamera(scene);
-
                 }
             }
             catch (Exception ex)
@@ -125,6 +124,11 @@ namespace Render3D.RenderLogic.Controllers
 
         public void Delete(SceneDto sceneDto)
         {
+            List<ModelDto> models = GetPositionedModels(sceneDto);
+            foreach (ModelDto modelDto in models)
+            {
+                RemoveModel(modelDto);
+            }
             SceneService.RemoveScene(int.Parse(sceneDto.Id));
         }
 
@@ -133,7 +137,6 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 SceneService.GetSceneByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-
             }
             catch
             {
@@ -236,7 +239,7 @@ namespace Render3D.RenderLogic.Controllers
                 Radius = ((Sphere)figure).Radius
             };
         }
-        public MaterialDto ConvertMaterial(Material material)
+        private MaterialDto ConvertMaterial(Material material)
         {
             double blur = 0;
             try
