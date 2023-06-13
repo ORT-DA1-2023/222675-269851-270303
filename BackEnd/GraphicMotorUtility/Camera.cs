@@ -15,10 +15,10 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _defaultFov = 30;
         private const int _minimumSquaredLength =  1;
         private const double AspectRatio = 3 / 2;
-        private Vector3D _lookAtSampleVector = new Vector3D(0, 2, 5);
-        private Vector3D _vectorUpSampleVector = new Vector3D(0, 1, 0);
-        private Vector3D _lookFromSampleVector = new Vector3D(0, 2, 0);
-        private Vector3D _vectorTempMultSubstract = new Vector3D(1, 1, 1);
+        private readonly Vector3D _lookAtSampleVector = new Vector3D(0, 2, 5);
+        private readonly Vector3D _vectorUpSampleVector = new Vector3D(0, 1, 0);
+        private readonly Vector3D _lookFromSampleVector = new Vector3D(0, 2, 0);
+        private readonly Vector3D _vectorTempMultSubstract = new Vector3D(1, 1, 1);
 
         public Vector3D VectorUp = new Vector3D(0, 1, 0);
         public Vector3D LookFrom { get; set; }

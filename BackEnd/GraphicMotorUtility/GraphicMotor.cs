@@ -20,7 +20,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _pixelSamplingPreview = 30;
         private const int _maximumDepthPreview = 10;
         private const int _fovCameraPreview = 60;
-        private Vector3D _modelPositionPreview = new Vector3D(0, 0, 0);
+        private readonly Vector3D _modelPositionPreview = new Vector3D(0, 0, 0);
 
         public Bitmap Bitmap { get; set; }
         public PixelMatrix PixelMatrix { get; set; }

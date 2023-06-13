@@ -6,6 +6,8 @@ namespace Render3D.BackEnd.Materials
 
     public class LambertianMaterial : Material
     {
+        private readonly Vector3D _vectorTempMultSubstract = new Vector3D(1, 1, 1);
+        private const int _minimumSquaredLength = 1;
         public LambertianMaterial() { }
 
         public override Ray ReflectsTheLight(HitRecord3D hitRecord)
@@ -15,15 +17,15 @@ namespace Render3D.BackEnd.Materials
             return new Ray(hitRecord.Intersection, newVector);
         }
 
-        private Vector3D GetRandomInUnitFigure()
+        public override Vector3D GetRandomInUnitFigure()
         {
             RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
             do
             {
                 Vector3D vectorTemp = new Vector3D(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Substract(new Vector3D(1, 1, 1));
-            } while (vector.SquaredLength() >= 1);
+                vector = vectorTemp.Multiply(2).Substract(_vectorTempMultSubstract);
+            } while (vector.SquaredLength() >= _minimumSquaredLength);
             return vector;
         }
 

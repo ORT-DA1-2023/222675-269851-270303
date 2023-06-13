@@ -5,9 +5,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
     public class HitRecord3D
     {
         private const int _moduleSampleDefault = 0;
-        private Vector3D _intersectionDefault = new Vector3D(0, 0, 0);
-        private Vector3D _normalDefault = new Vector3D(0, 0, 0);
-        private Colour _attenuationDefault = new Colour(0, 0, 0);
+        private readonly Vector3D _intersectionDefault = new Vector3D(0, 0, 0);
+        private readonly Vector3D _normalDefault = new Vector3D(0, 0, 0);
+        private readonly Colour _attenuationDefault = new Colour(0, 0, 0);
 
         public double Module { get; set; }
         public Vector3D Intersection { get; set; }
