@@ -10,6 +10,7 @@ namespace Render3D.BackEnd
     {
         private string _name;
         private Bitmap _preview;
+        public string Id { get; set; }
 
         public Client Client { get; set; }
 
@@ -23,6 +24,7 @@ namespace Render3D.BackEnd
             }
         }
 
+        public int Roughness { get; set; }
         public Figure Figure { get; set; }
         public Material Material { get; set; }
         public Bitmap Preview

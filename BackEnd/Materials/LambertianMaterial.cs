@@ -8,15 +8,16 @@ namespace Render3D.BackEnd.Materials
     {
         public LambertianMaterial() { }
 
-        public override Ray ReflectsTheLight(HitRecord3D hitRecord, Random random)
+        public override Ray ReflectsTheLight(HitRecord3D hitRecord)
         {
-            Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure(random));
+            Vector3D newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitFigure());
             Vector3D newVector = newVectorPoint.Substract(hitRecord.Intersection);
             return new Ray(hitRecord.Intersection, newVector);
         }
 
-        private Vector3D GetRandomInUnitFigure(Random random)
+        private Vector3D GetRandomInUnitFigure()
         {
+            RandomSingleton random = RandomSingleton.Instance;
             Vector3D vector;
             do
             {
@@ -26,13 +27,9 @@ namespace Render3D.BackEnd.Materials
             return vector;
         }
 
-
-
-
-
         public override string ToString()
         {
-            return base.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
+            return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
     }
 }

@@ -4,6 +4,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 {
     public class HitRecord3D
     {
+        public double Module { get; set; }
+        public Vector3D Intersection { get; set; }
+        public Vector3D Normal { get; set; }
+        public Colour Attenuation { get; set; }
+        public Ray Ray { get; set; }
+        public int Roughness { get; set; }
+
         public HitRecord3D()
         {
             Module = 0;
@@ -12,16 +19,15 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             Attenuation = new Colour(0, 0, 0);
         }
 
-        public HitRecord3D(double module, Vector3D intersection, Vector3D normal, Colour color)
+        public HitRecord3D(double module, Vector3D intersection, Vector3D normal, Colour color, Ray ray, int roughness)
         {
             Module = module;
             Intersection = intersection;
             Normal = normal;
             Attenuation = color;
+            Ray = ray;
+            Roughness = roughness;
         }
-        public double Module { get; set; }
-        public Vector3D Intersection { get; set; }
-        public Vector3D Normal { get; set; }
-        public Colour Attenuation { get; set; }
+
     }
 }

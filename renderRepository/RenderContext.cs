@@ -1,10 +1,5 @@
 ﻿using renderRepository.entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace renderRepository
 {
@@ -16,8 +11,8 @@ namespace renderRepository
         }
         public DbSet<ClientEntity> ClientEntities { get; set; }
         public DbSet<FigureEntity> FigureEntities { get; set; }
-        
         public DbSet<MaterialEntity> MaterialEntities { get; set; }
         public DbSet<ModelEntity> ModelEntities { get; set; }
+        public DbSet<SceneEntity> SceneEntities { get; set; }
     }
 }

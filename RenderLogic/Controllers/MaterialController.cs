@@ -1,81 +1,116 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
+using RenderLogic.Services;
 using System;
-
+using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Controllers
 {
     public class MaterialController
     {
-        public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
+        protected static MaterialController materialController;
+        public MaterialService MaterialService { get; set; }
+        public static MaterialController GetInstance()
+        {
+            if (materialController == null)
+            {
+                materialController = new MaterialController();
+            }
+            return materialController;
+        }
 
-        public void AddLambertianMaterial(string clientName, string materialName, int[] materialColors)
+        public void AddMaterial(MaterialDto materialDto)
         {
             try
             {
-                GetMaterialByNameAndClient(clientName, materialName);
-
+                MaterialService.GetMaterialByNameAndClient(materialDto.Name,int.Parse(ClientController.Client.Id));
+                throw new BackEndException("material already exists");
             }
             catch (Exception)
             {
-                Colour colour = new Colour(materialColors[0] / 255f, materialColors[1] / 255f, materialColors[2] / 255f);
-                CreateLambertianMaterial(ClientController.GetClientByName(clientName), materialName, colour);
-                return;
-            }
-            throw new BackEndException("material already exists");
-        }
-        private void CreateLambertianMaterial(Client client, string materialName, Colour colour)
-        {
-            Material material = new LambertianMaterial() { Client = client, Name = materialName, Attenuation = colour };
-            DataWarehouse.Materials.Add(material);
-        }
-
-        public Material GetMaterialByNameAndClient(string clientName, string materialName)
-        {
-            Client client = ClientController.GetClientByName(clientName);
-            foreach (Material material in DataWarehouse.Materials)
-            {
-                if (material.Name == materialName && material.Client.Equals(client))
+                Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
+                if (materialDto.Blur != 0)
                 {
-                    return material;
+                    CreateMetallicMaterial(materialDto.Name, colour, materialDto.Blur);
                 }
-            }
-            throw new BackEndException("material doesnt exist");
+                else
+                {
+                    CreateLambertianMaterial(materialDto.Name, colour);
+                }
+            }          
         }
-        public void ChangeMaterialName(string clientName, string oldName, string newName)
+        private void CreateLambertianMaterial(string materialName, Colour colour)
         {
-            Material material;
-            try
+            Material material = new LambertianMaterial() 
+            { 
+                Client = ClientController.Client,
+                Name = materialName, 
+                Attenuation = colour };
+            MaterialService.AddMaterial(material);
+        }         
+
+        private void CreateMetallicMaterial(string materialName, Colour colour, double blur)
+        {
+            Material material = new MetallicMaterial()
             {
-                material = GetMaterialByNameAndClient(clientName, oldName);
-                Material checkMaterialName = new LambertianMaterial() { Name = newName };
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            try
-            {
-                GetMaterialByNameAndClient(clientName, newName);
-            }
-            catch (Exception)
-            {
-                material.Name = newName;
-            }
+                Client = ClientController.Client, 
+                Name = materialName, 
+                Attenuation = colour, 
+                Blur = blur };
+           MaterialService.AddMaterial(material);
         }
-        public void DeleteMaterialInList(string clientName, string materialName)
+
+        public void ChangeName(MaterialDto materialDto, string newName)
         {
             try
             {
-                Material material = GetMaterialByNameAndClient(clientName, materialName);
-                DataWarehouse.Materials.Remove(material);
+                Material material = MaterialService.GetMaterialByNameAndClient(newName, int.Parse(ClientController.Client.Id));
             }
-            catch (Exception)
+            catch
             {
+                Material tryName = new LambertianMaterial() { Name = newName };
+                MaterialService.UpdateName(int.Parse(materialDto.Id), newName);
             }
+            throw new Exception("There is already a material with that name");
 
         }
+        public void Delete(MaterialDto materialDto)
+        {
+            MaterialService.RemoveMaterial(int.Parse(materialDto.Id));
+        }
+
+        public List<MaterialDto> GetMaterials()
+        {
+
+            List<Material> MaterialList;
+            try
+            {
+                MaterialList = MaterialService.GetMaterialsOfClient(int.Parse(ClientController.Client.Id));
+            }
+            catch
+            {
+                throw new Exception("The client does not have any figures");
+            }
+
+            List<MaterialDto> materialDtos = new List<MaterialDto>();
+            foreach (Material mat in MaterialList)
+            {
+                MaterialDto matDto = new MaterialDto()
+                {
+                    Id = mat.Id,
+                    Name = mat.Name,
+                    Red = mat.Attenuation.Red(),
+                    Green = mat.Attenuation.Green(),
+                    Blue = mat.Attenuation.Blue()
+                };
+               materialDtos.Add(matDto);
+            }
+            return materialDtos;
+        }
+
+     
     }
 }

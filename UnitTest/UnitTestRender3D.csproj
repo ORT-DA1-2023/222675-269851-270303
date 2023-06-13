@@ -56,7 +56,6 @@
     <Compile Include="ControllersTests\MaterialControllerTest.cs" />
     <Compile Include="ControllersTests\ModelControllerTest.cs" />
     <Compile Include="ControllersTests\SceneControllerTest.cs" />
-    <Compile Include="DataWarehouseTest.cs" />
     <Compile Include="LambertianTest.cs" />
     <Compile Include="ModelTest.cs" />
     <Compile Include="SceneTest.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="LogTest.cs" />
     <Compile Include="LogAnalyticsTest.cs" />
     <Compile Include="MetallicMaterialTest.cs" />
+    <Compile Include="OutputSaverTest.cs" />
     <Compile Include="VectorTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -34,6 +34,7 @@
             // pnLayout
             // 
             this.pnLayout.AutoSize = true;
+            this.pnLayout.BackColor = System.Drawing.SystemColors.Control;
             this.pnLayout.Location = new System.Drawing.Point(0, 0);
             this.pnLayout.Name = "pnLayout";
             this.pnLayout.Size = new System.Drawing.Size(1000, 580);
@@ -43,7 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 541);
+            this.ClientSize = new System.Drawing.Size(994, 561);
             this.Controls.Add(this.pnLayout);
             this.IsMdiContainer = true;
             this.Name = "Render3DIU";

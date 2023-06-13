@@ -1,82 +1,95 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
+using RenderLogic.DataTransferObjects;
+using RenderLogic.Services;
 using System;
-
+using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Controllers
 {
     public class FigureController
     {
-        public DataWarehouse DataWarehouse { get; set; }
-        public ClientController ClientController { get; set; }
-        public void AddFigure(string clientName, string figureName, double figureRadius)
+        public static FigureController figureController;
+        public FigureService FigureService { get; set; }
+        public ClientController ClientController = ClientController.GetInstance();
+
+        public static FigureController GetInstance()
+        {
+            if(figureController == null)
+            {
+                figureController = new FigureController();
+            }
+            return figureController;
+        }
+        public void AddFigure(FigureDto figureDto)
         {
             try
             {
-                GetFigureByNameAndClient(clientName, figureName);
-
+                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));    
             }
             catch (Exception)
             {
-                CreateSphere(ClientController.GetClientByName(clientName), figureName, figureRadius);
+                CreateSphere(figureDto);
                 return;
             }
             throw new BackEndException("figure already exists");
 
         }
-        private void CreateSphere(Client client, string figureName, double figureRadius)
+        private void CreateSphere(FigureDto figureDto)
         {
-            Figure figure = new Sphere() { Client = client, Name = figureName, Radius = figureRadius };
-            DataWarehouse.Figures.Add(figure);
+            Figure figure = new Sphere() 
+            { 
+                Client = ClientController.Client,
+                Name = figureDto.Name, 
+                Radius = figureDto.Radius
+            };
+            FigureService.AddFigure(figure);
         }
-        public Figure GetFigureByNameAndClient(string clientName, string figureName)
+        public void Delete(FigureDto figureDto)
         {
-            Client client = ClientController.GetClientByName(clientName);
-            foreach (Figure figure in DataWarehouse.Figures)
+            FigureService.RemoveFigure(int.Parse(figureDto.Id));
+        }
+
+        public List<FigureDto> GetFigures()
+        {
+            List<Figure> figureList;
+            try
             {
-                if (figure.Name == figureName && figure.Client.Equals(client))
+               figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
+            }
+            catch
+            {
+                throw new Exception("The client does not have any figures");
+            }
+          List<FigureDto> figureDtos = new List<FigureDto>();
+            foreach(Figure fig in figureList)
+            {
+                FigureDto figDto = new FigureDto()
                 {
-                    return figure;
-                }
+                    Id = fig.Id,
+                    Name = fig.Name,
+                    Radius = ((Sphere)fig).Radius
+                };
+                figureDtos.Add(figDto);
             }
-            throw new BackEndException("figure doesnt exist");
+            return figureDtos;
         }
-        public void DeleteFigureInList(string clientName, string figureName)
+
+        public void ChangeName(FigureDto figureDto, string newName)
         {
             try
             {
-                Figure figure = GetFigureByNameAndClient(clientName, figureName);
-                DataWarehouse.Figures.Remove(figure);
+                Figure figure = FigureService.GetFigureByNameAndClient(newName, int.Parse(ClientController.Client.Id));
+                
             }
-            catch (Exception)
+            catch
             {
+                Figure tryName = new Sphere() { Name = newName };
+                FigureService.UpdateName(int.Parse(figureDto.Id), newName);
             }
-
+            throw new Exception("That Name is already in use");
+           
         }
-        public void ChangeFigureName(string clientName, string oldName, string newName)
-        {
-            Figure figure;
-            try
-            {
-                figure = GetFigureByNameAndClient(clientName, oldName);
-                Figure correctNameCheck = new Sphere() { Name = newName };
-            }
-            catch (Exception)
-            {
-                return;
-            }
-
-            try
-            {
-                GetFigureByNameAndClient(clientName, newName);
-            }
-            catch (Exception)
-            {
-                figure.Name = newName;
-            }
-
-        }
-
     }
 }

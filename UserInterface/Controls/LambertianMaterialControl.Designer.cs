@@ -1,6 +1,6 @@
 ﻿namespace Render3D.UserInterface.Controls
 {
-    partial class MaterialControl
+    partial class LambertianMaterialControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,6 +36,7 @@
             this.lblMaterialName = new System.Windows.Forms.Label();
             this.btnEditName = new System.Windows.Forms.Button();
             this.lblErrorDeleteMaterial = new System.Windows.Forms.Label();
+            this.lblLambertian = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             // 
             // pBoxMaterial
             // 
-            this.pBoxMaterial.Location = new System.Drawing.Point(23, 17);
+            this.pBoxMaterial.Location = new System.Drawing.Point(13, 15);
             this.pBoxMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.pBoxMaterial.Name = "pBoxMaterial";
             this.pBoxMaterial.Size = new System.Drawing.Size(75, 65);
@@ -100,7 +101,7 @@
             // 
             this.lblMaterialName.AutoSize = true;
             this.lblMaterialName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaterialName.Location = new System.Drawing.Point(144, 34);
+            this.lblMaterialName.Location = new System.Drawing.Point(137, 25);
             this.lblMaterialName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaterialName.Name = "lblMaterialName";
             this.lblMaterialName.Size = new System.Drawing.Size(79, 29);
@@ -124,17 +125,29 @@
             this.lblErrorDeleteMaterial.AutoSize = true;
             this.lblErrorDeleteMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorDeleteMaterial.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorDeleteMaterial.Location = new System.Drawing.Point(97, 0);
+            this.lblErrorDeleteMaterial.Location = new System.Drawing.Point(91, 0);
             this.lblErrorDeleteMaterial.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.lblErrorDeleteMaterial.Name = "lblErrorDeleteMaterial";
             this.lblErrorDeleteMaterial.Size = new System.Drawing.Size(52, 25);
             this.lblErrorDeleteMaterial.TabIndex = 9;
             this.lblErrorDeleteMaterial.Text = "error";
             // 
-            // MaterialControl
+            // lblLambertian
+            // 
+            this.lblLambertian.AutoSize = true;
+            this.lblLambertian.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLambertian.Location = new System.Drawing.Point(137, 57);
+            this.lblLambertian.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLambertian.Name = "lblLambertian";
+            this.lblLambertian.Size = new System.Drawing.Size(74, 16);
+            this.lblLambertian.TabIndex = 10;
+            this.lblLambertian.Text = "Lambertian";
+            // 
+            // LambertianMaterialControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblLambertian);
             this.Controls.Add(this.lblErrorDeleteMaterial);
             this.Controls.Add(this.btnEditName);
             this.Controls.Add(this.lblMaterialName);
@@ -144,7 +157,7 @@
             this.Controls.Add(this.lblGreenColor);
             this.Controls.Add(this.lblRedColor);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "MaterialControl";
+            this.Name = "LambertianMaterialControl";
             this.Size = new System.Drawing.Size(388, 129);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxMaterial)).EndInit();
             this.ResumeLayout(false);
@@ -162,5 +175,6 @@
         private System.Windows.Forms.Label lblMaterialName;
         private System.Windows.Forms.Button btnEditName;
         private System.Windows.Forms.Label lblErrorDeleteMaterial;
+        private System.Windows.Forms.Label lblLambertian;
     }
 }

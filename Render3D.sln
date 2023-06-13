@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "renderRepository", "renderR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderLogic", "RenderLogic\RenderLogic.csproj", "{92DF00FD-9AC7-4504-BDBE-33CE11601C13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryFactory", "RepositoryFactory\RepositoryFactory.csproj", "{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{92DF00FD-9AC7-4504-BDBE-33CE11601C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DF00FD-9AC7-4504-BDBE-33CE11601C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DF00FD-9AC7-4504-BDBE-33CE11601C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AF282B7-1B6D-442A-8D3B-43A0B9CBB78C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

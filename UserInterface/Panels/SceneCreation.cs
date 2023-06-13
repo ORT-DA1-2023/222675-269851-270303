@@ -1,88 +1,103 @@
 ﻿using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
-using Render3D.BackEnd.GraphicMotorUtility;
+using RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace UserInterface.Panels
 {
     public partial class SceneCreation : Form
     {
-        public Scene scene;
+        private SceneDto _sceneDto;
         public SceneController sceneController;
-        private readonly string _client;
-        public SceneCreation(SceneController newSceneController, string clientName, Scene selectedScene)
+        public SceneCreation(SceneDto selectedScene)
         {
             InitializeComponent();
-            sceneController = newSceneController;
-            _client = clientName;
-            scene = selectedScene;
-            if (scene == null)
+            sceneController = SceneController.GetInstance();
+            _sceneDto = selectedScene;
+
+            if (_sceneDto == null)
             {
-                GenerateDefaultScene();
+                string name = "";
+                bool valid = false;
+                while (!valid)
+                {
+                    using (var nameChanger = new NameChanger(""))
+                    {
+                        var result = nameChanger.ShowDialog(this);
+                        if (result == DialogResult.OK)
+                        {
+                            name = nameChanger.newName;
+                            try
+                            {
+                                sceneController.AddScene(name);
+                                _sceneDto = new SceneDto() { Name = name };
+                                valid = true;
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
             }
             LoadScene();
         }
 
-        private void GenerateDefaultScene()
-        {
-            string name = sceneController.GetNextValidName();
-            sceneController.AddScene(_client, name);
-            scene = sceneController.GetSceneByNameAndClient(_client, name);
-        }
 
         private void LoadScene()
         {
-            txtSceneName.Text = scene.Name;
-            Camera cam = scene.Camera;
-            txtLookAt.Text = "(" + cam.LookAt.X + ";" + cam.LookAt.Y + ";" + cam.LookAt.Z + ")";
-            txtLookFrom.Text = "(" + cam.LookFrom.X + ";" + cam.LookFrom.Y + ";" + cam.LookFrom.Z + ")";
-            nrFov.Value = cam.Fov;
-            cBoxAvailableModels.Items.Clear();
-            cBoxPositionedModels.Items.Clear();
-            foreach (Model model in sceneController.DataWarehouse.Models)
-            {
-                if (model.Client.Equals(scene.Client))
-                {
-                    cBoxAvailableModels.Items.Add(model);
-                }
-            }
-            foreach (Model model in scene.PositionedModels)
-            {
-                cBoxPositionedModels.Items.Add(model);
-            }
-            pBoxRender.Image = scene.Preview;
+            _sceneDto = sceneController.GetScene(_sceneDto.Name);
+            txtSceneName.Text = _sceneDto.Name;
+            XLookAt.Text = $"{_sceneDto.LookAt[0]}";
+            YLookAt.Text = $"{_sceneDto.LookAt[1]}";
+            ZLookAt.Text = $"{_sceneDto.LookAt[2]}";
+            XLookFrom.Text = $"{_sceneDto.LookFrom[0]}";
+            YLookFrom.Text = $"{_sceneDto.LookFrom[1]}";
+            ZLookFrom.Text = $"{_sceneDto.LookFrom[2]}";
+            nrFov.Value = _sceneDto.Fov;
+            cBoxAvailableModels.DataSource = sceneController.GetAvailableModels();
+            cBoxAvailableModels.DisplayMember = "Name";
+            cBoxPositionedModels.DataSource = sceneController.GetPositionedModels(_sceneDto);
+            cBoxPositionedModels.DisplayMember = "Name";
+            pBoxRender.Image = _sceneDto.Preview;
             lblCamera.Text = "";
             lblName.Text = "";
-            lblAddModel.Text = "";
-            lblRemoveModel.Text = "";
+            lblAddModel.Visible = false;
+            lblRemoveModel.Visible = false;
+            if (_sceneDto.Aperture > 0)
+            {
+                cmbBlur.Checked = true;
+                lblAperture.Text = _sceneDto.Aperture.ToString();
+            }
             LastModifcationDateRefresh();
-            if (scene.LastRenderizationDate != null)
+            if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
             {
                 LastRenderDateRefresh();
             }
             else
             {
-                lblLastRenderDate.Text = "this scene has not been rendered yet";
+                lblLastRenderDate.Text = "Never";
             }
             CheckRenderOutDated();
         }
 
         private void LastRenderDateRefresh()
         {
-            lblLastRenderDate.Text = "" + ((DateTime)scene.LastRenderizationDate).Month + "/" + ((DateTime)scene.LastRenderizationDate).Day + "/" + ((DateTime)scene.LastRenderizationDate).Year + " " + ((DateTime)scene.LastRenderizationDate).Hour + ":" + ((DateTime)scene.LastRenderizationDate).Minute;
+            lblLastRenderDate.Text = "" + ((DateTime)_sceneDto.LastRenderizationDate).Month + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Day + "/" + ((DateTime)_sceneDto.LastRenderizationDate).Year + " " + ((DateTime)_sceneDto.LastRenderizationDate).Hour + ":" + ((DateTime)_sceneDto.LastRenderizationDate).Minute;
         }
 
         private void LastModifcationDateRefresh()
         {
-            lblLastModificationDate.Text = "" + scene.LastModificationDate.Month + "/" + scene.LastModificationDate.Day + "/" + scene.LastModificationDate.Year + " " + scene.LastModificationDate.Hour + ":" + scene.LastModificationDate.Minute;
+            lblLastModificationDate.Text = "" + _sceneDto.LastModificationDate.Month + "/" + _sceneDto.LastModificationDate.Day + "/" + _sceneDto.LastModificationDate.Year + " " + _sceneDto.LastModificationDate.Hour + ":" + _sceneDto.LastModificationDate.Minute;
         }
 
         private void CheckRenderOutDated()
         {
-            if (scene.LastRenderizationDate == null || scene.LastRenderizationDate < (scene.LastModificationDate))
+            if (_sceneDto.LastRenderizationDate == null || _sceneDto.LastRenderizationDate < (_sceneDto.LastModificationDate))
             {
                 lblRenderOutDated.Text = "WARNING this render is outdated";
             }
@@ -92,17 +107,24 @@ namespace UserInterface.Panels
             }
         }
 
-        public bool IsValidFormat(string input)
+        public bool IsValidFormatAperture(string input)
+        {
+            Regex vectorFormat = new Regex(@"^\d+,\d+$");
+            return vectorFormat.IsMatch(input);
+        }
+
+        public bool IsValidNumberAperture(string input)
+        {
+            double aperture = double.Parse(input);
+            return aperture > 0.0 && aperture <= 3.0;
+        }
+
+        public bool IsValidFormatVector(string input)
         {
             Regex vectorFormat = new Regex(@"^\(\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*;\s*-?\d+(\,\d+)?\s*\)$");
             return vectorFormat.IsMatch(input);
         }
 
-        public bool IsValidFormatAperture(string input)
-        {
-            Regex vectorFormat = new Regex(@"^(\d+(\.\d+)?),(\d+(\.\d+)?)$");
-            return vectorFormat.IsMatch(input);
-        }
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
@@ -110,31 +132,50 @@ namespace UserInterface.Panels
             this.Close();
         }
 
+        public bool IsValidFormat(string input)
+        {
+            Regex vectorFormat = new Regex(@"^(\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s;\s-?\d+(,\d+)?\s)$");
+            return vectorFormat.IsMatch(input);
+        }
+
 
         private void BtnChangeCamera_Click(object sender, EventArgs e)
         {
-            if (IsValidFormat(txtLookFrom.Text) && IsValidFormat(txtLookAt.Text))
+            string lookFromText = $"({XLookFrom.Text};{YLookFrom.Text};{ZLookFrom.Text})";
+            string lookAtText = $"({XLookAt.Text};{YLookAt.Text};{ZLookAt.Text})";
+            if (IsValidFormatVector(lookFromText) && IsValidFormatVector(lookAtText))
             {
-                
-                    try
+
+                try
+                {
+                    if (cmbBlur.Checked)
                     {
-                        if (cmbBlur.Checked)
+                        if (IsValidFormatAperture(txtAperture.Text) && IsValidNumberAperture(txtAperture.Text))
                         {
-                            sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, txtAperture.Text);
+                            sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
                         }
-                        string apertureNegative = "-1";
-                        sceneController.EditCamera(scene, txtLookAt.Text, txtLookFrom.Text, (int)nrFov.Value, apertureNegative);
-                        LoadScene();
-                        lblCamera.ForeColor = Color.Green;
-                        lblCamera.Text = "Camera settings change correctly";
+                        else
+                        {
+                            throw new Exception("Aperture format not valid");
+                        }
+
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        lblCamera.ForeColor = Color.Red;
-                        lblCamera.Text = ex.Message;
+                        string apertureZero = "0";
+                        sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
+
                     }
-                
-              
+                    LoadScene();
+                    lblCamera.ForeColor = Color.Green;
+                    lblCamera.Text = "Camera settings change correctly";
+
+                }
+                catch (Exception ex)
+                {
+                    lblCamera.ForeColor = Color.Red;
+                    lblCamera.Text = ex.Message;
+                }
 
             }
             else
@@ -148,7 +189,8 @@ namespace UserInterface.Panels
         {
             try
             {
-                sceneController.ChangeSceneName(scene.Client.Name, scene.Name, txtSceneName.Text);
+                sceneController.ChangeSceneName(_sceneDto, txtSceneName.Text);
+                _sceneDto.Name = txtSceneName.Text;
                 LoadScene();
                 lblName.ForeColor = Color.Green;
                 lblName.Text = "Name change correctly";
@@ -162,50 +204,49 @@ namespace UserInterface.Panels
 
         private void BtnAddModel_Click(object sender, EventArgs e)
         {
-            string position = txtPosition.Text;
-            if (!(cBoxAvailableModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.AddModel(scene, model, position);
-            scene.UpdateLastModificationDate();
+
+            ModelDto model = ((ModelDto)cBoxAvailableModels.SelectedItem);
+            string position = "(" + XPositionModel.Text + ";" + YPositionModel.Text + ";" + ZPositionModel.Text + ")";
+            sceneController.AddModel(_sceneDto, model, position);
             LoadScene();
-            lblAddModel.ForeColor = Color.Green;
-            lblAddModel.Text = "Added correctly";
-            cBoxAvailableModels.SelectedItem = null;
+            lblRenderOutDated.Text = "WARNING this render is outdated";
+            lblAddModel.Visible = true;
+            lblRemoveModel.Update();
+
+            
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
-            if (!(cBoxPositionedModels.SelectedItem is Model model))
-            {
-                return;
-            }
-            sceneController.RemoveModel(scene, model);
-            scene.UpdateLastModificationDate();
+            ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
+            sceneController.RemoveModel(model);
             LoadScene();
-            lblRemoveModel.ForeColor = Color.Green;
-            lblRemoveModel.Text = "Remove correctly";
-            cBoxPositionedModels.SelectedItem = null;
+            lblRenderOutDated.Text = "WARNING this render is outdated";
+            lblRemoveModel.Visible = true;
+            lblRemoveModel.Update();
         }
 
         private void BtnRender_Click(object sender, EventArgs e)
         {
+            lblRenderingNotification.Visible = true;
+            lblRenderingNotification.Update();
             if (cmbBlur.Checked)
             {
-                sceneController.RenderSceneBlur(scene);
+                sceneController.RenderScene(_sceneDto, true);
             }
             else
             {
 
-                sceneController.RenderScene(scene);
+                sceneController.RenderScene(_sceneDto, false);
             }
+
             LoadScene();
+            lblRenderingNotification.Visible = false;
+            lblRenderingNotification.Update();
         }
 
-        private void cmbBlur_CheckedChanged(object sender, EventArgs e)
+        private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-            scene.UpdateLastModificationDate();
             LoadScene();
             if (!cmbBlur.Checked)
             {
@@ -217,6 +258,70 @@ namespace UserInterface.Panels
                 txtAperture.Enabled = true;
                 lblAperture.Enabled = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                label5.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void Label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            label28.Visible = false;
+            label28.Update();
+            label27.Text = "";
+
+            if (textBox1.Text == "") { label27.Text = "Select a name for the file"; return; }
+            if (label5.Text == "None") { label27.Text = "Select a directory"; return; }
+            if (comboBox1.SelectedIndex == -1) { label27.Text = "Select a format"; return; }
+
+            bool dirExists = sceneController.IsValidDirectory(label5.Text);
+
+            if (!dirExists) { label27.Text = "Could not access the directory"; return; }
+
+            if (sceneController.FileExists(label5.Text + "\\" + textBox1.Text+"."+comboBox1.Text))
+            {
+                label27.Text = "There is a file with that name"; return;
+            }
+
+
+            lblExporting.Visible = true;
+            lblExporting.Update();
+            BtnRender_Click(sender, e);
+            _sceneDto.Preview = new Bitmap(pBoxRender.Image);
+            try
+            {
+                sceneController.ExportRender(_sceneDto, label5.Text + "\\" + textBox1.Text +"."+ comboBox1.Text, comboBox1.Text);
+            }
+            catch (Exception)
+            {
+                label27.Text = "Could not save the file";
+                return;
+            }
+
+            lblExporting.Visible = false;
+            lblExporting.Update();
+
+            label28.Visible = true;
+            label28.Update();
+        }
+
+        private void pBoxRender_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

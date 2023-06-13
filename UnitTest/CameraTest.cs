@@ -54,13 +54,6 @@ namespace Render3D.UnitTest
         }
 
         [TestMethod]
-        public void GivenValidAspectRatioAssingsToCamera()
-        {
-            cameraSample.AspectRatio = validAspectRatio;
-            Assert.AreEqual(validAspectRatio, cameraSample.AspectRatio);
-        }
-
-        [TestMethod]
         public void GivenVectorAssignsAsLookFrom()
         {
             cameraSample.LookFrom = allOnes;
@@ -119,24 +112,20 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenCameraCreatedWithConstructorWithParametersToBlurAssignsProperties()
         {
-            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, validAspectRatio, validAperture);
+            Camera camera = new Camera(allOnes, allTwos, validFov, validAperture);
             Assert.IsTrue(allOnes.Equals(camera.LookFrom));
             Assert.IsTrue(allTwos.Equals(camera.LookAt));
-            Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
             Assert.IsTrue(camera.Fov == validFov);
-            Assert.IsTrue(camera.AspectRatio == validAspectRatio);
             Assert.IsTrue(camera.LensRadius == validAperture / 2);
         }
 
         [TestMethod]
         public void GivenCameraCreatedWithConstructorWithParametersAssignsProperties()
         {
-            Camera camera = new Camera(allOnes, allTwos, oneTwoThree, validFov, validAspectRatio);
+            Camera camera = new Camera(allOnes, allTwos, validFov);
             Assert.IsTrue(allOnes.Equals(camera.LookFrom));
             Assert.IsTrue(allTwos.Equals(camera.LookAt));
-            Assert.IsTrue(oneTwoThree.Equals(camera.VectorUp));
             Assert.IsTrue(camera.Fov == validFov);
-            Assert.IsTrue(camera.AspectRatio == validAspectRatio);
         }
 
     }
