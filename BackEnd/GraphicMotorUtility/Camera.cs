@@ -44,6 +44,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public Vector3D Horizontal { get; set; }
         public Vector3D Vertical { get; set; }
 
+
         public Camera()
         {
             LookAt = _lookAtSampleVector;
@@ -80,6 +81,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, int fieldOfView, double aperture)
         {
             double focalDistance = vectorLookFrom.Substract(vectorLookAt).Length();
+           
             LensRadius = aperture / 2;
             LookAt = vectorLookAt;
             Fov = fieldOfView;

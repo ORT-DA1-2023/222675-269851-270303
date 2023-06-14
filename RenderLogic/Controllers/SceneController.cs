@@ -50,12 +50,25 @@ namespace Render3D.RenderLogic.Controllers
                 };
                 if (!CameraAreEqual(sceneDto, sceneNewCamera))
                 {
-                    Camera camera = new Camera(
+                    Camera camera;
+                    if (apertureDouble > 0)
+                    {
+                        camera = new Camera(
                         new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
-                   
+
                         new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                         fov,
                         sceneNewCamera.Aperture);
+                    }
+                    else
+                    {
+                        camera = new Camera(
+                       new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
+
+                       new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
+                       fov);
+                    }
+                    
                     Scene scene = new Scene()
                     {
                         Id = sceneDto.Id,

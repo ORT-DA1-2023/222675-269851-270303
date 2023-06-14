@@ -71,7 +71,7 @@ namespace UserInterface.Panels
             if (_sceneDto.Aperture > 0)
             {
                 cmbBlur.Checked = true;
-                lblAperture.Text = _sceneDto.Aperture.ToString();
+                txtAperture.Text = _sceneDto.Aperture.ToString();
             }
             LastModifcationDateRefresh();
             if (_sceneDto.LastRenderizationDate != DateTime.MinValue)
@@ -109,7 +109,7 @@ namespace UserInterface.Panels
 
         public bool IsValidFormatAperture(string input)
         {
-            Regex vectorFormat = new Regex(@"^\d+,\d+$");
+            Regex vectorFormat = new Regex(@"^(\d+(\.\d+)?|\d+,\d+)$");
             return vectorFormat.IsMatch(input);
         }
 
@@ -153,6 +153,7 @@ namespace UserInterface.Panels
                         if (IsValidFormatAperture(txtAperture.Text) && IsValidNumberAperture(txtAperture.Text))
                         {
                             sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
+                           
                         }
                         else
                         {
@@ -164,11 +165,12 @@ namespace UserInterface.Panels
                     {
                         string apertureZero = "0";
                         sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
-
+                       
                     }
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
+                    lblRenderOutDated.Text = "WARNING this render is outdated";
 
                 }
                 catch (Exception ex)
@@ -247,7 +249,7 @@ namespace UserInterface.Panels
 
         private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-            LoadScene();
+           
             if (!cmbBlur.Checked)
             {
                 txtAperture.Enabled = false;

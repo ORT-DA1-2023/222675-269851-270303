@@ -90,6 +90,7 @@
                         LookAtY = c.Double(nullable: false),
                         LookAtZ = c.Double(nullable: false),
                         Fov = c.Int(nullable: false),
+                        LensRadius = c.Double(nullable: false),
                         ClientEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
