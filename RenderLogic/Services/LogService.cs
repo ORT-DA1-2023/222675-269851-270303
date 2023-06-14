@@ -27,7 +27,7 @@ namespace Render3D.RenderLogic.Services
             return _logRepo.GetLogs();
         }
 
-        internal void DeleteLog(Log log)
+        public void DeleteLog(Log log)
         {
             _logRepo.DeleteLog(log);
         }

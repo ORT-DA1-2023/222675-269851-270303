@@ -36,7 +36,7 @@ namespace Render3D.RenderLogic.Services
             return _materialRepo.GetMaterialsOfClient(clientId);
         }
 
-        internal void UpdateName(int id, string newName)
+        public void UpdateName(int id, string newName)
         {
             _materialRepo.ChangeName(id, newName);
         }

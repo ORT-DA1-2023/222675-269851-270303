@@ -37,32 +37,32 @@ namespace Render3D.RenderLogic.Services
             return _sceneRepo.GetScenesOfClient(clientId);
         }
 
-        internal void UpdateName(int id, string newName)
+        public void UpdateName(int id, string newName)
         {
             _sceneRepo.UpdateName(id, newName);
         }
 
-        internal void UpdatePreview(Scene scene)
+        public void UpdatePreview(Scene scene)
         {
             _sceneRepo.UpdatePreview(scene);
         }
 
-        internal void UpdateCamera(Scene scene)
+        public void UpdateCamera(Scene scene)
         {
             _sceneRepo.UpdateCamera(scene);
         }
 
-        internal void AddModel(Scene scene, Model model)
+        public void AddModel(Scene scene, Model model)
         {
             _sceneRepo.AddModel(scene, model);
         }
 
-        internal void RemoveModel(Scene s, Model model)
+        public void RemoveModel(Scene s, Model model)
         {
             _sceneRepo.RemoveModel(s,model);
         }
 
-        internal List<Scene> GetScenesWithModel(Model model)
+        public List<Scene> GetScenesWithModel(Model model)
         {
            return _sceneRepo.GetScenesWithModel(model);
         }

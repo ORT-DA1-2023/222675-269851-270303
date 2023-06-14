@@ -37,7 +37,7 @@ namespace Render3D.RenderLogic.Services
            return _figureRepo.GetFiguresOfClient(clientId);
         }
 
-        internal void UpdateName(int id, string newName)
+        public void UpdateName(int id, string newName)
         {
             _figureRepo.ChangeName(id, newName);
         }

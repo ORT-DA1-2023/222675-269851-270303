@@ -167,7 +167,7 @@ namespace Render3D.UserInterface
         }
 
 
-        internal bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
+        public bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
         {
             try
             {
@@ -182,12 +182,12 @@ namespace Render3D.UserInterface
 
         }
 
-        internal void DeleteMaterial(MaterialDto materialDto)
+        public void DeleteMaterial(MaterialDto materialDto)
         {
             materialController.Delete(materialDto);
         }
 
-        internal bool ModelNameHasBeenChanged(ModelDto modelDto, string newName)
+        public bool ModelNameHasBeenChanged(ModelDto modelDto, string newName)
         {
             try
             {

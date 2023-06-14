@@ -38,22 +38,22 @@ namespace Render3D.RenderLogic.Services
             return _modelRepo.GetModelsOfClient(clientId);
         }
 
-        internal void UpdateName(int id, string newName)
+        public void UpdateName(int id, string newName)
         {
             _modelRepo.UpdateName(id, newName);
         }
 
-        internal void UpdatePreview(Model model)
+        public void UpdatePreview(Model model)
         {
             _modelRepo.UpdatePreview(model);
         }
 
-        internal List<Model> GetModelsWithFigure(int figureId)
+        public List<Model> GetModelsWithFigure(int figureId)
         {
             return _modelRepo.GetModelsWithFigure(figureId);
         }
 
-        internal List<Model> GetModelsWithMaterial(int materialId)
+        public List<Model> GetModelsWithMaterial(int materialId)
         {
             return _modelRepo.GetModelsWithMaterial(materialId);
         }
