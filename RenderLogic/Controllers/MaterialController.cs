@@ -32,7 +32,7 @@ namespace Render3D.RenderLogic.Controllers
             catch (Exception)
             {
                 Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
-                if (materialDto.Blur != _blur0)
+                if (materialDto.Blur >= _blur0)
                 {
                     CreateMetallicMaterial(materialDto.Name, colour, materialDto.Blur);
                     return;

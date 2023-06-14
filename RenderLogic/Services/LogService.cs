@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Logs;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.RepoInterface;
 using System;

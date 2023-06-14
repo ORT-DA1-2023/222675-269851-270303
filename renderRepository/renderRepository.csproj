@@ -58,9 +58,9 @@
     <Compile Include="entities\MaterialEntity.cs" />
     <Compile Include="entities\ModelEntity.cs" />
     <Compile Include="entities\SceneEntity.cs" />
-    <Compile Include="Migrations\202306140114389_v1.cs" />
-    <Compile Include="Migrations\202306140114389_v1.designer.cs">
-      <DependentUpon>202306140114389_v1.cs</DependentUpon>
+    <Compile Include="Migrations\202306141151515_v1.cs" />
+    <Compile Include="Migrations\202306141151515_v1.designer.cs">
+      <DependentUpon>202306141151515_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepoImplementation\FigureRepo.cs" />
@@ -87,8 +87,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202306140114389_v1.resx">
-      <DependentUpon>202306140114389_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202306141151515_v1.resx">
+      <DependentUpon>202306141151515_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
