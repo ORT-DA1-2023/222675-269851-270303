@@ -1,5 +1,5 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -39,6 +39,10 @@ namespace Render3D.UserInterface.Controls
                 if (result == DialogResult.OK)
                 {
                     creation.Refresh("Scene");
+                }
+                else
+                {
+                    scene.Close();
                 }
             }
         }

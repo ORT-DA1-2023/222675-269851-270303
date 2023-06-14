@@ -1,6 +1,6 @@
 ﻿using Render3D.BackEnd.Materials;
 using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -20,9 +20,9 @@ namespace Render3D.UserInterface.Controls
             _materialDto = material;
             modelController = ModelController.GetInstance();
             materialController = MaterialController.GetInstance();
-            lblRedColor.Text = "Red: " + material.Red;
-            lblGreenColor.Text = "Green: " + material.Green;
-            lblBlueColor.Text = "Blue: " + material.Blue;
+            lblRedColor.Text = "R: " + material.Red;
+            lblGreenColor.Text = "G: " + material.Green;
+            lblBlueColor.Text = "B: " + material.Blue;
             lblBlur.Text = "Blur: " + _materialDto.Blur;
             lblErrorDeleteMaterial.Text = "";
             pBoxMaterial.BackColor = Color.FromArgb(material.Red, material.Green, material.Blue);
@@ -33,10 +33,14 @@ namespace Render3D.UserInterface.Controls
         {
             if (!_materialDto.Name.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ChangeMaterialName(_materialDto, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).MaterialNameHasBeenChange(_materialDto, newName))
                 {
                     lblMaterialName.Text = newName;
                     _materialDto.Name = newName;
+                }
+                else
+                {
+                    lblErrorDeleteMaterial.Text = "invalid name or already taken";
                 }
             }
         }

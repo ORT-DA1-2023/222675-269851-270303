@@ -1,5 +1,5 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,22 +10,22 @@ namespace Render3D.UserInterface.Panels
     public partial class ModelPanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
         private readonly FigureController figureController;
         private readonly MaterialController materialController;
         private readonly ModelController modelController;
+        private readonly LogController logController;
         public ModelPanel()
         {
             InitializeComponent();
             figureController = FigureController.GetInstance();
             materialController = MaterialController.GetInstance();
             modelController = ModelController.GetInstance();
+            logController = LogController.GetInstance();
         }
 
         private void VariableInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = ((Render3DIU)creation.Parent.Parent);
             lstFigure.Items.Clear();
             lstMaterial.Items.Clear();
             List<FigureDto> figureList = figureController.GetFigures();
@@ -34,15 +34,18 @@ namespace Render3D.UserInterface.Panels
             {
                     lstFigure.Items.Add(figure);
             }
+            lstFigure.DisplayMember = "Name";
             foreach (MaterialDto material in materialList)
             {
                     lstMaterial.Items.Add(material);
             }
+            lstMaterial.DisplayMember = "Name";
             lblExceptionError.Text = "";
         }
 
         private void BtnCreateModel_Click(object sender, EventArgs e)
         {
+            lblExceptionError.Text = "";
             string modelName = txtModelName.Text;
             if (!(lstFigure.SelectedItem is FigureDto figure) || !(lstMaterial.SelectedItem is MaterialDto material))
             {
@@ -54,9 +57,15 @@ namespace Render3D.UserInterface.Panels
                 try
                 {
                     modelController.AddAModelWithPreview(modelName, figure, material);
+                    logController.AddLogFromPreview(modelName);
+                    txtModelName.Text = "";
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
                 }
             }
@@ -64,18 +73,23 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
+                
                     modelController.AddAModelWithoutPreview(modelName, figure, material);
+                    label6.Visible = true;
+                    label6.Update();
                 }
                 catch (Exception ex)
                 {
+                    label6.Visible = false;
+                    label6.Update();
                     lblExceptionError.Text = ex.Message;
+
                 }
 
             }
 
             creation.ShowModelList();
-            txtModelName.Text = "";
-
+            
         }
     }
 }

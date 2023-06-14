@@ -3,7 +3,7 @@ using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
 
-namespace RenderLogic.RepoInterface
+namespace Render3D.RenderLogic.RepoInterface
 {
     public interface IModelRepo
     {
@@ -11,10 +11,10 @@ namespace RenderLogic.RepoInterface
         void Delete(int Id);
         void UpdateName(int Id, string newName);
         Model Get(int Id);
-        Model GetByNameAndClient(string name, Client client);
-        List<Model> GetModelsOfClient(Client client);
+        Model GetByNameAndClient(string name, int clientId);
+        List<Model> GetModelsOfClient(int clientId);
         void UpdatePreview(Model model);
-        List<Model> GetModelsWithFigure(Figure figure);
-        List<Model> GetModelsWithMaterial(Material material);
+        List<Model> GetModelsWithFigure(int figureId);
+        List<Model> GetModelsWithMaterial(int materialId);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.RepoInterface;
-using RenderLogic.Services;
+using Render3D.RenderLogic.RepoInterface;
+using Render3D.RenderLogic.Services;
 using renderRepository.RepoImplementation;
+using System.Linq.Expressions;
 
 namespace RepositoryFactory
 {
@@ -12,6 +13,7 @@ namespace RepositoryFactory
         public IMaterialRepo materialRepo = new MaterialRepo();
         public IModelRepo modelRepo = new ModelRepo();
         public ISceneRepo sceneRepo = new SceneRepo();
+        public ILogRepo logRepo = new LogRepo();
 
         public void Initialize()
         {
@@ -21,6 +23,9 @@ namespace RepositoryFactory
             ModelController.GetInstance().ModelService = new ModelService(modelRepo);
             SceneController.GetInstance().SceneService = new SceneService(sceneRepo);
             SceneController.GetInstance().ModelService = new ModelService(modelRepo);
+            SceneController.GetInstance().MaterialService = new MaterialService(materialRepo);
+            SceneController.GetInstance().FigureService = new FigureService(figureRepo);
+            LogController.GetInstance().LogService = new LogService(logRepo);
         }
 
     }

@@ -2,10 +2,12 @@
 using Render3D.RenderLogic.Controllers;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UserInterface;
+
 namespace Render3D.UserInterface
 {
     public partial class CreationMenu : Form
@@ -30,13 +32,7 @@ namespace Render3D.UserInterface
         {
             flObjectList.Controls.Clear();
             List<FigureDto> figureList;
-            try
-            {
-                 figureList=figureController.GetFigures();
-            }catch
-            {
-                return;
-            }       
+            figureList=figureController.GetFigures();     
             foreach (FigureDto figure in figureList)
             {
                     FigureControl figureControl = new FigureControl(figure);
@@ -50,7 +46,7 @@ namespace Render3D.UserInterface
             List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (MaterialDto material in materialList)
             {
-                    if(material.Blur ==0)
+                    if(material.Blur <0)
                     {
                         LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
                         flObjectList.Controls.Add(materialControl);
@@ -83,9 +79,9 @@ namespace Render3D.UserInterface
             List<SceneDto> scenes = sceneController.GetScenes();
             scenes.Sort((scene1, scene2) => scene2.LastModificationDate.CompareTo(scene1.LastModificationDate));
             foreach (SceneDto scene in scenes)
-            {  
-                    SceneControl sceneControl = new SceneControl(scene);
-                    flObjectList.Controls.Add(sceneControl);
+            {
+                SceneControl sceneControl = new SceneControl(scene);
+                flObjectList.Controls.Add(sceneControl);
             }
         }
 
@@ -129,7 +125,7 @@ namespace Render3D.UserInterface
         private void VariablesInitialize(object sender, EventArgs e)
         {
             render = (Render3DIU)this.Parent.Parent;
-            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient() + "!!";
+            lblShowClientName.Text = "Welcome back \n" + clientController.GetClient();
             ShowObjectCreationPanel(new FigurePanel());
             ShowFigureList();
         }
@@ -171,7 +167,7 @@ namespace Render3D.UserInterface
         }
 
 
-        internal bool ChangeMaterialName(MaterialDto materialDto,string newName)
+        internal bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
         {
             try
             {
@@ -206,14 +202,16 @@ namespace Render3D.UserInterface
             
         }
 
-        internal void DeleteModel(ModelDto model)
-        {
-            modelController.Delete(model);
-        }
-
         private void BtnScene_Click(object sender, EventArgs e)
         {
             Refresh("Scene");
         }
+
+        private void BtnLogs_Click(object sender, EventArgs e)
+        {
+            var log = new LogUI();
+            log.Show();
+        }
+
     }
 }

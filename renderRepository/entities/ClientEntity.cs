@@ -11,6 +11,14 @@ namespace renderRepository.entities
         public string Name { get; set; }
         public string Password { get; set; }
         public DateTime RegisterDate { get; set; }
+        public double Aperture { get; set; }
+        public double LookFromX { get; set; }
+        public double LookFromY { get; set; }
+        public double LookFromZ { get; set; }
+        public double LookAtX { get; set; }
+        public double LookAtY { get; set; }
+        public double LookAtZ { get; set; }
+        public int Fov { get; set; }
 
         public static ClientEntity FromDomain(Client client)
         {

@@ -2,7 +2,7 @@
 using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
 
-namespace RenderLogic.RepoInterface
+namespace Render3D.RenderLogic.RepoInterface
 {
     public interface IMaterialRepo
     {
@@ -10,7 +10,7 @@ namespace RenderLogic.RepoInterface
         void Delete(int Id);
         void ChangeName(int Id, string newName);
         Material Get(int Id);
-        Material GetByNameAndClient(string name, Client client);
-        List<Material> GetMaterialsOfClient(Client client);
+        Material GetByNameAndClient(string name, int clientId);
+        List<Material> GetMaterialsOfClient(int clientId);
     }
 }

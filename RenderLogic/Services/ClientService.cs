@@ -1,9 +1,10 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using RenderLogic.RepoInterface;
+using Render3D.BackEnd.GraphicMotorUtility;
+using Render3D.RenderLogic.RepoInterface;
 using System;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class ClientService
     {
@@ -42,6 +43,19 @@ namespace RenderLogic.Services
             }
             
         }
-       
+        public void RemoveClient(string name)
+        {
+            _clientRepo.Remove(name);
+        }
+        public void AddCamera(int id, Camera camera)
+        {
+            _clientRepo.AddCamera(id, camera);
+        }
+        public Camera GetCamera(int id)
+        {
+            return _clientRepo.GetCamera(id);
+        }
+        
+
     }
 }

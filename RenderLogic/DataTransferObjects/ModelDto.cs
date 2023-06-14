@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace RenderLogic.DataTransferObjects
+namespace Render3D.RenderLogic.DataTransferObjects
 {
     public class ModelDto
     {
@@ -9,6 +9,6 @@ namespace RenderLogic.DataTransferObjects
         public FigureDto Figure { get; set; }
         public MaterialDto Material { get; set; }
         public Bitmap Preview { get; set; }
-
+    
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RenderLogic.DataTransferObjects
+namespace Render3D.RenderLogic.DataTransferObjects
 {
     public class FigureDto
     {

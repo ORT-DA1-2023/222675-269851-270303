@@ -1,9 +1,9 @@
 ﻿using Render3D.BackEnd;
 using System.Collections.Generic;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class MaterialService
     {
@@ -26,14 +26,14 @@ namespace RenderLogic.Services
         {
             return _materialRepo.Get(Id);
         }
-        public Material GetMaterialByNameAndClient(string MaterialName, Client client)
+        public Material GetMaterialByNameAndClient(string MaterialName, int clientId)
         {
-            return _materialRepo.GetByNameAndClient(MaterialName, client);
+            return _materialRepo.GetByNameAndClient(MaterialName, clientId);
         }
 
-        public List<Material> GetMaterialsOfClient(Client client)
+        public List<Material> GetMaterialsOfClient(int clientId)
         {
-            return _materialRepo.GetMaterialsOfClient(client);
+            return _materialRepo.GetMaterialsOfClient(clientId);
         }
 
         internal void UpdateName(int id, string newName)

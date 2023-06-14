@@ -14,5 +14,6 @@ namespace renderRepository
         public DbSet<MaterialEntity> MaterialEntities { get; set; }
         public DbSet<ModelEntity> ModelEntities { get; set; }
         public DbSet<SceneEntity> SceneEntities { get; set; }
+        public DbSet<LogEntity> LogEntities { get; set; }
     }
 }

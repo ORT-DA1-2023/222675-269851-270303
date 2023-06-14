@@ -88,7 +88,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
 
         public Bitmap Bitmap { get; set; }
 
-        public Bitmap Render(Scene sceneSample, Boolean blur)
+        public Bitmap Render(Scene sceneSample, bool blur)
         {
             int width = ResolutionWidth;
             int height = ResolutionHeight();
@@ -117,9 +117,9 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return bitmap;
         }
 
-        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix, Boolean blur)
+        private Colour[,] CreateMatrix(Scene sceneSample, Colour[,] matrix, bool blur)
         {
-            Random random = new Random();
+            RandomSingleton random = RandomSingleton.Instance;
             for (var row = ResolutionHeight() - 1; row >= 0; row--)
             {
                 for (var column = 0; column < ResolutionWidth; column++)
@@ -132,14 +132,14 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double v = (row + random.NextDouble()) / ResolutionHeight();
                         if (blur)
                         {
-                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v, random);
+                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v);
                         }
                         else
                         {
                              ray = sceneSample.Camera.GetRay(u, v);
                         }
       
-                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth, random));
+                        pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);
                     SavePixel(row, column, pixelColor, matrix);

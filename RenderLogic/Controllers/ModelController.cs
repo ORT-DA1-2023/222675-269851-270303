@@ -2,9 +2,8 @@
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +11,6 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class ModelController
     {
-        public DataWarehouse DataWarehouse { get; set; }
         public ClientController ClientController = ClientController.GetInstance();
         public GraphicMotor GraphicMotor = new GraphicMotor();
         public ModelService ModelService { get; set; }
@@ -30,23 +28,24 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                ModelService.GetModelByNameAndClient(modelName,ClientController.Client);
-                throw new BackEndException("model already exists");
+                ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));   
             }
-            catch (Exception)
+            catch
             {              
                 CreateAndAddModel(modelName, ConvertFigureDto(figureDto), ConvertMaterialDto(materialDto));
+                return;
             }
-           
+            throw new Exception("model already exists");
         }
 
         private Material ConvertMaterialDto(MaterialDto materialDto)
         {
             Material material;
-            if (materialDto.Blur == 0)
+            if (materialDto.Blur < 0)
             {
                 material = new LambertianMaterial()
                 {
+                    Id = materialDto.Id,
                     Client = ClientController.Client,
                     Name = materialDto.Name,
                     Attenuation = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f),
@@ -56,34 +55,38 @@ namespace Render3D.RenderLogic.Controllers
             {
                 material = new MetallicMaterial()
                 {
+                    Id = materialDto.Id,
                     Client = ClientController.Client,
                     Name = materialDto.Name,
                     Attenuation = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f),
-                    //Blur=materialDto.Blur,
+                    Blur=materialDto.Blur,
                 };
             }
             return material;
            
         }
-        public FigureDto ConvertFigure(Figure figure)
+        private FigureDto ConvertFigure(Figure figure)
         {
             return new FigureDto()
             {
+                Id = figure.Id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius
             };
         }
-        public MaterialDto ConvertMaterial(Material material)
+        private MaterialDto ConvertMaterial(Material material)
         {
-            int blur=0;
+            double blur;
             try
             {
-                //blur = ((MetallicMaterial)material).Blur;
-            }catch (Exception e)
+                blur = ((MetallicMaterial)material).Blur;
+            }catch
             {
+                blur=0;
             }
             return new MaterialDto()
             {
+                Id = material.Id,
                 Name = material.Name,
                 Red = material.Attenuation.Red(),
                 Green = material.Attenuation.Green(),
@@ -96,6 +99,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             Figure figure = new Sphere()
             {
+                Id = figureDto.Id,
                 Client = ClientController.Client,
                 Name= figureDto.Name,
                 Radius = figureDto.Radius,
@@ -120,7 +124,7 @@ namespace Render3D.RenderLogic.Controllers
         }
         private void AddPreviewToTheModel(string modelName)
         {
-            Model model = ModelService.GetModelByNameAndClient(modelName,ClientController.Client);
+            Model model = ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));
             model.Preview = GraphicMotor.RenderModelPreview(model);
             ModelService.UpdatePreview(model);
         }
@@ -128,14 +132,16 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Model material = ModelService.GetModelByNameAndClient(newName, ClientController.Client);
-                throw new Exception("There is already a material with that name");
+                Model material = ModelService.GetModelByNameAndClient(newName, int.Parse(ClientController.Client.Id));            
             }
             catch
             {
+                Model tryName = new Model() { Name = newName };
+                ModelService.UpdateName(int.Parse(modelDto.Id), newName);
+                return;
             }
-            Model tryName = new Model() { Name = newName };
-            ModelService.UpdateName(int.Parse(modelDto.Id), newName);
+            throw new Exception("There is already a model with that name");
+
         }
 
         public void Delete(ModelDto modelDto)
@@ -146,15 +152,7 @@ namespace Render3D.RenderLogic.Controllers
         {
 
             List<Model> Modellist;
-            try
-            {
-                Modellist = ModelService.GetModelsOfClient(ClientController.Client);
-            }
-            catch
-            {
-                throw new Exception("The client does not have any figures");
-            }
-
+            Modellist = ModelService.GetModelsOfClient(int.Parse(ClientController.Client.Id));
             List<ModelDto> modelDtos = new List<ModelDto>();
             foreach (Model mod in Modellist)
             {
@@ -164,34 +162,30 @@ namespace Render3D.RenderLogic.Controllers
                     Name = mod.Name,
                     Figure= ConvertFigure(mod.Figure),
                     Material = ConvertMaterial(mod.Material),
+                    Preview = mod.Preview,
                 };
                 modelDtos.Add(modDto);
             }
             return modelDtos;
         }
 
-        public bool CheckIfFigureIsInAModel(FigureDto figure)
+        public bool CheckIfFigureIsInAModel(FigureDto figureDto)
         {
-            try
+               List<Model> expectedEmptyList = ModelService.GetModelsWithFigure(int.Parse(figureDto.Id));
+            if(expectedEmptyList.Count == 0)
             {
-               List<Model> expectedEmptyList = ModelService.GetModelsWithFigure(ConvertFigureDto(figure));
                 return false;
-            }catch
-            {
-                return true; 
             }
+            return true;
         }
-        public bool CheckIfMaterialIsInAModel(MaterialDto material)
+        public bool CheckIfMaterialIsInAModel(MaterialDto materialDto)
         {
-            try
+            List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(int.Parse(materialDto.Id));
+            if (expectedEmptyList.Count == 0)
             {
-                List<Model> expectedEmptyList = ModelService.GetModelsWithMaterial(ConvertMaterialDto(material));
                 return false;
             }
-            catch
-            {
-                return true;
-            }
+            return true;
         }
     }
 }

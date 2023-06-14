@@ -1,10 +1,10 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.RepoInterface;
 using System;
 using System.Collections.Generic;
 
-namespace RenderLogic.Services
+namespace Render3D.RenderLogic.Services
 {
     public class SceneService
     {
@@ -27,14 +27,14 @@ namespace RenderLogic.Services
         {
             return _sceneRepo.Get(Id);
         }
-        public Scene GetSceneByNameAndClient(string sceneName, Client client)
+        public Scene GetSceneByNameAndClient(string sceneName, int clientId)
         {
-            return _sceneRepo.GetByNameAndClient(sceneName, client);
+            return _sceneRepo.GetByNameAndClient(sceneName, clientId);
         }
 
-        public List<Scene> GetScenesOfClient(Client client)
+        public List<Scene> GetScenesOfClient(int clientId)
         {
-            return _sceneRepo.GetScenesOfClient(client);
+            return _sceneRepo.GetScenesOfClient(clientId);
         }
 
         internal void UpdateName(int id, string newName)
@@ -52,14 +52,14 @@ namespace RenderLogic.Services
             _sceneRepo.UpdateCamera(scene);
         }
 
-        internal void AddModel(int id, Model model)
+        internal void AddModel(Scene scene, Model model)
         {
-            _sceneRepo.AddModel(id, model);
+            _sceneRepo.AddModel(scene, model);
         }
 
-        internal void RemoveModel(int id, Model model)
+        internal void RemoveModel(Scene s, Model model)
         {
-            _sceneRepo.RemoveModel(id,model);
+            _sceneRepo.RemoveModel(s,model);
         }
 
         internal List<Scene> GetScenesWithModel(Model model)

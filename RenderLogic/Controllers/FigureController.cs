@@ -1,8 +1,8 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Utilities;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.Services;
+using Render3D.RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +11,6 @@ namespace Render3D.RenderLogic.Controllers
     public class FigureController
     {
         public static FigureController figureController;
-        public DataWarehouse DataWarehouse { get; set; }
         public FigureService FigureService { get; set; }
         public ClientController ClientController = ClientController.GetInstance();
 
@@ -27,15 +26,14 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(figureDto.Name,ClientController.Client);
-                throw new BackEndException("figure already exists");
+                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));    
             }
             catch (Exception)
             {
                 CreateSphere(figureDto);
                 return;
             }
-            
+            throw new BackEndException("Figure already exists");
 
         }
         private void CreateSphere(FigureDto figureDto)
@@ -55,15 +53,8 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<FigureDto> GetFigures()
         {
-            List<Figure> figureList;
-            try
-            {
-               figureList = FigureService.GetFigureOfClient(ClientController.Client);
-            }
-            catch
-            {
-                throw new Exception("The client does not have any figures");
-            }
+          List<Figure> figureList;
+          figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
           List<FigureDto> figureDtos = new List<FigureDto>();
             foreach(Figure fig in figureList)
             {
@@ -82,14 +73,17 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                Figure figure = FigureService.GetFigureByNameAndClient(newName, ClientController.Client);
-                throw new Exception("That Name is already in use");
+                Figure figure = FigureService.GetFigureByNameAndClient(newName, int.Parse(ClientController.Client.Id));
+                
             }
             catch
-            {             
+            {
+                Figure tryName = new Sphere() { Name = newName };
+                FigureService.UpdateName(int.Parse(figureDto.Id), newName);
+                return;
             }
-            Figure tryName = new Sphere() { Name = newName };
-            FigureService.UpdateName(int.Parse(figureDto.Id), newName);
+            throw new Exception("That Name is already in use");
+           
         }
     }
 }

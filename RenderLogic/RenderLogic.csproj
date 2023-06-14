@@ -44,13 +44,16 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FigureController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\SceneController.cs" />
     <Compile Include="DataTransferObjects\FigureDto.cs" />
+    <Compile Include="DataTransferObjects\LogDto.cs" />
     <Compile Include="DataTransferObjects\MaterialDto.cs" />
     <Compile Include="DataTransferObjects\ModelDto.cs" />
     <Compile Include="DataTransferObjects\SceneDto.cs" />
+    <Compile Include="RepoInterface\ILogRepo.cs" />
     <Compile Include="RepoInterface\IMaterialRepo.cs" />
     <Compile Include="RepoInterface\ISceneRepo.cs" />
     <Compile Include="Services\ClientService.cs" />
@@ -59,6 +62,7 @@
     <Compile Include="RepoInterface\IClientRepo.cs" />
     <Compile Include="RepoInterface\IModelRepo.cs" />
     <Compile Include="Services\FigureService.cs" />
+    <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\MaterialService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\SceneService.cs" />

@@ -1,13 +1,8 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
+﻿using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace renderRepository.entities
 {
@@ -38,7 +33,6 @@ namespace renderRepository.entities
                 Id = id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius,
-                ClientEntity = ClientEntity.FromDomain(figure.Client),
                 X= figure.Position.X,
                 Y= figure.Position.Y,
                 Z = figure.Position.Z
@@ -52,7 +46,6 @@ namespace renderRepository.entities
             {
                 Id = ""+Id,
                 Name = Name,
-                Client = ClientEntity.ToDomain(),
                 Radius = Radius,
                 Position= position
             };

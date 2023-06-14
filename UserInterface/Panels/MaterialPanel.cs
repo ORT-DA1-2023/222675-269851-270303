@@ -1,5 +1,5 @@
 using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -25,7 +25,8 @@ namespace Render3D.UserInterface.Panels
                 Name = txtMaterialName.Text,
                 Red = Convert.ToInt32(Math.Round(nrRedColor.Value)),
                 Green = Convert.ToInt32(Math.Round(nrGreenColor.Value)),
-                Blue = Convert.ToInt32(Math.Round(nrBlueColor.Value))
+                Blue = Convert.ToInt32(Math.Round(nrBlueColor.Value)),
+                Blur = -1,
             };
             try
             {
@@ -37,16 +38,18 @@ namespace Render3D.UserInterface.Panels
                 else
                 {
                     if (cmbMaterial.SelectedItem.Equals("Lambertian"))
-                    {
-                         materialController.AddLambertianMaterial(materialDto);
+                    {   
+                        ResetValues();
+                         materialController.AddMaterial(materialDto);
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))
                     {
                         if (IsValidFormat(txtBlur.Text))
                         {
                             double blur = Convert.ToDouble(txtBlur.Text);
+                            ResetValues();
                             materialDto.Blur= blur;
-                            materialController.AddMetallicMaterial(materialDto);
+                            materialController.AddMaterial(materialDto);
                         }
                         else
                         {
@@ -54,6 +57,7 @@ namespace Render3D.UserInterface.Panels
                         }
                         
                     }
+                    
                 }
                 
                
@@ -64,11 +68,21 @@ namespace Render3D.UserInterface.Panels
                 return;
             }
             creation.ShowMaterialList();
+            
+
+        }
+
+
+        public void ResetValues()
+        {
+     
             txtMaterialName.Text = "";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;
             nrBlueColor.Value = 0;
             lblExceptionError.Text = "";
+            label2.Visible = true;
+            label2.Update();
         }
 
         public bool IsValidFormat(string input)
@@ -85,6 +99,7 @@ namespace Render3D.UserInterface.Panels
         private void cmbMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmbMaterial.SelectedItem.Equals("Lambertian")) {
+                txtBlur.Text = "0,0";
                 txtBlur.Enabled = false;
                 lblBlur.Enabled = false;
             }else if (cmbMaterial.SelectedItem.Equals("Metallic"))
@@ -92,6 +107,43 @@ namespace Render3D.UserInterface.Panels
                 txtBlur.Enabled = true;
                 lblBlur.Enabled = true;
             }
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void txtMaterialName_TextChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrRedColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrGreenColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void nrBlueColor_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void txtBlur_TextChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Update();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

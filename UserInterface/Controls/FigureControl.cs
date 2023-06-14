@@ -1,5 +1,5 @@
 ﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -33,6 +33,10 @@ namespace Render3D.UserInterface.Controls
                 {
                     lblFigureName.Text = newName;
                     _figureDto.Name = newName;
+                }
+                else
+                {
+                    lblErrorDeleteFigure.Text = "Figure name is either not valid or already taken";
                 }
             }
         }

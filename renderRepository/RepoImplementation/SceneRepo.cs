@@ -1,8 +1,6 @@
 ﻿using Render3D.BackEnd;
-using RenderLogic.DataTransferObjects;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +13,10 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = SceneEntity.FromDomain(scene);
+
+                int clientId = int.Parse(scene.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
                 dbContext.SceneEntities.Add(entity);
                 dbContext.SaveChanges();
                 scene.Id = entity.Id.ToString();
@@ -36,30 +38,64 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 SceneEntity sceneEntity = dbContext.SceneEntities.Find(Id);
-                return sceneEntity.ToDomain();
+                var scene = sceneEntity.ToDomain();
+                var models = sceneEntity.ModelEntities;
+                foreach (var modelEntity in models)
+                {
+                    var material = modelEntity.MaterialEntity.ToDomain();
+                    var figure = modelEntity.FigureEntity.ToDomain();
+                    var model = modelEntity.ToDomain();
+                    model.Figure = figure;
+                    model.Material = material;
+                    scene.PositionedModels.Add(model);
+                }
+                return scene;
             }
         }
 
-        public Scene GetByNameAndClient(string name, Client client)
+        public Scene GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var sceneEntity = dbContext.SceneEntities
-                    .Where(s => s.Name == name && s.ClientEntity == ClientEntity.FromDomain(client));
-                return sceneEntity.ElementAt(0).ToDomain();
+                    .Where(s => s.Name == name && s.ClientEntity.Id == clientId)
+                    .FirstOrDefault();
+                var scene = sceneEntity.ToDomain();
+                var models = sceneEntity.ModelEntities;
+                foreach (var modelEntity in models)
+                {
+                    var material = modelEntity.MaterialEntity.ToDomain();
+                    var figure = modelEntity.FigureEntity.ToDomain();
+                    var model = modelEntity.ToDomain();
+                    model.Figure = figure;
+                    model.Material = material;
+                    scene.PositionedModels.Add(model);
+                }
+                return scene;
             }
         }
 
-        public List<Scene> GetScenesOfClient(Client client)
+        public List<Scene> GetScenesOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(s => s.ClientEntity == ClientEntity.FromDomain(client))
+                    .Where(s => s.ClientEntity.Id == clientId)
                     .ToList();
                 List<Scene> clientScene = new List<Scene>();
                 foreach (var s in sceneEntities)
                 {
+                    var scene= s.ToDomain();
+                    var models = s.ModelEntities;
+                    foreach (var modelEntity in models)
+                    {
+                        var material = modelEntity.MaterialEntity.ToDomain();
+                        var figure = modelEntity.FigureEntity.ToDomain();
+                        var model = modelEntity.ToDomain();
+                        model.Figure = figure;
+                        model.Material = material;
+                        scene.PositionedModels.Add(model);
+                    }
                     clientScene.Add(s.ToDomain());
                 }
                 return clientScene;
@@ -68,18 +104,18 @@ namespace renderRepository.RepoImplementation
 
         public void UpdateCamera(Scene scene)
         {
-            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             using (var dbContext = new RenderContext())
             {
-                var entity = dbContext.SceneEntities.Find(scene.Id);
-                entity.LookFromX = SceneEntity.LookFromX;
-                entity.LookFromY = SceneEntity.LookFromY;
-                entity.LookFromZ = SceneEntity.LookFromZ;
-                entity.LookAtX = SceneEntity.LookAtX;
-                entity.LookAtY = SceneEntity.LookAtY;
-                entity.LookAtZ = SceneEntity.LookAtZ;
-                entity.Fov = SceneEntity.Fov;
-                entity.Aperture = SceneEntity.Aperture;
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.LookFromX = sceneEntity.LookFromX;
+                entity.LookFromY = sceneEntity.LookFromY;
+                entity.LookFromZ = sceneEntity.LookFromZ;
+                entity.LookAtX = sceneEntity.LookAtX;
+                entity.LookAtY = sceneEntity.LookAtY;
+                entity.LookAtZ = sceneEntity.LookAtZ;
+                entity.Fov = sceneEntity.Fov;
+                entity.Aperture = sceneEntity.Aperture;
                 dbContext.SaveChanges();
             }
         }
@@ -94,45 +130,71 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public void AddModel(int id, Model model)
+        public void AddModel(Scene scene, Model model)
         {
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
+            ModelEntity modelEntity = ModelEntity.FromDomain(model);
+            FigureEntity figureEntity = FigureEntity.FromDomain(model.Figure);
+            MaterialEntity materialEntity = MaterialEntity.FromDomain(model.Material);
+            modelEntity.MaterialEntity = materialEntity;
+            modelEntity.FigureEntity = figureEntity;
             using (var dbContext = new RenderContext())
             {
-                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
-                ModelEntity modelEntity = ModelEntity.FromDomain(model);
-                sceneEntity.ModelEntities.Add(modelEntity);
+                int clientId = int.Parse(scene.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                figureEntity.ClientEntity = client;
+                materialEntity.ClientEntity = client;
+                modelEntity.ClientEntity = client;
+                dbContext.FigureEntities.Add(figureEntity);
+                dbContext.MaterialEntities.Add(materialEntity);
+                dbContext.ModelEntities.Add(modelEntity);
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.LastModificationDate = sceneEntity.LastModificationDate;
+                entity.ModelEntities.Add(modelEntity);
                 dbContext.SaveChanges();
             }
         }
 
         public void UpdatePreview(Scene scene)
         {
-            SceneEntity SceneEntity = SceneEntity.FromDomain(scene);
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
             using (var dbContext = new RenderContext())
             {
-                var entity = dbContext.SceneEntities.Find(scene.Id);
-                entity.Preview = SceneEntity.Preview;
+                var entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                entity.Preview = sceneEntity.Preview;
+                entity.LastRenderizationDate = sceneEntity.LastRenderizationDate;
                 dbContext.SaveChanges();
             }
         }
 
-        public void RemoveModel(int id, Model model)
+        public void RemoveModel(Scene scene, Model model)
         {
+            SceneEntity sceneEntity = SceneEntity.FromDomain(scene);
+            int modelEntity = int.Parse(model.Id);
+            int figureEntity = int.Parse(model.Figure.Id);
+            int materialEntity = int.Parse(model.Material.Id);
             using (var dbContext = new RenderContext())
             {
-                SceneEntity sceneEntity = dbContext.SceneEntities.Find(id);
-                ModelEntity modelEntity = ModelEntity.FromDomain(model);
-                sceneEntity.ModelEntities.Remove(modelEntity);
+                SceneEntity entity = dbContext.SceneEntities.Find(sceneEntity.Id);
+                var modelToDelete = dbContext.ModelEntities.Find(modelEntity);
+                var figureToDelete = dbContext.FigureEntities.Find(figureEntity);
+                var materialToDelete = dbContext.MaterialEntities.Find(materialEntity);
+                dbContext.ModelEntities.Remove(modelToDelete);
+                dbContext.MaterialEntities.Remove(materialToDelete);
+                dbContext.FigureEntities.Remove(figureToDelete);
+                entity.LastModificationDate= sceneEntity.LastModificationDate;
                 dbContext.SaveChanges();
             }
         }
 
         public List<Scene> GetScenesWithModel(Model model)
         {
+            int id = ModelEntity.FromDomain(model).Id;
             using (var dbContext = new RenderContext())
             {
+                var modelEntity = dbContext.ModelEntities.Find(id);
                 var sceneEntities = dbContext.SceneEntities
-                    .Where(s => s.ModelEntities.Contains(ModelEntity.FromDomain(model)))
+                    .Where(s => s.ModelEntities.Any(m => m.Name == modelEntity.Name && m.ClientEntity.Id == modelEntity.ClientEntity.Id))
                     .ToList();
                 List<Scene> scenes = new List<Scene>();
                 foreach (var s in sceneEntities)

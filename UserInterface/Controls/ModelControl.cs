@@ -1,5 +1,6 @@
-﻿using Render3D.RenderLogic.Controllers;
-using RenderLogic.DataTransferObjects;
+﻿using Render3D.BackEnd;
+using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -9,6 +10,7 @@ namespace Render3D.UserInterface.Controls
     public partial class ModelControl : UserControl
     {
        private readonly ModelDto _modelDto;
+        private readonly ModelController modelController;
         private readonly SceneController sceneController;
         public ModelControl(ModelDto model)
         {
@@ -16,6 +18,7 @@ namespace Render3D.UserInterface.Controls
             lblModelName.Text = model.Name;
             _modelDto = model;
             sceneController = SceneController.GetInstance();
+            modelController = ModelController.GetInstance();
             lblModelFigure.Text = model.Figure.Name;
             lblModelMaterial.Text = model.Material.Name;
             lblErrorDeleteModel.Text = "";
@@ -55,8 +58,7 @@ namespace Render3D.UserInterface.Controls
         {
             if (!sceneController.CheckIfModelIsInAScene(_modelDto))
             {
-
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(_modelDto);
+                modelController.Delete(_modelDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
             }
             else

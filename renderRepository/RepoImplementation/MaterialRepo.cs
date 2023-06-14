@@ -1,10 +1,12 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
-using RenderLogic.RepoInterface;
+using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace renderRepository.RepoImplementation
 {
@@ -17,6 +19,9 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = MaterialEntity.FromDomain(material);
+                int clientId = int.Parse(material.Client.Id);
+                var client = dbContext.ClientEntities.Find(clientId);
+                entity.ClientEntity = client;
                 dbContext.MaterialEntities.Add(entity);
                 dbContext.SaveChanges();
                 material.Id = entity.Id.ToString();
@@ -52,22 +57,23 @@ namespace renderRepository.RepoImplementation
             }
         }
 
-        public Material GetByNameAndClient(string name, Client client)
+        public Material GetByNameAndClient(string name, int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                    .Where(m => m.Name == name && m.ClientEntity == ClientEntity.FromDomain(client));
-                return materialEntities.ElementAt(0).ToDomain();
+                    .Where(m => m.Name == name && m.ClientEntity.Id == clientId)
+                    .FirstOrDefault();
+                return materialEntities.ToDomain();
             }
         }
 
-        public List<Material> GetMaterialsOfClient(Client client)
+        public List<Material> GetMaterialsOfClient(int clientId)
         {
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                    .Where(f => f.ClientEntity == ClientEntity.FromDomain(client))
+                     .Where(m=> m.ClientEntity.Id == clientId)
                     .ToList();
                 List<Material> clientMaterials = new List<Material>();
                 foreach (var m in materialEntities)

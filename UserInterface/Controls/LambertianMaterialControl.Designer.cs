@@ -48,9 +48,9 @@
             this.lblRedColor.Location = new System.Drawing.Point(40, 86);
             this.lblRedColor.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.lblRedColor.Name = "lblRedColor";
-            this.lblRedColor.Size = new System.Drawing.Size(53, 25);
+            this.lblRedColor.Size = new System.Drawing.Size(31, 25);
             this.lblRedColor.TabIndex = 0;
-            this.lblRedColor.Text = "Red:";
+            this.lblRedColor.Text = "R:";
             // 
             // lblGreenColor
             // 
@@ -60,9 +60,9 @@
             this.lblGreenColor.Location = new System.Drawing.Point(144, 86);
             this.lblGreenColor.Margin = new System.Windows.Forms.Padding(40, 0, 3, 0);
             this.lblGreenColor.Name = "lblGreenColor";
-            this.lblGreenColor.Size = new System.Drawing.Size(72, 25);
+            this.lblGreenColor.Size = new System.Drawing.Size(33, 25);
             this.lblGreenColor.TabIndex = 1;
-            this.lblGreenColor.Text = "Green:";
+            this.lblGreenColor.Text = "G:";
             // 
             // lblBlueColor
             // 
@@ -72,9 +72,9 @@
             this.lblBlueColor.Location = new System.Drawing.Point(267, 86);
             this.lblBlueColor.Margin = new System.Windows.Forms.Padding(40, 0, 3, 0);
             this.lblBlueColor.Name = "lblBlueColor";
-            this.lblBlueColor.Size = new System.Drawing.Size(57, 25);
+            this.lblBlueColor.Size = new System.Drawing.Size(31, 25);
             this.lblBlueColor.TabIndex = 2;
-            this.lblBlueColor.Text = "Blue:";
+            this.lblBlueColor.Text = "B:";
             // 
             // btnDeleteMaterial
             // 
