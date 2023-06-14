@@ -77,7 +77,6 @@
             this.pnlObjectCreation.Name = "pnlObjectCreation";
             this.pnlObjectCreation.Size = new System.Drawing.Size(364, 580);
             this.pnlObjectCreation.TabIndex = 0;
-            this.pnlObjectCreation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlObjectCreation_Paint);
             // 
             // lblShowClientName
             // 
@@ -191,7 +190,7 @@
             this.btnLogs.TabIndex = 5;
             this.btnLogs.Text = "Logs";
             this.btnLogs.UseVisualStyleBackColor = false;
-            this.btnLogs.Click += new System.EventHandler(this.btnLogs_Click);
+            this.btnLogs.Click += new System.EventHandler(this.BtnLogs_Click);
             // 
             // CreationMenu
             // 

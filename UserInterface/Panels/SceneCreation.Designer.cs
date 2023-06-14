@@ -595,7 +595,6 @@
             this.pBoxRender.Size = new System.Drawing.Size(400, 246);
             this.pBoxRender.TabIndex = 8;
             this.pBoxRender.TabStop = false;
-            this.pBoxRender.Click += new System.EventHandler(this.pBoxRender_Click);
             // 
             // comboBox1
             // 
@@ -644,7 +643,7 @@
             this.btnSelectPath.TabIndex = 2;
             this.btnSelectPath.Text = "Select Path";
             this.btnSelectPath.UseVisualStyleBackColor = true;
-            this.btnSelectPath.Click += new System.EventHandler(this.button2_Click);
+            this.btnSelectPath.Click += new System.EventHandler(this.Button2_Click);
             // 
             // btnExport
             // 
@@ -838,7 +837,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(253, 657);
             this.panel3.TabIndex = 1;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // label30
             // 

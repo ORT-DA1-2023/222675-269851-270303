@@ -18,44 +18,7 @@ namespace UserInterface.Panels
             InitializeComponent();
             sceneController = SceneController.GetInstance();
             _sceneDto = selectedScene;
-
-            if (_sceneDto == null)
-            {
-                string name;
-                    NameChanger nameChanger = new NameChanger("");
-                    DialogResult result = nameChanger.ShowDialog(this);
-                    if (result == DialogResult.OK)
-                    {
-                        name = nameChanger.newName;
-                        try
-                        {
-                             _sceneDto = new SceneDto() { Name = name };
-                             sceneController.AddScene(name);
-                            SceneDto camera= sceneController.ClientController.GetCamera();
-                        if (int.Parse(camera.Id)!=0)
-                        {
-                            string lookAt = "(" + camera.LookAt[0] + ";" + camera.LookAt[1] + ";" + camera.LookAt[2] + ")";
-                            string lookFrom = "(" + camera.LookFrom[0] + ";" + camera.LookFrom[1] + ";" + camera.LookFrom[2] + ")";
-                            sceneController.EditCamera(sceneController.GetScene(name), lookAt, lookFrom,camera.Fov, camera.Aperture.ToString());
-                        }
-                        }
-                        catch
-                        {
-                            this.DialogResult = DialogResult.Cancel;
-                            this.Close();
-                        }
-                    }
-                else
-                {
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
-            }
-            if(_sceneDto != null)
-            {
-                LoadScene();
-            }
-
+            LoadScene();
         }
 
 
@@ -269,7 +232,7 @@ namespace UserInterface.Panels
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -277,10 +240,6 @@ namespace UserInterface.Panels
             }
         }
 
-        private void Label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Button3_Click(object sender, EventArgs e)
         {
@@ -323,14 +282,6 @@ namespace UserInterface.Panels
             label28.Update();
         }
 
-        private void pBoxRender_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

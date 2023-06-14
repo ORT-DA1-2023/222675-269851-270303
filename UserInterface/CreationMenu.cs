@@ -207,15 +207,11 @@ namespace Render3D.UserInterface
             Refresh("Scene");
         }
 
-        private void btnLogs_Click(object sender, EventArgs e)
+        private void BtnLogs_Click(object sender, EventArgs e)
         {
             var log = new LogUI();
             log.Show();
         }
 
-        private void pnlObjectCreation_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
