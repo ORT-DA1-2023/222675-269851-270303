@@ -10,14 +10,12 @@ namespace Render3D.BackEnd
     public class Scene
     {
         protected string _name;
+        private const int _mathPowFirst = 10;
+        private const int _mathPowSecond = 38;
+        private const double _minDistance = 0.001;
+        private const int _maxiumDepth0 = 0;
 
-        public Scene()
-        {
-            Camera = new Camera();
-            CreationDate = DateTimeProvider.Now;
-            LastModificationDate = DateTimeProvider.Now;
-            PositionedModels = new List<Model>();
-        }
+
         public string Id { get; set; }
         public Client Client { get; set; }
         public Camera Camera { get; set; }
@@ -31,6 +29,15 @@ namespace Render3D.BackEnd
             }
         }
 
+        public Scene()
+        {
+            Camera = new Camera();
+            CreationDate = DateTimeProvider.Now;
+            LastModificationDate = DateTimeProvider.Now;
+            PositionedModels = new List<Model>();
+        }
+       
+
         public DateTime CreationDate { get; set; }
         public DateTime LastModificationDate { get; set; }
         public DateTime? LastRenderizationDate { get; set; }
@@ -40,15 +47,15 @@ namespace Render3D.BackEnd
         public Colour ShootRay(Ray ray, int depth)
         {
             HitRecord3D hitRecord = null;
-            double moduleMax = Math.Pow(10, 38);
+            double moduleMax = Math.Pow(_mathPowFirst, _mathPowSecond);
             Model modelSample = new Model();
             bool itWasAHit = false;
             foreach (Model element in PositionedModels)
             {
-                if (element.Figure.WasHit(ray, 0.001, moduleMax))
+                if (element.Figure.WasHit(ray, _minDistance, moduleMax))
                 {
                     itWasAHit = true;
-                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, 0.001, moduleMax, element.Material.Attenuation, element.Roughness);
+                    HitRecord3D hit = element.Figure.FigureHitRecord(ray, _minDistance, moduleMax, element.Material.Attenuation, element.Roughness);
                     modelSample = element;
                     hitRecord = hit;
                     moduleMax = hit.Module;
@@ -72,7 +79,7 @@ namespace Render3D.BackEnd
 
         private Colour GetAttenuationOfTheFigure(int MaxiumDepth, HitRecord3D hitRecord, Model modelSample)
         {
-            if (MaxiumDepth > 0)
+            if (MaxiumDepth > _maxiumDepth0)
             {
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord);
                 if(newRay == null)

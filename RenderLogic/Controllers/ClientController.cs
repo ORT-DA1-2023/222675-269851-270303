@@ -7,6 +7,8 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class ClientController
     {
+        private const string _passwordSafe = "ThisPasswordIsS4fe";
+        private const string _validName = "validName";
         protected static ClientController clientController;
         public Client Client { get; set; }
         public ClientService ClientService { get; set; }
@@ -40,12 +42,12 @@ namespace Render3D.RenderLogic.Controllers
         }
         public void CheckName(string clientName)
         {
-            _ = new Client() { Name = clientName, Password = "ThisPasswordIsS4fe" };
+            _ = new Client() { Name = clientName, Password = _passwordSafe };
         }
 
         public void CheckPassword(string clientPassword)
         {
-            _ = new Client() { Name = "validName", Password = clientPassword };
+            _ = new Client() { Name = _validName, Password = clientPassword };
         }
 
         public Client GetClientByName(string clientName)
