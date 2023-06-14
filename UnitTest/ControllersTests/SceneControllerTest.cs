@@ -134,12 +134,12 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDto = sceneController.GetScene("SceneTest");
             string allOnes = "(1;1;1)";
             DateTime beforeChange = sceneDto.LastModificationDate;
-            sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"4");
+            sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"0");
             SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
             Assert.IsTrue(beforeChange <=sceneDtoV1.LastModificationDate);
             Assert.AreEqual(sceneDtoV1.LookAt[0], 1);
             Assert.AreEqual(sceneDtoV1.Fov, 40);
-            double aperture = 4;
+            double aperture = 0;
             Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
@@ -156,7 +156,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
             Assert.AreEqual(sceneDtoV1.LookAt[0], 0);
             Assert.AreEqual(sceneDtoV1.Fov, 40);
-            double aperture = 4;
+            double aperture = 2;
             Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
@@ -173,7 +173,7 @@ namespace Render3D.UnitTest.ControllersTests
             Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
             Assert.AreEqual(sceneDtoV1.LookFrom[0], 0);
             Assert.AreEqual(sceneDtoV1.Fov, 40);
-            double aperture = 4;
+            double aperture = 2;
             Assert.AreEqual(sceneDtoV1.Aperture, aperture);
         }
         [TestMethod]
@@ -191,7 +191,7 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDtoV3 = sceneController.GetScene("SceneTest");
             Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
             Assert.AreEqual(sceneDtoV3.Fov, 50);
-            double aperture = 4;
+            double aperture = 2;
             Assert.AreEqual(sceneDtoV3.Aperture, aperture);
         }
         [TestMethod]
@@ -209,7 +209,7 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDtoV3 = sceneController.GetScene("SceneTest");
             Assert.AreEqual(beforeChange, sceneDtoV3.LastModificationDate);
             Assert.AreEqual(sceneDtoV3.Fov, 40);
-            double aperture = 4;
+            double aperture = 2;
             Assert.AreEqual(sceneDtoV3.Aperture, aperture);
         }
 

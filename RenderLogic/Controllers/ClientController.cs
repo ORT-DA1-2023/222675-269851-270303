@@ -122,7 +122,7 @@ namespace Render3D.RenderLogic.Controllers
                 LookAt = new double[] { camera.LookAt.X, camera.LookAt.Y, camera.LookAt.Z },
                 LookFrom = new double[] { camera.LookFrom.X, camera.LookFrom.Y, camera.LookFrom.Z },
                 Fov = camera.Fov,
-                Aperture = camera.LensRadius,
+                Aperture = camera.LensRadius*2,
             };
         }
 

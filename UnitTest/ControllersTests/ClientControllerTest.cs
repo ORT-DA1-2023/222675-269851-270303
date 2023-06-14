@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.RepoInterface;
 using Render3D.RenderLogic.Services;
 using renderRepository.RepoImplementation;
@@ -97,5 +98,43 @@ namespace Render3D.UnitTest.ControllersTests
             clientController.LogOut();
             Assert.AreEqual(clientController.Client, null);
         }
+        [TestMethod]
+        public void AddDefaultCameraWithoutAperture()
+        {
+            clientController.SignIn("ClientTest", "4Testing");
+            string allOnes = "(1;1;1)";
+            clientController.AddCamera(allOnes, allOnes, 1, "0");
+            SceneDto scene = clientController.GetCamera();
+            Assert.AreEqual(scene.Fov, 1);
+            Assert.AreEqual(scene.LookAt[0], 1);
+            Assert.AreEqual(scene.LookAt[1], 1);
+            Assert.AreEqual(scene.LookAt[2], 1);
+            Assert.AreEqual(scene.LookFrom[0], 1);
+            Assert.AreEqual(scene.LookFrom[1], 1);
+            Assert.AreEqual(scene.LookFrom[2], 1);
+        }
+        [TestMethod]
+        public void AddDefaultCameraWithAperture()
+        {
+            clientController.SignIn("ClientTest", "4Testing");
+            string allOnes = "(1;1;1)";
+            clientController.AddCamera(allOnes, allOnes, 1, "1");
+            SceneDto scene =clientController.GetCamera();
+            Assert.AreEqual(scene.Aperture, 1);
+        }
+        [TestCleanup]
+        public void CleanUp()
+        {
+            try
+            {
+                clientController.RemoveClient("clientTest");
+            }
+            catch
+            {
+
+            }
+        }
+
+
     }
 }
