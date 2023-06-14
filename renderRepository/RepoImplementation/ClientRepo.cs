@@ -1,4 +1,5 @@
 ﻿using Render3D.BackEnd;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System;
@@ -40,9 +41,9 @@ namespace renderRepository.RepoImplementation
             }
         }
         public Client GetClientByName(string name)
-        {    
-                try
-                {
+        {
+            try
+            {
                 using (var dbContext = new RenderContext())
                 {
                     var ClientEntites = dbContext.ClientEntities
@@ -56,10 +57,10 @@ namespace renderRepository.RepoImplementation
                     return clients[0];
                 }
             }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void Remove(string name)
@@ -67,10 +68,46 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = dbContext.ClientEntities
-                    .Where(c => c.Name== name)
+                    .Where(c => c.Name == name)
                     .FirstOrDefault();
                 dbContext.ClientEntities.Remove(entity);
                 dbContext.SaveChanges();
+            }
+        }
+        public void AddCamera(int id, Camera camera)
+        {
+            using (var dbContext = new RenderContext())
+            {
+                var entity = dbContext.ClientEntities.Find(id);
+                entity.Aperture = camera.LensRadius * 2;
+                entity.LookFromX = camera.LookFrom.X;
+                entity.LookFromY = camera.LookFrom.Y;
+                entity.LookFromZ = camera.LookFrom.Z;
+                entity.LookAtX = camera.LookAt.X;
+                entity.LookAtY = camera.LookAt.Y;
+                entity.LookAtZ = camera.LookAt.Z;
+                entity.Fov = camera.Fov;
+                dbContext.SaveChanges();
+            }
+        }
+        public Camera GetCamera(int id)
+        {
+            ClientEntity clientEntity = null;
+            using (var dbContext = new RenderContext())
+            {
+                clientEntity = dbContext.ClientEntities.Find(id);
+            }
+            try
+            {
+                return new Camera(
+                     new Vector3D(clientEntity.LookFromX, clientEntity.LookFromY, clientEntity.LookFromZ),
+                     new Vector3D(clientEntity.LookAtX, clientEntity.LookAtY, clientEntity.LookAtZ),
+                     clientEntity.Fov,
+                     clientEntity.Aperture);
+            }
+            catch
+            {
+                return new Camera();
             }
         }
     }

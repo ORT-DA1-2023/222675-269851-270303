@@ -15,6 +15,14 @@
                         Name = c.String(),
                         Password = c.String(),
                         RegisterDate = c.DateTime(nullable: false),
+                        Aperture = c.Double(nullable: false),
+                        LookFromX = c.Double(nullable: false),
+                        LookFromY = c.Double(nullable: false),
+                        LookFromZ = c.Double(nullable: false),
+                        LookAtX = c.Double(nullable: false),
+                        LookAtY = c.Double(nullable: false),
+                        LookAtZ = c.Double(nullable: false),
+                        Fov = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -28,6 +36,22 @@
                         X = c.Double(nullable: false),
                         Y = c.Double(nullable: false),
                         Z = c.Double(nullable: false),
+                        ClientEntity_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
+                .Index(t => t.ClientEntity_Id);
+            
+            CreateTable(
+                "dbo.LogEntities",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        RenderTimeInSeconds = c.Int(nullable: false),
+                        RenderDate = c.DateTime(nullable: false),
+                        TimeWindowSinceLastRender = c.String(),
+                        NumberElements = c.Int(nullable: false),
+                        Name = c.String(),
                         ClientEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -106,6 +130,7 @@
             DropForeignKey("dbo.ModelEntities", "FigureEntity_Id", "dbo.FigureEntities");
             DropForeignKey("dbo.ModelEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropForeignKey("dbo.MaterialEntities", "ClientEntity_Id", "dbo.ClientEntities");
+            DropForeignKey("dbo.LogEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropForeignKey("dbo.FigureEntities", "ClientEntity_Id", "dbo.ClientEntities");
             DropIndex("dbo.SceneEntities", new[] { "ClientEntity_Id" });
             DropIndex("dbo.ModelEntities", new[] { "SceneEntity_Id" });
@@ -113,10 +138,12 @@
             DropIndex("dbo.ModelEntities", new[] { "FigureEntity_Id" });
             DropIndex("dbo.ModelEntities", new[] { "ClientEntity_Id" });
             DropIndex("dbo.MaterialEntities", new[] { "ClientEntity_Id" });
+            DropIndex("dbo.LogEntities", new[] { "ClientEntity_Id" });
             DropIndex("dbo.FigureEntities", new[] { "ClientEntity_Id" });
             DropTable("dbo.SceneEntities");
             DropTable("dbo.ModelEntities");
             DropTable("dbo.MaterialEntities");
+            DropTable("dbo.LogEntities");
             DropTable("dbo.FigureEntities");
             DropTable("dbo.ClientEntities");
         }

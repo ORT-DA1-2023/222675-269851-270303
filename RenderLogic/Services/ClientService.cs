@@ -1,5 +1,6 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
+using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.RenderLogic.RepoInterface;
 using System;
 
@@ -46,6 +47,15 @@ namespace Render3D.RenderLogic.Services
         {
             _clientRepo.Remove(name);
         }
-       
+        public void AddCamera(int id, Camera camera)
+        {
+            _clientRepo.AddCamera(id, camera);
+        }
+        public Camera GetCamera(int id)
+        {
+            return _clientRepo.GetCamera(id);
+        }
+        
+
     }
 }

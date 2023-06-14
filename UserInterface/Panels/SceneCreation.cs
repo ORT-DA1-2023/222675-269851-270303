@@ -29,15 +29,22 @@ namespace UserInterface.Panels
                         name = nameChanger.newName;
                         try
                         {
-                            sceneController.AddScene(name);
-                            _sceneDto = new SceneDto() { Name = name };
+                             _sceneDto = new SceneDto() { Name = name };
+                             sceneController.AddScene(name);
+                            SceneDto camera= sceneController.ClientController.GetCamera();
+                        if (int.Parse(camera.Id)!=0)
+                        {
+                            string lookAt = "(" + camera.LookAt[0] + ";" + camera.LookAt[1] + ";" + camera.LookAt[2] + ")";
+                            string lookFrom = "(" + camera.LookFrom[0] + ";" + camera.LookFrom[1] + ";" + camera.LookFrom[2] + ")";
+                            sceneController.EditCamera(sceneController.GetScene(name), lookAt, lookFrom,camera.Fov, camera.Aperture.ToString());
+                        }
                         }
                         catch
                         {
                             this.DialogResult = DialogResult.Cancel;
                             this.Close();
                         }
-                }
+                    }
                 else
                 {
                     this.DialogResult = DialogResult.Cancel;
@@ -167,7 +174,12 @@ namespace UserInterface.Panels
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
                     lblCamera.Text = "Camera settings change correctly";
+                    if (boxSaveDefault.Checked)
+                    {
+                        sceneController.ClientController.AddCamera(lookFromText, lookAtText, (int)nrFov.Value, txtAperture.Text);
+                    }
                 }
+                    
                 catch (Exception ex)
                 {
                     lblCamera.ForeColor = Color.Red;
