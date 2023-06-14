@@ -33,8 +33,7 @@ namespace Render3D.RenderLogic.Controllers
                 CreateSphere(figureDto);
                 return;
             }
-            throw new BackEndException("figure already exists");
-
+            throw new BackEndException("Figure already exists");
         }
         private void CreateSphere(FigureDto figureDto)
         {
@@ -62,7 +61,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 throw new Exception("The client does not have any figures");
             }
-          List<FigureDto> figureDtos = new List<FigureDto>();
+            List<FigureDto> figureDtos = new List<FigureDto>();
             foreach(Figure fig in figureList)
             {
                 FigureDto figDto = new FigureDto()
@@ -88,7 +87,7 @@ namespace Render3D.RenderLogic.Controllers
                 Figure tryName = new Sphere() { Name = newName };
                 FigureService.UpdateName(int.Parse(figureDto.Id), newName);
             }
-            throw new Exception("That Name is already in use");
+            throw new Exception("That name is already in use");
            
         }
     }

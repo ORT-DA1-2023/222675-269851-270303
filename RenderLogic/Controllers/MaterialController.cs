@@ -10,6 +10,7 @@ namespace Render3D.RenderLogic.Controllers
 {
     public class MaterialController
     {
+        private const int _blur0 = 0;
         public ClientController ClientController = ClientController.GetInstance();
         protected static MaterialController materialController;
         public MaterialService MaterialService { get; set; }
@@ -27,12 +28,12 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 MaterialService.GetMaterialByNameAndClient(materialDto.Name,int.Parse(ClientController.Client.Id));
-                throw new BackEndException("material already exists");
+                throw new BackEndException("Material already exists");
             }
             catch (Exception)
             {
                 Colour colour = new Colour(materialDto.Red / 255f, materialDto.Green / 255f, materialDto.Blue / 255f);
-                if (materialDto.Blur != 0)
+                if (materialDto.Blur != _blur0)
                 {
                     CreateMetallicMaterial(materialDto.Name, colour, materialDto.Blur);
                 }
