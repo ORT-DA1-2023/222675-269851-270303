@@ -15,18 +15,26 @@ namespace Render3D.UnitTest
         private Client client1;
         private Client client2;
         private LogAnalytics logAnalytics;
+        private const string _client1Name = "client1";
+        private const string _client2Name = "client2";
+        private const string _scene1Name = "scene1";
+        private const string _scene2Name = "scene2";
+        private const string _scene2_1Name = "scene2.1";
+        private const int _addedSconds = 40;
+        private const int _totalSeconds = 80;
+        private const int _average3 = 3;
 
         [TestInitialize]
         public void Initialize()
         {
-             client1 = new Client { Name = "client1" };
-             client2 = new Client { Name = "client2" };
-            Scene scene1 = new Scene { Name = "scene1", Client = client1 };
-            Scene scene2 = new Scene { Name = "scene2", Client = client2 };
-            Scene scene2_1 = new Scene { Name = "scene2.1", Client = client2 };
+             client1 = new Client { Name = _client1Name };
+             client2 = new Client { Name = _client2Name };
+            Scene scene1 = new Scene { Name = _scene1Name, Client = client1 };
+            Scene scene2 = new Scene { Name = _scene2Name, Client = client2 };
+            Scene scene2_1 = new Scene { Name = _scene2_1Name, Client = client2 };
 
             DateTime startedRender = DateTimeProvider.Now;
-            DateTimeProvider.Now = DateTimeProvider.Now.AddSeconds(40);
+            DateTimeProvider.Now = DateTimeProvider.Now.AddSeconds(_addedSconds);
             Log l1 = new Log(scene1);
             Log l2 = new Log(scene2, startedRender);
             Log l3 = new Log(scene2_1, startedRender);
@@ -46,14 +54,14 @@ namespace Render3D.UnitTest
         public void GivenLogAnalyticsReturnsAverageRenderTimeInSeconds()
         {
             int sec = logAnalytics.GetAverageRenderTimeInSeconds();
-            Assert.AreEqual(80 / 3, sec);
+            Assert.AreEqual(_totalSeconds / _average3, sec);
         }
 
         [TestMethod]
         public void GivenLogAnalyticsReturnsAverageRenderTimeInMinutes()
         {
             int min = logAnalytics.GetAverageRenderTimeInMinutes();
-            Assert.AreEqual(80 / (3*_secondsPerMinute), min);
+            Assert.AreEqual(_totalSeconds / (_average3 * _secondsPerMinute), min);
         }
 
         [TestMethod]
