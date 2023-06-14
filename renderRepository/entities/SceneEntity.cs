@@ -66,7 +66,7 @@ namespace renderRepository.entities
                 LookAtZ = scene.Camera.LookAt.Z,
                 Fov = scene.Camera.Fov,
                 Preview = bytes,
-                Aperture =scene.Camera.LensRadius/2
+                Aperture =scene.Camera.LensRadius
             };
             return sceneEntity;
         }
@@ -76,7 +76,7 @@ namespace renderRepository.entities
             Vector3D lookAt = new Vector3D(LookAtX, LookAtY, LookAtZ);
             Camera camera = new Camera(lookFrom, lookAt, Fov)
             {
-                LensRadius = Aperture * 2
+                LensRadius = Aperture
             };
             Bitmap bitmap;
             try

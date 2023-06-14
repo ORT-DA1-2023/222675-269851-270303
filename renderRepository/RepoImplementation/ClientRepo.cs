@@ -79,7 +79,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = dbContext.ClientEntities.Find(id);
-                entity.Aperture = camera.LensRadius * 2;
+                entity.Aperture = camera.LensRadius;
                 entity.LookFromX = camera.LookFrom.X;
                 entity.LookFromY = camera.LookFrom.Y;
                 entity.LookFromZ = camera.LookFrom.Z;

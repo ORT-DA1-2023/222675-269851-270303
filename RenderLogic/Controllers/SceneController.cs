@@ -227,7 +227,7 @@ namespace Render3D.RenderLogic.Controllers
                     LastModificationDate = scene.LastModificationDate,
                     LastRenderizationDate = lastRenderizationDate,
                     Models = ModelsIntoDtos(scene.PositionedModels),
-                    Aperture = scene.Camera.LensRadius * 2,
+                    Aperture = scene.Camera.LensRadius,
                     LookAt = lookAt,
                     LookFrom = lookFrom,
                     Fov = scene.Camera.Fov
