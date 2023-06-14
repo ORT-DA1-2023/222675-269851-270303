@@ -25,7 +25,7 @@ namespace Render3D.UserInterface.Panels
             double figureRadius;
             if (TryToParse(figureRadiusString) == -1)
             {
-                lblExceptionError.Text = "the radius must be a number";
+                lblExceptionError.Text = "The radius must be a number";
                 return;
             }
             figureRadius = Convert.ToDouble(figureRadiusString);

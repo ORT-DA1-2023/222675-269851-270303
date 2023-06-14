@@ -4,6 +4,7 @@ namespace Render3D.BackEnd.Utilities
 {
     public class HelperValidator
     {
+        private const int _notALengthName = 0;
         public static bool IsLengthBetween(string name, int minLength, int maxLength)
         {
             return name.Length >= minLength && name.Length <= maxLength;
@@ -27,7 +28,7 @@ namespace Render3D.BackEnd.Utilities
         }
         public static bool IsAnEmptyString(string name)
         {
-            return name.Length == 0;
+            return name.Length == _notALengthName;
         }
         public static bool IsANumberInRange(int num, int min, int max)
         {

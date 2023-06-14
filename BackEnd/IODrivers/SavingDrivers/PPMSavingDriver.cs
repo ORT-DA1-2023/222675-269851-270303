@@ -1,13 +1,8 @@
-﻿using Render3D.BackEnd.IODrivers;
-using System;
-using System.Collections.Generic;
+﻿using Render3D.BackEnd.IODrivers.Output;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Render3D.BackEnd.FileFormat
+namespace Render3D.BackEnd.Output.FileFormat
 {
     public class PPMSavingDriver : ISavingFormat
     {

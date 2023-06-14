@@ -11,7 +11,6 @@ namespace Render3D.BackEnd
         private string _name;
         private Bitmap _preview;
         public string Id { get; set; }
-
         public Client Client { get; set; }
 
         public string Name
@@ -38,12 +37,12 @@ namespace Render3D.BackEnd
                 }
             }
         }
-
         private void ValidateName(string Name)
         {
             if (HelperValidator.IsAnEmptyString(Name)) throw new BackEndException("Name must not be empty");
             if (HelperValidator.IsTrimmable(Name)) throw new BackEndException("Name must not start or end with spaces");
         }
+
         override
         public string ToString()
         {

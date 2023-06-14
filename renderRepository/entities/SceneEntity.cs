@@ -28,6 +28,8 @@ namespace renderRepository.entities
         public double LookAtY { get; set; }
         public double LookAtZ { get; set; }
         public int Fov { get; set; }
+
+        public double LensRadius { get; set; }
         public static SceneEntity FromDomain(Scene scene)
         {
             int id;
@@ -83,7 +85,7 @@ namespace renderRepository.entities
             }
             catch
             {
-                lenseRadius =-1;
+                lenseRadius =0;
             }
             if (lenseRadius < 0)
             {

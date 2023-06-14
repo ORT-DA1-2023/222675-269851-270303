@@ -53,7 +53,7 @@ namespace Render3D.UserInterface
             string repeatedPassword = txtClientRepeatedPassword.Text;
             if (!clientPassword.Equals(repeatedPassword) && (repeatedPassword != ""))
             {
-                lblPasswordsDontMatch.Text = "the password don't match";
+                lblPasswordsDontMatch.Text = "The password don't match";
             }
             else
             {

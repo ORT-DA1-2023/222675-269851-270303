@@ -3,6 +3,7 @@ using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
 using Render3D.BackEnd;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Render3D.UnitTest
 {
@@ -11,11 +12,15 @@ namespace Render3D.UnitTest
     {
         private MetallicMaterial materialSample;
         private readonly string validMaterialName = "MetallicMaterialName";
-
         private Client clientSample;
         private readonly string clientSampleName = "clientSampleName";
+        private readonly  string _emptyString = "";
         private readonly double blurSample = 0.5;
         private HitRecord3D hitSample;
+        private readonly Vector3D _validVectorIntersection = new Vector3D(1, 1, 1);
+        private readonly Vector3D _validVectorNormal = new Vector3D(0, 0, 2);
+        private readonly Colour _colourSample = new Colour(0, 0, 0);
+        private const double _validModule = 2.3;
 
         [TestInitialize]
         public void Initialize()
@@ -31,10 +36,10 @@ namespace Render3D.UnitTest
 
             hitSample = new HitRecord3D()
             {
-                Intersection = new Vector3D(1, 1, 1),
-                Normal = new Vector3D(0, 0, 2),
-                Attenuation = new Colour(0, 0, 0),
-                Module = 2.3,
+                Intersection = _validVectorIntersection,
+                Normal = _validVectorNormal,
+                Attenuation = _colourSample,
+                Module = _validModule,
             };
         }
 
@@ -51,7 +56,7 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenEmptyNameThrowsBackEndException()
         {
-            materialSample.Name = "";
+            materialSample.Name = _emptyString;
         }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name cant start or end with space")]

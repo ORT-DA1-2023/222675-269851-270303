@@ -12,14 +12,18 @@ namespace Render3D.UnitTest
         public Client clientSample1;
         public Model modelSample1;
         public Model modelSample2;
-        public readonly string validName = "A valid Model Name";
+        private const string _validName = "A valid Model Name";
+        private const string _clientName = "clientSampleName";
+        private const string _figureName = "figureSampleName";
+        private const string _materialName = "materialSampleName";
+        private const string _emptyString = "";
 
         [TestInitialize]
         public void Initialize()
         {
             clientSample1 = new Client()
             {
-                Name = "clientSampleName",
+                Name = _clientName,
             };
             modelSample1 = new Model();
 
@@ -28,8 +32,8 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenModelReturnsItsName()
         {
-            modelSample1.Name = validName;
-            Assert.AreEqual(modelSample1.Name, validName);
+            modelSample1.Name = _validName;
+            Assert.AreEqual(modelSample1.Name, _validName);
         }
 
         [TestMethod]
@@ -61,26 +65,26 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "Name must not be empty")]
         public void GivenEmptyNameThrowsBackEndException()
         {
-            modelSample1.Name = "";
+            modelSample1.Name = _emptyString;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
         public void GivenNameStartingWithSpaceThrowsBackEndException()
         {
-            modelSample1.Name = " " + validName;
+            modelSample1.Name = " " + _validName;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "Name must not start or end with spaces")]
         public void GivenNameEndingWithSpacesThrowsBackEndException()
         {
-            modelSample1.Name = validName + " ";
+            modelSample1.Name = _validName + " ";
         }
         [TestMethod]
         public void GivenModelReturnsItsFigure()
         {
-            Figure figureSample = new Sphere() { Name = "figureName" };
+            Figure figureSample = new Sphere() { Name = _figureName };
             Model modelSample = new Model()
             {
                 Client = clientSample1,
@@ -92,7 +96,7 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenModelReturnsItsMaterial()
         {
-            Material materialSample = new LambertianMaterial { Client = clientSample1, Name = "materialName" };
+            Material materialSample = new LambertianMaterial { Client = clientSample1, Name = _materialName };
             Model modelSample = new Model()
             {
                 Client = clientSample1,
@@ -103,14 +107,14 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenModelReturnsToString()
         {
-            Figure figureSample = new Sphere() { Name = "figureName" };
+            Figure figureSample = new Sphere() { Name = _figureName };
             Model modelSample = new Model()
             {
                 Client = clientSample1,
                 Figure = figureSample,
-                Name = validName,
+                Name = _validName,
             };
-            string expected = $"{validName}({figureSample.Position.X},{figureSample.Position.Y},{figureSample.Position.Z})";
+            string expected = $"{_validName}({figureSample.Position.X},{figureSample.Position.Y},{figureSample.Position.Z})";
             Assert.AreEqual(modelSample.ToString(), expected);
         }
 

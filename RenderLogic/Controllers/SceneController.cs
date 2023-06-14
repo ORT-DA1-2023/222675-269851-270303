@@ -1,6 +1,6 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.FileFormat;
+using Render3D.BackEnd.Output.FileFormat;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.IODrivers;
 using Render3D.BackEnd.Materials;
@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using Render3D.BackEnd.IODrivers.Output;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -121,7 +122,7 @@ namespace Render3D.RenderLogic.Controllers
                 CreateAndAddBlankScene(sceneName);
                 return;
             }
-            throw new Exception("scene already exists");
+            throw new Exception("The scene already exists");
         }
 
         private void CreateAndAddBlankScene(string sceneName)

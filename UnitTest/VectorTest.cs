@@ -8,8 +8,9 @@ namespace Render3D.UnitTest
     [TestClass]
     public class VectorTest
     {
-        private const double one = 1;
-        private const double two = 2;
+        private const double _one = 1;
+        private const double _two = 2;
+        private const double _three = 3;
         private Vector3D allOnes;
         private readonly Vector3D allTwos = new Vector3D(2, 2, 2);
         private readonly Vector3D squareRootIsInt = new Vector3D(1, 2, 2);
@@ -24,9 +25,9 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenVectorReturnsItsCoordinates()
         {
-            Assert.AreEqual(allOnes.X, one);
-            Assert.AreEqual(allOnes.Y, one);
-            Assert.AreEqual(allOnes.Z, one);
+            Assert.AreEqual(allOnes.X, _one);
+            Assert.AreEqual(allOnes.Y, _one);
+            Assert.AreEqual(allOnes.Z, _one);
         }
 
 
@@ -34,12 +35,12 @@ namespace Render3D.UnitTest
         public void GivenVectorAssignsCoordinates()
         {
             Vector3D all2 = new Vector3D(1, 1, 1);
-            all2.X = 2;
-            all2.Y = 2;
-            all2.Z = 2;
-            Assert.IsTrue(all2.X == 2);
-            Assert.IsTrue(all2.Y == 2);
-            Assert.IsTrue(all2.Z == 2);
+            all2.X = _two;
+            all2.Y = _two;
+            all2.Z = _two;
+            Assert.IsTrue(all2.X == _two);
+            Assert.IsTrue(all2.Y == _two);
+            Assert.IsTrue(all2.Z == _two);
         }
 
         [TestMethod]
@@ -59,17 +60,17 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenVectorAndDoubleMultiplyEachCoordenateByNumber()
         {
-            Assert.AreEqual(allOnes.Multiply(two).X, allTwos.X);
-            Assert.AreEqual(allOnes.Multiply(two).Y, allTwos.Y);
-            Assert.AreEqual(allOnes.Multiply(two).Z, allTwos.Z);
+            Assert.AreEqual(allOnes.Multiply(_two).X, allTwos.X);
+            Assert.AreEqual(allOnes.Multiply(_two).Y, allTwos.Y);
+            Assert.AreEqual(allOnes.Multiply(_two).Z, allTwos.Z);
         }
 
         [TestMethod]
         public void GivenVectorAndAdoubleDivideEachCoordenateByNumber()
         {
-            Assert.AreEqual(allTwos.Divide(two).X, allOnes.X);
-            Assert.AreEqual(allTwos.Divide(two).Y, allOnes.Y);
-            Assert.AreEqual(allTwos.Divide(two).Z, allOnes.Z);
+            Assert.AreEqual(allTwos.Divide(_two).X, allOnes.X);
+            Assert.AreEqual(allTwos.Divide(_two).Y, allOnes.Y);
+            Assert.AreEqual(allTwos.Divide(_two).Z, allOnes.Z);
         }
 
         [TestMethod]
@@ -108,24 +109,24 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenVectorReturnsSquaredLength()
         {
-            Assert.AreEqual(allOnes.SquaredLength(), 3);
+            Assert.AreEqual(allOnes.SquaredLength(), _three);
         }
         [TestMethod]
         public void GivenVectorReturnsLength()
         {
-            Assert.AreEqual(squareRootIsInt.Length(), 3);
+            Assert.AreEqual(squareRootIsInt.Length(), _three);
         }
         [TestMethod]
         public void GivenVectorReturnsUnitVector()
         {
-            Assert.AreEqual(squareRootIsInt.GetUnit().X, squareRootIsInt.Divide(3).X);
-            Assert.AreEqual(squareRootIsInt.GetUnit().Y, squareRootIsInt.Divide(3).Y);
-            Assert.AreEqual(squareRootIsInt.GetUnit().Z, squareRootIsInt.Divide(3).Z);
+            Assert.AreEqual(squareRootIsInt.GetUnit().X, squareRootIsInt.Divide(_three).X);
+            Assert.AreEqual(squareRootIsInt.GetUnit().Y, squareRootIsInt.Divide(_three).Y);
+            Assert.AreEqual(squareRootIsInt.GetUnit().Z, squareRootIsInt.Divide(_three).Z);
         }
         [TestMethod]
         public void GivenTwoVectorsReturnsDotProduct()
         {
-            Assert.AreEqual(allOnes.DotProduct(allOnes), 3);
+            Assert.AreEqual(allOnes.DotProduct(allOnes), _three);
         }
 
         [TestMethod]

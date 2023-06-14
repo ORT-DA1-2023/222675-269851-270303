@@ -34,7 +34,6 @@ namespace Render3D.RenderLogic.Controllers
                 return;
             }
             throw new BackEndException("Figure already exists");
-
         }
         private void CreateSphere(FigureDto figureDto)
         {
@@ -82,7 +81,7 @@ namespace Render3D.RenderLogic.Controllers
                 FigureService.UpdateName(int.Parse(figureDto.Id), newName);
                 return;
             }
-            throw new Exception("That Name is already in use");
+            throw new Exception("That name is already in use");
            
         }
     }

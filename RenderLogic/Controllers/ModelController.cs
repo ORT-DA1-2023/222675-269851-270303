@@ -29,6 +29,7 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));   
+
             }
             catch
             {              
