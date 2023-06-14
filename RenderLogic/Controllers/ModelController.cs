@@ -30,7 +30,7 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 ModelService.GetModelByNameAndClient(modelName,int.Parse(ClientController.Client.Id));
-                throw new BackEndException("model already exists");
+                throw new BackEndException("The model already exists");
             }
             catch (Exception)
             {              

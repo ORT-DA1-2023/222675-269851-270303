@@ -16,7 +16,6 @@ namespace Render3D.UnitTest
 
         private readonly int smallestValidFov = 0;
         private readonly int largestValidFov = 160;
-        private readonly double validAspectRatio = 1;
         private readonly double validWidthHalf = 1;
         private readonly double validHeightHalf = 1;
         private readonly double validLensRadius = 2;

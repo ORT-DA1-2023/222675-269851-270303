@@ -13,20 +13,21 @@ namespace Render3D.UnitTest
         private GraphicMotor graphicMotorSample;
         private Scene sceneSample;
 
-        private const int resolutionHeightSample = 500;
-        private const int resolutionWidthSampleDefault = 300;
-        private const int negativeResolutionHeightSample = -1;
-        private const int zeroResolutionHeightSample = 0;
+        private const int _resolutionHeightSample = 500;
+        private const int _resolutionWidthSampleDefault = 300;
+        private const int _negativeResolutionHeightSample = -1;
+        private const int _zeroResolutionHeightSample = 0;
 
-        private const int pixelSamplingSample = 79;
-        private const int pixelSamplingSampleDefault = 50;
-        private const int negativePixelSamplingSample = -1;
-        private const int zeroPixelSamplingSample = 0;
+        private const int _pixelSamplingSample = 79;
+        private const int _pixelSamplingSampleDefault = 50;
+        private const int _negativePixelSamplingSample = -1;
+        private const int _zeroPixelSamplingSample = 0;
 
-        private const int maximumDepthSample = 30;
-        private const int maximumDepthSampleDefault = 20;
-        private const int negativeMaximumDepth = -1;
-        private const int zeroMaximumDepth = 0;
+        private const int _maximumDepthSample = 30;
+        private const int _maximumDepthSampleDefault = 20;
+        private const int _negativeMaximumDepth = -1;
+        private const int _zeroMaximumDepth = 0;
+        private const int _radiusSample = 3;
 
         [TestInitialize]
         public void Initialize()
@@ -46,7 +47,7 @@ namespace Render3D.UnitTest
         {
             Model model = new Model()
             {
-                Figure = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = 3 },
+                Figure = new Sphere() { Position = new Vector3D(0, 0, 0), Radius = _radiusSample },
                 Material = new LambertianMaterial() { Attenuation = new Colour(1, 1, 1) },
             };
 
@@ -61,60 +62,60 @@ namespace Render3D.UnitTest
         [TestMethod]
         public void GivenAdefaultGraphicMotorItComparesDefaultPixelSampling()
         {
-            Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
+            Assert.AreEqual(graphicMotorSample.PixelSampling, _pixelSamplingSampleDefault);
         }
 
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasDefaultPixelSampling()
         {
-            Assert.AreEqual(graphicMotorSample.PixelSampling, pixelSamplingSampleDefault);
+            Assert.AreEqual(graphicMotorSample.PixelSampling, _pixelSamplingSampleDefault);
         }
 
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasDefaultMaximumDepth()
         {
-            Assert.AreEqual(graphicMotorSample.MaximumDepth, maximumDepthSampleDefault);
+            Assert.AreEqual(graphicMotorSample.MaximumDepth, _maximumDepthSampleDefault);
         }
 
         [TestMethod]
         public void GivenDefaultGraphicMotorItHasDefaultResolution()
         {
-            Assert.AreEqual(graphicMotorSample.ResolutionWidth, resolutionWidthSampleDefault);
+            Assert.AreEqual(graphicMotorSample.ResolutionWidth, _resolutionWidthSampleDefault);
         }
 
         [TestMethod]
         public void GivenValidResolutionAssignsToGraphicMotor()
         {
-            graphicMotorSample.ResolutionWidth = resolutionHeightSample;
-            Assert.AreEqual(resolutionHeightSample, graphicMotorSample.ResolutionWidth);
+            graphicMotorSample.ResolutionWidth = _resolutionHeightSample;
+            Assert.AreEqual(_resolutionHeightSample, graphicMotorSample.ResolutionWidth);
         }
 
         [TestMethod]
         public void GivenValidPixelSamplingAssignsToGraphicMotor()
         {
-            graphicMotorSample.PixelSampling = pixelSamplingSample;
-            Assert.AreEqual(pixelSamplingSample, graphicMotorSample.PixelSampling);
+            graphicMotorSample.PixelSampling = _pixelSamplingSample;
+            Assert.AreEqual(_pixelSamplingSample, graphicMotorSample.PixelSampling);
         }
 
         [TestMethod]
         public void GivenValidMaximumDepthAssignsToGraphicMotor()
         {
-            graphicMotorSample.MaximumDepth = maximumDepthSample;
-            Assert.AreEqual(maximumDepthSample, graphicMotorSample.MaximumDepth);
+            graphicMotorSample.MaximumDepth = _maximumDepthSample;
+            Assert.AreEqual(_maximumDepthSample, graphicMotorSample.MaximumDepth);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
         public void GivenNegativeMaximumDepthThrowsBackEndException()
         {
-            graphicMotorSample.MaximumDepth = negativeMaximumDepth;
+            graphicMotorSample.MaximumDepth = _negativeMaximumDepth;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The maximum depth must be greater than 0.")]
         public void GivenZeroMaximumDepthThrowsBackEndException()
         {
-            graphicMotorSample.MaximumDepth = zeroMaximumDepth;
+            graphicMotorSample.MaximumDepth = _zeroMaximumDepth;
         }
 
 
@@ -122,34 +123,34 @@ namespace Render3D.UnitTest
         [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
         public void GivenNegativePixelSamplingThrowsBackEndException()
         {
-            graphicMotorSample.PixelSampling = negativePixelSamplingSample;
+            graphicMotorSample.PixelSampling = _negativePixelSamplingSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The pixel sampling must be greater than 0.")]
         public void GivenZeroPixelSamplingThrowsBackEndException()
         {
-            graphicMotorSample.PixelSampling = zeroPixelSamplingSample;
+            graphicMotorSample.PixelSampling = _zeroPixelSamplingSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenNegativeResolutionThrowsABackEndException()
         {
-            graphicMotorSample.ResolutionWidth = negativeResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = _negativeResolutionHeightSample;
         }
 
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "The resolution must be greater than 0.")]
         public void GivenZeroResolutionThrowsBackEndException()
         {
-            graphicMotorSample.ResolutionWidth = zeroResolutionHeightSample;
+            graphicMotorSample.ResolutionWidth = _zeroResolutionHeightSample;
         }
 
         [TestMethod]
         public void GivenGraphicMotorReturnsAspectRatio()
         {
-            GraphicMotor motor = new GraphicMotor() { ResolutionWidth = 300 };
+            GraphicMotor motor = new GraphicMotor() { ResolutionWidth = _resolutionWidthSampleDefault };
             double ratio = motor.AspectRatio();
             Assert.AreEqual(1.5, ratio);
         }

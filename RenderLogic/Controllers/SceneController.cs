@@ -115,7 +115,7 @@ namespace Render3D.RenderLogic.Controllers
                 CreateAndAddBlankScene(sceneName);
                 return;
             }
-            throw new Exception("scene already exists");
+            throw new Exception("The scene already exists");
         }
 
         private void CreateAndAddBlankScene(string sceneName)
