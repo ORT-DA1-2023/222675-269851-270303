@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd;
+﻿using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -7,12 +8,16 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-        private string _oldName;
-        public ModelControl(Model model)
+        private readonly ModelDto _modelDto;
+        private readonly ModelController modelController;
+        private readonly SceneController sceneController;
+        public ModelControl(ModelDto model)
         {
             InitializeComponent();
             lblModelName.Text = model.Name;
-            _oldName = model.Name;
+            _modelDto = model;
+            sceneController = SceneController.GetInstance();
+            modelController = ModelController.GetInstance();
             lblModelFigure.Text = model.Figure.Name;
             lblModelMaterial.Text = model.Material.Name;
             lblErrorDeleteModel.Text = "";
@@ -24,7 +29,7 @@ namespace Render3D.UserInterface.Controls
 
         private void BtnEditModelName_Click(object sender, EventArgs e)
         {
-            using (var nameChanger = new NameChanger(_oldName))
+            using (var nameChanger = new NameChanger(_modelDto.Name))
             {
                 var result = nameChanger.ShowDialog(this);
                 if (result == DialogResult.OK)
@@ -38,22 +43,21 @@ namespace Render3D.UserInterface.Controls
 
         private void ChecksForCorrectEdit(string newName)
         {
-            if (!_oldName.Equals(newName))
+            if (!_modelDto.Equals(newName))
             {
-                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_oldName, newName))
+                if (((CreationMenu)this.Parent.Parent.Parent).ModelNameHasBeenChanged(_modelDto, newName))
                 {
                     lblModelName.Text = newName;
-                    _oldName = newName;
+                    _modelDto.Name = newName;
                 }
             }
         }
 
         private void BtnDeleteModel_Click(object sender, EventArgs e)
         {
-            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblModelName.Text))
+            if (!sceneController.CheckIfModelIsInAScene(_modelDto))
             {
-
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteModel(lblModelName.Text);
+                modelController.Delete(_modelDto);
                 ((CreationMenu)this.Parent.Parent.Parent).Refresh("Model");
             }
             else

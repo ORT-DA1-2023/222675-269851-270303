@@ -1,4 +1,5 @@
-﻿using Render3D.BackEnd;
+﻿using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
 using UserInterface.Panels;
@@ -7,41 +8,41 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class SceneControl : UserControl
     {
-        private string _oldName;
-        private Scene _scene;
-        public SceneControl(Scene selectedScene)
+        private readonly SceneDto _sceneDto;
+        private readonly SceneController sceneController;
+        public SceneControl(SceneDto selectedScene)
         {
             InitializeComponent();
-            _scene = selectedScene;
-            lblSceneName.Text = _scene.Name;
-            _oldName = _scene.Name;
-            lblSceneModificationDate.Text = "" + _scene.LastModificationDate.Month + "/" + _scene.LastModificationDate.Day + "/" + _scene.LastModificationDate.Year + " " + _scene.LastModificationDate.Hour + ":" + _scene.LastModificationDate.Minute;
-            if (_scene.Preview != null)
+            _sceneDto = selectedScene;
+            lblSceneName.Text = _sceneDto.Name;
+            sceneController = SceneController.GetInstance();
+            lblSceneModificationDate.Text = "" + _sceneDto.LastModificationDate.Month + "/" + _sceneDto.LastModificationDate.Day + "/" + _sceneDto.LastModificationDate.Year + " " + _sceneDto.LastModificationDate.Hour + ":" + _sceneDto.LastModificationDate.Minute;
+            if (_sceneDto.Preview != null)
             {
-                pBoxPreview.Image = _scene.Preview;
+                pBoxPreview.Image = _sceneDto.Preview;
             }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (!((CreationMenu)this.Parent.Parent.Parent).ModelIsPartOfScene(lblSceneName.Text))
-            {
-                ((CreationMenu)this.Parent.Parent.Parent).DeleteScene(lblSceneName.Text);
-                ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
-            }
+            sceneController.Delete(_sceneDto);
+            ((CreationMenu)this.Parent.Parent.Parent).Refresh("Scene");
 
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             CreationMenu creation = (CreationMenu)this.Parent.Parent.Parent;
-            Render3DIU render = (Render3DIU)creation.Parent.Parent;
-            using (var scene = new SceneCreation(render.sceneController, render.clientName, _scene))
+            using (var scene = new SceneCreation(_sceneDto))
             {
                 var result = scene.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     creation.Refresh("Scene");
+                }
+                else
+                {
+                    scene.Close();
                 }
             }
         }

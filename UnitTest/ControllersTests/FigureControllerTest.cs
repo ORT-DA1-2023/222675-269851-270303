@@ -1,96 +1,131 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
-using Render3D.BackEnd.Controllers;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Utilities;
-
+using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
+using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
     [TestClass]
     public class FigureControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private FigureController _figureController;
-        private ClientController _clientController;
-        private Client _clientSample;
-        private Figure _figureSample;
+        FigureController figureController;
+        RepoFactory repo = new RepoFactory();
 
         [TestInitialize]
         public void Initialize()
         {
-            _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
-            _figureController = new FigureController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
-            _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _figureSample = new Sphere() { Client = _clientSample, Name = "figureSample1", Radius = 5 };
+            figureController = FigureController.GetInstance();
+            repo.Initialize();
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
 
         [TestMethod]
-        public void GivenNewFigureAddsItToTheList()
+        public void GivenNewFigureSavesIt()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.AddFigure("clientSample1", "figureSample1", 5);
-            Assert.AreEqual(_figureSample.Name, _figureController.DataWarehouse.Figures[0].Name);
-            Assert.IsTrue((_figureSample.Client).Equals(_figureController.DataWarehouse.Figures[0].Client));
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 1);
+            figureController.ClientController.SignIn("ClientTest", "4Testing");
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            Assert.AreEqual(figureController.GetFigures()[0].Name, "figureTest");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "the Radius must be greater than 1")]
-        public void GivenNewWrongFigureFailsTryingToAddItToTheList()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.AddFigure("clientSample1", "figureSample1", -5);
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-        }
         [TestMethod]
         [ExpectedException(typeof(BackEndException), "figure already exists")]
-        public void GivenReapetedFigureFailsTryingToAddItToTheList()
+        public void GivenNewFigureItIsAlreadySaved()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 0);
-            _figureController.AddFigure("clientSample1", "figureSample1", 5);
-            _figureController.AddFigure("clientSample1", "figureSample1", 5);
-            Assert.IsTrue((_figureController.DataWarehouse).Figures.Count == 1);
+            figureController.ClientController.SignIn("ClientTest", "4Testing");
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
         }
         [TestMethod]
         public void GivenNewFigureNameItChanges()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _figureController.AddFigure("clientSample1", "figureSample1", 5);
-            _figureController.ChangeFigureName("clientSample1", "figureSample1", "figureSample2");
-            Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[0].Name);
+            figureController.ClientController.SignIn("ClientTest", "4Testing");
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            figureController.ChangeName(figureController.GetFigures()[0], "figureTest2");
+            Assert.AreEqual(figureController.GetFigures()[0].Name, "figureTest2");
         }
         [TestMethod]
+        [ExpectedException(typeof(Exception), "That Name is already in use")]
         public void GivenNewFigureNameItDoesNotChange()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _figureController.AddFigure("clientSample1", "figureSample1", 1);
-            _figureController.AddFigure("clientSample1", "figureSample2", 5);
-            _figureController.ChangeFigureName("clientSample1", "clientSample1", "figureSample2");
-            Assert.AreEqual("figureSample1", _figureController.DataWarehouse.Figures[0].Name);
-            Assert.AreEqual("figureSample2", _figureController.DataWarehouse.Figures[1].Name);
+            figureController.ClientController.SignIn("ClientTest", "4Testing");
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest2",
+                Radius = 10,
+            });
+            figureController.ChangeName(figureController.GetFigures()[0], "figureTest2");
         }
         [TestMethod]
-        public void GivenNameDeletesTheFigure()
+        public void GivenFigureDeletesIt()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _figureController.AddFigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
-            _figureController.DeleteFigureInList("clientSample1", "figureSample1");
-            Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 0);
+            figureController.ClientController.SignIn("ClientTest", "4Testing");
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            List<FigureDto> listDto = figureController.GetFigures();
+            Assert.AreEqual(listDto.Count, 1);
+            figureController.Delete(listDto[0]);
+            List<FigureDto> listDto2 = figureController.GetFigures();
+            Assert.AreEqual(listDto2.Count, 0);
         }
-        [TestMethod]
-        public void GivenNameDoesNotDeleteTheFigure()
+        [TestCleanup]
+        public void CleanUp()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _figureController.AddFigure("clientSample1", "figureSample1", 1);
-            Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
-            _figureController.DeleteFigureInList("clientSample1", "figureSample2");
-            Assert.IsTrue(_figureController.DataWarehouse.Figures.Count == 1);
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
     }
 }

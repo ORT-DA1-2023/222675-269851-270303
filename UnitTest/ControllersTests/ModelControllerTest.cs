@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
-using Render3D.BackEnd.Controllers;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
-
+using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
+using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -12,127 +11,320 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class ModelControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private ClientController _clientController;
-        private Client _clientSample;
-        private Material _materialSample;
-        private Figure _figure;
-        private ModelController _modelController;
-        private readonly Colour _colour = new Colour(0, 0, 0);
+        ModelController modelController;
+        MaterialController materialController;
+        FigureController figureController;
+        LogController logController;
+        RepoFactory repo = new RepoFactory();
+
 
         [TestInitialize]
         public void Initialize()
         {
-            _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
-            _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Attenuation = _colour };
-            _figure = new Sphere() { Client = _clientSample, Name = "figureSample1", Radius = 5 };
-            _modelController = new ModelController() { ClientController = _clientController, DataWarehouse = _dataWarehouse };
+            logController = LogController.GetInstance();
+            modelController = ModelController.GetInstance();
+            materialController = MaterialController.GetInstance();
+            figureController = FigureController.GetInstance();
+            repo.Initialize();
+            try
+            {
+                logController.ClientController.Login("ClientTest", "4Testing");
+                List<LogDto> logDtos = logController.GetLogs();
+                foreach (LogDto log in logDtos)
+                {
+                    logController.Delete(log);
+                }
+            }
+            catch { }
+            try
+            {
+                modelController.ClientController.Login("ClientTest", "4Testing");
+                List<ModelDto> modelDtos = modelController.GetModels();
+                foreach (ModelDto modelDto in modelDtos)
+                {
+                    modelController.Delete(modelDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.Login("ClientTest", "4Testing");
+                List<MaterialDto> materialDtos = materialController.GetMaterials();
+                foreach (MaterialDto materialDto in materialDtos)
+                {
+                    materialController.Delete(materialDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
+        }
+
+        [TestMethod]
+        public void GivenNewModelSavesIt()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = -1,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            Assert.AreEqual(modelController.GetModels()[0].Name, "ModelTest");
         }
         [TestMethod]
-        public void GivenNewModelAddsItToTheList()
+        [ExpectedException(typeof(Exception), "model already exists")]
+        public void GivenRepeatedModelThrowsException()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenNewWrongModelFailsAddingItToTheList()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
-            _modelController.AddAModelWithoutPreview("clientSample1", "", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "modelSample already exists")]
-        public void GivenRepeatedModelFailsAddingItToTheList()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
         }
         [TestMethod]
         public void GivenNewModelNameItChanges()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            _modelController.ChangeModelName("clientSample1", "modelSample1", "modelSample2");
-            Assert.IsTrue(_modelController.DataWarehouse.Models[0].Name == "modelSample2");
-
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            modelController.ChangeName(modelController.GetModels()[0], "modelTest2");
+            Assert.AreEqual(modelController.GetModels()[0].Name, "modelTest2");
         }
         [TestMethod]
-        public void givenNewModelNameItDoesNotChange()
+        [ExpectedException(typeof(Exception), "There is already a model with that name")]
+        public void GivenNewModelNameItDoesNotChange()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample2", _figure, _materialSample);
-            _modelController.ChangeModelName("clientSample1", "modelSample1", "modelSample2");
-            Assert.IsTrue(_modelController.DataWarehouse.Models[0].Name == "modelSample1");
-            Assert.IsTrue(_modelController.DataWarehouse.Models[1].Name == "modelSample2");
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            modelController.AddAModelWithPreview("ModelTest2", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            modelController.ChangeName(modelController.GetModels()[0], "modelTest2");
         }
         [TestMethod]
         public void GivenNameDeletesTheModel()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-            _modelController.DeleteModelInList("clientSample1", "modelSample1");
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 0);
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            modelController.Delete(modelController.GetModels()[0]);
         }
         [TestMethod]
-        public void GivenNameDoesNotDeleteTheModel()
+        public void GivenMaterialCheckIfIsInModel()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithoutPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-            _modelController.DeleteModelInList("clientSample1", "modelSample2");
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            Assert.IsTrue(modelController.CheckIfMaterialIsInAModel(materialController.GetMaterials()[0]));
+        }
+        [TestMethod]
+        public void GivenMaterialCheckIfIsNotInModel()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest2",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            List<MaterialDto> materialDtos = materialController.GetMaterials();
+            if (materialDtos[0].Name == "materialTest")
+            {
+                Assert.IsFalse(modelController.CheckIfMaterialIsInAModel(materialDtos[1]));
+            }
+            else
+            {
+                Assert.IsFalse(modelController.CheckIfMaterialIsInAModel(materialDtos[0]));
+            }
+        }
+        [TestMethod]
+        public void GivenFigureCheckIfIsInModel()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 0,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            Assert.IsTrue(modelController.CheckIfFigureIsInAModel(figureController.GetFigures()[0]));
+        }
+        [TestMethod]
+        public void GivenFigureCheckIfIsNotInModel()
+        {
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest",
+                Radius = 10,
+            });
+            figureController.AddFigure(new FigureDto()
+            {
+                Name = "figureTest2",
+                Radius = 10,
+            });
+            modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
+            List<FigureDto> figureDtos = figureController.GetFigures();
+            if (figureDtos[0].Name == "figureTest")
+            {
+                Assert.IsFalse(modelController.CheckIfFigureIsInAModel(figureDtos[1]));
+            }
+            else
+            {
+                Assert.IsFalse(modelController.CheckIfFigureIsInAModel(figureDtos[0]));
+            }
         }
 
-        [TestMethod]
-        public void GivenModelItAssignsItsPreview()
+        [TestCleanup]
+        public void CleanUp()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.DataWarehouse.Models.Count == 1);
-            Assert.IsTrue(_dataWarehouse.Models[0].Preview != null);
-        }
-
-        [TestMethod]
-        public void GivenModelWithFigureReturnsList()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.GetModelsWithFigure("figureSample1").Count > 0);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "no Models Found")]
-        public void GivenModelWithoutFigureThrowsException()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            _modelController.GetModelsWithFigure("figureSample2");
-        }
-        [TestMethod]
-        public void GivenModelWithMaterialReturnsList()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            Assert.IsTrue(_modelController.GetModelWithMaterial("materialSample1").Count > 0);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(BackEndException), "no Models Found")]
-        public void GivenModelWithoutModelThrowsException()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _modelController.AddAModelWithPreview("clientSample1", "modelSample1", _figure, _materialSample);
-            _modelController.GetModelsWithFigure("materialSample2");
+            try
+            {
+                modelController.ClientController.Login("ClientTest", "4Testing");
+                List<ModelDto> modelDtos = modelController.GetModels();
+                foreach (ModelDto modelDto in modelDtos)
+                {
+                    modelController.Delete(modelDto);
+                }
+            }
+            catch { }
+            try
+            {
+                figureController.ClientController.Login("ClientTest", "4Testing");
+                List<FigureDto> figureDtos = figureController.GetFigures();
+                foreach (FigureDto figureDto in figureDtos)
+                {
+                    figureController.Delete(figureDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.Login("ClientTest", "4Testing");
+                List<MaterialDto> materialDtos = materialController.GetMaterials();
+                foreach (MaterialDto materialDto in materialDtos)
+                {
+                    materialController.Delete(materialDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
-using System;
 
 namespace Render3D.BackEnd.Materials
 {
@@ -8,7 +7,10 @@ namespace Render3D.BackEnd.Materials
     public abstract class Material
     {
         protected string _name;
-
+        public Client Client { get; set; }
+        public Ray Ray { get; set; }
+        public Colour Attenuation { get; set; }
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
@@ -18,12 +20,10 @@ namespace Render3D.BackEnd.Materials
                 _name = value;
             }
         }
-        public Client Client { get; set; }
-        public Ray Ray { get; set; }
 
-        public Colour Attenuation { get; set; }
 
-        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord, Random random);
+        public abstract Ray ReflectsTheLight(HitRecord3D hitRecord);
+        public abstract Vector3D GetRandomInUnitFigure();
 
         protected void ValidateName(string value)
         {
@@ -32,10 +32,6 @@ namespace Render3D.BackEnd.Materials
 
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
 
     }
 }

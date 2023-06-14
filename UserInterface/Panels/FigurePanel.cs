@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
+using System;
 using System.Windows.Forms;
 
 namespace Render3D.UserInterface.Panels
@@ -7,37 +9,47 @@ namespace Render3D.UserInterface.Panels
     public partial class FigurePanel : Form
     {
         private CreationMenu creation;
-        private Render3DIU render;
+        private readonly FigureController figureController;
         public FigurePanel()
         {
             InitializeComponent();
+            figureController = FigureController.GetInstance();
+            lblExceptionError.Text = "";
         }
 
 
         private void BtnCreateFigure_Click(object sender, EventArgs e)
         {
-            string figureName = txtFigureName.Text;
+            lblExceptionError.Text = "";
             string figureRadiusString = txtFigureRadius.Text;
             double figureRadius;
-            if (TryToParse(figureRadiusString) != -1)
+            if (TryToParse(figureRadiusString) == -1)
             {
-                figureRadius = Convert.ToDouble(figureRadiusString);
-                try
-                {
-                    render.figureController.AddFigure(render.clientName, figureName, figureRadius);
-                }
-                catch (Exception ex)
-                {
-                    lblExceptionError.Text = ex.Message;
-                }
-                creation.ShowFigureList();
+                lblExceptionError.Text = "The radius must be a number";
+                return;
             }
-            else
+            figureRadius = Convert.ToDouble(figureRadiusString);
+            try
             {
-                lblExceptionError.Text = "the radius must be a number";
+                FigureDto figureDto = new FigureDto()
+                {
+                    Name = txtFigureName.Text,
+                    Radius = figureRadius,
+                };
+                figureController.AddFigure(figureDto);
             }
+            catch (Exception ex)
+            {
+                lblExceptionError.Text = ex.Message;
+                return;
+            }
+            creation.ShowFigureList();
             txtFigureName.Text = "";
             txtFigureRadius.Text = "";
+            lblCorrectlyAdded.Visible = true;
+            lblCorrectlyAdded.Update();
+
+
         }
 
         private double TryToParse(string figureRadiusString)
@@ -56,8 +68,18 @@ namespace Render3D.UserInterface.Panels
         private void VariablesInitialize(object sender, EventArgs e)
         {
             creation = (CreationMenu)this.Parent.Parent;
-            render = (Render3DIU)creation.Parent.Parent;
-            lblExceptionError.Text = "";
+        }
+
+        private void txtFigureName_TextChanged(object sender, EventArgs e)
+        {
+            lblCorrectlyAdded.Visible = false;
+            lblCorrectlyAdded.Update();
+        }
+
+        private void txtFigureRadius_TextChanged(object sender, EventArgs e)
+        {
+            lblCorrectlyAdded.Visible = false;
+            lblCorrectlyAdded.Update();
         }
     }
 }

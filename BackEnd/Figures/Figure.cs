@@ -11,6 +11,7 @@ namespace Render3D.BackEnd.Figures
         protected Vector3D _position;
 
         public Client Client { get; set; }
+        public string Id { get; set; }
         public string Name
         {
             get => _name;
@@ -21,13 +22,16 @@ namespace Render3D.BackEnd.Figures
             }
         }
 
+
         public override string ToString()
         {
             return Name;
         }
         public Vector3D Position { get => _position; set => _position = value; }
+
+
         public abstract bool WasHit(Ray ray, double minDistance, double maxDistance);
-        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color);
+        public abstract HitRecord3D FigureHitRecord(Ray ray, double minDistance, double maxDistance, Colour color, int roughness);
 
         protected void ValidateName(string value)
         {

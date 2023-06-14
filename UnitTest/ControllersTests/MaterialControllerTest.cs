@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
-using Render3D.BackEnd.Controllers;
-using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
-
+using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
+using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -11,86 +11,160 @@ namespace Render3D.UnitTest.ControllersTests
     [TestClass]
     public class MaterialControllerTest
     {
-        private DataWarehouse _dataWarehouse;
-        private MaterialController _materialController;
-        private ClientController _clientController;
-        private Client _clientSample;
-        private Material _materialSample;
-        private readonly Colour _color = new Colour(0, 0, 0);
-        private readonly int[] _colorArray = new int[] { 0, 0, 0 };
+        MaterialController materialController;
+        RepoFactory repo = new RepoFactory();
 
         [TestInitialize]
         public void Initialize()
         {
-            _dataWarehouse = new DataWarehouse();
-            _clientController = new ClientController() { DataWarehouse = _dataWarehouse };
-            _materialController = new MaterialController() { DataWarehouse = _dataWarehouse, ClientController = _clientController };
-            _clientSample = new Client() { Name = "clientSample1", Password = "PasswordSample1" };
-            _materialSample = new LambertianMaterial() { Client = _clientSample, Name = "materialSample1", Attenuation = _color };
+            materialController = MaterialController.GetInstance();
+            repo.Initialize();
+            try
+            {
+                materialController.ClientController.Login("ClientTest", "4Testing");
+                List<MaterialDto> materialDtos = materialController.GetMaterials();
+                foreach (MaterialDto materialDto in materialDtos)
+                {
+                    materialController.Delete(materialDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
         [TestMethod]
-        public void GivenNewMaterialAddsItToTheList()
+        public void GivenNewLambertianMaterialSavesIt()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = -1,
+            });
+            Assert.AreEqual(materialController.GetMaterials()[0].Name, "materialTest");
         }
+
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "Name must not be empty")]
-        public void GivenNewWrongMaterialFailsAddingItToTheList()
+        public void GivenNewMetallicMaterialSavesIt()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial("clientSample1", "", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            Assert.AreEqual(materialController.GetMaterials()[0].Name, "materialTest");
         }
+
+
         [TestMethod]
-        [ExpectedException(typeof(BackEndException), "materialSample already exists")]
-        public void GivenRepeatedMaterialFailsAddingItToTheList()
+        [ExpectedException(typeof(Exception), "Material already exists")]
+        public void GivenNewMaterialItIsAlreadySaved()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
         }
         [TestMethod]
         public void GivenNewMaterialNameItChanges()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            _materialController.ChangeMaterialName("clientSample1", "materialSample1", "materialSample2");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == "materialSample2");
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            materialController.ChangeName(materialController.GetMaterials()[0], "materialTest2");
+            Assert.AreEqual(materialController.GetMaterials()[0].Name, "materialTest2");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "There is already a material with that name")]
+        public void GivenRepeatedMaterialFailsAddingItToTheList()
+        {
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest2",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            materialController.ChangeName(materialController.GetMaterials()[0], "materialTest2");
+        }
+        [TestMethod]
+        public void GivenMaterialDeletesIt()
+        {
+            materialController.ClientController.SignIn("ClientTest", "4Testing");
+            materialController.AddMaterial(new MaterialDto()
+            {
+                Name = "materialTest",
+                Red = 255,
+                Blue = 255,
+                Green = 255,
+                Blur = 1,
+            });
+            List<MaterialDto> listDto = materialController.GetMaterials();
+            Assert.AreEqual(listDto.Count, 1);
+            materialController.Delete(listDto[0]);
+            List<MaterialDto> listDto2 = materialController.GetMaterials();
+            Assert.AreEqual(listDto2.Count, 0);
 
         }
-        [TestMethod]
-        public void GivenNewMaterialNameItDoesNotChange()
+        [TestCleanup]
+        public void CleanUp()
         {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample2", _colorArray);
-            _materialController.ChangeMaterialName("clientSample1", "materialSample1", "materialSample2");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[0].Name == "materialSample1");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials[1].Name == "materialSample2");
-        }
-        [TestMethod]
-        public void GivenNameDeletesTheMaterial()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList("clientSample1", "materialSample1");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 0);
-        }
-        [TestMethod]
-        public void GivenNameDoesNotDeleteTheMaterial()
-        {
-            _clientController.SignIn("clientSample1", "PasswordExample1");
-            _materialController.AddLambertianMaterial("clientSample1", "materialSample1", _colorArray);
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
-            _materialController.DeleteMaterialInList("clientSample1", "materialSample2");
-            Assert.IsTrue(_materialController.DataWarehouse.Materials.Count == 1);
+            try
+            {
+                materialController.ClientController.Login("ClientTest", "4Testing");
+                List<MaterialDto> materialDtos = materialController.GetMaterials();
+                foreach (MaterialDto materialDto in materialDtos)
+                {
+                    materialController.Delete(materialDto);
+                }
+            }
+            catch { }
+            try
+            {
+                materialController.ClientController.RemoveClient("ClientTest");
+            }
+            catch { }
         }
 
     }
