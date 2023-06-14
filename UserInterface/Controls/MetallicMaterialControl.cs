@@ -40,7 +40,7 @@ namespace Render3D.UserInterface.Controls
                 }
                 else
                 {
-                    lblErrorDeleteMaterial.Text = "invalid name or already taken";
+                    lblErrorDeleteMaterial.Text = "Invalid name or already taken";
                 }
             }
         }

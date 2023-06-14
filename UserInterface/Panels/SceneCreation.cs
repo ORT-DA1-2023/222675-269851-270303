@@ -314,14 +314,7 @@ namespace UserInterface.Panels
             label28.Update();
         }
 
-        private void pBoxRender_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+      
     }
 }

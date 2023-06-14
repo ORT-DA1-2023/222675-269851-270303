@@ -557,7 +557,6 @@
             this.pBoxRender.Size = new System.Drawing.Size(300, 200);
             this.pBoxRender.TabIndex = 8;
             this.pBoxRender.TabStop = false;
-            this.pBoxRender.Click += new System.EventHandler(this.pBoxRender_Click);
             // 
             // comboBox1
             // 
@@ -783,7 +782,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 534);
             this.panel3.TabIndex = 1;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // textBox1
             // 
