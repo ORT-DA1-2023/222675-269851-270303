@@ -79,7 +79,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var entity = dbContext.ClientEntities.Find(id);
-                entity.Aperture = camera.LensRadius;
+                entity.Aperture = camera.LensRadius*2;
                 entity.LookFromX = camera.LookFrom.X;
                 entity.LookFromY = camera.LookFrom.Y;
                 entity.LookFromZ = camera.LookFrom.Z;
@@ -99,11 +99,23 @@ namespace renderRepository.RepoImplementation
             }
             try
             {
-                return new Camera(
-                     new Vector3D(clientEntity.LookFromX, clientEntity.LookFromY, clientEntity.LookFromZ),
-                     new Vector3D(clientEntity.LookAtX, clientEntity.LookAtY, clientEntity.LookAtZ),
-                     clientEntity.Fov,
-                     clientEntity.Aperture);
+                if (clientEntity.Aperture > 0)
+                {
+                    return new Camera(
+                    new Vector3D(clientEntity.LookFromX, clientEntity.LookFromY, clientEntity.LookFromZ),
+                    new Vector3D(clientEntity.LookAtX, clientEntity.LookAtY, clientEntity.LookAtZ),
+                    clientEntity.Fov,
+                    clientEntity.Aperture);
+                }
+                else
+                {
+
+                    return new Camera(
+                    new Vector3D(clientEntity.LookFromX, clientEntity.LookFromY, clientEntity.LookFromZ),
+                    new Vector3D(clientEntity.LookAtX, clientEntity.LookAtY, clientEntity.LookAtZ),
+                    clientEntity.Fov);
+                }
+               
             }
             catch
             {

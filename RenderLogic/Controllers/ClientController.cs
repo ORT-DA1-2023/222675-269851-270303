@@ -94,13 +94,16 @@ namespace Render3D.RenderLogic.Controllers
             Vector3D lookAt = GetVectorFromString(stringLookAt);
             Vector3D lookFrom = GetVectorFromString(stringLookFrom);
             double apertureDouble = double.Parse(aperture);
-            Camera sceneNewCamera = new Camera()
+            Camera sceneNewCamera;
+            if (apertureDouble > 0)
             {
-                LookAt = lookAt,
-                LookFrom = lookFrom,
-                Fov = fov,
-                LensRadius = apertureDouble / 2
-            };
+                sceneNewCamera = new Camera(lookFrom,lookAt,fov,apertureDouble);
+            }
+            else
+            {
+                sceneNewCamera = new Camera(lookFrom,lookAt,fov);
+            }
+
             ClientService.AddCamera(int.Parse(Client.Id), sceneNewCamera);
         }
         public SceneDto GetCamera()

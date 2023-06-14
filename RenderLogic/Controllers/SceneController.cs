@@ -1,21 +1,15 @@
-﻿using Microsoft.SqlServer.Server;
-using Render3D.BackEnd;
+﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.FileFormat;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.IODrivers;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Resources;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Xml.Linq;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -54,12 +48,24 @@ namespace Render3D.RenderLogic.Controllers
                 };
                 if (!CameraAreEqual(sceneDto, sceneNewCamera))
                 {
-                    Camera camera = new Camera(
-                        new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
-                   
-                        new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
-                        fov,
-                        sceneNewCamera.Aperture);
+                Camera camera;
+                if (apertureDouble > 0)
+                {
+                    camera = new Camera(
+                      new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
+
+                      new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
+                      fov,
+                      sceneNewCamera.Aperture);
+                }
+                else
+                {
+                    camera = new Camera(
+                      new Vector3D(lookFrom[0], lookFrom[1], lookFrom[2]),
+
+                      new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
+                      fov);
+                }  
                     Scene scene = new Scene()
                     {
                         Id = sceneDto.Id,
@@ -227,7 +233,7 @@ namespace Render3D.RenderLogic.Controllers
                     LastModificationDate = scene.LastModificationDate,
                     LastRenderizationDate = lastRenderizationDate,
                     Models = ModelsIntoDtos(scene.PositionedModels),
-                    Aperture = scene.Camera.LensRadius,
+                    Aperture = scene.Camera.LensRadius*2,
                     LookAt = lookAt,
                     LookFrom = lookFrom,
                     Fov = scene.Camera.Fov
@@ -334,7 +340,7 @@ namespace Render3D.RenderLogic.Controllers
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderizationDate = lastRenderizationDate,
                 Models = ModelsIntoDtos(scene.PositionedModels),
-                Aperture = scene.Camera.LensRadius * 2,
+                Aperture = scene.Camera.LensRadius,
                 LookAt = lookAt,
                 LookFrom = lookFrom,
                 Fov = scene.Camera.Fov

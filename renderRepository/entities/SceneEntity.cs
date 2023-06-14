@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Remoting.Lifetime;
 
 namespace renderRepository.entities
 {
@@ -66,7 +67,7 @@ namespace renderRepository.entities
                 LookAtZ = scene.Camera.LookAt.Z,
                 Fov = scene.Camera.Fov,
                 Preview = bytes,
-                Aperture =scene.Camera.LensRadius
+                Aperture =scene.Camera.LensRadius *2
             };
             return sceneEntity;
         }
@@ -74,10 +75,24 @@ namespace renderRepository.entities
         {
             Vector3D lookFrom = new Vector3D(LookFromX,LookFromY,LookFromZ);
             Vector3D lookAt = new Vector3D(LookAtX, LookAtY, LookAtZ);
-            Camera camera = new Camera(lookFrom, lookAt, Fov)
+            double lenseRadius;
+            Camera camera;
+            try
             {
-                LensRadius = Aperture
-            };
+                lenseRadius = Aperture;   
+            }
+            catch
+            {
+                lenseRadius =-1;
+            }
+            if (lenseRadius < 0)
+            {
+                camera = new Camera(lookFrom, lookAt, Fov);
+            }
+            else
+            {
+                camera = new Camera(lookFrom,lookAt,Fov,lenseRadius);
+            }
             Bitmap bitmap;
             try
             {
