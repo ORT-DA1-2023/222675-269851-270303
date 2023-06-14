@@ -2,7 +2,6 @@
 using Render3D.RenderLogic.RepoInterface;
 using Render3D.RenderLogic.Services;
 using renderRepository.RepoImplementation;
-using System.Linq.Expressions;
 
 namespace RepositoryFactory
 {
@@ -17,7 +16,7 @@ namespace RepositoryFactory
 
         public void Initialize()
         {
-            ClientController.GetInstance().ClientService= new ClientService(clientRepo);
+            ClientController.GetInstance().ClientService = new ClientService(clientRepo);
             FigureController.GetInstance().FigureService = new FigureService(figureRepo);
             MaterialController.GetInstance().MaterialService = new MaterialService(materialRepo);
             ModelController.GetInstance().ModelService = new ModelService(modelRepo);

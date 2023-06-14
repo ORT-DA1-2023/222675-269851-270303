@@ -36,7 +36,7 @@ namespace Render3D.BackEnd
             LastModificationDate = DateTimeProvider.Now;
             PositionedModels = new List<Model>();
         }
-       
+
 
         public DateTime CreationDate { get; set; }
         public DateTime LastModificationDate { get; set; }
@@ -82,11 +82,11 @@ namespace Render3D.BackEnd
             if (MaxiumDepth > _maxiumDepth0)
             {
                 Ray newRay = modelSample.Material.ReflectsTheLight(hitRecord);
-                if(newRay == null)
+                if (newRay == null)
                 {
                     return new Colour(0, 0, 0);
                 }
-                
+
                 Colour color = ShootRay(newRay, MaxiumDepth - 1);
                 return new Colour(
                    hitRecord.Attenuation.PercentageRed * color.PercentageRed,

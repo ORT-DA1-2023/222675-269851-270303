@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd.Materials;
-using Render3D.BackEnd.Utilities;
+﻿using Render3D.BackEnd.Utilities;
 using System;
 
 namespace Render3D.BackEnd.GraphicMotorUtility
@@ -13,7 +12,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         private const int _maxFov = 160;
         private const double _degreesToRadians = Math.PI / 180;
         private const int _defaultFov = 30;
-        private const int _minimumSquaredLength =  1;
+        private const int _minimumSquaredLength = 1;
         private const double AspectRatio = 3 / 2;
         private readonly Vector3D _lookAtSampleVector = new Vector3D(0, 2, 5);
         private readonly Vector3D _vectorUpSampleVector = new Vector3D(0, 1, 0);
@@ -81,7 +80,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
         public Camera(Vector3D vectorLookFrom, Vector3D vectorLookAt, int fieldOfView, double aperture)
         {
             double focalDistance = vectorLookFrom.Substract(vectorLookAt).Length();
-           
+
             LensRadius = aperture / 2;
             LookAt = vectorLookAt;
             Fov = fieldOfView;
@@ -139,7 +138,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return new Ray(LookFrom.Add(vectorOffset), Corner_lowerLeft.Add(horizontalPosition.Add(verticalPosition)).Substract(LookFrom).Substract(vectorOffset));
 
         }
-        
+
 
         public Vector3D GetRandomInUnitForBlur()
         {

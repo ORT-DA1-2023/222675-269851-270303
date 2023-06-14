@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Utilities;
-using System;
 
 namespace Render3D.BackEnd.Materials
 {
@@ -21,7 +20,7 @@ namespace Render3D.BackEnd.Materials
                 _name = value;
             }
         }
-      
+
 
         public abstract Ray ReflectsTheLight(HitRecord3D hitRecord);
         public abstract Vector3D GetRandomInUnitFigure();
@@ -32,7 +31,7 @@ namespace Render3D.BackEnd.Materials
             if (HelperValidator.IsTrimmable(value)) throw new BackEndException("Color must be between 0 and 255");
 
         }
- 
+
 
     }
 }

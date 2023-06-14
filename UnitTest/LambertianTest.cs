@@ -2,7 +2,6 @@
 using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using System;
 
 namespace Render3D.UnitTest
 {
@@ -16,7 +15,7 @@ namespace Render3D.UnitTest
         private const string _emptyString = "";
         private readonly Vector3D _validVectorIntersection = new Vector3D(1, 1, 1);
         private readonly Vector3D _validVectorNormal = new Vector3D(0, 0, 2);
-        private readonly Colour _colourSample =  new Colour(0,0,0);
+        private readonly Colour _colourSample = new Colour(0, 0, 0);
         private const double _validModule = 2.3;
         private HitRecord3D _hitSample;
 

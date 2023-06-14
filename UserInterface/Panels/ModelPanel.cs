@@ -32,12 +32,12 @@ namespace Render3D.UserInterface.Panels
             List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (FigureDto figure in figureList)
             {
-                    lstFigure.Items.Add(figure);
+                lstFigure.Items.Add(figure);
             }
             lstFigure.DisplayMember = "Name";
             foreach (MaterialDto material in materialList)
             {
-                    lstMaterial.Items.Add(material);
+                lstMaterial.Items.Add(material);
             }
             lstMaterial.DisplayMember = "Name";
             lblExceptionError.Text = "";
@@ -73,7 +73,7 @@ namespace Render3D.UserInterface.Panels
             {
                 try
                 {
-                
+
                     modelController.AddAModelWithoutPreview(modelName, figure, material);
                     label6.Visible = true;
                     label6.Update();
@@ -89,7 +89,7 @@ namespace Render3D.UserInterface.Panels
             }
 
             creation.ShowModelList();
-            
+
         }
     }
 }

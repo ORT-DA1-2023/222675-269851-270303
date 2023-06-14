@@ -33,7 +33,7 @@ namespace renderRepository.entities
             }
             return new ClientEntity
             {
-                Id=id,
+                Id = id,
                 Name = client.Name,
                 Password = client.Password,
                 RegisterDate = client.RegisterDate
@@ -44,12 +44,12 @@ namespace renderRepository.entities
         {
             return new Client
             {
-                Id = ""+Id,
+                Id = "" + Id,
                 Name = Name,
                 Password = Password,
                 RegisterDate = RegisterDate,
             };
         }
     }
-  
+
 }

@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd;
-using System;
+﻿using System;
 
 namespace Render3D.RenderLogic.DataTransferObjects
 {

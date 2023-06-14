@@ -1,7 +1,5 @@
 ﻿using Render3D.BackEnd.Figures;
-using Render3D.BackEnd;
 using Render3D.RenderLogic.RepoInterface;
-using System;
 using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Services
@@ -34,7 +32,7 @@ namespace Render3D.RenderLogic.Services
 
         public List<Figure> GetFigureOfClient(int clientId)
         {
-           return _figureRepo.GetFiguresOfClient(clientId);
+            return _figureRepo.GetFiguresOfClient(clientId);
         }
 
         public void UpdateName(int id, string newName)

@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd.IODrivers;
+using Render3D.BackEnd.IODrivers.Output;
+using Render3D.BackEnd.Output.FileFormat;
 using System;
 using System.Drawing;
 using System.IO;
-using Render3D.BackEnd.IODrivers;
-using Render3D.BackEnd.Output.FileFormat;
-using Render3D.BackEnd.IODrivers.Output;
 
 namespace Render3D.UnitTest
 {
@@ -29,7 +29,7 @@ namespace Render3D.UnitTest
             OutputDriver o = new OutputDriver(savingFormat);
             o.Save(bitmapSample, destinationPath);
         }
-        
+
         [TestMethod]
         public void GivenBitmapSavesItAsJPG()
         {
@@ -45,7 +45,7 @@ namespace Render3D.UnitTest
                 File.Delete(destinationPath);
         }
 
-        
+
         [TestMethod]
         [ExpectedException(typeof(System.Runtime.InteropServices.ExternalException))]
         public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCaseJPG()
@@ -56,7 +56,7 @@ namespace Render3D.UnitTest
 
             outputSaver.Save(bitmapSample, destinationPath);
         }
-        
+
         [TestMethod]
         public void GivenBitmapSavesItAsPNG()
         {
@@ -71,7 +71,7 @@ namespace Render3D.UnitTest
 
             if (File.Exists(destinationPath)) File.Delete(destinationPath);
         }
-        
+
         [TestMethod]
         [ExpectedException(typeof(System.Runtime.InteropServices.ExternalException))]
         public void GivenBitmapAndInvalidPathThrowsBackEndExceptionCasePNG()

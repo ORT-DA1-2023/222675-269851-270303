@@ -85,7 +85,7 @@ namespace renderRepository.RepoImplementation
                 List<Scene> clientScene = new List<Scene>();
                 foreach (var s in sceneEntities)
                 {
-                    var scene= s.ToDomain();
+                    var scene = s.ToDomain();
                     var models = s.ModelEntities;
                     foreach (var modelEntity in models)
                     {
@@ -182,7 +182,7 @@ namespace renderRepository.RepoImplementation
                 dbContext.ModelEntities.Remove(modelToDelete);
                 dbContext.MaterialEntities.Remove(materialToDelete);
                 dbContext.FigureEntities.Remove(figureToDelete);
-                entity.LastModificationDate= sceneEntity.LastModificationDate;
+                entity.LastModificationDate = sceneEntity.LastModificationDate;
                 dbContext.SaveChanges();
             }
         }

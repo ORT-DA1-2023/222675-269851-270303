@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Materials;
+﻿using Render3D.BackEnd.Materials;
 using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.RepoInterface

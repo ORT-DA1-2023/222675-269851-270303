@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.IO;
-using System.Runtime.Remoting.Lifetime;
 
 namespace renderRepository.entities
 {
@@ -19,7 +18,7 @@ namespace renderRepository.entities
         public DateTime LastModificationDate { get; set; }
         public DateTime? LastRenderizationDate { get; set; }
         public virtual ICollection<ModelEntity> ModelEntities { get; set; }
-        public byte[] Preview {get; set; }
+        public byte[] Preview { get; set; }
         public double Aperture { get; set; }
         public double LookFromX { get; set; }
         public double LookFromY { get; set; }
@@ -69,23 +68,23 @@ namespace renderRepository.entities
                 LookAtZ = scene.Camera.LookAt.Z,
                 Fov = scene.Camera.Fov,
                 Preview = bytes,
-                Aperture =scene.Camera.LensRadius *2
+                Aperture = scene.Camera.LensRadius * 2
             };
             return sceneEntity;
         }
         public Scene ToDomain()
         {
-            Vector3D lookFrom = new Vector3D(LookFromX,LookFromY,LookFromZ);
+            Vector3D lookFrom = new Vector3D(LookFromX, LookFromY, LookFromZ);
             Vector3D lookAt = new Vector3D(LookAtX, LookAtY, LookAtZ);
             double lenseRadius;
             Camera camera;
             try
             {
-                lenseRadius = Aperture;   
+                lenseRadius = Aperture;
             }
             catch
             {
-                lenseRadius =0;
+                lenseRadius = 0;
             }
             if (lenseRadius < 0)
             {
@@ -93,7 +92,7 @@ namespace renderRepository.entities
             }
             else
             {
-                camera = new Camera(lookFrom,lookAt,Fov,lenseRadius);
+                camera = new Camera(lookFrom, lookAt, Fov, lenseRadius);
             }
             Bitmap bitmap;
             try
@@ -116,7 +115,7 @@ namespace renderRepository.entities
                 LastModificationDate = LastModificationDate,
                 LastRenderizationDate = LastRenderizationDate,
                 Preview = bitmap,
-                
+
             };
         }
     }

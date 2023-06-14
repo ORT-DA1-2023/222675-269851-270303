@@ -1,7 +1,5 @@
 ﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.RepoInterface;
-using System;
 using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Services
@@ -59,12 +57,12 @@ namespace Render3D.RenderLogic.Services
 
         public void RemoveModel(Scene s, Model model)
         {
-            _sceneRepo.RemoveModel(s,model);
+            _sceneRepo.RemoveModel(s, model);
         }
 
         public List<Scene> GetScenesWithModel(Model model)
         {
-           return _sceneRepo.GetScenesWithModel(model);
+            return _sceneRepo.GetScenesWithModel(model);
         }
     }
 }

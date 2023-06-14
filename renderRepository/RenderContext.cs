@@ -5,7 +5,7 @@ namespace renderRepository
 {
     public class RenderContext : DbContext
     {
-        public RenderContext() :base ("name=RenderDBConnectionString")
+        public RenderContext() : base("name=RenderDBConnectionString")
         {
 
         }

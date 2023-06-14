@@ -1,16 +1,12 @@
 ﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
 using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace renderRepository.RepoImplementation
 {
-    public class ModelRepo :IModelRepo
+    public class ModelRepo : IModelRepo
     {
         public ModelRepo() { }
 
@@ -27,7 +23,7 @@ namespace renderRepository.RepoImplementation
                 entity.FigureEntity = figure;
                 int materialId = int.Parse(model.Material.Id);
                 var material = dbContext.MaterialEntities.Find(materialId);
-                entity.MaterialEntity = material;   
+                entity.MaterialEntity = material;
                 dbContext.ModelEntities.Add(entity);
                 dbContext.SaveChanges();
                 model.Id = entity.Id.ToString();
@@ -96,8 +92,8 @@ namespace renderRepository.RepoImplementation
                 List<Model> clientModels = new List<Model>();
                 foreach (var m in modelEntities)
                 {
-                    var figure =m.FigureEntity.ToDomain();
-                    var material =m.MaterialEntity.ToDomain();
+                    var figure = m.FigureEntity.ToDomain();
+                    var material = m.MaterialEntity.ToDomain();
                     var model = m.ToDomain();
                     model.Material = material;
                     model.Figure = figure;
@@ -109,7 +105,7 @@ namespace renderRepository.RepoImplementation
 
         public void UpdatePreview(Model model)
         {
-           ModelEntity modelEntity= ModelEntity.FromDomain(model);
+            ModelEntity modelEntity = ModelEntity.FromDomain(model);
             int id = int.Parse(model.Id);
             using (var dbContext = new RenderContext())
             {

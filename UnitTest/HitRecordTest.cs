@@ -11,7 +11,7 @@ namespace Render3D.UnitTest
         private double moduleSample;
         private Vector3D intersectionSample;
         private Vector3D normalSample;
-        private Colour attenuationSample; 
+        private Colour attenuationSample;
         private Ray raySample;
         private int roughness;
 

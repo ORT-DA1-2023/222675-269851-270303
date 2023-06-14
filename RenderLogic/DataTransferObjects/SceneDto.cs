@@ -15,6 +15,6 @@ namespace Render3D.RenderLogic.DataTransferObjects
         public DateTime LastRenderizationDate { get; set; }
         public DateTime LastModificationDate { get; set; }
         public Bitmap Preview { get; set; }
-        public List<ModelDto> Models { get; set; } 
+        public List<ModelDto> Models { get; set; }
     }
 }

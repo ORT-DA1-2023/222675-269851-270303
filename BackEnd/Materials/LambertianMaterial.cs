@@ -1,5 +1,4 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
-using System;
 
 namespace Render3D.BackEnd.Materials
 {

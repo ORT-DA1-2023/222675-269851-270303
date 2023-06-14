@@ -1,12 +1,9 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Materials;
+﻿using Render3D.BackEnd.Materials;
 using Render3D.RenderLogic.RepoInterface;
 using renderRepository.entities;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace renderRepository.RepoImplementation
 {
@@ -73,7 +70,7 @@ namespace renderRepository.RepoImplementation
             using (var dbContext = new RenderContext())
             {
                 var materialEntities = dbContext.MaterialEntities
-                     .Where(m=> m.ClientEntity.Id == clientId)
+                     .Where(m => m.ClientEntity.Id == clientId)
                     .ToList();
                 List<Material> clientMaterials = new List<Material>();
                 foreach (var m in materialEntities)

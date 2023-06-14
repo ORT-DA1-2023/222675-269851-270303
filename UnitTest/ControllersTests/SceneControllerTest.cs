@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.RenderLogic.Controllers;
 using Render3D.RenderLogic.DataTransferObjects;
-using System.Collections.Generic;
-using System;
 using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -17,7 +17,7 @@ namespace Render3D.UnitTest.ControllersTests
         SceneController sceneController;
         LogController logController;
         RepoFactory repo = new RepoFactory();
-        
+
 
         [TestInitialize]
         public void Initialize()
@@ -25,7 +25,7 @@ namespace Render3D.UnitTest.ControllersTests
             logController = LogController.GetInstance();
             modelController = ModelController.GetInstance();
             materialController = MaterialController.GetInstance();
-            figureController = FigureController.GetInstance();           
+            figureController = FigureController.GetInstance();
             sceneController = SceneController.GetInstance();
             repo.Initialize();
             try
@@ -42,7 +42,7 @@ namespace Render3D.UnitTest.ControllersTests
             {
                 sceneController.ClientController.Login("ClientTest", "4Testing");
                 List<SceneDto> sceneDtos = sceneController.GetScenes();
-                foreach(SceneDto sceneDto in sceneDtos)
+                foreach (SceneDto sceneDto in sceneDtos)
                 {
                     sceneController.Delete(sceneDto);
                 }
@@ -134,9 +134,9 @@ namespace Render3D.UnitTest.ControllersTests
             SceneDto sceneDto = sceneController.GetScene("SceneTest");
             string allOnes = "(1;1;1)";
             DateTime beforeChange = sceneDto.LastModificationDate;
-            sceneController.EditCamera(sceneDto, allOnes, allOnes, 40,"0");
+            sceneController.EditCamera(sceneDto, allOnes, allOnes, 40, "0");
             SceneDto sceneDtoV1 = sceneController.GetScene("SceneTest");
-            Assert.IsTrue(beforeChange <=sceneDtoV1.LastModificationDate);
+            Assert.IsTrue(beforeChange <= sceneDtoV1.LastModificationDate);
             Assert.AreEqual(sceneDtoV1.LookAt[0], 1);
             Assert.AreEqual(sceneDtoV1.Fov, 40);
             double aperture = 0;
@@ -287,7 +287,7 @@ namespace Render3D.UnitTest.ControllersTests
                 Radius = 10,
             });
             modelController.AddAModelWithPreview("ModelTest", figureController.GetFigures()[0], materialController.GetMaterials()[0]);
-            Assert.AreEqual(sceneController.GetAvailableModels()[0].Name,"ModelTest");
+            Assert.AreEqual(sceneController.GetAvailableModels()[0].Name, "ModelTest");
         }
         [TestMethod]
         public void GivenModelReturnsTrueIfIsInAScene()
@@ -339,7 +339,7 @@ namespace Render3D.UnitTest.ControllersTests
             modelController.ClientController.SignIn("ClientTest", "4Testing");
             sceneController.AddScene("SceneTest");
             sceneController.RenderScene(sceneController.GetScenes()[0], false);
-            Assert.IsTrue(sceneController.GetScenes()[0].Preview!=null);
+            Assert.IsTrue(sceneController.GetScenes()[0].Preview != null);
         }
 
 
@@ -350,7 +350,7 @@ namespace Render3D.UnitTest.ControllersTests
             {
                 modelController.ClientController.Login("ClientTest", "4Testing");
                 List<SceneDto> sceneDtos = sceneController.GetScenes();
-                foreach(SceneDto sceneDto in sceneDtos)
+                foreach (SceneDto sceneDto in sceneDtos)
                 {
                     sceneController.Delete(sceneDto);
                 }

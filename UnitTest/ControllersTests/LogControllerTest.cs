@@ -5,10 +5,6 @@ using Render3D.RenderLogic.DataTransferObjects;
 using RepositoryFactory;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -78,7 +74,7 @@ namespace Render3D.UnitTest.ControllersTests
             logController.AddLogFromScene(scene1, start.AddSeconds(-2));
             logController.AddLogFromScene(scene2, start.AddSeconds(-2));
             logController.GetLogs();
-           Assert.AreEqual(logController.GetAverageRenderTimeInSeconds(),2);
+            Assert.AreEqual(logController.GetAverageRenderTimeInSeconds(), 2);
         }
         [TestMethod]
         public void GivenLogsAverageRenderTimeInMinutes()

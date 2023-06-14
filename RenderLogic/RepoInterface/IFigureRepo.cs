@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
+﻿using Render3D.BackEnd.Figures;
 using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.RepoInterface
@@ -12,6 +11,6 @@ namespace Render3D.RenderLogic.RepoInterface
         Figure Get(int Id);
         Figure GetByNameAndClient(string name, int clientId);
         List<Figure> GetFiguresOfClient(int clientId);
-       
+
     }
 }

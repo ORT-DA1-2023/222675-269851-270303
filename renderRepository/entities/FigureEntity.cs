@@ -2,7 +2,6 @@
 using Render3D.BackEnd.GraphicMotorUtility;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace renderRepository.entities
 {
@@ -33,8 +32,8 @@ namespace renderRepository.entities
                 Id = id,
                 Name = figure.Name,
                 Radius = ((Sphere)figure).Radius,
-                X= figure.Position.X,
-                Y= figure.Position.Y,
+                X = figure.Position.X,
+                Y = figure.Position.Y,
                 Z = figure.Position.Z
             };
             return figureEntity;
@@ -44,10 +43,10 @@ namespace renderRepository.entities
             Vector3D position = new Vector3D(X, Y, Z);
             return new Sphere
             {
-                Id = ""+Id,
+                Id = "" + Id,
                 Name = Name,
                 Radius = Radius,
-                Position= position
+                Position = position
             };
         }
     }

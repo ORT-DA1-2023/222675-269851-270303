@@ -1,16 +1,16 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Output.FileFormat;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.IODrivers;
+using Render3D.BackEnd.IODrivers.Output;
 using Render3D.BackEnd.Materials;
+using Render3D.BackEnd.Output.FileFormat;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using Render3D.BackEnd.IODrivers.Output;
 
 namespace Render3D.RenderLogic.Controllers
 {
@@ -37,18 +37,18 @@ namespace Render3D.RenderLogic.Controllers
 
         public void EditCamera(SceneDto sceneDto, string stringLookAt, string stringLookFrom, int fov, string aperture)
         {
-                double[] lookAt = GetArrayFromString(stringLookAt);
-                double[] lookFrom = GetArrayFromString(stringLookFrom);
-                double apertureDouble = double.Parse(aperture);
-                SceneDto sceneNewCamera = new SceneDto()
-                {
-                    LookAt = lookAt,
-                    LookFrom = lookFrom,
-                    Fov = fov,
-                    Aperture = apertureDouble
-                };
-                if (!CameraAreEqual(sceneDto, sceneNewCamera))
-                {
+            double[] lookAt = GetArrayFromString(stringLookAt);
+            double[] lookFrom = GetArrayFromString(stringLookFrom);
+            double apertureDouble = double.Parse(aperture);
+            SceneDto sceneNewCamera = new SceneDto()
+            {
+                LookAt = lookAt,
+                LookFrom = lookFrom,
+                Fov = fov,
+                Aperture = apertureDouble
+            };
+            if (!CameraAreEqual(sceneDto, sceneNewCamera))
+            {
                 Camera camera;
                 if (apertureDouble > 0)
                 {
@@ -66,25 +66,25 @@ namespace Render3D.RenderLogic.Controllers
 
                       new Vector3D(lookAt[0], lookAt[1], lookAt[2]),
                       fov);
-                }  
-                    Scene scene = new Scene()
-                    {
-                        Id = sceneDto.Id,
-                        Name = sceneDto.Name,
-                        LastModificationDate = sceneDto.LastModificationDate,
-                        LastRenderizationDate = sceneDto.LastRenderizationDate,
-                        Camera = camera,
-                    };
-                    scene.UpdateLastModificationDate();
-                    SceneService.UpdateCamera(scene);
                 }
+                Scene scene = new Scene()
+                {
+                    Id = sceneDto.Id,
+                    Name = sceneDto.Name,
+                    LastModificationDate = sceneDto.LastModificationDate,
+                    LastRenderizationDate = sceneDto.LastRenderizationDate,
+                    Camera = camera,
+                };
+                scene.UpdateLastModificationDate();
+                SceneService.UpdateCamera(scene);
+            }
 
         }
 
         private bool CameraAreEqual(SceneDto scene, SceneDto sceneNewCamera)
         {
             if (scene.LookAt[0] != sceneNewCamera.LookAt[0]
-                || scene.LookAt[1]!= sceneNewCamera.LookAt[1]
+                || scene.LookAt[1] != sceneNewCamera.LookAt[1]
                 || scene.LookAt[2] != sceneNewCamera.LookAt[2])
             {
                 return false;
@@ -160,7 +160,7 @@ namespace Render3D.RenderLogic.Controllers
             throw new Exception("Name already in use");
 
         }
- 
+
         public void AddModel(SceneDto sceneDto, ModelDto modelDto, string position)
         {
             Scene scene = SceneService.GetScene(int.Parse(sceneDto.Id));
@@ -174,10 +174,10 @@ namespace Render3D.RenderLogic.Controllers
             model.Material.Id = null;
             scene.UpdateLastModificationDate();
             SceneService.AddModel(scene, model);
-            
+
         }
 
-        public void RemoveModel(SceneDto sceneDto,ModelDto modelDto)
+        public void RemoveModel(SceneDto sceneDto, ModelDto modelDto)
         {
             Scene s = new Scene
             {
@@ -185,9 +185,10 @@ namespace Render3D.RenderLogic.Controllers
             };
             s.UpdateLastModificationDate();
             Model m = new Model
-            { Id = modelDto.Id,
+            {
+                Id = modelDto.Id,
                 Figure = new Sphere { Id = modelDto.Figure.Id, },
-                Material = new LambertianMaterial { Id = modelDto.Material.Id,}
+                Material = new LambertianMaterial { Id = modelDto.Material.Id, }
             };
             SceneService.RemoveModel(s, m);
         }
@@ -234,7 +235,7 @@ namespace Render3D.RenderLogic.Controllers
                     LastModificationDate = scene.LastModificationDate,
                     LastRenderizationDate = lastRenderizationDate,
                     Models = ModelsIntoDtos(scene.PositionedModels),
-                    Aperture = scene.Camera.LensRadius*2,
+                    Aperture = scene.Camera.LensRadius * 2,
                     LookAt = lookAt,
                     LookFrom = lookFrom,
                     Fov = scene.Camera.Fov
@@ -341,7 +342,7 @@ namespace Render3D.RenderLogic.Controllers
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderizationDate = lastRenderizationDate,
                 Models = ModelsIntoDtos(scene.PositionedModels),
-                Aperture = scene.Camera.LensRadius*2,
+                Aperture = scene.Camera.LensRadius * 2,
                 LookAt = lookAt,
                 LookFrom = lookFrom,
                 Fov = scene.Camera.Fov
@@ -377,7 +378,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public bool IsValidDirectory(string path)
         {
-           return  Directory.Exists(path);
+            return Directory.Exists(path);
         }
 
         public bool FileExists(string path)

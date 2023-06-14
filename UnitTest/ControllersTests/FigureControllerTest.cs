@@ -1,15 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
-using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Utilities;
-using Render3D.RenderLogic.Services;
-using Render3D.RenderLogic.RepoInterface;
-using renderRepository.RepoImplementation;
 using Render3D.RenderLogic.DataTransferObjects;
+using RepositoryFactory;
 using System;
 using System.Collections.Generic;
-using RepositoryFactory;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -28,7 +23,7 @@ namespace Render3D.UnitTest.ControllersTests
             {
                 figureController.ClientController.Login("ClientTest", "4Testing");
                 List<FigureDto> figureDtos = figureController.GetFigures();
-                foreach(FigureDto figureDto in figureDtos)
+                foreach (FigureDto figureDto in figureDtos)
                 {
                     figureController.Delete(figureDto);
                 }
@@ -78,7 +73,7 @@ namespace Render3D.UnitTest.ControllersTests
                 Name = "figureTest",
                 Radius = 10,
             });
-            figureController.ChangeName(figureController.GetFigures()[0],"figureTest2");
+            figureController.ChangeName(figureController.GetFigures()[0], "figureTest2");
             Assert.AreEqual(figureController.GetFigures()[0].Name, "figureTest2");
         }
         [TestMethod]

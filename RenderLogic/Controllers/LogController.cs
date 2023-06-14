@@ -25,7 +25,7 @@ namespace Render3D.RenderLogic.Controllers
         }
         public void AddLogFromScene(Scene scene, DateTime starts)
         {
-            Log log = new Log(scene,starts);
+            Log log = new Log(scene, starts);
             log.Client = ClientController.Client;
             LogService.AddLog(log);
         }
@@ -38,8 +38,8 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<LogDto> GetLogs()
         {
-            List<LogDto > logsDtoList = new List<LogDto>();
-           LogsCreated = LogService.GetLogs();
+            List<LogDto> logsDtoList = new List<LogDto>();
+            LogsCreated = LogService.GetLogs();
             foreach (Log log in LogsCreated)
             {
                 LogDto logDto = new LogDto()
@@ -122,7 +122,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             LogService.DeleteLog(new Log()
             {
-                Id= log.Id 
+                Id = log.Id
             });
         }
     }

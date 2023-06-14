@@ -22,7 +22,7 @@ namespace UserInterface.Panels
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult=DialogResult.Cancel;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

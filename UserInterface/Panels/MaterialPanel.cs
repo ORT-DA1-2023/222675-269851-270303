@@ -30,17 +30,17 @@ namespace Render3D.UserInterface.Panels
             };
             try
             {
-              
-                if(cmbMaterial.SelectedItem == null)
+
+                if (cmbMaterial.SelectedItem == null)
                 {
                     throw new Exception("You must select a material type");
                 }
                 else
                 {
                     if (cmbMaterial.SelectedItem.Equals("Lambertian"))
-                    {   
+                    {
                         ResetValues();
-                         materialController.AddMaterial(materialDto);
+                        materialController.AddMaterial(materialDto);
                     }
                     else if (cmbMaterial.SelectedItem.Equals("Metallic"))
                     {
@@ -48,19 +48,19 @@ namespace Render3D.UserInterface.Panels
                         {
                             double blur = Convert.ToDouble(txtBlur.Text);
                             ResetValues();
-                            materialDto.Blur= blur;
+                            materialDto.Blur = blur;
                             materialController.AddMaterial(materialDto);
                         }
                         else
                         {
                             throw new Exception("Invalid blur, the format is: number,number");
                         }
-                        
+
                     }
-                    
+
                 }
-                
-               
+
+
             }
             catch (Exception ex)
             {
@@ -68,14 +68,14 @@ namespace Render3D.UserInterface.Panels
                 return;
             }
             creation.ShowMaterialList();
-            
+
 
         }
 
 
         public void ResetValues()
         {
-     
+
             txtMaterialName.Text = "";
             nrRedColor.Value = 0;
             nrGreenColor.Value = 0;
@@ -98,11 +98,13 @@ namespace Render3D.UserInterface.Panels
 
         private void cmbMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbMaterial.SelectedItem.Equals("Lambertian")) {
+            if (cmbMaterial.SelectedItem.Equals("Lambertian"))
+            {
                 txtBlur.Text = "0,0";
                 txtBlur.Enabled = false;
                 lblBlur.Enabled = false;
-            }else if (cmbMaterial.SelectedItem.Equals("Metallic"))
+            }
+            else if (cmbMaterial.SelectedItem.Equals("Metallic"))
             {
                 txtBlur.Enabled = true;
                 lblBlur.Enabled = true;

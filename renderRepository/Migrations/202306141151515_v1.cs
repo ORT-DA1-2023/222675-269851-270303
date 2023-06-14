@@ -1,8 +1,7 @@
 ﻿namespace renderRepository.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class v1 : DbMigration
     {
         public override void Up()
@@ -10,82 +9,82 @@
             CreateTable(
                 "dbo.ClientEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Password = c.String(),
-                        RegisterDate = c.DateTime(nullable: false),
-                        Aperture = c.Double(nullable: false),
-                        LookFromX = c.Double(nullable: false),
-                        LookFromY = c.Double(nullable: false),
-                        LookFromZ = c.Double(nullable: false),
-                        LookAtX = c.Double(nullable: false),
-                        LookAtY = c.Double(nullable: false),
-                        LookAtZ = c.Double(nullable: false),
-                        Fov = c.Int(nullable: false),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Password = c.String(),
+                    RegisterDate = c.DateTime(nullable: false),
+                    Aperture = c.Double(nullable: false),
+                    LookFromX = c.Double(nullable: false),
+                    LookFromY = c.Double(nullable: false),
+                    LookFromZ = c.Double(nullable: false),
+                    LookAtX = c.Double(nullable: false),
+                    LookAtY = c.Double(nullable: false),
+                    LookAtZ = c.Double(nullable: false),
+                    Fov = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.FigureEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Radius = c.Double(nullable: false),
-                        X = c.Double(nullable: false),
-                        Y = c.Double(nullable: false),
-                        Z = c.Double(nullable: false),
-                        ClientEntity_Id = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Radius = c.Double(nullable: false),
+                    X = c.Double(nullable: false),
+                    Y = c.Double(nullable: false),
+                    Z = c.Double(nullable: false),
+                    ClientEntity_Id = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
                 .Index(t => t.ClientEntity_Id);
-            
+
             CreateTable(
                 "dbo.LogEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        RenderTimeInSeconds = c.Int(nullable: false),
-                        RenderDate = c.DateTime(nullable: false),
-                        TimeWindowSinceLastRender = c.String(),
-                        NumberElements = c.Int(nullable: false),
-                        Name = c.String(),
-                        ClientEntity_Id = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    RenderTimeInSeconds = c.Int(nullable: false),
+                    RenderDate = c.DateTime(nullable: false),
+                    TimeWindowSinceLastRender = c.String(),
+                    NumberElements = c.Int(nullable: false),
+                    Name = c.String(),
+                    ClientEntity_Id = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
                 .Index(t => t.ClientEntity_Id);
-            
+
             CreateTable(
                 "dbo.MaterialEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Red = c.Int(nullable: false),
-                        Green = c.Int(nullable: false),
-                        Blue = c.Int(nullable: false),
-                        Blur = c.Double(nullable: false),
-                        ClientEntity_Id = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Red = c.Int(nullable: false),
+                    Green = c.Int(nullable: false),
+                    Blue = c.Int(nullable: false),
+                    Blur = c.Double(nullable: false),
+                    ClientEntity_Id = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
                 .Index(t => t.ClientEntity_Id);
-            
+
             CreateTable(
                 "dbo.ModelEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Preview = c.Binary(),
-                        ClientEntity_Id = c.Int(),
-                        FigureEntity_Id = c.Int(),
-                        MaterialEntity_Id = c.Int(),
-                        SceneEntity_Id = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Preview = c.Binary(),
+                    ClientEntity_Id = c.Int(),
+                    FigureEntity_Id = c.Int(),
+                    MaterialEntity_Id = c.Int(),
+                    SceneEntity_Id = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
                 .ForeignKey("dbo.FigureEntities", t => t.FigureEntity_Id)
@@ -95,34 +94,34 @@
                 .Index(t => t.FigureEntity_Id)
                 .Index(t => t.MaterialEntity_Id)
                 .Index(t => t.SceneEntity_Id);
-            
+
             CreateTable(
                 "dbo.SceneEntities",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        CreationDate = c.DateTime(nullable: false),
-                        LastModificationDate = c.DateTime(nullable: false),
-                        LastRenderizationDate = c.DateTime(),
-                        Preview = c.Binary(),
-                        Aperture = c.Double(nullable: false),
-                        LookFromX = c.Double(nullable: false),
-                        LookFromY = c.Double(nullable: false),
-                        LookFromZ = c.Double(nullable: false),
-                        LookAtX = c.Double(nullable: false),
-                        LookAtY = c.Double(nullable: false),
-                        LookAtZ = c.Double(nullable: false),
-                        Fov = c.Int(nullable: false),
-                        LensRadius = c.Double(nullable: false),
-                        ClientEntity_Id = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    CreationDate = c.DateTime(nullable: false),
+                    LastModificationDate = c.DateTime(nullable: false),
+                    LastRenderizationDate = c.DateTime(),
+                    Preview = c.Binary(),
+                    Aperture = c.Double(nullable: false),
+                    LookFromX = c.Double(nullable: false),
+                    LookFromY = c.Double(nullable: false),
+                    LookFromZ = c.Double(nullable: false),
+                    LookAtX = c.Double(nullable: false),
+                    LookAtY = c.Double(nullable: false),
+                    LookAtZ = c.Double(nullable: false),
+                    Fov = c.Int(nullable: false),
+                    LensRadius = c.Double(nullable: false),
+                    ClientEntity_Id = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClientEntities", t => t.ClientEntity_Id)
                 .Index(t => t.ClientEntity_Id);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ModelEntities", "SceneEntity_Id", "dbo.SceneEntities");

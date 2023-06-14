@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.BackEnd.Materials;
-using Render3D.BackEnd;
-using System;
-using System.Runtime.InteropServices;
 
 namespace Render3D.UnitTest
 {
@@ -14,7 +12,7 @@ namespace Render3D.UnitTest
         private readonly string validMaterialName = "MetallicMaterialName";
         private Client clientSample;
         private readonly string clientSampleName = "clientSampleName";
-        private readonly  string _emptyString = "";
+        private readonly string _emptyString = "";
         private readonly double blurSample = 0.5;
         private HitRecord3D hitSample;
         private readonly Vector3D _validVectorIntersection = new Vector3D(1, 1, 1);
@@ -96,7 +94,7 @@ namespace Render3D.UnitTest
             Assert.AreEqual(ray, materialSample.Ray);
         }
 
-        
+
         [TestMethod]
         public void GivenABlurSetsItToMetallicMaterial()
         {

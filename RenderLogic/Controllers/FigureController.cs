@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.Figures;
-using Render3D.BackEnd.Utilities;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
@@ -16,7 +15,7 @@ namespace Render3D.RenderLogic.Controllers
 
         public static FigureController GetInstance()
         {
-            if(figureController == null)
+            if (figureController == null)
             {
                 figureController = new FigureController();
             }
@@ -26,7 +25,7 @@ namespace Render3D.RenderLogic.Controllers
         {
             try
             {
-                FigureService.GetFigureByNameAndClient(figureDto.Name,int.Parse(ClientController.Client.Id));    
+                FigureService.GetFigureByNameAndClient(figureDto.Name, int.Parse(ClientController.Client.Id));
             }
             catch (Exception)
             {
@@ -37,10 +36,10 @@ namespace Render3D.RenderLogic.Controllers
         }
         private void CreateSphere(FigureDto figureDto)
         {
-            Figure figure = new Sphere() 
-            { 
+            Figure figure = new Sphere()
+            {
                 Client = ClientController.Client,
-                Name = figureDto.Name, 
+                Name = figureDto.Name,
                 Radius = figureDto.Radius
             };
             FigureService.AddFigure(figure);
@@ -52,10 +51,10 @@ namespace Render3D.RenderLogic.Controllers
 
         public List<FigureDto> GetFigures()
         {
-          List<Figure> figureList;
-          figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
-          List<FigureDto> figureDtos = new List<FigureDto>();
-            foreach(Figure fig in figureList)
+            List<Figure> figureList;
+            figureList = FigureService.GetFigureOfClient(int.Parse(ClientController.Client.Id));
+            List<FigureDto> figureDtos = new List<FigureDto>();
+            foreach (Figure fig in figureList)
             {
                 FigureDto figDto = new FigureDto()
                 {
@@ -73,7 +72,7 @@ namespace Render3D.RenderLogic.Controllers
             try
             {
                 Figure figure = FigureService.GetFigureByNameAndClient(newName, int.Parse(ClientController.Client.Id));
-                
+
             }
             catch
             {
@@ -82,7 +81,7 @@ namespace Render3D.RenderLogic.Controllers
                 return;
             }
             throw new Exception("That name is already in use");
-           
+
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Render3D.BackEnd.GraphicMotorUtility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Render3D.BackEnd.Materials
 {
@@ -13,7 +8,7 @@ namespace Render3D.BackEnd.Materials
         private const int _minimumSquaredLength = 1;
         private readonly Vector3D _vectorOrigin000 = new Vector3D(0, 0, 0);
         private readonly Vector3D _vectorOrigin000Two = new Vector3D(0, 0, 0);
-        private const int _minimumDotProduct = 0;  
+        private const int _minimumDotProduct = 0;
 
 
         public double Blur { get; set; }
@@ -57,7 +52,7 @@ namespace Render3D.BackEnd.Materials
         {
             return Name.ToString() + " (" + Attenuation.Red() + "," + Attenuation.Green() + "," + Attenuation.Blue() + ")";
         }
-        
+
 
     }
 }

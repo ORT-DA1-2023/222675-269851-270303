@@ -13,7 +13,7 @@ namespace Render3D.BackEnd.Output.FileFormat
                 writer.WriteLine("P3");
                 writer.WriteLine($"{bitmap.Width} {bitmap.Height}");
                 writer.WriteLine("255");
-  
+
                 for (int y = 0; y < bitmap.Height; y++)
                 {
                     for (int x = 0; x < bitmap.Width; x++)

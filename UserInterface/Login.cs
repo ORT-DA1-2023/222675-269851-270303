@@ -1,7 +1,5 @@
-﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
+﻿using Render3D.RenderLogic.Controllers;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using UserInterface;
 
@@ -27,8 +25,8 @@ namespace Render3D.UserInterface
             label5.Update();
 
             try
-            {        
-             clientController.Login(clientName,clientPassword);
+            {
+                clientController.Login(clientName, clientPassword);
             }
             catch (Exception ex)
             {

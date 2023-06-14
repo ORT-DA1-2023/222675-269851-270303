@@ -1,5 +1,4 @@
-﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
+﻿using Render3D.RenderLogic.Controllers;
 using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Windows.Forms;
@@ -9,7 +8,7 @@ namespace Render3D.UserInterface.Controls
 {
     public partial class ModelControl : UserControl
     {
-       private readonly ModelDto _modelDto;
+        private readonly ModelDto _modelDto;
         private readonly ModelController modelController;
         private readonly SceneController sceneController;
         public ModelControl(ModelDto model)

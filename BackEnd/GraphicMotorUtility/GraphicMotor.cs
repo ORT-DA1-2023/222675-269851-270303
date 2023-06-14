@@ -1,6 +1,5 @@
 using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.Materials;
-using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -90,7 +89,7 @@ namespace Render3D.BackEnd.GraphicMotorUtility
             return Render(previewScene, false);
         }
 
-        
+
 
         public Bitmap Render(Scene sceneSample, bool blur)
         {
@@ -136,13 +135,13 @@ namespace Render3D.BackEnd.GraphicMotorUtility
                         double v = (row + random.NextDouble()) / ResolutionHeight();
                         if (blur)
                         {
-                             ray = sceneSample.Camera.GetRayForBlurCamera(u, v);
+                            ray = sceneSample.Camera.GetRayForBlurCamera(u, v);
                         }
                         else
                         {
-                             ray = sceneSample.Camera.GetRay(u, v);
+                            ray = sceneSample.Camera.GetRay(u, v);
                         }
-      
+
                         pixelColor.AddTo(sceneSample.ShootRay(ray, MaximumDepth));
                     }
                     pixelColor = pixelColor.Divide(PixelSampling);

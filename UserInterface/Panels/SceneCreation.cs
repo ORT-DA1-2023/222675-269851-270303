@@ -1,11 +1,9 @@
-﻿using Render3D.BackEnd;
-using Render3D.RenderLogic.Controllers;
+﻿using Render3D.RenderLogic.Controllers;
 using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace UserInterface.Panels
 {
@@ -121,11 +119,11 @@ namespace UserInterface.Panels
                         if (IsValidFormatAperture(txtAperture.Text) && IsValidNumberAperture(txtAperture.Text))
                         {
                             sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, txtAperture.Text);
-                           
+
                         }
                         else
                         {
-                            lblCamera.Text="Aperture format not valid";
+                            lblCamera.Text = "Aperture format not valid";
                             lblCamera.ForeColor = Color.Red;
                         }
                     }
@@ -133,7 +131,7 @@ namespace UserInterface.Panels
                     {
                         string apertureZero = "0";
                         sceneController.EditCamera(_sceneDto, lookAtText, lookFromText, (int)nrFov.Value, apertureZero);
-                       
+
                     }
                     LoadScene();
                     lblCamera.ForeColor = Color.Green;
@@ -145,7 +143,7 @@ namespace UserInterface.Panels
                     lblRenderOutDated.Text = "WARNING this render is outdated";
 
                 }
-                    
+
                 catch (Exception ex)
                 {
                     lblCamera.ForeColor = Color.Red;
@@ -188,13 +186,13 @@ namespace UserInterface.Panels
             lblAddModel.Visible = true;
             lblRemoveModel.Update();
 
-            
+
         }
 
         private void BtnRemoveModel_Click(object sender, EventArgs e)
         {
             ModelDto model = ((ModelDto)cBoxPositionedModels.SelectedItem);
-            sceneController.RemoveModel(_sceneDto,model);
+            sceneController.RemoveModel(_sceneDto, model);
             LoadScene();
             lblRenderOutDated.Text = "WARNING this render is outdated";
             lblRemoveModel.Visible = true;
@@ -222,7 +220,7 @@ namespace UserInterface.Panels
 
         private void CmbBlur_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if (!cmbBlur.Checked)
             {
                 txtAperture.Enabled = false;
@@ -258,7 +256,7 @@ namespace UserInterface.Panels
 
             if (!dirExists) { label27.Text = "Could not access the directory"; return; }
 
-            if (sceneController.FileExists(label5.Text + "\\" + textBox1.Text+"."+comboBox1.Text))
+            if (sceneController.FileExists(label5.Text + "\\" + textBox1.Text + "." + comboBox1.Text))
             {
                 label27.Text = "There is a file with that name"; return;
             }
@@ -270,7 +268,7 @@ namespace UserInterface.Panels
             _sceneDto.Preview = new Bitmap(pBoxRender.Image);
             try
             {
-                sceneController.ExportRender(_sceneDto, label5.Text + "\\" + textBox1.Text +"."+ comboBox1.Text, comboBox1.Text);
+                sceneController.ExportRender(_sceneDto, label5.Text + "\\" + textBox1.Text + "." + comboBox1.Text, comboBox1.Text);
             }
             catch (Exception)
             {

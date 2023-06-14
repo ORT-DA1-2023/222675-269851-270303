@@ -119,7 +119,7 @@ namespace Render3D.UnitTest.ControllersTests
             clientController.SignIn("ClientTest", "4Testing");
             string allOnes = "(1;1;1)";
             clientController.AddCamera(allOnes, allOnes, 1, "1");
-            SceneDto scene =clientController.GetCamera();
+            SceneDto scene = clientController.GetCamera();
             Assert.AreEqual(scene.Aperture, 1);
         }
         [TestCleanup]

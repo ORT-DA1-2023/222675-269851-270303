@@ -1,9 +1,6 @@
-﻿using Render3D.BackEnd.Materials;
-using Render3D.BackEnd;
-using System.Collections.Generic;
+﻿using Render3D.BackEnd;
 using Render3D.RenderLogic.RepoInterface;
-using Render3D.BackEnd.Figures;
-using System;
+using System.Collections.Generic;
 
 namespace Render3D.RenderLogic.Services
 {

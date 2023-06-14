@@ -10,10 +10,10 @@ namespace renderRepository.entities
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual ClientEntity ClientEntity { get; set; }
-        public int Red {get; set;}
-        public int Green { get; set;}
-        public int Blue { get; set;}  
-        public double Blur { get; set;}
+        public int Red { get; set; }
+        public int Green { get; set; }
+        public int Blue { get; set; }
+        public double Blur { get; set; }
 
         public static MaterialEntity FromDomain(Material material)
         {
@@ -47,9 +47,9 @@ namespace renderRepository.entities
             };
             return materialEntity;
         }
-        public Material ToDomain() 
+        public Material ToDomain()
         {
-            if (Blur <0)
+            if (Blur < 0)
             {
                 return new LambertianMaterial
                 {
@@ -58,7 +58,7 @@ namespace renderRepository.entities
                     Attenuation = new Colour(Red / 255f, Green / 255f, Blue / 255f),
                 };
             }
-           
+
             return new MetallicMaterial
             {
                 Id = Id.ToString(),

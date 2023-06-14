@@ -8,7 +8,7 @@ namespace Render3D.UserInterface.Panels
 {
     public partial class ScenePanel : Form
     {
-        SceneController sceneController= SceneController.GetInstance();
+        SceneController sceneController = SceneController.GetInstance();
         private SceneDto _sceneDto;
         public ScenePanel()
         {
@@ -20,7 +20,7 @@ namespace Render3D.UserInterface.Panels
 
         private void BtnCreateScene_Click(object sender, EventArgs e)
         {
-            
+
             CreationMenu creation = (CreationMenu)this.Parent.Parent;
             string name;
             NameChanger nameChanger = new NameChanger("");
@@ -50,14 +50,14 @@ namespace Render3D.UserInterface.Panels
                         scene.Close();
                     }
                 }
-                catch(Exception ex) 
+                catch (Exception ex)
                 {
                     lblError.Text = ex.Message;
                 }
             }
-           
-           
-            
+
+
+
         }
 
     }

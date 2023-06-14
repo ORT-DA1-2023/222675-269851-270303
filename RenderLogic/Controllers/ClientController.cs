@@ -1,6 +1,5 @@
 ﻿using Render3D.BackEnd;
 using Render3D.BackEnd.GraphicMotorUtility;
-using Render3D.BackEnd.Utilities;
 using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.RenderLogic.Services;
 using System;
@@ -25,7 +24,8 @@ namespace Render3D.RenderLogic.Controllers
 
         public void SignIn(string clientName, string clientPassword)
         {
-            try {
+            try
+            {
                 GetClientByName(clientName);
             }
             catch
@@ -99,11 +99,11 @@ namespace Render3D.RenderLogic.Controllers
             Camera sceneNewCamera;
             if (apertureDouble > 0)
             {
-                sceneNewCamera = new Camera(lookFrom,lookAt,fov,apertureDouble);
+                sceneNewCamera = new Camera(lookFrom, lookAt, fov, apertureDouble);
             }
             else
             {
-                sceneNewCamera = new Camera(lookFrom,lookAt,fov);
+                sceneNewCamera = new Camera(lookFrom, lookAt, fov);
             }
 
             ClientService.AddCamera(int.Parse(Client.Id), sceneNewCamera);
@@ -124,14 +124,14 @@ namespace Render3D.RenderLogic.Controllers
                 LookAt = new double[] { camera.LookAt.X, camera.LookAt.Y, camera.LookAt.Z },
                 LookFrom = new double[] { camera.LookFrom.X, camera.LookFrom.Y, camera.LookFrom.Z },
                 Fov = camera.Fov,
-                Aperture = camera.LensRadius*2,
+                Aperture = camera.LensRadius * 2,
             };
         }
 
         private bool CameraIsDefault(Camera camera)
         {
             if (!camera.LookAt.Equals(new Vector3D(0, 0, 0))) { return false; }
-            if(!camera.LookFrom.Equals(new Vector3D(0, 0, 0))) { return false; }
+            if (!camera.LookFrom.Equals(new Vector3D(0, 0, 0))) { return false; }
             if (camera.Fov != 0 && camera.LensRadius != 0) { return false; }
             return true;
         }
@@ -144,7 +144,7 @@ namespace Render3D.RenderLogic.Controllers
             {
                 valuesInDouble[i] = double.Parse(values[i]);
             }
-           return new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
+            return new Vector3D(valuesInDouble[0], valuesInDouble[1], valuesInDouble[2]);
         }
     }
 }

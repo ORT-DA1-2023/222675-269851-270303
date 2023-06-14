@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
-using Render3D.RenderLogic.Services;
-using renderRepository.RepoImplementation;
-using Render3D.RenderLogic.RepoInterface;
 using Render3D.RenderLogic.DataTransferObjects;
-using System.Collections.Generic;
-using System;
 using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -49,7 +45,7 @@ namespace Render3D.UnitTest.ControllersTests
                 Red = 255,
                 Blue = 255,
                 Green = 255,
-                Blur =-1, 
+                Blur = -1,
             });
             Assert.AreEqual(materialController.GetMaterials()[0].Name, "materialTest");
         }

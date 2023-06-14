@@ -1,5 +1,4 @@
 ﻿using Render3D.BackEnd;
-using Render3D.BackEnd.Figures;
 using Render3D.BackEnd.GraphicMotorUtility;
 using Render3D.RenderLogic.RepoInterface;
 using System;
@@ -13,7 +12,7 @@ namespace Render3D.RenderLogic.Services
 
         public ClientService(IClientRepo clientRepo)
         {
-            _clientRepo = clientRepo; 
+            _clientRepo = clientRepo;
         }
 
         public void AddClient(Client client)
@@ -26,7 +25,8 @@ namespace Render3D.RenderLogic.Services
             {
                 Client client = _clientRepo.Get(id);
                 return client;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -37,11 +37,12 @@ namespace Render3D.RenderLogic.Services
             try
             {
                 return _clientRepo.GetClientByName(name);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
         public void RemoveClient(string name)
         {
@@ -55,7 +56,7 @@ namespace Render3D.RenderLogic.Services
         {
             return _clientRepo.GetCamera(id);
         }
-        
+
 
     }
 }

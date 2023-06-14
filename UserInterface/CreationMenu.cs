@@ -1,8 +1,8 @@
 
 using Render3D.RenderLogic.Controllers;
+using Render3D.RenderLogic.DataTransferObjects;
 using Render3D.UserInterface.Controls;
 using Render3D.UserInterface.Panels;
-using Render3D.RenderLogic.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -32,11 +32,11 @@ namespace Render3D.UserInterface
         {
             flObjectList.Controls.Clear();
             List<FigureDto> figureList;
-            figureList=figureController.GetFigures();     
+            figureList = figureController.GetFigures();
             foreach (FigureDto figure in figureList)
             {
-                    FigureControl figureControl = new FigureControl(figure);
-                    flObjectList.Controls.Add(figureControl);
+                FigureControl figureControl = new FigureControl(figure);
+                flObjectList.Controls.Add(figureControl);
             }
         }
 
@@ -46,18 +46,18 @@ namespace Render3D.UserInterface
             List<MaterialDto> materialList = materialController.GetMaterials();
             foreach (MaterialDto material in materialList)
             {
-                    if(material.Blur <0)
-                    {
-                        LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
-                        flObjectList.Controls.Add(materialControl);
-                    }
-                    else 
-                    {
-                        MetallicMaterialControl materialControl = new MetallicMaterialControl(material);
-                        flObjectList.Controls.Add(materialControl);
-                    }
-                    
-                    
+                if (material.Blur < 0)
+                {
+                    LambertianMaterialControl materialControl = new LambertianMaterialControl(material);
+                    flObjectList.Controls.Add(materialControl);
+                }
+                else
+                {
+                    MetallicMaterialControl materialControl = new MetallicMaterialControl(material);
+                    flObjectList.Controls.Add(materialControl);
+                }
+
+
 
 
             }
@@ -68,8 +68,8 @@ namespace Render3D.UserInterface
             List<ModelDto> models = modelController.GetModels();
             foreach (ModelDto model in models)
             {
-                    ModelControl modelControl = new ModelControl(model);
-                    flObjectList.Controls.Add(modelControl);
+                ModelControl modelControl = new ModelControl(model);
+                flObjectList.Controls.Add(modelControl);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Render3D.UserInterface
         {
             try
             {
-                figureController.ChangeName(figureDto,newName);
+                figureController.ChangeName(figureDto, newName);
                 return true;
             }
             catch
@@ -167,18 +167,18 @@ namespace Render3D.UserInterface
         }
 
 
-        public bool MaterialNameHasBeenChange(MaterialDto materialDto,string newName)
+        public bool MaterialNameHasBeenChange(MaterialDto materialDto, string newName)
         {
             try
             {
-                materialController.ChangeName(materialDto,newName);
+                materialController.ChangeName(materialDto, newName);
                 return true;
             }
             catch
             {
                 return false;
             }
-            
+
 
         }
 
@@ -198,8 +198,8 @@ namespace Render3D.UserInterface
             {
                 return false;
             }
-            
-            
+
+
         }
 
         private void BtnScene_Click(object sender, EventArgs e)

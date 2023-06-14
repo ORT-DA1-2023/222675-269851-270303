@@ -13,7 +13,7 @@ namespace Render3D.RenderLogic.RepoInterface
         List<Scene> GetScenesOfClient(int clientId);
         void UpdatePreview(Scene scene);
         void UpdateCamera(Scene scene);
-        void AddModel(Scene scene,Model model);
+        void AddModel(Scene scene, Model model);
         void RemoveModel(Scene scene, Model model);
         List<Scene> GetScenesWithModel(Model model);
     }

@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Render3D.BackEnd;
 using Render3D.RenderLogic.Controllers;
-using Render3D.RenderLogic.Services;
-using Render3D.RenderLogic.RepoInterface;
-using renderRepository.RepoImplementation;
 using Render3D.RenderLogic.DataTransferObjects;
-using System.Collections.Generic;
-using System;
 using RepositoryFactory;
+using System;
+using System.Collections.Generic;
 
 namespace Render3D.UnitTest.ControllersTests
 {
@@ -204,7 +200,7 @@ namespace Render3D.UnitTest.ControllersTests
         [TestMethod]
         public void GivenMaterialCheckIfIsNotInModel()
         {
-            modelController.ClientController.SignIn("ClientTest", "4Testing");    
+            modelController.ClientController.SignIn("ClientTest", "4Testing");
             materialController.AddMaterial(new MaterialDto()
             {
                 Name = "materialTest",
